@@ -1,0 +1,53 @@
+# Normie Mode Agent Guide
+
+## Purpose
+
+Build Normie Mode into a trustworthy, task-first reference for what AI can actually do. Preserve the product chain:
+
+`Evidence -> Capability -> Work`
+
+Read these files before making changes:
+
+1. `Normie Mode Product Vision.md`
+2. `docs/IMPLEMENTATION_PLAN.md`
+3. `CHANGELOG.md`
+
+## Product guardrails
+
+- Organise the public experience around recognisable work, not benchmark scores.
+- The canonical comparison unit is the model, identified by exact model version. Products, wrappers, and product directories are outside the comparison scope.
+- Keep measured facts, sourced claims, editorial assessments, and recommendations distinguishable.
+- Preserve source, model or product version, evaluation date, and methodology for important evidence.
+- Do not present a recommendation that cannot explain why it exists and what still needs checking.
+- Do not invent unresolved product decisions. Record them in the decision section of `docs/IMPLEMENTATION_PLAN.md` and continue only where the decision does not materially affect the work.
+- Prefer a complete, credible vertical slice over broad but shallow coverage.
+- Human editorial review remains required for publishing and recommendation changes until a later decision explicitly changes this.
+
+## Plan discipline
+
+- Work against a task ID in `docs/IMPLEMENTATION_PLAN.md`.
+- Before starting, confirm the task's dependencies and acceptance criteria.
+- Use these task states: `proposed`, `ready`, `in_progress`, `blocked`, `done`.
+- Only mark a task `done` when its acceptance criteria and listed verification have been satisfied.
+- If implementation reveals a missing product decision, add or update a `D-###` entry in `docs/IMPLEMENTATION_PLAN.md`.
+- Do not change an accepted decision without recording the superseding decision and its consequences.
+
+## Required handoff updates
+
+After meaningful work:
+
+1. Update the task state in `docs/IMPLEMENTATION_PLAN.md`.
+2. Add a short progress note to the implementation plan only when it helps the next agent resume work.
+3. Add a user-visible product or documentation change to `CHANGELOG.md` under `Unreleased`.
+4. Keep code comments and progress notes factual; do not use them as a substitute for acceptance criteria.
+
+## Change safety
+
+- Preserve unrelated user changes.
+- Keep schema changes reversible while the product model is still being validated.
+- Treat evidence and recommendation history as append-oriented records; do not silently overwrite provenance.
+- Never publish generated editorial content or automatically change public recommendations without an accepted decision authorising it.
+
+## Verification
+
+The implementation plan will define project commands once the stack is selected. Until then, documentation work should be checked for internal links, task-ID consistency, decision references, and contradictions with the vision.
