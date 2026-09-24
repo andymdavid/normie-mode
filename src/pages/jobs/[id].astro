@@ -4,6 +4,8 @@ import BarChart from '../../components/BarChart.astro';
 import { graph } from '../../lib/graph';
 import { jobLeaders, jobScores, leadSentence, testFloor, testRows, testSource } from '../../lib/jobs';
 import { overviewRows } from '../../lib/overview';
+import { latestRun } from '../../lib/normie-tests';
+import { PREVIEW } from '../../lib/view';
 
 export function getStaticPaths() {
   return [...graph().jobs.keys()].map((id) => ({ params: { id } }));
@@ -18,6 +20,8 @@ const { leaders, testsUsed } = jobLeaders(job);
 const minCoverage = Math.max(1, Math.ceil(testsUsed / 2));
 const top = leaders.filter((l) => l.tests >= minCoverage).slice(0, 3);
 const scores = jobScores(job);
+// Draft Normie Mode tests attached to this job (preview only until signed off).
+const ownTest = PREVIEW && job.id === 'office-work' ? latestRun('spreadsheet-questions') : undefined;
 const untested = overviewRows().filter((r) => !leaders.some((l) => l.model.id === r.model.id));
 const costRows = overviewRows().map((r) => ({
   id: r.model.id, label: r.model.name, maker: r.maker, href: `/models/${r.model.id}`,
@@ -59,6 +63,16 @@ const costRows = overviewRows().map((r) => ({
     </div>
   </div>
 
+  {ownTest && (
+    <a class="card own-test" href="/tests/spreadsheet-questions">
+      <div class="eyebrow">Normie Mode test · <span class="badge draft">Draft</span></div>
+      <h3>We tested this ourselves: answering business questions from a spreadsheet</h3>
+      <p class="small">
+        {ownTest.summary.models.filter((m) => m.score === 100).length} of {ownTest.summary.models.length} models got every answer right.
+        {' '}{ownTest.summary.models.filter((m) => m.score !== 100).map((m) => `${m.name} scored ${m.score}%`).join('; ')}. See every question and answer →
+      </p>
+    </a>
+  )}
   <BarChart
     title={`Job score: ${job.name.toLowerCase()}`}
     sub={`Each test puts the models on a 0–100 scale from lowest to highest; this averages them across ${scores.testsUsed} test${scores.testsUsed === 1 ? '' : 's'}`}
@@ -100,3 +114,8 @@ const costRows = overviewRows().map((r) => ({
     </>
   )}
 </Base>
+
+<style>
+  .own-test { margin-bottom: 0.9rem; border-left: 3px solid var(--ink); }
+  .own-test h3 { margin: 0.2rem 0; }
+</style>

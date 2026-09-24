@@ -185,7 +185,7 @@ Orders:
 ${toCsv(c.orders)}`;
 }
 
-function parseAnswers(text: string): Record<string, unknown> | undefined {
+export function parseAnswers(text: string): Record<string, unknown> | undefined {
   // Working may come first; take the last {"answers": ...} object in the reply.
   const cleaned = text.replace(/```(?:json)?/g, '').trim();
   const start = cleaned.lastIndexOf('{', cleaned.lastIndexOf('"answers"'));

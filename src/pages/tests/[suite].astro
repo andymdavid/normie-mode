@@ -1,0 +1,140 @@
+---
+// Normie Mode test results page. Built only in preview until a run is signed off.
+import Base from '../../layouts/Base.astro';
+import BarChart from '../../components/BarChart.astro';
+import { graph } from '../../lib/graph';
+import { makerOf } from '../../lib/jobs';
+import { expectedAnswer, formatAnswer, givenAnswer, latestRun } from '../../lib/normie-tests';
+import { PREVIEW } from '../../lib/view';
+import { SUITE_TITLE, toCsv } from '../../../evals/spreadsheet-questions/suite';
+
+export function getStaticPaths() {
+  return PREVIEW && latestRun('spreadsheet-questions') ? [{ params: { suite: 'spreadsheet-questions' } }] : [];
+}
+
+const g = graph();
+const run = latestRun(Astro.params.suite!)!;
+const { summary, cases, answers } = run;
+const questions = cases[0].questions;
+const model = (id: string) => g.models.get(id)!;
+const perModel = summary.models.map((m) => {
+  const mine = answers.filter((a) => a.model === m.model);
+  const correct = mine.reduce((s, a) => s + a.score.correct, 0);
+  const total = mine.reduce((s, a) => s + a.score.total, 0);
+  return { ...m, correct, total, perQuestion: Object.fromEntries(questions.map((q) => [q.id, mine.filter((a) => a.score.per_question[q.id]).length])) };
+});
+const base = (m: (typeof perModel)[number]) => ({ id: m.model, label: m.name, maker: makerOf(model(m.model)), href: `/models/${m.model}` });
+const scoreRows = perModel.map((m) => ({ ...base(m), value: m.correct, display: `${m.correct}/${m.total}`, tip: `${m.name}: ${m.correct} of ${m.total} answers right` }));
+const costRows = perModel.map((m) => ({ ...base(m), value: m.cost_usd, display: `$${m.cost_usd.toFixed(2)}`, tip: `${m.name}: $${m.cost_usd.toFixed(3)} for all ${cases.length} sheets` }));
+const timeRows = perModel.map((m) => ({ ...base(m), value: m.avg_seconds ?? undefined, display: m.avg_seconds ? `${Math.round(m.avg_seconds)}s` : undefined }));
+
+const perfect = perModel.filter((m) => m.correct === m.total).sort((a, b) => a.cost_usd - b.cost_usd);
+const misses = answers
+  .flatMap((a) => questions.filter((q) => !a.score.per_question[q.id]).map((q) => ({ a, q, c: cases.find((c) => c.id === a.case)! })))
+  .map(({ a, q, c }) => ({ model: model(a.model).name, sheet: a.case.replace('case-0', 'Sheet '), question: c.questions.find((x) => x.id === q.id)!, given: givenAnswer(a, c.questions.find((x) => x.id === q.id)!) }));
+const sheet = cases[0];
+const sheetAnswers = perModel.map((m) => ({ m, a: answers.find((x) => x.model === m.model && x.case === sheet.id)! }));
+const csvLines = toCsv(sheet.orders).split('\n');
+const runDate = new Date(`${summary.run_id.slice(0, 10)}T00:00:00Z`).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' });
+---
+<Base title={`Normie Mode test: ${SUITE_TITLE}`} noindex>
+  <div class="eyebrow">Normie Mode test · <span class="badge draft">Draft, not published</span></div>
+  <h1>Can AI answer business questions from a spreadsheet?</h1>
+  <p class="lede">We gave {perModel.length} AI models the same sales sheets and asked the questions a manager would ask. Every question has one right answer, so no one had to judge.</p>
+
+  <div class="band">
+    <div class="band-inner summary-grid">
+      <div class="summary"><span class="tag">The short answer</span><p><strong>Yes, mostly.</strong> {perfect.length} of {perModel.length} models got every answer right. The rest made the most dangerous kind of mistake: a confident, plausible wrong number.</p></div>
+      {perfect[0] && <div class="summary"><span class="tag">Cheapest to get it all right</span><p><strong>{perfect[0].name}</strong> got all {perfect[0].total} right for ${perfect[0].cost_usd.toFixed(2)}{perfect[1] && <>, {Math.round(perfect.at(-1)!.cost_usd / perfect[0].cost_usd)}× less than {perfect.at(-1)!.name}</>}.</p></div>}
+      <div class="summary"><span class="tag">What to check</span><p>When models got it wrong, they named the right customer or product but gave the <strong>wrong amount</strong>. Always sanity-check the numbers.</p></div>
+      <div class="summary"><span class="tag">Test details</span><p>{cases.length} sheets × {questions.length} questions × {perModel.length} models, run {runDate}. Total cost to run: <strong>${summary.total_cost_usd.toFixed(2)}</strong>.</p></div>
+    </div>
+  </div>
+
+  <div class="section-head" style="margin-top:0"><h2>Results</h2></div>
+  <p class="section-sub">Each model answered the same {cases.length * questions.length} questions.</p>
+  <div class="grid-3">
+    <BarChart compact title="Answers right" sub={`Out of ${cases.length * questions.length}`} rows={scoreRows} showEmpty={false} />
+    <BarChart compact title="What it cost" sub={`For all ${cases.length} sheets`} rows={costRows} lowerIsBetter showEmpty={false} />
+    <BarChart compact title="How long it took" sub="Average per sheet" rows={timeRows} lowerIsBetter showEmpty={false} />
+  </div>
+
+  <div class="section-head"><h2>Question by question</h2></div>
+  <p class="section-sub">How many of the {cases.length} sheets each model got right, for each question.</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Question</th>{perModel.map((m) => <th>{m.name}</th>)}</tr></thead>
+      <tbody>
+        {questions.map((q) => (
+          <tr>
+            <td>{q.plain}</td>
+            {perModel.map((m) => {
+              const n = m.perQuestion[q.id];
+              return <td class="num">{n === cases.length ? '✓ ' : '✗ '}{n}/{cases.length}</td>;
+            })}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section-head"><h2>Where it went wrong</h2></div>
+  <p class="section-sub">Every wrong answer, next to the right one.</p>
+  {misses.length === 0 ? <p class="card">No mistakes.</p> : (
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Model</th><th>Sheet</th><th>Question</th><th>Right answer</th><th>It said</th></tr></thead>
+        <tbody>
+          {misses.map((x) => (
+            <tr><td>{x.model}</td><td>{x.sheet}</td><td>{x.question.plain}</td><td class="num">{expectedAnswer(x.question)}</td><td class="num">{formatAnswer(x.question, x.given)}</td></tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  )}
+
+  <div class="section-head"><h2>See it for yourself</h2></div>
+  <p class="section-sub">Sheet 1: what we asked, and what every model answered.</p>
+  <div class="grid-2">
+    <div class="card">
+      <h3>The questions</h3>
+      <ol class="small">{questions.map((q) => <li>{q.text}</li>)}</ol>
+      <p class="small muted">The definitions we gave: an order's value is quantity × unit price minus the discount; net revenue only counts completed orders.</p>
+    </div>
+    <div class="card">
+      <h3>The sheet</h3>
+      <p class="small muted">{sheet.orders.length} orders, including discounts, refunds and cancellations.</p>
+      <details>
+        <summary class="small">Show the first 12 rows</summary>
+        <div class="table-wrap" style="margin-top:0.5rem">
+          <table>
+            <thead><tr>{csvLines[0].split(',').map((h) => <th>{h.replace(/_/g, ' ')}</th>)}</tr></thead>
+            <tbody>{csvLines.slice(1, 13).map((l) => <tr>{l.split(',').map((v) => <td>{v}</td>)}</tr>)}</tbody>
+          </table>
+        </div>
+      </details>
+    </div>
+  </div>
+  <div class="table-wrap" style="margin-top:0.9rem">
+    <table>
+      <thead><tr><th>Question</th><th>Right answer</th>{sheetAnswers.map(({ m }) => <th>{m.name}</th>)}</tr></thead>
+      <tbody>
+        {sheet.questions.map((q) => (
+          <tr>
+            <td>{q.plain}</td>
+            <td class="num">{expectedAnswer(q)}</td>
+            {sheetAnswers.map(({ a }) => <td class="num">{a.score.per_question[q.id] ? '✓ ' : '✗ '}{formatAnswer(q, givenAnswer(a, q))}</td>)}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section-head"><h2>How we tested</h2></div>
+  <ul class="small muted" style="max-width:46rem">
+    <li>Every model got identical sheets and instructions, through OpenRouter at its default settings, once per sheet.</li>
+    <li>The sheets are made-up but realistic sales data, pasted as text. This doesn't test working with real Excel files, formulas or charts.</li>
+    <li>Money answers count as right within 0.5% or £1; names must match the sheet.</li>
+    <li>One run per sheet, so small differences may be luck.</li>
+  </ul>
+</Base>
