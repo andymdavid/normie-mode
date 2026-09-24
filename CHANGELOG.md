@@ -6,6 +6,7 @@ This file records meaningful changes to the Normie Mode product, implementation,
 
 ### Added
 
+- Design system revised after State of AI Design: Geist and Geist Mono, a white, black and orange palette with lavender data, square flat panels, numbered sections, report-style bar charts, an orange "best overall" block, and a single light look.
 - Harder Normie Mode test built: "Answer business questions from a messy spreadsheet", with duplicate entries, returns, inconsistent customer names and mixed date formats that change the answers, and eight questions.
 - First Normie Mode test run (2026-09-24, $2.93): four models scored 30/30, DeepSeek V4 Pro 29/30, GPT-6 Luna 26/30; results kept for review, not yet published.
 - First Normie Mode test, built: "Answer business questions from a spreadsheet", with five sales ledgers, six manager questions each, automatic scoring and a budget-capped OpenRouter runner (about $1–2 for the six-model pilot). "Spot unusual transactions" is also built, kept for a later checking-and-reviewing job.

@@ -110,11 +110,15 @@ A task is canonical when it has a distinct user goal **and** either distinct suc
 
 Each task records its user goal, inclusion boundary, success concept, required capabilities (`core` or `supporting`), aliases, and related tasks. Canonical data lives in `content/tasks/`.
 
-### D-022 — Design system modelled on Artificial Analysis (accepted 2026-09-24)
+### D-022 — Design system (accepted 2026-09-24, revised the same day)
 
-Product-owner direction: rewrite the design tokens to sit close to [Artificial Analysis](https://artificialanalysis.ai/models). We adopt its conventions, not its branding: a white page, grey edge-to-edge summary bands with one-sentence summary cards, serif section headings with a square marker, pill navigation, a sticky contents list, and one metric per chart card with "higher/lower is better" subtitles. Tokens live in `src/styles.css`.
+Revision after product-owner review ("very AI coding" look): structure still follows [Artificial Analysis](https://artificialanalysis.ai/models) (summary band, one chart per panel, sticky contents list, picks backed by charts), while type, colour and detailing now follow [State of AI Design](https://stateofaidesign.com/):
 
-Deliberate difference: bars are one colour, not one colour per maker. A five-maker palette fails the colour-vision checks (at most three categorical colours can be told apart in these chart forms), so maker identity comes from the row label instead. Bars run horizontally so model names stay readable on phones.
+- **Type:** Geist for everything (a free stand-in for State of AI Design's commercial Beausite Classic), large and tightly tracked headings, and Geist Mono for labels, numbers and metadata. No serif.
+- **Colour:** white page and black text, warm off-white (`#f7f6f4`) bands, orange (`#fe7141`) as the brand block, lavender for data and highlights, sage and navy in reserve. Bars use a deeper lavender (`#9b6cf5`) that passes the contrast and lightness checks; the lighter `#cdabfe` is for backgrounds only.
+- **Detailing:** square corners; no card borders, shadows or left-edge stripes; numbered sections under full-width rules; each chart title sits above a 2px rule, with the label above each thin bar, the value at the bar's end and hairlines between rows; mono uppercase labels; a quiet contents list that marks the current section with a dash.
+- **Single light look:** both references are light-only, so dark mode was removed to get one deliberate look right. It can be added back later.
+- Bars stay one colour rather than one per maker (a five-maker palette fails the colour-vision checks).
 
 ### D-023 — "Best AI for…" jobs as the way into everyday tasks (accepted 2026-09-24, replaces the overview heatmap)
 

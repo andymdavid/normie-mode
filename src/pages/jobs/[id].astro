@@ -65,7 +65,7 @@ const costRows = overviewRows().map((r) => ({
 
   {ownTest && (
     <a class="card own-test" href="/tests/spreadsheet-questions">
-      <div class="eyebrow">Normie Mode test · <span class="badge draft">Draft</span></div>
+      <div class="mono-label">Normie Mode test · Draft</div>
       <h3>We tested this ourselves: answering business questions from a spreadsheet</h3>
       <p class="small">
         Best overall: <strong>{rankRun(ownTest)[0].name}</strong> ({rankRun(ownTest)[0].why.toLowerCase()}).
@@ -116,6 +116,7 @@ const costRows = overviewRows().map((r) => ({
 </Base>
 
 <style>
-  .own-test { margin-bottom: 0.9rem; border-left: 3px solid var(--ink); }
-  .own-test h3 { margin: 0.2rem 0; }
+  .own-test { margin-bottom: 2.5rem; background: var(--lavender); }
+  .own-test:hover { background: var(--viz-soft); }
+  .own-test h3 { margin: 0.6rem 0 0.4rem; }
 </style>

@@ -48,22 +48,21 @@ const pct = (v: number) => `${Math.max(0, ((v - floor) / (max - floor || 1)) * 1
           <span class="bar-track">
             <span class="bar-fill" style={`width:${pct(r.value!)}`}></span>
             {r.low !== undefined && r.high !== undefined && <span class="bar-ci" style={`left:${pct(r.low)};width:calc(${pct(r.high)} - ${pct(r.low)})`}></span>}
+            <span class="bar-value" style={`left:${r.high !== undefined ? pct(Math.max(r.high, r.value!)) : pct(r.value!)}`}>{r.display ?? r.value}</span>
           </span>
-          <span class="bar-value">{r.display ?? r.value}</span>
         </div>
       ))}
       {empty.map((r) => (
         <div class="bar-row is-empty" role="listitem">
           <span class="bar-label">{r.href ? <a href={r.href}>{r.label}</a> : r.label}{r.maker && !compact && <span class="maker"> · {r.maker}</span>}</span>
-          <span class="bar-track"></span>
-          <span class="bar-value">Not tested</span>
+          <span class="bar-value">Not tested yet</span>
         </div>
       ))}
     </div>
   )}
   {source && (
     <div class="chart-foot">
-      <span>Source: <a href={source.url}>{source.name}</a>{source.note && <> · {source.note}</>}</span>
+      Source: <a href={source.url}>{source.name}</a>{source.note && <> · {source.note}</>}
     </div>
   )}
 </section>

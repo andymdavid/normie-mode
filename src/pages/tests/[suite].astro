@@ -53,14 +53,20 @@ const runDate = new Date(`${summary.run_id.slice(0, 10)}T00:00:00Z`).toLocaleDat
     </div>
   </div>
 
-  <section class="card best-overall" aria-labelledby="best-h">
-    <div class="eyebrow" id="best-h">Best overall in this test</div>
-    <p class="best-name"><a href={`/models/${best.model}`}>{best.name}</a></p>
-    <p>{best.why}, taking about {Math.round(best.seconds)} seconds a sheet and ${best.cost.toFixed(2)} for all {cases.length} sheets.</p>
-    <p class="small muted">How we pick: most answers right first. If models tie, the cheaper one ranks higher, then the faster one. Based on this test only.</p>
+  <section class="best-block" aria-labelledby="best-h">
+    <div class="best-inner">
+      <div class="mono-label" id="best-h">Best overall in this test</div>
+      <p class="best-name"><a href={`/models/${best.model}`}>{best.name}</a></p>
+      <dl class="best-stats">
+        <div><dt>Answers right</dt><dd>{best.correct}/{best.total}</dd></div>
+        <div><dt>Cost, 5 sheets</dt><dd>${best.cost.toFixed(2)}</dd></div>
+        <div><dt>Time per sheet</dt><dd>{Math.round(best.seconds)}s</dd></div>
+      </dl>
+      <p class="best-rule">How we pick: most answers right first. If models tie, the cheaper one ranks higher, then the faster one. Based on this test only.</p>
+    </div>
   </section>
 
-  <div class="section-head" style="margin-top:2rem"><h2>Overall ranking</h2></div>
+  <div class="section-head"><h2>Overall ranking</h2></div>
   <p class="section-sub">Most answers right first, then cheapest, then fastest.</p>
   <div class="table-wrap">
     <table>
@@ -169,7 +175,13 @@ const runDate = new Date(`${summary.run_id.slice(0, 10)}T00:00:00Z`).toLocaleDat
 </Base>
 
 <style>
-  .best-overall { border-left: 3px solid var(--ink); margin-bottom: 0.5rem; }
-  .best-name { font-family: var(--serif); font-size: 1.6rem; margin: 0.15rem 0 0.3rem; }
+  .best-block { background: var(--orange); margin-inline: calc(50% - 50vw); padding: 0 calc(50vw - 50%); }
+  .best-inner { max-width: 90rem; margin: 0 auto; padding: 1.5rem 1.25rem 1.75rem; }
+  .best-name { font-size: clamp(3rem, 8vw, 6.5rem); font-weight: 500; letter-spacing: -0.045em; line-height: 0.95; margin: 1.2rem 0 1.5rem; }
   .best-name a { text-decoration: none; }
+  .best-stats { display: flex; flex-wrap: wrap; gap: 0; margin: 0 0 1.2rem; border-top: 1px solid var(--rule); }
+  .best-stats div { padding: 0.7rem 2.5rem 0 0; }
+  .best-stats dt { font: 500 0.7rem var(--mono); text-transform: uppercase; }
+  .best-stats dd { margin: 0.2rem 0 0; font: 500 1.6rem var(--mono); letter-spacing: -0.03em; }
+  .best-rule { font-size: 0.85rem; margin: 0; max-width: 40rem; }
 </style>
