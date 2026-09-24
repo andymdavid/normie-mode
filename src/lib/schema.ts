@@ -195,6 +195,32 @@ export const makerClaimSchema = z.object({
 });
 export type MakerClaim = z.infer<typeof makerClaimSchema>;
 
+/** A test as shown to readers: one plain line, who made it, and where its data comes from (D-021). */
+export const testSchema = z.object({
+  id,
+  source: z.enum(['epoch', 'lmarena']),
+  /** Epoch benchmark name, or LMArena category. */
+  key: z.string(),
+  title: z.string(),
+  what: z.string(),
+  by: z.string(),
+  url: z.url(),
+});
+export type Test = z.infer<typeof testSchema>;
+
+/** A job people want AI for; its page is the stack of tests that measure it. */
+export const jobSchema = z.object({
+  id,
+  name: z.string(),
+  question: z.string(),
+  covers: z.string(),
+  order: z.number().default(100),
+  tests: z.array(id).min(1),
+  caveat: z.string().optional(),
+  related: z.array(id).default([]),
+});
+export type Job = z.infer<typeof jobSchema>;
+
 export type Source = z.infer<typeof sourceSchema>;
 export type ModelFamily = z.infer<typeof modelFamilySchema>;
 export type ModelVersion = z.infer<typeof modelVersionSchema>;

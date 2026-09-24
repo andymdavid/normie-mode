@@ -1,0 +1,69 @@
+---
+// One metric, one chart (D-021). Horizontal bars so model names stay readable at any width.
+// Single series colour; identity comes from the row label. Values sit at the bar tip.
+export interface BarDatum {
+  id: string;
+  label: string;
+  maker?: string;
+  href?: string;
+  value?: number;
+  display?: string;
+  low?: number;
+  high?: number;
+  tip?: string;
+  muted?: boolean;
+}
+interface Props {
+  title: string;
+  sub: string;
+  rows: BarDatum[];
+  lowerIsBetter?: boolean;
+  summary?: string;
+  source?: { name: string; url: string; note?: string };
+  /** Floor for the axis so small differences near the top remain visible (e.g. index scores). */
+  floor?: number;
+  id?: string;
+  showEmpty?: boolean;
+  /** Narrow cards: shorter labels, no maker names. */
+  compact?: boolean;
+}
+const { title, sub, rows, lowerIsBetter = false, summary, source, floor = 0, id, showEmpty = true, compact = false } = Astro.props;
+const withValue = rows.filter((r) => r.value !== undefined);
+const sorted = [...withValue].sort((a, b) => (lowerIsBetter ? a.value! - b.value! : b.value! - a.value!));
+const empty = showEmpty ? rows.filter((r) => r.value === undefined) : [];
+const max = Math.max(...withValue.map((r) => r.high ?? r.value!), 0);
+const pct = (v: number) => `${Math.max(0, ((v - floor) / (max - floor || 1)) * 100)}%`;
+---
+<section class={`chart-card${compact ? ' is-compact' : ''}`} id={id}>
+  <h3 class="chart-title">{title}</h3>
+  <p class="chart-sub">{sub} · {lowerIsBetter ? 'Lower is better' : 'Higher is better'}</p>
+  {summary && <p class="chart-summary">{summary}</p>}
+  {sorted.length === 0 ? (
+    <p class="bars-empty">No results yet for the models we track.</p>
+  ) : (
+    <div class="bars" role="list">
+      {sorted.map((r) => (
+        <div class={`bar-row${r.muted ? ' is-muted' : ''}`} role="listitem" tabindex="0" title={r.tip ?? `${r.label}: ${r.display ?? r.value}`}>
+          <span class="bar-label">{r.href ? <a href={r.href}>{r.label}</a> : r.label}{r.maker && !compact && <span class="maker"> · {r.maker}</span>}</span>
+          <span class="bar-track">
+            <span class="bar-fill" style={`width:${pct(r.value!)}`}></span>
+            {r.low !== undefined && r.high !== undefined && <span class="bar-ci" style={`left:${pct(r.low)};width:calc(${pct(r.high)} - ${pct(r.low)})`}></span>}
+          </span>
+          <span class="bar-value">{r.display ?? r.value}</span>
+        </div>
+      ))}
+      {empty.map((r) => (
+        <div class="bar-row is-empty" role="listitem">
+          <span class="bar-label">{r.href ? <a href={r.href}>{r.label}</a> : r.label}{r.maker && !compact && <span class="maker"> · {r.maker}</span>}</span>
+          <span class="bar-track"></span>
+          <span class="bar-value">Not tested</span>
+        </div>
+      ))}
+    </div>
+  )}
+  {source && (
+    <div class="chart-foot">
+      <span>Source: <a href={source.url}>{source.name}</a>{source.note && <> · {source.note}</>}</span>
+    </div>
+  )}
+</section>

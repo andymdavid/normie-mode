@@ -1,0 +1,7 @@
+id: swe-bench-verified
+source: epoch
+key: SWE-Bench verified
+title: Fixing reported bugs in real software
+what: Real bug reports from open-source Python projects; the fix must pass the project's tests.
+by: Princeton, OpenAI
+url: https://epoch.ai/benchmarks

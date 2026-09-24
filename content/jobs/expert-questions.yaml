@@ -1,0 +1,7 @@
+id: expert-questions
+name: Expert questions
+question: Which AI is best for expert questions?
+covers: Hard questions in science and other specialist subjects.
+order: 6
+tests: [gpqa-diamond, hle, arena-expert]
+related: [facts, maths]

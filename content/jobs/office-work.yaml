@@ -1,0 +1,7 @@
+id: office-work
+name: Professional office work
+question: Which AI is best at professional office work?
+covers: Multi-step work with documents, spreadsheets, slides and email, the kind a consultant or analyst does.
+order: 2
+tests: [apex-agents, remote-labor-index, arena-business]
+related: [documents-to-tables, write-code]

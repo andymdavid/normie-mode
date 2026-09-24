@@ -1,0 +1,7 @@
+id: dtbench
+source: epoch
+key: DTBench
+title: Pulling information out of documents into tables
+what: Reading documents and filling in a table with the right figures, including cases that need reasoning.
+by: DTBench authors
+url: https://arxiv.org/html/2602.13812

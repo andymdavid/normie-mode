@@ -1,0 +1,7 @@
+id: write-code
+name: Writing code
+question: Which AI is best for writing code?
+covers: Building apps and websites, fixing bugs, and automating things with scripts.
+order: 1
+tests: [frontiercode, deepswe, terminal-bench, swe-bench-verified, arena-coding]
+related: [office-work]

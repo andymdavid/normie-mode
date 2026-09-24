@@ -239,6 +239,12 @@ export function validate(g: Graph, asOf = today()): ValidationReport {
     need(g.sources.get(c.source)?.evidence_class === 'provider-reported', at, 'maker claims must cite a provider-reported source');
   }
 
+  for (const j of g.jobs.values()) {
+    const at = where('jobs', j.id);
+    for (const t of j.tests) need(g.tests.has(t), at, `unknown test "${t}"`);
+    for (const r of j.related) need(g.jobs.has(r), at, `unknown related job "${r}"`);
+  }
+
   const publishedScopes = new Map<string, string>();
   for (const rec of g.recommendations.values()) {
     const at = where('recommendations', rec.id);

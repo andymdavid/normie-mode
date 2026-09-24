@@ -1,0 +1,7 @@
+id: arena-coding
+source: lmarena
+key: coding
+title: People's votes on coding questions
+what: People compared two anonymous answers to their coding questions and picked the better one.
+by: LMArena
+url: https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset

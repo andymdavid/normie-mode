@@ -1,0 +1,7 @@
+id: remote-labor-index
+source: epoch
+key: Remote Labor Index
+title: Real paid freelance projects
+what: Projects originally done by freelancers for pay, scored on whether the AI's result would be acceptable to the client.
+by: Scale AI, Center for AI Safety
+url: https://epoch.ai/benchmarks

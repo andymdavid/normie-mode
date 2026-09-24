@@ -1,0 +1,8 @@
+id: health
+name: Health questions
+question: Which AI is best for health questions?
+covers: Understanding symptoms, conditions and medical information.
+order: 9
+tests: [arena-medicine]
+caveat: Based only on people's votes. Always check health answers with a qualified person.
+related: [legal]

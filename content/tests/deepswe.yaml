@@ -1,0 +1,7 @@
+id: deepswe
+source: epoch
+key: DeepSWE
+title: Building features in real software projects
+what: 113 original tasks across 91 real code projects in five languages, checked with hand-written tests.
+by: Datacurve
+url: https://deepswe.datacurve.ai/

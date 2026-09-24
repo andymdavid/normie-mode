@@ -1,0 +1,8 @@
+id: legal
+name: Legal questions
+question: Which AI is best for legal questions?
+covers: Understanding contracts, regulations and legal questions.
+order: 8
+tests: [arena-legal]
+caveat: Based only on people's votes. Always check legal answers with a qualified person.
+related: [health]

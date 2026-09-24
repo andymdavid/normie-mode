@@ -1,0 +1,7 @@
+id: arena-expert
+source: lmarena
+key: expert
+title: People's votes on expert questions
+what: People compared two anonymous answers to questions needing expert knowledge.
+by: LMArena
+url: https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset

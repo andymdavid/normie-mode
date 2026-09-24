@@ -1,0 +1,7 @@
+id: arena-instructions
+source: lmarena
+key: instruction_following
+title: People's votes on following instructions
+what: People compared two anonymous answers to requests with specific instructions.
+by: LMArena
+url: https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset

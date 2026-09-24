@@ -1,0 +1,7 @@
+id: arena-business
+source: lmarena
+key: industry_business_and_management_and_financial_operations
+title: People's votes on business and finance questions
+what: People compared two anonymous answers to business, management and finance questions.
+by: LMArena
+url: https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset

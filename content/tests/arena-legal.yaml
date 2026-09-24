@@ -1,0 +1,7 @@
+id: arena-legal
+source: lmarena
+key: industry_legal_and_government
+title: People's votes on legal questions
+what: People compared two anonymous answers to legal and government questions.
+by: LMArena
+url: https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset

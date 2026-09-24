@@ -1,0 +1,7 @@
+id: arena-medicine
+source: lmarena
+key: industry_medicine_and_healthcare
+title: People's votes on health questions
+what: People compared two anonymous answers to medical and healthcare questions.
+by: LMArena
+url: https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset

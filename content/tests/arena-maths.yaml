@@ -1,0 +1,7 @@
+id: arena-maths
+source: lmarena
+key: math
+title: People's votes on maths questions
+what: People compared two anonymous answers to maths questions.
+by: LMArena
+url: https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset

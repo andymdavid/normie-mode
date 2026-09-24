@@ -1,0 +1,8 @@
+id: facts
+name: Getting facts right
+question: Which AI makes things up the least?
+covers: Answering factual questions correctly, and not inventing answers.
+order: 5
+tests: [simpleqa-verified]
+caveat: Only one independent test covers this so far.
+related: [expert-questions]

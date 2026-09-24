@@ -1,0 +1,7 @@
+id: maths
+name: Maths
+question: Which AI is best at maths?
+covers: From homework-style problems to research-level maths.
+order: 7
+tests: [otis-aime, frontiermath, arena-maths]
+related: [expert-questions]

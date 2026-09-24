@@ -1,0 +1,7 @@
+id: arena-creative-writing
+source: lmarena
+key: creative_writing
+title: People's votes on creative writing
+what: People compared two anonymous pieces of creative writing.
+by: LMArena
+url: https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset
