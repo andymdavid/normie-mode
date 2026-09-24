@@ -1,0 +1,8 @@
+id: deepseek-v4-pro
+family: deepseek
+name: DeepSeek V4 Pro
+released_on: 2026-08-13
+lifecycle: current
+verification:
+  status: verified
+  sources: [deepseek-v4-pro]

@@ -1,0 +1,4 @@
+id: gpt
+name: GPT
+provider: OpenAI
+summary: OpenAI's model family, the models behind ChatGPT.

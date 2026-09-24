@@ -1,0 +1,15 @@
+id: compare-budget-to-actuals
+name: Compare budget to actuals
+question: Can AI compare my budget to actuals?
+user_goal: See where actual results differ from budget and why.
+includes: Variance tables, percentage differences, flagging material variances, explaining movements.
+excludes: Building the budget itself (see Build a financial model).
+success: Variances are correct, material items are flagged, and explanations match the data.
+capabilities:
+  - {capability: numerical-reasoning, importance: core}
+  - {capability: workbook-comprehension, importance: core}
+  - {capability: careful-inspection, importance: supporting}
+related: [build-a-monthly-report, build-a-financial-model, analyse-a-spreadsheet]
+aliases:
+  - budget vs actual analysis ai
+  - variance analysis with ai

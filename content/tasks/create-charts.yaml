@@ -1,0 +1,14 @@
+id: create-charts
+name: Create charts
+question: Can AI make charts from my spreadsheet?
+user_goal: Turn spreadsheet data into charts that make the point clearly.
+includes: Choosing chart types, building charts in the workbook, formatting for a report or deck.
+excludes: Full slide decks (outside this slice).
+success: The chart shows the right data, is correctly labelled, and is easy to read.
+capabilities:
+  - {capability: charts-and-presentation, importance: core}
+  - {capability: workbook-comprehension, importance: supporting}
+related: [build-a-monthly-report]
+aliases:
+  - ai chart maker from excel
+  - create graphs from spreadsheet ai

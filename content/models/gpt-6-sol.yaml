@@ -1,0 +1,8 @@
+id: gpt-6-sol
+family: gpt
+name: GPT-6 Sol
+released_on: 2026-09-22
+lifecycle: current
+verification:
+  status: verified
+  sources: [openai-gpt-6-sol]

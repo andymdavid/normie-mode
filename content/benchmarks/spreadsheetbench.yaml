@@ -1,0 +1,31 @@
+id: spreadsheetbench
+name: SpreadsheetBench
+owner: Renmin University of China (RUCKBReasoning)
+what_is_it: A test built from real questions people posted on Excel help forums, checking whether an AI can make the change they asked for.
+what_it_tests: Spreadsheet manipulation — filling cells, writing formulas, restructuring sheets — checked against several versions of each spreadsheet so lucky one-off answers don't count.
+why_care: The questions come from real users with real problems, not from researchers inventing puzzles.
+limits:
+  - Tasks are single requests, not whole jobs.
+  - It is older and top scores are high, so it separates the best models less well than it used to.
+  - Few current results are published by the benchmark owners themselves.
+kind: real-world-work
+sources: [spreadsheetbench-github, spreadsheetbench-site]
+versions:
+  - id: v1
+    name: SpreadsheetBench (v1)
+    notes: 912 instructions, 2,729 test spreadsheets.
+metrics:
+  - id: pass-1
+    name: Pass@1
+    plain: Share of tasks solved correctly on the first try, across all test versions of the spreadsheet.
+    unit: percent
+    primary: true
+measures:
+  - capability: formula-work
+    strength: primary
+  - capability: data-transformation
+    strength: primary
+  - capability: workbook-comprehension
+    strength: secondary
+direct_tasks:
+  - task: write-a-formula

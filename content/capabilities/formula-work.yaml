@@ -1,0 +1,4 @@
+id: formula-work
+name: Formulas
+definition: Writing, explaining and repairing spreadsheet formulas, including lookups, conditional logic and references across sheets.
+why_it_matters: Formulas are where spreadsheets encode business rules. A formula that looks right but references the wrong range silently produces wrong numbers.

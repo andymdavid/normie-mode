@@ -1,0 +1,8 @@
+id: claude-fable-5-1
+family: claude
+name: Claude Fable 5.1
+released_on: 2026-09-01
+lifecycle: current
+verification:
+  status: verified
+  sources: [anthropic-claude-fable-5-1]

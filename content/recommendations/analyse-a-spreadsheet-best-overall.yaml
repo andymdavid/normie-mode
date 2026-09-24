@@ -1,0 +1,30 @@
+id: analyse-a-spreadsheet-best-overall
+task: analyse-a-spreadsheet
+scope: best-overall
+model_version: gemini-3-7-flash
+confidence: limited
+status: draft
+verdict: Gemini 3.7 Flash has the best tested record for answering questions from spreadsheets, but Claude Fable 5.1 is close behind. Either is a sensible choice. Check the figures it used either way.
+rationale:
+  - text: Gemini 3.7 Flash scored highest on the most realistic independent test of spreadsheet analysis, answering 60% of questions correctly on all five attempts.
+    basis: measured
+    results: [aa-analyst-gemini-3-7-flash]
+  - text: Claude Fable 5.1 scored 57.5% on the same test. On 80 questions that gap is two questions, too small to call a clear winner, so confidence is limited.
+    basis: measured
+    results: [aa-analyst-gemini-3-7-flash, aa-analyst-claude-fable-5-1]
+limitations:
+  - text: This rests on a single independent benchmark, and its questions are private.
+    basis: sourced
+    sources: [aa-analyst-agent]
+  - text: Google has since released Gemini 3.8 Flash, which we have no results for yet.
+    basis: editorial
+  - text: Claude Opus 5.5 and GPT-6 Sol came out this week and haven't been tested on this job yet.
+    basis: editorial
+evidence: [aa-analyst-gemini-3-7-flash, aa-analyst-claude-fable-5-1, aa-analyst-claude-opus-5]
+alternatives:
+  - model_version: claude-fable-5-1
+    note: effectively tied on the same test (57.5%)
+  - model_version: claude-opus-5
+    note: a few points behind (53.8%) on the same test
+reviewed_on: 2026-09-23
+reviewer: unreviewed

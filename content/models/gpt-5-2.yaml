@@ -1,0 +1,8 @@
+id: gpt-5-2
+family: gpt
+name: GPT-5.2
+lifecycle: superseded
+successor: gpt-5-5
+verification:
+  status: unverified
+  note: Version name taken from third-party coverage; confirm against the provider's model list.

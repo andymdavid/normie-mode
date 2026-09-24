@@ -1,0 +1,8 @@
+id: multi-step-execution
+name: Seeing a long job through
+definition: Completing many coordinated edits across a workbook without losing track, stopping early or breaking something already done.
+why_it_matters: Real spreadsheet jobs often need hundreds of changes. Small per-step error rates add up to failure on the whole job.
+limitations:
+  - text: SpreadsheetBench 2 tasks need hundreds of cell edits on average, and the best model tested completed about a third of them fully correctly.
+    basis: sourced
+    sources: [spreadsheetbench-2-paper]

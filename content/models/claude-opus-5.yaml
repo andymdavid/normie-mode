@@ -1,0 +1,9 @@
+id: claude-opus-5
+family: claude
+name: Claude Opus 5
+released_on: 2026-07-24
+lifecycle: superseded
+successor: claude-opus-5-5
+verification:
+  status: verified
+  sources: [anthropic-claude-opus-5]

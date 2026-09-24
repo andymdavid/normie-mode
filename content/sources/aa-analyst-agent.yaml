@@ -1,0 +1,8 @@
+id: aa-analyst-agent
+title: AA-AnalystAgent Benchmark Leaderboard
+publisher: Artificial Analysis
+url: https://artificialanalysis.ai/evaluations/aa-analyst-agent
+kind: leaderboard
+evidence_class: independent-benchmark
+retrieved_on: 2026-09-23
+notes: Live leaderboard with 33 models; publication date not stated. Question set is held privately to limit contamination. Only the top three scores were captured on retrieval.

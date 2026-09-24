@@ -1,0 +1,4 @@
+id: data-transformation
+name: Reshaping and cleaning data
+definition: Cleaning, standardising, matching, merging and reshaping tables so they can be analysed.
+why_it_matters: A lot of real spreadsheet time goes into getting data into shape. Mistakes here (dropped rows, bad matches) are easy to miss.

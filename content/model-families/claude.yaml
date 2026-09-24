@@ -1,0 +1,4 @@
+id: claude
+name: Claude
+provider: Anthropic
+summary: Anthropic's model family. Currently offered in several tiers (Fable, Opus, Sonnet, Haiku) that trade capability against speed and cost.

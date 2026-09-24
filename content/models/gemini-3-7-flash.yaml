@@ -1,0 +1,8 @@
+id: gemini-3-7-flash
+family: gemini
+name: Gemini 3.7 Flash
+lifecycle: superseded
+successor: gemini-3-8-flash
+verification:
+  status: unverified
+  note: Version name taken from third-party coverage; confirm against the provider's model list.

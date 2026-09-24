@@ -1,0 +1,4 @@
+id: gemini
+name: Gemini
+provider: Google DeepMind
+summary: Google's model family, available in Pro and Flash tiers.

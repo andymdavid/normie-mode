@@ -1,0 +1,61 @@
+results:
+  - id: kimi-k3-report-sb2-kimi-k3
+    model_version: kimi-k3
+    benchmark: spreadsheetbench-2
+    benchmark_version: v1
+    metric: accuracy
+    value: 34.8
+    source: kimi-k3-github
+    published_on: 2026-07-17
+    configuration:
+      reasoning: max
+      harness: Claude Code
+    notes: Reported by Moonshot AI, not by the benchmark authors. Uses a different harness from the paper, so not directly comparable with paper results.
+  - id: kimi-k3-report-sb2-claude-fable-5
+    model_version: claude-fable-5
+    benchmark: spreadsheetbench-2
+    benchmark_version: v1
+    metric: accuracy
+    value: 34.7
+    source: kimi-k3-github
+    published_on: 2026-07-17
+    configuration:
+      reasoning: max, with fallback
+      harness: Claude Code
+    notes: Reported by Moonshot AI, not by the benchmark authors. Uses a different harness from the paper, so not directly comparable with paper results.
+  - id: kimi-k3-report-sb2-gpt-5-6-sol
+    model_version: gpt-5-6-sol
+    benchmark: spreadsheetbench-2
+    benchmark_version: v1
+    metric: accuracy
+    value: 32.4
+    source: kimi-k3-github
+    published_on: 2026-07-17
+    configuration:
+      reasoning: max
+      harness: Codex
+    notes: Reported by Moonshot AI, not by the benchmark authors. Uses a different harness from the paper, so not directly comparable with paper results.
+  - id: kimi-k3-report-sb2-claude-opus-4-8
+    model_version: claude-opus-4-8
+    benchmark: spreadsheetbench-2
+    benchmark_version: v1
+    metric: accuracy
+    value: 31.6
+    source: kimi-k3-github
+    published_on: 2026-07-17
+    configuration:
+      reasoning: max
+      harness: Claude Code
+    notes: Reported by Moonshot AI, not by the benchmark authors. Uses a different harness from the paper, so not directly comparable with paper results.
+  - id: kimi-k3-report-sb2-gpt-5-5
+    model_version: gpt-5-5
+    benchmark: spreadsheetbench-2
+    benchmark_version: v1
+    metric: accuracy
+    value: 29.1
+    source: kimi-k3-github
+    published_on: 2026-07-17
+    configuration:
+      reasoning: xhigh
+      harness: Codex
+    notes: Reported by Moonshot AI, not by the benchmark authors. Uses a different harness from the paper, so not directly comparable with paper results.

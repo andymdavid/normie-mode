@@ -1,0 +1,16 @@
+id: write-a-formula
+name: Write a formula
+question: Can AI write spreadsheet formulas for me?
+user_goal: Get a working formula for a specific calculation, and understand it.
+includes: Lookups, conditional sums, date logic, text manipulation, array formulas — one formula or a small set.
+excludes: Fixing an existing broken workbook (see Fix a broken workbook).
+success: The formula returns the right results on your real data, including edge cases.
+capabilities:
+  - {capability: formula-work, importance: core}
+  - {capability: workbook-comprehension, importance: supporting}
+related: [fix-a-broken-workbook, analyse-a-spreadsheet]
+aliases:
+  - ai excel formula generator
+  - can chatgpt write vlookup
+  - best ai for excel formulas
+  - explain this excel formula

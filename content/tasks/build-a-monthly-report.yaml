@@ -1,0 +1,17 @@
+id: build-a-monthly-report
+name: Build a monthly report
+question: Can AI turn my raw data into a monthly report?
+user_goal: Turn transactions or exports into a recurring management report.
+includes: Summarising by month, category or customer; pivot-style tables; commentary on movements.
+excludes: Budget comparisons (see Compare budget to actuals) and forward-looking models.
+success: Totals reconcile to the source data and the report is readable by someone else.
+capabilities:
+  - {capability: data-transformation, importance: core}
+  - {capability: numerical-reasoning, importance: core}
+  - {capability: charts-and-presentation, importance: supporting}
+  - {capability: multi-step-execution, importance: supporting}
+related: [compare-budget-to-actuals, create-charts, analyse-a-spreadsheet]
+aliases:
+  - ai monthly management report
+  - sales csv to monthly report
+  - automate excel reporting with ai

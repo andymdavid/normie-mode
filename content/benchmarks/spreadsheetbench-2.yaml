@@ -1,0 +1,45 @@
+id: spreadsheetbench-2
+name: SpreadsheetBench 2
+owner: Renmin University of China and collaborators
+what_is_it: A test of whether an AI agent can complete whole business spreadsheet jobs — building financial models, filling templates, fixing broken workbooks and making charts.
+what_it_tests: Long, multi-step spreadsheet work on real financial data. A task only counts as done if the whole spreadsheet ends up correct.
+example: "Given a company's filings, complete a multi-sheet financial model; or find and fix the errors planted in a working budget workbook."
+why_care: It is one of the few tests that looks like a real spreadsheet job from start to finish, and it's strict about the result.
+limits:
+  - Focused on finance and business workbooks; other kinds of spreadsheets may behave differently.
+  - The authors ran each model once, with no error bars, so small gaps may not be real.
+  - Exact-match grading can mark a sensible alternative solution as wrong.
+  - The published paper tested models that have since been replaced by newer versions.
+kind: agentic
+sources: [spreadsheetbench-2-paper]
+versions:
+  - id: v1
+    name: Initial release (arXiv v1)
+    released_on: 2026-06-29
+    notes: 321 tasks — 100 financial modelling, 97 template, 100 debugging, 24 visualisation.
+metrics:
+  - id: accuracy
+    name: Task accuracy
+    plain: Share of tasks where the finished spreadsheet was fully correct.
+    unit: percent
+    primary: true
+measures:
+  - capability: multi-step-execution
+    strength: primary
+  - capability: workbook-comprehension
+    strength: primary
+  - capability: careful-inspection
+    strength: primary
+  - capability: formula-work
+    strength: secondary
+  - capability: numerical-reasoning
+    strength: secondary
+  - capability: charts-and-presentation
+    strength: secondary
+direct_tasks:
+  - task: build-a-financial-model
+    subset: financial-modelling
+  - task: fix-a-broken-workbook
+    subset: debugging
+  - task: create-charts
+    subset: visualisation

@@ -1,0 +1,19 @@
+id: fix-a-broken-workbook-best-overall
+task: fix-a-broken-workbook
+scope: best-overall
+confidence: insufficient
+status: draft
+verdict: We can't recommend a model for this yet. The last independent test found every model failed most jobs, and the models it tested have all been replaced. Use AI to explain formulas, not to fix the workbook unsupervised.
+rationale:
+  - text: In SpreadsheetBench 2's debugging tasks, the best model (Claude Opus 4.6) fully fixed 12% of workbooks, and GPT-5.2 fixed 8%.
+    basis: measured
+    results: [sb2-paper-claude-opus-4-6-debugging, sb2-paper-gpt-5-2-debugging]
+  - text: None of the models tested are current versions, and we have found no published debugging results for their successors.
+    basis: editorial
+limitations:
+  - text: The test uses planted errors in finance workbooks, which may not match the errors in your file.
+    basis: sourced
+    sources: [spreadsheetbench-2-paper]
+evidence: [sb2-paper-claude-opus-4-6-debugging, sb2-paper-gpt-5-2-debugging, sb2-paper-gemini-3-1-pro-debugging]
+reviewed_on: 2026-09-23
+reviewer: unreviewed

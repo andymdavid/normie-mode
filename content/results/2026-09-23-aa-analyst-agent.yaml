@@ -1,0 +1,34 @@
+results:
+  - id: aa-analyst-gemini-3-7-flash
+    model_version: gemini-3-7-flash
+    benchmark: aa-analyst-agent
+    benchmark_version: current
+    metric: pass-5
+    value: 60
+    source: aa-analyst-agent
+    published_on: 2026-09-23
+    configuration:
+      reasoning: high
+    notes: Leaderboard publication date not stated; retrieval date recorded.
+  - id: aa-analyst-claude-fable-5-1
+    model_version: claude-fable-5-1
+    benchmark: aa-analyst-agent
+    benchmark_version: current
+    metric: pass-5
+    value: 57.5
+    source: aa-analyst-agent
+    published_on: 2026-09-23
+    configuration:
+      reasoning: Adaptive reasoning, max effort, default fallback
+    notes: Leaderboard publication date not stated; retrieval date recorded.
+  - id: aa-analyst-claude-opus-5
+    model_version: claude-opus-5
+    benchmark: aa-analyst-agent
+    benchmark_version: current
+    metric: pass-5
+    value: 53.8
+    source: aa-analyst-agent
+    published_on: 2026-09-23
+    configuration:
+      reasoning: Adaptive reasoning, max effort
+    notes: Leaderboard publication date not stated; retrieval date recorded.

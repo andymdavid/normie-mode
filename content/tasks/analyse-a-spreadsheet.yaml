@@ -1,0 +1,52 @@
+id: analyse-a-spreadsheet
+name: Analyse a spreadsheet
+question: Can AI analyse a spreadsheet for me?
+user_goal: Get a correct answer to a business question from data that lives in one or more spreadsheets.
+includes: Asking questions of existing workbooks and CSVs, summarising what's in them, finding and combining figures, comparing periods.
+excludes: Changing the workbook (see fixing, cleaning and reporting tasks) and building new models from scratch.
+success: The answer is correct, uses the right figures and definitions, and you can see where it came from.
+depth: full
+capabilities:
+  - capability: workbook-comprehension
+    importance: core
+  - capability: numerical-reasoning
+    importance: core
+  - capability: careful-inspection
+    importance: core
+  - capability: formula-work
+    importance: supporting
+related: [spot-unusual-transactions, compare-budget-to-actuals, build-a-monthly-report, clean-up-messy-data]
+aliases:
+  - best ai for excel analysis
+  - ai that can read spreadsheets
+  - can chatgpt analyse excel
+  - ask questions about my spreadsheet
+  - ai data analysis excel
+  - analyse csv with ai
+  - summarise a spreadsheet
+assessment:
+  - text: AI can now answer many real analysis questions from a folder of spreadsheets and documents. But even the best models tested get only about 60% of questions right every time across five attempts.
+    basis: measured
+    results: [aa-analyst-gemini-3-7-flash, aa-analyst-claude-fable-5-1, aa-analyst-claude-opus-5]
+  - text: When AI gets spreadsheet work wrong, it's usually not the arithmetic. It misses part of the workbook, or uses the wrong cells.
+    basis: sourced
+    sources: [spreadsheetbench-2-paper]
+can_do:
+  - text: Pull together figures from several spreadsheets and documents to answer a specific question.
+    basis: sourced
+    sources: [aa-analyst-agent]
+  - text: Summarise what a workbook contains and where the important numbers are.
+    basis: editorial
+  - text: Compare periods, spot trends and describe what changed in plain English.
+    basis: editorial
+checks:
+  - text: Ask which sheets and cells it used, then look at them yourself. Skipping part of the workbook is the most common failure.
+    basis: sourced
+    sources: [spreadsheetbench-2-paper]
+  - text: Ask important questions more than once. Top models still give different answers on repeat runs for a meaningful share of questions.
+    basis: sourced
+    sources: [aa-analyst-agent]
+  - text: Check the definitions it used — which periods, which categories, what was excluded.
+    basis: editorial
+  - text: Sanity-check one figure you already know before trusting the rest.
+    basis: editorial

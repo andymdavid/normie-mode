@@ -1,0 +1,17 @@
+id: reconcile-two-lists
+name: Reconcile two lists
+question: Can AI reconcile two lists or accounts?
+user_goal: Match records between two sources and explain every difference.
+includes: Bank vs ledger, two customer lists, invoices vs payments, merging lists with partial matches.
+excludes: Cleaning a single list (see Clean up messy data).
+success: Every record is matched or explained, and totals agree after the explained differences.
+capabilities:
+  - {capability: data-transformation, importance: core}
+  - {capability: careful-inspection, importance: core}
+  - {capability: numerical-reasoning, importance: supporting}
+related: [clean-up-messy-data, spot-unusual-transactions]
+aliases:
+  - bank reconciliation with ai
+  - merge customer lists
+  - match two spreadsheets
+  - find differences between two lists

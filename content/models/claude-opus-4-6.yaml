@@ -1,0 +1,8 @@
+id: claude-opus-4-6
+family: claude
+name: Claude Opus 4.6
+lifecycle: superseded
+successor: claude-opus-4-8
+verification:
+  status: unverified
+  note: Version name taken from third-party coverage; confirm against the provider's model list.

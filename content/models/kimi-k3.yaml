@@ -1,0 +1,8 @@
+id: kimi-k3
+family: kimi
+name: Kimi K3
+released_on: 2026-07-17
+lifecycle: current
+verification:
+  status: verified
+  sources: [kimi-k3-github]

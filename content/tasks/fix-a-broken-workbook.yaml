@@ -1,0 +1,41 @@
+id: fix-a-broken-workbook
+name: Fix a broken workbook
+question: Can AI find and fix errors in my spreadsheet?
+user_goal: Find what's wrong in a workbook that is giving bad numbers or errors, and fix it without breaking anything else.
+includes: Broken formulas, wrong references, #REF!/#VALUE! errors, inconsistent logic across sheets.
+excludes: Writing a single new formula from scratch (see Write a formula).
+success: Every error is fixed, nothing that was working is changed, and the totals reconcile.
+depth: full
+capabilities:
+  - capability: careful-inspection
+    importance: core
+  - capability: formula-work
+    importance: core
+  - capability: workbook-comprehension
+    importance: core
+  - capability: multi-step-execution
+    importance: supporting
+related: [write-a-formula, analyse-a-spreadsheet, build-a-financial-model]
+aliases:
+  - find broken formula
+  - ai to debug excel
+  - fix ref errors in excel
+  - why is my spreadsheet total wrong
+  - audit a spreadsheet with ai
+assessment:
+  - text: This is one of the weakest areas we've found. In the most detailed independent test, the best model fully fixed 12 of 100 broken workbooks.
+    basis: measured
+    results: [sb2-paper-claude-opus-4-6-debugging]
+  - text: Those results are for model versions that have since been replaced. We have not yet found newer independent results for this specific job.
+    basis: editorial
+can_do:
+  - text: Explain what an existing formula does, which often helps you spot the problem yourself.
+    basis: editorial
+  - text: Suggest likely causes for a specific error message or a total that looks wrong.
+    basis: editorial
+checks:
+  - text: Compare before and after. Check what else changed, because AI often applies a sensible fix to the wrong cells.
+    basis: sourced
+    sources: [spreadsheetbench-2-paper]
+  - text: Don't take "fixed" at face value. Recalculate a total you trust.
+    basis: editorial

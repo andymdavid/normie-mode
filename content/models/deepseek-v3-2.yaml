@@ -1,0 +1,8 @@
+id: deepseek-v3-2
+family: deepseek
+name: DeepSeek V3.2
+lifecycle: superseded
+successor: deepseek-v4-pro
+verification:
+  status: unverified
+  note: Version name taken from third-party coverage; confirm against the provider's model list.

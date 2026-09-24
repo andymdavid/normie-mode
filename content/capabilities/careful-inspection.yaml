@@ -1,0 +1,8 @@
+id: careful-inspection
+name: Checking before acting
+definition: Looking at enough of the file to find the right cells and notice what matters before changing or concluding anything.
+why_it_matters: The most common way AI agents fail on spreadsheets is not bad maths. They skip looking at part of the workbook, or apply the right fix to the wrong cells.
+limitations:
+  - text: In SpreadsheetBench 2, the two most common failure types were skipping important parts of the workbook and editing the wrong cells.
+    basis: sourced
+    sources: [spreadsheetbench-2-paper]

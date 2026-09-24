@@ -1,0 +1,16 @@
+id: spot-unusual-transactions
+name: Spot unusual transactions
+question: Can AI spot unusual transactions or expenses?
+user_goal: Flag outliers, duplicates or suspicious items in a list of transactions for a human to check.
+includes: Expense outliers, duplicate payments, unusual vendors, round-number patterns.
+excludes: Formal fraud investigation or audit sign-off.
+success: Genuine anomalies are flagged with a reason, and the flagged list is short enough to review.
+capabilities:
+  - {capability: numerical-reasoning, importance: core}
+  - {capability: careful-inspection, importance: core}
+  - {capability: data-transformation, importance: supporting}
+related: [reconcile-two-lists, analyse-a-spreadsheet]
+aliases:
+  - find expense outliers with ai
+  - detect duplicate payments
+  - ai anomaly detection spreadsheet

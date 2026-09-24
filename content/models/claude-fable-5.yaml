@@ -1,0 +1,8 @@
+id: claude-fable-5
+family: claude
+name: Claude Fable 5
+lifecycle: superseded
+successor: claude-fable-5-1
+verification:
+  status: unverified
+  note: Version name taken from third-party coverage; confirm against the provider's model list.

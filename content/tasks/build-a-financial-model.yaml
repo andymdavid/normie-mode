@@ -1,0 +1,17 @@
+id: build-a-financial-model
+name: Build a financial model
+question: Can AI build a financial model yet?
+user_goal: Create a working forecast, budget or valuation model from assumptions and historical data.
+includes: Three-statement models, cash flow forecasts, budgets, simple valuation models, filling finance templates.
+excludes: Analysing an existing model (see Analyse a spreadsheet).
+success: The model calculates correctly, links between sheets are right, and assumptions are visible and editable.
+capabilities:
+  - {capability: multi-step-execution, importance: core}
+  - {capability: numerical-reasoning, importance: core}
+  - {capability: formula-work, importance: core}
+  - {capability: workbook-comprehension, importance: supporting}
+related: [compare-budget-to-actuals, fix-a-broken-workbook]
+aliases:
+  - ai financial model excel
+  - can ai build a cash flow forecast
+  - best ai for financial modelling

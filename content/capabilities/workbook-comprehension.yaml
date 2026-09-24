@@ -1,0 +1,4 @@
+id: workbook-comprehension
+name: Understanding a workbook
+definition: Reading a real-world spreadsheet the way a colleague would — multiple sheets, messy headers, merged cells, and how one table feeds another.
+why_it_matters: Business workbooks are rarely tidy. If the AI misreads the layout, every answer after that is built on the wrong numbers.

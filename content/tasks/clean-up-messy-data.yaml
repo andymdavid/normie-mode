@@ -1,0 +1,17 @@
+id: clean-up-messy-data
+name: Clean up messy data
+question: Can AI clean up my messy data?
+user_goal: Turn an inconsistent export or list into a tidy table you can use.
+includes: Standardising names, dates and formats, removing duplicates within one table, splitting and combining columns.
+excludes: Matching records across two different lists (see Reconcile two lists).
+success: Every row is kept or deliberately removed, formats are consistent, and nothing was silently changed.
+capabilities:
+  - {capability: data-transformation, importance: core}
+  - {capability: careful-inspection, importance: core}
+  - {capability: workbook-comprehension, importance: supporting}
+related: [reconcile-two-lists, analyse-a-spreadsheet]
+aliases:
+  - clean a messy csv
+  - remove duplicates with ai
+  - ai data cleaning excel
+  - standardise dates in spreadsheet

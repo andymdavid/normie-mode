@@ -1,0 +1,32 @@
+id: aa-analyst-agent
+name: AA-AnalystAgent
+owner: Artificial Analysis
+what_is_it: A test of whether an AI can answer real business and research questions by digging through a folder of spreadsheets and documents.
+what_it_tests: End-to-end analysis — finding the right figures across files, choosing the right method, and producing a correct number. Each question is run five times.
+example: "Prescribed drug expenditures accounted for what percent of total net medical assistance program expenditures for Medicaid in California in 1997? (Answer: 8.66%)"
+why_care: This is close to what an analyst actually does, and it rewards getting the right answer every time, not just once.
+limits:
+  - It checks the final answer, not whether the working would convince a colleague.
+  - 80 questions is a small set, so a gap of a few points can be two or three questions.
+  - The questions are private, so you can't inspect exactly what was tested.
+kind: real-world-work
+sources: [aa-analyst-agent]
+versions:
+  - id: current
+    name: Current leaderboard
+    notes: Artificial Analysis does not publish a version number; results are recorded against the leaderboard as retrieved.
+metrics:
+  - id: pass-5
+    name: pass^5
+    plain: Share of questions the model got right on all five attempts.
+    unit: percent
+    primary: true
+measures:
+  - capability: numerical-reasoning
+    strength: primary
+  - capability: workbook-comprehension
+    strength: primary
+  - capability: careful-inspection
+    strength: secondary
+direct_tasks:
+  - task: analyse-a-spreadsheet

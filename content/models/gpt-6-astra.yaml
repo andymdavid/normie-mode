@@ -1,0 +1,8 @@
+id: gpt-6-astra
+family: gpt
+name: GPT-6 Astra
+released_on: 2026-09-03
+lifecycle: current
+verification:
+  status: verified
+  sources: [openai-gpt-6-astra]

@@ -1,0 +1,4 @@
+id: deepseek
+name: DeepSeek
+provider: DeepSeek
+summary: DeepSeek's model family. Openly released weights and low API prices.
