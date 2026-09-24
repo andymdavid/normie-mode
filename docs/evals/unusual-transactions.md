@@ -1,6 +1,6 @@
 # Normie Mode test: Spot unusual transactions (micro-pilot)
 
-Status: ready to run · Suite version 1 · Task: `spot-unusual-transactions`
+Status: built, deferred (the first run uses `spreadsheet-questions`) · Suite version 1 · Task: `spot-unusual-transactions`
 
 ## Why this test
 

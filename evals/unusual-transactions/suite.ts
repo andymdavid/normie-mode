@@ -2,8 +2,11 @@
 // Cases are generated from fixed seeds so every model sees identical inputs, and every planted
 // problem is known, so scoring needs no human or AI judge.
 
+import type { SuiteScore } from '../types';
+
 export const SUITE_ID = 'unusual-transactions';
 export const SUITE_VERSION = '1';
+export const SUITE_TITLE = 'Spot unusual transactions';
 
 export type ProblemType = 'duplicate' | 'outlier' | 'unapproved-supplier' | 'missing-approval' | 'out-of-period';
 export const PROBLEM_LABEL: Record<ProblemType, string> = {
@@ -227,14 +230,11 @@ export interface Flag {
   reason?: string;
 }
 
-export interface Score {
-  followed_format: boolean;
+export interface Score extends SuiteScore {
   planted: number;
   found: number;
   missed: ProblemType[];
   false_alarms: string[];
-  /** 0–100: harmonic mean of share found and share of flags that were right (F1). */
-  score: number;
 }
 
 export function parseFlags(text: string): Flag[] | undefined {
@@ -253,7 +253,7 @@ export function parseFlags(text: string): Flag[] | undefined {
 
 export function score(c: Case, text: string): Score {
   const flags = parseFlags(text);
-  if (!flags) return { followed_format: false, planted: c.planted.length, found: 0, missed: c.planted.map((p) => p.type), false_alarms: [], score: 0 };
+  if (!flags) return { followed_format: false, planted: c.planted.length, found: 0, missed: c.planted.map((p) => p.type), false_alarms: [], score: 0, summary: 'answer not in the required format' };
   const flagged = new Set(flags.map((f) => f.id.trim().toUpperCase()));
   const acceptable = new Set(c.planted.flatMap((p) => p.accept));
   const foundList = c.planted.filter((p) => p.accept.some((id) => flagged.has(id)));
@@ -267,6 +267,15 @@ export function score(c: Case, text: string): Score {
     found: foundList.length,
     missed: c.planted.filter((p) => !foundList.includes(p)).map((p) => p.type),
     false_alarms: falseAlarms,
+    // 0–100: harmonic mean of share found and share of flags that were right (F1).
     score: precision + recall ? Math.round((200 * precision * recall) / (precision + recall)) : 0,
+    summary: `${foundList.length}/${c.planted.length} found, ${falseAlarms.length} false alarm${falseAlarms.length === 1 ? '' : 's'}`,
   };
+}
+
+/** Pipeline check without an API: finds all but the last problem and raises one false alarm. */
+export function mockAnswer(c: Case): string {
+  const flags: Flag[] = c.planted.slice(0, -1).map((p) => ({ id: p.accept[0], reason: p.type }));
+  flags.push({ id: c.rows.find((r) => !c.planted.some((p) => p.accept.includes(r.id)))!.id, reason: 'mock false alarm' });
+  return JSON.stringify({ flags });
 }
