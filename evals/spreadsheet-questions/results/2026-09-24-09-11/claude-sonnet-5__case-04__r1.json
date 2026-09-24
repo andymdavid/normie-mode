@@ -1,0 +1,51 @@
+{
+ "suite": "spreadsheet-questions",
+ "version": "1",
+ "model": "claude-sonnet-5",
+ "route": "anthropic/claude-sonnet-5",
+ "case": "case-04",
+ "run": 1,
+ "seconds": 133.604,
+ "text": "# Working\n\nI calculated each order's value as `quantity × unit_price × (1 - discount%)`, then filtered/aggregated based on status and date ranges.\n\n## Q1: Net revenue in March 2026\nSumming all Completed orders dated March 2026 (SO-2049 to SO-2075, all Completed):\n**Total = £16,983.75**\n\n## Q2: Highest net revenue region in Q2 (Apr-Jun)\nRegion totals (Completed only):\n- North: £3,668.65\n- South: £4,616.60\n- East: £6,603.70\n- West: £4,528.25\n\n**Highest: East**\n\n## Q3: Product growth Q1→Q2\nQ1 vs Q2 net revenue by product (Completed only):\n- Filing Cabinet: £10,620.00 → £2,052.00 (-80.68%)\n- Standing Desk: £12,180.00 → £6,405.00 (-47.41%)\n- Monitor Arm: £5,408.00 → £1,651.00 (-69.45%)\n- Desk Lamp: £3,592.90 → £1,487.70 (-58.59%)\n- Desk Chair: £8,903.00 → £4,444.25 (-50.10%)\n- Whiteboard: £4,617.00 → £3,377.25 (-26.85%)\n\nAll products declined from Q1 to Q2 (order volume fell sharply). **Whiteboard had the smallest decline (best relative performance) at -26.85%.**\n\n## Q4: Value lost to refunded/cancelled orders (Jan-Jun)\nSummed all Refunded/Cancelled order values:\n2007, 2011, 2016, 2022, 2033, 2042, 2048, 2077, 2081, 2084, 2097, 2103, 2105, 2106\n**Total = £8,754.10**\n\n## Q5: Highest net revenue customer (Jan-Jun)\nTop customers by net revenue:\n- Copperfield Law: £7,222.40\n- Linden Travel: £6,637.95\n- Elmwood Primary School: £6,151.30\n- Oakridge Media: £5,906.50\n\n**Highest: Copperfield Law — £7,222.40**\n\n## Q6: Average net order value in Q1\n- Jan completed revenue: £15,245.25 (21 orders)\n- Feb completed revenue: £13,091.90 (20 orders)\n- Mar completed revenue: £16,983.75 (27 orders)\n- Total Q1 revenue: £45,320.90; Total completed orders: 68\n\nAverage = £45,320.90 / 68 = **£666.48**\n\n```json\n{\"answers\": {\"q1\": 16983.75, \"q2\": \"East\", \"q3\": {\"name\": \"Whiteboard\", \"percent\": -26.85}, \"q4\": 8754.10, \"q5\": {\"name\": \"Copperfield Law\", \"amount\": 7222.40}, \"q6\": 666.48}}\n```",
+ "cost": 0.2055735,
+ "usage": {
+  "prompt_tokens": 5345,
+  "completion_tokens": 19696,
+  "total_tokens": 25041,
+  "cost": 0.2055735,
+  "is_byok": false,
+  "prompt_tokens_details": {
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "audio_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost_details": {
+   "upstream_inference_cost": 0.20765,
+   "upstream_inference_prompt_cost": 0.01069,
+   "upstream_inference_completions_cost": 0.19696
+  },
+  "completion_tokens_details": {
+   "reasoning_tokens": 18732,
+   "image_tokens": 0,
+   "audio_tokens": 0
+  }
+ },
+ "provider": "Claude Platform on AWS",
+ "finish_reason": "stop",
+ "score": {
+  "followed_format": true,
+  "correct": 6,
+  "total": 6,
+  "per_question": {
+   "q1": true,
+   "q2": true,
+   "q3": true,
+   "q4": true,
+   "q5": true,
+   "q6": true
+  },
+  "score": 100,
+  "summary": "6/6 right"
+ }
+}

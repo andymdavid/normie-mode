@@ -1,0 +1,51 @@
+{
+ "suite": "spreadsheet-questions",
+ "version": "1",
+ "model": "gemini-3-8-flash",
+ "route": "google/gemini-3.8-flash",
+ "case": "case-02",
+ "run": 1,
+ "seconds": 109.227,
+ "text": "Here is the step-by-step breakdown of the calculations:\n\n### **q1. Net revenue in March 2026**\nSumming all orders with status **Completed** in March 2026 (SO-2049 through SO-2073, excluding refunded orders SO-2051, SO-2054 and cancelled order SO-2059):\n- SO-2049: £361.00\n- SO-2050: £129.20\n- SO-2052: £1,296.00\n- SO-2053: £144.40\n- SO-2055: £433.20\n- SO-2056: £34.20\n- SO-2057: £380.00\n- SO-2058: £370.50\n- SO-2060: £190.00\n- SO-2061: £95.00\n- SO-2062: £38.00\n- SO-2063: £304.00\n- SO-2064: £61.75\n- SO-2065: £950.00\n- SO-2066: £378.00\n- SO-2067: £95.00\n- SO-2068: £55.25\n- SO-2069: £739.50\n- SO-2070: £580.00\n- SO-2071: £95.00\n- SO-2072: £325.00\n- SO-2073: £1,305.00\n**Total March 2026 Net Revenue:** **£8,360.00**\n\n---\n\n### **q2. Highest net revenue region in Q2 (April to June 2026)**\nSum of completed orders by region for Q2:\n- **North:** £12,567.90\n- **East:** £10,112.25\n- **South:** £9,421.10\n- **West:** £6,294.75\n\n**North** had the highest net revenue in Q2.\n\n---\n\n### **q3. Product with highest percentage net revenue growth from Q1 to Q2**\n- **Desk Chair:** Q1 = £7,112.25 | Q2 = £12,955.75 → **+82.2%**\n- **Filing Cabinet:** Q1 = £6,975.00 | Q2 = £9,288.00 → +33.2%\n- **Whiteboard:** Q1 = £5,647.75 | Q2 = £6,132.25 → +8.6%\n- **Monitor Arm:** Q1 = £6,422.00 | Q2 = £2,704.00 → -57.9%\n- **Standing Desk:** Q1 = £7,035.00 | Q2 = £6,594.00 → -6.3%\n- **Desk Lamp:** Q1 = £3,041.90 | Q2 = £722.00 → -76.3%\n\n**Desk Chair** grew the most, with an increase of **82.2%**.\n\n---\n\n### **q4. Total order value lost to refunded and cancelled orders**\n- Refunded orders (11): SO-2008 (£652.50), SO-2015 (£304.00), SO-2025 (£1,071.00), SO-2037 (£1,197.00), SO-2045 (£1,881.00), SO-2051 (£185.25), SO-2054 (£1,740.00), SO-2083 (£324.90), SO-2090 (£370.50), SO-2101 (£1,428.00), SO-2133 (£304.00) = £9,458.15\n- Cancelled orders (3): SO-2059 (£123.50), SO-2082 (£679.25), SO-2106 (£1,435.50) = £2,238.25\n\n**Total Lost Order Value:** **£11,696.40**\n\n---\n\n### **q5. Customer with the highest net revenue (Jan–Jun 2026)**\n- Copperfield Law: £7,177.25\n- Linden Travel: £6,433.75\n- Greystone Insurance: £6,125.05\n- Kestrel Engineering: £6,121.25\n- Juniper Health Clinic: £5,704.50\n- Elmwood Primary School: £5,105.00\n- Brookside Dental: £5,074.65\n- Fairhaven Estates: £4,760.40\n- Dunmore Logistics: £4,414.25\n- Pembroke Consulting: £4,336.75\n- Maple Court Surgery: £4,150.25\n- Alder & Finch Architects: £3,839.95\n- Northwind Recruitment: £3,805.00\n- Ivy Lane Accountants: £3,172.25\n- Hollis Marketing: £2,856.60\n- Oakridge Media: £1,553.00\n\n**Copperfield Law** generated the highest net revenue at **£7,177.25**.\n\n---\n\n### **q6. Average net order value in Q1**\n- Total Net Revenue Q1: £36,233.90\n- Completed Orders Q1: 65 orders\n- Average Net Order Value: £36,233.90 / 65 = **£557.44**\n\n```json\n{\"answers\": {\"q1\": 8360.0, \"q2\": \"North\", \"q3\": {\"name\": \"Desk Chair\", \"percent\": 82.2}, \"q4\": 11696.4, \"q5\": {\"name\": \"Copperfield Law\", \"amount\": 7177.25}, \"q6\": 557.44}}\n```",
+ "cost": 0.0916549425,
+ "usage": {
+  "prompt_tokens": 5846,
+  "completion_tokens": 23519,
+  "total_tokens": 29365,
+  "cost": 0.0916549425,
+  "is_byok": false,
+  "prompt_tokens_details": {
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "audio_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost_details": {
+   "upstream_inference_cost": 0.09258075,
+   "upstream_inference_prompt_cost": 0.0043845,
+   "upstream_inference_completions_cost": 0.08819625
+  },
+  "completion_tokens_details": {
+   "reasoning_tokens": 21942,
+   "image_tokens": 0,
+   "audio_tokens": 0
+  }
+ },
+ "provider": "Google",
+ "finish_reason": "stop",
+ "score": {
+  "followed_format": true,
+  "correct": 6,
+  "total": 6,
+  "per_question": {
+   "q1": true,
+   "q2": true,
+   "q3": true,
+   "q4": true,
+   "q5": true,
+   "q6": true
+  },
+  "score": 100,
+  "summary": "6/6 right"
+ }
+}

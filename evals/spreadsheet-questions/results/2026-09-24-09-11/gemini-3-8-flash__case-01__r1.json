@@ -1,0 +1,51 @@
+{
+ "suite": "spreadsheet-questions",
+ "version": "1",
+ "model": "gemini-3-8-flash",
+ "route": "google/gemini-3.8-flash",
+ "case": "case-01",
+ "run": 1,
+ "seconds": 131.949,
+ "text": "To answer your questions, here is the breakdown of the calculations:\n\n1. **Total net revenue in March 2026:**\n   Only completed orders are counted. Summing all completed orders in March (SO-2054, SO-2056, SO-2057, SO-2058, SO-2059, SO-2060, SO-2062, SO-2063, SO-2065, SO-2066, SO-2067, SO-2069, SO-2070):\n   $$\\text{Total} = £10,540.05$$\n\n2. **Region with the highest net revenue in Q2 (April–June 2026):**\n   - **West:** £10,871.20\n   - **East:** £7,744.55\n   - **South:** £6,830.25\n   - **North:** £971.35\n   **West** had the highest net revenue.\n\n3. **Product with the highest net revenue growth from Q1 to Q2:**\n   - **Desk Lamp:** Q1 revenue was £1,299.60, Q2 revenue was £3,028.60.\n   - Growth: $\\frac{3,028.60 - 1,299.60}{1,299.60} \\times 100 = 133.04\\%$ (all other products either decreased or grew at a lower rate; Monitor Arm grew by 32.69%).\n\n4. **Order value lost to refunded and cancelled orders (Jan–Jun 2026):**\n   Sum of all 19 refunded and cancelled orders across the six months:\n   $$\\text{Total Lost} = £15,181.05$$\n\n5. **Customer with the highest net revenue (Jan–Jun 2026):**\n   - **Northwind Recruitment:** £8,548.95 (followed by Hollis Marketing at £8,095.55 and Copperfield Law at £7,076.60).\n\n6. **Average net order value in Q1:**\n   - Total completed net revenue in Q1 = £46,046.35\n   - Total completed orders in Q1 = 57\n   - Average net order value = $\\frac{£46,046.35}{57} \\approx £807.83$\n\n```json\n{\"answers\": {\"q1\": 10540.05, \"q2\": \"West\", \"q3\": {\"name\": \"Desk Lamp\", \"percent\": 133.04}, \"q4\": 15181.05, \"q5\": {\"name\": \"Northwind Recruitment\", \"amount\": 8548.95}, \"q6\": 807.83}}\n```",
+ "cost": 0.108201555,
+ "usage": {
+  "prompt_tokens": 5401,
+  "completion_tokens": 28065,
+  "total_tokens": 33466,
+  "cost": 0.108201555,
+  "is_byok": false,
+  "prompt_tokens_details": {
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "audio_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost_details": {
+   "upstream_inference_cost": 0.1092945,
+   "upstream_inference_prompt_cost": 0.00405075,
+   "upstream_inference_completions_cost": 0.10524375
+  },
+  "completion_tokens_details": {
+   "reasoning_tokens": 27378,
+   "image_tokens": 0,
+   "audio_tokens": 0
+  }
+ },
+ "provider": "Google",
+ "finish_reason": "stop",
+ "score": {
+  "followed_format": true,
+  "correct": 6,
+  "total": 6,
+  "per_question": {
+   "q1": true,
+   "q2": true,
+   "q3": true,
+   "q4": true,
+   "q5": true,
+   "q6": true
+  },
+  "score": 100,
+  "summary": "6/6 right"
+ }
+}

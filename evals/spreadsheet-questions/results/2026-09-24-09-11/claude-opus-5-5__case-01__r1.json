@@ -1,0 +1,51 @@
+{
+ "suite": "spreadsheet-questions",
+ "version": "1",
+ "model": "claude-opus-5-5",
+ "route": "anthropic/claude-opus-5.5",
+ "case": "case-01",
+ "run": 1,
+ "seconds": 69.793,
+ "text": "# Sales Order Analysis: January to June 2026\n\n**Method:** Each order's value is quantity × unit price × (1 − discount%). Net revenue includes only orders with status \"Completed\".\n\n## Q1: Net revenue in March 2026\n\nThere were 13 completed orders in March:\n\n1,083 + 798 + 665 + 1,653 + 409.50 + 110.50 + 325 + 307.80 + 1,515.25 + 720 + 190 + 1,680 + 1,083 = **£10,540.05**\n\n## Q2: Region with the highest net revenue in Q2\n\n| Region | Q2 Net Revenue |\n|---|---|\n| **West** | **£10,871.20** |\n| East | £7,744.55 |\n| South | £6,830.25 |\n| North | £971.35 |\n| **Total** | **£26,417.35** |\n\n## Q3: Product with the largest percentage growth from Q1 to Q2\n\n| Product | Q1 | Q2 | Change |\n|---|---|---|---|\n| **Desk Lamp** | £1,299.60 | £3,028.60 | **+133.04%** |\n| Monitor Arm | £4,722.25 | £6,266.00 | +32.69% |\n| Desk Chair | £8,895.75 | £5,756.50 | −35.3% |\n| Filing Cabinet | £11,817.00 | £5,274.00 | −55.4% |\n| Standing Desk | £7,812.00 | £2,772.00 | −64.5% |\n| Whiteboard | £11,499.75 | £3,320.25 | −71.1% |\n\nThe product totals add up to the Q1 total of £46,046.35 and the Q2 total of £26,417.35, which matches the regional figures.\n\n## Q4: Order value lost to refunded and cancelled orders\n\nThere were 19 such orders:\n\n| Order | Value | Order | Value |\n|---|---|---|---|\n| SO-2009 | 455.00 | SO-2061 | 992.75 |\n| SO-2012 | 741.00 | SO-2064 | 540.00 |\n| SO-2013 | 484.50 | SO-2068 | 2,052.00 |\n| SO-2014 | 493.00 | SO-2078 | 739.50 |\n| SO-2015 | 780.00 | SO-2093 | 108.30 |\n| SO-2018 | 1,595.00 | SO-2100 | 1,071.00 |\n| SO-2022 | 351.00 | SO-2106 | 1,620.00 |\n| SO-2040 | 137.75 | SO-2109 | 1,740.00 |\n| SO-2053 | 65.00 | SO-2113 | 1,160.00 |\n| SO-2055 | 55.25 | | |\n\nTotal lost: **£15,181.05**\n\n## Q5: Customer with the highest net revenue, January to June\n\n| Customer | Net Revenue |\n|---|---|\n| **Northwind Recruitment** | **£8,548.95** |\n| Hollis Marketing | £8,095.55 |\n| Copperfield Law | £7,076.60 |\n| Fairhaven Estates | £7,005.50 |\n| Greystone Insurance | £6,240.50 |\n| Juniper Health Clinic | £6,046.75 |\n\n## Q6: Average net order value in Q1\n\n| Month | Completed Orders | Net Revenue |\n|---|---|---|\n| January | 18 | £14,227.35 |\n| February | 26 | £21,278.95 |\n| March | 13 | £10,540.05 |\n| **Q1 total** | **57** | **£46,046.35** |\n\nAverage: £46,046.35 ÷ 57 = **£807.83**\n\n```json\n{\"answers\": {\"q1\": 10540.05, \"q2\": \"West\", \"q3\": {\"name\": \"Desk Lamp\", \"percent\": 133.04}, \"q4\": 15181.05, \"q5\": {\"name\": \"Northwind Recruitment\", \"amount\": 8548.95}, \"q6\": 807.83}}\n```",
+ "cost": 0.18290448,
+ "usage": {
+  "prompt_tokens": 5993,
+  "completion_tokens": 8039,
+  "total_tokens": 14032,
+  "cost": 0.18290448,
+  "is_byok": false,
+  "prompt_tokens_details": {
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "audio_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost_details": {
+   "upstream_inference_cost": 0.184752,
+   "upstream_inference_prompt_cost": 0.023972,
+   "upstream_inference_completions_cost": 0.16078
+  },
+  "completion_tokens_details": {
+   "reasoning_tokens": 6712,
+   "image_tokens": 0,
+   "audio_tokens": 0
+  }
+ },
+ "provider": "Claude Platform on AWS",
+ "finish_reason": "stop",
+ "score": {
+  "followed_format": true,
+  "correct": 6,
+  "total": 6,
+  "per_question": {
+   "q1": true,
+   "q2": true,
+   "q3": true,
+   "q4": true,
+   "q5": true,
+   "q6": true
+  },
+  "score": 100,
+  "summary": "6/6 right"
+ }
+}

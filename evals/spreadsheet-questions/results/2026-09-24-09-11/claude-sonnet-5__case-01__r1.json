@@ -1,0 +1,51 @@
+{
+ "suite": "spreadsheet-questions",
+ "version": "1",
+ "model": "claude-sonnet-5",
+ "route": "anthropic/claude-sonnet-5",
+ "case": "case-01",
+ "run": 1,
+ "seconds": 124.061,
+ "text": "# Working\n\nI calculated each order's value as `quantity × unit_price × (1 − discount%)`, then filtered by status, month, region, product, or customer as needed for each question.\n\n## Q1: Net Revenue in March 2026\nSumming all \"Completed\" orders dated in March 2026 (excluding cancelled/refunded):\n**March net revenue = £10,539.55**\n\n## Q2: Highest Net Revenue Region in Q2 (Apr–Jun)\nRegional totals (Completed only):\n- West: £10,871.20\n- East: £7,744.55\n- South: £6,830.25\n- North: £971.35\n\n**Highest: West**\n\n## Q3: Product with Highest % Growth Q1→Q2\nQ1 vs Q2 net revenue by product (Completed only):\n| Product | Q1 | Q2 | % Change |\n|---|---|---|---|\n| Filing Cabinet | 11,817.00 | 5,274.00 | -55.4% |\n| Monitor Arm | 4,722.25 | 6,266.00 | +32.7% |\n| Desk Lamp | 1,299.60 | 3,028.60 | **+133.0%** |\n| Standing Desk | 7,812.00 | 2,772.00 | -64.5% |\n| Whiteboard | 11,500.25 | 3,320.25 | -71.1% |\n| Desk Chair | 8,895.25 | 5,756.50 | -35.3% |\n\n**Winner: Desk Lamp, +133.03%**\n\n## Q4: Value Lost to Refunded/Cancelled Orders (Jan–Jun)\n- Refunded orders total: £9,951.75\n- Cancelled orders total: £5,229.30\n\n**Total lost = £15,181.05**\n\n## Q5: Top Customer by Net Revenue (Jan–Jun)\nTop few totals:\n- Northwind Recruitment: £8,549.45\n- Hollis Marketing: £8,095.55\n- Copperfield Law: £7,076.10\n- Fairhaven Estates: £7,005.50\n\n**Highest: Northwind Recruitment, £8,549.45**\n\n## Q6: Average Net Order Value in Q1\n- Q1 net revenue: £46,046.35\n- Q1 completed order count: 18 (Jan) + 26 (Feb) + 13 (Mar) = 57\n\n**Average = 46,046.35 / 57 = £807.83**\n\n```json\n{\"answers\": {\"q1\": 10539.55, \"q2\": \"West\", \"q3\": {\"name\": \"Desk Lamp\", \"percent\": 133.03}, \"q4\": 15181.05, \"q5\": {\"name\": \"Northwind Recruitment\", \"amount\": 8549.45}, \"q6\": 807.83}}\n```",
+ "cost": 0.19827918,
+ "usage": {
+  "prompt_tokens": 5991,
+  "completion_tokens": 18830,
+  "total_tokens": 24821,
+  "cost": 0.19827918,
+  "is_byok": false,
+  "prompt_tokens_details": {
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "audio_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost_details": {
+   "upstream_inference_cost": 0.200282,
+   "upstream_inference_prompt_cost": 0.011982,
+   "upstream_inference_completions_cost": 0.1883
+  },
+  "completion_tokens_details": {
+   "reasoning_tokens": 17921,
+   "image_tokens": 0,
+   "audio_tokens": 0
+  }
+ },
+ "provider": "Claude Platform on AWS",
+ "finish_reason": "stop",
+ "score": {
+  "followed_format": true,
+  "correct": 6,
+  "total": 6,
+  "per_question": {
+   "q1": true,
+   "q2": true,
+   "q3": true,
+   "q4": true,
+   "q5": true,
+   "q6": true
+  },
+  "score": 100,
+  "summary": "6/6 right"
+ }
+}

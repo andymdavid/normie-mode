@@ -1,0 +1,51 @@
+{
+ "suite": "spreadsheet-questions",
+ "version": "1",
+ "model": "gpt-6-luna",
+ "route": "openai/gpt-6-luna",
+ "case": "case-04",
+ "run": 1,
+ "seconds": 83.266,
+ "text": "Net order value is quantity × unit price × (1 − discount percentage). I counted only Completed orders as net revenue.\n\n- **q1:** March completed-order revenue totals **£16,983.75**.\n- **q2:** Q2 completed-order revenue by region was East **£6,603.70**, South **£4,616.60**, West **£4,528.25**, and North **£3,668.65**.\n- **q3:** No product grew from Q1 to Q2. Whiteboard had the smallest percentage decline: from **£4,617.00** to **£3,377.25**, a change of **−26.9%**.\n- **q4:** Refunded and cancelled orders had combined discounted order value of **£8,754.10**.\n- **q5:** Copperfield Law had the highest completed-order revenue, at **£7,222.40**.\n- **q6:** Q1 revenue was **£45,320.90** across **68** completed orders, averaging **£666.48** per order.\n\n{\"answers\": {\"q1\": 16983.75, \"q2\": \"East\", \"q3\": {\"name\": \"Whiteboard\", \"percent\": -26.9}, \"q4\": 8754.10, \"q5\": {\"name\": \"Copperfield Law\", \"amount\": 7222.40}, \"q6\": 666.48}}",
+ "cost": 0.00500982075,
+ "usage": {
+  "prompt_tokens": 3800,
+  "completion_tokens": 9171,
+  "total_tokens": 12971,
+  "cost": 0.00500982075,
+  "is_byok": false,
+  "prompt_tokens_details": {
+   "cached_tokens": 0,
+   "cache_write_tokens": 3797,
+   "audio_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost_details": {
+   "upstream_inference_cost": 0.005060425,
+   "upstream_inference_prompt_cost": 0.000474925,
+   "upstream_inference_completions_cost": 0.0045855
+  },
+  "completion_tokens_details": {
+   "reasoning_tokens": 8856,
+   "image_tokens": 0,
+   "audio_tokens": 0
+  }
+ },
+ "provider": "OpenAI",
+ "finish_reason": "stop",
+ "score": {
+  "followed_format": true,
+  "correct": 6,
+  "total": 6,
+  "per_question": {
+   "q1": true,
+   "q2": true,
+   "q3": true,
+   "q4": true,
+   "q5": true,
+   "q6": true
+  },
+  "score": 100,
+  "summary": "6/6 right"
+ }
+}

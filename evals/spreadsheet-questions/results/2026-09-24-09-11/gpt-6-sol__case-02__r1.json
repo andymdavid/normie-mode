@@ -1,0 +1,51 @@
+{
+ "suite": "spreadsheet-questions",
+ "version": "1",
+ "model": "gpt-6-sol",
+ "route": "openai/gpt-6-sol",
+ "case": "case-02",
+ "run": 1,
+ "seconds": 43.369,
+ "text": "{\"answers\": {\"q1\": 8360.00, \"q2\": \"North\", \"q3\": {\"name\": \"Desk Chair\", \"percent\": 82.16}, \"q4\": 11696.40, \"q5\": {\"name\": \"Copperfield Law\", \"amount\": 7177.25}, \"q6\": 557.44}}",
+ "cost": 0.05559444,
+ "usage": {
+  "prompt_tokens": 4583,
+  "completion_tokens": 4470,
+  "total_tokens": 9053,
+  "cost": 0.05559444,
+  "is_byok": false,
+  "prompt_tokens_details": {
+   "cached_tokens": 0,
+   "cache_write_tokens": 4580,
+   "audio_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost_details": {
+   "upstream_inference_cost": 0.056156,
+   "upstream_inference_prompt_cost": 0.011456,
+   "upstream_inference_completions_cost": 0.0447
+  },
+  "completion_tokens_details": {
+   "reasoning_tokens": 4385,
+   "image_tokens": 0,
+   "audio_tokens": 0
+  }
+ },
+ "provider": "OpenAI",
+ "finish_reason": "stop",
+ "score": {
+  "followed_format": true,
+  "correct": 6,
+  "total": 6,
+  "per_question": {
+   "q1": true,
+   "q2": true,
+   "q3": true,
+   "q4": true,
+   "q5": true,
+   "q6": true
+  },
+  "score": 100,
+  "summary": "6/6 right"
+ }
+}

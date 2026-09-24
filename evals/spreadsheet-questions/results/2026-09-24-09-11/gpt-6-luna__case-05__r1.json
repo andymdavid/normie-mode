@@ -1,0 +1,51 @@
+{
+ "suite": "spreadsheet-questions",
+ "version": "1",
+ "model": "gpt-6-luna",
+ "route": "openai/gpt-6-luna",
+ "case": "case-05",
+ "run": 1,
+ "seconds": 59.521,
+ "text": "I calculated each order’s value as quantity × unit price × (1 − discount rate), and counted only Completed orders as net revenue.\n\n- **q1:** March completed-order revenue totals **£22,869.55**.\n- **q2:** West had the highest Q2 net revenue, at **£14,194.65**.\n- **q3:** Monitor Arm net revenue rose from **£1,436.50** in Q1 to **£2,860.00** in Q2, an increase of **99.1%**.\n- **q4:** Refunded and cancelled orders had a combined discounted order value of **£11,773.75**.\n- **q5:** Juniper Health Clinic had the highest January–June net revenue: **£9,913.00**.\n- **q6:** Q1 net revenue was **£50,509.70** across **66** completed orders, averaging **£765.30** per order.\n\n{\"answers\": {\"q1\": 22869.55, \"q2\": \"West\", \"q3\": {\"name\": \"Monitor Arm\", \"percent\": 99.1}, \"q4\": 11773.75, \"q5\": {\"name\": \"Juniper Health Clinic\", \"amount\": 9913.00}, \"q6\": 765.30}}",
+ "cost": 0.00420222825,
+ "usage": {
+  "prompt_tokens": 4146,
+  "completion_tokens": 7453,
+  "total_tokens": 11599,
+  "cost": 0.00420222825,
+  "is_byok": false,
+  "prompt_tokens_details": {
+   "cached_tokens": 0,
+   "cache_write_tokens": 4143,
+   "audio_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost_details": {
+   "upstream_inference_cost": 0.004244675,
+   "upstream_inference_prompt_cost": 0.000518175,
+   "upstream_inference_completions_cost": 0.0037265
+  },
+  "completion_tokens_details": {
+   "reasoning_tokens": 7164,
+   "image_tokens": 0,
+   "audio_tokens": 0
+  }
+ },
+ "provider": "OpenAI",
+ "finish_reason": "stop",
+ "score": {
+  "followed_format": true,
+  "correct": 6,
+  "total": 6,
+  "per_question": {
+   "q1": true,
+   "q2": true,
+   "q3": true,
+   "q4": true,
+   "q5": true,
+   "q6": true
+  },
+  "score": 100,
+  "summary": "6/6 right"
+ }
+}

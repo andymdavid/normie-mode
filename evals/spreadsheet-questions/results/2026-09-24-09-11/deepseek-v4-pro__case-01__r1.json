@@ -1,0 +1,51 @@
+{
+ "suite": "spreadsheet-questions",
+ "version": "1",
+ "model": "deepseek-v4-pro",
+ "route": "deepseek/deepseek-v4-pro-0813",
+ "case": "case-01",
+ "run": 1,
+ "seconds": 219.337,
+ "text": "Working:\n- **q1:** March completed orders sum to **£10,540.05**.\n- **q2:** Q2 completed revenue by region: West £10,871.20, East £7,744.55, South £6,830.25, North £971.35. Highest is **West**.\n- **q3:** Product revenue growth Q1→Q2: Desk Lamp £1,299.60 → £3,028.60, growth of **133.0%**.\n- **q4:** Refunded/cancelled order value Jan–Jun sums to **£15,181.05**.\n- **q5:** Highest customer net revenue Jan–Jun: **Northwind Recruitment** with **£8,548.95**.\n- **q6:** Q1 completed revenue £46,046.35 / 57 completed orders = **£807.83**.\n\n{\"answers\": {\"q1\": 10540.05, \"q2\": \"West\", \"q3\": {\"name\": \"Desk Lamp\", \"percent\": 133.0}, \"q4\": 15181.05, \"q5\": {\"name\": \"Northwind Recruitment\", \"amount\": 8548.95}, \"q6\": 807.83}}",
+ "cost": 0.03070986534,
+ "usage": {
+  "prompt_tokens": 4413,
+  "completion_tokens": 20910,
+  "total_tokens": 25323,
+  "cost": 0.03070986534,
+  "is_byok": false,
+  "prompt_tokens_details": {
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "audio_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost_details": {
+   "upstream_inference_cost": 0.031020066,
+   "upstream_inference_prompt_cost": 0.002038806,
+   "upstream_inference_completions_cost": 0.02898126
+  },
+  "completion_tokens_details": {
+   "reasoning_tokens": 20639,
+   "image_tokens": 0,
+   "audio_tokens": 0
+  }
+ },
+ "provider": "StreamLake",
+ "finish_reason": "stop",
+ "score": {
+  "followed_format": true,
+  "correct": 6,
+  "total": 6,
+  "per_question": {
+   "q1": true,
+   "q2": true,
+   "q3": true,
+   "q4": true,
+   "q5": true,
+   "q6": true
+  },
+  "score": 100,
+  "summary": "6/6 right"
+ }
+}

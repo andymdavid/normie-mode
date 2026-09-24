@@ -1,0 +1,51 @@
+{
+ "suite": "spreadsheet-questions",
+ "version": "1",
+ "model": "gemini-3-8-flash",
+ "route": "google/gemini-3.8-flash",
+ "case": "case-05",
+ "run": 1,
+ "seconds": 83.174,
+ "text": "Here is the step-by-step working for each question:\n\n### **q1. Total Net Revenue in March 2026**\nSum of all completed orders in March (SO-2048 to SO-2075, excluding cancelled SO-2059 and refunded SO-2054):\n- SO-2048: £1,134.00\n- SO-2049: £65.00\n- SO-2050: £1,026.00\n- SO-2051: £342.00\n- SO-2052: £540.00\n- SO-2053: £1,102.00\n- SO-2055: £285.00\n- SO-2056: £722.00\n- SO-2057: £1,515.25\n- SO-2058: £292.50\n- SO-2060: £1,140.00\n- SO-2061: £1,653.00\n- SO-2062: £1,140.00\n- SO-2063: £1,305.00\n- SO-2064: £273.60\n- SO-2065: £38.00\n- SO-2066: £1,026.00\n- SO-2067: £1,377.50\n- SO-2068: £1,620.00\n- SO-2069: £234.00\n- SO-2070: £520.00\n- SO-2071: £1,015.00\n- SO-2072: £108.30\n- SO-2073: £1,740.00\n- SO-2074: £1,800.00\n- SO-2075: £855.00\n\n**Total March Net Revenue** = **£22,869.15**\n\n---\n\n### **q2. Region with Highest Net Revenue in Q2 (April–June 2026)**\n- **West:** £14,194.65\n- **North:** £7,861.75\n- **East:** £5,564.00\n- **South:** £4,759.70\n\n**Highest Region** = **West**\n\n---\n\n### **q3. Product Net Revenue Growth from Q1 to Q2**\n- **Monitor Arm:** Q1 = £1,436.50 → Q2 = £2,860.00 (+99.1%)\n- **Standing Desk:** Q1 = £5,880.00 → Q2 = £7,077.00 (+20.4%)\n- **Filing Cabinet:** Q1 = £17,172.00 → Q2 = £13,124.00 (-23.6%)\n- **Whiteboard:** Q1 = £9,096.25 → Q2 = £4,004.25 (-56.0%)\n- **Desk Chair:** Q1 = £14,811.75 → Q2 = £4,690.75 (-68.3%)\n- **Desk Lamp:** Q1 = £2,112.80 → Q2 = £644.10 (-69.5%)\n\n**Product with highest growth** = **Monitor Arm** at **99.1%**\n\n---\n\n### **q4. Order Value Lost to Refunded and Cancelled Orders (Jan–Jun 2026)**\n- SO-2004: £513.00\n- SO-2008: £1,015.00\n- SO-2015: £1,680.00\n- SO-2021: £391.50\n- SO-2022: £1,260.00\n- SO-2035: £165.75\n- SO-2047: £242.25\n- SO-2054: £1,239.75\n- SO-2059: £427.50\n- SO-2078: £486.00\n- SO-2085: £1,596.00\n- SO-2092: £840.00\n- SO-2103: £1,197.00\n- SO-2112: £720.00\n\n**Total Lost Order Value** = **£11,773.75**\n\n---\n\n### **q5. Customer with Highest Net Revenue (Jan–Jun 2026)**\n- **Juniper Health Clinic:** £9,913.00\n- Dunmore Logistics: £8,312.70\n- Copperfield Law: £7,537.00\n- Pembroke Consulting: £7,324.60\n- Northwind Recruitment: £7,294.45\n- Alder & Finch Architects: £6,319.50\n- Oakridge Media: £6,021.90\n- Kestrel Engineering: £5,156.10\n- Fairhaven Estates: £4,435.60\n- Maple Court Surgery: £4,372.00\n- Brookside Dental: £4,044.50\n- Elmwood Primary School: £3,775.00\n- Ivy Lane Accountants: £2,931.75\n- Greystone Insurance: £2,841.25\n- Hollis Marketing: £2,325.05\n- Linden Travel: £285.00\n\n**Highest Customer** = **Juniper Health Clinic** (£9,913.00)\n\n---\n\n### **q6. Average Net Order Value in Q1**\n- Total Net Revenue in Q1 = £50,509.30\n- Total Completed Orders in Q1 = 66\n- Average Net Order Value = £50,509.30 / 66 = **£765.29**\n\n```json\n{\"answers\": {\"q1\": 22869.15, \"q2\": \"West\", \"q3\": {\"name\": \"Monitor Arm\", \"percent\": 99.1}, \"q4\": 11773.75, \"q5\": {\"name\": \"Juniper Health Clinic\", \"amount\": 9913.0}, \"q6\": 765.29}}\n```",
+ "cost": 0.0987666075,
+ "usage": {
+  "prompt_tokens": 5309,
+  "completion_tokens": 25542,
+  "total_tokens": 30851,
+  "cost": 0.0987666075,
+  "is_byok": false,
+  "prompt_tokens_details": {
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "audio_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost_details": {
+   "upstream_inference_cost": 0.09976425,
+   "upstream_inference_prompt_cost": 0.00398175,
+   "upstream_inference_completions_cost": 0.0957825
+  },
+  "completion_tokens_details": {
+   "reasoning_tokens": 23909,
+   "image_tokens": 0,
+   "audio_tokens": 0
+  }
+ },
+ "provider": "Google AI Studio",
+ "finish_reason": "stop",
+ "score": {
+  "followed_format": true,
+  "correct": 6,
+  "total": 6,
+  "per_question": {
+   "q1": true,
+   "q2": true,
+   "q3": true,
+   "q4": true,
+   "q5": true,
+   "q6": true
+  },
+  "score": 100,
+  "summary": "6/6 right"
+ }
+}

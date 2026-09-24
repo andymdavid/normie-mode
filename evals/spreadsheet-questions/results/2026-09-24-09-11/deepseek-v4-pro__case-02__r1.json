@@ -1,0 +1,51 @@
+{
+ "suite": "spreadsheet-questions",
+ "version": "1",
+ "model": "deepseek-v4-pro",
+ "route": "deepseek/deepseek-v4-pro-0813",
+ "case": "case-02",
+ "run": 1,
+ "seconds": 230.153,
+ "text": "Completed-only orders were used for net revenue.\n\n- q1: March net revenue = £8,360.00\n- q2: Q2 region totals: North £12,567.90, East £10,112.25, South £9,421.10, West £6,294.75 → highest is North\n- q3: Desk Chair grew from £7,112.25 in Q1 to £12,955.75 in Q2 = +82.2%\n- q4: Refunded/cancelled order value lost = £11,696.40\n- q5: Top customer = Copperfield Law at £7,177.25\n- q6: Q1 average net order value = £36,233.90 / 65 = £557.44\n\n{\"answers\": {\"q1\": 8360.00, \"q2\": \"North\", \"q3\": {\"name\": \"Desk Chair\", \"percent\": 82.2}, \"q4\": 11696.40, \"q5\": {\"name\": \"Copperfield Law\", \"amount\": 7177.25}, \"q6\": 557.44}}",
+ "cost": 0.1073784492,
+ "usage": {
+  "prompt_tokens": 4691,
+  "completion_tokens": 25826,
+  "total_tokens": 30517,
+  "cost": 0.1073784492,
+  "is_byok": false,
+  "prompt_tokens_details": {
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "audio_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost_details": {
+   "upstream_inference_cost": 0.10846308,
+   "upstream_inference_prompt_cost": 0.00619212,
+   "upstream_inference_completions_cost": 0.10227096
+  },
+  "completion_tokens_details": {
+   "reasoning_tokens": 17460,
+   "image_tokens": 0,
+   "audio_tokens": 0
+  }
+ },
+ "provider": "Fireworks",
+ "finish_reason": "stop",
+ "score": {
+  "followed_format": true,
+  "correct": 6,
+  "total": 6,
+  "per_question": {
+   "q1": true,
+   "q2": true,
+   "q3": true,
+   "q4": true,
+   "q5": true,
+   "q6": true
+  },
+  "score": 100,
+  "summary": "6/6 right"
+ }
+}

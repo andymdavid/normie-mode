@@ -1,0 +1,51 @@
+{
+ "suite": "spreadsheet-questions",
+ "version": "1",
+ "model": "claude-sonnet-5",
+ "route": "anthropic/claude-sonnet-5",
+ "case": "case-03",
+ "run": 1,
+ "seconds": 131.83,
+ "text": "# Working\n\nI calculated order value for each order as `quantity × unit_price × (1 - discount_pct/100)`, then filtered by status and date ranges as needed.\n\n## Q1: Net Revenue in March 2026\nSumming all **Completed** orders dated March 2026 (18 orders):\n**Total = £13,704.50**\n\n## Q2: Highest Net Revenue Region in Q2 (Apr-Jun)\nSumming Completed orders by region:\n- North: £9,538.50\n- East: £9,178.25\n- South: £7,377.00\n- West: £4,317.50\n\n**Winner: North**\n\n## Q3: Product with Highest % Growth Q1→Q2\n| Product | Q1 Revenue | Q2 Revenue | % Change |\n|---|---|---|---|\n| Monitor Arm | £4,758.00 | £1,342.25 | -71.8% |\n| Filing Cabinet | £13,734.00 | £6,381.00 | -53.5% |\n| Desk Lamp | £2,268.60 | £1,016.50 | -55.2% |\n| Desk Chair | £13,920.00 | £7,438.50 | -46.6% |\n| **Standing Desk** | £6,300.00 | £13,188.00 | **+109.33%** |\n| Whiteboard | £6,141.75 | £1,045.00 | -83.0% |\n\nOnly Standing Desk grew — by **109.33%**\n\n## Q4: Value Lost to Refunds/Cancellations (Jan-Jun)\nSumming order values for all Refunded/Cancelled orders (18 orders):\n**Total = £10,843.00**\n\n## Q5: Top Customer by Net Revenue (Jan-Jun)\nComparing all customers' Completed order totals:\n- Brookside Dental: **£8,826.75** (highest)\n- Linden Travel: £6,859.50\n- Maple Court Surgery: £6,382.15\n- Pembroke Consulting: £6,090.50\n- (others lower)\n\n**Winner: Brookside Dental — £8,826.75**\n\n## Q6: Average Net Order Value in Q1\n- Q1 Net Revenue: £47,122.35 (Jan: £18,913.10 + Feb: £14,504.75 + Mar: £13,704.50)\n- Completed orders in Q1: 64 (26 Jan + 20 Feb + 18 Mar)\n- Average = £47,122.35 / 64 = **£736.29**\n\n```json\n{\"answers\": {\"q1\": 13704.50, \"q2\": \"North\", \"q3\": {\"name\": \"Standing Desk\", \"percent\": 109.33}, \"q4\": 10843.00, \"q5\": {\"name\": \"Brookside Dental\", \"amount\": 8826.75}, \"q6\": 736.29}}\n```",
+ "cost": 0.21777228,
+ "usage": {
+  "prompt_tokens": 5896,
+  "completion_tokens": 20818,
+  "total_tokens": 26714,
+  "cost": 0.21777228,
+  "is_byok": false,
+  "prompt_tokens_details": {
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "audio_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost_details": {
+   "upstream_inference_cost": 0.219972,
+   "upstream_inference_prompt_cost": 0.011792,
+   "upstream_inference_completions_cost": 0.20818
+  },
+  "completion_tokens_details": {
+   "reasoning_tokens": 19896,
+   "image_tokens": 0,
+   "audio_tokens": 0
+  }
+ },
+ "provider": "Claude Platform on AWS",
+ "finish_reason": "stop",
+ "score": {
+  "followed_format": true,
+  "correct": 6,
+  "total": 6,
+  "per_question": {
+   "q1": true,
+   "q2": true,
+   "q3": true,
+   "q4": true,
+   "q5": true,
+   "q6": true
+  },
+  "score": 100,
+  "summary": "6/6 right"
+ }
+}

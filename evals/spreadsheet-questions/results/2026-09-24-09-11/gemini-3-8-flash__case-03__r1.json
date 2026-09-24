@@ -1,0 +1,51 @@
+{
+ "suite": "spreadsheet-questions",
+ "version": "1",
+ "model": "gemini-3-8-flash",
+ "route": "google/gemini-3.8-flash",
+ "case": "case-03",
+ "run": 1,
+ "seconds": 97.924,
+ "text": "Here is the breakdown of the calculations:\n\n1. **March 2026 Net Revenue (q1):**\n   Summing all 18 completed orders in March 2026 yields **£13,704.50**.\n\n2. **Highest Net Revenue Region in Q2 (q2):**\n   - **North:** £9,538.50\n   - **East:** £9,178.25\n   - **South:** £7,377.00\n   - **West:** £4,317.50\n   **North** had the highest net revenue in Q2.\n\n3. **Highest Revenue Growth by Product (q3):**\n   - **Standing Desk:** Q1 = £6,300.00, Q2 = £13,188.00 (+109.3%)\n   - All other products experienced a decline in net revenue from Q1 to Q2.\n   The highest growing product was **Standing Desk** at **109.3%**.\n\n4. **Lost Order Value (q4):**\n   Summing the value of all 18 cancelled and refunded orders across January to June 2026 gives **£10,843.50**.\n\n5. **Top Customer by Net Revenue (q5):**\n   **Brookside Dental** generated the highest net revenue across completed orders with **£8,826.75**.\n\n6. **Average Net Order Value in Q1 (q6):**\n   Total Q1 net revenue (£47,122.35) divided by 64 completed orders equals **£736.29**.\n\n```json\n{\"answers\": {\"q1\": 13704.5, \"q2\": \"North\", \"q3\": {\"name\": \"Standing Desk\", \"percent\": 109.3}, \"q4\": 10843.5, \"q5\": {\"name\": \"Brookside Dental\", \"amount\": 8826.75}, \"q6\": 736.29}}\n```",
+ "cost": 0.08703882,
+ "usage": {
+  "prompt_tokens": 5334,
+  "completion_tokens": 22378,
+  "total_tokens": 27712,
+  "cost": 0.08703882,
+  "is_byok": false,
+  "prompt_tokens_details": {
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "audio_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost_details": {
+   "upstream_inference_cost": 0.087918,
+   "upstream_inference_prompt_cost": 0.0040005,
+   "upstream_inference_completions_cost": 0.0839175
+  },
+  "completion_tokens_details": {
+   "reasoning_tokens": 21900,
+   "image_tokens": 0,
+   "audio_tokens": 0
+  }
+ },
+ "provider": "Google",
+ "finish_reason": "stop",
+ "score": {
+  "followed_format": true,
+  "correct": 6,
+  "total": 6,
+  "per_question": {
+   "q1": true,
+   "q2": true,
+   "q3": true,
+   "q4": true,
+   "q5": true,
+   "q6": true
+  },
+  "score": 100,
+  "summary": "6/6 right"
+ }
+}

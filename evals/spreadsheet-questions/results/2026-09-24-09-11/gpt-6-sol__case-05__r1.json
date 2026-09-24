@@ -1,0 +1,51 @@
+{
+ "suite": "spreadsheet-questions",
+ "version": "1",
+ "model": "gpt-6-sol",
+ "route": "openai/gpt-6-sol",
+ "case": "case-05",
+ "run": 1,
+ "seconds": 41.007,
+ "text": "Completed orders generated £22,869.15 in March. For Q2, West had the highest net revenue at £14,194.65. Monitor Arm rose from £1,436.50 in Q1 to £2,860.00 in Q2, an increase of 99.1%.\n\n{\"answers\": {\"q1\": 22869.15, \"q2\": \"West\", \"q3\": {\"name\": \"Monitor Arm\", \"percent\": 99.1}, \"q4\": 11773.75, \"q5\": {\"name\": \"Juniper Health Clinic\", \"amount\": 9913.00}, \"q6\": 765.29}}",
+ "cost": 0.052107165,
+ "usage": {
+  "prompt_tokens": 4146,
+  "completion_tokens": 4227,
+  "total_tokens": 8373,
+  "cost": 0.052107165,
+  "is_byok": false,
+  "prompt_tokens_details": {
+   "cached_tokens": 0,
+   "cache_write_tokens": 4143,
+   "audio_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost_details": {
+   "upstream_inference_cost": 0.0526335,
+   "upstream_inference_prompt_cost": 0.0103635,
+   "upstream_inference_completions_cost": 0.04227
+  },
+  "completion_tokens_details": {
+   "reasoning_tokens": 4079,
+   "image_tokens": 0,
+   "audio_tokens": 0
+  }
+ },
+ "provider": "OpenAI",
+ "finish_reason": "stop",
+ "score": {
+  "followed_format": true,
+  "correct": 6,
+  "total": 6,
+  "per_question": {
+   "q1": true,
+   "q2": true,
+   "q3": true,
+   "q4": true,
+   "q5": true,
+   "q6": true
+  },
+  "score": 100,
+  "summary": "6/6 right"
+ }
+}

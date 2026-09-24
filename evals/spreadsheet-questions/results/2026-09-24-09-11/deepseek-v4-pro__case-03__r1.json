@@ -1,0 +1,51 @@
+{
+ "suite": "spreadsheet-questions",
+ "version": "1",
+ "model": "deepseek-v4-pro",
+ "route": "deepseek/deepseek-v4-pro-0813",
+ "case": "case-03",
+ "run": 1,
+ "seconds": 206.255,
+ "text": "Working summary:\n- Q1 completed revenue was £47,122.35 from 64 completed orders.\n- Q2 region revenue: North £9,538.50, East £9,178.25, South £7,377.00, West £4,317.50.\n- Standing Desk grew from £6,300.00 in Q1 to £13,188.00 in Q2.\n- Refunded/cancelled order value from January to June totalled £10,843.50.\n- Brookside Dental had the highest completed revenue at £8,826.75.\n\n{\"answers\": {\"q1\": 13704.50, \"q2\": \"North\", \"q3\": {\"name\": \"Standing Desk\", \"percent\": 109.3}, \"q4\": 10843.50, \"q5\": {\"name\": \"Brookside Dental\", \"amount\": 8826.75}, \"q6\": 736.29}}",
+ "cost": 0.0832418532,
+ "usage": {
+  "prompt_tokens": 4356,
+  "completion_tokens": 23528,
+  "total_tokens": 27884,
+  "cost": 0.0832418532,
+  "is_byok": false,
+  "prompt_tokens_details": {
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "audio_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost_details": {
+   "upstream_inference_cost": 0.08408268,
+   "upstream_inference_prompt_cost": 0.004887432,
+   "upstream_inference_completions_cost": 0.079195248
+  },
+  "completion_tokens_details": {
+   "reasoning_tokens": 23324,
+   "image_tokens": 0,
+   "audio_tokens": 0
+  }
+ },
+ "provider": "Alibaba",
+ "finish_reason": "stop",
+ "score": {
+  "followed_format": true,
+  "correct": 6,
+  "total": 6,
+  "per_question": {
+   "q1": true,
+   "q2": true,
+   "q3": true,
+   "q4": true,
+   "q5": true,
+   "q6": true
+  },
+  "score": 100,
+  "summary": "6/6 right"
+ }
+}

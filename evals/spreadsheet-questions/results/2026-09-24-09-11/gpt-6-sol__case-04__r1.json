@@ -1,0 +1,51 @@
+{
+ "suite": "spreadsheet-questions",
+ "version": "1",
+ "model": "gpt-6-sol",
+ "route": "openai/gpt-6-sol",
+ "case": "case-04",
+ "run": 1,
+ "seconds": 35.159,
+ "text": "Only completed orders count toward net revenue; each order’s value is its quantity × unit price after discount.\n\nNo product increased its net revenue from Q1 to Q2. Whiteboard had the smallest percentage decline, from £4,617.00 to £3,377.25, a change of −26.85%. Q1 net revenue was £45,320.90 across 68 completed orders.\n\n{\"answers\": {\"q1\": 16983.75, \"q2\": \"East\", \"q3\": {\"name\": \"Whiteboard\", \"percent\": -26.85}, \"q4\": 8754.10, \"q5\": {\"name\": \"Copperfield Law\", \"amount\": 7222.40}, \"q6\": 666.48}}",
+ "cost": 0.045964215,
+ "usage": {
+  "prompt_tokens": 3800,
+  "completion_tokens": 3693,
+  "total_tokens": 7493,
+  "cost": 0.045964215,
+  "is_byok": false,
+  "prompt_tokens_details": {
+   "cached_tokens": 0,
+   "cache_write_tokens": 3797,
+   "audio_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost_details": {
+   "upstream_inference_cost": 0.0464285,
+   "upstream_inference_prompt_cost": 0.0094985,
+   "upstream_inference_completions_cost": 0.03693
+  },
+  "completion_tokens_details": {
+   "reasoning_tokens": 3526,
+   "image_tokens": 0,
+   "audio_tokens": 0
+  }
+ },
+ "provider": "OpenAI",
+ "finish_reason": "stop",
+ "score": {
+  "followed_format": true,
+  "correct": 6,
+  "total": 6,
+  "per_question": {
+   "q1": true,
+   "q2": true,
+   "q3": true,
+   "q4": true,
+   "q5": true,
+   "q6": true
+  },
+  "score": 100,
+  "summary": "6/6 right"
+ }
+}

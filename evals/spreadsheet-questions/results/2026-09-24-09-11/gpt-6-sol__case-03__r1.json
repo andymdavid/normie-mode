@@ -1,0 +1,51 @@
+{
+ "suite": "spreadsheet-questions",
+ "version": "1",
+ "model": "gpt-6-sol",
+ "route": "openai/gpt-6-sol",
+ "case": "case-03",
+ "run": 1,
+ "seconds": 45.993,
+ "text": "March’s completed orders produced **£13,704.50** in net revenue. In Q2, **North** led the regions with **£9,538.50**. Standing Desk revenue rose from £6,300.00 in Q1 to £13,188.00 in Q2, an increase of **109.33%**.\n\nAcross January–June, refunded and cancelled orders had a combined discounted value of **£10,843.50**. Brookside Dental had the highest net revenue at **£8,826.75**. Q1 net revenue of £47,122.35 divided by 64 completed orders gives an average of **£736.29**.\n\n{\"answers\": {\"q1\": 13704.50, \"q2\": \"North\", \"q3\": {\"name\": \"Standing Desk\", \"percent\": 109.33}, \"q4\": 10843.50, \"q5\": {\"name\": \"Brookside Dental\", \"amount\": 8826.75}, \"q6\": 736.29}}",
+ "cost": 0.05520339,
+ "usage": {
+  "prompt_tokens": 4181,
+  "completion_tokens": 4531,
+  "total_tokens": 8712,
+  "cost": 0.05520339,
+  "is_byok": false,
+  "prompt_tokens_details": {
+   "cached_tokens": 0,
+   "cache_write_tokens": 4178,
+   "audio_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost_details": {
+   "upstream_inference_cost": 0.055761,
+   "upstream_inference_prompt_cost": 0.010451,
+   "upstream_inference_completions_cost": 0.04531
+  },
+  "completion_tokens_details": {
+   "reasoning_tokens": 4304,
+   "image_tokens": 0,
+   "audio_tokens": 0
+  }
+ },
+ "provider": "OpenAI",
+ "finish_reason": "stop",
+ "score": {
+  "followed_format": true,
+  "correct": 6,
+  "total": 6,
+  "per_question": {
+   "q1": true,
+   "q2": true,
+   "q3": true,
+   "q4": true,
+   "q5": true,
+   "q6": true
+  },
+  "score": 100,
+  "summary": "6/6 right"
+ }
+}

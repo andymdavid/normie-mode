@@ -1,0 +1,51 @@
+{
+ "suite": "spreadsheet-questions",
+ "version": "1",
+ "model": "claude-sonnet-5",
+ "route": "anthropic/claude-sonnet-5",
+ "case": "case-05",
+ "run": 1,
+ "seconds": 140.632,
+ "text": "# Working\n\nI calculated each order's value as `quantity × unit_price × (1 − discount%)`, then filtered by status/date/region/product/customer as needed.\n\n**Q1 – March 2026 Net Revenue**\nSummed all \"Completed\" orders dated in March 2026 (SO-2048 to SO-2075, excluding refunded/cancelled SO-2054, SO-2059):\n**Total = £22,869.15**\n\n**Q2 – Highest Net Revenue Region in Q2 (Apr–Jun)**\nRegion totals (Completed only):\n- East: £5,564.00\n- West: £14,194.65\n- South: £4,760.20\n- North: £7,861.75\n\n**West** wins by a wide margin.\n\n**Q3 – Product with Highest % Growth (Q1→Q2)**\nProduct net revenue (Completed only):\n\n| Product | Q1 | Q2 | Growth |\n|---|---|---|---|\n| Standing Desk | 5,880.00 | 7,077.00 | +20.4% |\n| Filing Cabinet | 17,172.00 | 13,104.00 | -23.7% |\n| Desk Chair | 14,811.75 | 4,690.75 | -68.3% |\n| Desk Lamp | 2,112.80 | 644.10 | -69.5% |\n| Whiteboard | 9,096.25 | 4,004.75 | -56.0% |\n| Monitor Arm | 1,436.50 | 2,860.00 | **+99.1%** |\n\n**Monitor Arm** grew the most, by **+99.1%**.\n\n**Q4 – Value Lost to Refunded/Cancelled Orders (Jan–Jun)**\nSummed order values for all Refunded and Cancelled orders (14 orders):\n**Total = £11,773.75**\n\n**Q5 – Highest Net Revenue Customer (Jan–Jun)**\nSummed Completed order values per customer. Top result:\n**Juniper Health Clinic = £9,913.00**\n(Next highest: Dunmore Logistics £8,312.70, Copperfield Law £7,537.00)\n\n**Q6 – Average Net Order Value in Q1**\n- Q1 Net Revenue (Jan+Feb+Mar Completed) = £11,034.95 + £16,605.20 + £22,869.15 = **£50,509.30**\n- Q1 Completed order count = 19 (Jan) + 21 (Feb) + 26 (Mar) = **66**\n- Average = 50,509.30 / 66 = **£765.29**\n\n```json\n{\"answers\": {\"q1\": 22869.15, \"q2\": \"West\", \"q3\": {\"name\": \"Monitor Arm\", \"percent\": 99.1}, \"q4\": 11773.75, \"q5\": {\"name\": \"Juniper Health Clinic\", \"amount\": 9913.00}, \"q6\": 765.29}}\n```",
+ "cost": 0.21205404,
+ "usage": {
+  "prompt_tokens": 5868,
+  "completion_tokens": 20246,
+  "total_tokens": 26114,
+  "cost": 0.21205404,
+  "is_byok": false,
+  "prompt_tokens_details": {
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "audio_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost_details": {
+   "upstream_inference_cost": 0.214196,
+   "upstream_inference_prompt_cost": 0.011736,
+   "upstream_inference_completions_cost": 0.20246
+  },
+  "completion_tokens_details": {
+   "reasoning_tokens": 19293,
+   "image_tokens": 0,
+   "audio_tokens": 0
+  }
+ },
+ "provider": "Claude Platform on AWS",
+ "finish_reason": "stop",
+ "score": {
+  "followed_format": true,
+  "correct": 6,
+  "total": 6,
+  "per_question": {
+   "q1": true,
+   "q2": true,
+   "q3": true,
+   "q4": true,
+   "q5": true,
+   "q6": true
+  },
+  "score": 100,
+  "summary": "6/6 right"
+ }
+}

@@ -1,0 +1,51 @@
+{
+ "suite": "spreadsheet-questions",
+ "version": "1",
+ "model": "claude-sonnet-5",
+ "route": "anthropic/claude-sonnet-5",
+ "case": "case-02",
+ "run": 1,
+ "seconds": 119.228,
+ "text": "# Working\n\n**Q1 – Net revenue March 2026 (Completed only)**\nSummed all Completed order values in March (excluding SO-2051, SO-2054 Refunded and SO-2059 Cancelled) = **£8,360.00**\n\n**Q2 – Highest net revenue region in Q2 (Apr–Jun, Completed only)**\n- North: £12,567.90\n- East: £10,112.25\n- South: £9,421.10\n- West: £6,294.75\n\n→ **North**\n\n**Q3 – Product with highest % growth Q1→Q2 (Completed only)**\n\n| Product | Q1 Revenue | Q2 Revenue | % Change |\n|---|---|---|---|\n| Monitor Arm | 6,422.00 | 2,704.00 | -57.9% |\n| Desk Lamp | 3,041.90 | 722.00 | -76.3% |\n| Whiteboard | 5,647.75 | 6,132.25 | +8.58% |\n| Desk Chair | 7,112.75 | 12,955.75 | **+82.15%** |\n| Filing Cabinet | 6,975.00 | 9,288.00 | +33.16% |\n| Standing Desk | 7,035.00 | 6,594.00 | -6.27% |\n\n→ **Desk Chair, +82.15%**\n\n**Q4 – Value lost to Refunded/Cancelled orders (Jan–Jun)**\nSum of all Refunded/Cancelled order values (SO-2008, 2015, 2025, 2037, 2045, 2051, 2054, 2059, 2082, 2083, 2090, 2101, 2106, 2133) = **£11,696.40**\n\n**Q5 – Highest net revenue customer (Jan–Jun, Completed only)**\nTop totals:\n- Copperfield Law: **£7,177.25**\n- Linden Travel: £6,434.25\n- Greystone Insurance: £6,125.05\n- Kestrel Engineering: £6,121.25\n\n→ **Copperfield Law, £7,177.25**\n\n**Q6 – Average net order value in Q1**\nQ1 net revenue = Jan (£14,527.15) + Feb (£13,347.25) + Mar (£8,360.00) = **£36,234.40**\nCompleted orders count: Jan 24 + Feb 19 + Mar 22 = **65**\nAverage = 36,234.40 / 65 = **£557.45**\n\n```json\n{\"answers\": {\"q1\": 8360.00, \"q2\": \"North\", \"q3\": {\"name\": \"Desk Chair\", \"percent\": 82.15}, \"q4\": 11696.40, \"q5\": {\"name\": \"Copperfield Law\", \"amount\": 7177.25}, \"q6\": 557.45}}\n```",
+ "cost": 0.19525572,
+ "usage": {
+  "prompt_tokens": 6459,
+  "completion_tokens": 18431,
+  "total_tokens": 24890,
+  "cost": 0.19525572,
+  "is_byok": false,
+  "prompt_tokens_details": {
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "audio_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost_details": {
+   "upstream_inference_cost": 0.197228,
+   "upstream_inference_prompt_cost": 0.012918,
+   "upstream_inference_completions_cost": 0.18431
+  },
+  "completion_tokens_details": {
+   "reasoning_tokens": 17521,
+   "image_tokens": 0,
+   "audio_tokens": 0
+  }
+ },
+ "provider": "Claude Platform on AWS",
+ "finish_reason": "stop",
+ "score": {
+  "followed_format": true,
+  "correct": 6,
+  "total": 6,
+  "per_question": {
+   "q1": true,
+   "q2": true,
+   "q3": true,
+   "q4": true,
+   "q5": true,
+   "q6": true
+  },
+  "score": 100,
+  "summary": "6/6 right"
+ }
+}

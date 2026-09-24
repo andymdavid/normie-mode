@@ -1,0 +1,51 @@
+{
+ "suite": "spreadsheet-questions",
+ "version": "1",
+ "model": "gemini-3-8-flash",
+ "route": "google/gemini-3.8-flash",
+ "case": "case-04",
+ "run": 1,
+ "seconds": 144.586,
+ "text": "Here is the step-by-step breakdown of the calculations:\n\n### **q1. Total net revenue in March 2026**\nThere were 27 orders placed in March 2026 (SO-2049 to SO-2075), all of which have status \"Completed\". Summing their order values (quantity × unit price × (1 − discount)):\n- **Total March 2026 Net Revenue:** **£16,983.75**\n\n---\n\n### **q2. Highest net revenue region in Q2 (April to June 2026)**\nSumming completed orders by region for Q2:\n- **East:** £6,603.70\n- **South:** £4,616.60\n- **West:** £4,528.25\n- **North:** £3,668.65\n\nThe region with the highest net revenue in Q2 was **East**.\n\n---\n\n### **q3. Product that grew net revenue the most in percentage terms from Q1 to Q2**\nComparing completed order net revenue from Q1 (Jan–Mar) to Q2 (Apr–Jun):\n- **Whiteboard:** Q1 = £4,617.00 | Q2 = £3,377.25 → **−26.9%**\n- **Standing Desk:** Q1 = £12,180.00 | Q2 = £6,405.00 → **−47.4%**\n- **Desk Chair:** Q1 = £8,903.00 | Q2 = £4,444.25 → **−50.1%**\n- **Desk Lamp:** Q1 = £3,592.90 | Q2 = £1,487.70 → **−58.6%**\n- **Monitor Arm:** Q1 = £5,408.00 | Q2 = £1,651.00 → **−69.5%**\n- **Filing Cabinet:** Q1 = £10,620.00 | Q2 = £2,052.00 → **−80.7%**\n\nAcross all products, revenue declined overall in Q2; **Whiteboard** had the best performance / smallest decline at **−26.9%**.\n\n---\n\n### **q4. Order value lost to refunded and cancelled orders (Jan–Jun 2026)**\nSumming the discounted values of all 14 Refunded and Cancelled orders:\n- SO-2007 (Greystone Insurance): £342.00\n- SO-2011 (Fairhaven Estates): £756.00\n- SO-2016 (Greystone Insurance): £1,539.00\n- SO-2022 (Alder & Finch Architects): £1,134.00\n- SO-2033 (Pembroke Consulting): £688.75\n- SO-2042 (Copperfield Law): £798.00\n- SO-2048 (Pembroke Consulting): £331.50\n- SO-2077 (Greystone Insurance): £494.00\n- SO-2081 (Elmwood Primary School): £290.00\n- SO-2084 (Greystone Insurance): £810.00\n- SO-2097 (Oakridge Media): £541.50\n- SO-2103 (Linden Travel): £397.10\n- SO-2105 (Pembroke Consulting): £242.25\n- SO-2106 (Northwind Recruitment): £390.00\n- **Total Lost Value:** **£8,754.10**\n\n---\n\n### **q5. Customer with the highest net revenue (Jan–Jun 2026)**\nCalculating total net revenue from completed orders by customer:\n1. **Copperfield Law:** £7,222.40\n2. **Linden Travel:** £6,637.95\n3. **Elmwood Primary School:** £6,151.30\n4. **Oakridge Media:** £5,906.50\n5. **Pembroke Consulting:** £4,860.00\n6. **Juniper Health Clinic:** £4,504.70\n7. **Ivy Lane Accountants:** £4,340.00\n8. **Fairhaven Estates:** £4,247.25\n9. **Kestrel Engineering:** £3,526.00\n10. **Hollis Marketing:** £3,350.15\n11. **Alder & Finch Architects:** £3,323.25\n12. **Dunmore Logistics:** £3,286.55\n13. **Northwind Recruitment:** £2,876.75\n14. **Maple Court Surgery:** £2,565.00\n15. **Brookside Dental:** £1,013.60\n16. **Greystone Insurance:** £926.70\n\nThe top customer was **Copperfield Law** with **£7,222.40**.\n\n---\n\n### **q6. Average net order value in Q1**\n- **Q1 Net Revenue:** £45,320.90 (January: £14,845.25; February: £13,491.90; March: £16,983.75)\n- **Completed Orders in Q1:** 68 (75 total orders minus 7 refunded/cancelled)\n- **Average Net Order Value:** £45,320.90 / 68 = **£666.48**\n\n```json\n{\"answers\": {\"q1\": 16983.75, \"q2\": \"East\", \"q3\": {\"name\": \"Whiteboard\", \"percent\": -26.9}, \"q4\": 8754.10, \"q5\": {\"name\": \"Copperfield Law\", \"amount\": 7222.40}, \"q6\": 666.48}}\n```",
+ "cost": 0.104673195,
+ "usage": {
+  "prompt_tokens": 4849,
+  "completion_tokens": 27225,
+  "total_tokens": 32074,
+  "cost": 0.104673195,
+  "is_byok": false,
+  "prompt_tokens_details": {
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "audio_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost_details": {
+   "upstream_inference_cost": 0.1057305,
+   "upstream_inference_prompt_cost": 0.00363675,
+   "upstream_inference_completions_cost": 0.10209375
+  },
+  "completion_tokens_details": {
+   "reasoning_tokens": 25771,
+   "image_tokens": 0,
+   "audio_tokens": 0
+  }
+ },
+ "provider": "Google",
+ "finish_reason": "stop",
+ "score": {
+  "followed_format": true,
+  "correct": 6,
+  "total": 6,
+  "per_question": {
+   "q1": true,
+   "q2": true,
+   "q3": true,
+   "q4": true,
+   "q5": true,
+   "q6": true
+  },
+  "score": 100,
+  "summary": "6/6 right"
+ }
+}

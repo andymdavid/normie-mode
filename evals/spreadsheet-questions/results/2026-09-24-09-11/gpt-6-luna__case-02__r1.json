@@ -1,0 +1,51 @@
+{
+ "suite": "spreadsheet-questions",
+ "version": "1",
+ "model": "gpt-6-luna",
+ "route": "openai/gpt-6-luna",
+ "case": "case-02",
+ "run": 1,
+ "seconds": 68.664,
+ "text": "I calculated each order’s value as quantity × unit price × (1 − discount percentage). Only Completed orders count toward net revenue.\n\n- **q1:** March Completed orders total **£8,174.75**.\n- **q2:** Q2 net revenue by region: North **£12,567.90**, East **£10,112.25**, South **£9,421.10**, West **£6,294.75**.\n- **q3:** Desk Chair revenue grew from **£7,112.25** in Q1 to **£12,955.75** in Q2: an increase of **82.2%**.\n- **q4:** The discounted order value of Refunded and Cancelled orders was **£11,732.15**.\n- **q5:** Copperfield Law had the highest Jan–June net revenue, at **£7,177.25**.\n- **q6:** Q1 net revenue was **£36,048.65** across **65** Completed orders, averaging **£554.59** per order.\n\n{\"answers\": {\"q1\": 8174.75, \"q2\": \"North\", \"q3\": {\"name\": \"Desk Chair\", \"percent\": 82.2}, \"q4\": 11732.15, \"q5\": {\"name\": \"Copperfield Law\", \"amount\": 7177.25}, \"q6\": 554.59}}",
+ "cost": 0.005070087,
+ "usage": {
+  "prompt_tokens": 4583,
+  "completion_tokens": 9097,
+  "total_tokens": 13680,
+  "cost": 0.005070087,
+  "is_byok": false,
+  "prompt_tokens_details": {
+   "cached_tokens": 0,
+   "cache_write_tokens": 4580,
+   "audio_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost_details": {
+   "upstream_inference_cost": 0.0051213,
+   "upstream_inference_prompt_cost": 0.0005728,
+   "upstream_inference_completions_cost": 0.0045485
+  },
+  "completion_tokens_details": {
+   "reasoning_tokens": 8787,
+   "image_tokens": 0,
+   "audio_tokens": 0
+  }
+ },
+ "provider": "OpenAI",
+ "finish_reason": "stop",
+ "score": {
+  "followed_format": true,
+  "correct": 4,
+  "total": 6,
+  "per_question": {
+   "q1": false,
+   "q2": true,
+   "q3": true,
+   "q4": true,
+   "q5": true,
+   "q6": false
+  },
+  "score": 67,
+  "summary": "4/6 right"
+ }
+}

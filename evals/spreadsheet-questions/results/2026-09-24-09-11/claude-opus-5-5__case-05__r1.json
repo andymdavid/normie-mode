@@ -1,0 +1,51 @@
+{
+ "suite": "spreadsheet-questions",
+ "version": "1",
+ "model": "claude-opus-5-5",
+ "route": "anthropic/claude-opus-5.5",
+ "case": "case-05",
+ "run": 1,
+ "seconds": 52.341,
+ "text": "# Sales Analysis: January to June 2026\n\n## Method\n\nI calculated each order's value as quantity × unit price × (1 − discount %). Net revenue counts only Completed orders.\n\n## q1. Net revenue in March 2026\n\nMarch has 28 orders. Two don't count: SO-2054 was refunded and SO-2059 was cancelled. The 26 completed orders add up to **£22,869.15**.\n\nFor reference, January was £11,034.95 from 19 completed orders, and February was £16,605.20 from 21 completed orders.\n\n## q2. Region with the highest Q2 net revenue\n\n| Region | Q2 net revenue |\n|---|---|\n| **West** | **£14,194.65** |\n| North | £7,861.75 |\n| East | £5,564.00 |\n| South | £4,759.70 |\n| Total | £32,380.10 |\n\n**West** had the highest net revenue in Q2.\n\n## q3. Product growth from Q1 to Q2\n\n| Product | Q1 | Q2 | Change |\n|---|---|---|---|\n| **Monitor Arm** | £1,436.50 | £2,860.00 | **+99.1%** |\n| Standing Desk | £5,880.00 | £7,077.00 | +20.4% |\n| Filing Cabinet | £17,172.00 | £13,104.00 | −23.7% |\n| Desk Chair | £14,811.75 | £4,690.75 | −68.3% |\n| Whiteboard | £9,096.25 | £4,004.25 | −56.0% |\n| Desk Lamp | £2,112.80 | £644.10 | −69.5% |\n\n**Monitor Arm** grew the most, by **99.1%**.\n\n## q4. Value lost to refunded and cancelled orders\n\nThere were 14 such orders:\n\n| Order | Value |\n|---|---|\n| SO-2004 | £513.00 |\n| SO-2008 | £1,015.00 |\n| SO-2015 | £1,680.00 |\n| SO-2021 | £391.50 |\n| SO-2022 | £1,260.00 |\n| SO-2035 | £165.75 |\n| SO-2047 | £242.25 |\n| SO-2054 | £1,239.75 |\n| SO-2059 | £427.50 |\n| SO-2078 | £486.00 |\n| SO-2085 | £1,596.00 |\n| SO-2092 | £840.00 |\n| SO-2103 | £1,197.00 |\n| SO-2112 | £720.00 |\n\nTogether these come to **£11,773.75**.\n\n## q5. Customer with the highest net revenue, January to June\n\n| Customer | Net revenue |\n|---|---|\n| **Juniper Health Clinic** | **£9,913.00** |\n| Dunmore Logistics | £8,312.70 |\n| Copperfield Law | £7,537.00 |\n| Pembroke Consulting | £7,324.60 |\n| Northwind Recruitment | £7,294.45 |\n\n**Juniper Health Clinic** had the highest net revenue, at **£9,913.00**.\n\n## q6. Average net order value in Q1\n\nQ1 net revenue was £50,509.30 from 66 completed orders.\n\n£50,509.30 ÷ 66 = **£765.29**\n\n```json\n{\"answers\": {\"q1\": 22869.15, \"q2\": \"West\", \"q3\": {\"name\": \"Monitor Arm\", \"percent\": 99.1}, \"q4\": 11773.75, \"q5\": {\"name\": \"Juniper Health Clinic\", \"amount\": 9913.00}, \"q6\": 765.29}}\n```",
+ "cost": 0.1577268,
+ "usage": {
+  "prompt_tokens": 5870,
+  "completion_tokens": 6792,
+  "total_tokens": 12662,
+  "cost": 0.1577268,
+  "is_byok": false,
+  "prompt_tokens_details": {
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "audio_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost_details": {
+   "upstream_inference_cost": 0.15932,
+   "upstream_inference_prompt_cost": 0.02348,
+   "upstream_inference_completions_cost": 0.13584
+  },
+  "completion_tokens_details": {
+   "reasoning_tokens": 5613,
+   "image_tokens": 0,
+   "audio_tokens": 0
+  }
+ },
+ "provider": "Claude Platform on AWS",
+ "finish_reason": "stop",
+ "score": {
+  "followed_format": true,
+  "correct": 6,
+  "total": 6,
+  "per_question": {
+   "q1": true,
+   "q2": true,
+   "q3": true,
+   "q4": true,
+   "q5": true,
+   "q6": true
+  },
+  "score": 100,
+  "summary": "6/6 right"
+ }
+}

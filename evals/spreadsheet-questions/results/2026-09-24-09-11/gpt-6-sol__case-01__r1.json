@@ -1,0 +1,51 @@
+{
+ "suite": "spreadsheet-questions",
+ "version": "1",
+ "model": "gpt-6-sol",
+ "route": "openai/gpt-6-sol",
+ "case": "case-01",
+ "run": 1,
+ "seconds": 48.067,
+ "text": "I calculated each order’s discounted value and counted only **Completed** orders as net revenue. Q1 net revenue was £46,046.35 across 57 completed orders, giving an average of £807.83. Desk Lamp revenue rose from £1,299.60 in Q1 to £3,028.60 in Q2, an increase of 133.04%.\n\n{\"answers\": {\"q1\": 10540.05, \"q2\": \"West\", \"q3\": {\"name\": \"Desk Lamp\", \"percent\": 133.04}, \"q4\": 15181.05, \"q5\": {\"name\": \"Northwind Recruitment\", \"amount\": 8548.95}, \"q6\": 807.83}}",
+ "cost": 0.054988065,
+ "usage": {
+  "prompt_tokens": 4234,
+  "completion_tokens": 4496,
+  "total_tokens": 8730,
+  "cost": 0.054988065,
+  "is_byok": false,
+  "prompt_tokens_details": {
+   "cached_tokens": 0,
+   "cache_write_tokens": 4231,
+   "audio_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost_details": {
+   "upstream_inference_cost": 0.0555435,
+   "upstream_inference_prompt_cost": 0.0105835,
+   "upstream_inference_completions_cost": 0.04496
+  },
+  "completion_tokens_details": {
+   "reasoning_tokens": 4334,
+   "image_tokens": 0,
+   "audio_tokens": 0
+  }
+ },
+ "provider": "OpenAI",
+ "finish_reason": "stop",
+ "score": {
+  "followed_format": true,
+  "correct": 6,
+  "total": 6,
+  "per_question": {
+   "q1": true,
+   "q2": true,
+   "q3": true,
+   "q4": true,
+   "q5": true,
+   "q6": true
+  },
+  "score": 100,
+  "summary": "6/6 right"
+ }
+}

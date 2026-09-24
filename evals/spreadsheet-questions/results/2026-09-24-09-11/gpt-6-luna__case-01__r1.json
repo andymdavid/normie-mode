@@ -1,0 +1,51 @@
+{
+ "suite": "spreadsheet-questions",
+ "version": "1",
+ "model": "gpt-6-luna",
+ "route": "openai/gpt-6-luna",
+ "case": "case-01",
+ "run": 1,
+ "seconds": 52.758,
+ "text": "I calculated each order’s value as quantity × unit price × (1 − discount percentage). Only completed orders count toward net revenue.\n\n- **q1:** March completed orders total **£10,540.05**.\n- **q2:** Q2 completed net revenue by region: West £10,871.20; East £7,744.55; South £6,659.25; North £971.35. **West** was highest.\n- **q3:** Desk Lamp net revenue rose from £1,109.60 in Q1 to £3,028.60 in Q2, an increase of about **172.9%**.\n- **q4:** Discounted order value from refunded and cancelled orders totalled **£15,181.05**.\n- **q5:** Northwind Recruitment had the highest January–June net revenue, at **£10,144.95**.\n- **q6:** Q1 net revenue was £46,046.35 across 57 completed orders, giving an average of **£807.83**.\n\n{\"answers\": {\"q1\": 10540.05, \"q2\": \"West\", \"q3\": {\"name\": \"Desk Lamp\", \"percent\": 172.9}, \"q4\": 15181.05, \"q5\": {\"name\": \"Northwind Recruitment\", \"amount\": 10144.95}, \"q6\": 807.83}}",
+ "cost": 0.00346467825,
+ "usage": {
+  "prompt_tokens": 4234,
+  "completion_tokens": 5941,
+  "total_tokens": 10175,
+  "cost": 0.00346467825,
+  "is_byok": false,
+  "prompt_tokens_details": {
+   "cached_tokens": 0,
+   "cache_write_tokens": 4231,
+   "audio_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost_details": {
+   "upstream_inference_cost": 0.003499675,
+   "upstream_inference_prompt_cost": 0.000529175,
+   "upstream_inference_completions_cost": 0.0029705
+  },
+  "completion_tokens_details": {
+   "reasoning_tokens": 5636,
+   "image_tokens": 0,
+   "audio_tokens": 0
+  }
+ },
+ "provider": "OpenAI",
+ "finish_reason": "stop",
+ "score": {
+  "followed_format": true,
+  "correct": 4,
+  "total": 6,
+  "per_question": {
+   "q1": true,
+   "q2": true,
+   "q3": false,
+   "q4": true,
+   "q5": false,
+   "q6": true
+  },
+  "score": 67,
+  "summary": "4/6 right"
+ }
+}

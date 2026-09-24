@@ -1,0 +1,51 @@
+{
+ "suite": "spreadsheet-questions",
+ "version": "1",
+ "model": "claude-opus-5-5",
+ "route": "anthropic/claude-opus-5.5",
+ "case": "case-04",
+ "run": 1,
+ "seconds": 46.979,
+ "text": "# Sales Analysis: January–June 2026\n\n**Method:** Each order's value is quantity × unit price × (1 − discount%). Net revenue includes only orders with status \"Completed\".\n\n---\n\n### q1. Net revenue in March 2026\n\nAll 27 March orders (SO-2049 to SO-2075) are Completed. Their values add up to **£16,983.75**.\n\n---\n\n### q2. Region with the highest net revenue in Q2 (April–June)\n\n| Region | Q2 net revenue |\n|---|---|\n| **East** | **£6,603.70** |\n| South | £4,616.60 |\n| West | £4,528.25 |\n| North | £3,668.65 |\n\n**East** had the highest net revenue.\n\n---\n\n### q3. Product growth from Q1 to Q2\n\n| Product | Q1 | Q2 | Change |\n|---|---|---|---|\n| Standing Desk | £12,180.00 | £6,405.00 | −47.4% |\n| Filing Cabinet | £10,620.00 | £2,052.00 | −80.7% |\n| Desk Chair | £8,903.00 | £4,444.25 | −50.1% |\n| **Whiteboard** | **£4,617.00** | **£3,377.25** | **−26.9%** |\n| Monitor Arm | £5,408.00 | £1,651.00 | −69.5% |\n| Desk Lamp | £3,592.90 | £1,487.70 | −58.6% |\n\n⚠️ **No product grew.** Every product's net revenue fell from Q1 to Q2. The best performer was **Whiteboard**, which had the smallest decline at **−26.9%**.\n\n---\n\n### q4. Order value lost to refunded and cancelled orders\n\nThere were 14 such orders:\n- 2007: £342\n- 2011: £756\n- 2016: £1,539\n- 2022: £1,134\n- 2033: £688.75\n- 2042: £798\n- 2048: £331.50\n- 2077: £494\n- 2081: £290\n- 2084: £810\n- 2097: £541.50\n- 2103: £397.10\n- 2105: £242.25\n- 2106: £390\n\nTotal lost: **£8,754.10**\n\n---\n\n### q5. Top customer by net revenue (January–June)\n\n| Customer | Net revenue |\n|---|---|\n| **Copperfield Law** | **£7,222.40** |\n| Linden Travel | £6,637.95 |\n| Elmwood Primary School | £6,151.30 |\n| Oakridge Media | £5,906.50 |\n\n**Copperfield Law** had the highest net revenue.\n\n---\n\n### q6. Average net order value in Q1\n\n- Q1 net revenue: £45,320.90\n- Completed orders in Q1: 68 (75 orders, minus 7 refunded or cancelled)\n- Average: £45,320.90 ÷ 68 = **£666.48**\n\n---\n\n```json\n{\"answers\": {\"q1\": 16983.75, \"q2\": \"East\", \"q3\": {\"name\": \"Whiteboard\", \"percent\": -26.9}, \"q4\": 8754.10, \"q5\": {\"name\": \"Copperfield Law\", \"amount\": 7222.40}, \"q6\": 666.48}}\n```",
+ "cost": 0.13585572,
+ "usage": {
+  "prompt_tokens": 5347,
+  "completion_tokens": 5792,
+  "total_tokens": 11139,
+  "cost": 0.13585572,
+  "is_byok": false,
+  "prompt_tokens_details": {
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "audio_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost_details": {
+   "upstream_inference_cost": 0.137228,
+   "upstream_inference_prompt_cost": 0.021388,
+   "upstream_inference_completions_cost": 0.11584
+  },
+  "completion_tokens_details": {
+   "reasoning_tokens": 4746,
+   "image_tokens": 0,
+   "audio_tokens": 0
+  }
+ },
+ "provider": "Claude Platform on AWS",
+ "finish_reason": "stop",
+ "score": {
+  "followed_format": true,
+  "correct": 6,
+  "total": 6,
+  "per_question": {
+   "q1": true,
+   "q2": true,
+   "q3": true,
+   "q4": true,
+   "q5": true,
+   "q6": true
+  },
+  "score": 100,
+  "summary": "6/6 right"
+ }
+}

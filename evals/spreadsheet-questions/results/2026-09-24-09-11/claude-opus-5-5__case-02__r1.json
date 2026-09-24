@@ -1,0 +1,51 @@
+{
+ "suite": "spreadsheet-questions",
+ "version": "1",
+ "model": "claude-opus-5-5",
+ "route": "anthropic/claude-opus-5.5",
+ "case": "case-02",
+ "run": 1,
+ "seconds": 51.452,
+ "text": "I worked out each order's value as quantity × unit price × (1 − discount%). Net revenue only includes orders with status \"Completed\". Q1 is January to March and Q2 is April to June.\n\n## q1. Net revenue in March 2026\nMarch had 22 completed orders. Two March orders are excluded as refunded (SO-2051 and SO-2054) and one as cancelled (SO-2059).\n\nAdding the completed orders in sequence: 361 + 129.20 + 1,296 + 144.40 + 433.20 + 34.20 + 380 + 370.50 + 190 + 95 + 38 + 304 + 61.75 + 950 + 378 + 95 + 55.25 + 739.50 + 580 + 95 + 325 + 1,305 = **£8,360.00**\n\n## q2. Net revenue by region in Q2\n| Region | Q2 net revenue |\n|---|---|\n| **North** | **£12,567.90** |\n| East | £10,112.25 |\n| South | £9,421.10 |\n| West | £6,294.75 |\n| Total | £38,396.00 |\n\nNorth had the highest net revenue.\n\n## q3. Net revenue by product, Q1 vs Q2\n| Product | Q1 | Q2 | Change |\n|---|---|---|---|\n| **Desk Chair** | £7,112.25 | £12,955.75 | **+82.16%** |\n| Filing Cabinet | £6,975.00 | £9,288.00 | +33.16% |\n| Whiteboard | £5,647.75 | £6,132.25 | +8.58% |\n| Standing Desk | £7,035.00 | £6,594.00 | −6.27% |\n| Monitor Arm | £6,422.00 | £2,704.00 | −57.89% |\n| Desk Lamp | £3,041.90 | £722.00 | −76.26% |\n\nDesk Chair grew the most, by 82.16%. The totals check out: Q1 is £36,233.90 and Q2 is £38,396.00.\n\n## q4. Value lost to refunded and cancelled orders\nThe 14 affected orders are:\n- SO-2008: 652.50\n- SO-2015: 304\n- SO-2025: 1,071\n- SO-2037: 1,197\n- SO-2045: 1,881\n- SO-2051: 185.25\n- SO-2054: 1,740\n- SO-2059: 123.50\n- SO-2082: 679.25\n- SO-2083: 324.90\n- SO-2090: 370.50\n- SO-2101: 1,428\n- SO-2106: 1,435.50\n- SO-2133: 304\n\nTogether these come to **£11,696.40**.\n\n## q5. Top customer by net revenue, January to June\n| Customer | Net revenue |\n|---|---|\n| **Copperfield Law** | **£7,177.25** |\n| Linden Travel | £6,433.75 |\n| Greystone Insurance | £6,125.05 |\n| Kestrel Engineering | £6,121.25 |\n| Juniper Health Clinic | £5,704.50 |\n\nCopperfield Law had the highest net revenue.\n\n## q6. Average net order value in Q1\n- Q1 net revenue was £36,233.90.\n- There were 65 completed orders (24 in January, 19 in February and 22 in March).\n- £36,233.90 ÷ 65 = **£557.44**\n\n{\"answers\": {\"q1\": 8360.00, \"q2\": \"North\", \"q3\": {\"name\": \"Desk Chair\", \"percent\": 82.16}, \"q4\": 11696.40, \"q5\": {\"name\": \"Copperfield Law\", \"amount\": 7177.25}, \"q6\": 557.44}}",
+ "cost": 0.15101856,
+ "usage": {
+  "prompt_tokens": 6461,
+  "completion_tokens": 6335,
+  "total_tokens": 12796,
+  "cost": 0.15101856,
+  "is_byok": false,
+  "prompt_tokens_details": {
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "audio_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost_details": {
+   "upstream_inference_cost": 0.152544,
+   "upstream_inference_prompt_cost": 0.025844,
+   "upstream_inference_completions_cost": 0.1267
+  },
+  "completion_tokens_details": {
+   "reasoning_tokens": 5128,
+   "image_tokens": 0,
+   "audio_tokens": 0
+  }
+ },
+ "provider": "Claude Platform on AWS",
+ "finish_reason": "stop",
+ "score": {
+  "followed_format": true,
+  "correct": 6,
+  "total": 6,
+  "per_question": {
+   "q1": true,
+   "q2": true,
+   "q3": true,
+   "q4": true,
+   "q5": true,
+   "q6": true
+  },
+  "score": 100,
+  "summary": "6/6 right"
+ }
+}
