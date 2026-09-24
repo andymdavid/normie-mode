@@ -1,0 +1,771 @@
+{
+ "suite": "unusual-transactions",
+ "version": "1",
+ "id": "case-04",
+ "seed": 1004,
+ "month": "2026-04",
+ "rows": [
+  {
+   "id": "EXP-1001",
+   "date": "2026-04-01",
+   "supplier": "Metro Rail",
+   "category": "Travel",
+   "amount": 23.35,
+   "approval_code": "",
+   "submitted_by": "J. Morgan"
+  },
+  {
+   "id": "EXP-1002",
+   "date": "2026-04-01",
+   "supplier": "Northgate Stationers",
+   "category": "Office supplies",
+   "amount": 16.62,
+   "approval_code": "",
+   "submitted_by": "J. Morgan"
+  },
+  {
+   "id": "EXP-1003",
+   "date": "2026-04-01",
+   "supplier": "Summit Hotels",
+   "category": "Travel",
+   "amount": 257.69,
+   "approval_code": "",
+   "submitted_by": "A. Patel"
+  },
+  {
+   "id": "EXP-1004",
+   "date": "2026-04-01",
+   "supplier": "Brightline IT Services",
+   "category": "IT",
+   "amount": 723.53,
+   "approval_code": "AP-6519",
+   "submitted_by": "R. Okafor"
+  },
+  {
+   "id": "EXP-1005",
+   "date": "2026-04-01",
+   "supplier": "Harbour Cleaning Ltd",
+   "category": "Cleaning",
+   "amount": 246.66,
+   "approval_code": "",
+   "submitted_by": "L. Byrne"
+  },
+  {
+   "id": "EXP-1006",
+   "date": "2026-04-02",
+   "supplier": "Ledger Accounting Services",
+   "category": "Professional fees",
+   "amount": 412.79,
+   "approval_code": "",
+   "submitted_by": "L. Byrne"
+  },
+  {
+   "id": "EXP-1007",
+   "date": "2026-04-03",
+   "supplier": "Harbour Cleaning Ltd",
+   "category": "Cleaning",
+   "amount": 222.72,
+   "approval_code": "",
+   "submitted_by": "R. Okafor"
+  },
+  {
+   "id": "EXP-1008",
+   "date": "2026-05-02",
+   "supplier": "Swift Couriers",
+   "category": "Postage",
+   "amount": 39.44,
+   "approval_code": "",
+   "submitted_by": "A. Patel"
+  },
+  {
+   "id": "EXP-1009",
+   "date": "2026-04-03",
+   "supplier": "Ledger Accounting Services",
+   "category": "Professional fees",
+   "amount": 706.96,
+   "approval_code": "AP-9927",
+   "submitted_by": "R. Okafor"
+  },
+  {
+   "id": "EXP-1010",
+   "date": "2026-04-03",
+   "supplier": "Summit Hotels",
+   "category": "Travel",
+   "amount": 310.33,
+   "approval_code": "",
+   "submitted_by": "R. Okafor"
+  },
+  {
+   "id": "EXP-1011",
+   "date": "2026-04-04",
+   "supplier": "Harbour Cleaning Ltd",
+   "category": "Cleaning",
+   "amount": 246.12,
+   "approval_code": "",
+   "submitted_by": "A. Patel"
+  },
+  {
+   "id": "EXP-1012",
+   "date": "2026-04-05",
+   "supplier": "Harbour Cleaning Ltd",
+   "category": "Cleaning",
+   "amount": 190.94,
+   "approval_code": "",
+   "submitted_by": "L. Byrne"
+  },
+  {
+   "id": "EXP-1013",
+   "date": "2026-04-05",
+   "supplier": "Swift Couriers",
+   "category": "Postage",
+   "amount": 20.41,
+   "approval_code": "",
+   "submitted_by": "J. Morgan"
+  },
+  {
+   "id": "EXP-1014",
+   "date": "2026-04-05",
+   "supplier": "Summit Hotels",
+   "category": "Travel",
+   "amount": 340.09,
+   "approval_code": "",
+   "submitted_by": "J. Morgan"
+  },
+  {
+   "id": "EXP-1015",
+   "date": "2026-04-05",
+   "supplier": "Fibrenet Broadband",
+   "category": "Utilities",
+   "amount": 57.41,
+   "approval_code": "",
+   "submitted_by": "R. Okafor"
+  },
+  {
+   "id": "EXP-1016",
+   "date": "2026-04-05",
+   "supplier": "Brightline IT Services",
+   "category": "IT",
+   "amount": 726.69,
+   "approval_code": "AP-9068",
+   "submitted_by": "L. Byrne"
+  },
+  {
+   "id": "EXP-1017",
+   "date": "2026-04-06",
+   "supplier": "Greenleaf Plants",
+   "category": "Office",
+   "amount": 22.69,
+   "approval_code": "",
+   "submitted_by": "J. Morgan"
+  },
+  {
+   "id": "EXP-1018",
+   "date": "2026-04-06",
+   "supplier": "Harbour Cleaning Ltd",
+   "category": "Cleaning",
+   "amount": 203.62,
+   "approval_code": "",
+   "submitted_by": "A. Patel"
+  },
+  {
+   "id": "EXP-1019",
+   "date": "2026-04-06",
+   "supplier": "Greenleaf Plants",
+   "category": "Office",
+   "amount": 40.59,
+   "approval_code": "",
+   "submitted_by": "R. Okafor"
+  },
+  {
+   "id": "EXP-1020",
+   "date": "2026-04-06",
+   "supplier": "Parkside Print",
+   "category": "Printing",
+   "amount": 349.91,
+   "approval_code": "",
+   "submitted_by": "J. Morgan"
+  },
+  {
+   "id": "EXP-1021",
+   "date": "2026-04-07",
+   "supplier": "Metro Rail",
+   "category": "Travel",
+   "amount": 20.05,
+   "approval_code": "",
+   "submitted_by": "J. Morgan"
+  },
+  {
+   "id": "EXP-1022",
+   "date": "2026-04-08",
+   "supplier": "Harbour Cleaning Ltd",
+   "category": "Cleaning",
+   "amount": 244.9,
+   "approval_code": "",
+   "submitted_by": "L. Byrne"
+  },
+  {
+   "id": "EXP-1023",
+   "date": "2026-04-08",
+   "supplier": "Brightline IT Services",
+   "category": "IT",
+   "amount": 772.44,
+   "approval_code": "AP-3239",
+   "submitted_by": "A. Patel"
+  },
+  {
+   "id": "EXP-1024",
+   "date": "2026-04-09",
+   "supplier": "Fibrenet Broadband",
+   "category": "Utilities",
+   "amount": 59.69,
+   "approval_code": "",
+   "submitted_by": "A. Patel"
+  },
+  {
+   "id": "EXP-1025",
+   "date": "2026-04-09",
+   "supplier": "CloudDesk Software",
+   "category": "Software",
+   "amount": 101.2,
+   "approval_code": "",
+   "submitted_by": "A. Patel"
+  },
+  {
+   "id": "EXP-1026",
+   "date": "2026-04-09",
+   "supplier": "Northgate Stationers",
+   "category": "Office supplies",
+   "amount": 50.39,
+   "approval_code": "",
+   "submitted_by": "S. Chen"
+  },
+  {
+   "id": "EXP-1027",
+   "date": "2026-04-10",
+   "supplier": "Northgate Stationers",
+   "category": "Office supplies",
+   "amount": 60.01,
+   "approval_code": "",
+   "submitted_by": "J. Morgan"
+  },
+  {
+   "id": "EXP-1028",
+   "date": "2026-04-10",
+   "supplier": "Kettle & Co Catering",
+   "category": "Meals",
+   "amount": 54.19,
+   "approval_code": "",
+   "submitted_by": "A. Patel"
+  },
+  {
+   "id": "EXP-1029",
+   "date": "2026-04-10",
+   "supplier": "Northgate Stationers",
+   "category": "Office supplies",
+   "amount": 14.87,
+   "approval_code": "",
+   "submitted_by": "L. Byrne"
+  },
+  {
+   "id": "EXP-1030",
+   "date": "2026-04-10",
+   "supplier": "Ledger Accounting Services",
+   "category": "Professional fees",
+   "amount": 499.3,
+   "approval_code": "",
+   "submitted_by": "A. Patel"
+  },
+  {
+   "id": "EXP-1031",
+   "date": "2026-04-10",
+   "supplier": "Kettle & Co Catering",
+   "category": "Meals",
+   "amount": 148.34,
+   "approval_code": "",
+   "submitted_by": "L. Byrne"
+  },
+  {
+   "id": "EXP-1032",
+   "date": "2026-04-10",
+   "supplier": "Metro Rail",
+   "category": "Travel",
+   "amount": 36.78,
+   "approval_code": "",
+   "submitted_by": "R. Okafor"
+  },
+  {
+   "id": "EXP-1033",
+   "date": "2026-04-11",
+   "supplier": "Metro Rail",
+   "category": "Travel",
+   "amount": 51.19,
+   "approval_code": "",
+   "submitted_by": "R. Okafor"
+  },
+  {
+   "id": "EXP-1034",
+   "date": "2026-04-11",
+   "supplier": "Metro Rail",
+   "category": "Travel",
+   "amount": 67.73,
+   "approval_code": "",
+   "submitted_by": "A. Patel"
+  },
+  {
+   "id": "EXP-1035",
+   "date": "2026-04-11",
+   "supplier": "Kettle & Co Catering",
+   "category": "Meals",
+   "amount": 118.76,
+   "approval_code": "",
+   "submitted_by": "L. Byrne"
+  },
+  {
+   "id": "EXP-1036",
+   "date": "2026-04-11",
+   "supplier": "Swift Couriers",
+   "category": "Postage",
+   "amount": 40.11,
+   "approval_code": "",
+   "submitted_by": "J. Morgan"
+  },
+  {
+   "id": "EXP-1037",
+   "date": "2026-04-11",
+   "supplier": "Parkside Print",
+   "category": "Printing",
+   "amount": 172.86,
+   "approval_code": "",
+   "submitted_by": "J. Morgan"
+  },
+  {
+   "id": "EXP-1038",
+   "date": "2026-04-12",
+   "supplier": "Greenleaf Plants",
+   "category": "Office",
+   "amount": 35.36,
+   "approval_code": "",
+   "submitted_by": "L. Byrne"
+  },
+  {
+   "id": "EXP-1039",
+   "date": "2026-04-12",
+   "supplier": "Metro Rail",
+   "category": "Travel",
+   "amount": 102.5,
+   "approval_code": "",
+   "submitted_by": "A. Patel"
+  },
+  {
+   "id": "EXP-1040",
+   "date": "2026-04-12",
+   "supplier": "Parkside Print",
+   "category": "Printing",
+   "amount": 176.17,
+   "approval_code": "",
+   "submitted_by": "R. Okafor"
+  },
+  {
+   "id": "EXP-1041",
+   "date": "2026-04-12",
+   "supplier": "Metro Rail",
+   "category": "Travel",
+   "amount": 38.38,
+   "approval_code": "",
+   "submitted_by": "S. Chen"
+  },
+  {
+   "id": "EXP-1042",
+   "date": "2026-04-13",
+   "supplier": "Brightline IT Services",
+   "category": "IT",
+   "amount": 577.56,
+   "approval_code": "AP-3067",
+   "submitted_by": "J. Morgan"
+  },
+  {
+   "id": "EXP-1043",
+   "date": "2026-04-15",
+   "supplier": "Brightline IT Services",
+   "category": "IT",
+   "amount": 428.96,
+   "approval_code": "",
+   "submitted_by": "R. Okafor"
+  },
+  {
+   "id": "EXP-1044",
+   "date": "2026-04-15",
+   "supplier": "Fibrenet Broadband",
+   "category": "Utilities",
+   "amount": 62.08,
+   "approval_code": "",
+   "submitted_by": "J. Morgan"
+  },
+  {
+   "id": "EXP-1045",
+   "date": "2026-04-15",
+   "supplier": "Metro Rail",
+   "category": "Travel",
+   "amount": 66.95,
+   "approval_code": "",
+   "submitted_by": "L. Byrne"
+  },
+  {
+   "id": "EXP-1046",
+   "date": "2026-04-15",
+   "supplier": "Metro Rail",
+   "category": "Travel",
+   "amount": 48.35,
+   "approval_code": "",
+   "submitted_by": "S. Chen"
+  },
+  {
+   "id": "EXP-1047",
+   "date": "2026-04-16",
+   "supplier": "CloudDesk Software",
+   "category": "Software",
+   "amount": 86.61,
+   "approval_code": "",
+   "submitted_by": "R. Okafor"
+  },
+  {
+   "id": "EXP-1048",
+   "date": "2026-04-16",
+   "supplier": "Kettle & Co Catering",
+   "category": "Meals",
+   "amount": 132.53,
+   "approval_code": "",
+   "submitted_by": "A. Patel"
+  },
+  {
+   "id": "EXP-1049",
+   "date": "2026-04-16",
+   "supplier": "Greenleaf Plants",
+   "category": "Office",
+   "amount": 31.12,
+   "approval_code": "",
+   "submitted_by": "L. Byrne"
+  },
+  {
+   "id": "EXP-1050",
+   "date": "2026-04-17",
+   "supplier": "Metro Rail",
+   "category": "Travel",
+   "amount": 16.58,
+   "approval_code": "",
+   "submitted_by": "R. Okafor"
+  },
+  {
+   "id": "EXP-1051",
+   "date": "2026-04-17",
+   "supplier": "Swift Couriers",
+   "category": "Postage",
+   "amount": 58.74,
+   "approval_code": "",
+   "submitted_by": "R. Okafor"
+  },
+  {
+   "id": "EXP-1052",
+   "date": "2026-04-20",
+   "supplier": "Northgate Stationers",
+   "category": "Office supplies",
+   "amount": 80.23,
+   "approval_code": "",
+   "submitted_by": "L. Byrne"
+  },
+  {
+   "id": "EXP-1053",
+   "date": "2026-04-20",
+   "supplier": "Ledger Accounting Services",
+   "category": "Professional fees",
+   "amount": 724.63,
+   "approval_code": "AP-3319",
+   "submitted_by": "J. Morgan"
+  },
+  {
+   "id": "EXP-1054",
+   "date": "2026-04-21",
+   "supplier": "Kettle & Co Catering",
+   "category": "Meals",
+   "amount": 76.47,
+   "approval_code": "",
+   "submitted_by": "A. Patel"
+  },
+  {
+   "id": "EXP-1055",
+   "date": "2026-04-21",
+   "supplier": "Parkside Print",
+   "category": "Printing",
+   "amount": 317.83,
+   "approval_code": "",
+   "submitted_by": "R. Okafor"
+  },
+  {
+   "id": "EXP-1056",
+   "date": "2026-04-21",
+   "supplier": "Greenleaf Plants",
+   "category": "Office",
+   "amount": 51.2,
+   "approval_code": "",
+   "submitted_by": "A. Patel"
+  },
+  {
+   "id": "EXP-1057",
+   "date": "2026-04-22",
+   "supplier": "Swift Couriers",
+   "category": "Postage",
+   "amount": 16,
+   "approval_code": "",
+   "submitted_by": "R. Okafor"
+  },
+  {
+   "id": "EXP-1058",
+   "date": "2026-04-22",
+   "supplier": "Kettle and Co Events",
+   "category": "Meals",
+   "amount": 112.97,
+   "approval_code": "",
+   "submitted_by": "A. Patel"
+  },
+  {
+   "id": "EXP-1059",
+   "date": "2026-04-23",
+   "supplier": "Northgate Stationers",
+   "category": "Office supplies",
+   "amount": 15.53,
+   "approval_code": "",
+   "submitted_by": "S. Chen"
+  },
+  {
+   "id": "EXP-1060",
+   "date": "2026-04-23",
+   "supplier": "Parkside Print",
+   "category": "Printing",
+   "amount": 55.04,
+   "approval_code": "",
+   "submitted_by": "R. Okafor"
+  },
+  {
+   "id": "EXP-1061",
+   "date": "2026-04-25",
+   "supplier": "CloudDesk Software",
+   "category": "Software",
+   "amount": 112,
+   "approval_code": "",
+   "submitted_by": "R. Okafor"
+  },
+  {
+   "id": "EXP-1062",
+   "date": "2026-04-25",
+   "supplier": "Swift Couriers",
+   "category": "Postage",
+   "amount": 39.29,
+   "approval_code": "",
+   "submitted_by": "J. Morgan"
+  },
+  {
+   "id": "EXP-1063",
+   "date": "2026-04-25",
+   "supplier": "Ledger Accounting Services",
+   "category": "Professional fees",
+   "amount": 1139.93,
+   "approval_code": "AP-3327",
+   "submitted_by": "J. Morgan"
+  },
+  {
+   "id": "EXP-1064",
+   "date": "2026-04-25",
+   "supplier": "Swift Couriers",
+   "category": "Postage",
+   "amount": 8.07,
+   "approval_code": "",
+   "submitted_by": "S. Chen"
+  },
+  {
+   "id": "EXP-1065",
+   "date": "2026-04-25",
+   "supplier": "Fibrenet Broadband",
+   "category": "Utilities",
+   "amount": 64.79,
+   "approval_code": "",
+   "submitted_by": "R. Okafor"
+  },
+  {
+   "id": "EXP-1066",
+   "date": "2026-04-25",
+   "supplier": "Summit Hotels",
+   "category": "Travel",
+   "amount": 3658,
+   "approval_code": "AP-9420",
+   "submitted_by": "L. Byrne"
+  },
+  {
+   "id": "EXP-1067",
+   "date": "2026-04-26",
+   "supplier": "Swift Couriers",
+   "category": "Postage",
+   "amount": 47.7,
+   "approval_code": "",
+   "submitted_by": "R. Okafor"
+  },
+  {
+   "id": "EXP-1068",
+   "date": "2026-04-27",
+   "supplier": "CloudDesk Software",
+   "category": "Software",
+   "amount": 86.23,
+   "approval_code": "",
+   "submitted_by": "R. Okafor"
+  },
+  {
+   "id": "EXP-1069",
+   "date": "2026-04-27",
+   "supplier": "Harbour Cleaning Ltd",
+   "category": "Cleaning",
+   "amount": 215.99,
+   "approval_code": "",
+   "submitted_by": "L. Byrne"
+  },
+  {
+   "id": "EXP-1070",
+   "date": "2026-04-27",
+   "supplier": "Brightline IT Services",
+   "category": "IT",
+   "amount": 544.76,
+   "approval_code": "AP-4938",
+   "submitted_by": "A. Patel"
+  },
+  {
+   "id": "EXP-1071",
+   "date": "2026-04-28",
+   "supplier": "Brightline IT Services",
+   "category": "IT",
+   "amount": 456.45,
+   "approval_code": "",
+   "submitted_by": "L. Byrne"
+  },
+  {
+   "id": "EXP-1072",
+   "date": "2026-04-28",
+   "supplier": "Summit Hotels",
+   "category": "Travel",
+   "amount": 162.45,
+   "approval_code": "",
+   "submitted_by": "A. Patel"
+  },
+  {
+   "id": "EXP-1073",
+   "date": "2026-04-28",
+   "supplier": "Summit Hotels",
+   "category": "Travel",
+   "amount": 217.79,
+   "approval_code": "",
+   "submitted_by": "R. Okafor"
+  },
+  {
+   "id": "EXP-1074",
+   "date": "2026-04-28",
+   "supplier": "Harbour Cleaning Ltd",
+   "category": "Cleaning",
+   "amount": 232.92,
+   "approval_code": "",
+   "submitted_by": "J. Morgan"
+  },
+  {
+   "id": "EXP-1075",
+   "date": "2026-04-29",
+   "supplier": "Kettle & Co Catering",
+   "category": "Meals",
+   "amount": 114.06,
+   "approval_code": "",
+   "submitted_by": "J. Morgan"
+  },
+  {
+   "id": "EXP-1076",
+   "date": "2026-04-29",
+   "supplier": "Northgate Stationers",
+   "category": "Office supplies",
+   "amount": 34.92,
+   "approval_code": "",
+   "submitted_by": "A. Patel"
+  },
+  {
+   "id": "EXP-1077",
+   "date": "2026-04-29",
+   "supplier": "Greenleaf Plants",
+   "category": "Office",
+   "amount": 50.2,
+   "approval_code": "",
+   "submitted_by": "A. Patel"
+  },
+  {
+   "id": "EXP-1078",
+   "date": "2026-04-29",
+   "supplier": "Brightline IT Services",
+   "category": "IT",
+   "amount": 876.07,
+   "approval_code": "",
+   "submitted_by": "R. Okafor"
+  },
+  {
+   "id": "EXP-1079",
+   "date": "2026-04-29",
+   "supplier": "Summit Hotels",
+   "category": "Travel",
+   "amount": 162.45,
+   "approval_code": "",
+   "submitted_by": "A. Patel"
+  },
+  {
+   "id": "EXP-1080",
+   "date": "2026-04-30",
+   "supplier": "Swift Couriers",
+   "category": "Postage",
+   "amount": 10.33,
+   "approval_code": "",
+   "submitted_by": "S. Chen"
+  },
+  {
+   "id": "EXP-1081",
+   "date": "2026-04-30",
+   "supplier": "Kettle & Co Catering",
+   "category": "Meals",
+   "amount": 99.63,
+   "approval_code": "",
+   "submitted_by": "J. Morgan"
+  }
+ ],
+ "planted": [
+  {
+   "type": "missing-approval",
+   "accept": [
+    "EXP-1078"
+   ]
+  },
+  {
+   "type": "unapproved-supplier",
+   "accept": [
+    "EXP-1058"
+   ]
+  },
+  {
+   "type": "out-of-period",
+   "accept": [
+    "EXP-1008"
+   ]
+  },
+  {
+   "type": "duplicate",
+   "accept": [
+    "EXP-1072",
+    "EXP-1079"
+   ]
+  },
+  {
+   "type": "outlier",
+   "accept": [
+    "EXP-1066"
+   ]
+  }
+ ]
+}
