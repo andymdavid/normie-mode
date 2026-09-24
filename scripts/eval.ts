@@ -25,9 +25,13 @@ if (existsSync('.env')) {
 }
 
 const PILOT_MODELS = ['claude-opus-5-5', 'claude-sonnet-5', 'gpt-6-sol', 'gpt-6-luna', 'gemini-3-8-flash', 'deepseek-v4-pro'];
-/** Allowance for the answer plus any thinking; used only for the up-front estimate. */
-const EST_OUTPUT_TOKENS = 4000;
-const CHARS_PER_TOKEN = 3.5;
+/**
+ * Allowance for the answer plus hidden thinking, used only for the up-front estimate. Measured on
+ * the first pilot (2026-09-24): Claude Sonnet 5 used ~19k output tokens per case, Opus 5.5 ~7k.
+ */
+const EST_OUTPUT_TOKENS = 20000;
+/** CSV full of numbers tokenises densely: measured ~1.8 characters per token. */
+const CHARS_PER_TOKEN = 1.8;
 
 const arg = (name: string) => {
   const i = process.argv.indexOf(`--${name}`);
