@@ -1,0 +1,15 @@
+id: presentations
+label: "Best AI for presentations and PowerPoint"
+priority: 10
+scope: in
+coverage: gap
+match:
+  - "ppt"
+  - "powerpoint"
+  - "presentation"
+  - "presentations"
+  - "slides"
+  - "slide"
+  - "deck"
+  - "decks"
+  - "pitch deck"

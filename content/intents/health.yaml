@@ -1,0 +1,26 @@
+id: health
+label: "Best AI for health questions"
+priority: 30
+scope: in
+job: health
+coverage: partial
+note: "Based on people's votes only."
+match:
+  - "health"
+  - "medical"
+  - "medicine"
+  - "doctors"
+  - "symptoms"
+  - "diagnosis"
+  - "medical diagnosis"
+  - "x ray"
+  - "x-ray"
+  - "therapy"
+  - "mental health"
+  - "fitness"
+  - "nutrition"
+  - "diet"
+  - "healthcare"
+  - "workout plan"
+  - "gym"
+  - "workout"

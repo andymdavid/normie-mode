@@ -1,0 +1,20 @@
+id: finance-accounting
+label: "Best AI for accounting and finance"
+priority: 20
+scope: in
+coverage: gap
+match:
+  - "accounting"
+  - "accountants"
+  - "finance"
+  - "financial analysis"
+  - "financial planning"
+  - "financial modelling"
+  - "financial modeling"
+  - "bookkeeping"
+  - "tax"
+  - "taxes"
+  - "budgeting"
+  - "quantity surveying"
+  - "quantity surveyor"
+  - "quickbooks"

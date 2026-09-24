@@ -1,0 +1,23 @@
+id: cv-jobs
+label: "Best AI for CVs, job applications and interviews"
+priority: 10
+scope: in
+coverage: gap
+match:
+  - "resume"
+  - "resumes"
+  - "cv"
+  - "cover letter"
+  - "cover letters"
+  - "job applications"
+  - "job application"
+  - "job search"
+  - "job seekers"
+  - "jobs"
+  - "job"
+  - "interview"
+  - "interviews"
+  - "interview preparation"
+  - "career advice"
+  - "career"
+  - "linkedin"

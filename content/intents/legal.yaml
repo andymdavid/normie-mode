@@ -1,0 +1,17 @@
+id: legal
+label: "Best AI for legal questions"
+priority: 30
+scope: in
+job: legal
+coverage: partial
+note: "Based on people's votes only."
+match:
+  - "legal"
+  - "law"
+  - "lawyers"
+  - "lawyer"
+  - "contracts"
+  - "contract"
+  - "legal drafting"
+  - "legal research"
+  - "legal documents"

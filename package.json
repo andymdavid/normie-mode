@@ -12,7 +12,8 @@
     "test": "vitest run",
     "import": "tsx scripts/import.ts",
     "eval": "tsx scripts/eval.ts",
-    "eval:generate": "tsx scripts/eval-generate.ts"
+    "eval:generate": "tsx scripts/eval-generate.ts",
+    "demand": "tsx scripts/demand.ts"
   },
   "dependencies": {
     "astro": "^7.3.4",

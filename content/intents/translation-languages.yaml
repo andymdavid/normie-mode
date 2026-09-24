@@ -1,0 +1,15 @@
+id: translation-languages
+label: "Best AI for translation and languages"
+priority: 35
+scope: in
+coverage: gap
+match:
+  - "translation"
+  - "translate"
+  - "translating"
+  - "language learning"
+  - "languages"
+  - "language"
+  - "kiswahili"
+  - "spanish"
+  - "english"

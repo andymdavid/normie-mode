@@ -245,6 +245,13 @@ export function validate(g: Graph, asOf = today()): ValidationReport {
     for (const r of j.related) need(g.jobs.has(r), at, `unknown related job "${r}"`);
   }
 
+  for (const i of g.intents.values()) {
+    const at = where('intents', i.id);
+    if (i.job) need(g.jobs.has(i.job), at, `unknown job "${i.job}"`);
+    if (i.coverage !== 'gap') need(!!i.job || !!i.page, at, `${i.coverage} coverage needs a job or page`);
+    if (i.scope === 'out') need(!!i.out_reason, at, 'out-of-scope intents need an out_reason');
+  }
+
   const publishedScopes = new Map<string, string>();
   for (const rec of g.recommendations.values()) {
     const at = where('recommendations', rec.id);

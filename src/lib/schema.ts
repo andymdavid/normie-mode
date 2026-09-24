@@ -223,6 +223,28 @@ export const jobSchema = z.object({
 });
 export type Job = z.infer<typeof jobSchema>;
 
+/**
+ * A search intent: one need, however people phrase it (D-024). Demand comes from the
+ * autocomplete snapshot; coverage says how well our pages answer it.
+ */
+export const intentSchema = z.object({
+  id,
+  /** How people search for it, e.g. "Best AI for Excel". */
+  label: z.string(),
+  /** Whole words or phrases; an autocomplete tail containing one belongs to this intent. */
+  match: z.array(z.string()).min(1),
+  /** Lower wins when a search matches more than one intent. */
+  priority: z.number().default(100),
+  scope: z.enum(['in', 'out']),
+  out_reason: z.string().optional(),
+  job: id.optional(),
+  /** A non-job page that answers it, e.g. the homepage comparison. */
+  page: z.string().startsWith('/').optional(),
+  coverage: z.enum(['covered', 'partial', 'gap']),
+  note: z.string().optional(),
+});
+export type Intent = z.infer<typeof intentSchema>;
+
 export type Source = z.infer<typeof sourceSchema>;
 export type ModelFamily = z.infer<typeof modelFamilySchema>;
 export type ModelVersion = z.infer<typeof modelVersionSchema>;

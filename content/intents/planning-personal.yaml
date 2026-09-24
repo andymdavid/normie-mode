@@ -1,0 +1,18 @@
+id: planning-personal
+label: "Best AI for planning and personal admin"
+priority: 50
+scope: in
+coverage: gap
+match:
+  - "travel planning"
+  - "trip planning"
+  - "travel"
+  - "planning"
+  - "organization"
+  - "organisation"
+  - "online shopping"
+  - "shopping"
+  - "scheduling"
+  - "recipes"
+  - "cooking"
+  - "meal planning"

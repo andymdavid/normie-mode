@@ -9,6 +9,7 @@ import {
   modelFamilySchema,
   makerClaimSchema,
   jobSchema,
+  intentSchema,
   testSchema,
   modelVersionSchema,
   recommendationSchema,
@@ -20,6 +21,7 @@ import {
   type ModelFamily,
   type MakerClaim,
   type Job,
+  type Intent,
   type Test,
   type ModelVersion,
   type Recommendation,
@@ -40,6 +42,7 @@ export interface Graph {
   claims: Map<string, MakerClaim>;
   tests: Map<string, Test>;
   jobs: Map<string, Job>;
+  intents: Map<string, Intent>;
   /** Result ID -> file it was defined in, for error messages. */
   origins: Map<string, string>;
 }
@@ -113,6 +116,7 @@ export function loadGraph(root = join(process.cwd(), 'content')): Graph {
     claims: loadEach('claims', makerClaimSchema),
     tests: loadEach('tests', testSchema),
     jobs: loadEach('jobs', jobSchema),
+    intents: loadEach('intents', intentSchema),
     origins,
   };
   if (problems.length) throw new ContentError(problems);

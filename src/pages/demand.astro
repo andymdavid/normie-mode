@@ -1,0 +1,97 @@
+---
+// Internal: what people search for against what we cover (D-024). Preview only.
+import Base from '../layouts/Base.astro';
+import { graph } from '../lib/graph';
+import { demandByIntent, loadDemand } from '../lib/demand';
+import { PREVIEW, formatDate } from '../lib/view';
+
+const snapshot = loadDemand();
+const { intents, unmatched, matchedShare } = demandByIntent(snapshot);
+const g = graph();
+const inScope = intents.filter((i) => i.intent.scope === 'in');
+const out = intents.filter((i) => i.intent.scope === 'out');
+const maxShare = Math.max(...inScope.map((i) => i.share));
+const gaps = inScope.filter((i) => i.intent.coverage === 'gap');
+const COVERAGE = { covered: 'Covered', partial: 'Partly covered', gap: 'Not covered' } as const;
+const BADGE = { covered: 'status-tested', partial: 'status-early', gap: 'conf-insufficient' } as const;
+const coveredBy = (i: (typeof intents)[number]['intent']) =>
+  i.job ? { href: `/jobs/${i.job}`, label: g.jobs.get(i.job)!.name } : i.page ? { href: i.page, label: 'Homepage comparison' } : undefined;
+---
+{PREVIEW && snapshot ? (
+  <Base title="What people search for" noindex>
+    <div class="mono-label">Internal · Draft</div>
+    <h1>What people ask AI to help with</h1>
+    <p class="lede">
+      Google's autocomplete suggestions for searches like "best AI for…", grouped into needs and set against what this site covers.
+      Collected {formatDate(snapshot.meta.retrieved_at.slice(0, 10))} for {snapshot.meta.regions.map((r) => r.toUpperCase()).join(' and ')}.
+    </p>
+
+    <div class="band">
+      <div class="band-inner summary-grid">
+        <div class="summary"><span class="tag">Most asked about</span><p><strong>{inScope[0].intent.label.replace('Best AI for ', '')}</strong>, then {inScope.slice(1, 3).map((i) => i.intent.label.replace('Best AI for ', '').toLowerCase()).join(' and ')}.</p></div>
+        <div class="summary"><span class="tag">Biggest gaps</span><p>{gaps.slice(0, 4).map((i, n) => (<>{n > 0 && ', '}<strong>{i.intent.label.replace('Best AI for ', '')}</strong></>))}. People search for these and we have nothing yet.</p></div>
+        <div class="summary"><span class="tag">Out of scope</span><p>{out.map((i) => i.intent.label.replace('Best AI for ', '').toLowerCase()).join('; ')}. Counted, not acted on.</p></div>
+        <div class="summary"><span class="tag">How to read the score</span><p>Each suggestion scores 10 at the top of the list down to 1 at the bottom. It shows <strong>relative interest</strong>, not search volume. {matchedShare.toFixed(0)}% of suggestions fall into a need below.</p></div>
+      </div>
+    </div>
+
+    <div class="section-head"><h2>Needs we could serve</h2></div>
+    <p class="section-sub">Ranked by share of the demand signal. The examples are the most-suggested searches in each group.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Need</th><th style="width:28%">Share of interest</th><th>Our coverage</th><th>Top searches</th></tr></thead>
+        <tbody>
+          {inScope.map((i) => {
+            const by = coveredBy(i.intent);
+            return (
+              <tr>
+                <td><strong>{i.intent.label}</strong>{i.intent.note && <div class="small muted">{i.intent.note}</div>}</td>
+                <td>
+                  <div class="share"><span class="bar-fill" style={`width:${(100 * i.share) / maxShare}%`}></span><span class="share-value" style={`left:${(100 * i.share) / maxShare}%`}>{i.share.toFixed(1)}%</span></div>
+                  <div class="small muted">{i.searches.length} searches · {i.regions.map((r) => r.toUpperCase()).join(', ')}</div>
+                </td>
+                <td><span class={`badge ${BADGE[i.intent.coverage]}`}>{COVERAGE[i.intent.coverage]}</span>{by && <div class="small"><a href={by.href}>{by.label}</a></div>}</td>
+                <td class="small">{i.searches.slice(0, 6).map((s) => s.tail).join(' · ')}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section-head"><h2>Out of scope for now</h2></div>
+    <p class="section-sub">Real demand we've chosen not to serve yet, with the reason.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Need</th><th>Signal</th><th>Why not</th><th>Top searches</th></tr></thead>
+        <tbody>
+          {out.map((i) => (
+            <tr>
+              <td><strong>{i.intent.label}</strong></td>
+              <td class="num">{i.score}</td>
+              <td class="small">{i.intent.out_reason}</td>
+              <td class="small">{i.searches.slice(0, 6).map((s) => s.tail).join(' · ')}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section-head"><h2>Not yet grouped</h2></div>
+    <p class="section-sub">Suggestions that don't match any need. Add phrases to <code>content/intents/</code> to group them.</p>
+    <p class="small">{unmatched.slice(0, 80).map((s) => `${s.tail} (${s.score})`).join(' · ')}</p>
+
+    <div class="plain-section">
+      <p class="small muted">Source: {snapshot.meta.name}. {snapshot.meta.method} {snapshot.meta.caveat} Refresh with <code>npm run demand</code>.</p>
+    </div>
+  </Base>
+) : (
+  <Base title="Not found" noindex><h1>Not found</h1></Base>
+)}
+
+<style>
+  .share { position: relative; height: 12px; margin: 0.35rem 3.5rem 0.35rem 0; }
+  .share .bar-fill { position: absolute; left: 0; top: 0; bottom: 0; }
+  .share-value { position: absolute; top: 50%; transform: translateY(-50%); padding-left: 0.5rem; font: 500 0.8rem var(--mono); }
+  code { font: 0.85em var(--mono); background: var(--band); padding: 0 0.25rem; }
+</style>

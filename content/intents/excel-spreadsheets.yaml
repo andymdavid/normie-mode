@@ -1,0 +1,25 @@
+id: excel-spreadsheets
+label: "Best AI for Excel and spreadsheets"
+priority: 10
+scope: in
+job: office-work
+coverage: partial
+note: "Our draft spreadsheet test covers questions about sales data; nothing yet covers working inside Excel files."
+match:
+  - "excel"
+  - "spreadsheet"
+  - "spreadsheets"
+  - "google sheets"
+  - "sheets"
+  - "data analysis"
+  - "data analytics"
+  - "data analyst"
+  - "qualitative data analysis"
+  - "quantitative analysis"
+  - "data science"
+  - "statistics"
+  - "sql"
+  - "power bi"
+  - "xero"
+  - "analyzing data"
+  - "analysing data"

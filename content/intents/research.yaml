@@ -1,0 +1,21 @@
+id: research
+label: "Best AI for research"
+priority: 20
+scope: in
+job: facts
+coverage: partial
+note: "Facts and expert-question tests help, but nothing yet tests research reports or citations."
+match:
+  - "research"
+  - "deep research"
+  - "literature review"
+  - "research paper"
+  - "research papers"
+  - "thesis"
+  - "dissertation"
+  - "citations"
+  - "sources"
+  - "fact checking"
+  - "online research"
+  - "osint"
+  - "genealogy research"

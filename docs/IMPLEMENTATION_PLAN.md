@@ -126,6 +126,17 @@ People reach comparisons through everyday jobs (writing code, office work, pulli
 
 Job score (added 2026-09-24): on each test with at least three models, each model is placed from 0 (lowest) to 100 (highest); a model's job score is the average across the tests it has results for, and only models covering at least half the usable tests are scored. It is relative to the models we track, so it shows who leads, not absolute ability. Home cards show the top five; each job page shows the full job-score chart above the per-test charts.
 
+### D-024 — Demand from search autocomplete (accepted 2026-09-24)
+
+What people search for decides which jobs we cover and which tests we build first. The first source is Google autocomplete: `npm run demand` collects suggestions for "best AI for…", "which AI is best for…", "best AI model for…" and "ChatGPT vs Claude for…", A to Z, for the UK and US, and saves `data/demand.json`. Searches are grouped into search intents (`content/intents/`), each linked to the job or page that answers it, with its coverage (covered, partial or gap) and scope.
+
+- **Demand score:** each suggestion scores 10 at the top of the list down to 1 at the bottom, summed per intent. It is relative interest, not search volume, and is always labelled that way.
+- **Scope:** images, video and design (the largest single cluster), investing and trading, and personal uses such as astrology and roleplay are counted but marked out of scope, each with a reason. Images and video are pending a product-owner decision.
+- **Next sources:** Bing Webmaster Tools (exact Bing volumes) and Google Keyword Planner (Google volume ranges) need accounts; Search Console once the site is live.
+- **Findings from the first sweep (2026-09-24):** the largest uncovered needs are studying and homework, CVs and job applications, accounting and finance, and presentations. Job page names should follow search language (e.g. "Best AI for Excel" rather than "Professional office work").
+
+The internal `/demand` page (preview only) ranks intents by demand against coverage.
+
 ## Reference sites
 
 Reviewed 2026-09-24 as models for structure and presentation:

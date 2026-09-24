@@ -1,0 +1,33 @@
+id: business
+label: "Best AI for business"
+priority: 30
+scope: in
+job: office-work
+coverage: partial
+match:
+  - "business"
+  - "business plan"
+  - "business ideas"
+  - "business strategy"
+  - "business research"
+  - "startup"
+  - "startups"
+  - "entrepreneurs"
+  - "small business"
+  - "marketing"
+  - "sales"
+  - "office work"
+  - "work"
+  - "productivity"
+  - "decision making"
+  - "brainstorming"
+  - "strategy"
+  - "consulting"
+  - "project management"
+  - "keyword research"
+  - "seo"
+  - "customer service"
+  - "ecommerce"
+  - "networking"
+  - "hr"
+  - "nonprofits"

@@ -1,0 +1,30 @@
+id: documents-notes
+label: "Best AI for documents, PDFs and notes"
+priority: 20
+scope: in
+job: documents-to-tables
+coverage: partial
+note: "Covers pulling data out of documents; nothing yet tests summaries or meeting notes."
+match:
+  - "document"
+  - "documents"
+  - "document analysis"
+  - "document creation"
+  - "documentation"
+  - "pdf"
+  - "pdfs"
+  - "notes"
+  - "note taking"
+  - "notes making"
+  - "making notes"
+  - "meeting notes"
+  - "meetings"
+  - "zoom"
+  - "transcription"
+  - "ocr"
+  - "summaries"
+  - "summary"
+  - "reading"
+  - "zotero"
+  - "zip files"
+  - "files"

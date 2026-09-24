@@ -1,0 +1,20 @@
+id: maths-science
+label: "Best AI for maths and science"
+priority: 30
+scope: in
+job: maths
+coverage: covered
+match:
+  - "math"
+  - "maths"
+  - "mathematics"
+  - "math problems"
+  - "physics"
+  - "chemistry"
+  - "organic chemistry"
+  - "biology"
+  - "science"
+  - "engineering"
+  - "calculus"
+  - "zoology"
+  - "ochem"

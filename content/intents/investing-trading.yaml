@@ -1,0 +1,27 @@
+id: investing-trading
+label: "Best AI for investing and trading"
+priority: 50
+scope: out
+out_reason: "Investment tips and trading signals are regulated advice we won't rank AI on."
+coverage: gap
+match:
+  - "trading"
+  - "stock"
+  - "stocks"
+  - "stock market"
+  - "stock trading"
+  - "stock analysis"
+  - "forex"
+  - "forex trading"
+  - "options trading"
+  - "crypto"
+  - "investing"
+  - "investment"
+  - "investment advice"
+  - "xauusd"
+  - "financial advice"
+  - "sports betting"
+  - "betting"
+  - "fantasy football"
+  - "football prediction"
+  - "kalshi"
