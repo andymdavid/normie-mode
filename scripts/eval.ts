@@ -2,12 +2,19 @@
 //
 //   npm run eval -- --dry-run                  estimate cost only, no API calls
 //   npm run eval -- --mock                     full pipeline with fake answers, no API calls
-//   OPENROUTER_API_KEY=... npm run eval -- --budget 3
-//   options: --models a,b,c (our model ids)  --runs 1  --budget 3 (USD)
+//   npm run eval -- --budget 3                 real run (needs OPENROUTER_API_KEY, env or .env)
+//   options: --suite spreadsheet-questions|unusual-transactions  --models a,b,c  --runs 1  --budget 3 (USD)
 import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { loadGraph } from '../src/lib/graph';
-import { buildPrompt, score, SUITE_ID, SUITE_VERSION, type Case, type Score } from '../evals/unusual-transactions/suite';
+import * as spreadsheetQuestions from '../evals/spreadsheet-questions/suite';
+import * as unusualTransactions from '../evals/unusual-transactions/suite';
+import type { Suite, SuiteCase, SuiteScore } from '../evals/types';
+
+const SUITES: Record<string, Suite<any>> = {
+  [spreadsheetQuestions.SUITE_ID]: spreadsheetQuestions,
+  [unusualTransactions.SUITE_ID]: unusualTransactions,
+};
 
 // Read OPENROUTER_API_KEY from a local, git-ignored .env if it isn't already set.
 if (existsSync('.env')) {
@@ -32,6 +39,10 @@ const MOCK = flag('mock');
 const RUNS = Number(arg('runs') ?? 1);
 const BUDGET = Number(arg('budget') ?? 3);
 const modelIds = (arg('models') ?? PILOT_MODELS.join(',')).split(',');
+const suite = SUITES[arg('suite') ?? spreadsheetQuestions.SUITE_ID];
+if (!suite) throw new Error(`Unknown suite. Choose one of: ${Object.keys(SUITES).join(', ')}`);
+const { SUITE_ID, SUITE_VERSION, buildPrompt, score } = suite;
+type Case = SuiteCase;
 
 const suiteDir = join(process.cwd(), 'evals', SUITE_ID);
 const cases: Case[] = readdirSync(join(suiteDir, 'cases'))
@@ -58,7 +69,7 @@ const promptTokens = cases.map((c) => buildPrompt(c).length / CHARS_PER_TOKEN);
 const avgPrompt = promptTokens.reduce((a, b) => a + b, 0) / promptTokens.length;
 const calls = cases.length * RUNS;
 let estimate = 0;
-console.log(`Suite ${SUITE_ID} v${SUITE_VERSION}: ${cases.length} cases × ${RUNS} run(s) × ${targets.length} models = ${calls * targets.length} calls`);
+console.log(`${suite.SUITE_TITLE} (${SUITE_ID} v${SUITE_VERSION}): ${cases.length} cases × ${RUNS} run(s) × ${targets.length} models = ${calls * targets.length} calls`);
 console.log(`Prompt ≈ ${Math.round(avgPrompt)} tokens; estimate allows ${EST_OUTPUT_TOKENS} output tokens per call.\n`);
 for (const t of targets) {
   const p = priceMap.get(t.route);
@@ -89,12 +100,7 @@ interface CallResult {
 }
 
 async function call(route: string, prompt: string, c: Case): Promise<CallResult> {
-  if (MOCK) {
-    // Mock answer: finds all but the last planted problem and raises one false alarm.
-    const flags: { id: string; reason: string }[] = c.planted.slice(0, -1).map((p) => ({ id: p.accept[0], reason: p.type }));
-    flags.push({ id: c.rows.find((r) => !c.planted.some((p) => p.accept.includes(r.id)))!.id, reason: 'mock false alarm' });
-    return { text: JSON.stringify({ flags }), cost: 0 };
-  }
+  if (MOCK) return { text: suite.mockAnswer(c), cost: 0 };
   const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
     method: 'POST',
     headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json', 'X-Title': 'Normie Mode tests' },
@@ -113,10 +119,10 @@ const runId = `${new Date().toISOString().slice(0, 16).replace(/[:T]/g, '-')}${M
 const outDir = join(suiteDir, 'results', runId);
 mkdirSync(outDir, { recursive: true });
 let spent = 0;
-const summary: Record<string, { name: string; route: string; scores: number[]; found: number; planted: number; false_alarms: number; format_failures: number; errors: number; cost: number; seconds: number }> = {};
+const summary: Record<string, { name: string; route: string; scores: number[]; format_failures: number; errors: number; cost: number; seconds: number }> = {};
 
 outer: for (const t of targets) {
-  const s = (summary[t.id] = { name: t.name, route: t.route, scores: [] as number[], found: 0, planted: 0, false_alarms: 0, format_failures: 0, errors: 0, cost: 0, seconds: 0 });
+  const s = (summary[t.id] = { name: t.name, route: t.route, scores: [] as number[], format_failures: 0, errors: 0, cost: 0, seconds: 0 });
   for (const c of cases) {
     for (let run = 1; run <= RUNS; run++) {
       if (spent >= BUDGET) {
@@ -127,11 +133,8 @@ outer: for (const t of targets) {
       const r = await call(t.route, buildPrompt(c), c);
       const seconds = (Date.now() - started) / 1000;
       spent += r.cost;
-      const sc: Score = score(c, r.text);
+      const sc: SuiteScore = score(c, r.text);
       Object.assign(s, {
-        found: s.found + sc.found,
-        planted: s.planted + sc.planted,
-        false_alarms: s.false_alarms + sc.false_alarms.length,
         format_failures: s.format_failures + (sc.followed_format ? 0 : 1),
         errors: s.errors + (r.error ? 1 : 0),
         cost: s.cost + r.cost,
@@ -142,7 +145,7 @@ outer: for (const t of targets) {
         join(outDir, `${t.id}__${c.id}__r${run}.json`),
         JSON.stringify({ suite: SUITE_ID, version: SUITE_VERSION, model: t.id, route: t.route, case: c.id, run, seconds, ...r, score: sc }, null, 1),
       );
-      console.log(`${t.name.padEnd(22)} ${c.id} r${run}: ${sc.found}/${sc.planted} found, ${sc.false_alarms.length} false alarm(s), score ${sc.score}${r.error ? ` ERROR ${r.error}` : ''} · $${r.cost.toFixed(4)} · ${seconds.toFixed(0)}s`);
+      console.log(`${t.name.padEnd(22)} ${c.id} r${run}: ${sc.summary}, score ${sc.score}${r.error ? ` ERROR ${r.error}` : ''} · $${r.cost.toFixed(4)} · ${seconds.toFixed(0)}s`);
     }
   }
 }
@@ -152,9 +155,6 @@ const table = Object.entries(summary).map(([id, s]) => ({
   name: s.name,
   route: s.route,
   score: s.scores.length ? Math.round(s.scores.reduce((a, b) => a + b, 0) / s.scores.length) : null,
-  found: s.found,
-  planted: s.planted,
-  false_alarms: s.false_alarms,
   format_failures: s.format_failures,
   errors: s.errors,
   cost_usd: Number(s.cost.toFixed(4)),
