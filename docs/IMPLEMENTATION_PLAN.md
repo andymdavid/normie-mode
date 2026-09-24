@@ -110,6 +110,16 @@ A task is canonical when it has a distinct user goal **and** either distinct suc
 
 Each task records its user goal, inclusion boundary, success concept, required capabilities (`core` or `supporting`), aliases, and related tasks. Canonical data lives in `content/tasks/`.
 
+### D-022 — Design system modelled on Artificial Analysis (accepted 2026-09-24)
+
+Product-owner direction: rewrite the design tokens to sit close to [Artificial Analysis](https://artificialanalysis.ai/models). We adopt its conventions, not its branding: a white page, grey edge-to-edge summary bands with one-sentence summary cards, serif section headings with a square marker, pill navigation, a sticky contents list, and one metric per chart card with "higher/lower is better" subtitles. Tokens live in `src/styles.css`.
+
+Deliberate difference: bars are one colour, not one colour per maker. A five-maker palette fails the colour-vision checks (at most three categorical colours can be told apart in these chart forms), so maker identity comes from the row label instead. Bars run horizontally so model names stay readable on phones.
+
+### D-023 — "Best AI for…" jobs as the way into everyday tasks (accepted 2026-09-24, replaces the overview heatmap)
+
+People reach comparisons through everyday jobs (writing code, office work, pulling data out of documents, writing, getting facts right, expert questions, maths, legal, health). Each job page is a stack of charts, one per test that measures the job, plus cost. The only words are a one-line plain description per test (`content/tests/`) and templated summary sentences generated from the data. Jobs live in `content/jobs/`. A job with thin evidence says so (for example "based only on people's votes"). The job list and its test mapping are editorial and open to revision.
+
 ## Reference sites
 
 Reviewed 2026-09-24 as models for structure and presentation:
@@ -144,6 +154,13 @@ Progress note (2026-09-24): `npm run import` (or `-- --offline` to reuse `.cache
 - Verification: product-owner review.
 
 Progress note (2026-09-24): Built as the homepage (`src/pages/index.astro`, data in `src/lib/overview.ts`). It has quick picks, a "too new to judge" strip, a capability-against-cost scatter, a model table and a "good at" heatmap. Translation constants (typical request size, words per page, the $5 best-value budget, the 8-test threshold) and the eight plain-English areas are proposals that need product-owner review.
+
+### N-006 — Jobs lens and design-system rewrite
+
+- Status: `done`
+- Dependencies: D-022, D-023
+- Delivered: new tokens and layout, a reusable bar chart component, the redesigned homepage (summary band, highlights, job grid, one chart per metric, contents list), `/jobs` and nine job pages.
+- Verification: `npm test` checks every test points at real imported data and every job has results; builds and type-checks cleanly; screenshots reviewed in light and dark mode.
 
 ### N-003 — Head-to-head comparison page
 
