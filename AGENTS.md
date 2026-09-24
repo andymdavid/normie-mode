@@ -6,7 +6,7 @@ Build Normie Mode into a trustworthy, task-first reference for what AI can actua
 
 `Evidence -> Capability -> Work`
 
-Read these files before making changes:
+Read these files before making changes (the vision predates the D-018 direction reset; where they conflict, the plan's decisions win):
 
 1. `Normie Mode Product Vision.md`
 2. `docs/IMPLEMENTATION_PLAN.md`
@@ -14,7 +14,9 @@ Read these files before making changes:
 
 ## Product guardrails
 
-- Organise the public experience around recognisable work, not benchmark scores.
+- Normie Mode is model comparison translated for non-experts (D-018). Use the reference sites in `docs/IMPLEMENTATION_PLAN.md` for structure; make every label, metric and chart readable by someone whose job isn't AI.
+- Distil, don't describe (D-021): lead with data and visuals, keep words short, and never publish generated editorial prose without product-owner review.
+- Only use data sources accepted in D-019, and keep each value's source, retrieval date and licence.
 - The canonical comparison unit is the model, identified by exact model version. Products, wrappers, and product directories are outside the comparison scope.
 - Keep measured facts, sourced claims, editorial assessments, and recommendations distinguishable.
 - Preserve source, model or product version, evaluation date, and methodology for important evidence.

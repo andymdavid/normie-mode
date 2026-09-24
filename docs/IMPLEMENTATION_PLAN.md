@@ -1,8 +1,8 @@
 # Implementation Plan
 
-Status: Phase 0–2 running together (D-016)  
-Last updated: 2026-09-23  
-Current phase: Phase 0 decisions under review; Phase 1 prototype built
+Status: Direction reset to translated model comparison (D-018)  
+Last updated: 2026-09-24  
+Current phase: Data foundation and overview mockup (see "Current work")
 
 ## Objective
 
@@ -14,9 +14,13 @@ The full engineering backlog will be expanded after the blocking decisions are a
 
 ### D-001 — First audience
 
+Partly superseded by D-018 (2026-09-24): the primary audience is now the vision's general audience. The text below still applies to work-lens content.
+
 SME operators and finance-adjacent knowledge workers who own recurring spreadsheet analysis, reporting, cleanup, reconciliation, or planning work. They use spreadsheets competently but do not evaluate AI models professionally. They need to know which model can help, how reliable it is, and what still requires checking.
 
 ### D-002 — First task family
+
+Partly superseded by D-018 (2026-09-24): spreadsheet work is the first candidate work lens, not the first product slice.
 
 Business spreadsheet work. The pilot will cover major general-purpose models and exact model versions applied to XLSX and CSV tasks. Product, plugin, wrapper, and spreadsheet-application comparisons are excluded.
 
@@ -40,6 +44,50 @@ Phases 0–2 run together. The agent drafts the remaining blocking decisions as 
 
 Andy David, the product owner, is the named human reviewer for publishing and recommendation changes until another reviewer is added. Agents draft; only Andy sets `status: published` and his name as `reviewer`.
 
+### D-018 — Product direction: model comparison, translated (accepted 2026-09-24)
+
+Normie Mode is a model comparison reference like [Artificial Analysis](https://artificialanalysis.ai/models), [BenchLM](https://benchlm.ai) and [OpenRouter compare](https://openrouter.ai/compare), but it translates everything for people whose job isn't AI. The structure and visual approach of those sites are the reference. The difference is the language: every metric, chart and benchmark gets a plain-English label and meaning.
+
+Core public surfaces, in build order:
+
+1. **Overview**: the models we track, compared on a few translated dimensions (how capable, what it costs, how new the evidence is, what it's good at).
+2. **Model pages**: one model's scores, price, specs and evidence status.
+3. **Head-to-head comparison**: two or three models side by side.
+4. **Benchmark explainers**: what a test checks, a real example, and who's winning.
+
+Consequences:
+
+- This supersedes the task-page-first approach of the first prototype. Work-based browsing ("best AI for spreadsheets") becomes a lens built on the comparison data once there's enough evidence to support it. Spreadsheet work (D-002) stays the first candidate lens but is no longer the first product slice.
+- D-001 widens. The primary audience is the vision's general audience (people for whom AI isn't their job). SME and finance-adjacent users stay the first audience for work-lens content.
+- The spreadsheet task pages and draft recommendations remain in the repository but are parked (see P1-001/P1-002).
+
+### D-019 — Data sources (accepted 2026-09-24)
+
+Only free sources whose licence allows public display. Each result keeps its source, retrieval date and licence.
+
+| Source | Provides | Licence | How |
+| --- | --- | --- | --- |
+| [Epoch AI benchmarking hub](https://epoch.ai/benchmarks/use-this-data) | Independent results on about 85 benchmarks, and the Epoch Capabilities Index (ECI) with confidence intervals | CC BY 4.0 | Scripted import of the CSV bundle |
+| [models.dev](https://github.com/anomalyco/models.dev) | Price, context window, modalities, release date; same-day coverage of new models | MIT | Scripted import of `api.json` |
+| [LMArena leaderboard dataset](https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset) | Human-preference rankings (text, code, documents, search, agents), updated daily | CC BY 4.0 | Scripted import of parquet snapshots |
+| Model makers' announcements and system cards | Launch-day scores | Published facts, cited | Hand-entered, labelled "the maker says" |
+| [BenchLM](https://benchlm.ai/data) | Blended category scores | Licence unconfirmed | Cross-check only, not displayed, until confirmed |
+
+Excluded: Artificial Analysis (the free API is internal-use only; public display needs the paid Commercial API, which is declined for now) and OpenRouter (its terms prohibit scraping or copying site data). Aggregators are never cited as the source of a result when the benchmark owner or Epoch is available.
+
+### D-020 — Evidence freshness is shown, not hidden (accepted 2026-09-24)
+
+Independent testing lags launches by one to three weeks. Every model shows where its evidence stands: **the maker says** (provider-reported only), **early results** (some independent results), or **independently tested** (independent results across the main areas). New models show launch claims clearly labelled, with independent coverage visible as it arrives (for example "2 of ~30 tests done").
+
+### D-021 — Distil, don't describe (accepted 2026-09-24)
+
+Product-owner feedback on the first prototype: it read like an AI-written summary of benchmarks loosely applied to tasks. Rules from here:
+
+- Lead with data and visuals. Words label and explain; they don't pad.
+- Benchmark explanations are one plain sentence plus a real example, not paragraphs.
+- No generated editorial prose on public pages without product-owner review. Prefer showing the actual test item, score or chart.
+- A translation is judged by whether a non-expert can read the chart correctly, not by how much it explains.
+
 ### D-003 — Recommendation and confidence methodology (accepted 2026-09-23)
 
 Recommendations are editorial, scoped to a task, and bounded by evidence. The system does not compute a winner; it computes a **confidence ceiling** an editor cannot exceed:
@@ -62,6 +110,56 @@ A task is canonical when it has a distinct user goal **and** either distinct suc
 
 Each task records its user goal, inclusion boundary, success concept, required capabilities (`core` or `supporting`), aliases, and related tasks. Canonical data lives in `content/tasks/`.
 
+## Reference sites
+
+Reviewed 2026-09-24 as models for structure and presentation:
+
+- [Artificial Analysis — models](https://artificialanalysis.ai/models): an overview built on scatter plots (intelligence against cost and speed), per-metric bar charts, capability indexes by kind of work (finance, legal, and so on), and filters (open or closed weights, reasoning, provider).
+- [BenchLM](https://benchlm.ai): a ranked table with category scores, uncertainty intervals, "evidence status" labels, and decision-ready picks (best value, fastest, best open-weight).
+- [OpenRouter compare](https://openrouter.ai/compare): side-by-side model cards (context, price, modalities, provider) with curated comparison sets (flagships, best for code, most affordable); URL pattern `/compare/<provider>/<model>/<provider>/<model>`.
+
+## Current work (D-018 onwards)
+
+These tasks follow the direction reset and take priority over the Phase 1–3 backlog below.
+
+### N-001 — Import free data sources
+
+- Status: `in_progress`
+- Dependencies: D-019
+- Work: importers for Epoch AI, models.dev and LMArena that write dated, normalised snapshots into the repository; a mapping from each source's model identifiers to our canonical model versions; hand-entered maker claims using the existing results schema.
+- Acceptance criteria:
+  - One command refreshes all sources and reports new, changed and unmapped models.
+  - Every imported value keeps its source, retrieval date, licence and original model identifier (including reasoning effort as configuration).
+  - A model released this week appears with its specs from models.dev, even with no independent results yet.
+- Verification: run the import, confirm coverage for every tracked current model, and confirm the validator passes.
+
+Progress note (2026-09-24): `npm run import` (or `-- --offline` to reuse `.cache/`) writes `data/epoch.json`, `data/modelsdev.json` and `data/lmarena.json`. Model mappings live in `source_ids` on each `content/models/*.yaml`. Maker claims live in `content/claims/`. Known gaps: 19 Epoch benchmarks (including SWE-bench Pro and WebDev Arena) have no score file in Epoch's metadata and are skipped; only LMArena's text leaderboard is imported so far; the OpenAI claim wording needs checking by hand because their page blocks automated fetching.
+
+### N-002 — Overview page mockup
+
+- Status: `in_progress`
+- Dependencies: N-001, D-021
+- Work: one page in the style of the Artificial Analysis overview, using live imported data and plain-English labels.
+- Acceptance criteria: the product owner can judge the direction from it; every number links to its source; evidence status (D-020) is visible for every model.
+- Verification: product-owner review.
+
+Progress note (2026-09-24): Built as the homepage (`src/pages/index.astro`, data in `src/lib/overview.ts`). It has quick picks, a "too new to judge" strip, a capability-against-cost scatter, a model table and a "good at" heatmap. Translation constants (typical request size, words per page, the $5 best-value budget, the 8-test threshold) and the eight plain-English areas are proposals that need product-owner review.
+
+### N-003 — Head-to-head comparison page
+
+- Status: `proposed`
+- Dependencies: N-002 reviewed
+
+### N-004 — Model page redesign
+
+- Status: `proposed`
+- Dependencies: N-002 reviewed
+
+### N-005 — Benchmark explainer redesign
+
+- Status: `proposed`
+- Dependencies: N-002 reviewed. Needs a way to show a real example item per benchmark within licence terms.
+
 ## Proposed decisions (awaiting product-owner acceptance)
 
 These are drafted so the build can proceed. The prototype implements them, which makes changing them cheap. Each needs explicit acceptance.
@@ -83,6 +181,8 @@ Capabilities are the reusable skills that evidence measures and tasks require. T
 `careful-inspection` is a deliberate inclusion: SpreadsheetBench 2 identifies insufficient inspection and wrong-target selection as the dominant failure modes, and it is exactly what a user needs to know to check.
 
 ### D-007 — Initial model set (proposed)
+
+Update 2026-09-24: under D-018 the tracked set also includes the cheaper current tiers in each family (for example Claude Sonnet 5 and Haiku 4.5, GPT-6 Luna, Gemini 3.5 Flash-Lite, DeepSeek V4.1 Flash), because cost is one of the main things people compare. Whether to add further families (xAI Grok, Alibaba Qwen, Z.ai GLM) is open.
 
 Five families, tracked at exact version: Anthropic Claude, OpenAI GPT, Google Gemini, Moonshot Kimi, DeepSeek. Current versions in scope as of 2026-09-23: Claude Fable 5.1, Claude Opus 5.5, GPT-6 Astra, GPT-6 Sol, Gemini 3.8 Flash, Gemini 3.1 Pro, Kimi K3, DeepSeek V4 Pro. All confirmed against provider pages on 2026-09-23; Opus 5.5 (released 2026-09-23) and GPT-6 Sol (2026-09-22) replace Opus 5 and GPT-5.6 Sol. Gemini 3.7 Flash is recorded as superseded by 3.8 Flash but holds the top AA-AnalystAgent result. Predecessor versions (e.g. Claude Opus 4.6, GPT-5.2) are recorded with `lifecycle: superseded` when they carry evidence, so that evidence stays attributable to the version actually tested and is never silently inherited by a successor. Evaluation configuration (reasoning effort, tools, scaffold) is stored on each result, not on the model version. Version names are verified against a provider source before a recommendation may cite them.
 
@@ -304,8 +404,8 @@ These items are not ready for implementation. Expand them after P0-010.
 
 ### Phase 1 — Content prototype
 
-- P1-001: Assemble structured sample data for one task. (`in_progress`: 33 sourced results from SpreadsheetBench 2, AA-AnalystAgent and the Kimi K3 report)
-- P1-002: Produce the full-fidelity task-page prototype. (`in_progress`: `/tasks/analyse-a-spreadsheet` and `/tasks/fix-a-broken-workbook` are full pages, each with a draft recommendation awaiting editorial review)
+- P1-001: Assemble structured sample data for one task. (Parked by D-018; was `in_progress`: 33 sourced results from SpreadsheetBench 2, AA-AnalystAgent and the Kimi K3 report)
+- P1-002: Produce the full-fidelity task-page prototype. (Parked by D-018; was `in_progress`: `/tasks/analyse-a-spreadsheet` and `/tasks/fix-a-broken-workbook` are full pages, each with a draft recommendation awaiting editorial review)
 - P1-003: Conduct comprehension and trust sessions.
 - P1-004: Revise taxonomy, rubric, and content model from findings.
 

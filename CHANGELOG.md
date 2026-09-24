@@ -6,6 +6,13 @@ This file records meaningful changes to the Normie Mode product, implementation,
 
 ### Added
 
+- Direction reset (D-018): Normie Mode is model comparison translated for non-experts, using Artificial Analysis, BenchLM and OpenRouter compare as structural references.
+- Accepted data sources (D-019): Epoch AI, models.dev, LMArena and maker announcements; Artificial Analysis and OpenRouter excluded for licensing reasons.
+- Accepted evidence-freshness display (D-020) and the "distil, don't describe" content rule (D-021).
+- New current-work tasks N-001 to N-005; spreadsheet task-page prototype parked.
+- Importers for Epoch AI, models.dev and LMArena, with per-model source mappings and hand-entered maker launch claims.
+- New homepage: a translated model-comparison overview with quick picks, a capability-against-cost chart, a model table, a "good at" heatmap and a "too new to judge" section.
+- Tracked models expanded to cheaper tiers (Claude Sonnet 5 and Haiku 4.5, GPT-6 Luna, Gemini 3.5 Flash-Lite, DeepSeek V4.1 Flash).
 - Astro site for the spreadsheet slice: homepage with intent search, task, skill, model, benchmark and source pages, a methodology page, and a preview-only editorial review queue.
 - Canonical YAML content model with a build-gating validator for graph integrity, claim provenance, confidence ceilings and freshness review flags.
 - Seed evidence: SpreadsheetBench 2 paper results, the AA-AnalystAgent leaderboard top three, and SpreadsheetBench 2 results reported by Moonshot AI, all with source, date and configuration.

@@ -1,5 +1,7 @@
 # Normie Mode
 
+> **Direction update, 2026-09-24:** the first product slice is model comparison translated for non-experts (in the style of Artificial Analysis, BenchLM and OpenRouter compare), with work-based browsing built on top later. See D-018 to D-021 in `docs/IMPLEMENTATION_PLAN.md`. The rest of this document is unchanged.
+
 ## Product Vision
 
 Normie Mode helps normal people understand what AI can actually do, which models are best for particular work, and why.
