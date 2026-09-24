@@ -1,57 +1,155 @@
 ---
 import Base from '../layouts/Base.astro';
-import Search from '../components/Search.astro';
-import Confidence from '../components/Confidence.astro';
-import { graph } from '../lib/graph';
-import { EVIDENCE_CLASS_LABEL, formatDate, modelName, visibleRecommendations } from '../lib/view';
-const g = graph();
-const featured = [...g.tasks.values()].sort((a, b) => (a.depth === b.depth ? 0 : a.depth === 'full' ? -1 : 1)).slice(0, 6);
-const latest = [...g.sources.values()]
-  .filter((s) => s.evidence_class !== 'editorial')
-  .sort((a, b) => (b.published_on ?? b.retrieved_on).localeCompare(a.published_on ?? a.retrieved_on))
-  .slice(0, 3);
+import CapabilityCostChart from '../components/CapabilityCostChart.astro';
+import { imported } from '../lib/imported';
+import { AREAS, EVIDENCE_STATUS_LABEL, TYPICAL_REQUEST, VALUE_BUDGET, overviewRows, picks } from '../lib/overview';
+import { formatDate } from '../lib/view';
+
+const rows = overviewRows();
+const top = picks(rows);
+const { epoch, modelsdev, lmarena } = imported();
+const fresh = rows.filter((r) => r.status !== 'tested').sort((a, b) => (b.model.released_on ?? '').localeCompare(a.model.released_on ?? ''));
+const labelled = new Set([...top.map((p) => p.row.model.id), ...rows.filter((r) => r.eci).sort((a, b) => (a.costPer1000 ?? 0) - (b.costPer1000 ?? 0)).slice(0, 1).map((r) => r.model.id)]);
+const money = (v?: number) => (v === undefined ? '–' : v < 1 ? `$${v.toFixed(2)}` : `$${v.toFixed(v < 10 ? 2 : 0)}`);
+const ordinal = (n: number) => `${n}${n % 10 === 1 && n !== 11 ? 'st' : n % 10 === 2 && n !== 12 ? 'nd' : n % 10 === 3 && n !== 13 ? 'rd' : 'th'}`;
+const step = (s: number) => Math.min(4, Math.floor(s * 5));
+const updated = formatDate(epoch?.meta.retrieved_at.slice(0, 10));
 ---
 <Base title="Normie Mode">
-  <section class="hero">
+  <header class="ov-head">
     <div>
-      <div class="eyebrow">Normie Mode</div>
-      <h1>What can AI actually do?</h1>
-      <p class="lede">Plain-English answers about which AI to use for real work, with the evidence underneath. We're starting with spreadsheets.</p>
-      <Search />
+      <h1>Which AI is best right now?</h1>
+      <p class="lede">The main AI models compared in plain English, using independent test results. Updated {updated}.</p>
     </div>
-    <img src="/norm.jpg" alt="Norm, our sceptical guide" width="180" height="180" />
+    <img src="/norm.jpg" alt="" width="96" height="96" />
+  </header>
+
+  <section class="picks" aria-label="Quick picks">
+    {top.map((p) => (
+      <a class="pick-card" href={`/models/${p.row.model.id}`}>
+        <span class="eyebrow">{p.label}</span>
+        <strong>{p.row.model.name}</strong>
+        <span class="small muted">{p.why}</span>
+      </a>
+    ))}
   </section>
 
-  <h2>Spreadsheet work</h2>
-  <div class="grid">
-    {featured.map((t) => {
-      const rec = visibleRecommendations(t.id).find((r) => r.scope === 'best-overall');
-      return (
-        <a class="card" href={`/tasks/${t.id}`}>
-          <h3>{t.question}</h3>
-          {rec ? <p class="small">{rec.model_version ? <>Norm's pick: {modelName(rec.model_version)}</> : 'No pick yet'} <Confidence level={rec.confidence} /></p> : <p class="small muted">See the evidence</p>}
-        </a>
-      );
-    })}
-  </div>
-  <p><a href="/tasks">All spreadsheet jobs →</a></p>
+  {fresh.length > 0 && (
+    <section class="new-strip" aria-labelledby="new-h">
+      <h2 id="new-h">Too new to judge</h2>
+      <div class="grid">
+        {fresh.map((r) => (
+          <div class="card">
+            <div class="eyebrow">{r.maker} · released {formatDate(r.model.released_on)}</div>
+            <h3>{r.model.name}</h3>
+            {r.claim && <p class="small"><span class="badge sourced">The maker says</span> “{r.claim.headline}”</p>}
+            <p class="small muted">Independent tests so far: <strong>{r.independentTests}</strong>. Check back in a week or two.</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  )}
 
-  <div class="two-col" style="margin-top: 2rem">
-    <section>
-      <h2>Latest evidence</h2>
-      <ul class="claims">
-        {latest.map((s) => (
-          <li><div><a href={`/sources/${s.id}`}>{s.title}</a><span class="cites">{s.publisher} · {s.published_on ? formatDate(s.published_on) : `retrieved ${formatDate(s.retrieved_on)}`}</span></div><span class="badge plain">{EVIDENCE_CLASS_LABEL[s.evidence_class]}</span></li>
+  <h2>Capability against cost</h2>
+  <CapabilityCostChart rows={rows} label={labelled} />
+
+  <h2>All models</h2>
+  <div class="table-wrap">
+    <table class="ov-table">
+      <thead>
+        <tr>
+          <th>Model</th>
+          <th>Capability</th>
+          <th>People's votes</th>
+          <th>Cost per 1,000 requests</th>
+          <th>Can read at once</th>
+          <th>Evidence</th>
+        </tr>
+      </thead>
+      <tbody>
+        {rows.map((r) => (
+          <tr>
+            <td><a href={`/models/${r.model.id}`}><strong>{r.model.name}</strong></a><div class="small muted">{r.maker}{r.openWeights && ' · open weights'}</div></td>
+            <td class="num">{r.eci ? <>{r.eci.value.toFixed(0)}<div class="small muted">likely {r.eci.low.toFixed(0)}–{r.eci.high.toFixed(0)}</div></> : <span class="muted">Not yet scored</span>}</td>
+            <td class="num">{r.arena ? <>{ordinal(r.arena.here)} of {r.arena.of}<div class="small muted">#{r.arena.rank} overall · {r.arena.votes.toLocaleString('en-GB')} votes</div></> : <span class="muted">Not yet ranked</span>}</td>
+            <td class="num">{money(r.costPer1000)}<div class="small muted">{r.price?.input !== undefined && `$${r.price.input} in / $${r.price.output} out per M tokens`}</div></td>
+            <td class="num">{r.contextPages ? `~${r.contextPages.toLocaleString('en-GB')} pages` : '–'}</td>
+            <td><span class={`badge status-${r.status}`}>{EVIDENCE_STATUS_LABEL[r.status]}</span><div class="small muted">{r.independentTests} test{r.independentTests === 1 ? "" : "s"}</div></td>
+          </tr>
         ))}
-      </ul>
-    </section>
-    <section>
-      <h2>Benchmarks explained</h2>
-      <ul class="claims">
-        {[...g.benchmarks.values()].map((b) => (
-          <li><div><a href={`/benchmarks/${b.id}`}>{b.name}</a><span class="cites">{b.what_is_it}</span></div></li>
-        ))}
-      </ul>
-    </section>
+      </tbody>
+    </table>
   </div>
+
+  <h2>What each model is good at</h2>
+  <p class="muted small" style="max-width: 44rem">Position among the models on this page that have been tested in each area. Stronger colour means closer to the top. A dash means no results yet.</p>
+  <div class="table-wrap">
+    <table class="heat">
+      <thead>
+        <tr>
+          <th>Model</th>
+          {AREAS.map((a) => <th title={a.plain}>{a.label}{a.kind === 'arena' && <span class="muted"> (votes)</span>}</th>)}
+        </tr>
+      </thead>
+      <tbody>
+        {rows.map((r) => (
+          <tr>
+            <td><a href={`/models/${r.model.id}`}>{r.model.name}</a></td>
+            {AREAS.map((a) => {
+              const c = r.areas[a.id];
+              return c ? (
+                <td class={`cell s${step(c.strength)}`} title={`${r.model.name}: ${ordinal(c.rank)} of ${c.of} in ${a.label.toLowerCase()} (${c.tests} test${c.tests > 1 ? 's' : ''})`}>
+                  {ordinal(c.rank)}<span> of {c.of}</span>
+                </td>
+              ) : <td class="cell none">–</td>;
+            })}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+  <div class="heat-legend small muted" aria-hidden="true">Behind <span class="cell s0"></span><span class="cell s1"></span><span class="cell s2"></span><span class="cell s3"></span><span class="cell s4"></span> Top</div>
+
+  <section class="how small muted">
+    <h2>How to read this</h2>
+    <ul>
+      <li><strong>Capability</strong> is Epoch AI's capability index, which combines results from dozens of independent tests into one score. Higher is better; the range shows how sure it is.</li>
+      <li><strong>People's votes</strong> is the position among the models here on LMArena, where people compare two anonymous answers and vote for the better one (leaderboard as of {formatDate(lmarena?.meta.as_of)}).</li>
+      <li><strong>Cost</strong> is the list price for 1,000 typical requests of about {TYPICAL_REQUEST.words}. Models that think longer before answering cost more than this in practice.</li>
+      <li><strong>Can read at once</strong> is how much text it can take in one go, at about 500 words per page.</li>
+      <li><strong>Best value</strong> is the most capable model under ${VALUE_BUDGET} per 1,000 requests.</li>
+    </ul>
+    <p>
+      Sources: <a href={epoch?.meta.url}>{epoch?.meta.name}</a> ({epoch?.meta.licence}),
+      <a href={lmarena?.meta.url}>{lmarena?.meta.name}</a> ({lmarena?.meta.licence}),
+      <a href={modelsdev?.meta.url}>{modelsdev?.meta.name}</a> ({modelsdev?.meta.licence}), and the model makers' own announcements.
+    </p>
+  </section>
 </Base>
+
+<style>
+  .ov-head { display: flex; justify-content: space-between; align-items: center; gap: 1.5rem; }
+  .ov-head img { border-radius: 50%; flex-shrink: 0; }
+  @media (max-width: 36rem) { .ov-head img { display: none; } }
+  .picks { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: 0.75rem; margin: 1.5rem 0 1rem; }
+  .pick-card { display: flex; flex-direction: column; gap: 0.25rem; padding: 1rem 1.1rem; background: var(--card); border: 1px solid var(--line); border-radius: 12px; text-decoration: none; }
+  .pick-card:hover { border-color: var(--accent); color: inherit; }
+  .pick-card strong { font-size: 1.2rem; }
+  .ov-table td, .heat td { vertical-align: middle; }
+  .badge.status-tested { background: var(--good-soft); color: var(--good); }
+  .badge.status-early { background: var(--warn-soft); color: var(--warn); }
+  .badge.status-maker-says { background: var(--accent-soft); color: var(--accent); }
+  .heat th { white-space: normal; min-width: 6.5rem; }
+  .heat td.cell { text-align: center; font-variant-numeric: tabular-nums; font-weight: 600; border: 2px solid var(--card); border-radius: 6px; }
+  .heat td.cell span { font-weight: 400; font-size: 0.75rem; opacity: 0.8; }
+  .cell.none { color: var(--muted); font-weight: 400; }
+  .cell.s0 { background: var(--seq-0); color: var(--seq-ink-0); }
+  .cell.s1 { background: var(--seq-1); color: var(--seq-ink-1); }
+  .cell.s2 { background: var(--seq-2); color: var(--seq-ink-2); }
+  .cell.s3 { background: var(--seq-3); color: var(--seq-ink-3); }
+  .cell.s4 { background: var(--seq-4); color: var(--seq-ink-4); }
+  .heat-legend { display: flex; align-items: center; gap: 4px; margin-top: 0.5rem; }
+  .heat-legend .cell { display: inline-block; width: 22px; height: 12px; border-radius: 3px; }
+  .how ul { padding-left: 1.2rem; }
+  .how h2 { font-size: 1.1rem; }
+</style>

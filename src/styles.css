@@ -14,6 +14,9 @@
   --bad-soft: #f7dfdf;
   --serif: 'Iowan Old Style', 'Charter', 'Georgia', serif;
   --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', system-ui, sans-serif;
+  --seq-0: #86b6ef; --seq-1: #5598e7; --seq-2: #2a78d6; --seq-3: #1c5cab; --seq-4: #0d366b;
+  --seq-ink-0: #0b0b0b; --seq-ink-1: #0b0b0b; --seq-ink-2: #ffffff; --seq-ink-3: #ffffff; --seq-ink-4: #ffffff;
+  --viz-series: #2a78d6; --viz-grid: #ece8e1; --viz-axis: #898781;
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark) {
@@ -21,6 +24,9 @@
     --paper: #171614; --card: #201f1c; --ink: #efe9df; --muted: #a89f92; --line: #36332e;
     --accent: #e2805c; --accent-soft: #3a2820; --good: #7fc4a0; --good-soft: #1f3129;
     --warn: #e1b563; --warn-soft: #33291a; --bad: #e59393; --bad-soft: #3a2222;
+    --seq-0: #184f95; --seq-1: #256abf; --seq-2: #3987e5; --seq-3: #6da7ec; --seq-4: #9ec5f4;
+    --seq-ink-0: #ffffff; --seq-ink-1: #ffffff; --seq-ink-2: #0b0b0b; --seq-ink-3: #0b0b0b; --seq-ink-4: #0b0b0b;
+    --viz-series: #3987e5; --viz-grid: #2c2c2a; --viz-axis: #898781;
     color-scheme: dark;
   }
 }
@@ -102,3 +108,16 @@ dl.facts { display: grid; grid-template-columns: max-content 1fr; gap: 0.35rem 1
 dl.facts dt { color: var(--muted); font-size: 0.9rem; }
 dl.facts dd { margin: 0; }
 .flag { background: var(--warn-soft); color: var(--warn); border-radius: 10px; padding: 0.6rem 0.9rem; font-size: 0.9rem; margin: 0.5rem 0; }
+
+.viz { position: relative; margin: 0; background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 1rem; }
+.viz svg { width: 100%; height: auto; display: block; overflow: visible; }
+.viz .grid { stroke: var(--viz-grid); stroke-width: 1; }
+.viz .tick { fill: var(--viz-axis); font: 11px var(--sans); font-variant-numeric: tabular-nums; }
+.viz .axis-label { fill: var(--muted); font: 12px var(--sans); }
+.viz .whisker { stroke: var(--viz-series); stroke-width: 2; stroke-linecap: round; opacity: 0.35; }
+.viz .dot { fill: var(--viz-series); stroke: var(--card); stroke-width: 2; }
+.viz .hit { fill: transparent; }
+.viz .pt { cursor: default; outline: none; }
+.viz .pt:hover .dot, .viz .pt:focus .dot { r: 7; }
+.viz .pt-label { fill: var(--ink); font: 600 12px var(--sans); paint-order: stroke; stroke: var(--card); stroke-width: 4px; }
+.viz-tip { position: absolute; max-width: 260px; background: var(--ink); color: var(--paper); font-size: 0.8rem; padding: 0.45rem 0.6rem; border-radius: 8px; pointer-events: none; transform: translateY(-100%); }
