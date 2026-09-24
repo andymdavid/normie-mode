@@ -9,10 +9,14 @@
     "preview": "astro preview",
     "check": "astro check",
     "validate": "tsx scripts/validate.ts",
-    "test": "vitest run"
+    "test": "vitest run",
+    "import": "tsx scripts/import.ts"
   },
   "dependencies": {
     "astro": "^7.3.4",
+    "csv-parse": "^7.0.2",
+    "fflate": "^0.8.3",
+    "hyparquet": "^1.31.1",
     "yaml": "^2.9.1",
     "zod": "^4.6.5"
   },
