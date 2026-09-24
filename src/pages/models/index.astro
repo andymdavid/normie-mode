@@ -1,0 +1,27 @@
+---
+import Base from '../../layouts/Base.astro';
+import { graph } from '../../lib/graph';
+import { resultsForModel } from '../../lib/view';
+const g = graph();
+const families = [...g.families.values()];
+---
+<Base title="Models">
+  <div class="eyebrow">Models</div>
+  <h1>The models we track</h1>
+  <p class="lede">We compare exact model versions, not apps. Results for one version never carry over to the next.</p>
+  <div class="grid">
+    {families.map((f) => (
+      <div class="card">
+        <h3>{f.name} <span class="muted small">by {f.provider}</span></h3>
+        <ul>
+          {[...g.models.values()].filter((m) => m.family === f.id).sort((a, b) => (a.lifecycle === 'current' ? -1 : 1) - (b.lifecycle === 'current' ? -1 : 1)).map((m) => (
+            <li class={m.lifecycle !== 'current' ? 'muted' : undefined}>
+              <a href={`/models/${m.id}`}>{m.name}</a>
+              <span class="small muted"> · {resultsForModel(m.id).length} results{m.lifecycle !== 'current' && ' · replaced'}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </div>
+</Base>

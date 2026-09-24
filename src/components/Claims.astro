@@ -1,0 +1,31 @@
+---
+import { graph } from '../lib/graph';
+import { BASIS_LABEL, benchmarkName, modelName, formatValue, subsetLabel } from '../lib/view';
+import type { Claim } from '../lib/schema';
+interface Props { claims: Claim[] }
+const { claims } = Astro.props;
+const g = graph();
+const cite = (c: Claim) => [
+  ...c.results.map((id) => {
+    const r = g.results.get(id)!;
+    const label = `${modelName(r.model_version)}: ${formatValue(r)} on ${benchmarkName(r.benchmark)}${r.subset ? ` (${subsetLabel(r.subset)})` : ''}`;
+    return { href: `/benchmarks/${r.benchmark}#${r.id}`, label };
+  }),
+  ...c.sources.map((id) => ({ href: `/sources/${id}`, label: g.sources.get(id)!.title })),
+];
+---
+<ul class="claims">
+  {claims.map((c) => (
+    <li>
+      <div>
+        {c.text}
+        {cite(c).length > 0 && (
+          <span class="cites">
+            {cite(c).map((x, i) => (<>{i > 0 && ' · '}<a href={x.href}>{x.label}</a></>))}
+          </span>
+        )}
+      </div>
+      <span class={`badge ${c.basis}`} title={c.basis === 'editorial' ? 'Our interpretation, not a measured result' : undefined}>{BASIS_LABEL[c.basis]}</span>
+    </li>
+  ))}
+</ul>

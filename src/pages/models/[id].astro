@@ -1,0 +1,66 @@
+---
+import Base from '../../layouts/Base.astro';
+import Confidence from '../../components/Confidence.astro';
+import ResultsTable from '../../components/ResultsTable.astro';
+import { graph } from '../../lib/graph';
+import { formatDate, modelName, resultsForModel, visibleRecommendations } from '../../lib/view';
+
+export function getStaticPaths() {
+  return [...graph().models.keys()].map((id) => ({ params: { id } }));
+}
+const g = graph();
+const model = g.models.get(Astro.params.id!)!;
+const family = g.families.get(model.family)!;
+const results = resultsForModel(model.id);
+const picks = visibleRecommendations().filter((r) => r.model_version === model.id);
+const alsoConsidered = visibleRecommendations().filter((r) => r.alternatives.some((a) => a.model_version === model.id));
+const predecessors = [...g.models.values()].filter((m) => m.successor === model.id);
+---
+<Base title={`What is ${model.name} good at?`}>
+  <div class="eyebrow">Models · {family.provider}</div>
+  <h1>{model.name}</h1>
+  {model.lifecycle !== 'current' && (
+    <div class="flag">
+      This version has been replaced{model.successor && <> by <a href={`/models/${model.successor}`}>{modelName(model.successor)}</a></>}. Results below apply to this exact version only.
+    </div>
+  )}
+  <p class="lede">{model.summary ?? family.summary}</p>
+
+  <div class="two-col">
+    <section class="card">
+      <h3>Where it's our pick</h3>
+      {picks.length === 0 && alsoConsidered.length === 0 && <p class="muted">Not currently recommended for any job we cover. That usually means we lack evidence, not that it's bad.</p>}
+      <ul>
+        {picks.map((r) => (
+          <li><a href={`/tasks/${r.task}`}>{g.tasks.get(r.task)!.name}</a> <Confidence level={r.confidence} /> {r.status === 'draft' && <span class="badge draft">Draft</span>}</li>
+        ))}
+        {alsoConsidered.map((r) => (
+          <li>Worth considering for <a href={`/tasks/${r.task}`}>{g.tasks.get(r.task)!.name}</a></li>
+        ))}
+      </ul>
+    </section>
+    <section class="card">
+      <h3>Model details</h3>
+      <dl class="facts">
+        <dt>Maker</dt><dd>{family.provider}</dd>
+        <dt>Family</dt><dd>{family.name}</dd>
+        <dt>Released</dt><dd>{formatDate(model.released_on)}</dd>
+        <dt>Status</dt><dd>{model.lifecycle === 'current' ? 'Current' : model.lifecycle === 'superseded' ? 'Replaced' : 'Retired'}</dd>
+        {predecessors.length > 0 && <><dt>Replaces</dt><dd>{predecessors.map((p) => <a href={`/models/${p.id}`}>{p.name}</a>)}</dd></>}
+        <dt>Name checked</dt>
+        <dd>
+          {model.verification.status === 'verified'
+            ? model.verification.sources.map((s) => <a href={`/sources/${s}`}>Confirmed with {g.sources.get(s)!.publisher}</a>)
+            : <span class="muted">Not yet confirmed with the maker</span>}
+        </dd>
+      </dl>
+    </section>
+  </div>
+
+  <h2>Test results for this exact version</h2>
+  {results.length ? (
+    <ResultsTable rows={results.map((result) => ({ result }))} show={{ benchmark: true }} />
+  ) : (
+    <p class="card muted">We don't hold any spreadsheet test results for this exact version yet. We never carry results over from an earlier version.</p>
+  )}
+</Base>

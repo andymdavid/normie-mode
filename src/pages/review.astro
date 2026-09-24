@@ -1,0 +1,42 @@
+---
+// Editorial queue. Built only in preview so it never ships publicly.
+import Base from '../layouts/Base.astro';
+import Confidence from '../components/Confidence.astro';
+import { graph } from '../lib/graph';
+import { confidenceCeiling, validate } from '../lib/rules';
+import { PREVIEW, modelName } from '../lib/view';
+const g = graph();
+const report = validate(g);
+const drafts = [...g.recommendations.values()].filter((r) => r.status === 'draft');
+---
+{PREVIEW ? (
+  <Base title="Editorial review" noindex>
+    <div class="eyebrow">Internal</div>
+    <h1>Editorial review queue</h1>
+    <p class="lede">Nothing here changes the public site until a person edits the content and it's merged.</p>
+
+    <h2>Recommendations flagged for review ({report.flags.length})</h2>
+    {report.flags.length ? <ul class="claims">{report.flags.map((f) => <li><div><a href={`/tasks/${f.task}`}>{g.tasks.get(f.task)!.name}</a><span class="cites">{f.reason}</span></div></li>)}</ul> : <p class="muted">None.</p>}
+
+    <h2>Drafts awaiting sign-off ({drafts.length})</h2>
+    <ul class="claims">
+      {drafts.map((r) => {
+        const c = confidenceCeiling(g, r);
+        return (
+          <li>
+            <div>
+              <a href={`/tasks/${r.task}`}>{g.tasks.get(r.task)!.name}</a>: {r.model_version ? modelName(r.model_version) : 'no pick'}
+              <span class="cites">content/recommendations/{r.id}.yaml · evidence supports up to {c.ceiling}. To publish: set a reviewer name and <code>status: published</code>.</span>
+            </div>
+            <Confidence level={r.confidence} />
+          </li>
+        );
+      })}
+    </ul>
+
+    <h2>Other warnings ({report.warnings.length})</h2>
+    <ul class="small">{report.warnings.map((w) => <li>{w}</li>)}</ul>
+  </Base>
+) : (
+  <Base title="Not found" noindex><h1>Not found</h1></Base>
+)}

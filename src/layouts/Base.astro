@@ -1,0 +1,47 @@
+---
+import '../styles.css';
+import { PREVIEW } from '../lib/view';
+
+interface Props {
+  title: string;
+  description?: string;
+  noindex?: boolean;
+}
+const { title, description = 'What AI can actually do, explained in plain English with the evidence underneath.', noindex = false } = Astro.props;
+const fullTitle = title === 'Normie Mode' ? title : `${title} · Normie Mode`;
+---
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    {(noindex || PREVIEW) && <meta name="robots" content="noindex" />}
+    <link rel="icon" href="/norm.jpg" />
+  </head>
+  <body>
+    {PREVIEW && (
+      <div class="preview-bar">Preview mode: draft recommendations are visible and labelled. <a href="/review">Editorial review queue →</a></div>
+    )}
+    <header class="site-header">
+      <div class="wrap">
+        <a class="brand" href="/"><img src="/norm.jpg" alt="" width="40" height="40" />Normie Mode</a>
+        <nav class="nav" aria-label="Main">
+          <a href="/tasks">Tasks</a>
+          <a href="/capabilities">Skills</a>
+          <a href="/models">Models</a>
+          <a href="/benchmarks">Benchmarks explained</a>
+        </nav>
+      </div>
+    </header>
+    <main class="wrap">
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <div class="wrap">
+        <p>Normie Mode: what AI can actually do. Every recommendation names the exact model version, the evidence behind it and the date we last checked it.</p>
+        <p><a href="/methodology">How we decide</a></p>
+      </div>
+    </footer>
+  </body>
+</html>

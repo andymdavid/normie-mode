@@ -1,0 +1,123 @@
+---
+import Base from '../../layouts/Base.astro';
+import Claims from '../../components/Claims.astro';
+import Confidence from '../../components/Confidence.astro';
+import ResultsTable from '../../components/ResultsTable.astro';
+import { graph } from '../../lib/graph';
+import { confidenceCeiling, reviewFlags } from '../../lib/rules';
+import { PREVIEW, CONFIDENCE_LABEL, evidenceForTask, formatDate, modelName, visibleRecommendations } from '../../lib/view';
+
+export function getStaticPaths() {
+  return [...graph().tasks.keys()].map((id) => ({ params: { id } }));
+}
+const g = graph();
+const task = g.tasks.get(Astro.params.id!)!;
+const recs = visibleRecommendations(task.id);
+const primary = recs.find((r) => r.scope === 'best-overall');
+const others = recs.filter((r) => r !== primary);
+const evidence = evidenceForTask(task.id);
+const flags = PREVIEW ? reviewFlags(g).filter((f) => f.task === task.id) : [];
+const ceiling = primary ? confidenceCeiling(g, primary) : undefined;
+const evidenceDates = (modelId: string) =>
+  [...new Set(evidence.filter((e) => e.result.model_version === modelId).map((e) => formatDate(e.result.published_on)))].join(', ');
+---
+<Base title={task.question} description={`${task.question} Plain-English answer, the model we'd pick, and what you still need to check.`}>
+  <article style="max-width: 50rem">
+    <div class="eyebrow">Spreadsheet work · <a href="/tasks">All tasks</a></div>
+    <h1>{task.question}</h1>
+    <p class="lede">{task.user_goal}</p>
+
+    {flags.map((f) => <div class="flag">Needs review: {f.reason}</div>)}
+
+    <section class="card verdict" aria-labelledby="verdict">
+      <img src="/norm.jpg" alt="Norm" width="64" height="64" />
+      <div>
+        <div class="eyebrow" id="verdict">Norm's verdict {primary?.status === 'draft' && <span class="badge draft">Draft · not yet reviewed</span>}</div>
+        {primary ? (
+          <>
+            <p class="pick">
+              {primary.model_version ? <>Norm's pick: <a href={`/models/${primary.model_version}`}>{modelName(primary.model_version)}</a></> : 'No pick yet'}
+            </p>
+            <p>{primary.verdict}</p>
+            <p class="small muted">
+              <Confidence level={primary.confidence} /> {CONFIDENCE_LABEL[primary.confidence].plain}
+              {primary.model_version && <> Evidence dated {evidenceDates(primary.model_version)}.</>} Reviewed {formatDate(primary.reviewed_on)}{primary.reviewer !== 'unreviewed' && <> by {primary.reviewer}</>}.
+            </p>
+            {primary.alternatives.length > 0 && (
+              <p class="small">
+                Also worth considering:{' '}
+                {primary.alternatives.map((a, i) => (<>{i > 0 && '; '}<a href={`/models/${a.model_version}`}>{modelName(a.model_version)}</a> ({a.note})</>))}
+              </p>
+            )}
+          </>
+        ) : (
+          <p>We haven't published a reviewed recommendation for this yet. The evidence we have is below.</p>
+        )}
+      </div>
+    </section>
+
+    {task.assessment.length > 0 && (<><h2>Can AI do this yet?</h2><Claims claims={task.assessment} /></>)}
+
+    {primary && (
+      <>
+        <h2>Why this answer</h2>
+        <Claims claims={primary.rationale} />
+        {primary.limitations.length > 0 && (<><h3>What this doesn't tell you</h3><Claims claims={primary.limitations} /></>)}
+        {PREVIEW && ceiling && (
+          <p class="small muted">Editor note: the cited evidence supports at most <Confidence level={ceiling.ceiling} />. {ceiling.reasons.join(' ')}</p>
+        )}
+      </>
+    )}
+
+    {others.map((r) => (
+      <section>
+        <h3>{r.scope.replace(/-/g, ' ')}: {r.model_version ? modelName(r.model_version) : 'no pick'} <Confidence level={r.confidence} /></h3>
+        <p>{r.verdict}</p>
+      </section>
+    ))}
+
+    {task.can_do.length > 0 && (<><h2>What AI can do here</h2><Claims claims={task.can_do} /></>)}
+    {task.checks.length > 0 && (<><h2>What you still need to check</h2><Claims claims={task.checks} /></>)}
+
+    {task.depth === 'stub' && (
+      <div class="card">
+        <p><strong>We haven't written this one up yet.</strong> Here's what the job covers, the skills it relies on, and any test results that apply.</p>
+        <dl class="facts">
+          <dt>Covers</dt><dd>{task.includes}</dd>
+          <dt>Doesn't cover</dt><dd>{task.excludes}</dd>
+          <dt>Done well means</dt><dd>{task.success}</dd>
+        </dl>
+      </div>
+    )}
+
+    <h2>Skills this job relies on</h2>
+    <ul>
+      {task.capabilities.map((c) => (
+        <li>
+          <a href={`/capabilities/${c.capability}`}>{g.capabilities.get(c.capability)!.name}</a>{' '}
+          <span class="badge plain">{c.importance === 'core' ? 'Essential' : 'Helpful'}</span>
+        </li>
+      ))}
+    </ul>
+  </article>
+
+  <h2>The evidence</h2>
+  <p class="muted" style="max-width: 44rem">Every result we hold that bears on this job, most relevant first. Greyed rows are for model versions that have since been replaced.</p>
+  {evidence.length ? (
+    <ResultsTable rows={evidence} show={{ model: true, benchmark: true, relevance: true }} />
+  ) : (
+    <p class="card">No test results cover this job yet. That's an evidence gap we're tracking.</p>
+  )}
+
+  {task.related.length > 0 && (
+    <>
+      <h2>Related jobs</h2>
+      <div class="grid">
+        {task.related.map((id) => {
+          const t = g.tasks.get(id)!;
+          return <a class="card" href={`/tasks/${id}`}><h3>{t.name}</h3><p class="small muted">{t.question}</p></a>;
+        })}
+      </div>
+    </>
+  )}
+</Base>

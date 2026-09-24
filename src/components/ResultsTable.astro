@@ -1,0 +1,51 @@
+---
+import { graph } from '../lib/graph';
+import { EVIDENCE_CLASS_LABEL, RELEVANCE_LABEL, benchmarkName, formatDate, formatValue, metricFor, modelName, subsetLabel } from '../lib/view';
+import type { Relevance } from '../lib/rules';
+import type { Result } from '../lib/schema';
+interface Props {
+  rows: { result: Result; relevance?: Relevance }[];
+  show?: { model?: boolean; benchmark?: boolean; relevance?: boolean };
+  anchors?: boolean;
+}
+const { rows, show = { model: true, benchmark: true }, anchors = false } = Astro.props;
+const g = graph();
+---
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        {show.model && <th>Model version</th>}
+        {show.benchmark && <th>Test</th>}
+        <th>Part</th>
+        <th>Score</th>
+        {show.relevance && <th>How relevant</th>}
+        <th>Who reported it</th>
+        <th>Set-up</th>
+      </tr>
+    </thead>
+    <tbody>
+      {rows.map(({ result: r, relevance }) => {
+        const model = g.models.get(r.model_version)!;
+        const source = g.sources.get(r.source)!;
+        const cfg = [r.configuration.reasoning && `Reasoning: ${r.configuration.reasoning}`, r.configuration.harness && `Harness: ${r.configuration.harness}`].filter(Boolean).join(' · ');
+        return (
+          <tr id={anchors ? r.id : undefined} class={model.lifecycle !== 'current' ? 'superseded-model' : undefined}>
+            {show.model && (
+              <td>
+                <a href={`/models/${model.id}`}>{modelName(model.id)}</a>
+                {model.lifecycle !== 'current' && <div class="small">Replaced by {model.successor ? modelName(model.successor) : 'a newer version'}</div>}
+              </td>
+            )}
+            {show.benchmark && <td><a href={`/benchmarks/${r.benchmark}`}>{benchmarkName(r.benchmark)}</a></td>}
+            <td>{subsetLabel(r.subset)}</td>
+            <td class="num" title={metricFor(r)?.plain}>{formatValue(r)}<div class="small muted">{metricFor(r)?.name}</div></td>
+            {show.relevance && <td class="small">{relevance && RELEVANCE_LABEL[relevance]}</td>}
+            <td class="small"><a href={`/sources/${source.id}`}>{source.publisher}</a><div class="muted">{EVIDENCE_CLASS_LABEL[source.evidence_class]} · {formatDate(r.published_on)}</div></td>
+            <td class="small muted">{cfg || 'Not stated'}</td>
+          </tr>
+        );
+      })}
+    </tbody>
+  </table>
+</div>

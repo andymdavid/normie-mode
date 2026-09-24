@@ -1,0 +1,64 @@
+---
+import Base from '../../layouts/Base.astro';
+import ResultsTable from '../../components/ResultsTable.astro';
+import { graph } from '../../lib/graph';
+import { formatDate, resultsForBenchmark } from '../../lib/view';
+
+export function getStaticPaths() {
+  return [...graph().benchmarks.keys()].map((id) => ({ params: { id } }));
+}
+const g = graph();
+const b = g.benchmarks.get(Astro.params.id!)!;
+const results = resultsForBenchmark(b.id);
+const KIND = {
+  academic: 'Academic',
+  technical: 'Technical',
+  agentic: 'Agentic (AI works on its own over many steps)',
+  'real-world-work': 'Real-world work',
+  specialist: 'Narrow specialist test',
+} as const;
+---
+<Base title={`${b.name} explained`} description={`What ${b.name} is, what it tests, and what it doesn't tell you, in plain English.`}>
+  <article style="max-width: 46rem">
+    <div class="eyebrow">Benchmarks explained · {KIND[b.kind]}</div>
+    <h1>{b.name}, explained</h1>
+    <p class="lede">{b.what_is_it}</p>
+
+    <h2>What does it test?</h2>
+    <p>{b.what_it_tests}</p>
+
+    {b.example && (<><h2>Show me an example</h2><blockquote class="card">{b.example}</blockquote></>)}
+
+    <h2>Why should I care?</h2>
+    <p>{b.why_care}</p>
+
+    <h2>What doesn't it tell me?</h2>
+    <ul>{b.limits.map((l) => <li>{l}</li>)}</ul>
+
+    <h2>Which skills it gives evidence for</h2>
+    <ul>
+      {b.measures.map((m) => (
+        <li><a href={`/capabilities/${m.capability}`}>{g.capabilities.get(m.capability)!.name}</a> <span class="badge plain">{m.strength === 'primary' ? 'Main focus' : 'Partly'}</span></li>
+      ))}
+    </ul>
+    {b.direct_tasks.length > 0 && (
+      <p>Tests these jobs directly: {b.direct_tasks.map((d, i) => (<>{i > 0 && ', '}<a href={`/tasks/${d.task}`}>{g.tasks.get(d.task)!.name}</a>{d.subset && <span class="muted"> ({d.subset.replace(/-/g, ' ')} part)</span>}</>))}.</p>
+    )}
+  </article>
+
+  <h2>Who is winning?</h2>
+  <p class="muted" style="max-width: 44rem">
+    Results for the models we track. Scores from different reporters or set-ups aren't always comparable, so check who reported each one.
+  </p>
+  {results.length ? (
+    <ResultsTable rows={results.map((result) => ({ result }))} show={{ model: true }} anchors />
+  ) : (
+    <p class="card muted">No published results for the models we track yet.</p>
+  )}
+
+  <h2>Versions and sources</h2>
+  <ul>
+    {b.versions.map((v) => <li><strong>{v.name}</strong>{v.released_on && <> ({formatDate(v.released_on)})</>}{v.notes && <>: {v.notes}</>}</li>)}
+  </ul>
+  <p>Methodology: {b.sources.map((s, i) => (<>{i > 0 && ' · '}<a href={`/sources/${s}`}>{g.sources.get(s)!.title}</a></>))}</p>
+</Base>

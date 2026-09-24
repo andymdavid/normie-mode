@@ -1,0 +1,44 @@
+---
+import { graph } from '../lib/graph';
+import { searchEntries } from '../lib/search-index';
+interface Props { placeholder?: string }
+const { placeholder = 'Try "analyse a spreadsheet" or "fix a broken formula"' } = Astro.props;
+const entries = searchEntries(graph());
+---
+<div class="search" data-search>
+  <label class="eyebrow" for="q">What do you want AI to do?</label>
+  <input id="q" type="search" autocomplete="off" placeholder={placeholder} aria-controls="search-results" />
+  <ul id="search-results" hidden></ul>
+  <script type="application/json" data-entries set:html={JSON.stringify(entries)} />
+</div>
+<script>
+  import { rank, type SearchEntry } from '../lib/search';
+  for (const root of document.querySelectorAll<HTMLElement>('[data-search]')) {
+    const input = root.querySelector('input')!;
+    const list = root.querySelector('ul')!;
+    const entries: SearchEntry[] = JSON.parse(root.querySelector('[data-entries]')!.textContent!);
+    const render = () => {
+      const hits = rank(entries, input.value);
+      list.hidden = !input.value.trim();
+      list.replaceChildren(
+        ...(hits.length
+          ? hits.map((h) => {
+              const li = document.createElement('li');
+              const a = document.createElement('a');
+              a.href = h.url;
+              a.innerHTML = `<span class="badge plain"></span> `;
+              a.querySelector('span')!.textContent = h.kind;
+              a.append(h.title);
+              li.append(a);
+              return li;
+            })
+          : [Object.assign(document.createElement('li'), { className: 'none', textContent: "We don't cover that yet. Right now we cover spreadsheet work." })]),
+      );
+    };
+    input.addEventListener('input', render);
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') list.querySelector('a')?.click();
+      if (e.key === 'Escape') { input.value = ''; render(); }
+    });
+  }
+</script>

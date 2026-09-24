@@ -1,0 +1,14 @@
+---
+import Base from '../../layouts/Base.astro';
+import { graph } from '../../lib/graph';
+---
+<Base title="Benchmarks explained">
+  <div class="eyebrow">Benchmarks explained</div>
+  <h1>Benchmarks, in plain English</h1>
+  <p class="lede">What each test actually checks, why you might care, and what it can't tell you.</p>
+  <div class="grid">
+    {[...graph().benchmarks.values()].map((b) => (
+      <a class="card" href={`/benchmarks/${b.id}`}><h3>{b.name}</h3><p class="small muted">{b.what_is_it}</p></a>
+    ))}
+  </div>
+</Base>

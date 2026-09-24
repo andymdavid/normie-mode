@@ -1,0 +1,37 @@
+---
+import Base from '../layouts/Base.astro';
+import Confidence from '../components/Confidence.astro';
+import { BASIS_LABEL, CONFIDENCE_LABEL, EVIDENCE_CLASS_LABEL } from '../lib/view';
+import { CONFIDENCE } from '../lib/schema';
+import { REVIEW_MAX_AGE_DAYS } from '../lib/rules';
+---
+<Base title="How we decide">
+  <article style="max-width: 46rem">
+    <div class="eyebrow">Methodology</div>
+    <h1>How we decide</h1>
+    <p class="lede">Every recommendation is made by a person, and it can't claim more confidence than the evidence allows.</p>
+
+    <h2>We compare exact model versions</h2>
+    <p>Not apps, plug-ins or chat products. When a model maker releases a new version, it starts with no results. We never assume the new version performs like the old one.</p>
+
+    <h2>Three kinds of statement</h2>
+    <ul>
+      <li><span class="badge measured">{BASIS_LABEL.measured}</span> A test result, linked to where it came from.</li>
+      <li><span class="badge sourced">{BASIS_LABEL.sourced}</span> A claim from a named source, such as a research paper.</li>
+      <li><span class="badge editorial">{BASIS_LABEL.editorial}</span> Our interpretation. Labelled, so you can weigh it yourself.</li>
+    </ul>
+
+    <h2>Who reported a result matters</h2>
+    <ul>{Object.values(EVIDENCE_CLASS_LABEL).filter((l) => l !== 'Editorial').map((l) => <li>{l}</li>)}</ul>
+    <p>Results a model maker reports about its own model are useful but labelled. Strong confidence needs at least one independent source.</p>
+
+    <h2>Confidence levels</h2>
+    <ul class="claims">
+      {[...CONFIDENCE].reverse().map((c) => <li><div>{CONFIDENCE_LABEL[c].plain}</div><Confidence level={c} /></li>)}
+    </ul>
+    <p>Strong needs direct tests of the job on the exact version from two sources, one of them independent. Moderate needs at least one direct test. Evidence from an earlier version of a model can only ever support limited confidence, and we say so. Our publishing system rejects any recommendation that claims more.</p>
+
+    <h2>Staying current</h2>
+    <p>A recommendation is flagged for review when a newer version of the model appears, when new results arrive for a relevant test, when a result we cited is corrected or withdrawn, or after {REVIEW_MAX_AGE_DAYS} days. A person reviews every change before it goes live.</p>
+  </article>
+</Base>

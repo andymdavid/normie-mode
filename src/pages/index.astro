@@ -1,0 +1,57 @@
+---
+import Base from '../layouts/Base.astro';
+import Search from '../components/Search.astro';
+import Confidence from '../components/Confidence.astro';
+import { graph } from '../lib/graph';
+import { EVIDENCE_CLASS_LABEL, formatDate, modelName, visibleRecommendations } from '../lib/view';
+const g = graph();
+const featured = [...g.tasks.values()].sort((a, b) => (a.depth === b.depth ? 0 : a.depth === 'full' ? -1 : 1)).slice(0, 6);
+const latest = [...g.sources.values()]
+  .filter((s) => s.evidence_class !== 'editorial')
+  .sort((a, b) => (b.published_on ?? b.retrieved_on).localeCompare(a.published_on ?? a.retrieved_on))
+  .slice(0, 3);
+---
+<Base title="Normie Mode">
+  <section class="hero">
+    <div>
+      <div class="eyebrow">Normie Mode</div>
+      <h1>What can AI actually do?</h1>
+      <p class="lede">Plain-English answers about which AI to use for real work, with the evidence underneath. We're starting with spreadsheets.</p>
+      <Search />
+    </div>
+    <img src="/norm.jpg" alt="Norm, our sceptical guide" width="180" height="180" />
+  </section>
+
+  <h2>Spreadsheet work</h2>
+  <div class="grid">
+    {featured.map((t) => {
+      const rec = visibleRecommendations(t.id).find((r) => r.scope === 'best-overall');
+      return (
+        <a class="card" href={`/tasks/${t.id}`}>
+          <h3>{t.question}</h3>
+          {rec ? <p class="small">{rec.model_version ? <>Norm's pick: {modelName(rec.model_version)}</> : 'No pick yet'} <Confidence level={rec.confidence} /></p> : <p class="small muted">See the evidence</p>}
+        </a>
+      );
+    })}
+  </div>
+  <p><a href="/tasks">All spreadsheet jobs →</a></p>
+
+  <div class="two-col" style="margin-top: 2rem">
+    <section>
+      <h2>Latest evidence</h2>
+      <ul class="claims">
+        {latest.map((s) => (
+          <li><div><a href={`/sources/${s.id}`}>{s.title}</a><span class="cites">{s.publisher} · {s.published_on ? formatDate(s.published_on) : `retrieved ${formatDate(s.retrieved_on)}`}</span></div><span class="badge plain">{EVIDENCE_CLASS_LABEL[s.evidence_class]}</span></li>
+        ))}
+      </ul>
+    </section>
+    <section>
+      <h2>Benchmarks explained</h2>
+      <ul class="claims">
+        {[...g.benchmarks.values()].map((b) => (
+          <li><div><a href={`/benchmarks/${b.id}`}>{b.name}</a><span class="cites">{b.what_is_it}</span></div></li>
+        ))}
+      </ul>
+    </section>
+  </div>
+</Base>

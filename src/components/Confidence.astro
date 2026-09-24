@@ -1,0 +1,7 @@
+---
+import { CONFIDENCE_LABEL } from '../lib/view';
+import type { Confidence } from '../lib/schema';
+interface Props { level: Confidence }
+const { level } = Astro.props;
+---
+<span class={`badge conf-${level}`} title={CONFIDENCE_LABEL[level].plain}>{CONFIDENCE_LABEL[level].label}</span>
