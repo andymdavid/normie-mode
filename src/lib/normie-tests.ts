@@ -70,3 +70,40 @@ export function expectedAnswer(q: Question): string {
   const e = q.expected;
   return formatAnswer(q, q.kind === 'money' ? e.value : q.kind === 'name' ? e.name : q.kind === 'name+percent' ? { name: e.name, percent: e.value } : { name: e.name, amount: e.value });
 }
+
+export interface RankedModel {
+  model: string;
+  name: string;
+  correct: number;
+  total: number;
+  cost: number;
+  seconds: number;
+  rank: number;
+  /** Plain reason for its place, e.g. "All 30 right, cheapest of those". */
+  why: string;
+}
+
+/**
+ * Overall ranking for a test: most answers right first; ties go to the cheaper model, then the
+ * faster one. Stated on the page so the pick can always explain itself (D-003).
+ */
+export function rankRun(run: TestRun): RankedModel[] {
+  const rows = run.summary.models.map((m) => {
+    const mine = run.answers.filter((a) => a.model === m.model);
+    return {
+      model: m.model,
+      name: m.name,
+      correct: mine.reduce((s, a) => s + a.score.correct, 0),
+      total: mine.reduce((s, a) => s + a.score.total, 0),
+      cost: m.cost_usd,
+      seconds: m.avg_seconds ?? Infinity,
+    };
+  });
+  rows.sort((a, b) => b.correct - a.correct || a.cost - b.cost || a.seconds - b.seconds);
+  return rows.map((r, i) => {
+    const tied = rows.filter((x) => x.correct === r.correct);
+    const all = r.correct === r.total ? `All ${r.total} right` : `${r.correct} of ${r.total} right`;
+    const place = tied.length > 1 ? (tied[0] === r ? ', cheapest of those' : tied.at(-1) === r ? ', most expensive of those' : '') : '';
+    return { ...r, rank: i + 1, why: `${all}${place}` };
+  });
+}

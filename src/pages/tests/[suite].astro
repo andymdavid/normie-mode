@@ -4,7 +4,7 @@ import Base from '../../layouts/Base.astro';
 import BarChart from '../../components/BarChart.astro';
 import { graph } from '../../lib/graph';
 import { makerOf } from '../../lib/jobs';
-import { expectedAnswer, formatAnswer, givenAnswer, latestRun } from '../../lib/normie-tests';
+import { expectedAnswer, formatAnswer, givenAnswer, latestRun, rankRun } from '../../lib/normie-tests';
 import { PREVIEW } from '../../lib/view';
 import { SUITE_TITLE, toCsv } from '../../../evals/spreadsheet-questions/suite';
 
@@ -28,6 +28,8 @@ const scoreRows = perModel.map((m) => ({ ...base(m), value: m.correct, display: 
 const costRows = perModel.map((m) => ({ ...base(m), value: m.cost_usd, display: `$${m.cost_usd.toFixed(2)}`, tip: `${m.name}: $${m.cost_usd.toFixed(3)} for all ${cases.length} sheets` }));
 const timeRows = perModel.map((m) => ({ ...base(m), value: m.avg_seconds ?? undefined, display: m.avg_seconds ? `${Math.round(m.avg_seconds)}s` : undefined }));
 
+const ranked = rankRun(run);
+const best = ranked[0];
 const perfect = perModel.filter((m) => m.correct === m.total).sort((a, b) => a.cost_usd - b.cost_usd);
 const misses = answers
   .flatMap((a) => questions.filter((q) => !a.score.per_question[q.id]).map((q) => ({ a, q, c: cases.find((c) => c.id === a.case)! })))
@@ -45,13 +47,40 @@ const runDate = new Date(`${summary.run_id.slice(0, 10)}T00:00:00Z`).toLocaleDat
   <div class="band">
     <div class="band-inner summary-grid">
       <div class="summary"><span class="tag">The short answer</span><p><strong>Yes, mostly.</strong> {perfect.length} of {perModel.length} models got every answer right. The rest made the most dangerous kind of mistake: a confident, plausible wrong number.</p></div>
-      {perfect[0] && <div class="summary"><span class="tag">Cheapest to get it all right</span><p><strong>{perfect[0].name}</strong> got all {perfect[0].total} right for ${perfect[0].cost_usd.toFixed(2)}{perfect[1] && <>, {Math.round(perfect.at(-1)!.cost_usd / perfect[0].cost_usd)}× less than {perfect.at(-1)!.name}</>}.</p></div>}
+      <div class="summary"><span class="tag">Best overall</span><p><strong>{best.name}</strong>: {best.why.toLowerCase()}{perfect.length > 1 && <>, {Math.round(perfect.at(-1)!.cost_usd / perfect[0].cost_usd)}× less than {perfect.at(-1)!.name}</>}.</p></div>
       <div class="summary"><span class="tag">What to check</span><p>When models got it wrong, they named the right customer or product but gave the <strong>wrong amount</strong>. Always sanity-check the numbers.</p></div>
       <div class="summary"><span class="tag">Test details</span><p>{cases.length} sheets × {questions.length} questions × {perModel.length} models, run {runDate}. Total cost to run: <strong>${summary.total_cost_usd.toFixed(2)}</strong>.</p></div>
     </div>
   </div>
 
-  <div class="section-head" style="margin-top:0"><h2>Results</h2></div>
+  <section class="card best-overall" aria-labelledby="best-h">
+    <div class="eyebrow" id="best-h">Best overall in this test</div>
+    <p class="best-name"><a href={`/models/${best.model}`}>{best.name}</a></p>
+    <p>{best.why}, taking about {Math.round(best.seconds)} seconds a sheet and ${best.cost.toFixed(2)} for all {cases.length} sheets.</p>
+    <p class="small muted">How we pick: most answers right first. If models tie, the cheaper one ranks higher, then the faster one. Based on this test only.</p>
+  </section>
+
+  <div class="section-head" style="margin-top:2rem"><h2>Overall ranking</h2></div>
+  <p class="section-sub">Most answers right first, then cheapest, then fastest.</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>#</th><th>Model</th><th>Answers right</th><th>Cost (5 sheets)</th><th>Time per sheet</th><th>Why it's here</th></tr></thead>
+      <tbody>
+        {ranked.map((r) => (
+          <tr>
+            <td class="num">{r.rank}</td>
+            <td><a href={`/models/${r.model}`}><strong>{r.name}</strong></a><div class="small muted">{makerOf(model(r.model))}</div></td>
+            <td class="num">{r.correct}/{r.total}</td>
+            <td class="num">${r.cost.toFixed(2)}</td>
+            <td class="num">{Math.round(r.seconds)}s</td>
+            <td class="small">{r.why}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section-head"><h2>Results</h2></div>
   <p class="section-sub">Each model answered the same {cases.length * questions.length} questions.</p>
   <div class="grid-3">
     <BarChart compact title="Answers right" sub={`Out of ${cases.length * questions.length}`} rows={scoreRows} showEmpty={false} />
@@ -138,3 +167,9 @@ const runDate = new Date(`${summary.run_id.slice(0, 10)}T00:00:00Z`).toLocaleDat
     <li>One run per sheet, so small differences may be luck.</li>
   </ul>
 </Base>
+
+<style>
+  .best-overall { border-left: 3px solid var(--ink); margin-bottom: 0.5rem; }
+  .best-name { font-family: var(--serif); font-size: 1.6rem; margin: 0.15rem 0 0.3rem; }
+  .best-name a { text-decoration: none; }
+</style>
