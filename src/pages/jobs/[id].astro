@@ -2,7 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import BarChart from '../../components/BarChart.astro';
 import { graph } from '../../lib/graph';
-import { jobLeaders, leadSentence, testFloor, testRows, testSource } from '../../lib/jobs';
+import { jobLeaders, jobScores, leadSentence, testFloor, testRows, testSource } from '../../lib/jobs';
 import { overviewRows } from '../../lib/overview';
 
 export function getStaticPaths() {
@@ -17,6 +17,7 @@ const noCurrent = withRows.filter((x) => !x.rows.some((r) => r.value !== undefin
 const { leaders, testsUsed } = jobLeaders(job);
 const minCoverage = Math.max(1, Math.ceil(testsUsed / 2));
 const top = leaders.filter((l) => l.tests >= minCoverage).slice(0, 3);
+const scores = jobScores(job);
 const untested = overviewRows().filter((r) => !leaders.some((l) => l.model.id === r.model.id));
 const costRows = overviewRows().map((r) => ({
   id: r.model.id, label: r.model.name, maker: r.maker, href: `/models/${r.model.id}`,
@@ -58,7 +59,14 @@ const costRows = overviewRows().map((r) => ({
     </div>
   </div>
 
-  <div class="grid-2">
+  <BarChart
+    title={`Job score: ${job.name.toLowerCase()}`}
+    sub={`Each test puts the models on a 0–100 scale from lowest to highest; this averages them across ${scores.testsUsed} test${scores.testsUsed === 1 ? '' : 's'}`}
+    rows={scores.rows}
+    summary="Models need results on at least half of these tests to get a score. The charts below show each test on its own."
+    showEmpty={false}
+  />
+  <div class="grid-2" style="margin-top: 0.9rem">
     {tests.map(({ t, rows }) => {
       return (
         <BarChart

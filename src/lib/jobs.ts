@@ -97,6 +97,28 @@ export function jobLeaders(job: Job): { leaders: JobLeader[]; testsUsed: number 
   return { leaders, testsUsed };
 }
 
+/**
+ * Job score (0–100): for each test with at least three models, place every model between the
+ * lowest (0) and highest (100) score on that test, then average across the tests it has results for.
+ * Only models with results on at least half the usable tests get a score.
+ */
+export function jobScores(job: Job): { rows: BarDatum[]; testsUsed: number } {
+  const { leaders, testsUsed } = jobLeaders(job);
+  const min = Math.max(1, Math.ceil(testsUsed / 2));
+  const rows = leaders
+    .filter((l) => l.tests >= min)
+    .map((l) => ({
+      id: l.model.id,
+      label: l.model.name,
+      maker: makerOf(l.model),
+      href: `/models/${l.model.id}`,
+      value: l.score * 100,
+      display: (l.score * 100).toFixed(0),
+      tip: `${l.model.name}: job score ${(l.score * 100).toFixed(0)} from ${l.tests} of ${testsUsed} test${testsUsed === 1 ? '' : 's'}`,
+    }));
+  return { rows, testsUsed };
+}
+
 export function jobsInOrder(): Job[] {
   return [...graph().jobs.values()].sort((a, b) => a.order - b.order);
 }

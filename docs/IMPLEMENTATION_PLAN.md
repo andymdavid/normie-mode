@@ -120,6 +120,8 @@ Deliberate difference: bars are one colour, not one colour per maker. A five-mak
 
 People reach comparisons through everyday jobs (writing code, office work, pulling data out of documents, writing, getting facts right, expert questions, maths, legal, health). Each job page is a stack of charts, one per test that measures the job, plus cost. The only words are a one-line plain description per test (`content/tests/`) and templated summary sentences generated from the data. Jobs live in `content/jobs/`. A job with thin evidence says so (for example "based only on people's votes"). The job list and its test mapping are editorial and open to revision.
 
+Job score (added 2026-09-24): on each test with at least three models, each model is placed from 0 (lowest) to 100 (highest); a model's job score is the average across the tests it has results for, and only models covering at least half the usable tests are scored. It is relative to the models we track, so it shows who leads, not absolute ability. Home cards show the top five; each job page shows the full job-score chart above the per-test charts.
+
 ## Reference sites
 
 Reviewed 2026-09-24 as models for structure and presentation:

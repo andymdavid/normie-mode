@@ -1,25 +1,35 @@
 ---
-import { jobLeaders, jobsInOrder } from '../lib/jobs';
-const jobs = jobsInOrder().map((job) => {
-  const { leaders, testsUsed } = jobLeaders(job);
-  const min = Math.max(1, Math.ceil(testsUsed / 2));
-  return { job, top: leaders.filter((l) => l.tests >= min).slice(0, 2), testsUsed };
-});
+// Each job as a small ranking chart: the job score for the top five models (see jobScores).
+import { jobScores, jobsInOrder } from '../lib/jobs';
+const jobs = jobsInOrder().map((job) => ({ job, ...jobScores(job) }));
 ---
-<div class="grid job-grid">
-  {jobs.map(({ job, top, testsUsed }) => (
+<div class="grid-3 job-grid">
+  {jobs.map(({ job, rows, testsUsed }) => (
     <a class="card job-card" href={`/jobs/${job.id}`}>
       <h3>{job.name}</h3>
       <p class="small muted">{job.covers}</p>
-      <p class="small job-leaders">
-        {top.length ? <>Leading: <strong>{top.map((l) => l.model.name).join(', ')}</strong></> : 'Not enough results yet'}
-        <span class="muted"> · {testsUsed} test{testsUsed === 1 ? '' : 's'}</span>
+      <div class="mini-bars" aria-label={`Top models for ${job.name.toLowerCase()}`}>
+        {rows.slice(0, 5).map((r, i) => (
+          <div class="mini-row" title={r.tip}>
+            <span class="mini-label">{i + 1}. {r.label}</span>
+            <span class="bar-track"><span class="bar-fill" style={`width:${Math.max(3, r.value!)}%`}></span></span>
+            <span class="mini-value">{r.display}</span>
+          </div>
+        ))}
+      </div>
+      <p class="small muted job-foot">
+        Job score from {testsUsed} test{testsUsed === 1 ? '' : 's'}{job.caveat?.startsWith('Based only on people') && ' · people\'s votes only'} · See all →
       </p>
     </a>
   ))}
 </div>
 <style>
   .job-card { display: flex; flex-direction: column; }
-  .job-card h3 { margin-bottom: 0.3rem; }
-  .job-leaders { margin: auto 0 0; padding-top: 0.6rem; border-top: 1px solid var(--line-soft); }
+  .job-card h3 { margin-bottom: 0.25rem; }
+  .mini-bars { display: grid; gap: 5px; margin: 0.4rem 0 0.8rem; }
+  .mini-row { display: grid; grid-template-columns: minmax(7rem, 9.5rem) minmax(0, 1fr) 2rem; gap: 0.5rem; align-items: center; font-size: 0.78rem; }
+  .mini-label { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .mini-row .bar-track { height: 12px; }
+  .mini-value { text-align: right; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .job-foot { margin: auto 0 0; padding-top: 0.55rem; border-top: 1px solid var(--line-soft); }
 </style>
