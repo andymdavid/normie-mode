@@ -50,4 +50,11 @@ After meaningful work:
 
 ## Verification
 
-The implementation plan will define project commands once the stack is selected. Until then, documentation work should be checked for internal links, task-ID consistency, decision references, and contradictions with the vision.
+- `npm run validate`: content integrity, provenance, confidence ceilings and review flags. Must pass with no errors.
+- `npm test`: rule and intent-search tests.
+- `npm run check`: type-check.
+- `npm run build`: runs the validator, then builds the public site (drafts hidden). Use `NORMIE_PREVIEW=1` or `npm run dev` to see drafts.
+
+Content rules for agents: write new recommendations with `status: draft` and `reviewer: unreviewed`. Never set `status: published`. Add results as new records, and use `supersedes` for corrections. Cite the original benchmark owner, paper or provider, never an aggregator site.
+
+Documentation work should also be checked for internal links, task-ID consistency, decision references, and contradictions with the vision.
