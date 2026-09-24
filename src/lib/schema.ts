@@ -1,0 +1,174 @@
+// Canonical content schemas. Cross-references are plain string IDs; graph
+// integrity is enforced in rules.ts so the validator and the site share one check.
+import { z } from 'astro/zod';
+
+const id = z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, 'IDs are lowercase kebab-case');
+const date = z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'Dates are YYYY-MM-DD');
+
+export const EVIDENCE_CLASSES = [
+  'independent-benchmark',
+  'provider-reported',
+  'independent-research',
+  'first-party',
+  'editorial',
+] as const;
+export const INDEPENDENT_CLASSES: readonly string[] = ['independent-benchmark', 'independent-research', 'first-party'];
+
+export const CONFIDENCE = ['insufficient', 'limited', 'moderate', 'strong'] as const;
+export type Confidence = (typeof CONFIDENCE)[number];
+
+/**
+ * A statement shown to readers. `basis` keeps measured facts, sourced claims and
+ * editorial judgement distinguishable; the validator checks the required support.
+ */
+export const claimSchema = z.object({
+  text: z.string().min(1),
+  basis: z.enum(['measured', 'sourced', 'editorial']),
+  results: z.array(id).default([]),
+  sources: z.array(id).default([]),
+});
+export type Claim = z.infer<typeof claimSchema>;
+
+export const sourceSchema = z.object({
+  id,
+  title: z.string(),
+  publisher: z.string(),
+  url: z.url(),
+  kind: z.enum(['paper', 'leaderboard', 'provider-report', 'model-card', 'article', 'dataset']),
+  evidence_class: z.enum(EVIDENCE_CLASSES),
+  published_on: date.optional(),
+  retrieved_on: date,
+  status: z.enum(['active', 'superseded', 'withdrawn']).default('active'),
+  superseded_by: id.optional(),
+  notes: z.string().optional(),
+});
+
+export const modelFamilySchema = z.object({
+  id,
+  name: z.string(),
+  provider: z.string(),
+  summary: z.string(),
+});
+
+export const modelVersionSchema = z.object({
+  id,
+  family: id,
+  name: z.string(),
+  released_on: date.optional(),
+  lifecycle: z.enum(['current', 'superseded', 'retired']),
+  // Successor in the same product line; drives D-011 review flags.
+  successor: id.optional(),
+  api_id: z.string().optional(),
+  verification: z.object({
+    status: z.enum(['verified', 'unverified']),
+    sources: z.array(id).default([]),
+    note: z.string().optional(),
+  }),
+  summary: z.string().optional(),
+});
+
+export const capabilitySchema = z.object({
+  id,
+  name: z.string(),
+  definition: z.string(),
+  why_it_matters: z.string(),
+  limitations: z.array(claimSchema).default([]),
+});
+
+export const taskSchema = z.object({
+  id,
+  name: z.string(),
+  question: z.string(),
+  user_goal: z.string(),
+  includes: z.string(),
+  excludes: z.string(),
+  success: z.string(),
+  capabilities: z
+    .array(z.object({ capability: id, importance: z.enum(['core', 'supporting']) }))
+    .min(1),
+  aliases: z.array(z.string()).default([]),
+  related: z.array(id).default([]),
+  assessment: z.array(claimSchema).default([]),
+  can_do: z.array(claimSchema).default([]),
+  checks: z.array(claimSchema).default([]),
+  // Tasks outside the first slice's depth can exist as stubs.
+  depth: z.enum(['full', 'stub']).default('stub'),
+});
+
+export const benchmarkSchema = z.object({
+  id,
+  name: z.string(),
+  owner: z.string(),
+  what_is_it: z.string(),
+  what_it_tests: z.string(),
+  example: z.string().optional(),
+  why_care: z.string(),
+  limits: z.array(z.string()).min(1),
+  kind: z.enum(['academic', 'technical', 'agentic', 'real-world-work', 'specialist']),
+  sources: z.array(id).min(1),
+  versions: z.array(z.object({ id, name: z.string(), released_on: date.optional(), notes: z.string().optional() })).min(1),
+  metrics: z
+    .array(
+      z.object({
+        id,
+        name: z.string(),
+        plain: z.string(),
+        unit: z.enum(['percent', 'score']),
+        higher_is_better: z.boolean().default(true),
+        primary: z.boolean().default(false),
+      }),
+    )
+    .min(1),
+  measures: z.array(z.object({ capability: id, strength: z.enum(['primary', 'secondary']) })).min(1),
+  // Tasks this benchmark measures directly, optionally restricted to one subset.
+  direct_tasks: z.array(z.object({ task: id, subset: z.string().optional() })).default([]),
+});
+
+export const resultSchema = z.object({
+  id,
+  model_version: id,
+  benchmark: id,
+  benchmark_version: id,
+  metric: id,
+  subset: z.string().optional(),
+  value: z.number(),
+  source: id,
+  evaluated_on: date.optional(),
+  published_on: date,
+  configuration: z.object({
+    reasoning: z.string().optional(),
+    harness: z.string().optional(),
+    tools: z.array(z.string()).optional(),
+    notes: z.string().optional(),
+  }),
+  supersedes: id.optional(),
+  notes: z.string().optional(),
+});
+export const resultFileSchema = z.object({ results: z.array(resultSchema).min(1) });
+
+export const recommendationSchema = z.object({
+  id,
+  task: id,
+  scope: z.enum(['best-overall', 'best-value', 'best-for-complex-work', 'best-for-autonomous-work']),
+  // Absent only when the honest answer is "insufficient evidence".
+  model_version: id.optional(),
+  confidence: z.enum(CONFIDENCE),
+  status: z.enum(['draft', 'published', 'withdrawn']),
+  verdict: z.string(),
+  rationale: z.array(claimSchema).min(1),
+  limitations: z.array(claimSchema).default([]),
+  evidence: z.array(id).default([]),
+  alternatives: z.array(z.object({ model_version: id, note: z.string() })).default([]),
+  reviewed_on: date,
+  reviewer: z.string(),
+  supersedes: id.optional(),
+});
+
+export type Source = z.infer<typeof sourceSchema>;
+export type ModelFamily = z.infer<typeof modelFamilySchema>;
+export type ModelVersion = z.infer<typeof modelVersionSchema>;
+export type Capability = z.infer<typeof capabilitySchema>;
+export type Task = z.infer<typeof taskSchema>;
+export type Benchmark = z.infer<typeof benchmarkSchema>;
+export type Result = z.infer<typeof resultSchema>;
+export type Recommendation = z.infer<typeof recommendationSchema>;
