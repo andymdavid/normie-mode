@@ -164,13 +164,14 @@ Progress note (2026-09-24): Built as the homepage (`src/pages/index.astro`, data
 - Delivered: new tokens and layout, a reusable bar chart component, the redesigned homepage (summary band, highlights, job grid, one chart per metric, contents list), `/jobs` and nine job pages.
 - Verification: `npm test` checks every test points at real imported data and every job has results; builds and type-checks cleanly; screenshots reviewed in light and dark mode.
 
-### N-007 — First Normie Mode test (micro-pilot)
+### N-007 — First Normie Mode test
 
-- Status: `ready` (built; waiting for an OpenRouter key and product-owner go-ahead to spend about $1)
+- Status: `ready` (built; waiting for an OpenRouter key and a go-ahead to spend about $1–2)
 - Dependencies: D-009 (this is its first, narrow application)
-- Delivered: the "spot unusual transactions" suite (`evals/unusual-transactions/`), a budget-capped OpenRouter runner (`npm run eval`), and the write-up `docs/evals/unusual-transactions.md`.
+- Decision (2026-09-24): the first test is "Answer business questions from a spreadsheet" (`evals/spreadsheet-questions/`, write-up in `docs/evals/spreadsheet-questions.md`). The product owner judged "Spot unusual transactions" too close to classification work, where specialist decision models such as Typesafe AI's Jev and simple spreadsheet filters would dominate, and less representative of office work. That suite is kept for a later "checking and reviewing" job.
+- Delivered: both suites, a shared test interface (`evals/types.ts`), `npm run eval:generate`, and the budget-capped runner (`npm run eval -- --suite <id>`).
 - Acceptance criteria: all six pilot models run on all five cases within budget; every answer, cost and score is saved; results are reviewed before being shown on the site.
-- Next, after results: show them on `/jobs/office-work` and the spreadsheet job pages as the first "Normie Mode test", with the real input and each model's answer.
+- Next, after results: show them on the office-work job page as the first Normie Mode test, with each question, the right answer and each model's answer.
 
 ### N-003 — Head-to-head comparison page
 
@@ -230,6 +231,8 @@ A published recommendation is flagged for review when: a newer version appears i
 - D-009: First-party test protocol (a narrow micro-pilot is defined in `docs/evals/unusual-transactions.md`; the general protocol is still open)
 - D-014: Smallest useful intelligence layer
 - D-015: Pilot success gate
+
+Watch list: Typesafe AI's Jev (launched 2026-09-15), a "decision" model that returns structured answers with confidence scores rather than text. It isn't in Epoch, LMArena, models.dev or OpenRouter yet, and our text-based tests can't run it. Revisit when independent results exist.
 
 ## Status vocabulary
 
