@@ -6,3 +6,6 @@ successor: deepseek-v4-pro
 verification:
   status: unverified
   note: Version name taken from third-party coverage; confirm against the provider's model list.
+source_ids:
+  epoch:
+    - deepseek-v3.2

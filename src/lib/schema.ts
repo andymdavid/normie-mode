@@ -65,6 +65,16 @@ export const modelVersionSchema = z.object({
     note: z.string().optional(),
   }),
   summary: z.string().optional(),
+  // How this exact version is named in each imported source (D-019). Reasoning-effort
+  // variants map to one version; the effort is kept as result configuration.
+  source_ids: z
+    .object({
+      epoch: z.array(z.string()).default([]),
+      epoch_index: z.string().optional(),
+      modelsdev: z.string().optional(),
+      lmarena: z.array(z.string()).default([]),
+    })
+    .default({ epoch: [], lmarena: [] }),
 });
 
 export const capabilitySchema = z.object({
@@ -163,6 +173,27 @@ export const recommendationSchema = z.object({
   reviewer: z.string(),
   supersedes: id.optional(),
 });
+
+/** What a model maker says at launch (D-020). Never mixed with independent results. */
+export const makerClaimSchema = z.object({
+  id,
+  model_version: id,
+  source: id,
+  stated_on: date,
+  headline: z.string(),
+  verification_note: z.string().optional(),
+  scores: z
+    .array(
+      z.object({
+        benchmark: z.string(),
+        value: z.number(),
+        unit: z.enum(['percent', 'elo']),
+        setup: z.string().optional(),
+      }),
+    )
+    .default([]),
+});
+export type MakerClaim = z.infer<typeof makerClaimSchema>;
 
 export type Source = z.infer<typeof sourceSchema>;
 export type ModelFamily = z.infer<typeof modelFamilySchema>;

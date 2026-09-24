@@ -1,0 +1,15 @@
+id: deepseek-v4-1-flash
+family: deepseek
+name: DeepSeek V4.1 Flash
+released_on: 2026-09-10
+lifecycle: current
+verification:
+  status: verified
+  sources:
+    - deepseek-v4-1-flash
+summary: DeepSeek routes the older deepseek-v4-flash API name to this model.
+source_ids:
+  epoch:
+    - deepseek-v4.1-flash
+  epoch_index: DeepSeek V4.1 Flash
+  modelsdev: deepseek/deepseek-v4-flash

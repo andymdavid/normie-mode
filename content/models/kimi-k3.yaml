@@ -5,4 +5,12 @@ released_on: 2026-07-17
 lifecycle: current
 verification:
   status: verified
-  sources: [kimi-k3-github]
+  sources:
+    - kimi-k3-github
+source_ids:
+  epoch:
+    - kimi-k3
+  epoch_index: Kimi K3
+  modelsdev: moonshotai/kimi-k3
+  lmarena:
+    - kimi-k3-max

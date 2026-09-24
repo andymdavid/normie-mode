@@ -6,3 +6,11 @@ successor: claude-opus-4-8
 verification:
   status: unverified
   note: Version name taken from third-party coverage; confirm against the provider's model list.
+source_ids:
+  epoch:
+    - claude-opus-4-6
+  epoch_index: Claude Opus 4.6
+  modelsdev: anthropic/claude-opus-4-6
+  lmarena:
+    - claude-opus-4-6-high
+    - claude-opus-4-6

@@ -7,6 +7,7 @@ import {
   benchmarkSchema,
   capabilitySchema,
   modelFamilySchema,
+  makerClaimSchema,
   modelVersionSchema,
   recommendationSchema,
   resultFileSchema,
@@ -15,6 +16,7 @@ import {
   type Benchmark,
   type Capability,
   type ModelFamily,
+  type MakerClaim,
   type ModelVersion,
   type Recommendation,
   type Result,
@@ -31,6 +33,7 @@ export interface Graph {
   benchmarks: Map<string, Benchmark>;
   results: Map<string, Result>;
   recommendations: Map<string, Recommendation>;
+  claims: Map<string, MakerClaim>;
   /** Result ID -> file it was defined in, for error messages. */
   origins: Map<string, string>;
 }
@@ -101,6 +104,7 @@ export function loadGraph(root = join(process.cwd(), 'content')): Graph {
     benchmarks: loadEach('benchmarks', benchmarkSchema),
     results,
     recommendations: loadEach('recommendations', recommendationSchema),
+    claims: loadEach('claims', makerClaimSchema),
     origins,
   };
   if (problems.length) throw new ContentError(problems);

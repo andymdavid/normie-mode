@@ -4,5 +4,13 @@ name: Gemini 3.1 Pro
 lifecycle: current
 verification:
   status: verified
-  sources: [google-gemini-3-1-pro]
+  sources:
+    - google-gemini-3-1-pro
   note: Google lists this as a preview model.
+source_ids:
+  epoch:
+    - gemini-3.1-pro-preview
+  epoch_index: Gemini 3.1 Pro
+  modelsdev: google/gemini-3.1-pro-preview
+  lmarena:
+    - gemini-3.1-pro-preview

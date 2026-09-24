@@ -6,4 +6,13 @@ lifecycle: superseded
 successor: claude-opus-5-5
 verification:
   status: verified
-  sources: [anthropic-claude-opus-5]
+  sources:
+    - anthropic-claude-opus-5
+source_ids:
+  epoch:
+    - claude-opus-5
+  epoch_index: Claude Opus 5
+  modelsdev: anthropic/claude-opus-5
+  lmarena:
+    - claude-opus-5-max
+    - claude-opus-5-high

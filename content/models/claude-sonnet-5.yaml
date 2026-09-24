@@ -1,0 +1,16 @@
+id: claude-sonnet-5
+family: claude
+name: Claude Sonnet 5
+released_on: 2026-06-29
+lifecycle: current
+verification:
+  status: verified
+  sources:
+    - anthropic-claude-sonnet-5
+source_ids:
+  epoch:
+    - claude-sonnet-5
+  epoch_index: Claude Sonnet 5
+  modelsdev: anthropic/claude-sonnet-5
+  lmarena:
+    - claude-sonnet-5-high

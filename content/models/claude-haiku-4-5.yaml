@@ -1,0 +1,15 @@
+id: claude-haiku-4-5
+family: claude
+name: Claude Haiku 4.5
+released_on: 2025-10-15
+lifecycle: current
+verification:
+  status: unverified
+  note: Confirm against the provider model list.
+source_ids:
+  epoch:
+    - claude-haiku-4-5-20251001
+  epoch_index: Claude Haiku 4.5
+  modelsdev: anthropic/claude-haiku-4-5-20251001
+  lmarena:
+    - claude-haiku-4-5-20251001

@@ -6,3 +6,7 @@ successor: kimi-k3
 verification:
   status: unverified
   note: Version name taken from third-party coverage; confirm against the provider's model list.
+source_ids:
+  epoch:
+    - kimi-k2.5
+  epoch_index: Kimi K2.5

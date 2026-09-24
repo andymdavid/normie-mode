@@ -1,0 +1,15 @@
+id: gemini-3-5-flash-lite
+family: gemini
+name: Gemini 3.5 Flash-Lite
+released_on: 2026-07-21
+lifecycle: current
+verification:
+  status: unverified
+  note: Confirm against the provider model list.
+source_ids:
+  epoch:
+    - gemini-3.5-flash-lite
+  epoch_index: Gemini 3.5 Flash-Lite
+  modelsdev: google/gemini-3.5-flash-lite
+  lmarena:
+    - gemini-3.5-flash-lite

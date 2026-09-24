@@ -233,6 +233,12 @@ export function validate(g: Graph, asOf = today()): ValidationReport {
     if (cls === 'editorial') errors.push(`${at}: results cannot come from an editorial source`);
   }
 
+  for (const c of g.claims.values()) {
+    const at = where('claims', c.id);
+    need(g.models.has(c.model_version), at, `unknown model version "${c.model_version}"`);
+    need(g.sources.get(c.source)?.evidence_class === 'provider-reported', at, 'maker claims must cite a provider-reported source');
+  }
+
   const publishedScopes = new Map<string, string>();
   for (const rec of g.recommendations.values()) {
     const at = where('recommendations', rec.id);

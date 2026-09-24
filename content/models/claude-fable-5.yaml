@@ -6,3 +6,10 @@ successor: claude-fable-5-1
 verification:
   status: unverified
   note: Version name taken from third-party coverage; confirm against the provider's model list.
+source_ids:
+  epoch:
+    - claude-fable-5
+  epoch_index: Claude Fable 5
+  modelsdev: anthropic/claude-fable-5
+  lmarena:
+    - claude-fable-5

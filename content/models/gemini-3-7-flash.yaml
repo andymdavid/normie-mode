@@ -6,3 +6,10 @@ successor: gemini-3-8-flash
 verification:
   status: unverified
   note: Version name taken from third-party coverage; confirm against the provider's model list.
+source_ids:
+  epoch:
+    - gemini-3.7-flash
+  epoch_index: Gemini 3.7 Flash
+  modelsdev: google/gemini-3.7-flash
+  lmarena:
+    - gemini-3.7-flash-high

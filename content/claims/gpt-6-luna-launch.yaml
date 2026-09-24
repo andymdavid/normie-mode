@@ -1,0 +1,6 @@
+id: gpt-6-luna-launch
+model_version: gpt-6-luna
+source: openai-gpt-6-sol
+stated_on: 2026-09-22
+headline: At high effort, GPT-6 Luna improves on its predecessor by 5.4 percentage points at 58% lower cost per task.
+verification_note: Quoted from OpenAI's announcement via search results; the page blocks automated reading. Confirm the wording by hand.

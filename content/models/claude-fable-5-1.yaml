@@ -5,4 +5,12 @@ released_on: 2026-09-01
 lifecycle: current
 verification:
   status: verified
-  sources: [anthropic-claude-fable-5-1]
+  sources:
+    - anthropic-claude-fable-5-1
+source_ids:
+  epoch:
+    - claude-fable-5-1
+  epoch_index: Claude Fable 5.1
+  modelsdev: anthropic/claude-fable-5-1
+  lmarena:
+    - claude-fable-5.1-max

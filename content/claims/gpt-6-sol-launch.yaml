@@ -1,0 +1,6 @@
+id: gpt-6-sol-launch
+model_version: gpt-6-sol
+source: openai-gpt-6-sol
+stated_on: 2026-09-22
+headline: On AutomationBench, GPT-6 Sol at xhigh effort outperforms Claude Opus 5 at max effort at just 9% of Opus 5's cost per task.
+verification_note: Quoted from OpenAI's announcement via search results; the page blocks automated reading. Confirm the wording by hand.

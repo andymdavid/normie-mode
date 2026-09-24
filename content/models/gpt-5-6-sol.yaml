@@ -5,4 +5,12 @@ lifecycle: superseded
 successor: gpt-6-sol
 verification:
   status: verified
-  sources: [openai-gpt-5-6]
+  sources:
+    - openai-gpt-5-6
+source_ids:
+  epoch:
+    - gpt-5.6-sol
+  epoch_index: GPT-5.6 Sol
+  modelsdev: openai/gpt-5.6-sol
+  lmarena:
+    - gpt-5.6-sol-xhigh

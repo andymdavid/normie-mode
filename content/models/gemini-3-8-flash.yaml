@@ -5,4 +5,12 @@ released_on: 2026-09-02
 lifecycle: current
 verification:
   status: verified
-  sources: [google-gemini-3-8-flash]
+  sources:
+    - google-gemini-3-8-flash
+source_ids:
+  epoch:
+    - gemini-3.8-flash
+  epoch_index: Gemini 3.8 Flash
+  modelsdev: google/gemini-3.8-flash
+  lmarena:
+    - gemini-3.8-flash-high

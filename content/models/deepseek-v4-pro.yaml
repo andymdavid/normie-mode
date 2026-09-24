@@ -5,4 +5,12 @@ released_on: 2026-08-13
 lifecycle: current
 verification:
   status: verified
-  sources: [deepseek-v4-pro]
+  sources:
+    - deepseek-v4-pro
+source_ids:
+  epoch:
+    - deepseek-v4-pro-0813
+  epoch_index: DeepSeek V4 Pro 0813
+  modelsdev: deepseek/deepseek-v4-pro
+  lmarena:
+    - deepseek-v4-pro-high-20260813

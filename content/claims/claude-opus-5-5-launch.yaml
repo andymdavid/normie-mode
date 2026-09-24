@@ -1,0 +1,13 @@
+id: claude-opus-5-5-launch
+model_version: claude-opus-5-5
+source: anthropic-claude-opus-5-5
+stated_on: 2026-09-23
+headline: It performs at the level of Claude Fable 5.1 on most work and costs 40% less to run than Opus 5.
+scores:
+  - { benchmark: Terminal-Bench 4.0, value: 66.4, unit: percent, setup: xhigh effort }
+  - { benchmark: FrontierCode v1.1, value: 54.4, unit: percent }
+  - { benchmark: CursorBench 4.0, value: 57.8, unit: percent }
+  - { benchmark: GDPval-AA v2.1, value: 1846, unit: elo }
+  - { benchmark: AutomationBench, value: 40.0, unit: percent, setup: without fallback models }
+  - { benchmark: Humanity's Last Exam, value: 67.7, unit: percent, setup: with tools }
+  - { benchmark: OSWorld 2.0, value: 81.8, unit: percent }
