@@ -1,155 +1,174 @@
 ---
 import Base from '../layouts/Base.astro';
+import BarChart, { type BarDatum } from '../components/BarChart.astro';
 import CapabilityCostChart from '../components/CapabilityCostChart.astro';
+import JobGrid from '../components/JobGrid.astro';
 import { imported } from '../lib/imported';
-import { AREAS, EVIDENCE_STATUS_LABEL, TYPICAL_REQUEST, VALUE_BUDGET, overviewRows, picks } from '../lib/overview';
+import { EVIDENCE_STATUS_LABEL, TYPICAL_REQUEST, overviewRows, picks, type OverviewRow } from '../lib/overview';
 import { formatDate } from '../lib/view';
 
 const rows = overviewRows();
-const top = picks(rows);
 const { epoch, modelsdev, lmarena } = imported();
-const fresh = rows.filter((r) => r.status !== 'tested').sort((a, b) => (b.model.released_on ?? '').localeCompare(a.model.released_on ?? ''));
-const labelled = new Set([...top.map((p) => p.row.model.id), ...rows.filter((r) => r.eci).sort((a, b) => (a.costPer1000 ?? 0) - (b.costPer1000 ?? 0)).slice(0, 1).map((r) => r.model.id)]);
-const money = (v?: number) => (v === undefined ? '–' : v < 1 ? `$${v.toFixed(2)}` : `$${v.toFixed(v < 10 ? 2 : 0)}`);
-const ordinal = (n: number) => `${n}${n % 10 === 1 && n !== 11 ? 'st' : n % 10 === 2 && n !== 12 ? 'nd' : n % 10 === 3 && n !== 13 ? 'rd' : 'th'}`;
-const step = (s: number) => Math.min(4, Math.floor(s * 5));
 const updated = formatDate(epoch?.meta.retrieved_at.slice(0, 10));
+const money = (v?: number) => (v === undefined ? undefined : v < 10 ? `$${v.toFixed(2)}` : `$${v.toFixed(0)}`);
+const ordinal = (n: number) => `${n}${n % 10 === 1 && n !== 11 ? 'st' : n % 10 === 2 && n !== 12 ? 'nd' : n % 10 === 3 && n !== 13 ? 'rd' : 'th'}`;
+const base = (r: OverviewRow) => ({ id: r.model.id, label: r.model.name, maker: r.maker, href: `/models/${r.model.id}` });
+
+const capability: BarDatum[] = rows.map((r) => ({
+  ...base(r),
+  value: r.eci?.value, display: r.eci?.value.toFixed(0), low: r.eci?.low, high: r.eci?.high,
+  tip: r.eci && `${r.model.name}: ${r.eci.value.toFixed(1)} (likely ${r.eci.low.toFixed(0)}–${r.eci.high.toFixed(0)})`,
+}));
+const votes: BarDatum[] = rows.map((r) => ({
+  ...base(r),
+  value: r.arena?.rating, display: r.arena && ordinal(r.arena.here),
+  tip: r.arena && `${r.model.name}: ${ordinal(r.arena.here)} of ${r.arena.of} here, #${r.arena.rank} on LMArena overall, ${r.arena.votes.toLocaleString('en-GB')} votes`,
+}));
+const cost: BarDatum[] = rows.map((r) => ({ ...base(r), value: r.costPer1000, display: money(r.costPer1000) }));
+const reads: BarDatum[] = rows.map((r) => ({ ...base(r), value: r.contextPages, display: r.contextPages?.toLocaleString('en-GB') }));
+
+const ranked = (d: BarDatum[], low = false) => d.filter((x) => x.value !== undefined).sort((a, b) => (low ? a.value! - b.value! : b.value! - a.value!));
+const sentence = (d: BarDatum[], what: string, low = false) => {
+  const [a, b, c, e] = ranked(d, low).map((x) => x.label);
+  return { lead: [a, b].filter(Boolean), what, rest: [c, e].filter(Boolean) };
+};
+const summaries = [
+  { tag: 'Most capable', ...sentence(capability, 'are the most capable overall') },
+  { tag: "People's favourites", ...sentence(votes, 'are preferred most in blind votes') },
+  { tag: 'Cheapest', ...sentence(cost, 'cost the least to use', true) },
+  { tag: 'Reads the most', ...sentence(reads, 'can take in the most text at once') },
+];
+const fresh = rows.filter((r) => r.status !== 'tested').sort((a, b) => (b.model.released_on ?? '').localeCompare(a.model.released_on ?? ''));
+const arenaFloor = Math.floor((Math.min(...votes.filter((v) => v.value).map((v) => v.value!)) - 20) / 10) * 10;
+const eciFloor = Math.floor((Math.min(...capability.filter((v) => v.low).map((v) => v.low!)) - 5) / 5) * 5;
+const scatterLabels = new Set(picks(rows).map((p) => p.row.model.id));
+const sections = [
+  ['highlights', 'Highlights'], ['jobs', 'Best AI for…'], ['capability', 'Capability'], ['value', 'Capability vs cost'],
+  ['votes', "People's votes"], ['cost', 'Cost'], ['reading', 'How much it can read'], ['new', 'Too new to judge'], ['numbers', 'All the numbers'],
+];
 ---
 <Base title="Normie Mode">
-  <header class="ov-head">
-    <div>
-      <h1>Which AI is best right now?</h1>
-      <p class="lede">The main AI models compared in plain English, using independent test results. Updated {updated}.</p>
+  <h1>Which AI is best right now?</h1>
+  <p class="lede">The main AI models compared in plain English, using independent tests and people's votes. Updated {updated}.</p>
+
+  <div class="band">
+    <div class="band-inner summary-grid">
+      {summaries.map((s) => (
+        <div class="summary">
+          <span class="tag">{s.tag}</span>
+          <p>
+            {s.lead.map((n, i) => (<>{i > 0 && ' and '}<strong>{n}</strong></>))} {s.what}{s.rest.length > 0 && <>, followed by {s.rest.join(' and ')}</>}.
+          </p>
+        </div>
+      ))}
+      {fresh.length > 0 && (
+        <div class="summary">
+          <span class="tag">Too new to judge</span>
+          <p>{fresh.map((r, i) => (<>{i > 0 && (i === fresh.length - 1 ? ' and ' : ', ')}<strong>{r.model.name}</strong></>))} came out in the last few days and have only 1–2 independent results so far.</p>
+        </div>
+      )}
     </div>
-    <img src="/norm.jpg" alt="" width="96" height="96" />
-  </header>
+  </div>
 
-  <section class="picks" aria-label="Quick picks">
-    {top.map((p) => (
-      <a class="pick-card" href={`/models/${p.row.model.id}`}>
-        <span class="eyebrow">{p.label}</span>
-        <strong>{p.row.model.name}</strong>
-        <span class="small muted">{p.why}</span>
-      </a>
-    ))}
-  </section>
+  <div class="with-toc">
+    <nav class="toc" aria-label="On this page">
+      <ol>{sections.map(([id, label]) => <li><a href={`#${id}`}>{label}</a></li>)}</ol>
+    </nav>
+    <div>
+      <div class="section-head" id="highlights" style="margin-top: 0"><h2>Highlights</h2></div>
+      <p class="section-sub">The three things most people want to know.</p>
+      <div class="grid-3">
+        <BarChart compact title="Capability" sub="Epoch AI capability score" rows={capability} floor={eciFloor} showEmpty={false} />
+        <BarChart compact title="People's votes" sub="Position in blind votes on LMArena" rows={votes} floor={arenaFloor} showEmpty={false} />
+        <BarChart compact title="Cost" sub="Per 1,000 typical requests" rows={cost} lowerIsBetter showEmpty={false} />
+      </div>
 
-  {fresh.length > 0 && (
-    <section class="new-strip" aria-labelledby="new-h">
-      <h2 id="new-h">Too new to judge</h2>
+      <div class="section-head" id="jobs"><h2>Best AI for…</h2></div>
+      <p class="section-sub">Pick a job to see the tests that measure it.</p>
+      <JobGrid />
+
+      <div class="section-head" id="capability"><h2>Capability</h2></div>
+      <p class="section-sub">One score that combines dozens of independent tests.</p>
+      <BarChart
+        title="Epoch Capabilities Index"
+        sub="Combines results from dozens of independent tests into one score. The thin line shows the likely range"
+        rows={capability}
+        floor={eciFloor}
+        summary="If two models' ranges overlap, treat them as roughly equal."
+        source={{ name: 'Epoch AI', url: epoch?.meta.url ?? '', note: epoch?.meta.licence }}
+      />
+
+      <div class="section-head" id="value"><h2>Capability vs cost</h2></div>
+      <p class="section-sub">Up and to the left is better: more capable for less money.</p>
+      <div class="chart-card"><CapabilityCostChart rows={rows} label={scatterLabels} /></div>
+
+      <div class="section-head" id="votes"><h2>People's votes</h2></div>
+      <p class="section-sub">People compare two anonymous answers and vote for the better one.</p>
+      <BarChart
+        title="LMArena text ranking"
+        sub={`Position among the models here, from votes as of ${formatDate(lmarena?.meta.as_of)}`}
+        rows={votes}
+        floor={arenaFloor}
+        summary="New models appear here after they collect enough votes, usually within a couple of weeks."
+        source={{ name: 'LMArena', url: lmarena?.meta.url ?? '', note: lmarena?.meta.licence }}
+      />
+
+      <div class="section-head" id="cost"><h2>Cost</h2></div>
+      <p class="section-sub">What you'd pay the maker directly. Chat apps with monthly plans price differently.</p>
+      <BarChart
+        title="Cost per 1,000 typical requests"
+        sub={`List price, assuming about ${TYPICAL_REQUEST.words} per request. Models that think longer cost more in practice`}
+        rows={cost}
+        lowerIsBetter
+        source={{ name: 'models.dev', url: modelsdev?.meta.url ?? '', note: modelsdev?.meta.licence }}
+      />
+
+      <div class="section-head" id="reading"><h2>How much it can read</h2></div>
+      <p class="section-sub">How much text it can take in at once, in pages of about 500 words.</p>
+      <BarChart
+        title="Pages it can read at once"
+        sub="Based on each model's context window"
+        rows={reads}
+        source={{ name: 'models.dev', url: modelsdev?.meta.url ?? '', note: modelsdev?.meta.licence }}
+      />
+
+      <div class="section-head" id="new"><h2>Too new to judge</h2></div>
+      <p class="section-sub">What the makers say, until independent results arrive.</p>
       <div class="grid">
         {fresh.map((r) => (
           <div class="card">
-            <div class="eyebrow">{r.maker} · released {formatDate(r.model.released_on)}</div>
-            <h3>{r.model.name}</h3>
+            <div class="eyebrow">{r.maker} · {formatDate(r.model.released_on)}</div>
+            <h3><a href={`/models/${r.model.id}`}>{r.model.name}</a></h3>
             {r.claim && <p class="small"><span class="badge sourced">The maker says</span> “{r.claim.headline}”</p>}
-            <p class="small muted">Independent tests so far: <strong>{r.independentTests}</strong>. Check back in a week or two.</p>
+            <p class="small muted">Independent results so far: <strong>{r.independentTests}</strong>.</p>
           </div>
         ))}
       </div>
-    </section>
-  )}
 
-  <h2>Capability against cost</h2>
-  <CapabilityCostChart rows={rows} label={labelled} />
-
-  <h2>All models</h2>
-  <div class="table-wrap">
-    <table class="ov-table">
-      <thead>
-        <tr>
-          <th>Model</th>
-          <th>Capability</th>
-          <th>People's votes</th>
-          <th>Cost per 1,000 requests</th>
-          <th>Can read at once</th>
-          <th>Evidence</th>
-        </tr>
-      </thead>
-      <tbody>
-        {rows.map((r) => (
-          <tr>
-            <td><a href={`/models/${r.model.id}`}><strong>{r.model.name}</strong></a><div class="small muted">{r.maker}{r.openWeights && ' · open weights'}</div></td>
-            <td class="num">{r.eci ? <>{r.eci.value.toFixed(0)}<div class="small muted">likely {r.eci.low.toFixed(0)}–{r.eci.high.toFixed(0)}</div></> : <span class="muted">Not yet scored</span>}</td>
-            <td class="num">{r.arena ? <>{ordinal(r.arena.here)} of {r.arena.of}<div class="small muted">#{r.arena.rank} overall · {r.arena.votes.toLocaleString('en-GB')} votes</div></> : <span class="muted">Not yet ranked</span>}</td>
-            <td class="num">{money(r.costPer1000)}<div class="small muted">{r.price?.input !== undefined && `$${r.price.input} in / $${r.price.output} out per M tokens`}</div></td>
-            <td class="num">{r.contextPages ? `~${r.contextPages.toLocaleString('en-GB')} pages` : '–'}</td>
-            <td><span class={`badge status-${r.status}`}>{EVIDENCE_STATUS_LABEL[r.status]}</span><div class="small muted">{r.independentTests} test{r.independentTests === 1 ? "" : "s"}</div></td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+      <div class="section-head" id="numbers"><h2>All the numbers</h2></div>
+      <p class="section-sub">Everything above in one table.</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Model</th><th>Capability</th><th>People's votes</th><th>Cost / 1,000 requests</th><th>Pages at once</th><th>Evidence</th></tr>
+          </thead>
+          <tbody>
+            {rows.map((r) => (
+              <tr>
+                <td><a href={`/models/${r.model.id}`}><strong>{r.model.name}</strong></a><div class="small muted">{r.maker}{r.openWeights && ' · open weights'}</div></td>
+                <td class="num">{r.eci ? <>{r.eci.value.toFixed(0)}<div class="small muted">{r.eci.low.toFixed(0)}–{r.eci.high.toFixed(0)}</div></> : <span class="muted">–</span>}</td>
+                <td class="num">{r.arena ? <>{ordinal(r.arena.here)} of {r.arena.of}<div class="small muted">{r.arena.votes.toLocaleString('en-GB')} votes</div></> : <span class="muted">–</span>}</td>
+                <td class="num">{money(r.costPer1000) ?? '–'}<div class="small muted">{r.price?.input !== undefined && `$${r.price.input} / $${r.price.output} per M tokens`}</div></td>
+                <td class="num">{r.contextPages?.toLocaleString('en-GB') ?? '–'}</td>
+                <td><span class={`badge status-${r.status}`}>{EVIDENCE_STATUS_LABEL[r.status]}</span><div class="small muted">{r.independentTests} result{r.independentTests === 1 ? '' : 's'}</div></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="small muted" style="margin-top: 1rem">
+        Sources: <a href={epoch?.meta.url}>{epoch?.meta.name}</a> ({epoch?.meta.licence}) · <a href={lmarena?.meta.url}>{lmarena?.meta.name}</a> ({lmarena?.meta.licence}) · <a href={modelsdev?.meta.url}>{modelsdev?.meta.name}</a> ({modelsdev?.meta.licence}) · model makers' announcements. <a href="/methodology">How it works</a>
+      </p>
+    </div>
   </div>
-
-  <h2>What each model is good at</h2>
-  <p class="muted small" style="max-width: 44rem">Position among the models on this page that have been tested in each area. Stronger colour means closer to the top. A dash means no results yet.</p>
-  <div class="table-wrap">
-    <table class="heat">
-      <thead>
-        <tr>
-          <th>Model</th>
-          {AREAS.map((a) => <th title={a.plain}>{a.label}{a.kind === 'arena' && <span class="muted"> (votes)</span>}</th>)}
-        </tr>
-      </thead>
-      <tbody>
-        {rows.map((r) => (
-          <tr>
-            <td><a href={`/models/${r.model.id}`}>{r.model.name}</a></td>
-            {AREAS.map((a) => {
-              const c = r.areas[a.id];
-              return c ? (
-                <td class={`cell s${step(c.strength)}`} title={`${r.model.name}: ${ordinal(c.rank)} of ${c.of} in ${a.label.toLowerCase()} (${c.tests} test${c.tests > 1 ? 's' : ''})`}>
-                  {ordinal(c.rank)}<span> of {c.of}</span>
-                </td>
-              ) : <td class="cell none">–</td>;
-            })}
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  </div>
-  <div class="heat-legend small muted" aria-hidden="true">Behind <span class="cell s0"></span><span class="cell s1"></span><span class="cell s2"></span><span class="cell s3"></span><span class="cell s4"></span> Top</div>
-
-  <section class="how small muted">
-    <h2>How to read this</h2>
-    <ul>
-      <li><strong>Capability</strong> is Epoch AI's capability index, which combines results from dozens of independent tests into one score. Higher is better; the range shows how sure it is.</li>
-      <li><strong>People's votes</strong> is the position among the models here on LMArena, where people compare two anonymous answers and vote for the better one (leaderboard as of {formatDate(lmarena?.meta.as_of)}).</li>
-      <li><strong>Cost</strong> is the list price for 1,000 typical requests of about {TYPICAL_REQUEST.words}. Models that think longer before answering cost more than this in practice.</li>
-      <li><strong>Can read at once</strong> is how much text it can take in one go, at about 500 words per page.</li>
-      <li><strong>Best value</strong> is the most capable model under ${VALUE_BUDGET} per 1,000 requests.</li>
-    </ul>
-    <p>
-      Sources: <a href={epoch?.meta.url}>{epoch?.meta.name}</a> ({epoch?.meta.licence}),
-      <a href={lmarena?.meta.url}>{lmarena?.meta.name}</a> ({lmarena?.meta.licence}),
-      <a href={modelsdev?.meta.url}>{modelsdev?.meta.name}</a> ({modelsdev?.meta.licence}), and the model makers' own announcements.
-    </p>
-  </section>
 </Base>
-
-<style>
-  .ov-head { display: flex; justify-content: space-between; align-items: center; gap: 1.5rem; }
-  .ov-head img { border-radius: 50%; flex-shrink: 0; }
-  @media (max-width: 36rem) { .ov-head img { display: none; } }
-  .picks { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: 0.75rem; margin: 1.5rem 0 1rem; }
-  .pick-card { display: flex; flex-direction: column; gap: 0.25rem; padding: 1rem 1.1rem; background: var(--card); border: 1px solid var(--line); border-radius: 12px; text-decoration: none; }
-  .pick-card:hover { border-color: var(--accent); color: inherit; }
-  .pick-card strong { font-size: 1.2rem; }
-  .ov-table td, .heat td { vertical-align: middle; }
-  .badge.status-tested { background: var(--good-soft); color: var(--good); }
-  .badge.status-early { background: var(--warn-soft); color: var(--warn); }
-  .badge.status-maker-says { background: var(--accent-soft); color: var(--accent); }
-  .heat th { white-space: normal; min-width: 6.5rem; }
-  .heat td.cell { text-align: center; font-variant-numeric: tabular-nums; font-weight: 600; border: 2px solid var(--card); border-radius: 6px; }
-  .heat td.cell span { font-weight: 400; font-size: 0.75rem; opacity: 0.8; }
-  .cell.none { color: var(--muted); font-weight: 400; }
-  .cell.s0 { background: var(--seq-0); color: var(--seq-ink-0); }
-  .cell.s1 { background: var(--seq-1); color: var(--seq-ink-1); }
-  .cell.s2 { background: var(--seq-2); color: var(--seq-ink-2); }
-  .cell.s3 { background: var(--seq-3); color: var(--seq-ink-3); }
-  .cell.s4 { background: var(--seq-4); color: var(--seq-ink-4); }
-  .heat-legend { display: flex; align-items: center; gap: 4px; margin-top: 0.5rem; }
-  .heat-legend .cell { display: inline-block; width: 22px; height: 12px; border-radius: 3px; }
-  .how ul { padding-left: 1.2rem; }
-  .how h2 { font-size: 1.1rem; }
-</style>

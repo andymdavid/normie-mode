@@ -38,6 +38,8 @@ for (const r of [...pts].sort((a, b) => Number(label.has(b.model.id)) - Number(l
 const money = (v: number) => (v < 1 ? `$${v.toFixed(2)}` : `$${v.toFixed(v < 10 ? 1 : 0)}`);
 ---
 <figure class="viz" data-scatter>
+  <h3 class="chart-title">Capability against cost</h3>
+  <p class="chart-sub">Epoch capability score against list price per 1,000 typical requests (log scale)</p>
   <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-labelledby="cc-title cc-desc">
     <title id="cc-title">How capable each model is against what it costs</title>
     <desc id="cc-desc">Scatter chart. Horizontal: cost per 1,000 typical requests, log scale. Vertical: Epoch capability score with uncertainty range. The same data is in the table below.</desc>
@@ -71,7 +73,7 @@ const money = (v: number) => (v < 1 ? `$${v.toFixed(2)}` : `$${v.toFixed(v < 10 
     })}
   </svg>
   <div class="viz-tip" hidden></div>
-  <figcaption class="small muted">Up and to the left is better. The vertical line on each dot is the likely range: if two lines overlap, it's too close to call.</figcaption>
+  <figcaption class="chart-foot">The vertical line on each dot is the likely range: if two lines overlap, it's too close to call. Sources: Epoch AI, models.dev</figcaption>
 </figure>
 <script>
   for (const fig of document.querySelectorAll<HTMLElement>('[data-scatter]')) {

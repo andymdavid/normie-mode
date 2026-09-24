@@ -8,6 +8,7 @@ interface Props {
   noindex?: boolean;
 }
 const { title, description = 'What AI can actually do, explained in plain English with the evidence underneath.', noindex = false } = Astro.props;
+const path = Astro.url.pathname.replace(/\.html$/, '').replace(/\/index$/, '') || '/';
 const fullTitle = title === 'Normie Mode' ? title : `${title} · Normie Mode`;
 ---
 <html lang="en-GB">
@@ -25,11 +26,13 @@ const fullTitle = title === 'Normie Mode' ? title : `${title} · Normie Mode`;
     )}
     <header class="site-header">
       <div class="wrap">
-        <a class="brand" href="/"><img src="/norm.jpg" alt="" width="40" height="40" />Normie Mode</a>
+        <a class="brand" href="/"><img src="/norm.jpg" alt="" width="26" height="26" />Normie Mode</a>
         <nav class="nav" aria-label="Main">
-          <a href="/">Compare</a>
-          <a href="/models">Models</a>
-          <a href="/benchmarks">Benchmarks explained</a>
+          <a href="/" aria-current={path === '/' ? 'page' : undefined}>Compare models</a>
+          <a href="/jobs" aria-current={path.startsWith('/jobs') ? 'page' : undefined}>Best AI for…</a>
+          <a href="/models" aria-current={path.startsWith('/models') ? 'page' : undefined}>Models</a>
+          <a href="/benchmarks" aria-current={path.startsWith('/benchmarks') ? 'page' : undefined}>Tests explained</a>
+          <a href="/methodology" aria-current={path.startsWith('/methodology') ? 'page' : undefined}>How it works</a>
         </nav>
       </div>
     </header>

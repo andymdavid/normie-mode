@@ -1,0 +1,94 @@
+---
+import Base from '../../layouts/Base.astro';
+import BarChart from '../../components/BarChart.astro';
+import { graph } from '../../lib/graph';
+import { jobLeaders, leadSentence, testFloor, testRows, testSource } from '../../lib/jobs';
+import { overviewRows } from '../../lib/overview';
+
+export function getStaticPaths() {
+  return [...graph().jobs.keys()].map((id) => ({ params: { id } }));
+}
+const g = graph();
+const job = g.jobs.get(Astro.params.id!)!;
+const allTests = job.tests.map((id) => g.tests.get(id)!);
+const withRows = allTests.map((t) => ({ t, rows: testRows(t) }));
+const tests = withRows.filter((x) => x.rows.some((r) => r.value !== undefined));
+const noCurrent = withRows.filter((x) => !x.rows.some((r) => r.value !== undefined)).map((x) => x.t);
+const { leaders, testsUsed } = jobLeaders(job);
+const minCoverage = Math.max(1, Math.ceil(testsUsed / 2));
+const top = leaders.filter((l) => l.tests >= minCoverage).slice(0, 3);
+const untested = overviewRows().filter((r) => !leaders.some((l) => l.model.id === r.model.id));
+const costRows = overviewRows().map((r) => ({
+  id: r.model.id, label: r.model.name, maker: r.maker, href: `/models/${r.model.id}`,
+  value: r.costPer1000, display: r.costPer1000 === undefined ? undefined : `$${r.costPer1000 < 10 ? r.costPer1000.toFixed(2) : r.costPer1000.toFixed(0)}`,
+}));
+---
+<Base title={job.question} description={`${job.question} Compared on ${tests.length} test${tests.length === 1 ? '' : 's'}, in plain English.`}>
+  <div class="eyebrow"><a href="/jobs">Best AI for…</a></div>
+  <h1>{job.question}</h1>
+  <p class="lede">{job.covers}</p>
+
+  <div class="band">
+    <div class="band-inner summary-grid">
+      <div class="summary">
+        <span class="tag">Across these tests</span>
+        <p>
+          {top.length ? (
+            <>{top.map((l, i) => (<>{i > 0 && (i === top.length - 1 ? ' and ' : ', ')}<strong>{l.model.name}</strong></>))} come out on top across {testsUsed} test{testsUsed === 1 ? '' : 's'}.</>
+          ) : 'Not enough results yet to compare.'}
+        </p>
+      </div>
+      <div class="summary">
+        <span class="tag">How we know</span>
+        <ul class="plain-list">{tests.map(({ t }) => <li>{t.title}</li>)}</ul>
+        {noCurrent.length > 0 && <p class="small muted">Also relevant but no results for current models yet: {noCurrent.map((t) => t.title).join(', ')}.</p>}
+      </div>
+      {job.caveat && (
+        <div class="summary">
+          <span class="tag">Keep in mind</span>
+          <p>{job.caveat}</p>
+        </div>
+      )}
+      {untested.length > 0 && (
+        <div class="summary">
+          <span class="tag">Not tested here yet</span>
+          <p>{untested.map((r) => r.model.name).join(', ')}.</p>
+        </div>
+      )}
+    </div>
+  </div>
+
+  <div class="grid-2">
+    {tests.map(({ t, rows }) => {
+      return (
+        <BarChart
+          title={t.title}
+          sub={t.what}
+          rows={rows}
+          floor={testFloor(t, rows)}
+          summary={leadSentence(rows)}
+          source={testSource(t)}
+          showEmpty={false}
+        />
+      );
+    })}
+    <BarChart
+      title="What it costs"
+      sub="List price for 1,000 typical requests (about 1,500 words in, 500 out)"
+      rows={costRows}
+      lowerIsBetter
+      summary={leadSentence(costRows, true, 'is cheapest')}
+      source={{ name: 'models.dev', url: 'https://models.dev', note: 'MIT' }}
+      showEmpty={false}
+    />
+  </div>
+
+  {job.related.length > 0 && (
+    <>
+      <div class="section-head"><h2>Related</h2></div>
+      <div class="grid">
+        {job.related.map((id) => { const r = g.jobs.get(id)!; return <a class="card" href={`/jobs/${id}`}><h3>{r.question}</h3><p class="small muted">{r.covers}</p></a>; })}
+      </div>
+    </>
+  )}
+</Base>

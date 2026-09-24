@@ -20,36 +20,6 @@ export const EVIDENCE_STATUS_LABEL: Record<EvidenceStatus, string> = {
   tested: 'Independently tested',
 };
 
-export interface AreaDef {
-  id: string;
-  label: string;
-  plain: string;
-  kind: 'epoch' | 'arena';
-  /** Epoch benchmark names, or one LMArena category. */
-  keys: string[];
-}
-
-/** Proposed plain-English areas (see D-005 successor; needs product-owner review). */
-export const AREAS: AreaDef[] = [
-  { id: 'coding', label: 'Writing code', plain: 'Building and fixing real software', kind: 'epoch', keys: ['FrontierCode', 'DeepSWE', 'Terminal Bench', 'SWE-Bench verified'] },
-  { id: 'agents', label: 'Doing work on its own', plain: 'Multi-step professional tasks with tools', kind: 'epoch', keys: ['APEX-Agents', 'Remote Labor Index'] },
-  { id: 'facts', label: 'Getting facts right', plain: 'Short factual questions, without making things up', kind: 'epoch', keys: ['SimpleQA Verified'] },
-  { id: 'expert', label: 'Expert questions', plain: 'Graduate-level science and very hard exam questions', kind: 'epoch', keys: ['GPQA diamond', 'HLE'] },
-  { id: 'maths', label: 'Maths', plain: 'Competition and research-level maths problems', kind: 'epoch', keys: ['FrontierMath-Tiers-1-3-v2-Private', 'OTIS Mock AIME 2024-2025'] },
-  { id: 'puzzles', label: 'New kinds of problems', plain: "Puzzles it can't have memorised", kind: 'epoch', keys: ['ARC-AGI-2', 'Mystery Game Puzzles'] },
-  { id: 'business', label: 'Business questions', plain: 'Which answers people preferred for business, management and finance questions', kind: 'arena', keys: ['industry_business_and_management_and_financial_operations'] },
-  { id: 'writing', label: 'Creative writing', plain: 'Which answers people preferred for creative writing', kind: 'arena', keys: ['creative_writing'] },
-];
-
-export interface AreaCell {
-  /** 1 = best among the models shown that have results here. */
-  rank: number;
-  of: number;
-  /** 0–1 relative position among those models, for shading. */
-  strength: number;
-  tests: number;
-}
-
 export interface OverviewRow {
   model: ModelVersion;
   maker: string;
@@ -63,7 +33,6 @@ export interface OverviewRow {
   independentTests: number;
   status: EvidenceStatus;
   claim?: MakerClaim;
-  areas: Record<string, AreaCell | undefined>;
 }
 
 function best<T>(items: T[], score: (t: T) => number): T | undefined {
@@ -79,15 +48,6 @@ function bestEpoch(results: EpochResult[]): Map<string, Map<string, number>> {
     out.set(r.model, m);
   }
   return out;
-}
-
-function rankCells(values: Map<string, number>): Map<string, AreaCell> {
-  const sorted = [...values.entries()].sort((a, b) => b[1] - a[1]);
-  const max = sorted[0]?.[1] ?? 0;
-  const min = sorted.at(-1)?.[1] ?? 0;
-  return new Map(
-    sorted.map(([model, v], i) => [model, { rank: i + 1, of: sorted.length, strength: max === min ? 1 : (v - min) / (max - min), tests: 1 }]),
-  );
 }
 
 export function overviewRows(): OverviewRow[] {
@@ -122,38 +82,11 @@ export function overviewRows(): OverviewRow[] {
       independentTests,
       status: independentTests === 0 ? 'maker-says' : independentTests < TESTED_THRESHOLD && !idx ? 'early' : 'tested',
       claim,
-      areas: {},
     };
   });
 
   const arenaRanked = rows.filter((r) => r.arena).sort((a, b) => b.arena!.rating - a.arena!.rating);
   arenaRanked.forEach((r, i) => Object.assign(r.arena!, { here: i + 1, of: arenaRanked.length }));
-
-  for (const area of AREAS) {
-    // Average relative position across the area's benchmarks; rank on that average.
-    const totals = new Map<string, { sum: number; n: number }>();
-    for (const key of area.keys) {
-      const values = new Map<string, number>();
-      if (area.kind === 'epoch') {
-        for (const [model, scores] of epochBest) if (scores.has(key)) values.set(model, scores.get(key)!);
-      } else {
-        for (const e of lmarena?.entries ?? []) {
-          if (e.category === key && ids.has(e.model)) values.set(e.model, Math.max(values.get(e.model) ?? -Infinity, e.rating));
-        }
-      }
-      if (values.size < 3) continue; // too few models to compare meaningfully
-      for (const [model, cell] of rankCells(values)) {
-        const t = totals.get(model) ?? { sum: 0, n: 0 };
-        totals.set(model, { sum: t.sum + cell.strength, n: t.n + 1 });
-      }
-    }
-    const averaged = new Map([...totals].map(([m, t]) => [m, t.sum / t.n]));
-    const ranked = rankCells(averaged);
-    for (const row of rows) {
-      const cell = ranked.get(row.model.id);
-      row.areas[area.id] = cell && { ...cell, strength: averaged.get(row.model.id)!, tests: totals.get(row.model.id)!.n };
-    }
-  }
 
   return rows.sort((a, b) => (b.eci?.value ?? -1) - (a.eci?.value ?? -1));
 }
