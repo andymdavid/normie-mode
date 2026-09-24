@@ -14,3 +14,4 @@ source_ids:
   modelsdev: anthropic/claude-fable-5-1
   lmarena:
     - claude-fable-5.1-max
+openrouter_id: anthropic/claude-fable-5.1

@@ -14,3 +14,4 @@ source_ids:
   modelsdev: deepseek/deepseek-v4-pro
   lmarena:
     - deepseek-v4-pro-high-20260813
+openrouter_id: deepseek/deepseek-v4-pro-0813

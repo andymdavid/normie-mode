@@ -11,3 +11,4 @@ source_ids:
   epoch:
     - claude-opus-5-5
   modelsdev: anthropic/claude-opus-5-5
+openrouter_id: anthropic/claude-opus-5.5

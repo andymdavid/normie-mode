@@ -11,3 +11,4 @@ source_ids:
   epoch:
     - gpt-6-sol
   modelsdev: openai/gpt-6-sol
+openrouter_id: openai/gpt-6-sol

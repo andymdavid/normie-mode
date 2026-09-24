@@ -10,7 +10,8 @@
     "check": "astro check",
     "validate": "tsx scripts/validate.ts",
     "test": "vitest run",
-    "import": "tsx scripts/import.ts"
+    "import": "tsx scripts/import.ts",
+    "eval": "tsx scripts/eval.ts"
   },
   "dependencies": {
     "astro": "^7.3.4",

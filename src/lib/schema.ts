@@ -65,6 +65,8 @@ export const modelVersionSchema = z.object({
     note: z.string().optional(),
   }),
   summary: z.string().optional(),
+  /** Model id used to run Normie Mode tests through OpenRouter. */
+  openrouter_id: z.string().optional(),
   // How this exact version is named in each imported source (D-019). Reasoning-effort
   // variants map to one version; the effort is kept as result configuration.
   source_ids: z

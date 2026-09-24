@@ -14,3 +14,4 @@ source_ids:
   modelsdev: moonshotai/kimi-k3
   lmarena:
     - kimi-k3-max
+openrouter_id: moonshotai/kimi-k3

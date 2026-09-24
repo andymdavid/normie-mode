@@ -13,3 +13,4 @@ source_ids:
   modelsdev: anthropic/claude-haiku-4-5-20251001
   lmarena:
     - claude-haiku-4-5-20251001
+openrouter_id: anthropic/claude-haiku-4.5
