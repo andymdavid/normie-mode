@@ -37,7 +37,7 @@ const pct = (v: number) => `${Math.max(0, ((v - floor) / (max - floor || 1)) * 1
 <section class={`chart-card${compact ? ' is-compact' : ''}`} id={id}>
   <h3 class="chart-title">{title}</h3>
   <p class="chart-sub">{sub} · {lowerIsBetter ? 'Lower is better' : 'Higher is better'}</p>
-  {summary && <p class="chart-summary">{summary}</p>}
+  <p class="chart-summary">{summary}</p>
   {sorted.length === 0 ? (
     <p class="bars-empty">No results yet for the models we track.</p>
   ) : (
@@ -60,9 +60,7 @@ const pct = (v: number) => `${Math.max(0, ((v - floor) / (max - floor || 1)) * 1
       ))}
     </div>
   )}
-  {source && (
-    <div class="chart-foot">
-      Source: <a href={source.url}>{source.name}</a>{source.note && <> · {source.note}</>}
-    </div>
-  )}
+  <div class="chart-foot">
+    {source && <>Source: <a href={source.url}>{source.name}</a>{source.note && <> · {source.note}</>}</>}
+  </div>
 </section>

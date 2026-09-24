@@ -25,7 +25,9 @@ const jobs = jobsInOrder().map((job) => ({ job, ...jobScores(job) }));
 </div>
 <style>
   .job-grid { row-gap: 2.5rem; }
-  .job-card { display: flex; flex-direction: column; background: none; padding: 0; }
+  /* Subgrid: title, description, bars and footer share rows across each line of cards,
+     so a longer description in one card keeps every table aligned. */
+  .job-card { display: grid; grid-row: span 4; grid-template-rows: subgrid; row-gap: 0; align-content: start; background: none; padding: 0; }
   .job-card:hover { background: none; }
   .job-card:hover h3 { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
   .job-card h3 { padding-bottom: 0.6rem; border-bottom: 2px solid var(--rule); }
@@ -35,5 +37,5 @@ const jobs = jobsInOrder().map((job) => ({ job, ...jobScores(job) }));
   .mini-label { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .mini-row .bar-track { height: 8px; margin-right: 0; }
   .mini-value { text-align: right; font: 500 0.8rem var(--mono); }
-  .job-foot { margin: auto 0 0; font: 0.7rem var(--mono); text-transform: uppercase; color: var(--muted); }
+  .job-foot { margin: 0; font: 0.7rem var(--mono); text-transform: uppercase; color: var(--muted); }
 </style>
