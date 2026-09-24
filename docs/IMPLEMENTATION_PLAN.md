@@ -164,6 +164,14 @@ Progress note (2026-09-24): Built as the homepage (`src/pages/index.astro`, data
 - Delivered: new tokens and layout, a reusable bar chart component, the redesigned homepage (summary band, highlights, job grid, one chart per metric, contents list), `/jobs` and nine job pages.
 - Verification: `npm test` checks every test points at real imported data and every job has results; builds and type-checks cleanly; screenshots reviewed in light and dark mode.
 
+### N-007 — First Normie Mode test (micro-pilot)
+
+- Status: `ready` (built; waiting for an OpenRouter key and product-owner go-ahead to spend about $1)
+- Dependencies: D-009 (this is its first, narrow application)
+- Delivered: the "spot unusual transactions" suite (`evals/unusual-transactions/`), a budget-capped OpenRouter runner (`npm run eval`), and the write-up `docs/evals/unusual-transactions.md`.
+- Acceptance criteria: all six pilot models run on all five cases within budget; every answer, cost and score is saved; results are reviewed before being shown on the site.
+- Next, after results: show them on `/jobs/office-work` and the spreadsheet job pages as the first "Normie Mode test", with the real input and each model's answer.
+
 ### N-003 — Head-to-head comparison page
 
 - Status: `proposed`
@@ -219,7 +227,7 @@ A published recommendation is flagged for review when: a newer version appears i
 
 ## Open decisions
 
-- D-009: First-party test protocol
+- D-009: First-party test protocol (a narrow micro-pilot is defined in `docs/evals/unusual-transactions.md`; the general protocol is still open)
 - D-014: Smallest useful intelligence layer
 - D-015: Pilot success gate
 

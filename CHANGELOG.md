@@ -6,6 +6,7 @@ This file records meaningful changes to the Normie Mode product, implementation,
 
 ### Added
 
+- First Normie Mode test, built and ready: "Spot unusual transactions", with five fixed expense sheets, automatic scoring and a budget-capped OpenRouter runner (about $1 for the six-model pilot).
 - Design system rewritten in the style of Artificial Analysis (D-022): white page, grey summary bands, serif section heads, pill navigation, one chart per card.
 - Job score: each "Best AI for…" card on the homepage now shows a top-five ranking combining that job's tests, and each job page leads with the full job-score chart.
 - "Best AI for…" job pages (D-023): nine everyday jobs, each shown as one chart per relevant test, with plain one-line test descriptions.
