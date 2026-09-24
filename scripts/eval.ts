@@ -3,17 +3,19 @@
 //   npm run eval -- --dry-run                  estimate cost only, no API calls
 //   npm run eval -- --mock                     full pipeline with fake answers, no API calls
 //   npm run eval -- --budget 3                 real run (needs OPENROUTER_API_KEY, env or .env)
-//   options: --suite spreadsheet-questions|unusual-transactions  --models a,b,c  --runs 1  --budget 3 (USD)
+//   options: --suite spreadsheet-questions|messy-spreadsheet-questions|unusual-transactions  --models a,b,c  --runs 1  --budget 3 (USD)
 import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { loadGraph } from '../src/lib/graph';
 import * as spreadsheetQuestions from '../evals/spreadsheet-questions/suite';
 import * as unusualTransactions from '../evals/unusual-transactions/suite';
+import * as messySpreadsheetQuestions from '../evals/messy-spreadsheet-questions/suite';
 import type { Suite, SuiteCase, SuiteScore } from '../evals/types';
 
 const SUITES: Record<string, Suite<any>> = {
   [spreadsheetQuestions.SUITE_ID]: spreadsheetQuestions,
   [unusualTransactions.SUITE_ID]: unusualTransactions,
+  [messySpreadsheetQuestions.SUITE_ID]: messySpreadsheetQuestions,
 };
 
 // Read OPENROUTER_API_KEY from a local, git-ignored .env if it isn't already set.
@@ -75,10 +77,15 @@ const calls = cases.length * RUNS;
 let estimate = 0;
 console.log(`${suite.SUITE_TITLE} (${SUITE_ID} v${SUITE_VERSION}): ${cases.length} cases × ${RUNS} run(s) × ${targets.length} models = ${calls * targets.length} calls`);
 console.log(`Prompt ≈ ${Math.round(avgPrompt)} tokens; estimate allows ${EST_OUTPUT_TOKENS} output tokens per call.\n`);
+const estimateFor = (route: string) => {
+  const p = priceMap.get(route);
+  if (!p) throw new Error(`OpenRouter has no model "${route}"`);
+  return avgPrompt * p.input + EST_OUTPUT_TOKENS * p.output;
+};
+// Cheapest first, so if the budget cap is hit it only ever cuts the expensive models.
+targets.sort((a, b) => estimateFor(a.route) - estimateFor(b.route));
 for (const t of targets) {
-  const p = priceMap.get(t.route);
-  if (!p) throw new Error(`OpenRouter has no model "${t.route}"`);
-  const each = avgPrompt * p.input + EST_OUTPUT_TOKENS * p.output;
+  const each = estimateFor(t.route);
   estimate += each * calls;
   console.log(`  ${t.name.padEnd(22)} ${t.route.padEnd(34)} ≈ $${(each * calls).toFixed(3)}`);
 }

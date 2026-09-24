@@ -3,8 +3,13 @@ import { mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import * as spreadsheetQuestions from '../evals/spreadsheet-questions/suite';
 import * as unusualTransactions from '../evals/unusual-transactions/suite';
+import * as messySpreadsheetQuestions from '../evals/messy-spreadsheet-questions/suite';
 
-const suites = { [spreadsheetQuestions.SUITE_ID]: spreadsheetQuestions, [unusualTransactions.SUITE_ID]: unusualTransactions } as const;
+const suites = {
+  [spreadsheetQuestions.SUITE_ID]: spreadsheetQuestions,
+  [unusualTransactions.SUITE_ID]: unusualTransactions,
+  [messySpreadsheetQuestions.SUITE_ID]: messySpreadsheetQuestions,
+} as const;
 const id = process.argv[2] as keyof typeof suites;
 const suite = suites[id];
 if (!suite) throw new Error(`Usage: npm run eval:generate -- ${Object.keys(suites).join('|')}`);

@@ -172,6 +172,7 @@ Progress note (2026-09-24): Built as the homepage (`src/pages/index.astro`, data
 - Delivered: both suites, a shared test interface (`evals/types.ts`), `npm run eval:generate`, and the budget-capped runner (`npm run eval -- --suite <id>`).
 - Acceptance criteria: all six pilot models run on all five cases within budget; every answer, cost and score is saved; results are reviewed before being shown on the site.
 - Progress note (2026-09-24, run `2026-09-24-09-11`, total $2.93): Claude Opus 5.5, Claude Sonnet 5, GPT-6 Sol and Gemini 3.8 Flash scored 30/30; DeepSeek V4 Pro 29/30; GPT-6 Luna 26/30. Mistakes were right names with wrong amounts (e.g. an average order value or a customer total). The test separates cheap models but not the top tier, so a harder version 2 is needed before publishing a ranking. Cost was about 3× the estimate because of hidden thinking (Claude Sonnet 5 used ~19k thinking tokens per case); the estimator now uses measured figures.
+- Version 2 built (2026-09-24): `messy-spreadsheet-questions` (write-up in `docs/evals/messy-spreadsheet-questions.md`), with untidy data that changes the answers and eight harder questions. The runner now runs the cheapest models first so the budget cap only cuts expensive ones.
 - Next, after results: show them on the office-work job page as the first Normie Mode test, with each question, the right answer and each model's answer.
 
 ### N-003 — Head-to-head comparison page

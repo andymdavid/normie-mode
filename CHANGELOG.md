@@ -6,6 +6,7 @@ This file records meaningful changes to the Normie Mode product, implementation,
 
 ### Added
 
+- Harder Normie Mode test built: "Answer business questions from a messy spreadsheet", with duplicate entries, returns, inconsistent customer names and mixed date formats that change the answers, and eight questions.
 - First Normie Mode test run (2026-09-24, $2.93): four models scored 30/30, DeepSeek V4 Pro 29/30, GPT-6 Luna 26/30; results kept for review, not yet published.
 - First Normie Mode test, built: "Answer business questions from a spreadsheet", with five sales ledgers, six manager questions each, automatic scoring and a budget-capped OpenRouter runner (about $1–2 for the six-model pilot). "Spot unusual transactions" is also built, kept for a later checking-and-reviewing job.
 - Design system rewritten in the style of Artificial Analysis (D-022): white page, grey summary bands, serif section heads, pill navigation, one chart per card.
