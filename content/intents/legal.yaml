@@ -1,9 +1,9 @@
 id: legal
 label: Best AI for legal questions
-priority: 30
+priority: 25
 scope: in
 coverage: partial
-note: Based on people's votes only.
+note: Mostly based on people's votes.
 match:
   - legal
   - law

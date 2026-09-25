@@ -2,6 +2,6 @@ id: simpleqa-verified
 source: epoch
 key: SimpleQA Verified
 title: Answering short factual questions correctly
-what: Questions with one checkable answer. Confident wrong answers count against it.
+what: Short questions that each have one checkable answer.
 by: Google DeepMind
 url: https://epoch.ai/benchmarks

@@ -40,7 +40,7 @@ tests:
     closeness: direct
 norm:
   status: draft
-  intro: These tests use real professional tasks, like the ones consultants and analysts do. They are some of the closest tests we have to everyday office work.
+  intro: Two of these tests use real professional tasks, like the ones consultants and analysts do. They are some of the closest tests we have to everyday office work.
   good_at:
     - Brainstorming ideas and options.
     - Drafting plans, proposals and summaries.

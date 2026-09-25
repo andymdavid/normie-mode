@@ -35,7 +35,7 @@ tests:
     closeness: related
 norm:
   status: draft
-  intro: AI is good at reading documents for you. These tests check whether it pulls out the right details and copes with long, detailed requests.
+  intro: AI is good at reading documents for you. These tests check whether it pulls the right details into a table, and which answers people prefer for long, detailed requests.
   good_at:
     - Summarising long documents.
     - Pulling figures and names into a table.

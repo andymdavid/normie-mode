@@ -3,7 +3,7 @@ label: Best AI for Excel and spreadsheets
 priority: 10
 scope: in
 coverage: partial
-note: Our draft spreadsheet test covers questions about sales data; nothing yet covers working inside Excel files.
+note: Nothing here yet tests working inside real Excel files, only answering questions about the data.
 match:
   - excel
   - spreadsheet
@@ -33,7 +33,7 @@ tests:
 normie_test: spreadsheet-questions
 norm:
   status: draft
-  intro: "Good news: AI is now pretty reliable at answering questions about a spreadsheet. The catch is that it can sound sure while using the wrong figures, so it's worth a quick check."
+  intro: AI is getting good at answering questions about spreadsheets. The catch is that it can sound sure while using the wrong figures, so it's worth a quick check.
   good_at:
     - Answering questions about your data, like totals, top customers and trends.
     - Writing and explaining formulas.

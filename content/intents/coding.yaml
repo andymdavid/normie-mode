@@ -72,7 +72,7 @@ tests:
     closeness: direct
 norm:
   status: draft
-  intro: Coding is where AI has been tested most thoroughly, so these charts are some of the most reliable on the site.
+  intro: Coding is one of the most heavily tested areas, so these charts are among the most reliable on the site.
   good_at:
     - Writing small scripts and tools from a plain-English description.
     - Explaining code you didn't write.

@@ -23,7 +23,7 @@ tests:
     closeness: related
 norm:
   status: draft
-  intro: Nobody has properly tested AI on making presentations yet, so there's no clear winner. What I can show you is which models are strongest at the writing and planning part.
+  intro: Nobody has properly tested AI on making presentations yet, so there's no clear winner. What I can show you is which models are strongest at writing and following instructions, which is most of the job.
   good_at:
     - Turning your notes into a clear outline.
     - Writing slide titles and short bullet points.
