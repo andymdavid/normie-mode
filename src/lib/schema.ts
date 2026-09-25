@@ -258,6 +258,16 @@ export const normLinesSchema = z.object({
 });
 export type NormLines = z.infer<typeof normLinesSchema>;
 
+/** Data-driven message templates: first variant whose conditions match the page's facts wins. */
+export const normMessagesSchema = z.object({
+  id,
+  slots: z.record(
+    z.string(),
+    z.array(z.object({ when: z.record(z.string(), z.union([z.string(), z.boolean()])).optional(), text: z.string() })).min(1),
+  ),
+});
+export type NormMessages = z.infer<typeof normMessagesSchema>;
+
 export type Source = z.infer<typeof sourceSchema>;
 export type ModelFamily = z.infer<typeof modelFamilySchema>;
 export type ModelVersion = z.infer<typeof modelVersionSchema>;

@@ -8,6 +8,7 @@ import { latestRun, rankRun } from '../../lib/normie-tests';
 import { overviewRows } from '../../lib/overview';
 import { CLOSENESS_LABEL, allTaskPages, effectiveTests, leadSentence, normLine, subtasksOf, taskPath, taskScores, tasksByDemand, testFloor, testRows, testSource } from '../../lib/tasks';
 import { PREVIEW, formatDate } from '../../lib/view';
+import { taskCostNote, taskEvidenceNote } from '../../lib/norm';
 
 export function getStaticPaths() {
   return allTaskPages().map((task) => ({ params: { id: task.id } }));
@@ -27,22 +28,12 @@ const noResults = effectiveTests(task).filter((t) => !evidence.some((e) => e.tes
 const ownRun = PREVIEW && task.normie_test ? latestRun(task.normie_test) : undefined;
 const norm = task.norm;
 const normOn = !!norm && (norm.status === 'approved' || PREVIEW);
-const scoreNorm = normLine(scores.closeness === 'direct' ? 'task_score' : scores.closeness === 'related' ? 'related_only' : 'general_only');
 const costRows = overviewRows().map((r) => ({
   id: r.model.id, label: r.model.name, maker: r.maker, href: `/models/${r.model.id}`,
   value: r.costPer1000, display: r.costPer1000 === undefined ? undefined : `$${r.costPer1000 < 10 ? r.costPer1000.toFixed(2) : r.costPer1000.toFixed(0)}`,
 }));
-// Cost, in terms of this page: how the top models here compare on price.
-const priced = top.map((r) => ({ name: r.label, cost: costRows.find((c) => c.id === r.id)?.value })).filter((x) => x.cost !== undefined) as { name: string; cost: number }[];
-const money = (v: number) => (v < 10 ? `$${v.toFixed(2)}` : `$${v.toFixed(0)}`);
-const cheapestTop = [...priced].sort((a, b) => a.cost - b.cost)[0];
-const dearestTop = [...priced].sort((a, b) => b.cost - a.cost)[0];
-const costNote =
-  cheapestTop && dearestTop && cheapestTop.name !== dearestTop.name && dearestTop.cost / cheapestTop.cost >= 1.5
-    ? `Of the top ${priced.length} here, ${cheapestTop.name} is the cheapest at ${money(cheapestTop.cost)} per 1,000 requests. ${dearestTop.name} costs about ${Math.round(dearestTop.cost / cheapestTop.cost)} times as much.`
-    : cheapestTop
-      ? `The top ${priced.length} here cost about the same, from ${money(cheapestTop.cost)} per 1,000 requests.`
-      : undefined;
+const evidenceNote = taskEvidenceNote(task);
+const costNote = taskCostNote(task);
 const others = tasksByDemand().filter((t) => t.task.id !== (hub?.id ?? task.id)).slice(0, 3);
 const month = formatDate(new Date().toISOString().slice(0, 10)).replace(/^\d+ /, '');
 const leaderLine = top.length
@@ -57,7 +48,11 @@ const sections = [['answer', 'The short answer'], ...(normOn ? [['guide', "Norm'
   <div class="eyebrow"><a href="/best-ai-for">Best AI for…</a>{hub && <> / <a href={taskPath(hub)}>{hub.label.replace(/^Best AI for /, '')}</a></>}</div>
   <h1>{task.label}</h1>
   <p class="lede">{task.covers}</p>
-  {norm && <NormSays text={norm.intro} status={norm.status} />}
+  {normOn ? (
+    <NormSays text={[norm!.intro, evidenceNote].filter(Boolean).join(' ')} status={norm!.status} />
+  ) : (
+    <NormSays text={evidenceNote} fromData />
+  )}
 
   <div class="band">
     <div class="band-inner summary-grid">
@@ -97,7 +92,6 @@ const sections = [['answer', 'The short answer'], ...(normOn ? [['guide', "Norm'
         summary={leaderLine}
         showEmpty={false}
       />
-      <NormSays {...scoreNorm} />
 
       {normOn && (
         <>

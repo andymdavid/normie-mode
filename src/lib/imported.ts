@@ -104,11 +104,16 @@ function read<T>(name: string): T | undefined {
   return existsSync(f) ? (JSON.parse(readFileSync(f, 'utf8')) as T) : undefined;
 }
 
-let cached: Imported | undefined;
+let cached: { data: Imported; at: number } | undefined;
+const MAX_AGE_MS = process.env.NODE_ENV === 'production' ? Infinity : 2000;
+
+/** Imported snapshots, reloaded after 2s outside production builds so `astro dev` sees re-imports. */
 export function imported(): Imported {
-  return (cached ??= {
-    epoch: read<EpochSnapshot>('epoch'),
-    modelsdev: read<ModelsDevSnapshot>('modelsdev'),
-    lmarena: read<ArenaSnapshot>('lmarena'),
-  });
+  if (!cached || Date.now() - cached.at > MAX_AGE_MS) {
+    cached = {
+      data: { epoch: read<EpochSnapshot>('epoch'), modelsdev: read<ModelsDevSnapshot>('modelsdev'), lmarena: read<ArenaSnapshot>('lmarena') },
+      at: Date.now(),
+    };
+  }
+  return cached.data;
 }

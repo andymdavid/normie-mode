@@ -176,14 +176,9 @@ export const taskPath = (task: Intent) => `/best-ai-for/${task.id}`;
 const LINE_MOODS: Record<string, 'default' | 'happy' | 'smug' | 'wise'> = {
   bars: 'happy',
   tasks: 'happy',
-  ci_lines: 'wise',
-  task_score: 'wise',
   votes: 'wise',
   cost: 'default',
   normie_test: 'happy',
-  related_only: 'smug',
-  general_only: 'smug',
-  new_models: 'smug',
 };
 
 export function normLine(key: string): { text?: string; status: 'draft' | 'approved'; mood?: 'default' | 'happy' | 'smug' | 'wise' } {

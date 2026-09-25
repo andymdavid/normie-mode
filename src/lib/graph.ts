@@ -10,6 +10,7 @@ import {
   makerClaimSchema,
   intentSchema,
   normLinesSchema,
+  normMessagesSchema,
   testSchema,
   modelVersionSchema,
   recommendationSchema,
@@ -22,6 +23,7 @@ import {
   type MakerClaim,
   type Intent,
   type NormLines,
+  type NormMessages,
   type Test,
   type ModelVersion,
   type Recommendation,
@@ -43,6 +45,7 @@ export interface Graph {
   tests: Map<string, Test>;
   intents: Map<string, Intent>;
   norm: Map<string, NormLines>;
+  normMessages: Map<string, NormMessages>;
   /** Result ID -> file it was defined in, for error messages. */
   origins: Map<string, string>;
 }
@@ -117,14 +120,19 @@ export function loadGraph(root = join(process.cwd(), 'content')): Graph {
     tests: loadEach('tests', testSchema),
     intents: loadEach('intents', intentSchema),
     norm: loadEach('norm', normLinesSchema),
+    normMessages: loadEach('norm-messages', normMessagesSchema),
     origins,
   };
   if (problems.length) throw new ContentError(problems);
   return graph;
 }
 
-let cached: Graph | undefined;
+let cached: { graph: Graph; at: number } | undefined;
+/** Content only changes between builds, but in `astro dev` edits must show up, so reload after 2s. */
+const MAX_AGE_MS = process.env.NODE_ENV === 'production' ? Infinity : 2000;
+
 /** Memoised graph for page rendering; the validator loads fresh. */
 export function graph(): Graph {
-  return (cached ??= loadGraph());
+  if (!cached || Date.now() - cached.at > MAX_AGE_MS) cached = { graph: loadGraph(), at: Date.now() };
+  return cached.graph;
 }

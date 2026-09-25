@@ -49,6 +49,16 @@ Not Norm:
 - "The ECI aggregates IRT-calibrated benchmark performance." (jargon)
 - "Studies show AI saves 40% of your time on CVs." (a number with no source)
 
+## Accuracy model
+
+Norm's words come in two kinds, and the build keeps them apart:
+
+- **Advice (hand-written).** His opening line and his three-part guide on each task page (`content/intents/*.yaml`) and shared method lines (`content/norm/charts.yaml`). These may only give advice. The validator rejects any hand-written line that names a model or maker, and any intro that includes a number or makes a claim about the evidence ("these tests", "people's votes", "scores", "tested", "comes out on top").
+- **Anything about the data (generated).** What the evidence is, who leads, who's too close to call, and what the top models cost come from templates in `content/norm-messages/messages.yaml`, filled with facts computed from the same data as the page's charts (`src/lib/norm.ts`). Each template has conditions, for example votes only, half votes, or evidence inherited from the hub, and the first matching variant is used. A template that needs a fact the page doesn't have fails the build.
+- **Tests** (`src/lib/norm.test.ts`) render every message on every task page and check it against the data: the named leader matches the chart, "people's votes" appears only when the evidence is votes, and the cost note names the cheapest of the top-scoring models.
+
+To change what Norm says about the data, edit the template wording, not the page. To add a new kind of claim, add a fact in `taskFacts` and a template that uses it.
+
 ## Review
 
 Norm's lines are editorial. They're written as drafts (`status: draft`) and show only in preview until the product owner approves them (`status: approved`), in line with AGENTS.md.

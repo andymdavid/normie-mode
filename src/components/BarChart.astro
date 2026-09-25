@@ -1,5 +1,6 @@
 ---
 import NormSays from './NormSays.astro';
+import { renderSlot } from '../lib/norm';
 // One metric, one chart (D-021). Horizontal bars so model names stay readable at any width.
 // Single series colour; identity comes from the row label. Values sit at the bar tip.
 export interface BarDatum {
@@ -39,7 +40,7 @@ const max = Math.max(...withValue.map((r) => r.high ?? r.value!), 0);
 const [first, second] = [...withValue].sort((a, b) => (lowerIsBetter ? a.value! - b.value! : b.value! - a.value!));
 const tie =
   tieNote && !compact && first && second && first.low !== undefined && second.high !== undefined && first.low <= second.high
-    ? `${first.label} and ${second.label} are too close to call here. Their lines overlap, so either is a sensible pick.`
+    ? renderSlot('chart.tie', { first: first.label, second: second.label })
     : undefined;
 const pct = (v: number) => `${Math.max(0, ((v - floor) / (max - floor || 1)) * 100)}%`;
 ---

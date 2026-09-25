@@ -1,0 +1,40 @@
+# Norm's data-driven messages (docs/norm-voice.md, "Accuracy model").
+# Each slot has variants; the first whose `when` conditions all match the page's facts is used.
+# Text may only state data through {placeholders}; a missing fact or no matching variant fails the build.
+id: messages
+slots:
+  task.evidence:
+    - when: { has_scores: false }
+      text: "No test has results for this yet, so I can't point you to a winner."
+    - when: { inherited: true }
+      text: "There's no test of {name} on its own yet, so I'm using the tests for {hub}. {leader} comes out on top there."
+    - when: { closeness: direct, votes_only: true }
+      text: "The evidence here is people's votes on {vote_topics}, not a proper test. {leader} is the one people prefer most."
+    - when: { closeness: direct, mostly_votes: true }
+      text: "Most of the evidence here is people's votes on {vote_topics}, so treat it as a rough guide. On the combined score, {leader} comes out on top."
+    - when: { closeness: direct, half_votes: true }
+      text: "Half of the evidence here is people's votes on {vote_topics}, so treat it as a rough guide. On the combined score, {leader} comes out on top."
+    - when: { closeness: direct }
+      text: "{direct_words} below {direct_verb} {name} directly{related_clause}. On the combined score, {leader} comes out on top."
+    - when: { closeness: related, votes_only: true }
+      text: "Nothing tests {name} directly yet. The closest evidence is people's votes on {vote_topics}, where {leader} does best."
+    - when: { closeness: related }
+      text: "Nothing tests {name} directly yet, so I've used {related_words} of related skills below. On the combined score, {leader} comes out on top, but treat it as a guide."
+    - when: { closeness: general }
+      text: "Nothing tests {name} directly yet, so this is the overall ranking. {leader} comes out on top."
+  task.close:
+    - when: { close_call: true }
+      text: "{second} is only just behind, so either is a good choice."
+  task.cost:
+    - when: { has_leader_prices: false }
+      text: ""
+    - when: { leaders_similar_price: true }
+      text: "The {leaders_count_words} models that score best for {name} cost about the same, from {cheapest_leader_price} per 1,000 requests."
+    - text: "Of the {leaders_count_words} models that score best for {name}, {cheapest_leader} is the cheapest at {cheapest_leader_price} per 1,000 requests. {dearest_leader} costs about {leader_price_ratio} times as much."
+  task.cost_overall:
+    - when: { cheapest_overall_in_leaders: false }
+      text: "The cheapest model of all, {cheapest_overall}, isn't one of them."
+  chart.tie:
+    - text: "{first} and {second} are too close to call here. Their lines overlap, so either is a sensible pick."
+  home.new_models:
+    - text: "{new_models} came out in the last few days. Independent testers have {max_results_words} for them so far, so for now it's mostly what the makers say."

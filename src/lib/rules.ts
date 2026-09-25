@@ -150,6 +150,32 @@ export function reviewFlags(g: Graph, asOf = today()): ReviewFlag[] {
   return flags;
 }
 
+/**
+ * Norm's hand-written lines may only give advice. Anything about models, numbers or the evidence
+ * must come from a data-driven template (src/lib/norm.ts), so it can't drift from the charts.
+ */
+const EVIDENCE_CLAIMS: [RegExp, string][] = [
+  [/\b(these|those|no|a proper|any|the) tests?\b|\btests\b/i, 'talks about tests'],
+  [/\bresults come\b/i, 'says where results come from'],
+  [/\btested\b/i, 'talks about testing'],
+  [/people's votes/i, "talks about people's votes"],
+  [/\bbenchmarks?\b/i, 'talks about benchmarks'],
+  [/\b(charts?|scores?|rankings?|evidence)\b/i, 'talks about the charts or evidence'],
+  [/\b(comes? out on top|leads the|the top (two|three|four|few))\b/i, 'says who leads'],
+];
+
+/** Checks for evidence claims that only intros must avoid; guide tips may use these words as advice. */
+const INTRO_ONLY = new Set(['talks about testing', 'talks about the charts or evidence']);
+
+export function lintNormText(g: Graph, text: string, kind: 'intro' | 'guide' = 'intro'): string[] {
+  const problems: string[] = [];
+  if (kind === 'intro' && /\d/.test(text)) problems.push('contains a number');
+  const names = [...g.models.values()].map((m) => m.name).concat([...g.families.values()].flatMap((f) => [f.name, f.provider]));
+  for (const n of names) if (new RegExp(`\\b${n.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`).test(text)) problems.push(`names "${n}"`);
+  for (const [re, why] of EVIDENCE_CLAIMS) if (re.test(text) && (kind === 'intro' || !INTRO_ONLY.has(why))) problems.push(why);
+  return problems;
+}
+
 export interface ValidationReport {
   errors: string[];
   warnings: string[];
@@ -241,6 +267,10 @@ export function validate(g: Graph, asOf = today()): ValidationReport {
 
   for (const i of g.intents.values()) {
     const at = where('intents', i.id);
+    if (i.norm) {
+      const lines: [string, 'intro' | 'guide'][] = [[i.norm.intro, 'intro'], ...[...i.norm.good_at, ...i.norm.trips_up, ...i.norm.how_to].map((l) => [l, 'guide'] as [string, 'guide'])];
+      for (const [line, kind] of lines) for (const p of lintNormText(g, line, kind)) errors.push(`${at}: Norm's line ${p}; data claims must use a message template: "${line}"`);
+    }
     for (const t of i.tests) need(g.tests.has(t.test), at, `unknown test "${t.test}"`);
     if (i.parent) {
       const p = g.intents.get(i.parent);
@@ -250,6 +280,13 @@ export function validate(g: Graph, asOf = today()): ValidationReport {
     if (i.scope === 'out') need(!!i.out_reason, at, 'out-of-scope intents need an out_reason');
     if (i.scope === 'in' && !i.page) need(!!i.covers, at, 'task pages need a "covers" line');
     if (i.coverage !== 'gap' && !i.page) need(i.tests.some((t) => t.closeness !== 'general') || !!i.normie_test || !!i.parent, at, `${i.coverage} coverage needs a direct or related test`);
+  }
+
+  for (const set of g.norm.values()) {
+    for (const [key, line] of Object.entries(set.lines)) {
+      // Shared lines explain methods (so may include figures like "1,000 requests"), but never name models.
+      for (const p of lintNormText(g, line, 'guide')) errors.push(`${where('norm', set.id)}: line "${key}" ${p}; data claims must use a message template`);
+    }
   }
 
   const publishedScopes = new Map<string, string>();

@@ -5,6 +5,7 @@ import CapabilityCostChart from '../components/CapabilityCostChart.astro';
 import TaskGrid from '../components/TaskGrid.astro';
 import NormSays from '../components/NormSays.astro';
 import { allTaskPages, normLine, tasksByDemand } from '../lib/tasks';
+import { countWords, renderSlot } from '../lib/norm';
 import { imported } from '../lib/imported';
 import { EVIDENCE_STATUS_LABEL, TYPICAL_REQUEST, overviewRows, picks, type OverviewRow } from '../lib/overview';
 import { formatDate } from '../lib/view';
@@ -140,7 +141,14 @@ const sections = [
 
       <div class="section-head" id="new"><h2>Too new to judge</h2></div>
       <p class="section-sub">What the makers say, until independent results arrive.</p>
-      <NormSays {...normLine('new_models')} />
+      <NormSays
+        text={fresh.length ? renderSlot('home.new_models', {
+          new_models: fresh.map((r) => r.model.name).join(fresh.length > 2 ? ', ' : ' and ').replace(/, ([^,]*)$/, ' and $1'),
+          max_results_words: (() => { const n = Math.max(...fresh.map((r) => r.independentTests)); return `${n === 1 ? 'only one result' : `at most ${countWords(n)} results`} each`; })(),
+        }) : undefined}
+        fromData
+        mood="smug"
+      />
       <div class="grid">
         {fresh.map((r) => (
           <div class="card">
