@@ -6,6 +6,12 @@ This file records meaningful changes to the Normie Mode product, implementation,
 
 ### Added
 
+- 31 specific task pages under the 15 hubs (e.g. vibe coding, job hunting, essay writing, travel planning), with inherited evidence labelled as related rather than direct.
+- Norm's four faces (default, happy, smug, wise) chosen per line, with a hover effect that enlarges the avatar and swaps faces.
+
+### Fixed
+
+- Norm's lines checked against the data: corrected the task-score explanation, cost bars, new-model evidence, and wording on coding, research, business, health, planning, Excel and presentations pages.
 - Task pages (D-025): 15 "Best AI for…" pages named after real searches, with evidence labelled by how closely it matches the task, replacing the nine job pages.
 - Norm as guide: a voice guide (`docs/norm-voice.md`), inline chat bubbles and a three-part guide on every task page, all draft until approved.
 - Demand data (D-024): an autocomplete sweep of "best AI for…" searches (UK and US), 19 search intents grouping 99% of the signal, and a preview-only page ranking demand against our coverage.

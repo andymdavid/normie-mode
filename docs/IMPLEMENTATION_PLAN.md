@@ -145,6 +145,10 @@ Every in-scope search intent (D-024) gets its own public page at `/best-ai-for/<
 - **Norm as tutor:** the warm-tutor voice defined in `docs/norm-voice.md`. Norm appears as inline chat bubbles (an opening line on each page, chart-reading tips, gap notes) and writes a short three-part guide (what AI is good at, where it trips up, how to get a good result). His words are plain text in the page, so they're indexed and work without JavaScript. They're editorial drafts (`status: draft`) that show only in preview until the product owner approves them. One-line summaries generated from the data ("X comes out on top") are not editorial and can show publicly.
 - **SEO:** page titles and descriptions follow the search wording and include the month.
 
+**Specific tasks (added 2026-09-25):** hubs also get specific task pages for distinct needs with strong search signal (31 so far, e.g. "Best AI for vibe coding", "Best AI for job hunting", "Best AI for travel planning"), because specific searches bring different audiences even when the evidence is shared. A specific task sets `parent` to its hub and matches its searches before the hub does; the hub's demand includes them. Specific tasks use their own tests where they exist, or inherit the hub's. Inherited tests are labelled "tests a related skill" at most, never "tests this task", and the page says the evidence comes from the hub.
+
+**Accuracy:** every line Norm says is checked against the data on its page before approval (sweep 2026-09-25). Norm's face varies by what he's saying (happy, wise, smug, default), and hovering enlarges the avatar and swaps to a random face.
+
 Five more LMArena categories were added to the test catalogue (other languages, long requests, science, conversations, overall) to give translation, documents and planning pages real evidence.
 
 ## Reference sites
