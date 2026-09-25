@@ -1,0 +1,7 @@
+id: arena-science
+source: lmarena
+key: industry_life_and_physical_and_social_science
+title: People's votes on science questions
+what: People compared two anonymous answers to questions in the life, physical and social sciences.
+by: LMArena
+url: https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset

@@ -1,0 +1,7 @@
+id: arena-long-requests
+source: lmarena
+key: longer_query
+title: People's votes on long, detailed requests
+what: People compared two anonymous answers to long requests with lots of detail to take in.
+by: LMArena
+url: https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset

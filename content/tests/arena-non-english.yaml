@@ -1,0 +1,7 @@
+id: arena-non-english
+source: lmarena
+key: non_english
+title: People's votes on questions in other languages
+what: People compared two anonymous answers to questions asked in languages other than English.
+by: LMArena
+url: https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset

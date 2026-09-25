@@ -1,0 +1,7 @@
+id: arena-conversations
+source: lmarena
+key: multi_turn
+title: People's votes on back-and-forth conversations
+what: People compared two anonymous answers in conversations with several back-and-forth turns.
+by: LMArena
+url: https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset

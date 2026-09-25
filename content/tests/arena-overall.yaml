@@ -1,0 +1,7 @@
+id: arena-overall
+source: lmarena
+key: overall
+title: People's votes overall
+what: People compared two anonymous answers to all kinds of questions and picked the better one.
+by: LMArena
+url: https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset
