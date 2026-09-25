@@ -4,7 +4,7 @@ import BarChart, { type BarDatum } from '../components/BarChart.astro';
 import CapabilityCostChart from '../components/CapabilityCostChart.astro';
 import TaskGrid from '../components/TaskGrid.astro';
 import NormSays from '../components/NormSays.astro';
-import { normLine, tasksByDemand } from '../lib/tasks';
+import { allTaskPages, normLine, tasksByDemand } from '../lib/tasks';
 import { imported } from '../lib/imported';
 import { EVIDENCE_STATUS_LABEL, TYPICAL_REQUEST, overviewRows, picks, type OverviewRow } from '../lib/overview';
 import { formatDate } from '../lib/view';
@@ -89,11 +89,10 @@ const sections = [
       <div class="section-head" id="tasks"><h2>Best AI for…</h2></div>
       <p class="section-sub">The everyday jobs people search for, most popular first. Each ranking combines the tests that measure that job.</p>
       <TaskGrid limit={9} />
-      <p style="margin-top:1.5rem"><a href="/best-ai-for">All {tasksByDemand().length} tasks →</a></p>
+      <p style="margin-top:1.5rem"><a href="/best-ai-for">All {allTaskPages().length} tasks →</a></p>
 
       <div class="section-head" id="capability"><h2>Capability</h2></div>
-      <p class="section-sub">One score that combines dozens of independent tests.</p>
-      <NormSays {...normLine('ci_lines')} />
+      <p class="section-sub">One score that combines dozens of independent tests. The thin line on each bar is the likely range.</p>
       <BarChart
         title="Epoch Capabilities Index"
         sub="Combines results from dozens of independent tests into one score. The thin line shows the likely range"

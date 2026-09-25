@@ -28,11 +28,21 @@ const ownRun = PREVIEW && task.normie_test ? latestRun(task.normie_test) : undef
 const norm = task.norm;
 const normOn = !!norm && (norm.status === 'approved' || PREVIEW);
 const scoreNorm = normLine(scores.closeness === 'direct' ? 'task_score' : scores.closeness === 'related' ? 'related_only' : 'general_only');
-const hasWhiskers = evidence.some((e) => e.rows.some((r) => r.low !== undefined));
 const costRows = overviewRows().map((r) => ({
   id: r.model.id, label: r.model.name, maker: r.maker, href: `/models/${r.model.id}`,
   value: r.costPer1000, display: r.costPer1000 === undefined ? undefined : `$${r.costPer1000 < 10 ? r.costPer1000.toFixed(2) : r.costPer1000.toFixed(0)}`,
 }));
+// Cost, in terms of this page: how the top models here compare on price.
+const priced = top.map((r) => ({ name: r.label, cost: costRows.find((c) => c.id === r.id)?.value })).filter((x) => x.cost !== undefined) as { name: string; cost: number }[];
+const money = (v: number) => (v < 10 ? `$${v.toFixed(2)}` : `$${v.toFixed(0)}`);
+const cheapestTop = [...priced].sort((a, b) => a.cost - b.cost)[0];
+const dearestTop = [...priced].sort((a, b) => b.cost - a.cost)[0];
+const costNote =
+  cheapestTop && dearestTop && cheapestTop.name !== dearestTop.name && dearestTop.cost / cheapestTop.cost >= 1.5
+    ? `Of the top ${priced.length} here, ${cheapestTop.name} is the cheapest at ${money(cheapestTop.cost)} per 1,000 requests. ${dearestTop.name} costs about ${Math.round(dearestTop.cost / cheapestTop.cost)} times as much.`
+    : cheapestTop
+      ? `The top ${priced.length} here cost about the same, from ${money(cheapestTop.cost)} per 1,000 requests.`
+      : undefined;
 const others = tasksByDemand().filter((t) => t.task.id !== (hub?.id ?? task.id)).slice(0, 3);
 const month = formatDate(new Date().toISOString().slice(0, 10)).replace(/^\d+ /, '');
 const leaderLine = top.length
@@ -103,7 +113,6 @@ const sections = [['answer', 'The short answer'], ...(normOn ? [['guide', "Norm'
 
       <div class="section-head" id="evidence"><h2>The evidence</h2></div>
       <p class="section-sub">Each test on its own, labelled by how closely it matches this task.</p>
-      {hasWhiskers && <NormSays {...normLine('ci_lines')} />}
       <div class="grid-2">
         {evidence.map((e) => (
           <BarChart
@@ -120,7 +129,7 @@ const sections = [['answer', 'The short answer'], ...(normOn ? [['guide', "Norm'
       {noResults.length > 0 && <p class="small muted" style="margin-top:1rem">Also relevant, but no results for current models yet: {noResults.map((t) => t.title).join(', ')}.</p>}
 
       <div class="section-head" id="cost"><h2>What it costs</h2></div>
-      <NormSays {...normLine('cost')} />
+      <NormSays text={costNote} fromData mood="default" />
       <BarChart
         title="Cost per 1,000 typical requests"
         sub="List price, about 1,500 words in and 500 out per request"

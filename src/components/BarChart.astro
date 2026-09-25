@@ -1,4 +1,5 @@
 ---
+import NormSays from './NormSays.astro';
 // One metric, one chart (D-021). Horizontal bars so model names stay readable at any width.
 // Single series colour; identity comes from the row label. Values sit at the bar tip.
 export interface BarDatum {
@@ -26,18 +27,27 @@ interface Props {
   showEmpty?: boolean;
   /** Narrow cards: shorter labels, no maker names. */
   compact?: boolean;
+  /** Let Norm point out when the top two are too close to call (from the data, so it's never generic). */
+  tieNote?: boolean;
 }
-const { title, sub, rows, lowerIsBetter = false, summary, source, floor = 0, id, showEmpty = true, compact = false } = Astro.props;
+const { title, sub, rows, lowerIsBetter = false, summary, source, floor = 0, id, showEmpty = true, compact = false, tieNote = true } = Astro.props;
 const withValue = rows.filter((r) => r.value !== undefined);
 const sorted = [...withValue].sort((a, b) => (lowerIsBetter ? a.value! - b.value! : b.value! - a.value!));
 const empty = showEmpty ? rows.filter((r) => r.value === undefined) : [];
 const max = Math.max(...withValue.map((r) => r.high ?? r.value!), 0);
+// The top two's likely ranges overlap: say so, naming them, because that's when the ranking misleads.
+const [first, second] = [...withValue].sort((a, b) => (lowerIsBetter ? a.value! - b.value! : b.value! - a.value!));
+const tie =
+  tieNote && !compact && first && second && first.low !== undefined && second.high !== undefined && first.low <= second.high
+    ? `${first.label} and ${second.label} are too close to call here. Their lines overlap, so either is a sensible pick.`
+    : undefined;
 const pct = (v: number) => `${Math.max(0, ((v - floor) / (max - floor || 1)) * 100)}%`;
 ---
 <section class={`chart-card${compact ? ' is-compact' : ''}`} id={id}>
   <h3 class="chart-title">{title}</h3>
   <p class="chart-sub">{sub} · {lowerIsBetter ? 'Lower is better' : 'Higher is better'}</p>
   <p class="chart-summary">{summary}</p>
+  <div class="bars-wrap">
   {sorted.length === 0 ? (
     <p class="bars-empty">No results yet for the models we track.</p>
   ) : (
@@ -60,6 +70,8 @@ const pct = (v: number) => `${Math.max(0, ((v - floor) / (max - floor || 1)) * 1
       ))}
     </div>
   )}
+  {tie && <NormSays text={tie} fromData mood="wise" />}
+  </div>
   <div class="chart-foot">
     {source && <>Source: <a href={source.url}>{source.name}</a>{source.note && <> · {source.note}</>}</>}
   </div>
