@@ -2,11 +2,11 @@
 import Base from '../../layouts/Base.astro';
 import NormSays from '../../components/NormSays.astro';
 import TaskGrid from '../../components/TaskGrid.astro';
-import { normLine } from '../../lib/tasks';
+import { allTaskPages, normLine, tasksByDemand } from '../../lib/tasks';
 ---
 <Base title="Best AI for…" description="Which AI is best for Excel, writing, research, CVs, coding and more. Plain-English answers backed by independent tests.">
   <h1>What do you want AI to help with?</h1>
-  <p class="lede">The everyday jobs people ask AI to do, most searched for first.</p>
+  <p class="lede">{allTaskPages().length} everyday jobs people ask AI to do: {tasksByDemand().length} broad areas, most searched for first, most with more specific tasks inside.</p>
   <NormSays {...normLine('tasks')} />
   <div style="margin-top: 2.5rem"><TaskGrid /></div>
 </Base>
