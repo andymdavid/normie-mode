@@ -1,0 +1,44 @@
+id: academic-research
+label: Best AI for academic research
+priority: 6
+scope: in
+parent: research
+coverage: partial
+covers: Literature reviews, research papers and academic study.
+tests:
+  - test: arena-expert
+    closeness: related
+  - test: hle
+    closeness: related
+  - test: gpqa-diamond
+    closeness: related
+  - test: simpleqa-verified
+    closeness: related
+norm:
+  status: draft
+  intro: AI can speed up the reading and note-taking side of academic research. Be very careful with references, because made-up citations are still a real problem.
+  good_at:
+    - Summarising papers and pulling out key findings.
+    - Suggesting search terms and related topics.
+    - Explaining difficult methods in plain English.
+  trips_up:
+    - References that don't exist.
+    - Summaries that miss important caveats.
+    - Missing recent papers.
+  how_to:
+    - Find papers through proper databases, then use AI to help you read them.
+    - Check every citation exists and says what it claims.
+    - Follow your university's rules on AI use.
+match:
+  - academic research
+  - literature review
+  - research paper
+  - research papers
+  - writing research paper
+  - writing research papers
+  - research paper writing
+  - thesis
+  - dissertation
+  - citations
+  - zotero
+  - academic research and writing

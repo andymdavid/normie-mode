@@ -1,0 +1,33 @@
+id: ocr-scans
+label: Best AI for reading scanned documents
+priority: 6
+scope: in
+parent: documents-notes
+coverage: partial
+covers: Reading scans, photos of documents and handwriting.
+tests:
+  - test: dtbench
+    closeness: related
+norm:
+  status: draft
+  intro: AI can read text from scans and photos of documents. It struggles more with poor photos and messy handwriting, so check anything important.
+  good_at:
+    - Turning a clear scan into editable text.
+    - Pulling key details from receipts and forms.
+    - Reading printed tables into a spreadsheet.
+  trips_up:
+    - Blurry or dark photos.
+    - Messy handwriting.
+    - Numbers that look alike, like 1 and 7, or 0 and 8.
+  how_to:
+    - Use a clear, well-lit photo.
+    - Check numbers and names against the original.
+    - For long documents, do a page at a time.
+match:
+  - ocr
+  - scanned documents
+  - scans
+  - handwriting
+  - cursive
+  - reading cursive
+  - reading handwriting

@@ -1,0 +1,37 @@
+id: teaching
+label: Best AI for teachers
+priority: 6
+scope: in
+parent: studying
+coverage: gap
+covers: Lesson planning, worksheets, marking and feedback.
+tests:
+  - test: arena-writing
+    closeness: related
+  - test: arena-instructions
+    closeness: related
+  - test: arena-expert
+    closeness: related
+norm:
+  status: draft
+  intro: For teachers, AI is best at the time-consuming prep work. You still decide what's right for your class.
+  good_at:
+    - Drafting lesson plans and worksheets.
+    - Making the same material easier or harder.
+    - Suggesting feedback on student work.
+  trips_up:
+    - Facts that need checking before they reach a classroom.
+    - Material that doesn't match your curriculum.
+    - Students' privacy, if you paste in their work.
+  how_to:
+    - Tell it the age group and curriculum.
+    - Remove student names before pasting anything in.
+    - Check every fact before you use it.
+match:
+  - teachers
+  - teacher
+  - teaching
+  - lesson plans
+  - lesson planning
+  - lesson plan
+  - worksheets

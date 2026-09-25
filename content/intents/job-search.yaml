@@ -1,0 +1,31 @@
+id: job-search
+label: Best AI for job hunting
+priority: 6
+scope: in
+parent: cv-jobs
+coverage: gap
+covers: Finding jobs, researching employers and managing applications.
+norm:
+  status: draft
+  intro: AI can take some of the grind out of job hunting. It's best for research and writing, not for finding the jobs themselves.
+  good_at:
+    - Researching a company before you apply.
+    - Drafting tailored application answers.
+    - Keeping track of applications and follow-ups.
+  trips_up:
+    - Job listings, which may be out of date or not real.
+    - Generic answers that hiring managers spot quickly.
+    - Salary information, which varies a lot by place.
+  how_to:
+    - Use job sites for listings and AI for the writing.
+    - Give it the full job advert, not just the title.
+    - Add a personal detail it couldn't know.
+match:
+  - job search
+  - job applications
+  - job application
+  - job seekers
+  - job hunting
+  - jobs
+  - job preparation
+  - job search and resume

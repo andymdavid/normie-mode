@@ -1,0 +1,33 @@
+id: chemistry
+label: Best AI for chemistry
+priority: 6
+scope: in
+parent: maths-science
+coverage: covered
+covers: Chemistry questions, including organic chemistry.
+tests:
+  - test: gpqa-diamond
+    closeness: direct
+  - test: arena-science
+    closeness: direct
+norm:
+  status: draft
+  intro: Chemistry is covered by some tough science tests, including graduate-level questions. Step-by-step mechanisms and structures are hard to check in text, so go carefully.
+  good_at:
+    - Explaining concepts in different ways.
+    - Working through calculations.
+    - Making practice questions.
+  trips_up:
+    - Mistakes in step-by-step mechanisms.
+    - Drawing or reading structures.
+    - Safety information for real experiments.
+  how_to:
+    - Ask it to explain each step.
+    - Check against your textbook.
+    - Never rely on it for lab safety.
+match:
+  - organic chemistry
+  - chemistry
+  - ochem
+  - orgo
+  - chemical

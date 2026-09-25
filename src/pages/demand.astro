@@ -44,7 +44,7 @@ const coveredBy = (i: (typeof intents)[number]['intent']) =>
             const by = coveredBy(i.intent);
             return (
               <tr>
-                <td><strong>{i.intent.label}</strong>{i.intent.note && <div class="small muted">{i.intent.note}</div>}</td>
+                <td>{i.intent.parent && <span class="muted">↳ </span>}<strong>{i.intent.label}</strong>{i.intent.parent && <div class="small muted">Part of {i.intent.parent}</div>}{i.intent.note && <div class="small muted">{i.intent.note}</div>}</td>
                 <td>
                   <div class="share"><span class="bar-fill" style={`width:${(100 * i.share) / maxShare}%`}></span><span class="share-value" style={`left:${(100 * i.share) / maxShare}%`}>{i.share.toFixed(1)}%</span></div>
                   <div class="small muted">{i.searches.length} searches · {i.regions.map((r) => r.toUpperCase()).join(', ')}</div>

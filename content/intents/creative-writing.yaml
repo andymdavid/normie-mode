@@ -1,0 +1,37 @@
+id: creative-writing
+label: Best AI for creative writing
+priority: 6
+scope: in
+parent: writing
+coverage: partial
+covers: Stories, poems and other creative pieces.
+tests:
+  - test: arena-creative-writing
+    closeness: direct
+  - test: arena-writing
+    closeness: related
+norm:
+  status: draft
+  intro: For creative writing, the best evidence we have is which pieces people prefer when they compare two side by side without knowing which AI wrote them.
+  good_at:
+    - Brainstorming plots, characters and settings.
+    - Getting a first draft moving.
+    - Trying the same scene in different styles.
+  trips_up:
+    - Predictable plots and familiar phrases.
+    - Keeping characters consistent over a long piece.
+    - Sounding like everyone else who used the same AI.
+  how_to:
+    - Give it your own ideas to build on.
+    - Ask for several options, then pick and mix.
+    - Rewrite the best bits in your own voice.
+match:
+  - creative writing
+  - story writing
+  - writing stories
+  - stories
+  - story
+  - storytelling
+  - poetry
+  - poems
+  - fiction

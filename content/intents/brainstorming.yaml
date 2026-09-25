@@ -1,0 +1,29 @@
+id: brainstorming
+label: Best AI for brainstorming
+priority: 6
+scope: in
+parent: business
+coverage: partial
+covers: Coming up with ideas, names and new angles.
+norm:
+  status: draft
+  intro: AI makes a good brainstorming partner. It never runs out of ideas, even if only some of them are good.
+  good_at:
+    - Producing lots of ideas quickly.
+    - Looking at a problem from different angles.
+    - Building on your ideas instead of starting fresh.
+  trips_up:
+    - Obvious ideas near the top of the list.
+    - Names or ideas that already exist.
+    - Ideas that don't fit your budget or situation.
+  how_to:
+    - Ask for more ideas than you need, then pick.
+    - Tell it what you've already tried.
+    - Check that names aren't already taken.
+match:
+  - brainstorming
+  - brainstorming ideas
+  - business ideas
+  - ideas
+  - naming
+  - name ideas

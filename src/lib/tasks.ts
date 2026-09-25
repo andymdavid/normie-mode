@@ -84,11 +84,21 @@ export interface Leader {
   tests: number;
 }
 
+/**
+ * A task's evidence: its own tests, or its hub's if it's a specific task without its own.
+ * Inherited tests measure the broader task, so they count as related at best, never direct.
+ */
+export function effectiveTests(task: Intent): Intent['tests'] {
+  if (task.tests.length || !task.parent) return task.tests;
+  return (graph().intents.get(task.parent)?.tests ?? []).map((t) => ({ ...t, closeness: t.closeness === 'direct' ? 'related' : t.closeness }));
+}
+
 /** Tests that count towards the task score: direct and related ones, or general ones if that's all there is. */
 export function scoringTests(task: Intent): Test[] {
   const g = graph();
-  const close = task.tests.filter((t) => t.closeness !== 'general');
-  return (close.length ? close : task.tests).map((t) => g.tests.get(t.test)!);
+  const tests = effectiveTests(task);
+  const close = tests.filter((t) => t.closeness !== 'general');
+  return (close.length ? close : tests).map((t) => g.tests.get(t.test)!);
 }
 
 export function leaders(task: Intent): { leaders: Leader[]; testsUsed: number } {
@@ -131,22 +141,52 @@ export function taskScores(task: Intent): { rows: BarDatum[]; testsUsed: number;
       display: (l.score * 100).toFixed(0),
       tip: `${l.model.name}: task score ${(l.score * 100).toFixed(0)} from ${l.tests} of ${testsUsed} test${testsUsed === 1 ? '' : 's'}`,
     }));
-  const used = scoringTests(task).map((t) => task.tests.find((x) => x.test === t.id)!.closeness);
+  const used = scoringTests(task).map((t) => effectiveTests(task).find((x) => x.test === t.id)!.closeness);
   const closeness = used.includes('direct') ? 'direct' : used.includes('related') ? 'related' : used[0];
   return { rows, testsUsed, closeness };
 }
 
-/** In-scope tasks with their own page, most searched-for first. */
+/**
+ * Hub tasks with their own page, most searched-for first. A hub's share includes the searches
+ * that matched its more specific tasks.
+ */
 export function tasksByDemand(): { task: Intent; share: number }[] {
+  const d = demandByIntent().intents;
+  return d
+    .filter((x) => x.intent.scope === 'in' && !x.intent.page && !x.intent.parent)
+    .map((x) => ({ task: x.intent, share: x.share + d.filter((c) => c.intent.parent === x.intent.id).reduce((s, c) => s + c.share, 0) }))
+    .sort((a, b) => b.share - a.share);
+}
+
+/** A hub's more specific tasks, most searched-for first. */
+export function subtasksOf(hubId: string): { task: Intent; share: number }[] {
   return demandByIntent()
-    .intents.filter((d) => d.intent.scope === 'in' && !d.intent.page)
-    .map((d) => ({ task: d.intent, share: d.share }));
+    .intents.filter((x) => x.intent.parent === hubId)
+    .map((x) => ({ task: x.intent, share: x.share }));
+}
+
+/** Every task that gets a page: hubs and their specific tasks. */
+export function allTaskPages(): Intent[] {
+  return tasksByDemand().flatMap(({ task }) => [task, ...subtasksOf(task.id).map((s) => s.task)]);
 }
 
 export const taskPath = (task: Intent) => `/best-ai-for/${task.id}`;
 
 /** Norm's shared lines, e.g. how to read a chart. */
-export function normLine(key: string): { text?: string; status: 'draft' | 'approved' } {
+const LINE_MOODS: Record<string, 'default' | 'happy' | 'smug' | 'wise'> = {
+  bars: 'happy',
+  tasks: 'happy',
+  ci_lines: 'wise',
+  task_score: 'wise',
+  votes: 'wise',
+  cost: 'default',
+  normie_test: 'happy',
+  related_only: 'smug',
+  general_only: 'smug',
+  new_models: 'smug',
+};
+
+export function normLine(key: string): { text?: string; status: 'draft' | 'approved'; mood?: 'default' | 'happy' | 'smug' | 'wise' } {
   const set = graph().norm.get('charts');
-  return { text: set?.lines[key], status: set?.status ?? 'draft' };
+  return { text: set?.lines[key], status: set?.status ?? 'draft', mood: LINE_MOODS[key] };
 }

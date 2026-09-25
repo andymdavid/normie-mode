@@ -1,0 +1,37 @@
+id: medical-students
+label: Best AI for medical and nursing students
+priority: 6
+scope: in
+parent: studying
+coverage: gap
+covers: Studying medicine, nursing and healthcare subjects.
+tests:
+  - test: arena-medicine
+    closeness: related
+  - test: gpqa-diamond
+    closeness: related
+  - test: arena-expert
+    closeness: related
+norm:
+  status: draft
+  intro: AI can help you revise the huge amount there is to learn in medicine and nursing. Always check it against your course materials, because small errors matter here.
+  good_at:
+    - Explaining conditions and processes in plain terms.
+    - Making practice questions and case studies.
+    - Summarising long reading lists.
+  trips_up:
+    - Out-of-date guidance.
+    - Confidently wrong details on drugs and doses.
+    - Guidance that differs between countries.
+  how_to:
+    - Check anything clinical against your course materials.
+    - Ask it to explain its reasoning.
+    - Never use it for real patient decisions.
+match:
+  - medical students
+  - medical student
+  - nursing students
+  - nursing student
+  - nursing school
+  - nursing
+  - med school

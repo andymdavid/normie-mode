@@ -1,0 +1,29 @@
+id: business-plan
+label: Best AI for business plans and strategy
+priority: 6
+scope: in
+parent: business
+coverage: partial
+covers: Writing a business plan and thinking through strategy.
+norm:
+  status: draft
+  intro: AI is useful for turning a rough idea into a structured business plan. The numbers and assumptions still need your own judgement.
+  good_at:
+    - Laying out the sections a business plan needs.
+    - Asking the questions an investor might ask.
+    - Summarising market research you give it.
+  trips_up:
+    - Market sizes and figures it may make up.
+    - Assumptions that sound reasonable but don't fit your market.
+    - Plans that look polished but haven't been tested.
+  how_to:
+    - Give it real details about your business and customers.
+    - Check every number against a real source.
+    - Ask it to argue against your plan too.
+match:
+  - business plan
+  - business planning
+  - business plans
+  - business strategy
+  - strategy
+  - business plan and research

@@ -1,0 +1,30 @@
+id: travel-planning
+label: Best AI for travel planning
+priority: 6
+scope: in
+parent: planning-personal
+coverage: gap
+covers: Planning trips, itineraries and holidays.
+norm:
+  status: draft
+  intro: AI is a handy travel planner for ideas and itineraries. Prices, opening times and bookings always need checking on the official websites.
+  good_at:
+    - Drafting a day-by-day itinerary.
+    - Suggesting places to see based on what you like.
+    - Packing lists and travel checklists.
+  trips_up:
+    - Places that have closed or moved.
+    - Prices and opening times.
+    - Travel times between places.
+  how_to:
+    - Tell it your budget, dates and interests.
+    - Check everything on official websites before booking.
+    - Use a model that can search the web.
+match:
+  - travel planning
+  - trip planning
+  - vacation planning
+  - holiday planning
+  - travel
+  - itinerary
+  - trips

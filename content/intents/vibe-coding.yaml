@@ -1,0 +1,28 @@
+id: vibe-coding
+label: Best AI for vibe coding
+priority: 6
+scope: in
+parent: coding
+coverage: covered
+covers: Building software by describing it in plain English, without being a programmer.
+norm:
+  status: draft
+  intro: Vibe coding means describing what you want and letting the AI write all the code. It can work well for small projects. The trick is knowing when to stop and ask for help.
+  good_at:
+    - Small tools and personal projects.
+    - Quick prototypes to test an idea.
+    - Explaining what went wrong when something breaks.
+  trips_up:
+    - Projects that grow too big to keep track of.
+    - Code it says works but hasn't actually been tested.
+    - Anything that handles other people's data or payments.
+  how_to:
+    - Start small and add one thing at a time.
+    - Keep a copy of the last version that worked.
+    - Get a programmer to look over anything you plan to share or sell.
+match:
+  - vibe coding
+  - non coders
+  - non coding
+  - no code
+  - without coding

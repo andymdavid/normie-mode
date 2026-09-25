@@ -1,0 +1,29 @@
+id: engineering
+label: Best AI for engineering
+priority: 6
+scope: in
+parent: maths-science
+coverage: covered
+covers: Engineering calculations, concepts and problem-solving.
+norm:
+  status: draft
+  intro: AI can explain engineering concepts and work through calculations. For anything that has to be safe, a qualified engineer should check it.
+  good_at:
+    - Explaining principles and formulas.
+    - Working through calculations step by step.
+    - Suggesting approaches to a design problem.
+  trips_up:
+    - Unit conversions and rounding.
+    - Standards and regulations, which vary by country.
+    - Assumptions it doesn't tell you about.
+  how_to:
+    - Ask it to show every step and unit.
+    - Check results against a method you know.
+    - Have safety-critical work checked by an engineer.
+match:
+  - engineering
+  - electrical engineering
+  - engineering questions
+  - mechanical engineering
+  - civil engineering
+  - engineers

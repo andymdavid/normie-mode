@@ -1,0 +1,37 @@
+id: essay-writing
+label: Best AI for essays and academic writing
+priority: 6
+scope: in
+parent: writing
+coverage: partial
+covers: Essays, assignments and academic writing.
+tests:
+  - test: arena-writing
+    closeness: direct
+  - test: arena-instructions
+    closeness: related
+  - test: arena-expert
+    closeness: related
+norm:
+  status: draft
+  intro: AI can help you plan and improve an essay, but check your school's rules first. Many treat AI-written work as cheating.
+  good_at:
+    - Turning your notes into a clear plan.
+    - Suggesting a stronger structure.
+    - Pointing out unclear sentences and weak arguments.
+  trips_up:
+    - Made-up quotes and references.
+    - Arguments that sound good but say very little.
+    - Breaking your school's rules on AI use.
+  how_to:
+    - Check what your school allows.
+    - Write it yourself and use AI for feedback.
+    - Look up every reference it gives you.
+match:
+  - writing essays
+  - essay writing
+  - essays
+  - essay
+  - academic writing
+  - assignment writing
+  - thesis writing

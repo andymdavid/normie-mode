@@ -1,0 +1,35 @@
+id: mental-health
+label: Best AI for mental health support
+priority: 6
+scope: in
+parent: health
+coverage: partial
+covers: Talking things through and understanding mental health.
+tests:
+  - test: arena-medicine
+    closeness: related
+  - test: arena-conversations
+    closeness: related
+norm:
+  status: draft
+  intro: AI can be a patient listener and help you make sense of how you feel, but it isn't a therapist. If you're struggling or feel unsafe, please talk to a professional or a helpline.
+  good_at:
+    - Helping you put your thoughts into words.
+    - Explaining common techniques for stress and worry.
+    - Suggesting questions to take to a GP or counsellor.
+  trips_up:
+    - It doesn't know you or your history.
+    - It can miss when something is serious.
+    - Advice that sounds kind but isn't right for you.
+  how_to:
+    - Use it alongside real support, not instead of it.
+    - Be careful about sharing very personal details.
+    - If you're in crisis, contact a professional or emergency services.
+match:
+  - therapy
+  - mental health
+  - emotional support
+  - anxiety
+  - stress
+  - counselling
+  - counseling

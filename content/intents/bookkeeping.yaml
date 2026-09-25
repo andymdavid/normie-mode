@@ -1,0 +1,33 @@
+id: bookkeeping
+label: Best AI for accounting and bookkeeping
+priority: 6
+scope: in
+parent: finance-accounting
+coverage: gap
+covers: Day-to-day accounts, bookkeeping and tax questions.
+norm:
+  status: draft
+  intro: AI can explain accounting ideas and help with routine bookkeeping. For tax, and anything you file, check with an accountant.
+  good_at:
+    - Explaining accounting terms and rules in plain English.
+    - Categorising transactions.
+    - Drafting invoices and payment reminders.
+  trips_up:
+    - Tax rules, which vary by country and change often.
+    - Categorising unusual transactions.
+    - Adding up long lists of figures.
+  how_to:
+    - Tell it which country you're in.
+    - Use your accounting software for the actual books.
+    - Ask an accountant about anything you'll file.
+match:
+  - accounting
+  - accountants
+  - accounting and finance
+  - bookkeeping
+  - xero
+  - quickbooks
+  - tax
+  - taxes
+  - vat
+  - invoices

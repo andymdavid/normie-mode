@@ -228,6 +228,8 @@ export const intentSchema = z.object({
   page: z.string().startsWith('/').optional(),
   coverage: z.enum(['covered', 'partial', 'gap']),
   note: z.string().optional(),
+  /** A hub task this is a more specific version of; it inherits the hub's tests unless it lists its own. */
+  parent: id.optional(),
   /** One plain line on what the task covers. */
   covers: z.string().optional(),
   /** Evidence for the task page, labelled by how closely each test matches the task. */

@@ -1,0 +1,35 @@
+id: app-development
+label: Best AI for building apps
+priority: 6
+scope: in
+parent: coding
+coverage: covered
+covers: Making phone and desktop apps, from idea to working version.
+norm:
+  status: draft
+  intro: Building an app has a lot of moving parts, which is exactly where AI can help, and where it can wander off. These results come from general coding tests, so they're a good guide rather than an app-specific verdict.
+  good_at:
+    - Setting up the skeleton of a new app.
+    - Explaining error messages in plain English.
+    - Writing the repetitive bits, like forms and lists.
+  trips_up:
+    - Keeping track of a large project across many files.
+    - Publishing steps for app stores, which change often.
+    - Security and privacy details.
+  how_to:
+    - Build one small feature at a time.
+    - Run the app after every change.
+    - Ask it to explain what each new piece of code does.
+match:
+  - app development
+  - building apps
+  - build apps
+  - apps
+  - app
+  - xcode
+  - mobile app
+  - ios
+  - android
+  - swift
+  - coding in xcode
+  - xcode development

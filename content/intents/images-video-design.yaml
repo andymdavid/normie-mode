@@ -1,6 +1,6 @@
 id: images-video-design
 label: "Best AI for images, video and design"
-priority: 5
+priority: 9
 scope: out
 out_reason: "Image, video and design models are a different kind of model from the text models we compare. Pending a scope decision."
 coverage: gap

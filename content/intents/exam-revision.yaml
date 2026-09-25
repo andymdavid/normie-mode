@@ -1,0 +1,35 @@
+id: exam-revision
+label: Best AI for exam revision
+priority: 6
+scope: in
+parent: studying
+coverage: gap
+covers: Revising for exams with practice questions and quizzes.
+norm:
+  status: draft
+  intro: AI is a handy revision partner. It can quiz you as many times as you like and never gets bored.
+  good_at:
+    - Making practice questions from your notes.
+    - Quizzing you and explaining what you got wrong.
+    - Summarising topics into short revision notes.
+  trips_up:
+    - Questions that don't match your exam's style.
+    - Mistakes in the answers it gives.
+    - Topics that aren't on your syllabus.
+  how_to:
+    - Paste in your own notes or syllabus.
+    - Ask for questions in the style of past papers.
+    - Check tricky answers against your textbook.
+match:
+  - exam preparation
+  - exam
+  - exams
+  - revision
+  - revising
+  - quizzes
+  - quiz
+  - quiz answers
+  - quiz making
+  - flashcards
+  - studying for exams
+  - test prep

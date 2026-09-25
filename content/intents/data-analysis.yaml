@@ -1,0 +1,35 @@
+id: data-analysis
+label: Best AI for data analysis
+priority: 6
+scope: in
+parent: excel-spreadsheets
+coverage: partial
+covers: Finding patterns, trends and answers in your data.
+normie_test: spreadsheet-questions
+norm:
+  status: draft
+  intro: AI is getting good at answering questions about data. The risk is a confident answer built on the wrong rows, so ask it to show its working.
+  good_at:
+    - Spotting trends and outliers.
+    - Answering questions about totals and averages.
+    - Suggesting charts that make a point clearly.
+  trips_up:
+    - Using the wrong rows or definitions.
+    - Very large datasets.
+    - Mistaking a pattern for a cause.
+  how_to:
+    - Explain what each column means.
+    - Ask it to show the calculation.
+    - Check one result you already know.
+match:
+  - data analysis
+  - data analysis free
+  - data analytics
+  - data analyst
+  - analyzing data
+  - analysing data
+  - qualitative data analysis
+  - quantitative analysis
+  - statistics
+  - data science
+  - excel data analysis

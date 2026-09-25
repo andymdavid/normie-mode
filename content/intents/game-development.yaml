@@ -1,0 +1,32 @@
+id: game-development
+label: Best AI for making games
+priority: 6
+scope: in
+parent: coding
+coverage: covered
+covers: Making games with engines like Unity, Godot and Unreal.
+norm:
+  status: draft
+  intro: AI can write a lot of the code behind a game, but game engines each have their own quirks. These results come from general coding tests, so treat them as a guide.
+  good_at:
+    - Writing scripts for movement, scoring and menus.
+    - Explaining how a game engine feature works.
+    - Fixing bugs from an error message.
+  trips_up:
+    - Engine versions, since its answers can be out of date.
+    - Graphics, sound and level design, which need other tools.
+    - Performance problems in bigger games.
+  how_to:
+    - Tell it which engine and version you're using.
+    - Ask for small, self-contained scripts.
+    - Test in the engine after every change.
+match:
+  - game development
+  - games
+  - game
+  - godot
+  - unity
+  - unity game development
+  - unreal engine
+  - unreal engine 5
+  - unreal

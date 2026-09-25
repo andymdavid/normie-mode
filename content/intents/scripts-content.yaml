@@ -1,0 +1,41 @@
+id: scripts-content
+label: Best AI for scripts and content creation
+priority: 6
+scope: in
+parent: writing
+coverage: partial
+covers: Video scripts, social media posts and other content.
+tests:
+  - test: arena-writing
+    closeness: direct
+  - test: arena-creative-writing
+    closeness: related
+norm:
+  status: draft
+  intro: For scripts and posts, AI is great at getting a first draft down fast. The part it can't do is know your audience as well as you do.
+  good_at:
+    - Drafting scripts from bullet points.
+    - Writing several versions of a post to choose from.
+    - Cutting a script down to length.
+  trips_up:
+    - Sounding like every other AI-written post.
+    - Facts and statistics that need checking.
+    - Missing the tone your followers expect.
+  how_to:
+    - Give it examples of your past posts to match.
+    - Say how long it should be, in words or seconds.
+    - Read it out loud before you publish.
+match:
+  - script writing
+  - scripts
+  - script
+  - youtube script
+  - youtube scripts
+  - youtube script writing
+  - youtube video script writing
+  - content creation
+  - youtube content creation
+  - social media
+  - captions
+  - blog
+  - blogs

@@ -1,0 +1,38 @@
+id: book-writing
+label: Best AI for writing a book
+priority: 6
+scope: in
+parent: writing
+coverage: partial
+covers: Planning, drafting and editing a novel or non-fiction book.
+tests:
+  - test: arena-creative-writing
+    closeness: direct
+  - test: arena-long-requests
+    closeness: related
+  - test: arena-writing
+    closeness: related
+norm:
+  status: draft
+  intro: A book is a long project, and that's where AI finds things hardest. It's a useful helper for planning and editing, but the book should still sound like you.
+  good_at:
+    - Outlining chapters and plot points.
+    - Suggesting edits for pace and clarity.
+    - Keeping notes on characters and timelines.
+  trips_up:
+    - Remembering details across hundreds of pages.
+    - Repeating the same phrases and ideas.
+    - Writing that feels generic without your input.
+  how_to:
+    - Work chapter by chapter, not the whole book at once.
+    - Keep your own notes on characters and plot to paste in.
+    - Use it as an editor as much as a writer.
+match:
+  - novel writing
+  - writing a book
+  - book writing
+  - novel
+  - novels
+  - book
+  - books
+  - writing books

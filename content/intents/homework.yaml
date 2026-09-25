@@ -1,0 +1,30 @@
+id: homework
+label: Best AI for homework help
+priority: 6
+scope: in
+parent: studying
+coverage: gap
+covers: Getting help with homework in any subject.
+norm:
+  status: draft
+  intro: AI can be a patient helper with homework. It works best when it explains how to get the answer rather than just giving it to you.
+  good_at:
+    - Explaining a question in simpler words.
+    - Walking through an example step by step.
+    - Checking your answer and showing where it went wrong.
+  trips_up:
+    - Confidently wrong answers, especially in maths.
+    - Methods that differ from the ones your teacher uses.
+    - Doing the work for you, so you don't learn it.
+  how_to:
+    - Ask it to explain, not to answer.
+    - Try the next question yourself, then check.
+    - If something seems off, ask your teacher.
+match:
+  - homework
+  - school work
+  - schoolwork
+  - question solving
+  - assignments
+  - assignment
+  - university assignments

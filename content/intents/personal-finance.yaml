@@ -1,0 +1,28 @@
+id: personal-finance
+label: Best AI for budgeting and personal finance
+priority: 6
+scope: in
+parent: finance-accounting
+coverage: gap
+covers: Budgeting, saving and planning your money.
+norm:
+  status: draft
+  intro: AI can help you build a budget and understand your options. It can't give you regulated financial advice, so treat it as a starting point.
+  good_at:
+    - Setting up a simple monthly budget.
+    - Explaining financial products in plain English.
+    - Comparing options you give it.
+  trips_up:
+    - Current interest rates and products.
+    - Advice that doesn't fit your circumstances.
+    - Tax rules for your country.
+  how_to:
+    - Give it your real numbers, but never your account details.
+    - Check current rates on official websites.
+    - Speak to a qualified adviser before big decisions.
+match:
+  - financial planning
+  - personal finance
+  - budgeting
+  - budget
+  - saving money

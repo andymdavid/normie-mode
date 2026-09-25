@@ -1,0 +1,30 @@
+id: interview-prep
+label: Best AI for interview practice
+priority: 6
+scope: in
+parent: cv-jobs
+coverage: gap
+covers: Practising for job interviews.
+norm:
+  status: draft
+  intro: Practising out loud is one of the best ways to prepare for an interview, and AI will happily play the interviewer as often as you like.
+  good_at:
+    - Asking likely questions for a specific job.
+    - Giving feedback on your answers.
+    - Helping you structure answers with clear examples.
+  trips_up:
+    - Questions that don't match that company's style.
+    - Feedback that is too generous.
+    - Knowing what a particular interviewer cares about.
+  how_to:
+    - Give it the job advert and your CV.
+    - Ask it to be tough on your answers.
+    - Practise saying your answers out loud, not just typing them.
+match:
+  - interview prep
+  - job interview preparation
+  - interview preparation
+  - interview
+  - interviews
+  - zoom interview
+  - online interview

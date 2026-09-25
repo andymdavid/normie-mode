@@ -6,13 +6,18 @@ const intents = [...graph().intents.values()].sort((a, b) => a.priority - b.prio
 
 describe('search intents', () => {
   it.each([
-    ['excel data analysis', 'excel-spreadsheets'],
+    ['excel data analysis', 'data-analysis'],
+    ['excel', 'excel-spreadsheets'],
     ['making ppt', 'presentations'],
-    ['resume writing', 'cv-jobs'],
-    ['language learning', 'translation-languages'],
+    ['resume writing', 'resume-writing'],
+    ['language learning', 'language-learning'],
+    ['translation', 'translation-languages'],
     ['image generation free', 'images-video-design'],
-    ['vibe coding', 'coding'],
-    ['zoom meeting notes', 'documents-notes'],
+    ['vibe coding', 'vibe-coding'],
+    ['website design', 'website-building'],
+    ['coding', 'coding'],
+    ['zoom meeting notes', 'note-taking'],
+    ['legal work', 'legal'],
   ])('"%s" is grouped as %s', (tail, id) => {
     expect(matchIntent(tail, intents)?.id).toBe(id);
   });

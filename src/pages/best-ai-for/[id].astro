@@ -6,22 +6,24 @@ import NormSays from '../../components/NormSays.astro';
 import { graph } from '../../lib/graph';
 import { latestRun, rankRun } from '../../lib/normie-tests';
 import { overviewRows } from '../../lib/overview';
-import { CLOSENESS_LABEL, leadSentence, normLine, taskPath, taskScores, tasksByDemand, testFloor, testRows, testSource } from '../../lib/tasks';
+import { CLOSENESS_LABEL, allTaskPages, effectiveTests, leadSentence, normLine, subtasksOf, taskPath, taskScores, tasksByDemand, testFloor, testRows, testSource } from '../../lib/tasks';
 import { PREVIEW, formatDate } from '../../lib/view';
 
 export function getStaticPaths() {
-  return tasksByDemand().map(({ task }) => ({ params: { id: task.id } }));
+  return allTaskPages().map((task) => ({ params: { id: task.id } }));
 }
 
 const g = graph();
 const task = g.intents.get(Astro.params.id!)!;
+const hub = task.parent ? g.intents.get(task.parent)! : undefined;
+const specific = subtasksOf(hub?.id ?? task.id).map((s) => s.task).filter((t) => t.id !== task.id);
 const name = task.label.replace(/^Best AI for /, '');
 const scores = taskScores(task);
 const top = scores.rows.slice(0, 3);
-const evidence = task.tests
+const evidence = effectiveTests(task)
   .map((t) => ({ ...t, test: g.tests.get(t.test)!, rows: testRows(g.tests.get(t.test)!) }))
   .filter((e) => e.rows.some((r) => r.value !== undefined));
-const noResults = task.tests.filter((t) => !evidence.some((e) => e.test.id === t.test)).map((t) => g.tests.get(t.test)!);
+const noResults = effectiveTests(task).filter((t) => !evidence.some((e) => e.test.id === t.test)).map((t) => g.tests.get(t.test)!);
 const ownRun = PREVIEW && task.normie_test ? latestRun(task.normie_test) : undefined;
 const norm = task.norm;
 const normOn = !!norm && (norm.status === 'approved' || PREVIEW);
@@ -31,7 +33,7 @@ const costRows = overviewRows().map((r) => ({
   id: r.model.id, label: r.model.name, maker: r.maker, href: `/models/${r.model.id}`,
   value: r.costPer1000, display: r.costPer1000 === undefined ? undefined : `$${r.costPer1000 < 10 ? r.costPer1000.toFixed(2) : r.costPer1000.toFixed(0)}`,
 }));
-const others = tasksByDemand().filter((t) => t.task.id !== task.id).slice(0, 3);
+const others = tasksByDemand().filter((t) => t.task.id !== (hub?.id ?? task.id)).slice(0, 3);
 const month = formatDate(new Date().toISOString().slice(0, 10)).replace(/^\d+ /, '');
 const leaderLine = top.length
   ? `On the tests we have, ${top[0].label} comes out on top${top[1] ? `, followed by ${top.slice(1).map((r) => r.label).join(' and ')}` : ''}.`
@@ -42,7 +44,7 @@ const sections = [['answer', 'The short answer'], ...(normOn ? [['guide', "Norm'
   title={`${task.label} (${month})`}
   description={`${task.label}: which AI models do best at ${task.covers?.toLowerCase().replace(/\.$/, '')}, what to watch out for, and the evidence behind it.`}
 >
-  <div class="eyebrow"><a href="/best-ai-for">Best AI for…</a></div>
+  <div class="eyebrow"><a href="/best-ai-for">Best AI for…</a>{hub && <> / <a href={taskPath(hub)}>{hub.label.replace(/^Best AI for /, '')}</a></>}</div>
   <h1>{task.label}</h1>
   <p class="lede">{task.covers}</p>
   {norm && <NormSays text={norm.intro} status={norm.status} />}
@@ -57,6 +59,9 @@ const sections = [['answer', 'The short answer'], ...(normOn ? [['guide', "Norm'
         <span class="tag">How close the evidence is</span>
         <p>{scores.closeness ? <><strong>{CLOSENESS_LABEL[scores.closeness]}.</strong> {scores.testsUsed} test{scores.testsUsed === 1 ? '' : 's'} with results.</> : 'Nothing measures this yet.'}</p>
       </div>
+      {hub && !task.tests.length && (
+        <div class="summary"><span class="tag">Where the evidence comes from</span><p>The same tests as <a href={taskPath(hub)}>{hub.label.replace(/^Best AI/, 'best AI')}</a>. No test looks at this more specific task on its own yet.</p></div>
+      )}
       {task.coverage === 'gap' && (
         <div class="summary"><span class="tag">Not tested properly yet</span><p>No test measures this task directly yet. It's on our list.</p></div>
       )}
@@ -77,12 +82,12 @@ const sections = [['answer', 'The short answer'], ...(normOn ? [['guide', "Norm'
       )}
       <BarChart
         title={`Task score: ${name}`}
-        sub={`Combines ${scores.testsUsed} test${scores.testsUsed === 1 ? '' : 's'}. The best model scores 100`}
+        sub={`Average of ${scores.testsUsed} test${scores.testsUsed === 1 ? '' : 's'}, each scored from 0 (came last) to 100 (came top)`}
         rows={scores.rows}
         summary={leaderLine}
         showEmpty={false}
       />
-      <NormSays text={scoreNorm.text} status={scoreNorm.status} />
+      <NormSays {...scoreNorm} />
 
       {normOn && (
         <>
@@ -125,6 +130,16 @@ const sections = [['answer', 'The short answer'], ...(normOn ? [['guide', "Norm'
         source={{ name: 'models.dev', url: 'https://models.dev', note: 'MIT' }}
         showEmpty={false}
       />
+
+      {(specific.length > 0 || hub) && (
+        <div class="plain-section">
+          <h3 style="margin-bottom:1rem">{hub ? `More on ${hub.label.replace(/^Best AI for /, '').toLowerCase()}` : 'More specific tasks'}</h3>
+          <ul class="other-tasks">
+            {hub && <li><a href={taskPath(hub)}>{hub.label}</a></li>}
+            {specific.map((t) => <li><a href={taskPath(t)}>{t.label}</a></li>)}
+          </ul>
+        </div>
+      )}
 
       <div class="plain-section">
         <h3 style="margin-bottom:1rem">Other things people use AI for</h3>

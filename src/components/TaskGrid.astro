@@ -1,6 +1,6 @@
 ---
 // Every everyday task as a small ranking: its task score for the top three models.
-import { CLOSENESS_LABEL, taskPath, taskScores, tasksByDemand } from '../lib/tasks';
+import { CLOSENESS_LABEL, subtasksOf, taskPath, taskScores, tasksByDemand } from '../lib/tasks';
 interface Props { limit?: number }
 const { limit } = Astro.props;
 const tasks = tasksByDemand().slice(0, limit).map(({ task }) => ({ task, ...taskScores(task) }));
@@ -9,7 +9,7 @@ const tasks = tasksByDemand().slice(0, limit).map(({ task }) => ({ task, ...task
   {tasks.map(({ task, rows, testsUsed, closeness }) => (
     <a class="card task-card" href={taskPath(task)}>
       <h3>{task.label.replace(/^Best AI for /, '').replace(/^./, (c) => c.toUpperCase())}</h3>
-      <p class="small">{task.covers}</p>
+      <p class="small">{task.covers}{subtasksOf(task.id).length > 0 && <> Includes {subtasksOf(task.id).map((s) => s.task.label.replace(/^Best AI for /, '')).slice(0, 3).join(', ').toLowerCase()}{subtasksOf(task.id).length > 3 && ' and more'}.</>}</p>
       <div class="mini-bars" aria-label={`Top models for ${task.label.toLowerCase()}`}>
         {rows.slice(0, 3).map((r, i) => (
           <div class="mini-row" title={r.tip}>

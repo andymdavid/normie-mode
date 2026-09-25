@@ -1,0 +1,27 @@
+id: deep-research
+label: Best AI for deep research
+priority: 6
+scope: in
+parent: research
+coverage: partial
+covers: In-depth research reports that pull together many sources.
+norm:
+  status: draft
+  intro: Deep research tools read lots of sources and write a report for you. They save a lot of time, but a report is only as good as the sources behind it.
+  good_at:
+    - Gathering and summarising many sources at once.
+    - Giving you a structured overview of a new topic.
+    - Pointing you to sources you might have missed.
+  trips_up:
+    - Citing sources that don't say what it claims.
+    - Treating weak sources as reliable.
+    - Missing the most recent information.
+  how_to:
+    - Open the key sources yourself.
+    - Ask it to separate facts from its own conclusions.
+    - Tell it which sources you trust.
+match:
+  - deep research
+  - research and analysis
+  - deep research and analysis
+  - research reports

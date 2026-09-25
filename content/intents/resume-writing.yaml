@@ -1,0 +1,35 @@
+id: resume-writing
+label: Best AI for writing a CV or resume
+priority: 6
+scope: in
+parent: cv-jobs
+coverage: gap
+covers: Writing, updating and tailoring your CV.
+norm:
+  status: draft
+  intro: AI can really help with a CV, especially for tidying up wording and tailoring it to a job. Just make sure every word is true.
+  good_at:
+    - Turning a messy CV into clear, tidy sections.
+    - Rewording your experience to match a job advert.
+    - Writing a first draft of a cover letter.
+  trips_up:
+    - Inflating your skills and achievements.
+    - Getting dates, titles and names wrong.
+    - Using the same phrases as thousands of other CVs.
+  how_to:
+    - Paste in the job advert along with your CV.
+    - Ask it to keep your facts exactly as they are.
+    - Read it through slowly before sending.
+match:
+  - resume writing
+  - resume
+  - resumes
+  - cv
+  - cv writing
+  - resume building
+  - resume making
+  - updating resume
+  - resume tailoring
+  - cover letter
+  - cover letters
+  - resume writing for free

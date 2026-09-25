@@ -1,0 +1,33 @@
+id: language-learning
+label: Best AI for learning a language
+priority: 6
+scope: in
+parent: translation-languages
+coverage: gap
+covers: Practising and learning a new language.
+tests:
+  - test: arena-non-english
+    closeness: direct
+  - test: arena-conversations
+    closeness: related
+norm:
+  status: draft
+  intro: AI makes a patient conversation partner for language practice. It's good for everyday language and less reliable for local slang.
+  good_at:
+    - Practising conversation at your level.
+    - Explaining grammar with examples.
+    - Correcting your writing.
+  trips_up:
+    - Slang and regional expressions.
+    - Pronunciation, if you're only typing.
+    - Less common languages.
+  how_to:
+    - Tell it your level and ask it to match it.
+    - Ask it to correct you gently as you go.
+    - Mix in real conversations with people too.
+match:
+  - language learning
+  - learning languages
+  - learn a language
+  - learning a language
+  - language practice

@@ -242,9 +242,14 @@ export function validate(g: Graph, asOf = today()): ValidationReport {
   for (const i of g.intents.values()) {
     const at = where('intents', i.id);
     for (const t of i.tests) need(g.tests.has(t.test), at, `unknown test "${t.test}"`);
+    if (i.parent) {
+      const p = g.intents.get(i.parent);
+      need(!!p && !p.parent && p.scope === 'in', at, `parent "${i.parent}" must be an in-scope hub task`);
+      need(i.priority < (p?.priority ?? 0), at, 'a specific task needs a lower priority number than its hub, so its searches match first');
+    }
     if (i.scope === 'out') need(!!i.out_reason, at, 'out-of-scope intents need an out_reason');
     if (i.scope === 'in' && !i.page) need(!!i.covers, at, 'task pages need a "covers" line');
-    if (i.coverage !== 'gap' && !i.page) need(i.tests.some((t) => t.closeness !== 'general') || !!i.normie_test, at, `${i.coverage} coverage needs a direct or related test`);
+    if (i.coverage !== 'gap' && !i.page) need(i.tests.some((t) => t.closeness !== 'general') || !!i.normie_test || !!i.parent, at, `${i.coverage} coverage needs a direct or related test`);
   }
 
   const publishedScopes = new Map<string, string>();

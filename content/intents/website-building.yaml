@@ -1,0 +1,40 @@
+id: website-building
+label: Best AI for building a website
+priority: 6
+scope: in
+parent: coding
+coverage: covered
+covers: Making a website, from a simple landing page to a full site.
+norm:
+  status: draft
+  intro: For a simple website, AI can take you from nothing to something that works in an afternoon. These charts come from general coding tests, so they tell you which models write good code overall.
+  good_at:
+    - Building a simple site from a description.
+    - Tweaking layout, colours and text.
+    - Fixing things that look wrong on phones.
+  trips_up:
+    - Hosting and domain settings, which depend on your provider.
+    - Forms and payments, where mistakes cost money.
+    - Keeping the whole site consistent as it grows.
+  how_to:
+    - "Describe your site like a brief: who it's for and what pages it needs."
+    - Check it on your phone as well as your computer.
+    - If you'd rather not touch code, try a website builder's own AI.
+match:
+  - building websites
+  - website building
+  - building a website
+  - website
+  - websites
+  - website development
+  - website design
+  - website creation
+  - creating website
+  - creating website for free
+  - web development
+  - web design
+  - landing page
+  - frontend
+  - front end
+  - frontend development
+  - html

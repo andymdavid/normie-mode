@@ -1,0 +1,40 @@
+id: note-taking
+label: Best AI for notes and meeting notes
+priority: 6
+scope: in
+parent: documents-notes
+coverage: partial
+covers: Taking notes, summarising meetings and tracking actions.
+tests:
+  - test: arena-long-requests
+    closeness: related
+  - test: arena-instructions
+    closeness: related
+norm:
+  status: draft
+  intro: AI is very good at turning a messy transcript or rough notes into something tidy. The thing to check is that it caught the decisions and actions correctly.
+  good_at:
+    - Summarising a meeting into key points.
+    - Listing actions and who owns them.
+    - Tidying rough notes into clear sections.
+  trips_up:
+    - Mixing up who said what.
+    - Missing a decision that was only implied.
+    - Recording tools that need everyone's permission.
+  how_to:
+    - Ask for decisions and actions as separate lists.
+    - Check the actions with the people involved.
+    - Let people know when a meeting is being recorded.
+match:
+  - notes
+  - notes making
+  - note taking
+  - making notes
+  - notes making free
+  - notes and study
+  - meeting notes
+  - zoom meeting notes
+  - zoom meetings
+  - meetings
+  - meeting
+  - transcription

@@ -1,0 +1,36 @@
+id: marketing
+label: Best AI for marketing
+priority: 6
+scope: in
+parent: business
+coverage: partial
+covers: Marketing copy, campaigns, SEO and advertising.
+tests:
+  - test: arena-business
+    closeness: direct
+  - test: arena-writing
+    closeness: related
+norm:
+  status: draft
+  intro: AI can draft marketing copy and plans quickly. What it can't do is know your customers like you do, so treat its ideas as a starting point.
+  good_at:
+    - Drafting ad copy, emails and product descriptions.
+    - Suggesting campaign ideas.
+    - Rewriting the same message for different audiences.
+  trips_up:
+    - Claims about your product that aren't true.
+    - Copy that sounds like everyone else's.
+    - SEO advice that is out of date.
+  how_to:
+    - Tell it who your customers are and what they care about.
+    - Give it examples of copy you like.
+    - Check every claim before you publish.
+match:
+  - marketing
+  - seo
+  - youtube seo
+  - keyword research
+  - copywriting
+  - ads
+  - advertising
+  - email marketing

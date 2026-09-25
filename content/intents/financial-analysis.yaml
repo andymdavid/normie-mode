@@ -1,0 +1,35 @@
+id: financial-analysis
+label: Best AI for financial analysis
+priority: 6
+scope: in
+parent: finance-accounting
+coverage: gap
+covers: Analysing company finances, statements and investments.
+tests:
+  - test: apex-agents
+    closeness: related
+  - test: dtbench
+    closeness: related
+  - test: arena-business
+    closeness: related
+norm:
+  status: draft
+  intro: AI can read financial statements and explain what they show. Anything you plan to act on should still be checked by someone qualified.
+  good_at:
+    - Explaining a balance sheet or a profit and loss statement.
+    - Pulling figures out of reports into a table.
+    - Setting up a simple financial model.
+  trips_up:
+    - Arithmetic across big tables.
+    - Mixing up periods or units.
+    - Sounding confident about forecasts.
+  how_to:
+    - Check totals against the original report.
+    - Ask it to show its working.
+    - Treat forecasts as scenarios, not predictions.
+match:
+  - financial analysis
+  - financial modelling
+  - financial modeling
+  - financial statements
+  - quant finance
