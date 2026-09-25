@@ -1,13 +1,12 @@
 ---
 // Internal: what people search for against what we cover (D-024). Preview only.
 import Base from '../layouts/Base.astro';
-import { graph } from '../lib/graph';
 import { demandByIntent, loadDemand } from '../lib/demand';
 import { PREVIEW, formatDate } from '../lib/view';
+import { taskPath } from '../lib/tasks';
 
 const snapshot = loadDemand();
 const { intents, unmatched, matchedShare } = demandByIntent(snapshot);
-const g = graph();
 const inScope = intents.filter((i) => i.intent.scope === 'in');
 const out = intents.filter((i) => i.intent.scope === 'out');
 const maxShare = Math.max(...inScope.map((i) => i.share));
@@ -15,7 +14,7 @@ const gaps = inScope.filter((i) => i.intent.coverage === 'gap');
 const COVERAGE = { covered: 'Covered', partial: 'Partly covered', gap: 'Not covered' } as const;
 const BADGE = { covered: 'status-tested', partial: 'status-early', gap: 'conf-insufficient' } as const;
 const coveredBy = (i: (typeof intents)[number]['intent']) =>
-  i.job ? { href: `/jobs/${i.job}`, label: g.jobs.get(i.job)!.name } : i.page ? { href: i.page, label: 'Homepage comparison' } : undefined;
+  i.page ? { href: i.page, label: 'Homepage comparison' } : { href: taskPath(i), label: 'Task page' };
 ---
 {PREVIEW && snapshot ? (
   <Base title="What people search for" noindex>

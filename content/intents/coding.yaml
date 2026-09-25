@@ -1,61 +1,87 @@
 id: coding
-label: "Best AI for coding and building apps"
+label: Best AI for coding and building apps
 priority: 20
 scope: in
-job: write-code
 coverage: covered
 match:
-  - "coding"
-  - "code"
-  - "programming"
-  - "programmer"
-  - "programmers"
-  - "developers"
-  - "developer"
-  - "app development"
-  - "building apps"
-  - "apps"
-  - "app"
-  - "website"
-  - "websites"
-  - "web development"
-  - "website building"
-  - "website design"
-  - "website development"
-  - "website creation"
-  - "frontend"
-  - "front end"
-  - "backend"
-  - "vibe coding"
-  - "game development"
-  - "java"
-  - "python"
-  - "javascript"
-  - "xcode"
-  - "unity"
-  - "software"
-  - "software engineering"
-  - "debugging"
-  - "kali linux"
-  - "xml"
-  - "godot"
-  - "unreal engine"
-  - "network engineers"
-  - "network troubleshooting"
-  - "networking"
-  - "cyber security"
-  - "cybersecurity"
-  - "qa testing"
-  - "bug bounty"
-  - "automation"
-  - "orchestration"
-  - "opencode"
-  - "zed"
-  - "ollama"
-  - "local use"
-  - "home assistant"
-  - "openclaw"
-  - "hermes agent"
-  - "hermes"
-  - "non coders"
-  - "devops"
+  - coding
+  - code
+  - programming
+  - programmer
+  - programmers
+  - developers
+  - developer
+  - app development
+  - building apps
+  - apps
+  - app
+  - website
+  - websites
+  - web development
+  - website building
+  - website design
+  - website development
+  - website creation
+  - frontend
+  - front end
+  - backend
+  - vibe coding
+  - game development
+  - java
+  - python
+  - javascript
+  - xcode
+  - unity
+  - software
+  - software engineering
+  - debugging
+  - kali linux
+  - xml
+  - godot
+  - unreal engine
+  - network engineers
+  - network troubleshooting
+  - networking
+  - cyber security
+  - cybersecurity
+  - qa testing
+  - bug bounty
+  - automation
+  - orchestration
+  - opencode
+  - zed
+  - ollama
+  - local use
+  - home assistant
+  - openclaw
+  - hermes agent
+  - hermes
+  - non coders
+  - devops
+covers: Building apps and websites, fixing bugs and automating tasks.
+tests:
+  - test: frontiercode
+    closeness: direct
+  - test: deepswe
+    closeness: direct
+  - test: terminal-bench
+    closeness: direct
+  - test: swe-bench-verified
+    closeness: direct
+  - test: arena-coding
+    closeness: direct
+norm:
+  status: draft
+  intro: Coding is where AI has been tested most thoroughly, so these charts are some of the most reliable on the site.
+  good_at:
+    - Writing small scripts and tools from a plain-English description.
+    - Explaining code you didn't write.
+    - Finding and fixing bugs.
+  trips_up:
+    - Large projects with lots of moving parts.
+    - Code that runs but isn't quite what you asked for.
+    - Security details, like passwords and permissions.
+  how_to:
+    - Describe what you want in small steps.
+    - Test the result before you rely on it.
+    - Ask it to explain anything you don't understand.

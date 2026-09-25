@@ -1,26 +1,46 @@
 id: health
-label: "Best AI for health questions"
+label: Best AI for health questions
 priority: 30
 scope: in
-job: health
 coverage: partial
-note: "Based on people's votes only."
+note: Based on people's votes only.
 match:
-  - "health"
-  - "medical"
-  - "medicine"
-  - "doctors"
-  - "symptoms"
-  - "diagnosis"
-  - "medical diagnosis"
-  - "x ray"
-  - "x-ray"
-  - "therapy"
-  - "mental health"
-  - "fitness"
-  - "nutrition"
-  - "diet"
-  - "healthcare"
-  - "workout plan"
-  - "gym"
-  - "workout"
+  - health
+  - medical
+  - medicine
+  - doctors
+  - symptoms
+  - diagnosis
+  - medical diagnosis
+  - x ray
+  - x-ray
+  - therapy
+  - mental health
+  - fitness
+  - nutrition
+  - diet
+  - healthcare
+  - workout plan
+  - gym
+  - workout
+covers: Understanding symptoms, conditions and medical information.
+tests:
+  - test: arena-medicine
+    closeness: direct
+  - test: arena-science
+    closeness: related
+norm:
+  status: draft
+  intro: AI can help you understand health information, but it isn't a doctor. For this page we mostly have people's votes on health questions, so treat it as a rough guide.
+  good_at:
+    - Explaining medical terms in plain language.
+    - Helping you prepare questions for an appointment.
+    - Summarising general health information.
+  trips_up:
+    - It can't examine you or know your history.
+    - Rare conditions and unusual symptoms.
+    - Sounding reassuring when you should really see someone.
+  how_to:
+    - Use it to understand, not to diagnose.
+    - Take its questions to your doctor or pharmacist.
+    - If something feels urgent, call a professional.

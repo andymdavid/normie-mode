@@ -1,15 +1,34 @@
 id: translation-languages
-label: "Best AI for translation and languages"
+label: Best AI for translation and languages
 priority: 35
 scope: in
 coverage: gap
 match:
-  - "translation"
-  - "translate"
-  - "translating"
-  - "language learning"
-  - "languages"
-  - "language"
-  - "kiswahili"
-  - "spanish"
-  - "english"
+  - translation
+  - translate
+  - translating
+  - language learning
+  - languages
+  - language
+  - kiswahili
+  - spanish
+  - english
+covers: Translating text and learning a language.
+tests:
+  - test: arena-non-english
+    closeness: direct
+norm:
+  status: draft
+  intro: These results come from people's votes on questions asked in languages other than English. It's a decent sign of which models handle other languages well.
+  good_at:
+    - Everyday translation of emails and documents.
+    - Explaining grammar and phrases.
+    - Practising conversation.
+  trips_up:
+    - Idioms and local expressions.
+    - Less common languages.
+    - Formal or legal documents where the exact wording matters.
+  how_to:
+    - Tell it who the translation is for and how formal it should be.
+    - Ask a native speaker to check anything important.
+    - When learning, ask it to correct you gently as you go.

@@ -1,20 +1,41 @@
 id: finance-accounting
-label: "Best AI for accounting and finance"
+label: Best AI for accounting and finance
 priority: 20
 scope: in
 coverage: gap
 match:
-  - "accounting"
-  - "accountants"
-  - "finance"
-  - "financial analysis"
-  - "financial planning"
-  - "financial modelling"
-  - "financial modeling"
-  - "bookkeeping"
-  - "tax"
-  - "taxes"
-  - "budgeting"
-  - "quantity surveying"
-  - "quantity surveyor"
-  - "quickbooks"
+  - accounting
+  - accountants
+  - finance
+  - financial analysis
+  - financial planning
+  - financial modelling
+  - financial modeling
+  - bookkeeping
+  - tax
+  - taxes
+  - budgeting
+  - quantity surveying
+  - quantity surveyor
+  - quickbooks
+covers: Accounting, financial analysis, budgets and planning.
+tests:
+  - test: apex-agents
+    closeness: related
+  - test: arena-business
+    closeness: related
+norm:
+  status: draft
+  intro: There's no test built just for accounting yet. The closest evidence comes from tests of professional work, including banking tasks, so treat this as a rough guide.
+  good_at:
+    - Explaining financial terms and statements.
+    - Setting up a simple budget or forecast.
+    - Checking your working on a calculation.
+  trips_up:
+    - Arithmetic across long lists of numbers.
+    - Tax and accounting rules, which vary by country and change often.
+    - Sounding certain about a rule it's got slightly wrong.
+  how_to:
+    - Use it to understand and draft, not to file.
+    - Check the totals yourself.
+    - For anything to do with tax, confirm with an accountant.

@@ -1,38 +1,63 @@
 id: studying
-label: "Best AI for studying and homework"
+label: Best AI for studying and homework
 priority: 40
 scope: in
 coverage: gap
 match:
-  - "studying"
-  - "study"
-  - "students"
-  - "student"
-  - "homework"
-  - "exam"
-  - "exams"
-  - "exam preparation"
-  - "assignments"
-  - "assignment"
-  - "school"
-  - "school work"
-  - "college"
-  - "university"
-  - "uni"
-  - "learning"
-  - "teaching"
-  - "teachers"
-  - "tutoring"
-  - "quiz"
-  - "quizzes"
-  - "revision"
-  - "upsc"
-  - "jee"
-  - "nursing students"
-  - "medical students"
-  - "understanding concepts"
-  - "question solving"
-  - "question paper"
-  - "flashcards"
-  - "kids"
-  - "education"
+  - studying
+  - study
+  - students
+  - student
+  - homework
+  - exam
+  - exams
+  - exam preparation
+  - assignments
+  - assignment
+  - school
+  - school work
+  - college
+  - university
+  - uni
+  - learning
+  - teaching
+  - teachers
+  - tutoring
+  - quiz
+  - quizzes
+  - revision
+  - upsc
+  - jee
+  - nursing students
+  - medical students
+  - understanding concepts
+  - question solving
+  - question paper
+  - flashcards
+  - kids
+  - education
+covers: Homework, revision, exam practice and learning new topics.
+tests:
+  - test: arena-expert
+    closeness: related
+  - test: gpqa-diamond
+    closeness: related
+  - test: otis-aime
+    closeness: related
+  - test: arena-maths
+    closeness: related
+norm:
+  status: draft
+  intro: AI can be a very patient tutor. These tests show which models handle hard questions in maths, science and specialist subjects best.
+  good_at:
+    - Explaining a topic in a different way until it clicks.
+    - Making practice questions and quizzes.
+    - Checking your working step by step.
+  trips_up:
+    - Confidently wrong answers on hard problems.
+    - Doing the work for you, so you don't learn it.
+    - Using different methods from the ones your course expects.
+  how_to:
+    - Ask it to explain, not just to answer.
+    - Have it quiz you on what you've learned.
+    - Check anything important against your course notes.

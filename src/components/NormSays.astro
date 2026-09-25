@@ -1,0 +1,31 @@
+---
+// Norm's chat bubble (docs/norm-voice.md). Plain text in the page, so it's indexed and works
+// without JavaScript. Drafts render only in preview, marked as drafts.
+import { PREVIEW } from '../lib/view';
+interface Props {
+  text?: string;
+  status?: 'draft' | 'approved';
+  /** A one-off data-driven line (e.g. who leads) is written from the data, not editorial. */
+  fromData?: boolean;
+}
+const { text, status = 'draft', fromData = false } = Astro.props;
+const show = !!text && (fromData || status === 'approved' || PREVIEW);
+---
+{show && (
+  <aside class="norm" aria-label="Norm says">
+    <img src="/norm.jpg" alt="" width="44" height="44" />
+    <div class="norm-bubble">
+      <span class="norm-name">Norm{!fromData && status === 'draft' && <span class="norm-draft"> · draft</span>}</span>
+      <p>{text}</p>
+    </div>
+  </aside>
+)}
+
+<style>
+  .norm { display: flex; align-items: flex-end; gap: 0.7rem; max-width: 40rem; margin: 1.2rem 0; }
+  .norm img { width: 44px; height: 44px; border-radius: 50%; flex-shrink: 0; }
+  .norm-bubble { position: relative; background: var(--aside); padding: 0.75rem 1rem 0.8rem; border-radius: 16px 16px 16px 4px; }
+  .norm-bubble p { margin: 0.15rem 0 0; font-size: 0.98rem; line-height: 1.45; }
+  .norm-name { font: 500 0.68rem var(--mono); text-transform: uppercase; color: var(--muted); }
+  .norm-draft { color: var(--viz-series); }
+</style>

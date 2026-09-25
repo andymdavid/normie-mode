@@ -1,18 +1,39 @@
 id: planning-personal
-label: "Best AI for planning and personal admin"
+label: Best AI for planning and personal admin
 priority: 50
 scope: in
 coverage: gap
 match:
-  - "travel planning"
-  - "trip planning"
-  - "travel"
-  - "planning"
-  - "organization"
-  - "organisation"
-  - "online shopping"
-  - "shopping"
-  - "scheduling"
-  - "recipes"
-  - "cooking"
-  - "meal planning"
+  - travel planning
+  - trip planning
+  - travel
+  - planning
+  - organization
+  - organisation
+  - online shopping
+  - shopping
+  - scheduling
+  - recipes
+  - cooking
+  - meal planning
+covers: Trip planning, shopping, organising and everyday admin.
+tests:
+  - test: arena-conversations
+    closeness: related
+  - test: arena-overall
+    closeness: general
+norm:
+  status: draft
+  intro: Nobody tests AI on planning trips or sorting life admin yet, so this page leans on people's votes. Any of the top few will do a decent job.
+  good_at:
+    - Drafting an itinerary or a to-do list.
+    - Comparing options you give it.
+    - Writing polite emails and messages.
+  trips_up:
+    - Prices, opening hours and availability, which change often.
+    - Recommending places that have closed or don't exist.
+    - Keeping track of lots of details at once.
+  how_to:
+    - Check anything time-sensitive on the official website.
+    - Give it your budget and dates up front.
+    - Use a model that can search the web for anything current.

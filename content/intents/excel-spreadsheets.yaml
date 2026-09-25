@@ -1,25 +1,48 @@
 id: excel-spreadsheets
-label: "Best AI for Excel and spreadsheets"
+label: Best AI for Excel and spreadsheets
 priority: 10
 scope: in
-job: office-work
 coverage: partial
-note: "Our draft spreadsheet test covers questions about sales data; nothing yet covers working inside Excel files."
+note: Our draft spreadsheet test covers questions about sales data; nothing yet covers working inside Excel files.
 match:
-  - "excel"
-  - "spreadsheet"
-  - "spreadsheets"
-  - "google sheets"
-  - "sheets"
-  - "data analysis"
-  - "data analytics"
-  - "data analyst"
-  - "qualitative data analysis"
-  - "quantitative analysis"
-  - "data science"
-  - "statistics"
-  - "sql"
-  - "power bi"
-  - "xero"
-  - "analyzing data"
-  - "analysing data"
+  - excel
+  - spreadsheet
+  - spreadsheets
+  - google sheets
+  - sheets
+  - data analysis
+  - data analytics
+  - data analyst
+  - qualitative data analysis
+  - quantitative analysis
+  - data science
+  - statistics
+  - sql
+  - power bi
+  - xero
+  - analyzing data
+  - analysing data
+covers: Asking questions about your data, cleaning up sheets, formulas and summaries.
+tests:
+  - test: dtbench
+    closeness: related
+  - test: apex-agents
+    closeness: related
+  - test: arena-business
+    closeness: general
+normie_test: spreadsheet-questions
+norm:
+  status: draft
+  intro: "Good news: AI is now pretty reliable at answering questions about a spreadsheet. The catch is that it can sound sure while using the wrong figures, so it's worth a quick check."
+  good_at:
+    - Answering questions about your data, like totals, top customers and trends.
+    - Writing and explaining formulas.
+    - Turning a messy export into a tidy table.
+  trips_up:
+    - Missing part of a sheet, or adding up the wrong rows.
+    - Quietly counting things you'd have left out, like refunds or cancelled orders.
+    - Very large files, where it may only look at part of the data.
+  how_to:
+    - Tell it your rules up front, for example 'only count completed orders'.
+    - Ask it to show which rows it used.
+    - Check one number you already know before trusting the rest.

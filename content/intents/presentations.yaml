@@ -1,15 +1,38 @@
 id: presentations
-label: "Best AI for presentations and PowerPoint"
+label: Best AI for presentations and PowerPoint
 priority: 10
 scope: in
 coverage: gap
 match:
-  - "ppt"
-  - "powerpoint"
-  - "presentation"
-  - "presentations"
-  - "slides"
-  - "slide"
-  - "deck"
-  - "decks"
-  - "pitch deck"
+  - ppt
+  - powerpoint
+  - presentation
+  - presentations
+  - slides
+  - slide
+  - deck
+  - decks
+  - pitch deck
+covers: Planning, writing and building slide decks.
+tests:
+  - test: arena-writing
+    closeness: related
+  - test: arena-instructions
+    closeness: related
+  - test: apex-agents
+    closeness: related
+norm:
+  status: draft
+  intro: Nobody has properly tested AI on making presentations yet, so there's no clear winner. What I can show you is which models are strongest at the writing and planning part.
+  good_at:
+    - Turning your notes into a clear outline.
+    - Writing slide titles and short bullet points.
+    - Suggesting a structure for a talk.
+  trips_up:
+    - Design. Layouts and images depend a lot on the app you use, not just the AI.
+    - Making up facts or figures to fill a slide.
+    - Too many words on each slide.
+  how_to:
+    - Start with an outline, and only then ask for slides.
+    - Give it your key points. Don't let it invent them.
+    - Ask for no more than a few bullet points per slide.

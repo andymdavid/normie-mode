@@ -8,8 +8,8 @@ import {
   capabilitySchema,
   modelFamilySchema,
   makerClaimSchema,
-  jobSchema,
   intentSchema,
+  normLinesSchema,
   testSchema,
   modelVersionSchema,
   recommendationSchema,
@@ -20,8 +20,8 @@ import {
   type Capability,
   type ModelFamily,
   type MakerClaim,
-  type Job,
   type Intent,
+  type NormLines,
   type Test,
   type ModelVersion,
   type Recommendation,
@@ -41,8 +41,8 @@ export interface Graph {
   recommendations: Map<string, Recommendation>;
   claims: Map<string, MakerClaim>;
   tests: Map<string, Test>;
-  jobs: Map<string, Job>;
   intents: Map<string, Intent>;
+  norm: Map<string, NormLines>;
   /** Result ID -> file it was defined in, for error messages. */
   origins: Map<string, string>;
 }
@@ -115,8 +115,8 @@ export function loadGraph(root = join(process.cwd(), 'content')): Graph {
     recommendations: loadEach('recommendations', recommendationSchema),
     claims: loadEach('claims', makerClaimSchema),
     tests: loadEach('tests', testSchema),
-    jobs: loadEach('jobs', jobSchema),
     intents: loadEach('intents', intentSchema),
+    norm: loadEach('norm', normLinesSchema),
     origins,
   };
   if (problems.length) throw new ContentError(problems);

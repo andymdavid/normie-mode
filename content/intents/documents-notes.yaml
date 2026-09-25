@@ -1,30 +1,50 @@
 id: documents-notes
-label: "Best AI for documents, PDFs and notes"
+label: Best AI for documents, PDFs and notes
 priority: 20
 scope: in
-job: documents-to-tables
 coverage: partial
-note: "Covers pulling data out of documents; nothing yet tests summaries or meeting notes."
+note: Covers pulling data out of documents; nothing yet tests summaries or meeting notes.
 match:
-  - "document"
-  - "documents"
-  - "document analysis"
-  - "document creation"
-  - "documentation"
-  - "pdf"
-  - "pdfs"
-  - "notes"
-  - "note taking"
-  - "notes making"
-  - "making notes"
-  - "meeting notes"
-  - "meetings"
-  - "zoom"
-  - "transcription"
-  - "ocr"
-  - "summaries"
-  - "summary"
-  - "reading"
-  - "zotero"
-  - "zip files"
-  - "files"
+  - document
+  - documents
+  - document analysis
+  - document creation
+  - documentation
+  - pdf
+  - pdfs
+  - notes
+  - note taking
+  - notes making
+  - making notes
+  - meeting notes
+  - meetings
+  - zoom
+  - transcription
+  - ocr
+  - summaries
+  - summary
+  - reading
+  - zotero
+  - zip files
+  - files
+covers: Reading PDFs and documents, pulling out information and taking notes.
+tests:
+  - test: dtbench
+    closeness: direct
+  - test: arena-long-requests
+    closeness: related
+norm:
+  status: draft
+  intro: AI is good at reading documents for you. These tests check whether it pulls out the right details and copes with long, detailed requests.
+  good_at:
+    - Summarising long documents.
+    - Pulling figures and names into a table.
+    - Turning meeting notes into action points.
+  trips_up:
+    - Skipping parts of very long documents.
+    - Mixing up similar figures or names.
+    - Scanned documents where the image is poor.
+  how_to:
+    - Ask it to quote the part of the document it's using.
+    - Spot-check a few details against the original.
+    - For long files, ask about one section at a time.

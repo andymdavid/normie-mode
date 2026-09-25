@@ -2,7 +2,9 @@
 import Base from '../layouts/Base.astro';
 import BarChart, { type BarDatum } from '../components/BarChart.astro';
 import CapabilityCostChart from '../components/CapabilityCostChart.astro';
-import JobGrid from '../components/JobGrid.astro';
+import TaskGrid from '../components/TaskGrid.astro';
+import NormSays from '../components/NormSays.astro';
+import { normLine, tasksByDemand } from '../lib/tasks';
 import { imported } from '../lib/imported';
 import { EVIDENCE_STATUS_LABEL, TYPICAL_REQUEST, overviewRows, picks, type OverviewRow } from '../lib/overview';
 import { formatDate } from '../lib/view';
@@ -43,7 +45,7 @@ const arenaFloor = Math.floor((Math.min(...votes.filter((v) => v.value).map((v) 
 const eciFloor = Math.floor((Math.min(...capability.filter((v) => v.low).map((v) => v.low!)) - 5) / 5) * 5;
 const scatterLabels = new Set(picks(rows).map((p) => p.row.model.id));
 const sections = [
-  ['highlights', 'Highlights'], ['jobs', 'Best AI for…'], ['capability', 'Capability'], ['value', 'Capability vs cost'],
+  ['highlights', 'Highlights'], ['tasks', 'Best AI for…'], ['capability', 'Capability'], ['value', 'Capability vs cost'],
   ['votes', "People's votes"], ['cost', 'Cost'], ['reading', 'How much it can read'], ['new', 'Too new to judge'], ['numbers', 'All the numbers'],
 ];
 ---
@@ -77,18 +79,21 @@ const sections = [
     <div>
       <div class="section-head" id="highlights" style="margin-top: 0"><h2>Highlights</h2></div>
       <p class="section-sub">The three things most people want to know.</p>
+      <NormSays {...normLine('bars')} />
       <div class="grid-3">
         <BarChart compact title="Capability" sub="Epoch AI capability score" rows={capability} floor={eciFloor} showEmpty={false} />
         <BarChart compact title="People's votes" sub="Position in blind votes on LMArena" rows={votes} floor={arenaFloor} showEmpty={false} />
         <BarChart compact title="Cost" sub="Per 1,000 typical requests" rows={cost} lowerIsBetter showEmpty={false} />
       </div>
 
-      <div class="section-head" id="jobs"><h2>Best AI for…</h2></div>
-      <p class="section-sub">Who comes out on top for each job, combining the tests that measure it. Pick one to see every test.</p>
-      <JobGrid />
+      <div class="section-head" id="tasks"><h2>Best AI for…</h2></div>
+      <p class="section-sub">The everyday jobs people search for, most popular first. Each ranking combines the tests that measure that job.</p>
+      <TaskGrid limit={9} />
+      <p style="margin-top:1.5rem"><a href="/best-ai-for">All {tasksByDemand().length} tasks →</a></p>
 
       <div class="section-head" id="capability"><h2>Capability</h2></div>
       <p class="section-sub">One score that combines dozens of independent tests.</p>
+      <NormSays {...normLine('ci_lines')} />
       <BarChart
         title="Epoch Capabilities Index"
         sub="Combines results from dozens of independent tests into one score. The thin line shows the likely range"
@@ -104,6 +109,7 @@ const sections = [
 
       <div class="section-head" id="votes"><h2>People's votes</h2></div>
       <p class="section-sub">People compare two anonymous answers and vote for the better one.</p>
+      <NormSays {...normLine('votes')} />
       <BarChart
         title="LMArena text ranking"
         sub={`Position among the models here, from votes as of ${formatDate(lmarena?.meta.as_of)}`}
@@ -115,6 +121,7 @@ const sections = [
 
       <div class="section-head" id="cost"><h2>Cost</h2></div>
       <p class="section-sub">What you'd pay the maker directly. Chat apps with monthly plans price differently.</p>
+      <NormSays {...normLine('cost')} />
       <BarChart
         title="Cost per 1,000 typical requests"
         sub={`List price, assuming about ${TYPICAL_REQUEST.words} per request. Models that think longer cost more in practice`}
@@ -134,6 +141,7 @@ const sections = [
 
       <div class="section-head" id="new"><h2>Too new to judge</h2></div>
       <p class="section-sub">What the makers say, until independent results arrive.</p>
+      <NormSays {...normLine('new_models')} />
       <div class="grid">
         {fresh.map((r) => (
           <div class="card">

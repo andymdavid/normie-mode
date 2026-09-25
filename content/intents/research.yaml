@@ -1,21 +1,43 @@
 id: research
-label: "Best AI for research"
+label: Best AI for research
 priority: 20
 scope: in
-job: facts
 coverage: partial
-note: "Facts and expert-question tests help, but nothing yet tests research reports or citations."
+note: Facts and expert-question tests help, but nothing yet tests research reports or citations.
 match:
-  - "research"
-  - "deep research"
-  - "literature review"
-  - "research paper"
-  - "research papers"
-  - "thesis"
-  - "dissertation"
-  - "citations"
-  - "sources"
-  - "fact checking"
-  - "online research"
-  - "osint"
-  - "genealogy research"
+  - research
+  - deep research
+  - literature review
+  - research paper
+  - research papers
+  - thesis
+  - dissertation
+  - citations
+  - sources
+  - fact checking
+  - online research
+  - osint
+  - genealogy research
+covers: Finding information, checking facts and pulling it all together.
+tests:
+  - test: simpleqa-verified
+    closeness: related
+  - test: hle
+    closeness: related
+  - test: arena-expert
+    closeness: related
+norm:
+  status: draft
+  intro: AI can save you hours of reading, but research is where getting facts right matters most. These tests show which models make things up the least and handle hard questions best.
+  good_at:
+    - Summarising long articles and reports.
+    - Explaining a topic you're new to.
+    - Comparing a few options side by side.
+  trips_up:
+    - Inventing sources, quotes or statistics.
+    - Out-of-date information.
+    - Presenting a guess as if it were a fact.
+  how_to:
+    - Ask for sources, then open them yourself.
+    - Use a model that can search the web for anything recent.
+    - Double-check any number you plan to repeat.

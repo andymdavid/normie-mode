@@ -1,33 +1,55 @@
 id: business
-label: "Best AI for business"
+label: Best AI for business
 priority: 30
 scope: in
-job: office-work
 coverage: partial
 match:
-  - "business"
-  - "business plan"
-  - "business ideas"
-  - "business strategy"
-  - "business research"
-  - "startup"
-  - "startups"
-  - "entrepreneurs"
-  - "small business"
-  - "marketing"
-  - "sales"
-  - "office work"
-  - "work"
-  - "productivity"
-  - "decision making"
-  - "brainstorming"
-  - "strategy"
-  - "consulting"
-  - "project management"
-  - "keyword research"
-  - "seo"
-  - "customer service"
-  - "ecommerce"
-  - "networking"
-  - "hr"
-  - "nonprofits"
+  - business
+  - business plan
+  - business ideas
+  - business strategy
+  - business research
+  - startup
+  - startups
+  - entrepreneurs
+  - small business
+  - marketing
+  - sales
+  - office work
+  - work
+  - productivity
+  - decision making
+  - brainstorming
+  - strategy
+  - consulting
+  - project management
+  - keyword research
+  - seo
+  - customer service
+  - ecommerce
+  - networking
+  - hr
+  - nonprofits
+covers: Planning, strategy, brainstorming and everyday office work.
+tests:
+  - test: apex-agents
+    closeness: direct
+  - test: remote-labor-index
+    closeness: related
+  - test: arena-business
+    closeness: direct
+norm:
+  status: draft
+  intro: These tests use real professional tasks, like the ones consultants and analysts do. They are some of the closest tests we have to everyday office work.
+  good_at:
+    - Brainstorming ideas and options.
+    - Drafting plans, proposals and summaries.
+    - Turning messy thinking into something clear.
+  trips_up:
+    - Longer jobs with many steps, where small mistakes add up.
+    - Making confident assumptions about your business.
+    - Numbers that look right but aren't.
+  how_to:
+    - Give it real context about your business.
+    - Break big jobs into smaller pieces.
+    - Treat its plan as a starting point, not a decision.

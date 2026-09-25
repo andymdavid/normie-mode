@@ -1,23 +1,44 @@
 id: cv-jobs
-label: "Best AI for CVs, job applications and interviews"
+label: Best AI for CVs, job applications and interviews
 priority: 10
 scope: in
 coverage: gap
 match:
-  - "resume"
-  - "resumes"
-  - "cv"
-  - "cover letter"
-  - "cover letters"
-  - "job applications"
-  - "job application"
-  - "job search"
-  - "job seekers"
-  - "jobs"
-  - "job"
-  - "interview"
-  - "interviews"
-  - "interview preparation"
-  - "career advice"
-  - "career"
-  - "linkedin"
+  - resume
+  - resumes
+  - cv
+  - cover letter
+  - cover letters
+  - job applications
+  - job application
+  - job search
+  - job seekers
+  - jobs
+  - job
+  - interview
+  - interviews
+  - interview preparation
+  - career advice
+  - career
+  - linkedin
+covers: CVs, cover letters, job applications and interview practice.
+tests:
+  - test: arena-writing
+    closeness: related
+  - test: arena-instructions
+    closeness: related
+norm:
+  status: draft
+  intro: There isn't a proper test for CVs yet, but AI is a great help with a first draft. Just check every fact it writes about you.
+  good_at:
+    - Turning your experience into clear, tidy wording.
+    - Tailoring a CV or cover letter to a job advert.
+    - Practising interview questions with you.
+  trips_up:
+    - Adding skills or achievements you don't have.
+    - Sounding generic, like everyone else's application.
+    - Getting dates and job titles slightly wrong.
+  how_to:
+    - Give it your real details and the job advert.
+    - Ask it to keep your own words where it can.
+    - Read every line out loud before you send it.

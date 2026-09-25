@@ -1,8 +1,10 @@
-// Turns a job's tests into chart rows for the current models, and summarises who leads.
+// Task pages (D-025): each in-scope search intent becomes a page built from its tests.
+// Tests are labelled by how closely they match the task; the task score uses only close ones.
 import type { BarDatum } from '../components/BarChart.astro';
 import { graph } from './graph';
 import { imported } from './imported';
-import type { Job, ModelVersion, Test } from './schema';
+import type { Closeness, Intent, ModelVersion, Test } from './schema';
+import { demandByIntent } from './demand';
 import { formatDate } from './view';
 
 export function currentModels(): ModelVersion[] {
@@ -69,19 +71,32 @@ export function leadSentence(rows: BarDatum[], lowerIsBetter = false, verb = 'le
   return `${a.label} ${verb}, followed by ${next.join(' and ')}.`;
 }
 
-export interface JobLeader {
+export const CLOSENESS_LABEL: Record<Closeness, string> = {
+  direct: 'Tests this task',
+  related: 'Tests a related skill',
+  general: 'General ability',
+};
+
+export interface Leader {
   model: ModelVersion;
-  /** Average relative position (0–1) across the job's tests that have at least three models. */
+  /** Average relative position (0–1) across the task's usable tests. */
   score: number;
   tests: number;
 }
 
-export function jobLeaders(job: Job): { leaders: JobLeader[]; testsUsed: number } {
+/** Tests that count towards the task score: direct and related ones, or general ones if that's all there is. */
+export function scoringTests(task: Intent): Test[] {
+  const g = graph();
+  const close = task.tests.filter((t) => t.closeness !== 'general');
+  return (close.length ? close : task.tests).map((t) => g.tests.get(t.test)!);
+}
+
+export function leaders(task: Intent): { leaders: Leader[]; testsUsed: number } {
   const g = graph();
   const totals = new Map<string, { sum: number; n: number }>();
   let testsUsed = 0;
-  for (const id of job.tests) {
-    const rows = testRows(g.tests.get(id)!).filter((r) => r.value !== undefined);
+  for (const test of scoringTests(task)) {
+    const rows = testRows(test).filter((r) => r.value !== undefined);
     if (rows.length < 3) continue;
     testsUsed++;
     const vals = rows.map((r) => r.value!);
@@ -91,21 +106,21 @@ export function jobLeaders(job: Job): { leaders: JobLeader[]; testsUsed: number 
       totals.set(r.id, { sum: t.sum + (max === min ? 1 : (r.value! - min) / (max - min)), n: t.n + 1 });
     }
   }
-  const leaders = [...totals]
+  const out = [...totals]
     .map(([id, t]) => ({ model: g.models.get(id)!, score: t.sum / t.n, tests: t.n }))
     .sort((a, b) => b.score - a.score);
-  return { leaders, testsUsed };
+  return { leaders: out, testsUsed };
 }
 
 /**
- * Job score (0–100): for each test with at least three models, place every model between the
- * lowest (0) and highest (100) score on that test, then average across the tests it has results for.
- * Only models with results on at least half the usable tests get a score.
+ * Task score (0–100): on each usable test, place every model between the lowest (0) and highest
+ * (100) score, then average across the tests it has results for. Only models with results on at
+ * least half the usable tests get a score.
  */
-export function jobScores(job: Job): { rows: BarDatum[]; testsUsed: number } {
-  const { leaders, testsUsed } = jobLeaders(job);
+export function taskScores(task: Intent): { rows: BarDatum[]; testsUsed: number; closeness: Closeness | undefined } {
+  const { leaders: ls, testsUsed } = leaders(task);
   const min = Math.max(1, Math.ceil(testsUsed / 2));
-  const rows = leaders
+  const rows = ls
     .filter((l) => l.tests >= min)
     .map((l) => ({
       id: l.model.id,
@@ -114,11 +129,24 @@ export function jobScores(job: Job): { rows: BarDatum[]; testsUsed: number } {
       href: `/models/${l.model.id}`,
       value: l.score * 100,
       display: (l.score * 100).toFixed(0),
-      tip: `${l.model.name}: job score ${(l.score * 100).toFixed(0)} from ${l.tests} of ${testsUsed} test${testsUsed === 1 ? '' : 's'}`,
+      tip: `${l.model.name}: task score ${(l.score * 100).toFixed(0)} from ${l.tests} of ${testsUsed} test${testsUsed === 1 ? '' : 's'}`,
     }));
-  return { rows, testsUsed };
+  const used = scoringTests(task).map((t) => task.tests.find((x) => x.test === t.id)!.closeness);
+  const closeness = used.includes('direct') ? 'direct' : used.includes('related') ? 'related' : used[0];
+  return { rows, testsUsed, closeness };
 }
 
-export function jobsInOrder(): Job[] {
-  return [...graph().jobs.values()].sort((a, b) => a.order - b.order);
+/** In-scope tasks with their own page, most searched-for first. */
+export function tasksByDemand(): { task: Intent; share: number }[] {
+  return demandByIntent()
+    .intents.filter((d) => d.intent.scope === 'in' && !d.intent.page)
+    .map((d) => ({ task: d.intent, share: d.share }));
+}
+
+export const taskPath = (task: Intent) => `/best-ai-for/${task.id}`;
+
+/** Norm's shared lines, e.g. how to read a chart. */
+export function normLine(key: string): { text?: string; status: 'draft' | 'approved' } {
+  const set = graph().norm.get('charts');
+  return { text: set?.lines[key], status: set?.status ?? 'draft' };
 }

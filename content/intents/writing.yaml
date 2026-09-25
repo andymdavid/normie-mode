@@ -1,42 +1,64 @@
 id: writing
-label: "Best AI for writing"
+label: Best AI for writing
 priority: 30
 scope: in
-job: writing
 coverage: partial
-note: "Based on people's votes only."
+note: Based on people's votes only.
 match:
-  - "writing"
-  - "write"
-  - "essay"
-  - "essays"
-  - "creative writing"
-  - "story"
-  - "stories"
-  - "novel"
-  - "book"
-  - "books"
-  - "content creation"
-  - "content"
-  - "copywriting"
-  - "blog"
-  - "blogs"
-  - "email"
-  - "emails"
-  - "email writing"
-  - "script"
-  - "scripts"
-  - "script writing"
-  - "poetry"
-  - "poems"
-  - "lyrics"
-  - "humanizing text"
-  - "humanizer"
-  - "report writing"
-  - "proofreading"
-  - "editing text"
-  - "grammar"
-  - "paraphrasing"
-  - "rewriting"
-  - "summarizing"
-  - "summarising"
+  - writing
+  - write
+  - essay
+  - essays
+  - creative writing
+  - story
+  - stories
+  - novel
+  - book
+  - books
+  - content creation
+  - content
+  - copywriting
+  - blog
+  - blogs
+  - email
+  - emails
+  - email writing
+  - script
+  - scripts
+  - script writing
+  - poetry
+  - poems
+  - lyrics
+  - humanizing text
+  - humanizer
+  - report writing
+  - proofreading
+  - editing text
+  - grammar
+  - paraphrasing
+  - rewriting
+  - summarizing
+  - summarising
+covers: Emails, articles, reports, stories and editing.
+tests:
+  - test: arena-writing
+    closeness: direct
+  - test: arena-creative-writing
+    closeness: direct
+  - test: arena-instructions
+    closeness: related
+norm:
+  status: draft
+  intro: For writing, the best guide we have is which answers people prefer when they compare two side by side. It's not a perfect test, but it's a good sign of what reads well.
+  good_at:
+    - Getting you past a blank page.
+    - Tidying up grammar and tone.
+    - Shortening long text.
+  trips_up:
+    - Sounding bland or overly formal.
+    - Adding details you didn't ask for.
+    - Losing your own voice.
+  how_to:
+    - Tell it who the reader is and what you want them to do.
+    - Give it an example of your own writing to match.
+    - Edit the result. Don't just paste it.

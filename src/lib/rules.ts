@@ -239,17 +239,12 @@ export function validate(g: Graph, asOf = today()): ValidationReport {
     need(g.sources.get(c.source)?.evidence_class === 'provider-reported', at, 'maker claims must cite a provider-reported source');
   }
 
-  for (const j of g.jobs.values()) {
-    const at = where('jobs', j.id);
-    for (const t of j.tests) need(g.tests.has(t), at, `unknown test "${t}"`);
-    for (const r of j.related) need(g.jobs.has(r), at, `unknown related job "${r}"`);
-  }
-
   for (const i of g.intents.values()) {
     const at = where('intents', i.id);
-    if (i.job) need(g.jobs.has(i.job), at, `unknown job "${i.job}"`);
-    if (i.coverage !== 'gap') need(!!i.job || !!i.page, at, `${i.coverage} coverage needs a job or page`);
+    for (const t of i.tests) need(g.tests.has(t.test), at, `unknown test "${t.test}"`);
     if (i.scope === 'out') need(!!i.out_reason, at, 'out-of-scope intents need an out_reason');
+    if (i.scope === 'in' && !i.page) need(!!i.covers, at, 'task pages need a "covers" line');
+    if (i.coverage !== 'gap' && !i.page) need(i.tests.some((t) => t.closeness !== 'general') || !!i.normie_test, at, `${i.coverage} coverage needs a direct or related test`);
   }
 
   const publishedScopes = new Map<string, string>();

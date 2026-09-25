@@ -1,0 +1,13 @@
+id: charts
+status: draft
+lines:
+  bars: "Don't worry about the numbers. Longer bar, better result. That's really all you need here."
+  ci_lines: "This little line shows how confident the testers are. When two lines overlap, the models are about as good as each other."
+  task_score: "This pulls the tests below into one score for this task. The best model scores 100 and the others are measured against it."
+  related_only: "None of these tests measure this task exactly, so treat them as a guide rather than a verdict."
+  general_only: "Nobody tests this task directly yet, so this is the overall ranking. Any of the top few will do a good job."
+  votes: "These come from people comparing two answers side by side without knowing which AI wrote them."
+  cost: "This is roughly what you'd pay for 1,000 typical requests if you use the AI directly. Chat apps with a monthly plan work differently."
+  new_models: "These came out in the last few days. Until someone independent tests them, all we have is what the makers say."
+  normie_test: "We ran this test ourselves, so you can see every question and every answer."
+  tasks: "Pick the job you have in mind. I'll show you which AI does it best, and what to watch out for."

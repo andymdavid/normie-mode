@@ -210,19 +210,6 @@ export const testSchema = z.object({
 });
 export type Test = z.infer<typeof testSchema>;
 
-/** A job people want AI for; its page is the stack of tests that measure it. */
-export const jobSchema = z.object({
-  id,
-  name: z.string(),
-  question: z.string(),
-  covers: z.string(),
-  order: z.number().default(100),
-  tests: z.array(id).min(1),
-  caveat: z.string().optional(),
-  related: z.array(id).default([]),
-});
-export type Job = z.infer<typeof jobSchema>;
-
 /**
  * A search intent: one need, however people phrase it (D-024). Demand comes from the
  * autocomplete snapshot; coverage says how well our pages answer it.
@@ -237,13 +224,37 @@ export const intentSchema = z.object({
   priority: z.number().default(100),
   scope: z.enum(['in', 'out']),
   out_reason: z.string().optional(),
-  job: id.optional(),
-  /** A non-job page that answers it, e.g. the homepage comparison. */
+  /** A page other than its own task page that answers it, e.g. the homepage comparison. */
   page: z.string().startsWith('/').optional(),
   coverage: z.enum(['covered', 'partial', 'gap']),
   note: z.string().optional(),
+  /** One plain line on what the task covers. */
+  covers: z.string().optional(),
+  /** Evidence for the task page, labelled by how closely each test matches the task. */
+  tests: z.array(z.object({ test: id, closeness: z.enum(['direct', 'related', 'general']) })).default([]),
+  /** A Normie Mode test suite that measures this task. */
+  normie_test: z.string().optional(),
+  /** Norm's words for this page (docs/norm-voice.md). Drafts show in preview only. */
+  norm: z
+    .object({
+      status: z.enum(['draft', 'approved']),
+      intro: z.string(),
+      good_at: z.array(z.string()).default([]),
+      trips_up: z.array(z.string()).default([]),
+      how_to: z.array(z.string()).default([]),
+    })
+    .optional(),
 });
 export type Intent = z.infer<typeof intentSchema>;
+export type Closeness = Intent['tests'][number]['closeness'];
+
+/** Norm's reusable lines, e.g. how to read a chart (docs/norm-voice.md). */
+export const normLinesSchema = z.object({
+  id,
+  status: z.enum(['draft', 'approved']),
+  lines: z.record(z.string(), z.string()),
+});
+export type NormLines = z.infer<typeof normLinesSchema>;
 
 export type Source = z.infer<typeof sourceSchema>;
 export type ModelFamily = z.infer<typeof modelFamilySchema>;
