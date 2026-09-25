@@ -24,7 +24,7 @@ const face = mood ?? NORM_FACES[hash % NORM_FACES.length];
 {show && (
   <aside class="norm" aria-label="Norm says">
     <span class="norm-face" data-norm-face={face}>
-      <img src={`/norm-${face}.jpg`} alt="" width="44" height="44" loading="lazy" />
+      <img src={`/norm-${face}.jpg`} alt="" width="88" height="88" loading="lazy" />
     </span>
     <div class="norm-bubble">
       <span class="norm-name">Norm{!fromData && status === 'draft' && <span class="norm-draft"> · draft</span>}</span>
@@ -34,15 +34,18 @@ const face = mood ?? NORM_FACES[hash % NORM_FACES.length];
 )}
 
 <script>
-  // On hover, swap to a random different face (preloaded so the swap is instant).
+  // On hover, swap to a random face that is neither the resting face nor the last one shown on
+  // hover, so every hover visibly changes. Faces are preloaded so the swap is instant.
   const faces = ['default', 'happy', 'smug', 'wise'];
   for (const f of faces) new Image().src = `/norm-${f}.jpg`;
   for (const el of document.querySelectorAll<HTMLElement>('[data-norm-face]')) {
     const img = el.querySelector('img')!;
     const home = el.dataset.normFace!;
+    let last = '';
     el.addEventListener('mouseenter', () => {
-      const others = faces.filter((f) => !img.src.endsWith(`norm-${f}.jpg`));
-      img.src = `/norm-${others[Math.floor(Math.random() * others.length)]}.jpg`;
+      const choices = faces.filter((f) => f !== home && f !== last);
+      last = choices[Math.floor(Math.random() * choices.length)];
+      img.src = `/norm-${last}.jpg`;
     });
     el.addEventListener('mouseleave', () => (img.src = `/norm-${home}.jpg`));
   }
@@ -51,11 +54,12 @@ const face = mood ?? NORM_FACES[hash % NORM_FACES.length];
 <style>
   .norm { display: flex; align-items: flex-end; gap: 0.7rem; max-width: 40rem; margin: 1.2rem 0; }
   .norm-face { position: relative; width: 44px; height: 44px; flex-shrink: 0; cursor: default; z-index: 1; }
-  .norm-face img { width: 44px; height: 44px; border-radius: 50%; display: block; transform-origin: bottom left; transition: transform 0.2s ease; background: var(--page); }
-  .norm-face:hover img { transform: scale(1.9); box-shadow: 0 6px 18px rgb(0 0 0 / 0.12); }
+  /* Drawn at twice the resting size and shrunk, so it stays sharp when it grows on hover. */
+  .norm-face img { position: absolute; left: 0; bottom: 0; width: 88px; height: 88px; max-width: none; border-radius: 50%; display: block; transform: scale(0.5); transform-origin: bottom left; transition: transform 0.2s ease; background: var(--page); }
+  .norm-face:hover img { transform: scale(1); box-shadow: 0 6px 18px rgb(0 0 0 / 0.12); }
   @media (prefers-reduced-motion: reduce) {
     .norm-face img { transition: none; }
-    .norm-face:hover img { transform: none; box-shadow: none; }
+    .norm-face:hover img { transform: scale(0.5); box-shadow: none; }
   }
   .norm-bubble { position: relative; background: var(--aside); padding: 0.75rem 1rem 0.8rem; border-radius: 16px 16px 16px 4px; }
   .norm-bubble p { margin: 0.15rem 0 0; font-size: 0.98rem; line-height: 1.45; }
