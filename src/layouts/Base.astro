@@ -18,7 +18,7 @@ const fullTitle = title === 'Normie Mode' ? title : `${title} · Normie Mode`;
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     {(noindex || PREVIEW) && <meta name="robots" content="noindex" />}
-    <link rel="icon" href="/norm.jpg" />
+    <link rel="icon" href="/norm-default.jpg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" />
@@ -29,7 +29,7 @@ const fullTitle = title === 'Normie Mode' ? title : `${title} · Normie Mode`;
     )}
     <header class="site-header">
       <div class="wrap">
-        <a class="brand" href="/"><img src="/norm.jpg" alt="" width="28" height="28" />Normie Mode</a>
+        <a class="brand" href="/"><img src="/norm-default.jpg" alt="" width="28" height="28" />Normie Mode</a>
         <nav class="nav" aria-label="Main">
           <a class="nav-cta" href="/best-ai-for" aria-current={path.startsWith('/best-ai-for') ? 'page' : undefined}>Best AI for… +</a>
           <a href="/" aria-current={path === '/' ? 'page' : undefined}>Compare models</a>

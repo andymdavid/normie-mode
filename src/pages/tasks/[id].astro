@@ -30,7 +30,7 @@ const evidenceDates = (modelId: string) =>
     {flags.map((f) => <div class="flag">Needs review: {f.reason}</div>)}
 
     <section class="card verdict" aria-labelledby="verdict">
-      <img src="/norm.jpg" alt="Norm" width="64" height="64" />
+      <img src="/norm-default.jpg" alt="Norm" width="64" height="64" />
       <div>
         <div class="eyebrow" id="verdict">Norm's verdict {primary?.status === 'draft' && <span class="badge draft">Draft · not yet reviewed</span>}</div>
         {primary ? (
