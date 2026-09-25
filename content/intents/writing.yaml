@@ -49,7 +49,7 @@ tests:
     closeness: related
 norm:
   status: draft
-  intro: For writing, the best guide we have is which answers people prefer when they compare two side by side. It's not a perfect test, but it's a good sign of what reads well.
+  intro: AI is good at getting you past a blank page and tidying up what you've written. Keep your own voice in it.
   good_at:
     - Getting you past a blank page.
     - Tidying up grammar and tone.

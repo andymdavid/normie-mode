@@ -26,7 +26,7 @@ tests:
     closeness: related
 norm:
   status: draft
-  intro: There's no test built just for accounting yet. The closest evidence comes from tests of professional work, including banking tasks, so treat this as a rough guide.
+  intro: AI can explain financial ideas and help with the numbers, but it isn't an accountant. Check anything you'll file or act on.
   good_at:
     - Explaining financial terms and statements.
     - Setting up a simple budget or forecast.

@@ -40,7 +40,7 @@ tests:
     closeness: direct
 norm:
   status: draft
-  intro: Two of these tests use real professional tasks, like the ones consultants and analysts do. They are some of the closest tests we have to everyday office work.
+  intro: AI is a useful extra pair of hands for office work, from drafting to planning. It works best on jobs where you can check what it did.
   good_at:
     - Brainstorming ideas and options.
     - Drafting plans, proposals and summaries.

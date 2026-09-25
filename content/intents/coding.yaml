@@ -72,7 +72,7 @@ tests:
     closeness: direct
 norm:
   status: draft
-  intro: Coding is one of the most heavily tested areas, so these charts are among the most reliable on the site.
+  intro: AI can write, explain and fix code from a plain-English description. Try what it gives you before you rely on it.
   good_at:
     - Writing small scripts and tools from a plain-English description.
     - Explaining code you didn't write.

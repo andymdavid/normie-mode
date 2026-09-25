@@ -22,7 +22,7 @@ tests:
     closeness: related
 norm:
   status: draft
-  intro: AI is handy for understanding legal wording, but it can't give you legal advice. For this page we mostly have people's votes, so treat it as a rough guide.
+  intro: AI is handy for understanding legal wording, but it can't give you legal advice. Have anything important checked by a qualified person.
   good_at:
     - Explaining what a contract clause means in plain English.
     - Spotting parts of a document worth asking about.

@@ -28,7 +28,7 @@ tests:
     closeness: related
 norm:
   status: draft
-  intro: AI can save you hours of reading, but research is where getting facts right matters most. These tests show which models answer factual and expert questions correctly most often.
+  intro: AI can save you hours of reading, but research is where getting facts right matters most. Always check the sources yourself.
   good_at:
     - Summarising long articles and reports.
     - Explaining a topic you're new to.

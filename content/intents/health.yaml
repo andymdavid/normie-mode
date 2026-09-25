@@ -31,7 +31,7 @@ tests:
     closeness: related
 norm:
   status: draft
-  intro: AI can help you understand health information, but it isn't a doctor. For this page we only have people's votes, so treat it as a rough guide.
+  intro: AI can help you understand health information, but it isn't a doctor. If something feels wrong, talk to a professional.
   good_at:
     - Explaining medical terms in plain language.
     - Helping you prepare questions for an appointment.

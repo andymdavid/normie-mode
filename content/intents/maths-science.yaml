@@ -31,7 +31,7 @@ tests:
     closeness: related
 norm:
   status: draft
-  intro: Maths and science have some of the toughest tests around. Some of these use problems that take specialists hours to solve.
+  intro: AI can work through maths and science problems step by step. Ask it to show its working, because small slips add up.
   good_at:
     - Working through problems step by step.
     - Explaining the idea behind a formula.

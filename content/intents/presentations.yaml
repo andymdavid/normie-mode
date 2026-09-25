@@ -23,7 +23,7 @@ tests:
     closeness: related
 norm:
   status: draft
-  intro: Nobody has properly tested AI on making presentations yet, so there's no clear winner. What I can show you is which models are strongest at writing and following instructions, which is most of the job.
+  intro: AI is good at the thinking and writing behind a presentation. The design side depends more on the app you use.
   good_at:
     - Turning your notes into a clear outline.
     - Writing slide titles and short bullet points.

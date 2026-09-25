@@ -48,7 +48,7 @@ tests:
     closeness: related
 norm:
   status: draft
-  intro: AI can be a very patient tutor. These tests show which models handle hard questions in maths, science and specialist subjects best.
+  intro: AI can be a very patient tutor. It helps most when it explains, rather than just giving you the answer.
   good_at:
     - Explaining a topic in a different way until it clicks.
     - Making practice questions and quizzes.

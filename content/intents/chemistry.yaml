@@ -12,7 +12,7 @@ tests:
     closeness: direct
 norm:
   status: draft
-  intro: Chemistry is covered by some tough science tests, including graduate-level questions. Step-by-step mechanisms and structures are hard to check in text, so go carefully.
+  intro: AI can explain chemistry in different ways until it clicks. Step-by-step mechanisms and structures are hard to check in text, so go carefully.
   good_at:
     - Explaining concepts in different ways.
     - Working through calculations.

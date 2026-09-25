@@ -12,7 +12,7 @@ tests:
     closeness: related
 norm:
   status: draft
-  intro: For creative writing, the best evidence we have is which pieces people prefer when they compare two side by side without knowing which AI wrote them.
+  intro: AI can be a good creative sparring partner. Use it to get ideas moving, then make the writing your own.
   good_at:
     - Brainstorming plots, characters and settings.
     - Getting a first draft moving.

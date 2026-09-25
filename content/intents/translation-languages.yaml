@@ -19,7 +19,7 @@ tests:
     closeness: direct
 norm:
   status: draft
-  intro: These results come from people's votes on questions asked in languages other than English. It's a decent sign of which models handle other languages well.
+  intro: AI is a handy translator for everyday text. For anything important, ask a native speaker to check it.
   good_at:
     - Everyday translation of emails and documents.
     - Explaining grammar and phrases.

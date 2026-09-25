@@ -33,7 +33,7 @@ tests:
 normie_test: spreadsheet-questions
 norm:
   status: draft
-  intro: AI is getting good at answering questions about spreadsheets. The catch is that it can sound sure while using the wrong figures, so it's worth a quick check.
+  intro: AI can answer questions about your spreadsheets. The catch is that it can sound sure while using the wrong figures, so it's worth a quick check.
   good_at:
     - Answering questions about your data, like totals, top customers and trends.
     - Writing and explaining formulas.

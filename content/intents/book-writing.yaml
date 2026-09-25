@@ -14,7 +14,7 @@ tests:
     closeness: related
 norm:
   status: draft
-  intro: A book is a long project, and that's where AI finds things hardest. It's a useful helper for planning and editing, but the book should still sound like you.
+  intro: A book is a long project, and long projects are where AI tends to slip. It helps most with planning and editing, and the book should still sound like you.
   good_at:
     - Outlining chapters and plot points.
     - Suggesting edits for pace and clarity.

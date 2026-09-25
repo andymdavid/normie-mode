@@ -29,7 +29,7 @@ tests:
     closeness: related
 norm:
   status: draft
-  intro: There isn't a proper test for CVs yet, but AI can be a real help with a first draft. Just check every fact it writes about you.
+  intro: AI can be a real help with a first draft of a CV or cover letter. Just check every fact it writes about you.
   good_at:
     - Turning your experience into clear, tidy wording.
     - Tailoring a CV or cover letter to a job advert.

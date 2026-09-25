@@ -8,7 +8,7 @@ covers: Finding patterns, trends and answers in your data.
 normie_test: spreadsheet-questions
 norm:
   status: draft
-  intro: AI is getting good at answering questions about data. The risk is a confident answer built on the wrong rows, so ask it to show its working.
+  intro: AI can answer questions about your data. The risk is a confident answer built on the wrong rows, so ask it to show its working.
   good_at:
     - Spotting trends and outliers.
     - Answering questions about totals and averages.

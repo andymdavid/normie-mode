@@ -7,7 +7,7 @@ coverage: covered
 covers: Making games with engines like Unity, Godot and Unreal.
 norm:
   status: draft
-  intro: AI can write a lot of the code behind a game, but game engines each have their own quirks. These results come from general coding tests, so treat them as a guide.
+  intro: AI can write a lot of the code behind a game, but game engines each have their own quirks.
   good_at:
     - Writing scripts for movement, scoring and menus.
     - Explaining how a game engine feature works.

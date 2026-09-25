@@ -12,7 +12,7 @@ tests:
     closeness: related
 norm:
   status: draft
-  intro: AI is very good at turning a messy transcript or rough notes into something tidy. The thing to check is that it caught the decisions and actions correctly.
+  intro: AI is good at turning a messy transcript or rough notes into something tidy. The thing to check is that it caught the decisions and actions correctly.
   good_at:
     - Summarising a meeting into key points.
     - Listing actions and who owns them.

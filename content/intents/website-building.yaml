@@ -7,7 +7,7 @@ coverage: covered
 covers: Making a website, from a simple landing page to a full site.
 norm:
   status: draft
-  intro: For a simple website, AI can take you from nothing to something that works in an afternoon. These charts come from general coding tests, so they tell you which models write good code overall.
+  intro: AI can take you from nothing to a working simple website quite quickly. Hosting, forms and payments still need care.
   good_at:
     - Building a simple site from a description.
     - Tweaking layout, colours and text.

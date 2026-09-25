@@ -24,7 +24,7 @@ tests:
     closeness: general
 norm:
   status: draft
-  intro: Nobody tests AI on planning trips or sorting life admin yet, so this page leans on people's votes. The top four are close enough that any of them should be fine.
+  intro: AI is a handy helper for plans, lists and everyday admin. Anything with a price or an opening time needs checking.
   good_at:
     - Drafting an itinerary or a to-do list.
     - Comparing options you give it.
