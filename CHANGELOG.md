@@ -11,6 +11,8 @@ This file records meaningful changes to the Normie Mode product, implementation,
 
 ### Fixed
 
+- Norm's claims about the data are now generated from templates filled with each page's facts, and his hand-written lines are checked to contain advice only, so a message can't contradict its charts (e.g. the cost note now says "the three models that score best for this task").
+- `astro dev` now picks up content changes instead of serving stale pages, which had hidden the specific task pages.
 - Norm's lines checked against the data: corrected the task-score explanation, cost bars, new-model evidence, and wording on coding, research, business, health, planning, Excel and presentations pages.
 - Task pages (D-025): 15 "Best AI for…" pages named after real searches, with evidence labelled by how closely it matches the task, replacing the nine job pages.
 - Norm as guide: a voice guide (`docs/norm-voice.md`), inline chat bubbles and a three-part guide on every task page, all draft until approved.
