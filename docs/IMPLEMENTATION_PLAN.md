@@ -137,6 +137,16 @@ What people search for decides which jobs we cover and which tests we build firs
 
 The internal `/demand` page (preview only) ranks intents by demand against coverage.
 
+### D-025 — Task pages from search demand, with Norm as guide (accepted 2026-09-25)
+
+Every in-scope search intent (D-024) gets its own public page at `/best-ai-for/<task>`, named the way people search ("Best AI for Excel and spreadsheets", "Best AI for CVs, job applications and interviews"). These replace the nine "Best AI for…" job pages. Each page shows:
+
+- **Evidence labelled by closeness:** each test is marked "Tests this task", "Tests a related skill" or "General ability". The task score uses only direct and related tests (general ones only when nothing closer exists), so a page never overstates how well a task has been measured. Gap tasks say plainly that nothing tests them directly yet.
+- **Norm as tutor:** the warm-tutor voice defined in `docs/norm-voice.md`. Norm appears as inline chat bubbles (an opening line on each page, chart-reading tips, gap notes) and writes a short three-part guide (what AI is good at, where it trips up, how to get a good result). His words are plain text in the page, so they're indexed and work without JavaScript. They're editorial drafts (`status: draft`) that show only in preview until the product owner approves them. One-line summaries generated from the data ("X comes out on top") are not editorial and can show publicly.
+- **SEO:** page titles and descriptions follow the search wording and include the month.
+
+Five more LMArena categories were added to the test catalogue (other languages, long requests, science, conversations, overall) to give translation, documents and planning pages real evidence.
+
 ## Reference sites
 
 Reviewed 2026-09-24 as models for structure and presentation:

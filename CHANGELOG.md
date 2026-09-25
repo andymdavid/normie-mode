@@ -6,6 +6,8 @@ This file records meaningful changes to the Normie Mode product, implementation,
 
 ### Added
 
+- Task pages (D-025): 15 "Best AI for…" pages named after real searches, with evidence labelled by how closely it matches the task, replacing the nine job pages.
+- Norm as guide: a voice guide (`docs/norm-voice.md`), inline chat bubbles and a three-part guide on every task page, all draft until approved.
 - Demand data (D-024): an autocomplete sweep of "best AI for…" searches (UK and US), 19 search intents grouping 99% of the signal, and a preview-only page ranking demand against our coverage.
 - Side-by-side job cards and charts now line up row by row (CSS subgrid), whatever the length of their descriptions.
 - Design system revised after State of AI Design: Geist and Geist Mono, a white, black and orange palette with lavender data, square flat panels, numbered sections, report-style bar charts, an orange "best overall" block, and a single light look.
