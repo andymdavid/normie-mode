@@ -63,9 +63,23 @@ export function testSource(test: Test) {
 }
 
 /** "A leads, followed by B and C." Names are plain text; the chart carries the numbers. */
+/**
+ * The top two are statistically tied when their likely ranges overlap. Shared by the chart's
+ * summary line and Norm's note so the two can never disagree.
+ */
+export function topTwoTied(rows: BarDatum[], lowerIsBetter = false): [BarDatum, BarDatum] | undefined {
+  const [a, b] = rows.filter((r) => r.value !== undefined).sort((x, y) => (lowerIsBetter ? x.value! - y.value! : y.value! - x.value!));
+  if (!a || !b || lowerIsBetter || a.low === undefined || b.high === undefined) return undefined;
+  return a.low <= b.high ? [a, b] : undefined;
+}
+
 export function leadSentence(rows: BarDatum[], lowerIsBetter = false, verb = 'leads'): string | undefined {
   const sorted = rows.filter((r) => r.value !== undefined).sort((a, b) => (lowerIsBetter ? a.value! - b.value! : b.value! - a.value!));
   if (sorted.length < 2) return undefined;
+  if (topTwoTied(rows, lowerIsBetter)) {
+    const next = sorted.slice(2, 4).map((r) => r.label);
+    return `${sorted[0].label} and ${sorted[1].label} are neck and neck at the top${next.length ? `, followed by ${next.join(' and ')}` : ''}.`;
+  }
   const [a, ...rest] = sorted;
   const next = rest.slice(0, 2).map((r) => r.label);
   return `${a.label} ${verb}, followed by ${next.join(' and ')}.`;

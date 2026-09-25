@@ -35,6 +35,8 @@ slots:
     - when: { cheapest_overall_in_leaders: false }
       text: "The cheapest model of all, {cheapest_overall}, isn't one of them."
   chart.tie:
-    - text: "{first} and {second} are too close to call here. Their lines overlap, so either is a sensible pick."
+    - when: { cost_differs: true }
+      text: "{first} and {second} are too close to call here, because their lines overlap. When it's a tie, price decides it: {dearer} costs about {price_ratio} times as much as {cheaper}."
+    - text: "{first} and {second} are too close to call here, because their lines overlap. Either is a sensible pick."
   home.new_models:
     - text: "{new_models} came out in the last few days. Independent testers have {max_results_words} for them so far, so for now it's mostly what the makers say."

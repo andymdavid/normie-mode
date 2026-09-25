@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { graph } from './graph';
 import { NormMessageError, renderSlot, taskCostNote, taskEvidenceNote, taskFacts } from './norm';
 import { lintNormText } from './rules';
-import { allTaskPages, taskScores } from './tasks';
+import { allTaskPages, leadSentence, taskScores, topTwoTied } from './tasks';
 
 const pages = allTaskPages().map((t) => [t.id, t] as const);
 const clean = (s?: string) => {
@@ -38,8 +38,19 @@ describe("Norm's data-driven messages", () => {
     expect(() => renderSlot('chart.tie', { first: 'A' })).toThrow(NormMessageError);
   });
 
-  it('says the top two are too close to call only with both names', () => {
-    expect(renderSlot('chart.tie', { first: 'A', second: 'B' })).toMatch(/^A and B are too close to call/);
+  it('says the top two are too close to call, and lets price decide when it differs', () => {
+    expect(renderSlot('chart.tie', { first: 'A', second: 'B', cost_differs: false })).toMatch(/^A and B are too close to call/);
+    expect(renderSlot('chart.tie', { first: 'A', second: 'B', cost_differs: true, cheaper: 'B', dearer: 'A', price_ratio: 13 })).toContain('A costs about 13 times as much as B');
+  });
+
+  it("never says one model leads when Norm says it's a tie", () => {
+    const rows = [
+      { id: 'a', label: 'A', value: 1516, low: 1500, high: 1532 },
+      { id: 'b', label: 'B', value: 1502, low: 1485, high: 1518 },
+      { id: 'c', label: 'C', value: 1480, low: 1475, high: 1485 },
+    ];
+    expect(topTwoTied(rows)).toBeTruthy();
+    expect(leadSentence(rows)).toBe('A and B are neck and neck at the top, followed by C.');
   });
 });
 
