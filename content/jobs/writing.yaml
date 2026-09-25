@@ -1,7 +1,0 @@
-id: writing
-name: Writing and editing
-question: Which AI is best for writing?
-covers: Emails, articles, stories and editing, done the way you asked.
-order: 4
-tests: [arena-writing, arena-creative-writing, arena-instructions]
-caveat: Based only on people's votes. No independent test measures writing quality well yet.

@@ -1,8 +1,0 @@
-id: documents-to-tables
-name: Pulling data out of documents
-question: Which AI is best at pulling data out of documents?
-covers: Turning reports, invoices and PDFs into tables and spreadsheets.
-order: 3
-tests: [dtbench]
-caveat: Only one independent test covers this so far.
-related: [office-work]
