@@ -6,11 +6,14 @@ This file records meaningful changes to the Normie Mode product, implementation,
 
 ### Added
 
+- Task cards on the homepage and "Best AI for…" list each hub's specific tasks, so all 46 task pages are one click away.
+- Charts point out when the top two are too close to call, and say how much more the dearer one costs; the summary line above the chart then says they're neck and neck instead of naming a leader.
 - 31 specific task pages under the 15 hubs (e.g. vibe coding, job hunting, essay writing, travel planning), with inherited evidence labelled as related rather than direct.
 - Norm's four faces (default, happy, smug, wise) chosen per line, with a hover effect that enlarges the avatar and swaps faces.
 
 ### Fixed
 
+- Norm's avatar stays sharp when it grows on hover, and each hover shows a different face from the last.
 - Norm's claims about the data are now generated from templates filled with each page's facts, and his hand-written lines are checked to contain advice only, so a message can't contradict its charts (e.g. the cost note now says "the three models that score best for this task").
 - `astro dev` now picks up content changes instead of serving stale pages, which had hidden the specific task pages.
 - Norm's lines checked against the data: corrected the task-score explanation, cost bars, new-model evidence, and wording on coding, research, business, health, planning, Excel and presentations pages.
