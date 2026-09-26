@@ -1,6 +1,9 @@
 ---
 import '../styles.css';
-import { PREVIEW } from '../lib/view';
+import { PREVIEW, formatDate } from '../lib/view';
+import { PODCAST } from '../lib/site';
+import { tasksByDemand, taskPath } from '../lib/tasks';
+import { imported } from '../lib/imported';
 
 interface Props {
   title: string;
@@ -9,6 +12,9 @@ interface Props {
 }
 const { title, description = 'What AI can actually do, explained in plain English with the evidence underneath.', noindex = false } = Astro.props;
 const path = Astro.url.pathname.replace(/\.html$/, '').replace(/\/index$/, '') || '/';
+const topTasks = tasksByDemand().slice(0, 6).map((t) => t.task);
+const { epoch, lmarena, modelsdev } = imported();
+const updated = formatDate(epoch?.meta.retrieved_at.slice(0, 10));
 const fullTitle = title === 'Normie Mode' ? title : `${title} · Normie Mode`;
 ---
 <html lang="en-GB">
@@ -24,8 +30,13 @@ const fullTitle = title === 'Normie Mode' ? title : `${title} · Normie Mode`;
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" />
   </head>
   <body>
+    <a class="promo-strip" href={PODCAST.url}>
+      <span class="promo-tag">Podcast</span>
+      <span class="promo-text"><strong>{PODCAST.name}</strong><span class="promo-pitch"> · {PODCAST.pitch}</span></span>
+      <span class="promo-cta">Listen →</span>
+    </a>
     {PREVIEW && (
-      <div class="preview-bar">PREVIEW: drafts are visible and labelled · <a href="/review">Review queue →</a></div>
+      <div class="preview-badge">Preview: drafts visible · <a href="/review">Review queue</a></div>
     )}
     <header class="site-header">
       <div class="wrap">
@@ -44,9 +55,45 @@ const fullTitle = title === 'Normie Mode' ? title : `${title} · Normie Mode`;
       <slot />
     </main>
     <footer class="site-footer">
-      <div class="wrap">
-        <p>Normie Mode: what AI can actually do. Every ranking names the exact model version and the evidence behind it.</p>
-        <p><a href="/methodology">How it works</a></p>
+      <div class="footer-inner">
+        <p class="footer-mark" aria-hidden="true">Normie Mode</p>
+        <div class="footer-grid">
+          <div class="footer-col">
+            <span class="footer-label">Best AI for…</span>
+            <ul>
+              {topTasks.map((t) => <li><a href={taskPath(t)}>{t.label.replace(/^Best AI for /, '').replace(/^./, (c) => c.toUpperCase())}</a></li>)}
+              <li><a href="/best-ai-for">All tasks</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <span class="footer-label">Normie Mode</span>
+            <ul>
+              <li><a href="/models">Models</a></li>
+              <li><a href="/benchmarks">Tests explained</a></li>
+              <li><a href="/methodology">How it works</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <span class="footer-label">Data from</span>
+            <ul>
+              <li><a href={epoch?.meta.url}>Epoch AI</a></li>
+              <li><a href={lmarena?.meta.url}>LMArena</a></li>
+              <li><a href={modelsdev?.meta.url}>models.dev</a></li>
+              <li>Makers' own pages</li>
+            </ul>
+          </div>
+          <a class="footer-podcast" href={PODCAST.url}>
+            <span class="footer-label">Listen</span>
+            <span class="footer-podcast-name">{PODCAST.name}</span>
+            <span class="footer-podcast-pitch">{PODCAST.tagline}. {PODCAST.pitch}</span>
+            <span class="footer-podcast-cta">Listen now →</span>
+          </a>
+        </div>
+        <div class="footer-bottom">
+          <span>© {new Date().getFullYear()} Normie Mode</span>
+          <span>Data updated {updated} · Rankings compare the models we track; check prices before you buy</span>
+          <span class="footer-listen">{PODCAST.links.map((l, i) => <>{i > 0 && ' · '}<a href={l.url}>{l.label}</a></>)}</span>
+        </div>
       </div>
     </footer>
     <script>

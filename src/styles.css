@@ -74,9 +74,38 @@ p { margin: 0 0 0.8rem; }
   .nav-links a { padding: 0.55rem 0.9rem; }
   .nav-links a:first-child { padding-left: 1.25rem; }
 }
-.preview-bar { background: var(--lavender); color: var(--ink); font: 0.75rem var(--mono); padding: 0.35rem 1.25rem; text-align: center; }
+/* Promo strip above the header: the Intelligence Snacks podcast */
+.promo-strip { display: flex; align-items: center; gap: 0.9rem; background: var(--ink); color: #fff; text-decoration: none; padding: 0.45rem 1.25rem; font-size: 0.8rem; }
+.promo-strip:hover .promo-cta { text-decoration: underline; }
+.promo-tag { font: 500 0.66rem var(--mono); text-transform: uppercase; background: var(--orange); color: var(--ink); padding: 0.1rem 0.4rem; }
+.promo-text { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.promo-text strong { font-weight: 600; }
+.promo-pitch { color: #cfcfcf; }
+.promo-cta { font: 500 0.72rem var(--mono); text-transform: uppercase; white-space: nowrap; }
+@media (max-width: 40rem) { .promo-pitch { display: none; } }
+.preview-badge { position: fixed; left: 0.75rem; bottom: calc(env(safe-area-inset-bottom, 0px) + 0.75rem); z-index: 30; background: var(--lavender); color: var(--ink); font: 0.72rem var(--mono); padding: 0.35rem 0.6rem; }
 main { padding-block: 3rem 5rem; }
-.site-footer { border-top: 1px solid var(--rule); padding-block: 1.5rem 3rem; font-size: 0.85rem; color: var(--muted); }
+
+/* Footer: black block, full-width wordmark, link columns, podcast block (after State of AI Design) */
+.site-footer { background: var(--ink); color: #f5f4f0; margin-top: 2rem; }
+.footer-inner { max-width: 90rem; margin: 0 auto; padding: 3rem 1.25rem calc(env(safe-area-inset-bottom, 0px) + 1.5rem); }
+.footer-mark { font-weight: 500; letter-spacing: -0.06em; line-height: 0.85; font-size: min(calc((100vw - 2.5rem) / 5.75), 15.2rem); margin: 0 0 3.5rem; white-space: nowrap; }
+.footer-grid { display: grid; gap: 2rem 3rem; grid-template-columns: repeat(3, minmax(9rem, max-content)) minmax(min(18rem, 100%), 1fr); align-items: start; }
+@media (max-width: 56rem) { .footer-grid { grid-template-columns: repeat(auto-fit, minmax(min(11rem, 100%), 1fr)); } }
+.footer-label { display: block; font: 500 0.7rem var(--mono); text-transform: uppercase; color: #9a9994; margin-bottom: 1rem; }
+.footer-col ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.55rem; font-size: 0.95rem; }
+.footer-col a { text-decoration: none; }
+.footer-col a:hover { text-decoration: underline; }
+.footer-col li:not(:has(a)) { color: #9a9994; }
+.footer-podcast { display: grid; background: var(--orange); color: var(--ink); text-decoration: none; padding: 1.3rem 1.4rem; justify-self: end; width: 100%; max-width: 26rem; }
+.footer-podcast .footer-label { color: var(--ink); margin-bottom: 0.7rem; }
+.footer-podcast-name { font-size: clamp(1.6rem, 3vw, 2.2rem); letter-spacing: -0.035em; line-height: 1; }
+.footer-podcast-pitch { font-size: 0.9rem; margin: 0.7rem 0 1.1rem; }
+.footer-podcast-cta { font: 500 0.75rem var(--mono); text-transform: uppercase; }
+.footer-podcast:hover .footer-podcast-cta { text-decoration: underline; }
+.footer-bottom { display: flex; flex-wrap: wrap; gap: 0.5rem 2rem; justify-content: space-between; border-top: 1px solid #3a3a38; margin-top: 3rem; padding-top: 1rem; font-size: 0.8rem; color: #9a9994; }
+.footer-bottom a { color: #f5f4f0; text-decoration: none; }
+.footer-bottom a:hover { text-decoration: underline; }
 
 /* Summary band: columns divided by hairlines, not cards */
 .band { background: var(--band); margin-inline: calc(50% - 50vw); padding: 0 calc(50vw - 50%); margin-block: 2.5rem 3.5rem; }
