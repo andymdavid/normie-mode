@@ -6,6 +6,8 @@ This file records meaningful changes to the Normie Mode product, implementation,
 
 ### Added
 
+- A verdict at the top of every task page (D-027): best overall, best for $25 a month or less and best free, each with the app and plan that gets it, "too close to call" when two are within 5 points, and a table of what every plan gives you for that task. The rule is on How it works. Shows in preview until the plans are approved.
+
 - Apps and plans (D-026, draft): which ChatGPT, Claude, Gemini and Kimi plans include each model, with monthly prices, how sure the mapping is, and the maker's or press source. Model pages show "Where you can use it". Visible in preview until approved.
 - GPT-5.6 Luna and Gemini 3.6 Flash, what ChatGPT Free and Gemini Free actually use; older versions still used by a plan are compared alongside current ones.
 
@@ -61,6 +63,7 @@ This file records meaningful changes to the Normie Mode product, implementation,
 
 ### Changed
 
+- Task pages call the per-request cost chart "If you build with it", since app users pay a monthly plan instead.
 - Reframed the initial delivery around a complete vertical slice before expansion across all proposed public entities and capability areas.
 - Established models and exact model versions as the canonical comparison unit; products, wrappers, and configured agents are outside the comparison scope, while evaluation configuration remains methodology metadata.
 - Selected business spreadsheet work for SME operators and finance-adjacent knowledge workers as the first vertical slice.

@@ -257,11 +257,12 @@ Progress note (2026-09-24): Built as the homepage (`src/pages/index.astro`, data
 
 ### N-010 — Verdict block on task pages (stage 3)
 
-- Status: `proposed`
+- Status: `in_progress` (built 2026-09-26; public once N-009's plans are approved)
 - Dependencies: D-027, N-009
 - Work: `verdict(task)` in `src/lib/`, tests that the picks match the task-score chart and plan data, and the verdict block at the top of every task page; the rule on `/methodology`; API cost moved below the verdict as "If you build with it".
 - Acceptance criteria: every in-scope task page shows a verdict or says why it can't; the picks are consistent with the chart on the same page.
 - Verification: `npm test` renders every task page's verdict and checks it against the data; product-owner review of five pages.
+- Progress note (2026-09-26): `verdict()` in `src/lib/verdict.ts`, shown by `src/components/Verdict.astro` and published as a rule on `/methodology#verdict`. It shows only when at least one app's plans are visible, so public pages keep "Top of the tests" until plans are approved. A plan counts only models that aren't extra-cost; `where` notes (e.g. "ChatGPT Work and Codex, not ordinary chat") appear under the pick. The per-request cost section is now "If you build with it". `src/lib/verdict.test.ts` checks every task page's picks against its task score.
 
 ### N-011 — Readable numbers (stage 4)
 
