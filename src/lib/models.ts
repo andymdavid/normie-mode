@@ -2,7 +2,7 @@
 // never disagree with a chart: positions come from `taskScores` and `testRows`.
 import { graph } from './graph';
 import { overviewRows, type OverviewRow } from './overview';
-import { allTaskPages, effectiveTests, ordinal, taskScores, tasksByDemand, testRows, type CLOSENESS_LABEL } from './tasks';
+import { MIN_MODELS_TO_RANK, allTaskPages, effectiveTests, ordinal, scoringTests, taskScores, tasksByDemand, testRows, type CLOSENESS_LABEL } from './tasks';
 import type { Intent, Test } from './schema';
 import type { BarDatum } from '../components/BarChart.astro';
 
@@ -65,4 +65,15 @@ export function tasksUsingTest(testId: string): { task: Intent; closeness: keyof
       const t = effectiveTests(task).find((x) => x.test === testId);
       return t ? [{ task, closeness: t.closeness }] : [];
     });
+}
+
+/**
+ * True when a model's task score rests only on people's votes although the task also has tests of
+ * real work that other models were scored on, e.g. a new model that hasn't been tested yet.
+ */
+export function scoredOnVotesOnly(task: Intent, modelId: string): boolean {
+  const usable = scoringTests(task).filter((t) => rankedTestRows(t).length >= MIN_MODELS_TO_RANK);
+  if (!usable.some((t) => t.source !== 'lmarena')) return false;
+  const mine = usable.filter((t) => rankedTestRows(t).some((r) => r.id === modelId));
+  return mine.length > 0 && mine.every((t) => t.source === 'lmarena');
 }

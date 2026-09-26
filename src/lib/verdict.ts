@@ -1,6 +1,6 @@
 // The verdict on a task page (D-027): picks computed from the task score and the plans that include
 // each model, so it can't disagree with the chart beneath it. The rule is published on /methodology.
-import { cachedTaskScores } from './models';
+import { cachedTaskScores, scoredOnVotesOnly } from './models';
 import { taskFacts } from './norm';
 import { plansFor, visibleApps, type PlanAccess } from './plans';
 import type { AppPlans, Intent, Plan } from './schema';
@@ -26,6 +26,8 @@ export interface Option {
   of: number;
   /** Cheapest plan that gives you this model within the pick's budget; absent if no app we cover offers it. */
   plan?: PlanAccess;
+  /** Scored only on people's votes, though other models were also scored on tests of real work. */
+  votesOnly: boolean;
 }
 
 export interface Pick {
@@ -74,6 +76,7 @@ export function verdict(task: Intent): Verdict | undefined {
     position: i + 1,
     of: rows.length,
     plan: usable(rows[i].id, maxPrice)[0],
+    votesOnly: scoredOnVotesOnly(task, rows[i].id),
   });
 
   /** The top-scoring model within a budget, plus a runner-up if it's too close to call. */

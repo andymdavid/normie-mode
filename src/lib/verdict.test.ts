@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { cachedTaskScores } from './models';
-import { allTaskPages } from './tasks';
+import { allTaskPages, scoringTests } from './tasks';
 import { STANDARD_PLAN_MAX_USD, TOO_CLOSE_POINTS, verdict } from './verdict';
 
 // D-027: the verdict is worked out from the same task score as the chart beneath it.
@@ -42,6 +42,10 @@ describe('task page verdicts (D-027)', () => {
             expect(rows[o.position - 1].value).toBe(o.score);
           }
         }
+      });
+
+      it('flags a pick scored on votes alone only when the task has tests of real work', () => {
+        for (const p of v.picks) for (const o of p.options) if (o.votesOnly) expect(scoringTests(task).some((t) => t.source === 'epoch')).toBe(true);
       });
 
       it('shows each pick once', () => {
