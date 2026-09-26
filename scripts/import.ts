@@ -1,6 +1,6 @@
 // Refreshes imported evidence (N-001): Epoch AI, models.dev, LMArena.
 // Usage: npm run import [-- --offline]   (--offline reuses files already in .cache/)
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { parse as parseCsv } from 'csv-parse/sync';
 import { unzipSync, strFromU8 } from 'fflate';
@@ -49,6 +49,9 @@ async function fetchCached(url: string, file: string): Promise<Buffer> {
   writeFileSync(path, buf);
   return buf;
 }
+
+/** When a cached file was downloaded, so `--offline` runs keep the true retrieval date. */
+const retrievedAt = (file: string) => statSync(join(CACHE, file)).mtime.toISOString();
 
 function write(name: string, data: unknown) {
   mkdirSync(DATA_DIR, { recursive: true });
@@ -136,7 +139,7 @@ async function importEpoch() {
       url: 'https://epoch.ai/benchmarks',
       licence: 'CC BY 4.0',
       attribution: "Epoch AI, 'Capabilities & Benchmarking', https://epoch.ai/benchmarks",
-      retrieved_at: now.toISOString(),
+      retrieved_at: retrievedAt('epoch.zip'),
     },
     benchmarks,
     index,
@@ -188,7 +191,7 @@ async function importModelsDev() {
       url: 'https://models.dev',
       licence: 'MIT',
       attribution: 'models.dev (https://github.com/anomalyco/models.dev)',
-      retrieved_at: now.toISOString(),
+      retrieved_at: retrievedAt('modelsdev.json'),
     },
     models: out,
   };
@@ -232,7 +235,7 @@ async function importArena() {
       url: 'https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset',
       licence: 'CC BY 4.0',
       attribution: 'LMArena leaderboard dataset (lmarena-ai/leaderboard-dataset)',
-      retrieved_at: now.toISOString(),
+      retrieved_at: retrievedAt('lmarena-text.parquet'),
       as_of: asOf || undefined,
     },
     overall_count: rows.filter((r) => r.category === 'overall').length,
