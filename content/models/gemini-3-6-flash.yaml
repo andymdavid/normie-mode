@@ -1,0 +1,18 @@
+id: gemini-3-6-flash
+family: gemini
+name: Gemini 3.6 Flash
+released_on: 2026-07-21
+# Replaced by 3.8 Flash for paying users and developers, but still what the free Gemini app uses (D-026).
+lifecycle: superseded
+successor: gemini-3-8-flash
+verification:
+  status: verified
+  sources:
+    - google-gemini-plans
+source_ids:
+  epoch:
+    - gemini-3.6-flash
+  epoch_index: Gemini 3.6 Flash
+  modelsdev: google/gemini-3.6-flash
+  lmarena:
+    - gemini-3.6-flash-high

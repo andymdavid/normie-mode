@@ -5,7 +5,7 @@
   "url": "https://epoch.ai/benchmarks",
   "licence": "CC BY 4.0",
   "attribution": "Epoch AI, 'Capabilities & Benchmarking', https://epoch.ai/benchmarks",
-  "retrieved_at": "2026-09-24T05:02:06.034Z"
+  "retrieved_at": "2026-09-24T05:01:00.052Z"
  },
  "benchmarks": [
   {
@@ -700,6 +700,13 @@
    "high": 159.15
   },
   {
+   "model": "gpt-5-6-luna",
+   "source_model": "GPT-5.6 Luna",
+   "eci": 156.32,
+   "low": 153.58,
+   "high": 158.86
+  },
+  {
    "model": "deepseek-v4-pro",
    "source_model": "DeepSeek V4 Pro 0813",
    "eci": 155.39,
@@ -726,6 +733,13 @@
    "eci": 154.92,
    "low": 152.8,
    "high": 157.58
+  },
+  {
+   "model": "gemini-3-6-flash",
+   "source_model": "Gemini 3.6 Flash",
+   "eci": 154.36,
+   "low": 152.66,
+   "high": 156.25
   },
   {
    "model": "gpt-5-2",
@@ -844,6 +858,36 @@
    "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2F6cmgkNAQZekBr6e6rVdLe9.eval"
   },
   {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_none",
+   "effort": "none",
+   "benchmark": "GPQA diamond",
+   "value": 0.6363636363636364,
+   "stderr": 0.03427308652999934,
+   "evaluated_on": "2026-08-07",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FbDKKx7zTdW5WwMCfwqsLi4.eval"
+  },
+  {
+   "model": "gemini-3-6-flash",
+   "source_model": "gemini-3.6-flash_minimal",
+   "effort": "minimal",
+   "benchmark": "GPQA diamond",
+   "value": 0.8585858585858586,
+   "stderr": 0.024825909793343353,
+   "evaluated_on": "2026-08-07",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FaPmR8fV49N98a6NVKpASAf.eval"
+  },
+  {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_low",
+   "effort": "low",
+   "benchmark": "GPQA diamond",
+   "value": 0.8232323232323232,
+   "stderr": 0.027178752639044908,
+   "evaluated_on": "2026-08-07",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FnW39ZzuDQ3xTAGVoEfFG95.eval"
+  },
+  {
    "model": "claude-opus-4-6",
    "source_model": "claude-opus-4-6_max",
    "effort": "max",
@@ -852,6 +896,16 @@
    "stderr": 0.02282888177524936,
    "evaluated_on": "2026-08-06",
    "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FJcQMgXdZKU54u52B8TGQKp.eval"
+  },
+  {
+   "model": "gemini-3-6-flash",
+   "source_model": "gemini-3.6-flash_low",
+   "effort": "low",
+   "benchmark": "GPQA diamond",
+   "value": 0.8636363636363636,
+   "stderr": 0.02445015597318985,
+   "evaluated_on": "2026-08-06",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FJoraLb9y55QXpMg4Rrmr5x.eval"
   },
   {
    "model": "gemini-3-5-flash-lite",
@@ -973,6 +1027,15 @@
    "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2Fd23hYvSNGFo7rniLFyBWiu.eval"
   },
   {
+   "model": "gemini-3-6-flash",
+   "source_model": "gemini-3.6-flash_high",
+   "effort": "high",
+   "benchmark": "GPQA diamond",
+   "value": 0.9412878787878788,
+   "stderr": 0.014028967942064968,
+   "evaluated_on": "2026-08-02"
+  },
+  {
    "model": "claude-opus-5",
    "source_model": "claude-opus-5_max",
    "effort": "max",
@@ -999,6 +1062,15 @@
    "stderr": 0.031544498882702825,
    "evaluated_on": "2026-07-13",
    "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2F4sPs53wmM9bvN8JXzsiNCk.eval"
+  },
+  {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_max",
+   "effort": "max",
+   "benchmark": "GPQA diamond",
+   "value": 0.9160353535353535,
+   "stderr": 0.01728284355494035,
+   "evaluated_on": "2026-07-09"
   },
   {
    "model": "gpt-5-6-sol",
@@ -1271,6 +1343,26 @@
    "evaluated_on": "2026-08-30"
   },
   {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_none",
+   "effort": "none",
+   "benchmark": "FrontierMath-Tiers-1-3-v2-Private",
+   "value": 0.39649122807017545,
+   "stderr": 0.029026817016410068,
+   "evaluated_on": "2026-08-29",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FYwHKNFQjbat97wVLqachmi.eval"
+  },
+  {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_low",
+   "effort": "low",
+   "benchmark": "FrontierMath-Tiers-1-3-v2-Private",
+   "value": 0.41403508771929826,
+   "stderr": 0.029227738239445765,
+   "evaluated_on": "2026-08-29",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FZryXhNUpPedPvGhbqdNBEw.eval"
+  },
+  {
    "model": "deepseek-v4-pro",
    "source_model": "deepseek-v4-pro-0813_max",
    "effort": "max",
@@ -1301,6 +1393,16 @@
    "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2F8o2J9uQLKDCTiCFwYdkJRK.eval"
   },
   {
+   "model": "gemini-3-6-flash",
+   "source_model": "gemini-3.6-flash_high",
+   "effort": "high",
+   "benchmark": "FrontierMath-Tiers-1-3-v2-Private",
+   "value": 0.5894736842105263,
+   "stderr": 0.02919063494391404,
+   "evaluated_on": "2026-08-02",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2Fnb9LnDeeQyvRCqsbsTANGD.eval"
+  },
+  {
    "model": "claude-opus-5",
    "source_model": "claude-opus-5_max",
    "effort": "max",
@@ -1318,6 +1420,16 @@
    "value": 0.721830985915493,
    "stderr": 0.026636607935112643,
    "evaluated_on": "2026-07-17"
+  },
+  {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_max",
+   "effort": "max",
+   "benchmark": "FrontierMath-Tiers-1-3-v2-Private",
+   "value": 0.8210526315789474,
+   "stderr": 0.02274515950332741,
+   "evaluated_on": "2026-07-09",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FYLAk5J3Wd8EruVXee8bAQb.eval"
   },
   {
    "model": "gpt-5-6-sol",
@@ -1499,6 +1611,16 @@
    "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FjuNVfKBcYTwaKnk9GRA2zL.eval"
   },
   {
+   "model": "gemini-3-6-flash",
+   "source_model": "gemini-3.6-flash_high",
+   "effort": "high",
+   "benchmark": "FrontierMath-Tier-4-v2-Private",
+   "value": 0.21951219512195122,
+   "stderr": 0.06544589202438408,
+   "evaluated_on": "2026-08-02",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FJCMjXU6FRiiLV3xvs9R2Xv.eval"
+  },
+  {
    "model": "claude-opus-5",
    "source_model": "claude-opus-5_max",
    "effort": "max",
@@ -1517,6 +1639,16 @@
    "stderr": 0.07712872341874095,
    "evaluated_on": "2026-07-17",
    "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FgZERSAQwxBAevQzBsWfUie.eval"
+  },
+  {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_max",
+   "effort": "max",
+   "benchmark": "FrontierMath-Tier-4-v2-Private",
+   "value": 0.6097560975609756,
+   "stderr": 0.07712872341874097,
+   "evaluated_on": "2026-07-09",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FNLiiJJSyA9wmg2FHENFpAq.eval"
   },
   {
    "model": "gpt-5-6-sol",
@@ -1709,6 +1841,46 @@
    "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FCdmtwZ8NR8YeTXWiLVTRDJ.eval"
   },
   {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_none",
+   "effort": "none",
+   "benchmark": "OTIS Mock AIME 2024-2025",
+   "value": 0.4,
+   "stderr": 0.07385489458759964,
+   "evaluated_on": "2026-08-07",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FQYZ6wRuT7WMkaYPKc9dRPy.eval"
+  },
+  {
+   "model": "gemini-3-6-flash",
+   "source_model": "gemini-3.6-flash_minimal",
+   "effort": "minimal",
+   "benchmark": "OTIS Mock AIME 2024-2025",
+   "value": 0.8,
+   "stderr": 0.06030226891555273,
+   "evaluated_on": "2026-08-07",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FcF97JqHbFxxp7ePjYVK9HV.eval"
+  },
+  {
+   "model": "gemini-3-6-flash",
+   "source_model": "gemini-3.6-flash_low",
+   "effort": "low",
+   "benchmark": "OTIS Mock AIME 2024-2025",
+   "value": 0.8222222222222222,
+   "stderr": 0.057637747950250916,
+   "evaluated_on": "2026-08-07",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2F6iEkMa88YjLDgcde4bLm8B.eval"
+  },
+  {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_low",
+   "effort": "low",
+   "benchmark": "OTIS Mock AIME 2024-2025",
+   "value": 0.6666666666666666,
+   "stderr": 0.07106690545187014,
+   "evaluated_on": "2026-08-07",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FZgU8BagFmaj7BE94y3JDZA.eval"
+  },
+  {
    "model": "gemini-3-1-pro",
    "source_model": "gemini-3.1-pro-preview_high",
    "effort": "high",
@@ -1828,6 +2000,15 @@
    "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FhwrnvtEbDAocFtjcsHqsQh.eval"
   },
   {
+   "model": "gemini-3-6-flash",
+   "source_model": "gemini-3.6-flash_high",
+   "effort": "high",
+   "benchmark": "OTIS Mock AIME 2024-2025",
+   "value": 0.9416666666666667,
+   "stderr": 0.030926354359015452,
+   "evaluated_on": "2026-08-02"
+  },
+  {
    "model": "claude-opus-5",
    "source_model": "claude-opus-5_max",
    "effort": "max",
@@ -1854,6 +2035,15 @@
    "stderr": 0.07309112127323451,
    "evaluated_on": "2026-07-13",
    "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FUBKiF8QVUmHwqgx4rF7CDA.eval"
+  },
+  {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_max",
+   "effort": "max",
+   "benchmark": "OTIS Mock AIME 2024-2025",
+   "value": 0.9833333333333333,
+   "stderr": 0.011650421590325524,
+   "evaluated_on": "2026-07-09"
   },
   {
    "model": "gpt-5-6-sol",
@@ -2053,6 +2243,16 @@
    "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2F2xfFf6KZAp2gUWYhHGkFgs.eval"
   },
   {
+   "model": "gemini-3-6-flash",
+   "source_model": "gemini-3.6-flash_high",
+   "effort": "high",
+   "benchmark": "SimpleQA Verified",
+   "value": 0.662,
+   "stderr": 0.014965960710224383,
+   "evaluated_on": "2026-08-27",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FF83pa7Gfsb4UNVttTnS5Hk.eval"
+  },
+  {
    "model": "gpt-5-2",
    "source_model": "gpt-5.2-2025-12-11_low",
    "effort": "low",
@@ -2149,6 +2349,15 @@
    "benchmark": "SimpleQA Verified",
    "value": 0.697,
    "stderr": 0.014539683710535193,
+   "evaluated_on": "2026-08-10"
+  },
+  {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_max",
+   "effort": "max",
+   "benchmark": "SimpleQA Verified",
+   "value": 0.41,
+   "stderr": 0.015560917136921657,
    "evaluated_on": "2026-08-10"
   },
   {
@@ -2292,6 +2501,46 @@
    "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FEnbN27oUrNyfbxuPwtZey2.eval"
   },
   {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_none",
+   "effort": "none",
+   "benchmark": "Chess Puzzles",
+   "value": 0.02,
+   "stderr": 0.014070529413628968,
+   "evaluated_on": "2026-08-07",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2Fd9jMGFp8BwebW7sufdxbnC.eval"
+  },
+  {
+   "model": "gemini-3-6-flash",
+   "source_model": "gemini-3.6-flash_minimal",
+   "effort": "minimal",
+   "benchmark": "Chess Puzzles",
+   "value": 0.35,
+   "stderr": 0.047937248544110224,
+   "evaluated_on": "2026-08-07",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FhL24cexf97QKVLsv73H5TT.eval"
+  },
+  {
+   "model": "gemini-3-6-flash",
+   "source_model": "gemini-3.6-flash_low",
+   "effort": "low",
+   "benchmark": "Chess Puzzles",
+   "value": 0.43,
+   "stderr": 0.0497569851956243,
+   "evaluated_on": "2026-08-07",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FDLvSYBHHLcHECeL5SpNgVK.eval"
+  },
+  {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_low",
+   "effort": "low",
+   "benchmark": "Chess Puzzles",
+   "value": 0.21,
+   "stderr": 0.040936018074033236,
+   "evaluated_on": "2026-08-07",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FUhmACN5spAPyAtWWBf4MAP.eval"
+  },
+  {
    "model": "claude-opus-4-6",
    "source_model": "claude-opus-4-6_max",
    "effort": "max",
@@ -2401,6 +2650,15 @@
    "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FSoCkYbcxzkYHXqcqnEQwFN.eval"
   },
   {
+   "model": "gemini-3-6-flash",
+   "source_model": "gemini-3.6-flash_high",
+   "effort": "high",
+   "benchmark": "Chess Puzzles",
+   "value": 0.4,
+   "stderr": 0.0492365963917331,
+   "evaluated_on": "2026-08-02"
+  },
+  {
    "model": "claude-opus-5",
    "source_model": "claude-opus-5_max",
    "effort": "max",
@@ -2427,6 +2685,15 @@
    "stderr": 0.01969463855669324,
    "evaluated_on": "2026-07-13",
    "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FjMRYcMRgjaXW3N6q2JogNW.eval"
+  },
+  {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_max",
+   "effort": "max",
+   "benchmark": "Chess Puzzles",
+   "value": 0.4,
+   "stderr": 0.0492365963917331,
+   "evaluated_on": "2026-07-09"
   },
   {
    "model": "gpt-5-6-sol",
@@ -2636,6 +2903,15 @@
    "evaluated_on": "2026-09-01"
   },
   {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_none",
+   "effort": "none",
+   "benchmark": "Mystery Game Puzzles",
+   "value": 0.2,
+   "stderr": 0.04020151261036849,
+   "evaluated_on": "2026-08-30"
+  },
+  {
    "model": "gpt-6-astra",
    "source_model": "gpt-6-astra_max",
    "effort": "max",
@@ -2687,6 +2963,24 @@
    "benchmark": "Mystery Game Puzzles",
    "value": 0.1,
    "stderr": 0.03015113445777636,
+   "evaluated_on": "2026-08-27"
+  },
+  {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_medium",
+   "effort": "medium",
+   "benchmark": "Mystery Game Puzzles",
+   "value": 0.12,
+   "stderr": 0.032659863237109045,
+   "evaluated_on": "2026-08-27"
+  },
+  {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_low",
+   "effort": "low",
+   "benchmark": "Mystery Game Puzzles",
+   "value": 0.17,
+   "stderr": 0.03775251680686369,
    "evaluated_on": "2026-08-27"
   },
   {
@@ -2795,6 +3089,24 @@
    "evaluated_on": "2026-08-06"
   },
   {
+   "model": "gemini-3-6-flash",
+   "source_model": "gemini-3.6-flash_minimal",
+   "effort": "minimal",
+   "benchmark": "Mystery Game Puzzles",
+   "value": 0.25,
+   "stderr": 0.04351941398892446,
+   "evaluated_on": "2026-08-05"
+  },
+  {
+   "model": "gemini-3-6-flash",
+   "source_model": "gemini-3.6-flash_low",
+   "effort": "low",
+   "benchmark": "Mystery Game Puzzles",
+   "value": 0.23,
+   "stderr": 0.04229525846816508,
+   "evaluated_on": "2026-08-05"
+  },
+  {
    "model": "gemini-3-5-flash-lite",
    "source_model": "gemini-3.5-flash-lite_minimal",
    "effort": "minimal",
@@ -2810,6 +3122,15 @@
    "benchmark": "Mystery Game Puzzles",
    "value": 0.19,
    "stderr": 0.039427724440366255,
+   "evaluated_on": "2026-08-05"
+  },
+  {
+   "model": "gemini-3-6-flash",
+   "source_model": "gemini-3.6-flash_high",
+   "effort": "high",
+   "benchmark": "Mystery Game Puzzles",
+   "value": 0.3,
+   "stderr": 0.04605661864718382,
    "evaluated_on": "2026-08-05"
   },
   {
@@ -2837,6 +3158,15 @@
    "benchmark": "Mystery Game Puzzles",
    "value": 0.35,
    "stderr": 0.04793724854411023,
+   "evaluated_on": "2026-07-28"
+  },
+  {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_max",
+   "effort": "max",
+   "benchmark": "Mystery Game Puzzles",
+   "value": 0.21,
+   "stderr": 0.040936018074033236,
    "evaluated_on": "2026-07-28"
   },
   {
@@ -3181,6 +3511,13 @@
    "value": 0.915
   },
   {
+   "model": "gemini-3-6-flash",
+   "source_model": "gemini-3.6-flash_high",
+   "effort": "high",
+   "benchmark": "ARC-AGI",
+   "value": 0.9116666666666666
+  },
+  {
    "model": "gemini-3-7-flash",
    "source_model": "gemini-3.7-flash_medium",
    "effort": "medium",
@@ -3221,6 +3558,27 @@
    "effort": "low",
    "benchmark": "ARC-AGI",
    "value": 0.88
+  },
+  {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_max",
+   "effort": "max",
+   "benchmark": "ARC-AGI",
+   "value": 0.88
+  },
+  {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_xhigh",
+   "effort": "xhigh",
+   "benchmark": "ARC-AGI",
+   "value": 0.8767
+  },
+  {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_xhigh",
+   "effort": "xhigh",
+   "benchmark": "ARC-AGI",
+   "value": 0.8767
   },
   {
    "model": "deepseek-v4-pro",
@@ -3273,12 +3631,33 @@
    "value": 0.8516666666666666
   },
   {
+   "model": "gemini-3-6-flash",
+   "source_model": "gemini-3.6-flash_medium",
+   "effort": "medium",
+   "benchmark": "ARC-AGI",
+   "value": 0.8316666666666666
+  },
+  {
    "model": "gpt-5-2",
    "source_model": "gpt-5.2-2025-12-11_high",
    "effort": "high",
    "benchmark": "ARC-AGI",
    "value": 0.7867000000000001,
    "source_link": "https://arcprize.org/leaderboard"
+  },
+  {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_high",
+   "effort": "high",
+   "benchmark": "ARC-AGI",
+   "value": 0.765
+  },
+  {
+   "model": "gemini-3-6-flash",
+   "source_model": "gemini-3.6-flash_low",
+   "effort": "low",
+   "benchmark": "ARC-AGI",
+   "value": 0.765
   },
   {
    "model": "gpt-5-5",
@@ -3315,6 +3694,13 @@
    "value": 0.6533
   },
   {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_medium",
+   "effort": "medium",
+   "benchmark": "ARC-AGI",
+   "value": 0.565
+  },
+  {
    "model": "gpt-5-2",
    "source_model": "gpt-5.2-2025-12-11_low",
    "effort": "low",
@@ -3327,6 +3713,20 @@
    "effort": "high",
    "benchmark": "ARC-AGI",
    "value": 0.535
+  },
+  {
+   "model": "gemini-3-6-flash",
+   "source_model": "gemini-3.6-flash_minimal",
+   "effort": "minimal",
+   "benchmark": "ARC-AGI",
+   "value": 0.34500000000000003
+  },
+  {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_low",
+   "effort": "low",
+   "benchmark": "ARC-AGI",
+   "value": 0.3417
   },
   {
    "model": "gemini-3-5-flash-lite",
@@ -3412,6 +3812,14 @@
    "source_model": "gemini-3.1-pro-preview",
    "benchmark": "Balrog",
    "value": 0.569,
+   "source_link": "https://balrogai.com/"
+  },
+  {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_max",
+   "effort": "max",
+   "benchmark": "Balrog",
+   "value": 0.456,
    "source_link": "https://balrogai.com/"
   },
   {
@@ -3660,8 +4068,22 @@
    "value": 0.606
   },
   {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_unknown",
+   "effort": "unknown",
+   "benchmark": "SimpleBench",
+   "value": 0.468
+  },
+  {
    "model": "kimi-k2-5",
    "source_model": "kimi-k2.5",
+   "benchmark": "SimpleBench",
+   "value": 0.46799999999999997
+  },
+  {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_xhigh",
+   "effort": "xhigh",
    "benchmark": "SimpleBench",
    "value": 0.46799999999999997
   },
@@ -4134,6 +4556,20 @@
    "source_link": "https://htihle.github.io/weirdml.html"
   },
   {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_high",
+   "effort": "high",
+   "benchmark": "WeirdML",
+   "value": 0.6086
+  },
+  {
+   "model": "gemini-3-6-flash",
+   "source_model": "gemini-3.6-flash_high",
+   "effort": "high",
+   "benchmark": "WeirdML",
+   "value": 0.561
+  },
+  {
    "model": "gpt-5-2",
    "source_model": "gpt-5.2-2025-12-11_none",
    "effort": "none",
@@ -4251,6 +4687,13 @@
    "effort": "unknown",
    "benchmark": "APEX-Agents",
    "value": 0.473
+  },
+  {
+   "model": "gemini-3-6-flash",
+   "source_model": "gemini-3.6-flash_unknown",
+   "effort": "unknown",
+   "benchmark": "APEX-Agents",
+   "value": 0.469
   },
   {
    "model": "claude-opus-4-6",
@@ -4516,6 +4959,13 @@
    "value": 0.6041666666666666
   },
   {
+   "model": "gemini-3-6-flash",
+   "source_model": "gemini-3.6-flash_high",
+   "effort": "high",
+   "benchmark": "ARC-AGI-2",
+   "value": 0.6041666666666666
+  },
+  {
    "model": "deepseek-v4-pro",
    "source_model": "deepseek-v4-pro-0813_high",
    "effort": "high",
@@ -4528,6 +4978,13 @@
    "effort": "none",
    "benchmark": "ARC-AGI-2",
    "value": 0.5958333333333333
+  },
+  {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_max",
+   "effort": "max",
+   "benchmark": "ARC-AGI-2",
+   "value": 0.5954
   },
   {
    "model": "deepseek-v4-pro",
@@ -4572,6 +5029,27 @@
    "value": 0.5291
   },
   {
+   "model": "gemini-3-6-flash",
+   "source_model": "gemini-3.6-flash_medium",
+   "effort": "medium",
+   "benchmark": "ARC-AGI-2",
+   "value": 0.5041666666666667
+  },
+  {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_xhigh",
+   "effort": "xhigh",
+   "benchmark": "ARC-AGI-2",
+   "value": 0.4764
+  },
+  {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_xhigh",
+   "effort": "xhigh",
+   "benchmark": "ARC-AGI-2",
+   "value": 0.4764
+  },
+  {
    "model": "gpt-5-2",
    "source_model": "gpt-5.2-2025-12-11_high",
    "effort": "high",
@@ -4591,6 +5069,20 @@
    "effort": "low",
    "benchmark": "ARC-AGI-2",
    "value": 0.3333
+  },
+  {
+   "model": "gemini-3-6-flash",
+   "source_model": "gemini-3.6-flash_low",
+   "effort": "low",
+   "benchmark": "ARC-AGI-2",
+   "value": 0.30416666666666664
+  },
+  {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_high",
+   "effort": "high",
+   "benchmark": "ARC-AGI-2",
+   "value": 0.2931
   },
   {
    "model": "gpt-5-2",
@@ -4627,11 +5119,32 @@
    "value": 0.0972
   },
   {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_medium",
+   "effort": "medium",
+   "benchmark": "ARC-AGI-2",
+   "value": 0.0736
+  },
+  {
    "model": "gemini-3-5-flash-lite",
    "source_model": "gemini-3.5-flash-lite_medium",
    "effort": "medium",
    "benchmark": "ARC-AGI-2",
    "value": 0.05277777777777778
+  },
+  {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_low",
+   "effort": "low",
+   "benchmark": "ARC-AGI-2",
+   "value": 0.05140000000000001
+  },
+  {
+   "model": "gemini-3-6-flash",
+   "source_model": "gemini-3.6-flash_minimal",
+   "effort": "minimal",
+   "benchmark": "ARC-AGI-2",
+   "value": 0.02638888888888889
   },
   {
    "model": "gemini-3-5-flash-lite",
@@ -4882,6 +5395,13 @@
    "value": 0.373
   },
   {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_max",
+   "effort": "max",
+   "benchmark": "CursorBench",
+   "value": 0.359
+  },
+  {
    "model": "gpt-5-6-sol",
    "source_model": "gpt-5.6-sol_high",
    "effort": "high",
@@ -4894,6 +5414,13 @@
    "effort": "max",
    "benchmark": "CursorBench",
    "value": 0.341
+  },
+  {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_xhigh",
+   "effort": "xhigh",
+   "benchmark": "CursorBench",
+   "value": 0.33
   },
   {
    "model": "claude-sonnet-5",
@@ -4917,6 +5444,13 @@
    "value": 0.308
   },
   {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_high",
+   "effort": "high",
+   "benchmark": "CursorBench",
+   "value": 0.294
+  },
+  {
    "model": "claude-sonnet-5",
    "source_model": "claude-sonnet-5_medium",
    "effort": "medium",
@@ -4936,6 +5470,20 @@
    "effort": "low",
    "benchmark": "CursorBench",
    "value": 0.24100000000000002
+  },
+  {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_medium",
+   "effort": "medium",
+   "benchmark": "CursorBench",
+   "value": 0.222
+  },
+  {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_low",
+   "effort": "low",
+   "benchmark": "CursorBench",
+   "value": 0.16
   },
   {
    "model": "gpt-5-6-sol",
@@ -5106,6 +5654,20 @@
    "value": 0.20857142857142902
   },
   {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_max",
+   "effort": "max",
+   "benchmark": "CritPt",
+   "value": 0.205714285714286
+  },
+  {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_xhigh",
+   "effort": "xhigh",
+   "benchmark": "CritPt",
+   "value": 0.205714285714286
+  },
+  {
    "model": "gpt-6-astra",
    "source_model": "gpt-6-astra_none",
    "effort": "none",
@@ -5147,6 +5709,13 @@
    "value": 0.168571428571429
   },
   {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_high",
+   "effort": "high",
+   "benchmark": "CritPt",
+   "value": 0.165714285714286
+  },
+  {
    "model": "gpt-5-6-sol",
    "source_model": "gpt-5.6-sol_low",
    "effort": "low",
@@ -5173,6 +5742,13 @@
    "effort": "medium",
    "benchmark": "CritPt",
    "value": 0.122857142857143
+  },
+  {
+   "model": "gemini-3-6-flash",
+   "source_model": "gemini-3.6-flash_high",
+   "effort": "high",
+   "benchmark": "CritPt",
+   "value": 0.105714285714286
   },
   {
    "model": "gemini-3-7-flash",
@@ -5203,6 +5779,13 @@
    "value": 0.0514285714285714
   },
   {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_medium",
+   "effort": "medium",
+   "benchmark": "CritPt",
+   "value": 0.0485714285714286
+  },
+  {
    "model": "gemini-3-8-flash",
    "source_model": "gemini-3.8-flash_low",
    "effort": "low",
@@ -5223,6 +5806,13 @@
    "value": 0.0314285714285714
   },
   {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_low",
+   "effort": "low",
+   "benchmark": "CritPt",
+   "value": 0.0257142857142857
+  },
+  {
    "model": "gpt-5-5",
    "source_model": "gpt-5.5_none",
    "effort": "none",
@@ -5235,6 +5825,13 @@
    "effort": "high",
    "benchmark": "CritPt",
    "value": 0.0114285714285714
+  },
+  {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_none",
+   "effort": "none",
+   "benchmark": "CritPt",
+   "value": 0.00285714285714286
   },
   {
    "model": "claude-haiku-4-5",
@@ -5558,6 +6155,13 @@
    "value": 0.68125
   },
   {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_medium",
+   "effort": "medium",
+   "benchmark": "Surface Evolver Bench",
+   "value": 0.61875
+  },
+  {
    "model": "kimi-k3",
    "source_model": "kimi-k3_unknown",
    "effort": "unknown",
@@ -5648,6 +6252,13 @@
    "value": 0.6860465116279071
   },
   {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_max",
+   "effort": "max",
+   "benchmark": "DeepSWE",
+   "value": 0.671875
+  },
+  {
    "model": "gpt-5-5",
    "source_model": "gpt-5.5_xhigh",
    "effort": "xhigh",
@@ -5674,6 +6285,13 @@
    "effort": "max",
    "benchmark": "DeepSWE",
    "value": 0.5897435897435898
+  },
+  {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_xhigh",
+   "effort": "xhigh",
+   "benchmark": "DeepSWE",
+   "value": 0.5685840707964602
   },
   {
    "model": "claude-opus-4-8",
@@ -5732,6 +6350,13 @@
    "value": 0.45353982300884954
   },
   {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_high",
+   "effort": "high",
+   "benchmark": "DeepSWE",
+   "value": 0.4424778761061947
+  },
+  {
    "model": "claude-opus-4-8",
    "source_model": "claude-opus-4-8_low",
    "effort": "low",
@@ -5750,6 +6375,20 @@
    "source_model": "gemini-3.1-pro-preview",
    "benchmark": "DeepSWE",
    "value": 0.1172566371681416
+  },
+  {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_medium",
+   "effort": "medium",
+   "benchmark": "DeepSWE",
+   "value": 0.11283185840707964
+  },
+  {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_low",
+   "effort": "low",
+   "benchmark": "DeepSWE",
+   "value": 0.015486725663716814
   },
   {
    "model": "claude-opus-5",
@@ -5806,6 +6445,13 @@
    "effort": "low",
    "benchmark": "DeepSWE",
    "value": 0.5812917594654788
+  },
+  {
+   "model": "gemini-3-6-flash",
+   "source_model": "gemini-3.6-flash_high",
+   "effort": "high",
+   "benchmark": "DeepSWE",
+   "value": 0.4668141592920354
   },
   {
    "model": "claude-sonnet-5",
@@ -5954,6 +6600,14 @@
    "stderr": 0.04648
   },
   {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_max",
+   "effort": "max",
+   "benchmark": "ProofBench",
+   "value": 0.6,
+   "stderr": 0.05009
+  },
+  {
    "model": "gemini-3-7-flash",
    "source_model": "gemini-3.7-flash_unknown",
    "effort": "unknown",
@@ -5996,6 +6650,14 @@
    "effort": "unknown",
    "benchmark": "ProofBench",
    "value": 0.48
+  },
+  {
+   "model": "gemini-3-6-flash",
+   "source_model": "gemini-3.6-flash_unknown",
+   "effort": "unknown",
+   "benchmark": "ProofBench",
+   "value": 0.36,
+   "stderr": 0.04824
   },
   {
    "model": "gemini-3-1-pro",
@@ -6097,6 +6759,20 @@
    "value": 0.4119
   },
   {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_unknown",
+   "effort": "unknown",
+   "benchmark": "FrontierCode",
+   "value": 0.3981
+  },
+  {
+   "model": "gemini-3-6-flash",
+   "source_model": "gemini-3.6-flash_unknown",
+   "effort": "unknown",
+   "benchmark": "FrontierCode",
+   "value": 0.3437
+  },
+  {
    "model": "deepseek-v4-pro",
    "source_model": "deepseek-v4-pro-0813_high",
    "effort": "high",
@@ -6181,11 +6857,25 @@
    "value": 0.493
   },
   {
+   "model": "gemini-3-6-flash",
+   "source_model": "gemini-3.6-flash_high",
+   "effort": "high",
+   "benchmark": "LMCA",
+   "value": 0.44930000000000003
+  },
+  {
    "model": "gpt-5-2",
    "source_model": "gpt-5.2-2025-12-11_xhigh",
    "effort": "xhigh",
    "benchmark": "LMCA",
    "value": 0.4391
+  },
+  {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_max",
+   "effort": "max",
+   "benchmark": "LMCA",
+   "value": 0.4854
   },
   {
    "model": "gemini-3-5-flash-lite",
@@ -6433,11 +7123,25 @@
    "value": 0.4545
   },
   {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_xhigh",
+   "effort": "xhigh",
+   "benchmark": "LMCA",
+   "value": 0.4854
+  },
+  {
    "model": "deepseek-v4-1-flash",
    "source_model": "deepseek-v4.1-flash_unknown",
    "effort": "unknown",
    "benchmark": "LMCA",
    "value": 0.4697
+  },
+  {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_high",
+   "effort": "high",
+   "benchmark": "LMCA",
+   "value": 0.47380000000000005
   },
   {
    "model": "claude-sonnet-5",
@@ -6452,6 +7156,27 @@
    "effort": "low",
    "benchmark": "LMCA",
    "value": 0.4965
+  },
+  {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_medium",
+   "effort": "medium",
+   "benchmark": "LMCA",
+   "value": 0.4425
+  },
+  {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_low",
+   "effort": "low",
+   "benchmark": "LMCA",
+   "value": 0.4379
+  },
+  {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_none",
+   "effort": "none",
+   "benchmark": "LMCA",
+   "value": 0.414
   },
   {
    "model": "claude-opus-5",
@@ -6524,11 +7249,25 @@
    "value": 0.9248000000000001
   },
   {
+   "model": "gemini-3-6-flash",
+   "source_model": "gemini-3.6-flash_high",
+   "effort": "high",
+   "benchmark": "DTBench",
+   "value": 0.9547
+  },
+  {
    "model": "gpt-5-2",
    "source_model": "gpt-5.2-2025-12-11_xhigh",
    "effort": "xhigh",
    "benchmark": "DTBench",
    "value": 0.9093000000000001
+  },
+  {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_max",
+   "effort": "max",
+   "benchmark": "DTBench",
+   "value": 0.888
   },
   {
    "model": "gemini-3-5-flash-lite",
@@ -6776,11 +7515,25 @@
    "value": 0.9387000000000001
   },
   {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_xhigh",
+   "effort": "xhigh",
+   "benchmark": "DTBench",
+   "value": 0.8906999999999999
+  },
+  {
    "model": "deepseek-v4-1-flash",
    "source_model": "deepseek-v4.1-flash_unknown",
    "effort": "unknown",
    "benchmark": "DTBench",
    "value": 0.8987
+  },
+  {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_high",
+   "effort": "high",
+   "benchmark": "DTBench",
+   "value": 0.8667
   },
   {
    "model": "claude-sonnet-5",
@@ -6795,6 +7548,27 @@
    "effort": "low",
    "benchmark": "DTBench",
    "value": 0.736
+  },
+  {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_medium",
+   "effort": "medium",
+   "benchmark": "DTBench",
+   "value": 0.8320000000000001
+  },
+  {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_low",
+   "effort": "low",
+   "benchmark": "DTBench",
+   "value": 0.8
+  },
+  {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_none",
+   "effort": "none",
+   "benchmark": "DTBench",
+   "value": 0.6925
   },
   {
    "model": "claude-fable-5-1",
@@ -6887,6 +7661,15 @@
    "evaluated_on": "2026-09-10"
   },
   {
+   "model": "gemini-3-6-flash",
+   "source_model": "gemini-3.6-flash_high",
+   "effort": "high",
+   "benchmark": "Furniture Assembly",
+   "value": 0.23333333333333334,
+   "stderr": 0.05376590116477416,
+   "evaluated_on": "2026-09-10"
+  },
+  {
    "model": "gemini-3-8-flash",
    "source_model": "gemini-3.8-flash_high",
    "effort": "high",
@@ -6947,6 +7730,15 @@
    "benchmark": "Furniture Assembly",
    "value": 0.2833333333333333,
    "stderr": 0.05866531842313124,
+   "evaluated_on": "2026-09-10"
+  },
+  {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_max",
+   "effort": "max",
+   "benchmark": "Furniture Assembly",
+   "value": 0.425,
+   "stderr": 0.06380695638890652,
    "evaluated_on": "2026-09-10"
   },
   {
@@ -7146,6 +7938,41 @@
    "value": 0.554398148148148
   },
   {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_max",
+   "effort": "max",
+   "benchmark": "SciCode",
+   "value": 0.53587962962963
+  },
+  {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_high",
+   "effort": "high",
+   "benchmark": "SciCode",
+   "value": 0.506944444444444
+  },
+  {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_xhigh",
+   "effort": "xhigh",
+   "benchmark": "SciCode",
+   "value": 0.5
+  },
+  {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_medium",
+   "effort": "medium",
+   "benchmark": "SciCode",
+   "value": 0.45833333333333304
+  },
+  {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_low",
+   "effort": "low",
+   "benchmark": "SciCode",
+   "value": 0.456018518518519
+  },
+  {
    "model": "claude-opus-5",
    "source_model": "claude-opus-5_max",
    "effort": "max",
@@ -7188,6 +8015,13 @@
    "value": 0.586805555555556
   },
   {
+   "model": "gemini-3-6-flash",
+   "source_model": "gemini-3.6-flash_high",
+   "effort": "high",
+   "benchmark": "SciCode",
+   "value": 0.52662037037037
+  },
+  {
    "model": "gemini-3-5-flash-lite",
    "source_model": "gemini-3.5-flash-lite",
    "benchmark": "SciCode",
@@ -7226,6 +8060,13 @@
    "effort": "none",
    "benchmark": "SciCode",
    "value": 0.47106481481481505
+  },
+  {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_none",
+   "effort": "none",
+   "benchmark": "SciCode",
+   "value": 0.399305555555556
   },
   {
    "model": "claude-fable-5-1",
@@ -7388,6 +8229,13 @@
    "value": 0.2646420824295011
   },
   {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_unknown",
+   "effort": "unknown",
+   "benchmark": "Blueprint-Bench 2",
+   "value": 0.22559652928416485
+  },
+  {
    "model": "claude-opus-4-8",
    "source_model": "claude-opus-4-8_unknown",
    "effort": "unknown",
@@ -7400,6 +8248,13 @@
    "effort": "unknown",
    "benchmark": "Blueprint-Bench 2",
    "value": 0
+  },
+  {
+   "model": "gemini-3-6-flash",
+   "source_model": "gemini-3.6-flash_unknown",
+   "effort": "unknown",
+   "benchmark": "Blueprint-Bench 2",
+   "value": 0.31236442516268986
   },
   {
    "model": "claude-opus-5",
