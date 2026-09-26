@@ -62,7 +62,18 @@ function terms(suggestions: Suggestion[]): SearchTerm[] {
   return [...byTail.values()].sort((a, b) => b.score - a.score);
 }
 
-export function demandByIntent(snapshot = loadDemand()): { intents: IntentDemand[]; unmatched: SearchTerm[]; matchedShare: number } {
+type DemandByIntent = { intents: IntentDemand[]; unmatched: SearchTerm[]; matchedShare: number };
+/** The saved snapshot's grouping, memoised per loaded graph: every page asks for it. */
+const memo = new WeakMap<object, DemandByIntent>();
+
+export function demandByIntent(snapshot?: DemandSnapshot): DemandByIntent {
+  if (snapshot) return groupDemand(snapshot);
+  const g = graph();
+  if (!memo.has(g)) memo.set(g, groupDemand(loadDemand()));
+  return memo.get(g)!;
+}
+
+function groupDemand(snapshot: DemandSnapshot | undefined): DemandByIntent {
   const intents = [...graph().intents.values()].sort((a, b) => a.priority - b.priority);
   const groups = new Map<string, Suggestion[]>();
   const unmatchedSuggestions: Suggestion[] = [];
