@@ -62,7 +62,18 @@ p { margin: 0 0 0.8rem; }
 .nav a { display: inline-flex; align-items: center; text-decoration: none; font-size: 0.85rem; padding: 0 1rem; color: var(--ink); }
 .nav a:hover { text-decoration: underline; }
 .nav a.nav-cta { background: var(--orange); padding: 0 1.4rem; margin-right: auto; }
+.nav-links { display: flex; align-items: stretch; }
 .nav a[aria-current='page'] { text-decoration: underline; }
+/* Phones: brand and "Best AI for…" on the first row, the other links on a second row. */
+@media (max-width: 40rem) {
+  .site-header .wrap { display: grid; grid-template-columns: auto 1fr; }
+  .brand, .nav a.nav-cta { min-height: 2.6rem; }
+  .nav { display: contents; }
+  .nav a.nav-cta { margin-right: 0; }
+  .nav-links { grid-column: 1 / -1; border-top: 1px solid var(--hair); }
+  .nav-links a { padding: 0.55rem 0.9rem; }
+  .nav-links a:first-child { padding-left: 1.25rem; }
+}
 .preview-bar { background: var(--lavender); color: var(--ink); font: 0.75rem var(--mono); padding: 0.35rem 1.25rem; text-align: center; }
 main { padding-block: 3rem 5rem; }
 .site-footer { border-top: 1px solid var(--rule); padding-block: 1.5rem 3rem; font-size: 0.85rem; color: var(--muted); }
@@ -91,13 +102,13 @@ main { padding-block: 3rem 5rem; }
 .toc a::before { content: ''; width: 0; height: 1px; background: var(--ink); transition: width 0.15s; }
 .toc a:hover, .toc a.is-active { color: var(--ink); }
 .toc a.is-active::before { width: 1.6rem; }
-@media (max-width: 64rem) { .with-toc { grid-template-columns: 1fr; } .toc { display: none; } }
+@media (max-width: 64rem) { .with-toc { grid-template-columns: minmax(0, 1fr); } .toc { display: none; } }
 
 /* Panels: flat, square, no borders */
 .card { background: var(--band); padding: 1.4rem 1.5rem; }
-.grid { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr)); }
-.grid-3 { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr)); }
-.grid-2 { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(26rem, 1fr)); }
+.grid { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fill, minmax(min(17rem, 100%), 1fr)); }
+.grid-3 { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(min(19rem, 100%), 1fr)); }
+.grid-2 { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(min(26rem, 100%), 1fr)); }
 @media (max-width: 32rem) { .grid-2 { grid-template-columns: 1fr; } }
 a.card { text-decoration: none; display: block; transition: background 0.15s; }
 a.card:hover { background: #efeee9; }
