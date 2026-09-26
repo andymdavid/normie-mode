@@ -4,7 +4,7 @@ import BarChart, { type BarDatum } from '../components/BarChart.astro';
 import CapabilityCostChart from '../components/CapabilityCostChart.astro';
 import TaskGrid from '../components/TaskGrid.astro';
 import NormSays from '../components/NormSays.astro';
-import { allTaskPages, normLine, tasksByDemand } from '../lib/tasks';
+import { allTaskPages, normLine, tasksByDemand, withPositions } from '../lib/tasks';
 import { countWords, renderSlot } from '../lib/norm';
 import { imported } from '../lib/imported';
 import { EVIDENCE_STATUS_LABEL, TYPICAL_REQUEST, overviewRows, picks, type OverviewRow } from '../lib/overview';
@@ -17,11 +17,11 @@ const money = (v?: number) => (v === undefined ? undefined : v < 10 ? `$${v.toFi
 const ordinal = (n: number) => `${n}${n % 10 === 1 && n !== 11 ? 'st' : n % 10 === 2 && n !== 12 ? 'nd' : n % 10 === 3 && n !== 13 ? 'rd' : 'th'}`;
 const base = (r: OverviewRow) => ({ id: r.model.id, label: r.model.name, maker: r.maker, href: `/models/${r.model.id}` });
 
-const capability: BarDatum[] = rows.map((r) => ({
+const capability: BarDatum[] = withPositions(rows.map((r) => ({
   ...base(r),
-  value: r.eci?.value, display: r.eci?.value.toFixed(0), low: r.eci?.low, high: r.eci?.high,
-  tip: r.eci && `${r.model.name}: ${r.eci.value.toFixed(1)} (likely ${r.eci.low.toFixed(0)}–${r.eci.high.toFixed(0)})`,
-}));
+  value: r.eci?.value, low: r.eci?.low, high: r.eci?.high,
+  tip: r.eci && `${r.model.name}: Epoch capability score ${r.eci.value.toFixed(1)} (likely ${r.eci.low.toFixed(0)}–${r.eci.high.toFixed(0)})`,
+})));
 const votes: BarDatum[] = rows.map((r) => ({
   ...base(r),
   value: r.arena?.rating, display: r.arena && ordinal(r.arena.here),
@@ -82,7 +82,7 @@ const sections = [
       <p class="section-sub">The three things most people want to know.</p>
       <NormSays {...normLine('bars')} />
       <div class="grid-3">
-        <BarChart compact title="Capability" sub="Epoch AI capability score" rows={capability} floor={eciFloor} showEmpty={false} />
+        <BarChart compact title="Capability" sub="Position on a score combining dozens of tests" rows={capability} floor={eciFloor} showEmpty={false} />
         <BarChart compact title="People's votes" sub="Position in blind votes on LMArena" rows={votes} floor={arenaFloor} showEmpty={false} />
         <BarChart compact title="Cost" sub="Per 1,000 typical requests" rows={cost} lowerIsBetter showEmpty={false} />
       </div>
@@ -95,8 +95,8 @@ const sections = [
       <div class="section-head" id="capability"><h2>Capability</h2></div>
       <p class="section-sub">One score that combines dozens of independent tests. The thin line on each bar is the likely range.</p>
       <BarChart
-        title="Epoch Capabilities Index"
-        sub="Combines results from dozens of independent tests into one score. The thin line shows the likely range"
+        title="Overall capability"
+        sub="Position on Epoch AI's score, which combines dozens of independent tests. The thin line shows the likely range"
         rows={capability}
         floor={eciFloor}
         summary="If two models' ranges overlap, treat them as roughly equal."

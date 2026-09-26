@@ -2,12 +2,11 @@
 // never disagree with a chart: positions come from `taskScores` and `testRows`.
 import { graph } from './graph';
 import { overviewRows, type OverviewRow } from './overview';
-import { allTaskPages, effectiveTests, taskScores, tasksByDemand, testRows, type CLOSENESS_LABEL } from './tasks';
+import { allTaskPages, effectiveTests, ordinal, taskScores, tasksByDemand, testRows, type CLOSENESS_LABEL } from './tasks';
 import type { Intent, Test } from './schema';
 import type { BarDatum } from '../components/BarChart.astro';
 
-export const ordinal = (n: number) =>
-  `${n}${n % 10 === 1 && n % 100 !== 11 ? 'st' : n % 10 === 2 && n % 100 !== 12 ? 'nd' : n % 10 === 3 && n % 100 !== 13 ? 'rd' : 'th'}`;
+export { ordinal };
 
 const scoreCache = new Map<string, ReturnType<typeof taskScores>>();
 const rowCache = new Map<string, BarDatum[]>();
@@ -36,7 +35,7 @@ export function taskPositions(modelId: string): { task: Intent; score: string; p
     .map(({ task }) => {
       const rows = cachedTaskScores(task).rows;
       const i = rows.findIndex((r) => r.id === modelId);
-      return i < 0 ? undefined : { task, score: rows[i].display!, pos: { position: i + 1, of: rows.length } };
+      return i < 0 ? undefined : { task, score: rows[i].value!.toFixed(0), pos: { position: i + 1, of: rows.length } };
     })
     .filter((x) => x !== undefined)
     .sort((a, b) => a.pos.position - b.pos.position || b.task.priority - a.task.priority);
@@ -48,7 +47,7 @@ export function testPositions(modelId: string): { test: Test; display: string; p
     .map((test) => {
       const rows = rankedTestRows(test);
       const i = rows.findIndex((r) => r.id === modelId);
-      return i < 0 ? undefined : { test, display: rows[i].display!, pos: { position: i + 1, of: rows.length } };
+      return i < 0 ? undefined : { test, display: test.source === 'lmarena' ? `rating ${rows[i].value!.toFixed(0)}` : rows[i].display!, pos: { position: i + 1, of: rows.length } };
     })
     .filter((x) => x !== undefined)
     .sort((a, b) => a.pos.position / a.pos.of - b.pos.position / b.pos.of);

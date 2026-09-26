@@ -17,8 +17,28 @@ export function makerOf(m: ModelVersion): string {
   return graph().families.get(m.family)?.provider ?? m.family;
 }
 
+export const ordinal = (n: number) =>
+  `${n}${n % 10 === 1 && n % 100 !== 11 ? 'st' : n % 10 === 2 && n % 100 !== 12 ? 'nd' : n % 10 === 3 && n % 100 !== 13 ? 'rd' : 'th'}`;
+
+/**
+ * Label each bar with its position ("1st", "10th") instead of a score that means nothing on its
+ * own (N-011). The bar length still shows the gaps; the raw figure stays in the tooltip.
+ */
+export function withPositions(rows: BarDatum[]): BarDatum[] {
+  const ranked = rows.filter((r) => r.value !== undefined).sort((a, b) => b.value! - a.value!);
+  return rows.map((r) => (r.value === undefined ? r : { ...r, display: ordinal(ranked.indexOf(r) + 1) }));
+}
+
+/** Tests with fewer models than this get no ranking: two results can't show who's best. */
+export const MIN_MODELS_TO_RANK = 3;
+
 /** Bar rows for one test: best result per model across reasoning-effort settings. */
 export function testRows(test: Test): BarDatum[] {
+  const rows = rawTestRows(test);
+  return test.source === 'lmarena' ? withPositions(rows) : rows;
+}
+
+function rawTestRows(test: Test): BarDatum[] {
   const { epoch, lmarena } = imported();
   return currentModels().map((m) => {
     const base = { id: m.id, label: m.name, maker: makerOf(m), href: `/models/${m.id}` };
@@ -77,7 +97,7 @@ export function topTwoTied(rows: BarDatum[], lowerIsBetter = false): [BarDatum, 
 
 export function leadSentence(rows: BarDatum[], lowerIsBetter = false, verb = 'leads'): string | undefined {
   const sorted = rows.filter((r) => r.value !== undefined).sort((a, b) => (lowerIsBetter ? a.value! - b.value! : b.value! - a.value!));
-  if (sorted.length < 2) return undefined;
+  if (sorted.length < MIN_MODELS_TO_RANK) return undefined;
   if (topTwoTied(rows, lowerIsBetter)) {
     const next = sorted.slice(2, 4).map((r) => r.label);
     return `${sorted[0].label} and ${sorted[1].label} are neck and neck at the top${next.length ? `, followed by ${next.join(' and ')}` : ''}.`;
@@ -154,12 +174,11 @@ export function taskScores(task: Intent): { rows: BarDatum[]; testsUsed: number;
       maker: makerOf(l.model),
       href: `/models/${l.model.id}`,
       value: l.score * 100,
-      display: (l.score * 100).toFixed(0),
-      tip: `${l.model.name}: task score ${(l.score * 100).toFixed(0)} from ${l.tests} of ${testsUsed} test${testsUsed === 1 ? '' : 's'}`,
+      tip: `${l.model.name}: task score ${(l.score * 100).toFixed(0)} out of 100, from ${l.tests} of ${testsUsed} test${testsUsed === 1 ? '' : 's'}`,
     }));
   const used = scoringTests(task).map((t) => effectiveTests(task).find((x) => x.test === t.id)!.closeness);
   const closeness = used.includes('direct') ? 'direct' : used.includes('related') ? 'related' : used[0];
-  return { rows, testsUsed, closeness };
+  return { rows: withPositions(rows), testsUsed, closeness };
 }
 
 /**

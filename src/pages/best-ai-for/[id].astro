@@ -6,7 +6,7 @@ import NormSays from '../../components/NormSays.astro';
 import { graph } from '../../lib/graph';
 import { latestRun, rankRun } from '../../lib/normie-tests';
 import { overviewRows } from '../../lib/overview';
-import { CLOSENESS_LABEL, allTaskPages, effectiveTests, leadSentence, normLine, subtasksOf, taskPath, taskScores, tasksByDemand, testFloor, testRows, testSource } from '../../lib/tasks';
+import { CLOSENESS_LABEL, MIN_MODELS_TO_RANK, allTaskPages, effectiveTests, leadSentence, normLine, subtasksOf, taskPath, taskScores, tasksByDemand, testFloor, testRows, testSource } from '../../lib/tasks';
 import { PREVIEW, formatDate } from '../../lib/view';
 import { taskCostNote, taskEvidenceNote } from '../../lib/norm';
 import Verdict from '../../components/Verdict.astro';
@@ -25,8 +25,10 @@ const scores = taskScores(task);
 const top = scores.rows.slice(0, 3);
 const evidence = effectiveTests(task)
   .map((t) => ({ ...t, test: g.tests.get(t.test)!, rows: testRows(g.tests.get(t.test)!) }))
-  .filter((e) => e.rows.some((r) => r.value !== undefined));
+  .filter((e) => e.rows.filter((r) => r.value !== undefined).length >= MIN_MODELS_TO_RANK);
 const noResults = effectiveTests(task).filter((t) => !evidence.some((e) => e.test.id === t.test)).map((t) => g.tests.get(t.test)!);
+const tooFew = noResults.map((t) => ({ t, n: testRows(t).filter((r) => r.value !== undefined).length })).filter((x) => x.n > 0);
+const untested = noResults.filter((t) => !tooFew.some((x) => x.t.id === t.id));
 const ownRun = PREVIEW && task.normie_test ? latestRun(task.normie_test) : undefined;
 const norm = task.norm;
 const normOn = !!norm && (norm.status === 'approved' || PREVIEW);
@@ -91,7 +93,7 @@ const sections = [['answer', 'The short answer'], ...(normOn ? [['guide', "Norm'
       )}
       <BarChart
         title={`Task score: ${name}`}
-        sub={`Average of ${scores.testsUsed} test${scores.testsUsed === 1 ? '' : 's'}, each scored from 0 (came last) to 100 (came top)`}
+        sub={`Position on a combined score from ${scores.testsUsed} test${scores.testsUsed === 1 ? '' : 's'}. The longer the bar, the further ahead`}
         rows={scores.rows}
         summary={leaderLine}
         showEmpty={false}
@@ -124,7 +126,8 @@ const sections = [['answer', 'The short answer'], ...(normOn ? [['guide', "Norm'
           />
         ))}
       </div>
-      {noResults.length > 0 && <p class="small muted" style="margin-top:1rem">Also relevant, but no results for current models yet: {noResults.map((t) => t.title).join(', ')}.</p>}
+      {tooFew.length > 0 && <p class="small muted" style="margin-top:1rem">Also relevant, but too few of our models tested to compare yet: {tooFew.map((x, i) => <>{i > 0 && ', '}<a href={`/benchmarks/${x.t.id}`}>{x.t.title}</a> ({x.n === 1 ? 'one model' : `${x.n} models`})</>)}.</p>}
+      {untested.length > 0 && <p class="small muted" style="margin-top:1rem">Also relevant, but no results for the models we compare yet: {untested.map((t) => t.title).join(', ')}.</p>}
 
       <div class="section-head" id="cost"><h2>If you build with it</h2></div>
       <p class="section-sub">What the makers charge developers who use the models directly. Using an app? The plans above are what you pay.</p>

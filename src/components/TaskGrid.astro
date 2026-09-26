@@ -15,9 +15,9 @@ const short = (label: string) => label.replace(/^Best AI for /, '').replace(/^./
       <h3><a href={taskPath(task)}>{short(task.label)}</a></h3>
       <p class="small">{task.covers}</p>
       <a class="mini-bars" href={taskPath(task)} aria-label={`Top models for ${task.label.toLowerCase()}`}>
-        {rows.slice(0, 3).map((r, i) => (
+        {rows.slice(0, 3).map((r) => (
           <span class="mini-row" title={r.tip}>
-            <span class="mini-label">{i + 1}. {r.label}</span>
+            <span class="mini-label">{r.label}</span>
             <span class="bar-track"><span class="bar-fill" style={`width:${Math.max(3, r.value!)}%`}></span></span>
             <span class="mini-value">{r.display}</span>
           </span>
