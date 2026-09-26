@@ -42,3 +42,11 @@ describe('tasks and tests', () => {
     expect(taskScores(planning).closeness).toBe('related');
   });
 });
+
+describe("task score coverage (D-029)", () => {
+  it("never scores a model on people's votes alone when the task has tests of real work", async () => {
+    const { scoredOnVotesOnly } = await import('./models');
+    const { allTaskPages, taskScores } = await import('./tasks');
+    for (const task of allTaskPages()) for (const r of taskScores(task).rows) expect(scoredOnVotesOnly(task, r.id), `${task.id}: ${r.id}`).toBe(false);
+  });
+});

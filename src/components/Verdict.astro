@@ -30,7 +30,6 @@ const drafts = v.plans.some((p) => p.app.status === 'draft');
             <p class="verdict-model"><a href={`/models/${o.modelId}`}>{o.name}</a> <span class="maker">{modelMaker(o.modelId)}</span></p>
             <p class="verdict-plan">{where(o)}</p>
             {o.plan?.entry.where && <p class="verdict-note">{o.plan.entry.where}</p>}
-            {o.votesOnly && <p class="verdict-note verdict-caution">Scored on people's votes only so far; not yet tested on real work.</p>}
             <p class="verdict-score">{ordinal(o.position)} of {o.of} · task score {o.score.toFixed(0)}</p>
           </div>
         ))}
@@ -73,7 +72,6 @@ const drafts = v.plans.some((p) => p.app.status === 'draft');
   .verdict-plan { margin: 0; font-size: 0.95rem; }
   .verdict-note { margin: 0.15rem 0 0; font-size: 0.82rem; color: var(--ink-2); }
   .verdict-score { margin: 0.5rem 0 0; font: 0.78rem var(--mono); color: var(--ink-2); }
-  .verdict-caution { font-weight: 500; color: var(--ink); }
   .verdict-tie { font-size: 0.85rem; margin: 0 0 0.6rem; }
   .verdict-basis { font-size: 0.85rem; color: var(--muted); margin: 0.8rem 0 0; }
   .verdict-paying { margin-top: 1.2rem; }

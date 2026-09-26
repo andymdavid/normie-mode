@@ -118,6 +118,8 @@ export interface Leader {
   /** Average relative position (0–1) across the task's usable tests. */
   score: number;
   tests: number;
+  /** How many of those are tests of real work rather than people's votes. */
+  workTests: number;
 }
 
 /**
@@ -137,37 +139,47 @@ export function scoringTests(task: Intent): Test[] {
   return (close.length ? close : tests).map((t) => g.tests.get(t.test)!);
 }
 
-export function leaders(task: Intent): { leaders: Leader[]; testsUsed: number } {
+export function leaders(task: Intent): { leaders: Leader[]; testsUsed: number; workTestsUsed: number; placements: Map<string, Map<string, number>>; used: Test[] } {
   const g = graph();
-  const totals = new Map<string, { sum: number; n: number }>();
+  const totals = new Map<string, { sum: number; n: number; work: number }>();
+  /** Model -> test -> place on that test (0 lowest, 1 highest), for showing how a score is made. */
+  const placements = new Map<string, Map<string, number>>();
+  const used: Test[] = [];
   let testsUsed = 0;
+  let workTestsUsed = 0;
   for (const test of scoringTests(task)) {
     const rows = testRows(test).filter((r) => r.value !== undefined);
     if (rows.length < 3) continue;
     testsUsed++;
+    used.push(test);
+    const work = test.source !== 'lmarena';
+    if (work) workTestsUsed++;
     const vals = rows.map((r) => r.value!);
     const max = Math.max(...vals), min = Math.min(...vals);
     for (const r of rows) {
-      const t = totals.get(r.id) ?? { sum: 0, n: 0 };
-      totals.set(r.id, { sum: t.sum + (max === min ? 1 : (r.value! - min) / (max - min)), n: t.n + 1 });
+      const place = max === min ? 1 : (r.value! - min) / (max - min);
+      const t = totals.get(r.id) ?? { sum: 0, n: 0, work: 0 };
+      totals.set(r.id, { sum: t.sum + place, n: t.n + 1, work: t.work + (work ? 1 : 0) });
+      placements.set(r.id, (placements.get(r.id) ?? new Map()).set(test.id, place));
     }
   }
   const out = [...totals]
-    .map(([id, t]) => ({ model: g.models.get(id)!, score: t.sum / t.n, tests: t.n }))
+    .map(([id, t]) => ({ model: g.models.get(id)!, score: t.sum / t.n, tests: t.n, workTests: t.work }))
     .sort((a, b) => b.score - a.score);
-  return { leaders: out, testsUsed };
+  return { leaders: out, testsUsed, workTestsUsed, placements, used };
 }
 
 /**
  * Task score (0–100): on each usable test, place every model between the lowest (0) and highest
  * (100) score, then average across the tests it has results for. Only models with results on at
- * least half the usable tests get a score.
+ * least half the usable tests get a score, and when the task has tests of real work, a model needs
+ * at least one of them: people's votes alone can't put a model on the chart (D-029).
  */
 export function taskScores(task: Intent): { rows: BarDatum[]; testsUsed: number; closeness: Closeness | undefined } {
-  const { leaders: ls, testsUsed } = leaders(task);
+  const { leaders: ls, testsUsed, workTestsUsed } = leaders(task);
   const min = Math.max(1, Math.ceil(testsUsed / 2));
   const rows = ls
-    .filter((l) => l.tests >= min)
+    .filter((l) => l.tests >= min && (workTestsUsed === 0 || l.workTests > 0))
     .map((l) => ({
       id: l.model.id,
       label: l.model.name,
