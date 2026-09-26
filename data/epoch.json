@@ -5,7 +5,7 @@
   "url": "https://epoch.ai/benchmarks",
   "licence": "CC BY 4.0",
   "attribution": "Epoch AI, 'Capabilities & Benchmarking', https://epoch.ai/benchmarks",
-  "retrieved_at": "2026-09-24T05:01:00.052Z"
+  "retrieved_at": "2026-09-26T05:43:29.435Z"
  },
  "benchmarks": [
   {
@@ -570,10 +570,10 @@
    "name": "Furniture Assembly",
    "file": "furniture_assembly.csv",
    "score_column": "Best score (across scorers)",
-   "random_baseline": 0,
+   "random_baseline": 0.3,
    "score_ceiling": 1,
-   "released_on": "1.0",
-   "in_index": false
+   "released_on": "2026-09-23",
+   "in_index": true
   },
   {
    "name": "FrontierSWE",
@@ -2788,6 +2788,15 @@
    "stderr": 0.04229525846816508,
    "evaluated_on": "2025-12-11",
    "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FSUBFSiYKfaantxswKig2a2.eval"
+  },
+  {
+   "model": "claude-opus-5-5",
+   "source_model": "claude-opus-5-5_max",
+   "effort": "max",
+   "benchmark": "EBR-bench",
+   "value": 0.7142857142857142,
+   "stderr": 0.07063046178186345,
+   "evaluated_on": "2026-09-22"
   },
   {
    "model": "gpt-6-sol",

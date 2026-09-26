@@ -12,4 +12,6 @@ source_ids:
   epoch:
     - deepseek-v4.1-flash
   epoch_index: DeepSeek V4.1 Flash
-  modelsdev: deepseek/deepseek-v4-flash
+  modelsdev: deepseek/deepseek-flash
+  lmarena:
+    - deepseek-v4.1-flash-max

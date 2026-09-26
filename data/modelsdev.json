@@ -5,7 +5,7 @@
   "url": "https://models.dev",
   "licence": "MIT",
   "attribution": "models.dev (https://github.com/anomalyco/models.dev)",
-  "retrieved_at": "2026-09-24T05:01:00.564Z"
+  "retrieved_at": "2026-09-26T05:43:29.704Z"
  },
  "models": [
   {
@@ -17,6 +17,31 @@
     "input": 4,
     "output": 20,
     "cache_read": 0.2
+   },
+   "context": 1000000,
+   "max_output": 128000,
+   "input_modalities": [
+    "text",
+    "image",
+    "pdf"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "reasoning": true,
+   "tool_call": true,
+   "open_weights": false,
+   "knowledge": "2026-06"
+  },
+  {
+   "model": "claude-fable-5-1",
+   "source_model": "anthropic/claude-fable-5-1",
+   "name": "Claude Fable 5.1",
+   "released_on": "2026-09-01",
+   "price": {
+    "input": 10,
+    "output": 50,
+    "cache_read": 0.25
    },
    "context": 1000000,
    "max_output": 128000,
@@ -57,81 +82,6 @@
    "tool_call": true,
    "open_weights": false,
    "knowledge": "2026-05"
-  },
-  {
-   "model": "claude-fable-5-1",
-   "source_model": "anthropic/claude-fable-5-1",
-   "name": "Claude Fable 5.1",
-   "released_on": "2026-09-01",
-   "price": {
-    "input": 10,
-    "output": 50,
-    "cache_read": 0.25
-   },
-   "context": 1000000,
-   "max_output": 128000,
-   "input_modalities": [
-    "text",
-    "image",
-    "pdf"
-   ],
-   "output_modalities": [
-    "text"
-   ],
-   "reasoning": true,
-   "tool_call": true,
-   "open_weights": false,
-   "knowledge": "2026-06"
-  },
-  {
-   "model": "claude-opus-4-6",
-   "source_model": "anthropic/claude-opus-4-6",
-   "name": "Claude Opus 4.6",
-   "released_on": "2026-02-04",
-   "price": {
-    "input": 5,
-    "output": 25,
-    "cache_read": 0.5
-   },
-   "context": 1000000,
-   "max_output": 128000,
-   "input_modalities": [
-    "text",
-    "image",
-    "pdf"
-   ],
-   "output_modalities": [
-    "text"
-   ],
-   "reasoning": true,
-   "tool_call": true,
-   "open_weights": false,
-   "knowledge": "2025-05-31"
-  },
-  {
-   "model": "claude-haiku-4-5",
-   "source_model": "anthropic/claude-haiku-4-5-20251001",
-   "name": "Claude Haiku 4.5",
-   "released_on": "2025-10-15",
-   "price": {
-    "input": 1,
-    "output": 5,
-    "cache_read": 0.1
-   },
-   "context": 200000,
-   "max_output": 64000,
-   "input_modalities": [
-    "text",
-    "image",
-    "pdf"
-   ],
-   "output_modalities": [
-    "text"
-   ],
-   "reasoning": true,
-   "tool_call": true,
-   "open_weights": false,
-   "knowledge": "2025-02-28"
   },
   {
    "model": "claude-fable-5",
@@ -208,22 +158,20 @@
    "knowledge": "2026-01-31"
   },
   {
-   "model": "gemini-3-1-pro",
-   "source_model": "google/gemini-3.1-pro-preview",
-   "name": "Gemini 3.1 Pro Preview",
-   "released_on": "2026-02-19",
+   "model": "claude-opus-4-6",
+   "source_model": "anthropic/claude-opus-4-6",
+   "name": "Claude Opus 4.6",
+   "released_on": "2026-02-04",
    "price": {
-    "input": 2,
-    "output": 12,
-    "cache_read": 0.2
+    "input": 5,
+    "output": 25,
+    "cache_read": 0.5
    },
-   "context": 1048576,
-   "max_output": 65536,
+   "context": 1000000,
+   "max_output": 128000,
    "input_modalities": [
     "text",
     "image",
-    "video",
-    "audio",
     "pdf"
    ],
    "output_modalities": [
@@ -232,7 +180,78 @@
    "reasoning": true,
    "tool_call": true,
    "open_weights": false,
-   "knowledge": "2025-01"
+   "knowledge": "2025-05-31"
+  },
+  {
+   "model": "claude-haiku-4-5",
+   "source_model": "anthropic/claude-haiku-4-5-20251001",
+   "name": "Claude Haiku 4.5",
+   "released_on": "2025-10-15",
+   "price": {
+    "input": 1,
+    "output": 5,
+    "cache_read": 0.1
+   },
+   "context": 200000,
+   "max_output": 64000,
+   "input_modalities": [
+    "text",
+    "image",
+    "pdf"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "reasoning": true,
+   "tool_call": true,
+   "open_weights": false,
+   "knowledge": "2025-02-28"
+  },
+  {
+   "model": "deepseek-v4-1-flash",
+   "source_model": "deepseek/deepseek-flash",
+   "name": "DeepSeek V4.1 Flash",
+   "released_on": "2026-09-10",
+   "price": {
+    "input": 0.15,
+    "output": 0.6,
+    "cache_read": 0.003
+   },
+   "context": 1000000,
+   "max_output": 393216,
+   "input_modalities": [
+    "text",
+    "image"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "reasoning": true,
+   "tool_call": true,
+   "open_weights": true,
+   "knowledge": "2025-05"
+  },
+  {
+   "model": "deepseek-v4-pro",
+   "source_model": "deepseek/deepseek-v4-pro",
+   "name": "DeepSeek V4 Pro",
+   "released_on": "2026-08-12",
+   "price": {
+    "input": 0.435,
+    "output": 0.87,
+    "cache_read": 0.003625
+   },
+   "context": 1000000,
+   "max_output": 393216,
+   "input_modalities": [
+    "text"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "reasoning": true,
+   "tool_call": true,
+   "open_weights": true
   },
   {
    "model": "gemini-3-6-flash",
@@ -289,14 +308,14 @@
    "knowledge": "2026-03"
   },
   {
-   "model": "gemini-3-8-flash",
-   "source_model": "google/gemini-3.8-flash",
-   "name": "Gemini 3.8 Flash",
-   "released_on": "2026-09-02",
+   "model": "gemini-3-1-pro",
+   "source_model": "google/gemini-3.1-pro-preview",
+   "name": "Gemini 3.1 Pro Preview",
+   "released_on": "2026-02-19",
    "price": {
-    "input": 0.75,
-    "output": 3.75,
-    "cache_read": 0.075
+    "input": 2,
+    "output": 12,
+    "cache_read": 0.2
    },
    "context": 1048576,
    "max_output": 65536,
@@ -312,7 +331,8 @@
    ],
    "reasoning": true,
    "tool_call": true,
-   "open_weights": false
+   "open_weights": false,
+   "knowledge": "2025-01"
   },
   {
    "model": "gemini-3-7-flash",
@@ -342,43 +362,47 @@
    "knowledge": "2026-03"
   },
   {
-   "model": "deepseek-v4-1-flash",
-   "source_model": "deepseek/deepseek-v4-flash",
-   "name": "DeepSeek V4 Flash",
-   "released_on": "2026-09-10",
+   "model": "gemini-3-8-flash",
+   "source_model": "google/gemini-3.8-flash",
+   "name": "Gemini 3.8 Flash",
+   "released_on": "2026-09-02",
    "price": {
-    "input": 0.15,
-    "output": 0.6,
-    "cache_read": 0.003
+    "input": 0.75,
+    "output": 3.75,
+    "cache_read": 0.075
    },
-   "context": 1000000,
-   "max_output": 393216,
+   "context": 1048576,
+   "max_output": 65536,
    "input_modalities": [
     "text",
-    "image"
+    "image",
+    "video",
+    "audio",
+    "pdf"
    ],
    "output_modalities": [
     "text"
    ],
    "reasoning": true,
    "tool_call": true,
-   "open_weights": true,
-   "knowledge": "2025-05"
+   "open_weights": false
   },
   {
-   "model": "deepseek-v4-pro",
-   "source_model": "deepseek/deepseek-v4-pro",
-   "name": "DeepSeek V4 Pro",
-   "released_on": "2026-08-12",
+   "model": "kimi-k3",
+   "source_model": "moonshotai/kimi-k3",
+   "name": "Kimi K3",
+   "released_on": "2026-07-16",
    "price": {
-    "input": 0.435,
-    "output": 0.87,
-    "cache_read": 0.003625
+    "input": 3,
+    "output": 15,
+    "cache_read": 0.3
    },
-   "context": 1000000,
-   "max_output": 393216,
+   "context": 1048576,
+   "max_output": 1048576,
    "input_modalities": [
-    "text"
+    "text",
+    "image",
+    "video"
    ],
    "output_modalities": [
     "text"
@@ -386,56 +410,6 @@
    "reasoning": true,
    "tool_call": true,
    "open_weights": true
-  },
-  {
-   "model": "gpt-6-sol",
-   "source_model": "openai/gpt-6-sol",
-   "name": "GPT-6 Sol",
-   "released_on": "2026-09-22",
-   "price": {
-    "input": 2,
-    "output": 10,
-    "cache_read": 0.2
-   },
-   "context": 1050000,
-   "max_output": 128000,
-   "input_modalities": [
-    "text",
-    "image",
-    "pdf"
-   ],
-   "output_modalities": [
-    "text"
-   ],
-   "reasoning": true,
-   "tool_call": true,
-   "open_weights": false,
-   "knowledge": "2026-04-20"
-  },
-  {
-   "model": "gpt-5-6-sol",
-   "source_model": "openai/gpt-5.6-sol",
-   "name": "GPT-5.6 Sol",
-   "released_on": "2026-07-09",
-   "price": {
-    "input": 4,
-    "output": 20,
-    "cache_read": 0.4
-   },
-   "context": 1050000,
-   "max_output": 128000,
-   "input_modalities": [
-    "text",
-    "image",
-    "pdf"
-   ],
-   "output_modalities": [
-    "text"
-   ],
-   "reasoning": true,
-   "tool_call": true,
-   "open_weights": false,
-   "knowledge": "2026-02-16"
   },
   {
    "model": "gpt-6-astra",
@@ -461,31 +435,6 @@
    "tool_call": true,
    "open_weights": false,
    "knowledge": "2026-04-30"
-  },
-  {
-   "model": "gpt-6-luna",
-   "source_model": "openai/gpt-6-luna",
-   "name": "GPT-6 Luna",
-   "released_on": "2026-09-22",
-   "price": {
-    "input": 0.1,
-    "output": 0.5,
-    "cache_read": 0.01
-   },
-   "context": 1050000,
-   "max_output": 128000,
-   "input_modalities": [
-    "text",
-    "image",
-    "pdf"
-   ],
-   "output_modalities": [
-    "text"
-   ],
-   "reasoning": true,
-   "tool_call": true,
-   "open_weights": false,
-   "knowledge": "2026-05-18"
   },
   {
    "model": "gpt-5-6-luna",
@@ -562,28 +511,79 @@
    "knowledge": "2025-12-01"
   },
   {
-   "model": "kimi-k3",
-   "source_model": "moonshotai/kimi-k3",
-   "name": "Kimi K3",
-   "released_on": "2026-07-16",
+   "model": "gpt-6-luna",
+   "source_model": "openai/gpt-6-luna",
+   "name": "GPT-6 Luna",
+   "released_on": "2026-09-22",
    "price": {
-    "input": 3,
-    "output": 15,
-    "cache_read": 0.3
+    "input": 0.1,
+    "output": 0.5,
+    "cache_read": 0.01
    },
-   "context": 1048576,
-   "max_output": 1048576,
+   "context": 1050000,
+   "max_output": 128000,
    "input_modalities": [
     "text",
     "image",
-    "video"
+    "pdf"
    ],
    "output_modalities": [
     "text"
    ],
    "reasoning": true,
    "tool_call": true,
-   "open_weights": true
+   "open_weights": false,
+   "knowledge": "2026-05-18"
+  },
+  {
+   "model": "gpt-5-6-sol",
+   "source_model": "openai/gpt-5.6-sol",
+   "name": "GPT-5.6 Sol",
+   "released_on": "2026-07-09",
+   "price": {
+    "input": 4,
+    "output": 20,
+    "cache_read": 0.4
+   },
+   "context": 1050000,
+   "max_output": 128000,
+   "input_modalities": [
+    "text",
+    "image",
+    "pdf"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "reasoning": true,
+   "tool_call": true,
+   "open_weights": false,
+   "knowledge": "2026-02-16"
+  },
+  {
+   "model": "gpt-6-sol",
+   "source_model": "openai/gpt-6-sol",
+   "name": "GPT-6 Sol",
+   "released_on": "2026-09-22",
+   "price": {
+    "input": 2,
+    "output": 10,
+    "cache_read": 0.2
+   },
+   "context": 1050000,
+   "max_output": 128000,
+   "input_modalities": [
+    "text",
+    "image",
+    "pdf"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "reasoning": true,
+   "tool_call": true,
+   "open_weights": false,
+   "knowledge": "2026-04-20"
   }
  ]
 }
