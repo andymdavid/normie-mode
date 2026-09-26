@@ -1,9 +1,8 @@
 ---
-import { graph } from '../lib/graph';
 import { searchEntries } from '../lib/search-index';
 interface Props { placeholder?: string }
-const { placeholder = 'Try "analyse a spreadsheet" or "fix a broken formula"' } = Astro.props;
-const entries = searchEntries(graph());
+const { placeholder = 'Try "Excel", "write my CV" or "vibe coding"' } = Astro.props;
+const entries = searchEntries();
 ---
 <div class="search" data-search>
   <label class="eyebrow" for="q">What do you want AI to do?</label>
@@ -32,7 +31,7 @@ const entries = searchEntries(graph());
               li.append(a);
               return li;
             })
-          : [Object.assign(document.createElement('li'), { className: 'none', textContent: "We don't cover that yet. Right now we cover spreadsheet work." })]),
+          : [Object.assign(document.createElement('li'), { className: 'none', textContent: "We don't cover that yet. Try one of the tasks below." })]),
       );
     };
     input.addEventListener('input', render);

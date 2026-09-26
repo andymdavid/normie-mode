@@ -4,6 +4,8 @@ export interface SearchEntry {
   title: string;
   kind: 'Task' | 'Skill' | 'Model' | 'Benchmark';
   terms: string;
+  /** Phrases that count as an exact match, e.g. a task's search terms. */
+  phrases?: string[];
 }
 
 const STOP = new Set(['a', 'an', 'the', 'my', 'for', 'to', 'of', 'with', 'in', 'on', 'and', 'or', 'can', 'ai', 'best', 'is', 'it', 'do', 'does', 'me', 'i', 'how', 'what', 'which', 'this']);
@@ -14,7 +16,8 @@ export function normalise(word: string): string {
     .toLowerCase()
     .replace(/yse/g, 'yze')
     .replace(/ise$/, 'ize')
-    .replace(/(ing|es|s|ed)$/, '');
+    .replace(/(ing|es|s|ed)$/, '')
+    .replace(/e$/, '');
 }
 
 export function tokens(text: string): string[] {
@@ -32,7 +35,8 @@ export function rank(entries: SearchEntry[], query: string, limit = 6): SearchEn
     .map((e) => {
       const t = new Set(tokens(e.terms));
       const hits = q.filter((w) => t.has(w) || [...t].some((x) => x.startsWith(w) && w.length >= 3)).length;
-      return { e, score: (hits / q.length) * KIND_WEIGHT[e.kind] };
+      const exact = e.phrases?.some((p) => tokens(p).join(' ') === q.join(' ')) ? 1 : 0;
+      return { e, score: (hits / q.length) * KIND_WEIGHT[e.kind] + exact };
     })
     .filter((x) => x.score > 0)
     .sort((a, b) => b.score - a.score)

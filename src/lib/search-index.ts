@@ -1,18 +1,28 @@
-import type { Graph } from './graph';
+import { comparedModels } from './plans';
+import { allTaskPages, taskPath } from './tasks';
+import { graph } from './graph';
 import type { SearchEntry } from './search';
 
-export function searchEntries(g: Graph): SearchEntry[] {
+/** Task pages first (their search phrases count as exact matches), then the models we compare. */
+export function searchEntries(): SearchEntry[] {
+  const g = graph();
+  const pages = allTaskPages();
+  const phrasesOf = (t: (typeof pages)[number]) => [t.label.replace(/^Best AI for /, ''), ...t.match];
+  // A phrase that a more specific task also uses belongs to that task, not its hub.
+  const specific = new Set(pages.filter((t) => t.parent).flatMap(phrasesOf));
   return [
-    ...[...g.tasks.values()].map((t) => ({
-      url: `/tasks/${t.id}`,
-      title: t.question,
+    ...pages.map((t) => ({
+      url: taskPath(t),
+      title: t.label,
       kind: 'Task' as const,
-      terms: [t.name, t.question, t.includes, ...t.aliases].join(' '),
+      terms: [t.label, t.covers ?? '', ...t.match].join(' '),
+      phrases: t.parent ? phrasesOf(t) : phrasesOf(t).filter((p) => !specific.has(p)),
     })),
-    ...[...g.capabilities.values()].map((c) => ({ url: `/capabilities/${c.id}`, title: c.name, kind: 'Skill' as const, terms: c.name })),
-    ...[...g.models.values()]
-      .filter((m) => m.lifecycle === 'current')
-      .map((m) => ({ url: `/models/${m.id}`, title: m.name, kind: 'Model' as const, terms: `${m.name} ${g.families.get(m.family)?.provider ?? ''}` })),
-    ...[...g.benchmarks.values()].map((b) => ({ url: `/benchmarks/${b.id}`, title: `${b.name} explained`, kind: 'Benchmark' as const, terms: b.name })),
+    ...comparedModels().map((m) => ({
+      url: `/models/${m.id}`,
+      title: m.name,
+      kind: 'Model' as const,
+      terms: `${m.name} ${g.families.get(m.family)?.name ?? ''} ${g.families.get(m.family)?.provider ?? ''}`,
+    })),
   ];
 }
