@@ -6,6 +6,9 @@ This file records meaningful changes to the Normie Mode product, implementation,
 
 ### Added
 
+- Homepage leads with work (N-012): "Which AI is best for what you're doing?", a task search, the task cards with their up-to-$25 and free picks, and "Already paying for one?" showing how each plan does across the everyday tasks. The model comparison follows below.
+- Task search covers all 46 task pages and the models we compare, and lands specific searches ("vibe coding", "write my CV") on the specific page.
+
 - A verdict at the top of every task page (D-027): best overall, best for $25 a month or less and best free, each with the app and plan that gets it, "too close to call" when two are within 5 points, and a table of what every plan gives you for that task. The rule is on How it works. Shows in preview until the plans are approved.
 
 - Apps and plans (D-026, draft): which ChatGPT, Claude, Gemini and Kimi plans include each model, with monthly prices, how sure the mapping is, and the maker's or press source. Model pages show "Where you can use it". Visible in preview until approved.

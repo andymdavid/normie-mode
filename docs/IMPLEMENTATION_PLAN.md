@@ -275,11 +275,12 @@ Progress note (2026-09-24): Built as the homepage (`src/pages/index.astro`, data
 
 ### N-012 — Work-first homepage (stage 5)
 
-- Status: `proposed`
+- Status: `in_progress` (built 2026-09-26; product-owner review outstanding)
 - Dependencies: N-010
 - Work: open the homepage with "What do you want to do?" (task search and the top tasks with their verdicts), then "Already paying for one?", with the model charts moved below.
 - Acceptance criteria: a first-time visitor reaches a verdict for their task in one click or search.
 - Verification: product-owner review.
+- Progress note (2026-09-26): the homepage opens with the task search (`Search.astro`, now indexing task pages and compared models; a task's own search phrases count as exact matches, and a phrase shared with a more specific task belongs to that task), then the task cards, which show the up-to-$25 and free picks, then "Already paying for one?" (`planSummaries` in `src/lib/verdict.ts`: how many everyday tasks each plan's best model is top three for, noting when a plan's main model is too new to score), then the model comparison. Picks and the plans table need visible plans, so the public homepage shows search, cards and comparison until plans are approved.
 
 ### N-013 — First public editorial and own-test evidence (stage 6)
 
