@@ -1,8 +1,8 @@
 # Implementation Plan
 
-Status: Direction reset to translated model comparison (D-018)  
-Last updated: 2026-09-24  
-Current phase: Data foundation and overview mockup (see "Current work")
+Status: Product-clarity pass (D-026 to D-028)  
+Last updated: 2026-09-26  
+Current phase: Product-clarity stages N-008 to N-013 (see "Current work")
 
 ## Objective
 
@@ -27,6 +27,8 @@ Business spreadsheet work. The pilot will cover major general-purpose models and
 ### D-004 — Comparison unit
 
 Models, identified by exact model version. Evaluation configuration and enabled tools are methodology metadata, not separate comparison entities.
+
+Extended by D-026 (2026-09-26): models stay the comparison unit, and a "where you get it" layer maps each model to the apps and plans that offer it.
 
 ### D-013 — Technology stack (accepted 2026-09-23)
 
@@ -151,6 +153,34 @@ Every in-scope search intent (D-024) gets its own public page at `/best-ai-for/<
 
 Five more LMArena categories were added to the test catalogue (other languages, long requests, science, conversations, overall) to give translation, documents and planning pages real evidence.
 
+### D-026 — Where you get it: models mapped to apps and plans (accepted 2026-09-26, extends D-004)
+
+Product review (2026-09-26): people choose an app and a plan (ChatGPT, Claude, Gemini; free or paid), not a model version. 191 of 1,115 collected searches are "ChatGPT vs Claude for…" and 42 ask for "free"; none name a model version. Cost per 1,000 API requests means nothing to someone paying a monthly subscription.
+
+- Models remain the comparison unit. Nothing is tested at the app level.
+- A new content type, `content/plans/`, records each consumer plan: app, maker, plan name, monthly price (USD, and GBP where published), which tracked model versions it includes and whether usage is limited, the source URL and the date checked. Plans are hand-entered from the maker's own pricing or help pages and cited, like maker claims.
+- Pages show which plans include a model, and the verdict (D-027) names the app and plan as well as the model.
+- API cost stays, relabelled as "if you build with it" information, below the consumer view.
+- A plan is flagged for review after 30 days, because plans change more often than models.
+
+### D-027 — The verdict on each task page, chosen by a published rule (accepted 2026-09-26)
+
+Each task page leads with a verdict computed from the same data as its charts, so it can't contradict them. Like the data-driven one-line summaries (D-025), it isn't editorial prose. The rule is public on the methodology page:
+
+- **Best:** the model with the highest task score, and the cheapest plan that includes it.
+- **Best on a standard plan:** the highest-scoring model included in a plan costing $25 a month or less.
+- **Best free:** the highest-scoring model included in a free plan.
+- **Too close to call:** if the runner-up is within 5 task-score points, the verdict names both, and the cheaper plan first.
+- **Already paying?** For each app, the best model on its standard plan and where it ranks for this task.
+- Picks that collapse into one (e.g. the best model is also on a free plan) are shown once.
+- When the evidence is only general ability or votes, the verdict says so in its label, and a gap task shows no picks.
+
+"Can AI do this well yet?" needs an absolute measure (our own tests or direct benchmarks) and is deferred until N-007 results are published.
+
+### D-028 — Retire the pages left from the spreadsheet-first prototype (accepted 2026-09-26)
+
+`/tasks`, `/capabilities` and `/sources` leave the public build; their content stays in the repository. `/models` and "Tests explained" are rebuilt from the data the task pages use (`content/tests/`, imported snapshots, claims). `/methodology` is rewritten to describe how task pages actually work (closeness labels, task score, evidence status, the verdict rule). The legacy recommendation and confidence system (D-003) stays in the validator but isn't shown until recommendations are reintroduced.
+
 ## Reference sites
 
 Reviewed 2026-09-24 as models for structure and presentation:
@@ -204,6 +234,55 @@ Progress note (2026-09-24): Built as the homepage (`src/pages/index.astro`, data
 - Best overall for a Normie Mode test (2026-09-24, draft rule for product-owner review): rank by answers right, then lower cost, then faster time; shown with a one-line reason per model (`rankRun` in `src/lib/normie-tests.ts`). It's scoped to the one test, and a single run means a one-answer gap may be luck.
 - Version 2 built (2026-09-24): `messy-spreadsheet-questions` (write-up in `docs/evals/messy-spreadsheet-questions.md`), with untidy data that changes the answers and eight harder questions. The runner now runs the cheapest models first so the budget cap only cuts expensive ones.
 - Next, after results: show them on the office-work job page as the first Normie Mode test, with each question, the right answer and each model's answer.
+
+### N-008 — Make the site consistent (stage 1)
+
+- Status: `done` (2026-09-26)
+- Dependencies: D-028
+- Work: rebuild `/models` and the model pages (task-score positions, test results from `content/tests/`, specs, maker claims, evidence status); rebuild "Tests explained" from `content/tests/` with the tasks each test feeds; drop `/tasks`, `/capabilities` and `/sources` from the build; rewrite `/methodology`; remove the "Compare models" nav item until N-003 exists; fix the homepage overflowing at phone width.
+- Acceptance criteria: no public page contradicts another (e.g. a model shown with "0 results" that leads a chart); every test used on a task page has an explainer; nothing in the public build links to a removed page; pages fit at 400px.
+- Verification: `npm test`, `npm run check`, `npm run build`, a link check over `dist/`, and screenshots at 1400px and 400px.
+- Progress note (2026-09-26): model and test views live in `src/lib/models.ts` and reuse `taskScores`/`testRows`, so positions always match the task charts. Tests with no results for current models are left out of "Tests explained". The phone "overflow" in the review was an artefact of headless Chrome's 500px minimum window (check phone widths inside a 390px iframe instead); the real phone bug was grids sized by their content, which pushed the homepage's votes chart off screen, fixed with `minmax(0, 1fr)`. Search-demand grouping is now memoised, which cut the build from 16s to under 1s. `Search.astro` and `search-index.ts` still index the retired pages; they're unused until N-012 reuses search for tasks.
+
+### N-009 — Apps and plans data (stage 2)
+
+- Status: `proposed`
+- Dependencies: D-026
+- Work: `plans` schema, loader and validator rules (every model referenced exists; source and date required; 30-day review flag); hand-entered plans for ChatGPT, Claude, Gemini, DeepSeek and Kimi, checked against each maker's pricing page; "Where you can use it" on model pages.
+- Acceptance criteria: every current tracked model is either in at least one plan or marked API-only; every plan cites its source and date checked.
+- Verification: validator passes; spot-check each plan against its source.
+
+### N-010 — Verdict block on task pages (stage 3)
+
+- Status: `proposed`
+- Dependencies: D-027, N-009
+- Work: `verdict(task)` in `src/lib/`, tests that the picks match the task-score chart and plan data, and the verdict block at the top of every task page; the rule on `/methodology`; API cost moved below the verdict as "If you build with it".
+- Acceptance criteria: every in-scope task page shows a verdict or says why it can't; the picks are consistent with the chart on the same page.
+- Verification: `npm test` renders every task page's verdict and checks it against the data; product-owner review of five pages.
+
+### N-011 — Readable numbers (stage 4)
+
+- Status: `proposed`
+- Dependencies: N-008
+- Work: replace raw Epoch index and LMArena ratings in headline positions with plain ranks or bands; stop a relative score of 0 reading as "useless" (e.g. show position "10th of 10" alongside the score); flag close calls beyond the top two; hide single-test charts with fewer than three models from task summaries.
+- Acceptance criteria: a non-expert can read every headline chart without knowing what the underlying index is.
+- Verification: product-owner review; a comprehension check with at least three people outside AI (P1-003).
+
+### N-012 — Work-first homepage (stage 5)
+
+- Status: `proposed`
+- Dependencies: N-010
+- Work: open the homepage with "What do you want to do?" (task search and the top tasks with their verdicts), then "Already paying for one?", with the model charts moved below.
+- Acceptance criteria: a first-time visitor reaches a verdict for their task in one click or search.
+- Verification: product-owner review.
+
+### N-013 — First public editorial and own-test evidence (stage 6)
+
+- Status: `proposed`
+- Dependencies: product-owner review time; N-007
+- Work: product owner approves Norm's guide ("what to check") for the five hubs with the most demand; run the messy-spreadsheet test and publish it on the Excel page as the first direct evidence.
+- Acceptance criteria: at least five task pages show an approved "what to check" publicly; the Excel page shows our own test with every question and answer.
+- Verification: product-owner approval recorded in content (`status: approved`).
 
 ### N-003 — Head-to-head comparison page
 

@@ -17,7 +17,7 @@ Read these files before making changes (the vision predates the D-018 direction 
 - Normie Mode is model comparison translated for non-experts (D-018). Use the reference sites in `docs/IMPLEMENTATION_PLAN.md` for structure; make every label, metric and chart readable by someone whose job isn't AI.
 - Distil, don't describe (D-021): lead with data and visuals, keep words short, and never publish generated editorial prose without product-owner review.
 - Only use data sources accepted in D-019, and keep each value's source, retrieval date and licence.
-- The canonical comparison unit is the model, identified by exact model version. Products, wrappers, and product directories are outside the comparison scope.
+- The canonical comparison unit is the model, identified by exact model version. Apps and plans are mapped to models (D-026) so pages can say where to get a model, but they are never tested or ranked as separate entities.
 - Keep measured facts, sourced claims, editorial assessments, and recommendations distinguishable.
 - Preserve source, model or product version, evaluation date, and methodology for important evidence.
 - Do not present a recommendation that cannot explain why it exists and what still needs checking.

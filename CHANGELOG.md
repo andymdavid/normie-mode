@@ -6,12 +6,20 @@ This file records meaningful changes to the Normie Mode product, implementation,
 
 ### Added
 
+- Product-clarity plan (D-026 to D-028, stages N-008 to N-013): models mapped to the apps and plans people use, a rule-based verdict on each task page, and retiring the prototype pages.
+- Model pages rebuilt: where the model ranks on every task, its results on every test we use, cost, evidence status and what the maker says; the models list shows how many tasks each model is in the top three for.
+- "Tests explained" rebuilt from the tests the task pages use: 25 tests in two groups (tests of real work, people's votes), each with a chart and the tasks it feeds.
+- "How it works" rewritten to describe what the site actually does: sources, closeness labels, the task score, too-close-to-call, evidence status, cost and who writes what.
+
 - Task cards on the homepage and "Best AI for…" list each hub's specific tasks, so all 46 task pages are one click away.
 - Charts point out when the top two are too close to call, and say how much more the dearer one costs; the summary line above the chart then says they're neck and neck instead of naming a leader.
 - 31 specific task pages under the 15 hubs (e.g. vibe coding, job hunting, essay writing, travel planning), with inherited evidence labelled as related rather than direct.
 - Norm's four faces (default, happy, smug, wise) chosen per line, with a hover effect that enlarges the avatar and swaps faces.
 
 ### Fixed
+
+- Phones: the homepage's "People's votes" chart was pushed off screen, and the header wrapped into a jumble; the header now has two tidy rows.
+- Build time down from about 16 seconds to under one, by grouping search demand once per build.
 
 - Norm's avatar stays sharp when it grows on hover, and each hover shows a different face from the last.
 - Norm's claims about the data are now generated from templates filled with each page's facts, and his hand-written lines are checked to contain advice only, so a message can't contradict its charts (e.g. the cost note now says "the three models that score best for this task").
@@ -56,4 +64,5 @@ This file records meaningful changes to the Normie Mode product, implementation,
 
 ### Removed
 
+- The spreadsheet-prototype pages (`/tasks`, `/capabilities`, `/sources`, and the three old benchmark pages) and the "Compare models" menu item, which only pointed at the homepage. Their content stays in the repository.
 - Interim review, wedge recommendation, decision-register, and worklog documents after consolidating durable information into the implementation plan.
