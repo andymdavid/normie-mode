@@ -9,6 +9,9 @@ import { countWords, renderSlot } from '../lib/norm';
 import { imported } from '../lib/imported';
 import { EVIDENCE_STATUS_LABEL, TYPICAL_REQUEST, overviewRows, picks, type OverviewRow } from '../lib/overview';
 import { formatDate } from '../lib/view';
+import Search from '../components/Search.astro';
+import { formatPrice, planLabel } from '../lib/plans';
+import { planSummaries } from '../lib/verdict';
 
 const rows = overviewRows();
 const { epoch, modelsdev, lmarena } = imported();
@@ -45,17 +48,53 @@ const fresh = rows.filter((r) => r.status !== 'tested').sort((a, b) => (b.model.
 const arenaFloor = Math.floor((Math.min(...votes.filter((v) => v.value).map((v) => v.value!)) - 20) / 10) * 10;
 const eciFloor = Math.floor((Math.min(...capability.filter((v) => v.low).map((v) => v.low!)) - 5) / 5) * 5;
 const scatterLabels = new Set(picks(rows).map((p) => p.row.model.id));
+const hubs = tasksByDemand().map((t) => t.task);
+const paying = planSummaries(hubs);
+const short = (label: string) => label.replace(/^Best AI for /, '').toLowerCase();
 const sections = [
-  ['highlights', 'Highlights'], ['tasks', 'Best AI for…'], ['capability', 'Capability'], ['value', 'Capability vs cost'],
+  ['tasks', 'Best AI for…'], ...(paying.length ? [['paying', 'Already paying?']] : []), ['highlights', 'Compare the models'], ['capability', 'Capability'], ['value', 'Capability vs cost'],
   ['votes', "People's votes"], ['cost', 'Cost'], ['reading', 'How much it can read'], ['new', 'Too new to judge'], ['numbers', 'All the numbers'],
 ];
 ---
 <Base title="Normie Mode">
-  <h1>Which AI is best right now?</h1>
-  <p class="lede">The main AI models compared in plain English, using independent tests and people's votes. Updated {updated}.</p>
+  <h1>Which AI is best for what you're doing?</h1>
+  <p class="lede">Pick your task to see which AI does it best, which app and plan gets you it, and the evidence behind it. Updated {updated}.</p>
+  <div class="home-search"><Search /></div>
 
-  <div class="band">
-    <div class="band-inner summary-grid">
+  <div class="with-toc">
+    <nav class="toc" aria-label="On this page">
+      <ol>{sections.map(([id, label]) => <li><a href={`#${id}`}>{label}</a></li>)}</ol>
+    </nav>
+    <div>
+      <div class="section-head" id="tasks" style="margin-top: 0"><h2>Best AI for…</h2></div>
+      <p class="section-sub">The everyday jobs people search for, most popular first, with the models that do each best.</p>
+      <TaskGrid limit={9} />
+      <p style="margin-top:1.5rem"><a href="/best-ai-for">All {allTaskPages().length} tasks →</a></p>
+
+      {paying.length > 0 && (
+        <>
+          <div class="section-head" id="paying"><h2>Already paying for one?</h2></div>
+          <p class="section-sub">How the best model on each plan does across the {paying[0].of} everyday tasks above.</p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>App and plan</th><th>Price</th><th>In the top three for</th></tr></thead>
+              <tbody>
+                {paying.map((p) => (
+                  <tr>
+                    <td><strong>{planLabel(p.app, p.plan)}</strong>{p.app.status === 'draft' && <span class="badge draft" style="margin-left:0.5rem">Draft</span>}</td>
+                    <td class="num">{formatPrice(p.plan.price_usd)}</td>
+                    <td>{p.top3.length} of {p.of} tasks{p.top3.length > 0 && <div class="small muted">{p.top3.slice(0, 4).map((t) => short(t.label)).join(', ')}{p.top3.length > 4 && '…'}</div>}{p.unscoredDefault && <div class="small muted">Its main model, {p.unscoredDefault}, is too new to score yet, so this counts its other models.</div>}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </>
+      )}
+
+      <div class="section-head" id="highlights"><h2>Compare the models</h2></div>
+      <p class="section-sub">The models behind the apps, side by side: how capable, how much people like them and what they cost developers.</p>
+      <div class="summary-grid model-summary">
       {summaries.map((s) => (
         <div class="summary">
           <span class="tag">{s.tag}</span>
@@ -71,15 +110,7 @@ const sections = [
         </div>
       )}
     </div>
-  </div>
 
-  <div class="with-toc">
-    <nav class="toc" aria-label="On this page">
-      <ol>{sections.map(([id, label]) => <li><a href={`#${id}`}>{label}</a></li>)}</ol>
-    </nav>
-    <div>
-      <div class="section-head" id="highlights" style="margin-top: 0"><h2>Highlights</h2></div>
-      <p class="section-sub">The three things most people want to know.</p>
       <NormSays {...normLine('bars')} />
       <div class="grid-3">
         <BarChart compact title="Capability" sub="Position on a score combining dozens of tests" rows={capability} floor={eciFloor} showEmpty={false} />
@@ -87,10 +118,6 @@ const sections = [
         <BarChart compact title="Cost" sub="Per 1,000 typical requests" rows={cost} lowerIsBetter showEmpty={false} />
       </div>
 
-      <div class="section-head" id="tasks"><h2>Best AI for…</h2></div>
-      <p class="section-sub">The everyday jobs people search for, most popular first. Each ranking combines the tests that measure that job.</p>
-      <TaskGrid limit={9} />
-      <p style="margin-top:1.5rem"><a href="/best-ai-for">All {allTaskPages().length} tasks →</a></p>
 
       <div class="section-head" id="capability"><h2>Capability</h2></div>
       <p class="section-sub">One score that combines dozens of independent tests. The thin line on each bar is the likely range.</p>
@@ -187,3 +214,9 @@ const sections = [
     </div>
   </div>
 </Base>
+
+<style>
+  .home-search { margin-top: 2rem; max-width: 36rem; }
+  .with-toc { margin-top: 3.5rem; }
+  .model-summary { margin: 0 0 2rem; padding: 1.2rem 0; border-block: 1px solid var(--hair); }
+</style>

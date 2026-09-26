@@ -2,15 +2,20 @@
 // Every hub task as a small ranking (its task score for the top three models), with links to its
 // more specific tasks so all task pages are one click from here.
 import { CLOSENESS_LABEL, subtasksOf, taskPath, taskScores, tasksByDemand } from '../lib/tasks';
+import { planLabel } from '../lib/plans';
+import { verdict, type Option, type PickKind } from '../lib/verdict';
 interface Props { limit?: number }
 const { limit } = Astro.props;
 const tasks = tasksByDemand()
   .slice(0, limit)
-  .map(({ task }) => ({ task, specific: subtasksOf(task.id).map((s) => s.task), ...taskScores(task) }));
+  .map(({ task }) => ({ task, specific: subtasksOf(task.id).map((s) => s.task), v: verdict(task), ...taskScores(task) }));
+/** "Claude Sonnet 5 (Claude Free)", or both names when it's too close to call. */
+const pickLine = (options: Option[]) => options.map((o) => `${o.name}${o.plan ? ` (${planLabel(o.plan.app, o.plan.plan)})` : ''}`).join(' or ');
+const pickFor = (v: ReturnType<typeof verdict>, kind: PickKind) => v?.picks.find((p) => p.kinds.includes(kind));
 const short = (label: string) => label.replace(/^Best AI for /, '').replace(/^./, (c) => c.toUpperCase());
 ---
 <div class="grid-3 task-grid">
-  {tasks.map(({ task, specific, rows, testsUsed, closeness }) => (
+  {tasks.map(({ task, specific, v, rows, testsUsed, closeness }) => (
     <article class="task-card">
       <h3><a href={taskPath(task)}>{short(task.label)}</a></h3>
       <p class="small">{task.covers}</p>
@@ -23,6 +28,9 @@ const short = (label: string) => label.replace(/^Best AI for /, '').replace(/^./
           </span>
         ))}
       </a>
+      <dl class="card-picks">
+        {v && (['standard', 'free'] as const).map((k) => { const p = pickFor(v, k); return p && <><dt>{k === 'free' ? 'Free' : 'Up to $25'}</dt><dd>{pickLine(p.options)}</dd></>; })}
+      </dl>
       <ul class="specific">
         {specific.map((t) => <li><a href={taskPath(t)}>{short(t.label)}</a></li>)}
       </ul>
@@ -36,7 +44,7 @@ const short = (label: string) => label.replace(/^Best AI for /, '').replace(/^./
 <style>
   .task-grid { row-gap: 2.5rem; }
   /* Subgrid keeps title, description, bars, specific tasks and footer aligned across each line. */
-  .task-card { display: grid; grid-row: span 5; grid-template-rows: subgrid; row-gap: 0; align-content: start; }
+  .task-card { display: grid; grid-row: span 6; grid-template-rows: subgrid; row-gap: 0; align-content: start; }
   .task-card h3 { padding-bottom: 0.6rem; border-bottom: 2px solid var(--rule); }
   .task-card h3 a { text-decoration: none; }
   .task-card h3 a:hover { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
@@ -46,6 +54,9 @@ const short = (label: string) => label.replace(/^Best AI for /, '').replace(/^./
   .mini-label { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .mini-row .bar-track { height: 8px; margin-right: 0; }
   .mini-value { text-align: right; font: 500 0.8rem var(--mono); }
+  .card-picks { display: grid; grid-template-columns: auto 1fr; gap: 0.2rem 0.6rem; margin: 0 0 0.7rem; font-size: 0.8rem; align-content: start; }
+  .card-picks dt { font: 500 0.68rem var(--mono); text-transform: uppercase; color: var(--muted); padding-top: 0.1rem; }
+  .card-picks dd { margin: 0; }
   .specific { list-style: none; margin: 0 0 0.7rem; padding: 0; display: flex; flex-wrap: wrap; gap: 0.35rem; align-content: start; }
   .specific li a { display: inline-block; font-size: 0.78rem; padding: 0.15rem 0.5rem; background: var(--band); text-decoration: none; }
   .specific li a:hover { background: var(--lavender); }

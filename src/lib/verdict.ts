@@ -38,6 +38,8 @@ export interface PlanRow {
   app: AppPlans;
   plan: Plan;
   best?: Option;
+  /** The plan's default model, when it has no score for this task. */
+  unscoredDefault?: string;
 }
 
 export interface Verdict {
@@ -100,7 +102,13 @@ export function verdict(task: Intent): Verdict | undefined {
     .map(({ app, plan }) => {
       const onPlan = new Set(plan.models.filter((m) => m.access !== 'extra-cost').map((m) => m.model));
       const i = rows.findIndex((r) => onPlan.has(r.id));
-      return { app, plan, best: i < 0 ? undefined : { ...option(i), plan: { app, plan, entry: plan.models.find((m) => m.model === rows[i].id)! } } };
+      const def = plan.models.find((m) => m.default)?.model;
+      return {
+        app,
+        plan,
+        best: i < 0 ? undefined : { ...option(i), plan: { app, plan, entry: plan.models.find((m) => m.model === rows[i].id)! } },
+        unscoredDefault: def && !rows.some((r) => r.id === def) ? graph().models.get(def)?.name : undefined,
+      };
     })
     .sort((a, b) => a.app.app.localeCompare(b.app.app) || a.plan.price_usd - b.plan.price_usd);
 
@@ -111,3 +119,29 @@ export const modelMaker = (modelId: string) => {
   const m = graph().models.get(modelId);
   return m ? (graph().families.get(m.family)?.provider ?? m.family) : '';
 };
+
+export interface PlanSummary {
+  app: AppPlans;
+  plan: Plan;
+  /** Hub tasks where this plan's best model is in the top three. */
+  top3: Intent[];
+  /** Hub tasks with a verdict. */
+  of: number;
+  /** The plan's default model, when it has no task score anywhere yet (e.g. just released). */
+  unscoredDefault?: string;
+}
+
+/** For "Already paying for one?": how each plan does across the everyday tasks. */
+export function planSummaries(hubs: Intent[]): PlanSummary[] {
+  const verdicts = hubs.map((task) => ({ task, v: verdict(task) })).filter((x) => x.v);
+  const byPlan = new Map<Plan, PlanSummary>();
+  for (const { task, v } of verdicts) {
+    for (const row of v!.plans) {
+      const s = byPlan.get(row.plan) ?? { app: row.app, plan: row.plan, top3: [], of: verdicts.length, unscoredDefault: row.unscoredDefault };
+      if (!row.unscoredDefault) s.unscoredDefault = undefined;
+      if (row.best && row.best.position <= 3) s.top3.push(task);
+      byPlan.set(row.plan, s);
+    }
+  }
+  return [...byPlan.values()].sort((a, b) => a.app.app.localeCompare(b.app.app) || a.plan.price_usd - b.plan.price_usd);
+}

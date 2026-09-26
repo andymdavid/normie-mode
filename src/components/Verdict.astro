@@ -44,11 +44,11 @@ const drafts = v.plans.some((p) => p.app.status === 'draft');
       <table>
         <thead><tr><th>App and plan</th><th>Price</th><th>Best model on it for this</th><th>Position</th></tr></thead>
         <tbody>
-          {v.plans.map(({ app, plan, best }) => (
+          {v.plans.map(({ app, plan, best, unscoredDefault }) => (
             <tr>
               <td><strong>{planLabel(app, plan)}</strong></td>
               <td class="num">{formatPrice(plan.price_usd)}</td>
-              <td>{best ? <><a href={`/models/${best.modelId}`}>{best.name}</a>{best.plan?.entry.where && <div class="small muted">{best.plan.entry.where}</div>}</> : <span class="muted">No score yet</span>}</td>
+              <td>{best ? <><a href={`/models/${best.modelId}`}>{best.name}</a>{best.plan?.entry.where && <div class="small muted">{best.plan.entry.where}</div>}</> : <span class="muted">No score yet</span>}{unscoredDefault && <div class="small muted">Its main model, {unscoredDefault}, is too new to score yet.</div>}</td>
               <td class="num">{best ? `${ordinal(best.position)} of ${best.of}` : '–'}</td>
             </tr>
           ))}

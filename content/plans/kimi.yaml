@@ -14,8 +14,9 @@ sources:
 note: Kimi's own page lists prices in yuan and doesn't map models to plans; the US dollar prices and "every plan gets K3" come from press coverage.
 plans:
   - id: free
-    name: Free (Adagio)
+    name: Free
     price_usd: 0
+    price_note: Called Adagio
     models:
       - { model: kimi-k3, access: included, default: true, basis: press }
   - id: moderato
