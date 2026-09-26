@@ -2,7 +2,7 @@ id: claude
 app: Claude
 maker: Anthropic
 url: https://claude.ai
-status: draft
+status: approved
 checked_on: 2026-09-26
 sources:
   - url: https://claude.com/pricing

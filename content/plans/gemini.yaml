@@ -2,7 +2,7 @@ id: gemini
 app: Gemini
 maker: Google
 url: https://gemini.google.com
-status: draft
+status: approved
 checked_on: 2026-09-26
 sources:
   - url: https://gemini.google/us/subscriptions/

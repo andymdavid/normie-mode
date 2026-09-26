@@ -2,7 +2,7 @@ id: chatgpt
 app: ChatGPT
 maker: OpenAI
 url: https://chatgpt.com
-status: draft
+status: approved
 checked_on: 2026-09-26
 sources:
   - url: https://help.openai.com/en/articles/20001354-gpt-56-and-gpt-6-pro-in-chatgpt
