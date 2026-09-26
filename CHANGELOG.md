@@ -6,6 +6,10 @@ This file records meaningful changes to the Normie Mode product, implementation,
 
 ### Added
 
+- Plans for ChatGPT, Claude, Gemini and Kimi approved, so task-page verdicts, homepage picks and "Already paying for one?" are now public.
+- Data refreshed (26 Sept): people's votes as of 25 Sept, adding Claude Opus 5.5 (now 1st overall) and DeepSeek V4.1 Flash.
+- Picks scored on people's votes alone, on tasks that also have tests of real work, say so ("Scored on people's votes only so far").
+
 - Homepage leads with work (N-012): "Which AI is best for what you're doing?", a task search, the task cards with their up-to-$25 and free picks, and "Already paying for one?" showing how each plan does across the everyday tasks. The model comparison follows below.
 - Task search covers all 46 task pages and the models we compare, and lands specific searches ("vibe coding", "write my CV") on the specific page.
 
@@ -26,6 +30,7 @@ This file records meaningful changes to the Normie Mode product, implementation,
 
 ### Fixed
 
+- Norm counted tests that the page no longer charts (fewer than three of our models), so his note could mention more tests than the page showed.
 - `npm run import -- --offline` no longer stamps reused data with today's date; each snapshot keeps the date it was downloaded.
 - Phones: the homepage's "People's votes" chart was pushed off screen, and the header wrapped into a jumble; the header now has two tidy rows.
 - Build time down from about 16 seconds to under one, by grouping search demand once per build.
