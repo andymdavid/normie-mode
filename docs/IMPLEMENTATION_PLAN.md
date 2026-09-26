@@ -162,6 +162,7 @@ Product review (2026-09-26): people choose an app and a plan (ChatGPT, Claude, G
 - Pages show which plans include a model, and the verdict (D-027) names the app and plan as well as the model.
 - API cost stays, relabelled as "if you build with it" information, below the consumer view.
 - A plan is flagged for review after 30 days, because plans change more often than models.
+- Consequence (2026-09-26): free and cheaper plans often run an older version than the current one (e.g. ChatGPT Free on GPT-5.6 Luna). An older version that a shown plan still uses is compared alongside current versions, and its model page says why.
 
 ### D-027 — The verdict on each task page, chosen by a published rule (accepted 2026-09-26)
 
@@ -246,11 +247,13 @@ Progress note (2026-09-24): Built as the homepage (`src/pages/index.astro`, data
 
 ### N-009 — Apps and plans data (stage 2)
 
-- Status: `proposed`
+- Status: `in_progress` (built 2026-09-26; plan data awaiting product-owner check)
 - Dependencies: D-026
 - Work: `plans` schema, loader and validator rules (every model referenced exists; source and date required; 30-day review flag); hand-entered plans for ChatGPT, Claude, Gemini, DeepSeek and Kimi, checked against each maker's pricing page; "Where you can use it" on model pages.
 - Acceptance criteria: every current tracked model is either in at least one plan or marked API-only; every plan cites its source and date checked.
 - Verification: validator passes; spot-check each plan against its source.
+- Progress note (2026-09-26): `content/plans/` holds ChatGPT, Claude, Gemini and Kimi as `status: draft`, so they show only in preview. Each model on a plan records its `basis`: the maker names the exact version (`maker`), the maker names the tier and we mapped it to the current version (`maker-tier`), or only press coverage says so (`press`). OpenAI's pages block automated reading, so every ChatGPT entry is `press`. Kimi's own page has yuan prices and no model mapping. DeepSeek is left out: its pages don't say which model the free app uses. Free plans mostly run older models (ChatGPT Free and Go use GPT-5.6 Luna; Gemini Free uses 3.6 Flash; ChatGPT Plus chat uses GPT-5.6 Sol), so the compared set is now current versions plus any model a visible plan uses (`comparedModels` in `src/lib/plans.ts`), which adds three models to every chart once the plans are approved. GPT-5.6 Luna and Gemini 3.6 Flash were added as models. The importer now stamps each snapshot with the cached file's download time, so `--offline` runs keep the true retrieval date.
+- To approve: check each plan against the maker's page, fix anything wrong, and set `status: approved` in its file.
 
 ### N-010 — Verdict block on task pages (stage 3)
 

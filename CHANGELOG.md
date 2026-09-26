@@ -6,6 +6,9 @@ This file records meaningful changes to the Normie Mode product, implementation,
 
 ### Added
 
+- Apps and plans (D-026, draft): which ChatGPT, Claude, Gemini and Kimi plans include each model, with monthly prices, how sure the mapping is, and the maker's or press source. Model pages show "Where you can use it". Visible in preview until approved.
+- GPT-5.6 Luna and Gemini 3.6 Flash, what ChatGPT Free and Gemini Free actually use; older versions still used by a plan are compared alongside current ones.
+
 - Product-clarity plan (D-026 to D-028, stages N-008 to N-013): models mapped to the apps and plans people use, a rule-based verdict on each task page, and retiring the prototype pages.
 - Model pages rebuilt: where the model ranks on every task, its results on every test we use, cost, evidence status and what the maker says; the models list shows how many tasks each model is in the top three for.
 - "Tests explained" rebuilt from the tests the task pages use: 25 tests in two groups (tests of real work, people's votes), each with a chart and the tasks it feeds.
@@ -18,6 +21,7 @@ This file records meaningful changes to the Normie Mode product, implementation,
 
 ### Fixed
 
+- `npm run import -- --offline` no longer stamps reused data with today's date; each snapshot keeps the date it was downloaded.
 - Phones: the homepage's "People's votes" chart was pushed off screen, and the header wrapped into a jumble; the header now has two tidy rows.
 - Build time down from about 16 seconds to under one, by grouping search demand once per build.
 
