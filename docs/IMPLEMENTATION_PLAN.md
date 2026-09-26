@@ -182,6 +182,14 @@ Each task page leads with a verdict computed from the same data as its charts, s
 
 `/tasks`, `/capabilities` and `/sources` leave the public build; their content stays in the repository. `/models` and "Tests explained" are rebuilt from the data the task pages use (`content/tests/`, imported snapshots, claims). `/methodology` is rewritten to describe how task pages actually work (closeness labels, task score, evidence status, the verdict rule). The legacy recommendation and confidence system (D-003) stays in the validator but isn't shown until recommendations are reintroduced.
 
+### D-029 — People's votes alone can't put a model on a task chart (accepted 2026-09-26)
+
+The task score (D-023) scores a model with results on at least half of a task's tests. After the 2026-09-26 refresh, Claude Opus 5.5 led 9 of 15 hub tasks on people's votes alone, on tasks that also had tests of real work its rivals were scored on. Rule from here: when a task has tests of real work, a model needs at least one of them to get a task score. Votes-only tasks (e.g. writing) are unchanged, and their picks say "Based only on people's votes". A new model reaches those charts once independent testers publish a result, usually within one to three weeks.
+
+### D-030 — Site chrome: podcast strip and footer (accepted 2026-09-26)
+
+The strip above the header promotes Intelligence Snacks, the product owner's podcast, as a feeder; the preview notice moves to a small corner badge. The footer follows State of AI Design: a black block with a full-width wordmark, link columns (top tasks, the site, data sources), a podcast block and a hairline bottom row. Podcast details live in `src/lib/site.ts`.
+
 ## Reference sites
 
 Reviewed 2026-09-24 as models for structure and presentation:
@@ -285,7 +293,7 @@ Progress note (2026-09-24): Built as the homepage (`src/pages/index.astro`, data
 
 ### N-013 — First public editorial and own-test evidence (stage 6)
 
-- Status: `proposed`
+- Status: `in_progress` (Norm's notes approved for coding, writing, studying, CVs and jobs, and business on 2026-09-26; own spreadsheet test not yet run)
 - Dependencies: product-owner review time; N-007
 - Work: product owner approves Norm's guide ("what to check") for the five hubs with the most demand; run the messy-spreadsheet test and publish it on the Excel page as the first direct evidence.
 - Acceptance criteria: at least five task pages show an approved "what to check" publicly; the Excel page shows our own test with every question and answer.
@@ -346,7 +354,6 @@ A published recommendation is flagged for review when: a newer version appears i
 
 ## Open decisions
 
-- D-029: Scoring a model that only has one kind of evidence. The task score (D-023) scores any model with results on at least half of a task's tests, so a new model with only people's votes can lead a task that also has tests of real work (after the 2026-09-26 refresh, Claude Opus 5.5 leads 9 of 15 hub tasks this way). For now its picks carry the note "Scored on people's votes only so far". Options: keep the rule and the note; require at least one test of real work when the task has one; or require the same coverage as the other scored models.
 
 - D-009: First-party test protocol (a narrow micro-pilot is defined in `docs/evals/unusual-transactions.md`; the general protocol is still open)
 - D-014: Smallest useful intelligence layer

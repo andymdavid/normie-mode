@@ -6,9 +6,13 @@ This file records meaningful changes to the Normie Mode product, implementation,
 
 ### Added
 
+- How it works rebuilt: the four steps from test to pick, the evidence sources with dates and licences, a worked example of the coding task score test by test, the pick rules with the live coding verdict, and what the rankings can't tell you. Every number comes from the site's own data.
+- A proper footer (after State of AI Design): full-width wordmark, top tasks, site links, data sources, an Intelligence Snacks block and a bottom row with the data date.
+- The strip above the header now promotes the Intelligence Snacks podcast; the preview notice is a small corner badge.
+- Norm's guides approved for coding, writing, studying, CVs and jobs, and business, so they show publicly.
+
 - Plans for ChatGPT, Claude, Gemini and Kimi approved, so task-page verdicts, homepage picks and "Already paying for one?" are now public.
 - Data refreshed (26 Sept): people's votes as of 25 Sept, adding Claude Opus 5.5 (now 1st overall) and DeepSeek V4.1 Flash.
-- Picks scored on people's votes alone, on tasks that also have tests of real work, say so ("Scored on people's votes only so far").
 
 - Homepage leads with work (N-012): "Which AI is best for what you're doing?", a task search, the task cards with their up-to-$25 and free picks, and "Already paying for one?" showing how each plan does across the everyday tasks. The model comparison follows below.
 - Task search covers all 46 task pages and the models we compare, and lands specific searches ("vibe coding", "write my CV") on the specific page.
@@ -71,6 +75,7 @@ This file records meaningful changes to the Normie Mode product, implementation,
 
 ### Changed
 
+- People's votes alone can no longer put a model on a task chart that also has tests of real work (D-029); a new model joins once it has an independent result.
 - Charts label each model by its position ("1st", "10th") instead of task scores, vote ratings or the Epoch index, so a last place no longer reads as a score of 0. The exact figures stay in the tooltip.
 - Tests that only a couple of our models have taken no longer get a chart that names a leader; task pages list them as too few tested to compare.
 - Task pages call the per-request cost chart "If you build with it", since app users pay a monthly plan instead.
