@@ -16,7 +16,7 @@ const drafts = [...g.recommendations.values()].filter((r) => r.status === 'draft
     <p class="lede">Nothing here changes the public site until a person edits the content and it's merged.</p>
 
     <h2>Recommendations flagged for review ({report.flags.length})</h2>
-    {report.flags.length ? <ul class="claims">{report.flags.map((f) => <li><div><a href={`/tasks/${f.task}`}>{g.tasks.get(f.task)!.name}</a><span class="cites">{f.reason}</span></div></li>)}</ul> : <p class="muted">None.</p>}
+    {report.flags.length ? <ul class="claims">{report.flags.map((f) => <li><div>{g.tasks.get(f.task)!.name}<span class="cites">{f.reason}</span></div></li>)}</ul> : <p class="muted">None.</p>}
 
     <h2>Drafts awaiting sign-off ({drafts.length})</h2>
     <ul class="claims">
@@ -25,7 +25,7 @@ const drafts = [...g.recommendations.values()].filter((r) => r.status === 'draft
         return (
           <li>
             <div>
-              <a href={`/tasks/${r.task}`}>{g.tasks.get(r.task)!.name}</a>: {r.model_version ? modelName(r.model_version) : 'no pick'}
+              {g.tasks.get(r.task)!.name}: {r.model_version ? modelName(r.model_version) : 'no pick'}
               <span class="cites">content/recommendations/{r.id}.yaml · evidence supports up to {c.ceiling}. To publish: set a reviewer name and <code>status: published</code>.</span>
             </div>
             <Confidence level={r.confidence} />

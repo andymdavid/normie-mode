@@ -1,37 +1,58 @@
 ---
+// How it works (D-028): describes what the task pages actually do, using the same constants.
 import Base from '../layouts/Base.astro';
-import Confidence from '../components/Confidence.astro';
-import { BASIS_LABEL, CONFIDENCE_LABEL, EVIDENCE_CLASS_LABEL } from '../lib/view';
-import { CONFIDENCE } from '../lib/schema';
-import { REVIEW_MAX_AGE_DAYS } from '../lib/rules';
+import { CLOSENESS_LABEL } from '../lib/tasks';
+import { EVIDENCE_STATUS_LABEL, TESTED_THRESHOLD, TYPICAL_REQUEST } from '../lib/overview';
+import { imported } from '../lib/imported';
+
+const { epoch, modelsdev, lmarena } = imported();
 ---
-<Base title="How we decide">
+<Base title="How it works" description="Where Normie Mode's AI rankings come from, how the task score works, and what we do and don't claim.">
   <article style="max-width: 46rem">
-    <div class="eyebrow">Methodology</div>
-    <h1>How we decide</h1>
-    <p class="lede">Every recommendation is made by a person, and it can't claim more confidence than the evidence allows.</p>
+    <div class="eyebrow">How it works</div>
+    <h1>How it works</h1>
+    <p class="lede">We rank AI models for everyday tasks using independent tests and people's votes, and show you the evidence under every answer.</p>
+
+    <h2>Where the evidence comes from</h2>
+    <ul class="plain-list">
+      <li><strong>Tests of real work</strong>, collected by <a href={epoch?.meta.url}>Epoch AI</a> from the people who run each test ({epoch?.meta.licence}).</li>
+      <li><strong>People's votes</strong> from <a href={lmarena?.meta.url}>LMArena</a>, where people compare two anonymous answers and pick the better one ({lmarena?.meta.licence}).</li>
+      <li><strong>Prices and specs</strong> from <a href={modelsdev?.meta.url}>models.dev</a> ({modelsdev?.meta.licence}).</li>
+      <li><strong>What the makers say</strong> at launch, always labelled as theirs.</li>
+    </ul>
+    <p>Every chart names its source underneath.</p>
 
     <h2>We compare exact model versions</h2>
-    <p>Not apps, plug-ins or chat products. When a model maker releases a new version, it starts with no results. We never assume the new version performs like the old one.</p>
+    <p>ChatGPT, Claude and Gemini are apps. Each runs one or more AI models, and those models change every few months. We compare the models. A new version starts with no results, and we never assume it performs like the one before.</p>
 
-    <h2>Three kinds of statement</h2>
-    <ul>
-      <li><span class="badge measured">{BASIS_LABEL.measured}</span> A test result, linked to where it came from.</li>
-      <li><span class="badge sourced">{BASIS_LABEL.sourced}</span> A claim from a named source, such as a research paper.</li>
-      <li><span class="badge editorial">{BASIS_LABEL.editorial}</span> Our interpretation. Labelled, so you can weigh it yourself.</li>
+    <h2>How close a test is to your task</h2>
+    <p>Hardly any test measures one everyday task exactly, so each test on a task page carries a label:</p>
+    <ul class="plain-list">
+      <li><strong>{CLOSENESS_LABEL.direct}:</strong> the test is this kind of work.</li>
+      <li><strong>{CLOSENESS_LABEL.related}:</strong> it tests a skill the task depends on.</li>
+      <li><strong>{CLOSENESS_LABEL.general}:</strong> it tests overall ability, used only when nothing closer exists.</li>
+    </ul>
+    <p>When a more specific task (for example vibe coding) has no tests of its own, it uses the tests from its broader task, labelled as related at most.</p>
+
+    <h2>The task score</h2>
+    <p>On each test with at least three models, we place each model from 0 (lowest of the models we track) to 100 (highest). A model's task score is its average across the tests it has results for. Only models with results on at least half the tests get a score.</p>
+    <p>It shows who leads among the models we track, not how good they are in absolute terms. A score of 0 means last of this group, not useless.</p>
+
+    <h2>Too close to call</h2>
+    <p>Test results come with a likely range, shown as a thin line on the bar. When the top two models' ranges overlap, we say they're too close to call rather than naming a winner.</p>
+
+    <h2>How new a model's evidence is</h2>
+    <p>Independent testers take one to three weeks to catch up with a launch, so each model shows where its evidence stands:</p>
+    <ul class="plain-list">
+      <li><strong>{EVIDENCE_STATUS_LABEL['maker-says']}:</strong> no independent results yet.</li>
+      <li><strong>{EVIDENCE_STATUS_LABEL.early}:</strong> fewer than {TESTED_THRESHOLD} independent results.</li>
+      <li><strong>{EVIDENCE_STATUS_LABEL.tested}:</strong> {TESTED_THRESHOLD} or more, or a place on Epoch AI's combined capability score.</li>
     </ul>
 
-    <h2>Who reported a result matters</h2>
-    <ul>{Object.values(EVIDENCE_CLASS_LABEL).filter((l) => l !== 'Editorial').map((l) => <li>{l}</li>)}</ul>
-    <p>Results a model maker reports about its own model are useful but labelled. Strong confidence needs at least one independent source.</p>
+    <h2>What it costs</h2>
+    <p>Cost is the maker's list price for using the model directly, worked out for 1,000 typical requests of about {TYPICAL_REQUEST.words}. Models that think for longer cost more in practice. Chat apps charge a monthly fee instead.</p>
 
-    <h2>Confidence levels</h2>
-    <ul class="claims">
-      {[...CONFIDENCE].reverse().map((c) => <li><div>{CONFIDENCE_LABEL[c].plain}</div><Confidence level={c} /></li>)}
-    </ul>
-    <p>Strong needs direct tests of the job on the exact version from two sources, one of them independent. Moderate needs at least one direct test. Evidence from an earlier version of a model can only ever support limited confidence, and we say so. Our publishing system rejects any recommendation that claims more.</p>
-
-    <h2>Staying current</h2>
-    <p>A recommendation is flagged for review when a newer version of the model appears, when new results arrive for a relevant test, when a result we cited is corrected or withdrawn, or after {REVIEW_MAX_AGE_DAYS} days. A person reviews every change before it goes live.</p>
+    <h2>Who writes what</h2>
+    <p>Norm, our guide, says two kinds of thing. Anything about the data, such as who leads or what the top models cost, is generated from the same numbers as the charts, so it can't disagree with them. His advice is written by a person and only appears once it's been reviewed.</p>
   </article>
 </Base>

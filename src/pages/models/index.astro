@@ -1,27 +1,55 @@
 ---
+// The models we track (D-028): current versions with where they rank, what they cost and how well tested they are.
 import Base from '../../layouts/Base.astro';
 import { graph } from '../../lib/graph';
-import { resultsForModel } from '../../lib/view';
+import { EVIDENCE_STATUS_LABEL, overviewRows } from '../../lib/overview';
+import { taskPositions } from '../../lib/models';
+import { formatDate } from '../../lib/view';
+
 const g = graph();
-const families = [...g.families.values()];
+const rows = overviewRows()
+  .map((r) => ({ ...r, top3: taskPositions(r.model.id).filter((p) => p.pos.position <= 3) }))
+  .sort((a, b) => b.top3.length - a.top3.length || (b.model.released_on ?? '').localeCompare(a.model.released_on ?? ''));
+const replaced = [...g.models.values()].filter((m) => m.lifecycle !== 'current').sort((a, b) => a.name.localeCompare(b.name));
+const money = (v?: number) => (v === undefined ? '–' : v < 10 ? `$${v.toFixed(2)}` : `$${v.toFixed(0)}`);
 ---
-<Base title="Models">
+<Base title="The AI models we track" description="The current AI models from Anthropic, OpenAI, Google, DeepSeek and Moonshot: what each is best for, what it costs and how well it's been tested.">
   <div class="eyebrow">Models</div>
   <h1>The models we track</h1>
-  <p class="lede">We compare exact model versions, not apps. Results for one version never carry over to the next.</p>
-  <div class="grid">
-    {families.map((f) => (
-      <div class="card">
-        <h3>{f.name} <span class="muted small">by {f.provider}</span></h3>
-        <ul>
-          {[...g.models.values()].filter((m) => m.family === f.id).sort((a, b) => (a.lifecycle === 'current' ? -1 : 1) - (b.lifecycle === 'current' ? -1 : 1)).map((m) => (
-            <li class={m.lifecycle !== 'current' ? 'muted' : undefined}>
-              <a href={`/models/${m.id}`}>{m.name}</a>
-              <span class="small muted"> · {resultsForModel(m.id).length} results{m.lifecycle !== 'current' && ' · replaced'}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-    ))}
+  <p class="lede">The AI models behind ChatGPT, Claude, Gemini and others, most often in a task's top three first.</p>
+
+  <div class="table-wrap" style="margin-top:2.5rem">
+    <table>
+      <thead>
+        <tr><th>Model</th><th>In the top three for</th><th>Cost / 1,000 requests</th><th>Evidence</th><th>Released</th></tr>
+      </thead>
+      <tbody>
+        {rows.map((r) => (
+          <tr>
+            <td><a href={`/models/${r.model.id}`}><strong>{r.model.name}</strong></a><div class="small muted">{r.maker}</div></td>
+            <td>
+              {r.top3.length ? (
+                <>{r.top3.length} task{r.top3.length === 1 ? '' : 's'}<div class="small muted">{r.top3.slice(0, 3).map((p) => p.task.label.replace(/^Best AI for /, '')).join(', ')}{r.top3.length > 3 && '…'}</div></>
+              ) : <span class="muted">None yet</span>}
+            </td>
+            <td class="num">{money(r.costPer1000)}</td>
+            <td><span class={`badge status-${r.status}`}>{EVIDENCE_STATUS_LABEL[r.status]}</span></td>
+            <td class="small">{r.model.released_on ? formatDate(r.model.released_on) : '–'}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="plain-section">
+    <h3 style="margin-bottom:0.6rem">Older versions</h3>
+    <p class="small muted">Replaced by a newer version. A new version starts with no results; we never assume it performs like the old one.</p>
+    <ul class="inline-list">
+      {replaced.map((m) => <li><a href={`/models/${m.id}`}>{m.name}</a></li>)}
+    </ul>
   </div>
 </Base>
+
+<style>
+  .inline-list { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 0.4rem 1.5rem; }
+</style>

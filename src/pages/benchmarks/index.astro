@@ -1,14 +1,40 @@
 ---
+// Tests explained (D-028): every test the task pages use, in one plain sentence each.
 import Base from '../../layouts/Base.astro';
 import { graph } from '../../lib/graph';
+import { rankedTestRows, tasksUsingTest } from '../../lib/models';
+
+const tests = [...graph().tests.values()]
+  .map((test) => ({ test, results: rankedTestRows(test).length, tasks: tasksUsingTest(test.id).length }))
+  .filter((t) => t.tasks > 0 && t.results > 0)
+  .sort((a, b) => b.tasks - a.tasks || a.test.title.localeCompare(b.test.title));
+const groups = [
+  { id: 'work', title: 'Tests of real work', sub: 'Set tasks with right and wrong answers, run by independent testers.', items: tests.filter((t) => t.test.source === 'epoch') },
+  { id: 'votes', title: "People's votes", sub: 'People ask a question, see two anonymous answers and pick the better one. It shows which answers people prefer, not whether they were right.', items: tests.filter((t) => t.test.source === 'lmarena') },
+];
 ---
-<Base title="Benchmarks explained">
-  <div class="eyebrow">Benchmarks explained</div>
-  <h1>Benchmarks, in plain English</h1>
-  <p class="lede">What each test actually checks, why you might care, and what it can't tell you.</p>
-  <div class="grid">
-    {[...graph().benchmarks.values()].map((b) => (
-      <a class="card" href={`/benchmarks/${b.id}`}><h3>{b.name}</h3><p class="small muted">{b.what_is_it}</p></a>
-    ))}
-  </div>
+<Base title="The tests behind our rankings, explained" description="What each AI test actually checks, in one plain sentence, and which tasks it helps us rank.">
+  <div class="eyebrow">Tests explained</div>
+  <h1>The tests behind our rankings</h1>
+  <p class="lede">What each test checks, in one sentence, and which tasks it helps us rank.</p>
+
+  {groups.map((g) => (
+    <section>
+      <h2 class="page-h2">{g.title}</h2>
+      <p class="section-sub">{g.sub}</p>
+      <div class="grid">
+        {g.items.map(({ test, results, tasks }) => (
+          <a class="card" href={`/benchmarks/${test.id}`}>
+            <h3>{test.title}</h3>
+            <p class="small" style="margin-top:0.6rem">{test.what}</p>
+            <p class="mono-label muted" style="margin:0">{test.by} · {results} model{results === 1 ? '' : 's'} · {tasks} task{tasks === 1 ? '' : 's'}</p>
+          </a>
+        ))}
+      </div>
+    </section>
+  ))}
 </Base>
+
+<style>
+  .card h3 { font-size: 1.15rem; }
+</style>

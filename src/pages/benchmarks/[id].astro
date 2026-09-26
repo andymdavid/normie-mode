@@ -1,64 +1,56 @@
 ---
+// One test explained (D-028): what it checks, how the models we track did, and which tasks use it.
 import Base from '../../layouts/Base.astro';
-import ResultsTable from '../../components/ResultsTable.astro';
+import BarChart from '../../components/BarChart.astro';
 import { graph } from '../../lib/graph';
-import { formatDate, resultsForBenchmark } from '../../lib/view';
+import { rankedTestRows, tasksUsingTest } from '../../lib/models';
+import { CLOSENESS_LABEL, leadSentence, taskPath, testFloor, testRows, testSource } from '../../lib/tasks';
 
 export function getStaticPaths() {
-  return [...graph().benchmarks.keys()].map((id) => ({ params: { id } }));
+  return [...graph().tests.keys()].filter((id) => tasksUsingTest(id).length && rankedTestRows(graph().tests.get(id)!).length).map((id) => ({ params: { id } }));
 }
-const g = graph();
-const b = g.benchmarks.get(Astro.params.id!)!;
-const results = resultsForBenchmark(b.id);
-const KIND = {
-  academic: 'Academic',
-  technical: 'Technical',
-  agentic: 'Agentic (AI works on its own over many steps)',
-  'real-world-work': 'Real-world work',
-  specialist: 'Narrow specialist test',
-} as const;
+const test = graph().tests.get(Astro.params.id!)!;
+const rows = testRows(test);
+const tasks = tasksUsingTest(test.id);
+const votes = test.source === 'lmarena';
 ---
-<Base title={`${b.name} explained`} description={`What ${b.name} is, what it tests, and what it doesn't tell you, in plain English.`}>
-  <article style="max-width: 46rem">
-    <div class="eyebrow">Benchmarks explained · {KIND[b.kind]}</div>
-    <h1>{b.name}, explained</h1>
-    <p class="lede">{b.what_is_it}</p>
+<Base title={`${test.title}: the test explained`} description={`${test.what} How the main AI models did, in plain English.`}>
+  <div class="eyebrow"><a href="/benchmarks">Tests explained</a> · {votes ? "People's votes" : 'Test of real work'}</div>
+  <h1>{test.title}</h1>
+  <p class="lede">{test.what}</p>
 
-    <h2>What does it test?</h2>
-    <p>{b.what_it_tests}</p>
+  <div class="band">
+    <div class="band-inner summary-grid">
+      <div class="summary"><span class="tag">Run by</span><p><a href={test.url}><strong>{test.by}</strong></a></p></div>
+      <div class="summary">
+        <span class="tag">How to read it</span>
+        <p>{votes
+          ? 'A rating from thousands of head-to-head votes. Higher means people preferred its answers more often. The thin line is the likely range.'
+          : 'The share of tasks the model got right. The thin line, where shown, is the likely range.'}</p>
+      </div>
+      <div class="summary"><span class="tag">Used for</span><p><strong>{tasks.length} task{tasks.length === 1 ? '' : 's'}</strong> on this site.</p></div>
+    </div>
+  </div>
 
-    {b.example && (<><h2>Show me an example</h2><blockquote class="card">{b.example}</blockquote></>)}
+  <BarChart
+    title="How the models did"
+    sub={votes ? 'Rating from blind votes' : 'Share of tasks done correctly'}
+    rows={rows}
+    floor={testFloor(test, rows)}
+    summary={leadSentence(rows)}
+    source={testSource(test)}
+  />
 
-    <h2>Why should I care?</h2>
-    <p>{b.why_care}</p>
-
-    <h2>What doesn't it tell me?</h2>
-    <ul>{b.limits.map((l) => <li>{l}</li>)}</ul>
-
-    <h2>Which skills it gives evidence for</h2>
-    <ul>
-      {b.measures.map((m) => (
-        <li><a href={`/capabilities/${m.capability}`}>{g.capabilities.get(m.capability)!.name}</a> <span class="badge plain">{m.strength === 'primary' ? 'Main focus' : 'Partly'}</span></li>
-      ))}
-    </ul>
-    {b.direct_tasks.length > 0 && (
-      <p>Tests these jobs directly: {b.direct_tasks.map((d, i) => (<>{i > 0 && ', '}<a href={`/tasks/${d.task}`}>{g.tasks.get(d.task)!.name}</a>{d.subset && <span class="muted"> ({d.subset.replace(/-/g, ' ')} part)</span>}</>))}.</p>
-    )}
-  </article>
-
-  <h2>Who is winning?</h2>
-  <p class="muted" style="max-width: 44rem">
-    Results for the models we track. Scores from different reporters or set-ups aren't always comparable, so check who reported each one.
-  </p>
-  {results.length ? (
-    <ResultsTable rows={results.map((result) => ({ result }))} show={{ model: true }} anchors />
-  ) : (
-    <p class="card muted">No published results for the models we track yet.</p>
-  )}
-
-  <h2>Versions and sources</h2>
-  <ul>
-    {b.versions.map((v) => <li><strong>{v.name}</strong>{v.released_on && <> ({formatDate(v.released_on)})</>}{v.notes && <>: {v.notes}</>}</li>)}
-  </ul>
-  <p>Methodology: {b.sources.map((s, i) => (<>{i > 0 && ' · '}<a href={`/sources/${s}`}>{g.sources.get(s)!.title}</a></>))}</p>
+  <h2 class="page-h2">Where we use it</h2>
+  <p class="section-sub">Each task page labels this test by how closely it matches the task.</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Task</th><th>How close</th></tr></thead>
+      <tbody>
+        {tasks.map(({ task, closeness }) => (
+          <tr><td><a href={taskPath(task)}>{task.label}</a></td><td>{CLOSENESS_LABEL[closeness]}</td></tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
 </Base>

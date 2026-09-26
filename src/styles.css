@@ -189,5 +189,7 @@ dl.facts dt { color: var(--muted); font-size: 0.85rem; }
 dl.facts dd { margin: 0; }
 .flag { background: var(--lavender); padding: 0.6rem 0.9rem; font-size: 0.9rem; margin: 0.5rem 0; }
 article h2 { margin-top: 2.5rem; }
+.page-h2 { margin: 3.5rem 0 1rem; font-size: clamp(1.5rem, 2.6vw, 2rem); }
+.page-h2 + .section-sub { margin-top: 0; }
 .plain-list { margin: 0 0 0.5rem; padding-left: 1.1rem; }
 .plain-list li { margin: 0.15rem 0; }

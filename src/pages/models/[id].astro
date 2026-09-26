@@ -1,9 +1,12 @@
 ---
+// One model (D-028): where it ranks for each task, its test results, cost and evidence status.
+// Positions come from the same functions as the task-page charts.
 import Base from '../../layouts/Base.astro';
-import Confidence from '../../components/Confidence.astro';
-import ResultsTable from '../../components/ResultsTable.astro';
 import { graph } from '../../lib/graph';
-import { formatDate, modelName, resultsForModel, visibleRecommendations } from '../../lib/view';
+import { EVIDENCE_STATUS_LABEL } from '../../lib/overview';
+import { ordinal, overviewRow, taskPositions, testPositions } from '../../lib/models';
+import { taskPath } from '../../lib/tasks';
+import { formatDate, modelName } from '../../lib/view';
 
 export function getStaticPaths() {
   return [...graph().models.keys()].map((id) => ({ params: { id } }));
@@ -11,56 +14,116 @@ export function getStaticPaths() {
 const g = graph();
 const model = g.models.get(Astro.params.id!)!;
 const family = g.families.get(model.family)!;
-const results = resultsForModel(model.id);
-const picks = visibleRecommendations().filter((r) => r.model_version === model.id);
-const alsoConsidered = visibleRecommendations().filter((r) => r.alternatives.some((a) => a.model_version === model.id));
+const current = model.lifecycle === 'current';
+const row = current ? overviewRow(model.id) : undefined;
+const tasks = current ? taskPositions(model.id) : [];
+const tests = current ? testPositions(model.id) : [];
+const claims = [...g.claims.values()].filter((c) => c.model_version === model.id);
 const predecessors = [...g.models.values()].filter((m) => m.successor === model.id);
+const top3 = tasks.filter((t) => t.pos.position <= 3);
+const money = (v?: number) => (v === undefined ? undefined : v < 10 ? `$${v.toFixed(2)}` : `$${v.toFixed(0)}`);
 ---
-<Base title={`What is ${model.name} good at?`}>
-  <div class="eyebrow">Models · {family.provider}</div>
+<Base title={`${model.name}: what it's good at and what it costs`} description={`What ${model.name} from ${family.provider} is best for, where it ranks on independent tests, and what it costs.`}>
+  <div class="eyebrow"><a href="/models">Models</a> · {family.provider}</div>
   <h1>{model.name}</h1>
-  {model.lifecycle !== 'current' && (
+  {!current && (
     <div class="flag">
-      This version has been replaced{model.successor && <> by <a href={`/models/${model.successor}`}>{modelName(model.successor)}</a></>}. Results below apply to this exact version only.
+      This version has been replaced{model.successor && <> by <a href={`/models/${model.successor}`}>{modelName(model.successor)}</a></>}. We only compare current versions.
     </div>
   )}
-  <p class="lede">{model.summary ?? family.summary}</p>
+  <p class="lede">{family.provider}'s {family.name} model{model.released_on && <>, released {formatDate(model.released_on)}</>}.</p>
 
-  <div class="two-col">
-    <section class="card">
-      <h3>Where it's our pick</h3>
-      {picks.length === 0 && alsoConsidered.length === 0 && <p class="muted">Not currently recommended for any job we cover. That usually means we lack evidence, not that it's bad.</p>}
-      <ul>
-        {picks.map((r) => (
-          <li><a href={`/tasks/${r.task}`}>{g.tasks.get(r.task)!.name}</a> <Confidence level={r.confidence} /> {r.status === 'draft' && <span class="badge draft">Draft</span>}</li>
-        ))}
-        {alsoConsidered.map((r) => (
-          <li>Worth considering for <a href={`/tasks/${r.task}`}>{g.tasks.get(r.task)!.name}</a></li>
-        ))}
-      </ul>
-    </section>
-    <section class="card">
-      <h3>Model details</h3>
-      <dl class="facts">
-        <dt>Maker</dt><dd>{family.provider}</dd>
-        <dt>Family</dt><dd>{family.name}</dd>
-        <dt>Released</dt><dd>{formatDate(model.released_on)}</dd>
-        <dt>Status</dt><dd>{model.lifecycle === 'current' ? 'Current' : model.lifecycle === 'superseded' ? 'Replaced' : 'Retired'}</dd>
-        {predecessors.length > 0 && <><dt>Replaces</dt><dd>{predecessors.map((p) => <a href={`/models/${p.id}`}>{p.name}</a>)}</dd></>}
-        <dt>Name checked</dt>
-        <dd>
-          {model.verification.status === 'verified'
-            ? model.verification.sources.map((s) => <a href={`/sources/${s}`}>Confirmed with {g.sources.get(s)!.publisher}</a>)
-            : <span class="muted">Not yet confirmed with the maker</span>}
-        </dd>
-      </dl>
-    </section>
-  </div>
-
-  <h2>Test results for this exact version</h2>
-  {results.length ? (
-    <ResultsTable rows={results.map((result) => ({ result }))} show={{ benchmark: true }} />
-  ) : (
-    <p class="card muted">We don't hold any spreadsheet test results for this exact version yet. We never carry results over from an earlier version.</p>
+  {current && (
+    <div class="band">
+      <div class="band-inner summary-grid">
+        <div class="summary">
+          <span class="tag">Top three for</span>
+          <p>{top3.length ? <><strong>{top3.length} task{top3.length === 1 ? '' : 's'}</strong>, including {top3.slice(0, 3).map((t) => t.task.label.replace(/^Best AI for /, '').toLowerCase()).join(', ')}.</> : 'No task yet.'}</p>
+        </div>
+        <div class="summary">
+          <span class="tag">Evidence</span>
+          <p>{row && <><strong>{EVIDENCE_STATUS_LABEL[row.status]}.</strong> {row.independentTests} independent result{row.independentTests === 1 ? '' : 's'} so far{tests.length === 0 && row.independentTests > 0 ? ', none yet on the tests we use for tasks' : ''}.</>}</p>
+        </div>
+        <div class="summary">
+          <span class="tag">Cost</span>
+          <p>{row?.costPer1000 !== undefined ? <><strong>{money(row.costPer1000)}</strong> per 1,000 typical requests, if you use it directly.</> : 'Not published.'}</p>
+        </div>
+        {row?.contextPages && (
+          <div class="summary"><span class="tag">Reads at once</span><p><strong>{row.contextPages.toLocaleString('en-GB')} pages</strong> of about 500 words.</p></div>
+        )}
+      </div>
+    </div>
   )}
+
+  {current && (
+    <>
+      <h2 class="page-h2">Where it ranks, task by task</h2>
+      <p class="section-sub">Its place on each task's score, among the current models with enough results to score.</p>
+      {tasks.length ? (
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Task</th><th>Position</th><th>Task score</th></tr></thead>
+            <tbody>
+              {tasks.map((t) => (
+                <tr>
+                  <td><a href={taskPath(t.task)}>{t.task.label}</a></td>
+                  <td class="num">{ordinal(t.pos.position)} of {t.pos.of}</td>
+                  <td class="num">{t.score}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      ) : (
+        <p class="card muted">Not enough independent results yet to place it on any task. New models usually get results within a few weeks.</p>
+      )}
+
+      <h2 class="page-h2">Test results</h2>
+      <p class="section-sub">Every test we use that has a result for this exact version.</p>
+      {tests.length ? (
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Test</th><th>Result</th><th>Position</th></tr></thead>
+            <tbody>
+              {tests.map((t) => (
+                <tr>
+                  <td><a href={`/benchmarks/${t.test.id}`}>{t.test.title}</a><div class="small muted">{t.test.by}</div></td>
+                  <td class="num">{t.display}</td>
+                  <td class="num">{ordinal(t.pos.position)} of {t.pos.of}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      ) : (
+        <p class="card muted">No independent results for this exact version yet. We never carry results over from an earlier version.</p>
+      )}
+    </>
+  )}
+
+  {claims.length > 0 && (
+    <>
+      <h2 class="page-h2">What the maker says</h2>
+      <ul class="claims">
+        {claims.map((c) => {
+          const s = g.sources.get(c.source);
+          return <li><div>“{c.headline}”<span class="cites">{s ? <a href={s.url}>{s.publisher}</a> : c.source} · {formatDate(c.stated_on)}</span></div><span class="badge sourced">The maker says</span></li>;
+        })}
+      </ul>
+    </>
+  )}
+
+  <h2 class="page-h2">Details</h2>
+  <dl class="facts">
+    <dt>Maker</dt><dd>{family.provider}</dd>
+    <dt>Released</dt><dd>{formatDate(model.released_on)}</dd>
+    <dt>Status</dt><dd>{current ? 'Current' : model.lifecycle === 'superseded' ? 'Replaced' : 'Retired'}</dd>
+    {predecessors.length > 0 && <><dt>Replaces</dt><dd>{predecessors.map((p, i) => <>{i > 0 && ', '}<a href={`/models/${p.id}`}>{p.name}</a></>)}</dd></>}
+    <dt>Name checked</dt>
+    <dd>
+      {model.verification.status === 'verified'
+        ? model.verification.sources.map((id) => { const s = g.sources.get(id)!; return <a href={s.url}>Confirmed with {s.publisher}</a>; })
+        : <span class="muted">Not yet confirmed with the maker</span>}
+    </dd>
+  </dl>
 </Base>
