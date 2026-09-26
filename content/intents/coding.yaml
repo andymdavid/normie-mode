@@ -71,7 +71,7 @@ tests:
   - test: arena-coding
     closeness: direct
 norm:
-  status: draft
+  status: approved
   intro: AI can write, explain and fix code from a plain-English description. Try what it gives you before you rely on it.
   good_at:
     - Writing small scripts and tools from a plain-English description.

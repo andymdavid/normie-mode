@@ -47,7 +47,7 @@ tests:
   - test: arena-maths
     closeness: related
 norm:
-  status: draft
+  status: approved
   intro: AI can be a very patient tutor. It helps most when it explains, rather than just giving you the answer.
   good_at:
     - Explaining a topic in a different way until it clicks.

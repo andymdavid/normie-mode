@@ -39,7 +39,7 @@ tests:
   - test: arena-business
     closeness: direct
 norm:
-  status: draft
+  status: approved
   intro: AI is a useful extra pair of hands for office work, from drafting to planning. It works best on jobs where you can check what it did.
   good_at:
     - Brainstorming ideas and options.

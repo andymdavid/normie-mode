@@ -48,7 +48,7 @@ tests:
   - test: arena-instructions
     closeness: related
 norm:
-  status: draft
+  status: approved
   intro: AI is good at getting you past a blank page and tidying up what you've written. Keep your own voice in it.
   good_at:
     - Getting you past a blank page.
