@@ -6,6 +6,7 @@ import { graph } from '../../lib/graph';
 import { EVIDENCE_STATUS_LABEL } from '../../lib/overview';
 import { ordinal, overviewRow, taskPositions, testPositions } from '../../lib/models';
 import { taskPath } from '../../lib/tasks';
+import { ACCESS_LABEL, formatPrice, isCompared, plansFor } from '../../lib/plans';
 import { formatDate, modelName } from '../../lib/view';
 
 export function getStaticPaths() {
@@ -14,7 +15,9 @@ export function getStaticPaths() {
 const g = graph();
 const model = g.models.get(Astro.params.id!)!;
 const family = g.families.get(model.family)!;
-const current = model.lifecycle === 'current';
+const current = isCompared(model.id);
+const stillUsed = current && model.lifecycle !== 'current';
+const plans = plansFor(model.id);
 const row = current ? overviewRow(model.id) : undefined;
 const tasks = current ? taskPositions(model.id) : [];
 const tests = current ? testPositions(model.id) : [];
@@ -29,6 +32,11 @@ const money = (v?: number) => (v === undefined ? undefined : v < 10 ? `$${v.toFi
   {!current && (
     <div class="flag">
       This version has been replaced{model.successor && <> by <a href={`/models/${model.successor}`}>{modelName(model.successor)}</a></>}. We only compare current versions.
+    </div>
+  )}
+  {stillUsed && (
+    <div class="flag">
+      A newer version exists{model.successor && <> (<a href={`/models/${model.successor}`}>{modelName(model.successor)}</a>)</>}, but this is still what some apps give you, so we keep comparing it.
     </div>
   )}
   <p class="lede">{family.provider}'s {family.name} model{model.released_on && <>, released {formatDate(model.released_on)}</>}.</p>
@@ -55,10 +63,31 @@ const money = (v?: number) => (v === undefined ? undefined : v < 10 ? `$${v.toFi
     </div>
   )}
 
+  {plans.length > 0 && (
+    <>
+      <h2 class="page-h2">Where you can use it</h2>
+      <p class="section-sub">The apps and plans that include it, cheapest first.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>App and plan</th><th>Price</th><th>Access</th></tr></thead>
+          <tbody>
+            {plans.map(({ app, plan, entry }) => (
+              <tr>
+                <td><a href={app.url}><strong>{app.app}</strong></a> {plan.name}{app.status === 'draft' && <span class="badge draft" style="margin-left:0.5rem">Draft</span>}</td>
+                <td class="num">{formatPrice(plan.price_usd)}{plan.price_note && <div class="small muted">{plan.price_note}</div>}</td>
+                <td>{ACCESS_LABEL[entry.access]}{entry.default && ', the default'}{entry.where && <div class="small muted">{entry.where}</div>}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </>
+  )}
+
   {current && (
     <>
       <h2 class="page-h2">Where it ranks, task by task</h2>
-      <p class="section-sub">Its place on each task's score, among the current models with enough results to score.</p>
+      <p class="section-sub">Its place on each task's score, among the models we compare that have enough results to score.</p>
       {tasks.length ? (
         <div class="table-wrap">
           <table>

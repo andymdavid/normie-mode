@@ -211,6 +211,52 @@ export const testSchema = z.object({
 export type Test = z.infer<typeof testSchema>;
 
 /**
+ * Where you get a model (D-026): one consumer app, its plans and the tracked models each includes.
+ * `basis` says how sure the mapping is: the maker names this exact version on this plan (`maker`),
+ * the maker names the tier (e.g. "Opus") and we map it to the current version (`maker-tier`), or
+ * only press coverage says so because the maker's page couldn't be read (`press`).
+ */
+export const PLAN_BASIS = ['maker', 'maker-tier', 'press'] as const;
+export const appPlansSchema = z.object({
+  id,
+  app: z.string(),
+  maker: z.string(),
+  url: z.url(),
+  /** Plans are editorial facts: only `approved` apps show in public builds (D-017). */
+  status: z.enum(['draft', 'approved']).default('draft'),
+  checked_on: date,
+  sources: z.array(z.object({ url: z.url(), title: z.string(), kind: z.enum(['maker', 'press']) })).min(1),
+  plans: z
+    .array(
+      z.object({
+        id,
+        name: z.string(),
+        /** Monthly price in US dollars; the cheapest option when a plan has tiers. */
+        price_usd: z.number().min(0),
+        price_note: z.string().optional(),
+        models: z
+          .array(
+            z.object({
+              model: id,
+              /** `included`: within the plan's limits; `limited`: capped or rolling out; `extra-cost`: paid on top. */
+              access: z.enum(['included', 'limited', 'extra-cost']),
+              /** The model a new chat uses on this plan. */
+              default: z.boolean().default(false),
+              /** Where in the app, when it isn't ordinary chat. */
+              where: z.string().optional(),
+              basis: z.enum(PLAN_BASIS),
+            }),
+          )
+          .min(1),
+      }),
+    )
+    .min(1),
+  note: z.string().optional(),
+});
+export type AppPlans = z.infer<typeof appPlansSchema>;
+export type Plan = AppPlans['plans'][number];
+
+/**
  * A search intent: one need, however people phrase it (D-024). Demand comes from the
  * autocomplete snapshot; coverage says how well our pages answer it.
  */

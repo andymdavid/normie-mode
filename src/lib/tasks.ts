@@ -5,10 +5,12 @@ import { graph } from './graph';
 import { imported } from './imported';
 import type { Closeness, Intent, ModelVersion, Test } from './schema';
 import { demandByIntent } from './demand';
+import { comparedModels } from './plans';
 import { formatDate } from './view';
 
+/** The models on every chart: current versions plus older ones still used by an app's plan (D-026). */
 export function currentModels(): ModelVersion[] {
-  return [...graph().models.values()].filter((m) => m.lifecycle === 'current');
+  return comparedModels();
 }
 
 export function makerOf(m: ModelVersion): string {

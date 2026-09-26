@@ -1,0 +1,39 @@
+id: claude
+app: Claude
+maker: Anthropic
+url: https://claude.ai
+status: draft
+checked_on: 2026-09-26
+sources:
+  - url: https://claude.com/pricing
+    title: Claude plans and pricing
+    kind: maker
+  - url: https://support.claude.com/en/articles/15424964-claude-fable-models-on-your-plan
+    title: Claude Fable models on your plan
+    kind: maker
+note: The pricing page names model tiers (Opus, Sonnet, Haiku) but not versions; we map each tier to its current version.
+plans:
+  - id: free
+    name: Free
+    price_usd: 0
+    models:
+      - { model: claude-sonnet-5, access: included, default: true, basis: maker-tier }
+      - { model: claude-haiku-4-5, access: included, basis: maker-tier }
+  - id: pro
+    name: Pro
+    price_usd: 20
+    price_note: $17 a month if paid yearly
+    models:
+      - { model: claude-opus-5-5, access: included, default: true, basis: maker-tier }
+      - { model: claude-sonnet-5, access: included, basis: maker-tier }
+      - { model: claude-haiku-4-5, access: included, basis: maker-tier }
+      - { model: claude-fable-5-1, access: extra-cost, where: "Paid for with usage credits on top of the plan", basis: maker }
+  - id: max
+    name: Max
+    price_usd: 100
+    price_note: From $100 a month; a $200 tier has four times the usage
+    models:
+      - { model: claude-opus-5-5, access: included, default: true, basis: maker-tier }
+      - { model: claude-sonnet-5, access: included, basis: maker-tier }
+      - { model: claude-haiku-4-5, access: included, basis: maker-tier }
+      - { model: claude-fable-5-1, access: limited, where: "Up to half of the weekly usage limit", basis: maker }

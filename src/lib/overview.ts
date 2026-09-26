@@ -1,6 +1,7 @@
 // Builds the translated comparison rows for the overview (N-002) from imported snapshots.
 // Every figure keeps a pointer to where it came from; translation constants are named and shown on the page.
 import { graph } from './graph';
+import { comparedModels } from './plans';
 import { imported, type ArenaEntry, type EpochResult } from './imported';
 import type { MakerClaim, ModelVersion } from './schema';
 
@@ -53,7 +54,7 @@ function bestEpoch(results: EpochResult[]): Map<string, Map<string, number>> {
 export function overviewRows(): OverviewRow[] {
   const g = graph();
   const { epoch, modelsdev, lmarena } = imported();
-  const current = [...g.models.values()].filter((m) => m.lifecycle === 'current');
+  const current = comparedModels();
   const ids = new Set(current.map((m) => m.id));
   const epochBest = bestEpoch((epoch?.results ?? []).filter((r) => ids.has(r.model)));
 

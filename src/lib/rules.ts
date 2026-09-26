@@ -7,6 +7,8 @@ export type Relevance = 'direct' | 'proxy' | 'indirect' | 'none';
 const RELEVANCE_ORDER: Relevance[] = ['none', 'indirect', 'proxy', 'direct'];
 
 export const REVIEW_MAX_AGE_DAYS = 90;
+/** Consumer plans change more often than models (D-026). */
+export const PLAN_MAX_AGE_DAYS = 30;
 /** Reviewer value for agent-drafted content that no human has reviewed yet. */
 export const UNREVIEWED = 'unreviewed';
 
@@ -333,6 +335,22 @@ export function validate(g: Graph, asOf = today()): ValidationReport {
   for (const m of g.models.values()) {
     if (m.verification.status === 'unverified' && m.lifecycle === 'current') {
       warnings.push(`${where('models', m.id)}: version name not yet verified against a provider source`);
+    }
+  }
+
+  for (const app of g.plans.values()) {
+    const at = where('plans', app.id);
+    const ids = new Set<string>();
+    for (const plan of app.plans) {
+      need(!ids.has(plan.id), at, `duplicate plan "${plan.id}"`);
+      ids.add(plan.id);
+      need(plan.models.filter((m) => m.default).length <= 1, at, `plan "${plan.id}" has more than one default model`);
+      for (const m of plan.models) need(g.models.has(m.model), at, `plan "${plan.id}" names unknown model "${m.model}"`);
+    }
+    const age = daysBetween(app.checked_on, asOf);
+    if (age > PLAN_MAX_AGE_DAYS) warnings.push(`${at}: plans last checked ${age} days ago (limit ${PLAN_MAX_AGE_DAYS})`);
+    if (app.plans.some((p) => p.models.some((m) => m.basis === 'press'))) {
+      warnings.push(`${at}: some models are mapped from press coverage only; check against ${app.maker}'s own pages before approving`);
     }
   }
 

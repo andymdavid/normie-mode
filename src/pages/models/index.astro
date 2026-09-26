@@ -4,13 +4,14 @@ import Base from '../../layouts/Base.astro';
 import { graph } from '../../lib/graph';
 import { EVIDENCE_STATUS_LABEL, overviewRows } from '../../lib/overview';
 import { taskPositions } from '../../lib/models';
+import { isCompared } from '../../lib/plans';
 import { formatDate } from '../../lib/view';
 
 const g = graph();
 const rows = overviewRows()
   .map((r) => ({ ...r, top3: taskPositions(r.model.id).filter((p) => p.pos.position <= 3) }))
   .sort((a, b) => b.top3.length - a.top3.length || (b.model.released_on ?? '').localeCompare(a.model.released_on ?? ''));
-const replaced = [...g.models.values()].filter((m) => m.lifecycle !== 'current').sort((a, b) => a.name.localeCompare(b.name));
+const replaced = [...g.models.values()].filter((m) => !isCompared(m.id)).sort((a, b) => a.name.localeCompare(b.name));
 const money = (v?: number) => (v === undefined ? '–' : v < 10 ? `$${v.toFixed(2)}` : `$${v.toFixed(0)}`);
 ---
 <Base title="The AI models we track" description="The current AI models from Anthropic, OpenAI, Google, DeepSeek and Moonshot: what each is best for, what it costs and how well it's been tested.">

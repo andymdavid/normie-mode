@@ -1,0 +1,47 @@
+id: chatgpt
+app: ChatGPT
+maker: OpenAI
+url: https://chatgpt.com
+status: draft
+checked_on: 2026-09-26
+sources:
+  - url: https://help.openai.com/en/articles/20001354-gpt-56-and-gpt-6-pro-in-chatgpt
+    title: GPT-5.6 and GPT-6 Pro in ChatGPT (couldn't be read automatically)
+    kind: maker
+  - url: https://www.macrumors.com/2026/09/22/openai-gpt-6-sol-luna/
+    title: "MacRumors: OpenAI's new GPT-6 Sol and Luna models"
+    kind: press
+  - url: https://www.notebookcheck.net/ChatGPT-Free-gets-GPT-6-Luna-but-only-in-the-desktop-app.1407282.0.html
+    title: "Notebookcheck: ChatGPT Free gets GPT-6 Luna, but only in the desktop app"
+    kind: press
+  - url: https://the-decoder.com/openai-rolls-out-gpt-6-astra-to-top-tier-chatgpt-plans-at-half-the-rate-of-gpt-5-6-sol/
+    title: "The Decoder: GPT-6 Astra on top-tier ChatGPT plans"
+    kind: press
+note: OpenAI's help and pricing pages block automated reading, so this is from press coverage and needs checking by hand. Which model answers depends on the part of the app (Chat, Work or Codex).
+plans:
+  - id: free
+    name: Free
+    price_usd: 0
+    models:
+      - { model: gpt-5-6-luna, access: included, default: true, basis: press }
+      - { model: gpt-6-luna, access: limited, where: "Desktop app only, rolling out", basis: press }
+  - id: go
+    name: Go
+    price_usd: 8
+    models:
+      - { model: gpt-5-6-luna, access: included, default: true, basis: press }
+      - { model: gpt-6-luna, access: limited, where: "Desktop app only, rolling out", basis: press }
+  - id: plus
+    name: Plus
+    price_usd: 20
+    models:
+      - { model: gpt-5-6-sol, access: included, default: true, basis: press }
+      - { model: gpt-6-astra, access: included, where: "ChatGPT Work and Codex, not ordinary chat", basis: press }
+      - { model: gpt-6-sol, access: included, where: "ChatGPT Work and Codex, not ordinary chat", basis: press }
+  - id: pro
+    name: Pro
+    price_usd: 100
+    price_note: From $100 a month; a $200 tier has higher limits
+    models:
+      - { model: gpt-6-astra, access: included, default: true, where: "Shown as GPT-6 Pro in chat", basis: press }
+      - { model: gpt-6-sol, access: included, where: "ChatGPT Work and Codex", basis: press }

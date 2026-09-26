@@ -1,0 +1,25 @@
+id: kimi
+app: Kimi
+maker: Moonshot AI
+url: https://www.kimi.com
+status: draft
+checked_on: 2026-09-26
+sources:
+  - url: https://www.kimi.com/en/help/membership/membership-pricing
+    title: Kimi membership pricing (prices in yuan; doesn't say which model each plan gets)
+    kind: maker
+  - url: https://www.eesel.ai/blog/kimi-k3-pricing
+    title: "eesel AI: Kimi K3 pricing and app tiers"
+    kind: press
+note: Kimi's own page lists prices in yuan and doesn't map models to plans; the US dollar prices and "every plan gets K3" come from press coverage.
+plans:
+  - id: free
+    name: Free (Adagio)
+    price_usd: 0
+    models:
+      - { model: kimi-k3, access: included, default: true, basis: press }
+  - id: moderato
+    name: Moderato
+    price_usd: 19
+    models:
+      - { model: kimi-k3, access: included, default: true, basis: press }

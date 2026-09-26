@@ -4,6 +4,7 @@ import { join, relative } from 'node:path';
 import { parse } from 'yaml';
 import type { z } from 'astro/zod';
 import {
+  appPlansSchema,
   benchmarkSchema,
   capabilitySchema,
   modelFamilySchema,
@@ -17,6 +18,7 @@ import {
   resultFileSchema,
   sourceSchema,
   taskSchema,
+  type AppPlans,
   type Benchmark,
   type Capability,
   type ModelFamily,
@@ -46,6 +48,7 @@ export interface Graph {
   intents: Map<string, Intent>;
   norm: Map<string, NormLines>;
   normMessages: Map<string, NormMessages>;
+  plans: Map<string, AppPlans>;
   /** Result ID -> file it was defined in, for error messages. */
   origins: Map<string, string>;
 }
@@ -121,6 +124,7 @@ export function loadGraph(root = join(process.cwd(), 'content')): Graph {
     intents: loadEach('intents', intentSchema),
     norm: loadEach('norm', normLinesSchema),
     normMessages: loadEach('norm-messages', normMessagesSchema),
+    plans: loadEach('plans', appPlansSchema),
     origins,
   };
   if (problems.length) throw new ContentError(problems);

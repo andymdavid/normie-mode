@@ -1,0 +1,40 @@
+id: gemini
+app: Gemini
+maker: Google
+url: https://gemini.google.com
+status: draft
+checked_on: 2026-09-26
+sources:
+  - url: https://gemini.google/us/subscriptions/
+    title: Gemini plans and pricing (US)
+    kind: maker
+  - url: https://blog.google/innovation-and-ai/models-and-research/gemini-models/3-8-flash-and-3-8-flash-cyber/
+    title: Introducing Gemini 3.8 Flash
+    kind: maker
+note: The pricing page describes paid plans by usage limits and says "Gemini 3 Pro"; we map that to Gemini 3.1 Pro, the current Pro version.
+plans:
+  - id: free
+    name: Free
+    price_usd: 0
+    models:
+      - { model: gemini-3-6-flash, access: included, default: true, basis: maker }
+      - { model: gemini-3-1-pro, access: limited, where: "Varying access", basis: maker }
+  - id: ai-plus
+    name: Google AI Plus
+    price_usd: 4.99
+    models:
+      - { model: gemini-3-6-flash, access: included, default: true, basis: maker }
+      - { model: gemini-3-1-pro, access: limited, where: "Twice the free limits", basis: maker }
+  - id: ai-pro
+    name: Google AI Pro
+    price_usd: 19.99
+    models:
+      - { model: gemini-3-8-flash, access: included, default: true, basis: maker }
+      - { model: gemini-3-1-pro, access: included, basis: maker-tier }
+  - id: ai-ultra
+    name: Google AI Ultra
+    price_usd: 99.99
+    price_note: From $99.99 a month; a $199.99 tier has higher limits
+    models:
+      - { model: gemini-3-8-flash, access: included, default: true, basis: maker }
+      - { model: gemini-3-1-pro, access: included, basis: maker-tier }
