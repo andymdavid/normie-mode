@@ -63,6 +63,8 @@ This file records meaningful changes to the Normie Mode product, implementation,
 
 ### Changed
 
+- Charts label each model by its position ("1st", "10th") instead of task scores, vote ratings or the Epoch index, so a last place no longer reads as a score of 0. The exact figures stay in the tooltip.
+- Tests that only a couple of our models have taken no longer get a chart that names a leader; task pages list them as too few tested to compare.
 - Task pages call the per-request cost chart "If you build with it", since app users pay a monthly plan instead.
 - Reframed the initial delivery around a complete vertical slice before expansion across all proposed public entities and capability areas.
 - Established models and exact model versions as the canonical comparison unit; products, wrappers, and configured agents are outside the comparison scope, while evaluation configuration remains methodology metadata.

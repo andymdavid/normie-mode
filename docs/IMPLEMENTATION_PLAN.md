@@ -266,11 +266,12 @@ Progress note (2026-09-24): Built as the homepage (`src/pages/index.astro`, data
 
 ### N-011 — Readable numbers (stage 4)
 
-- Status: `proposed`
+- Status: `in_progress` (first pass 2026-09-26; comprehension check outstanding)
 - Dependencies: N-008
 - Work: replace raw Epoch index and LMArena ratings in headline positions with plain ranks or bands; stop a relative score of 0 reading as "useless" (e.g. show position "10th of 10" alongside the score); flag close calls beyond the top two; hide single-test charts with fewer than three models from task summaries.
 - Acceptance criteria: a non-expert can read every headline chart without knowing what the underlying index is.
 - Verification: product-owner review; a comprehension check with at least three people outside AI (P1-003).
+- Progress note (2026-09-26): task-score charts, people's-votes charts and the homepage capability charts now label bars with position ("1st", "10th") via `withPositions` in `src/lib/tasks.ts`; raw scores and ratings stay in tooltips and in model-page tables. Tests with fewer than three of our models get no chart or "leads" line on task pages; they're listed as "too few of our models tested to compare yet". Not done: flagging close calls beyond the top two.
 
 ### N-012 — Work-first homepage (stage 5)
 
