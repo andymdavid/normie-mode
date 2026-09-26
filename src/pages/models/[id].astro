@@ -6,7 +6,7 @@ import { graph } from '../../lib/graph';
 import { EVIDENCE_STATUS_LABEL } from '../../lib/overview';
 import { ordinal, overviewRow, taskPositions, testPositions } from '../../lib/models';
 import { taskPath } from '../../lib/tasks';
-import { ACCESS_LABEL, formatPrice, isCompared, plansFor } from '../../lib/plans';
+import { ACCESS_LABEL, formatPrice, isCompared, planLabel, plansFor } from '../../lib/plans';
 import { formatDate, modelName } from '../../lib/view';
 
 export function getStaticPaths() {
@@ -73,7 +73,7 @@ const money = (v?: number) => (v === undefined ? undefined : v < 10 ? `$${v.toFi
           <tbody>
             {plans.map(({ app, plan, entry }) => (
               <tr>
-                <td><a href={app.url}><strong>{app.app}</strong></a> {plan.name}{app.status === 'draft' && <span class="badge draft" style="margin-left:0.5rem">Draft</span>}</td>
+                <td><a href={app.url}><strong>{planLabel(app, plan)}</strong></a>{app.status === 'draft' && <span class="badge draft" style="margin-left:0.5rem">Draft</span>}</td>
                 <td class="num">{formatPrice(plan.price_usd)}{plan.price_note && <div class="small muted">{plan.price_note}</div>}</td>
                 <td>{ACCESS_LABEL[entry.access]}{entry.default && ', the default'}{entry.where && <div class="small muted">{entry.where}</div>}</td>
               </tr>

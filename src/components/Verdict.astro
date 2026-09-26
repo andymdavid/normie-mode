@@ -1,0 +1,80 @@
+---
+// The verdict at the top of a task page (D-027). Every value comes from `verdict()`; no prose here
+// says anything the data doesn't.
+import { formatPrice, planLabel } from '../lib/plans';
+import { ordinal } from '../lib/models';
+import { PICK_LABEL, modelMaker, type Option, type Verdict } from '../lib/verdict';
+
+interface Props {
+  v: Verdict;
+}
+const { v } = Astro.props;
+const label = (kinds: string[]) =>
+  kinds.map((k, i) => (i === 0 ? PICK_LABEL[k as keyof typeof PICK_LABEL] : PICK_LABEL[k as keyof typeof PICK_LABEL].replace(/^Best/, 'best'))).join(', and ');
+const where = (o: Option) =>
+  o.plan ? `${planLabel(o.plan.app, o.plan.plan)} · ${formatPrice(o.plan.plan.price_usd)}` : 'Not in any app we cover; developers can use it directly';
+const tieLine = ([a, b]: Option[]) =>
+  a.plan && b.plan && a.plan.plan === b.plan.plan
+    ? `Too close to call. Both come with ${planLabel(a.plan.app, a.plan.plan)}:`
+    : a.plan?.plan.price_usd === b.plan?.plan.price_usd ? 'Too close to call:' : 'Too close to call. Cheaper first:';
+const drafts = v.plans.some((p) => p.app.status === 'draft');
+---
+<section class="verdict-block" aria-label="Our verdict">
+  <div class="verdict-picks">
+    {v.picks.map((p, i) => (
+      <div class={`verdict-pick${i === 0 ? ' is-lead' : ''}`}>
+        <span class="tag">{label(p.kinds)}</span>
+        {p.options.length > 1 && <p class="verdict-tie">{tieLine(p.options)}</p>}
+        {p.options.map((o) => (
+          <div class="verdict-option">
+            <p class="verdict-model"><a href={`/models/${o.modelId}`}>{o.name}</a> <span class="maker">{modelMaker(o.modelId)}</span></p>
+            <p class="verdict-plan">{where(o)}</p>
+            {o.plan?.entry.where && <p class="verdict-note">{o.plan.entry.where}</p>}
+            <p class="verdict-score">{ordinal(o.position)} of {o.of} · task score {o.score.toFixed(0)}</p>
+          </div>
+        ))}
+      </div>
+    ))}
+  </div>
+  <p class="verdict-basis">{v.basis}. Picks follow <a href="/methodology#verdict">a fixed rule</a> from the task score and each app's plans.{drafts && <span class="badge draft" style="margin-left:0.5rem">Plans draft</span>}</p>
+
+  <details class="verdict-paying">
+    <summary>Already paying for one? See what each plan gives you here</summary>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>App and plan</th><th>Price</th><th>Best model on it for this</th><th>Position</th></tr></thead>
+        <tbody>
+          {v.plans.map(({ app, plan, best }) => (
+            <tr>
+              <td><strong>{planLabel(app, plan)}</strong></td>
+              <td class="num">{formatPrice(plan.price_usd)}</td>
+              <td>{best ? <><a href={`/models/${best.modelId}`}>{best.name}</a>{best.plan?.entry.where && <div class="small muted">{best.plan.entry.where}</div>}</> : <span class="muted">No score yet</span>}</td>
+              <td class="num">{best ? `${ordinal(best.position)} of ${best.of}` : '–'}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </details>
+</section>
+
+<style>
+  .verdict-block { margin: 2rem 0 0; }
+  .verdict-picks { display: grid; gap: 1px; grid-template-columns: repeat(auto-fit, minmax(min(16rem, 100%), 1fr)); background: var(--hair); }
+  .verdict-pick { background: var(--band); padding: 1.3rem 1.4rem 1.2rem; }
+  .verdict-pick.is-lead { background: var(--orange); }
+  .verdict-pick .tag { display: block; font: 500 0.72rem var(--mono); text-transform: uppercase; margin-bottom: 0.8rem; }
+  .verdict-option + .verdict-option { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(0, 0, 0, 0.15); }
+  .verdict-model { font-size: 1.5rem; letter-spacing: -0.02em; line-height: 1.1; margin: 0 0 0.35rem; }
+  .verdict-model a { text-decoration: none; }
+  .verdict-model a:hover { text-decoration: underline; }
+  .verdict-model .maker { font-size: 0.85rem; letter-spacing: 0; color: var(--ink-2); }
+  .verdict-plan { margin: 0; font-size: 0.95rem; }
+  .verdict-note { margin: 0.15rem 0 0; font-size: 0.82rem; color: var(--ink-2); }
+  .verdict-score { margin: 0.5rem 0 0; font: 0.78rem var(--mono); color: var(--ink-2); }
+  .verdict-tie { font-size: 0.85rem; margin: 0 0 0.6rem; }
+  .verdict-basis { font-size: 0.85rem; color: var(--muted); margin: 0.8rem 0 0; }
+  .verdict-paying { margin-top: 1.2rem; }
+  .verdict-paying summary { cursor: pointer; font-size: 0.95rem; }
+  .verdict-paying .table-wrap { margin-top: 1rem; }
+</style>

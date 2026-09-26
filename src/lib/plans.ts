@@ -41,3 +41,6 @@ export const ACCESS_LABEL: Record<Plan['models'][number]['access'], string> = {
 export function formatPrice(usd: number): string {
   return usd === 0 ? 'Free' : `$${Number.isInteger(usd) ? usd : usd.toFixed(2)}/month`;
 }
+
+/** "ChatGPT Plus", but "Google AI Pro" rather than "Gemini Google AI Pro". */
+export const planLabel = (app: AppPlans, plan: Plan) => (plan.name.startsWith(app.maker) ? plan.name : `${app.app} ${plan.name}`);

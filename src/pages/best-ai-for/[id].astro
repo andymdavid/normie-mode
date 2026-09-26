@@ -9,6 +9,8 @@ import { overviewRows } from '../../lib/overview';
 import { CLOSENESS_LABEL, allTaskPages, effectiveTests, leadSentence, normLine, subtasksOf, taskPath, taskScores, tasksByDemand, testFloor, testRows, testSource } from '../../lib/tasks';
 import { PREVIEW, formatDate } from '../../lib/view';
 import { taskCostNote, taskEvidenceNote } from '../../lib/norm';
+import Verdict from '../../components/Verdict.astro';
+import { verdict } from '../../lib/verdict';
 
 export function getStaticPaths() {
   return allTaskPages().map((task) => ({ params: { id: task.id } }));
@@ -32,6 +34,7 @@ const costRows = overviewRows().map((r) => ({
   id: r.model.id, label: r.model.name, maker: r.maker, href: `/models/${r.model.id}`,
   value: r.costPer1000, display: r.costPer1000 === undefined ? undefined : `$${r.costPer1000 < 10 ? r.costPer1000.toFixed(2) : r.costPer1000.toFixed(0)}`,
 }));
+const v = verdict(task);
 const evidenceNote = taskEvidenceNote(task);
 const costNote = taskCostNote(task);
 const others = tasksByDemand().filter((t) => t.task.id !== (hub?.id ?? task.id)).slice(0, 3);
@@ -39,7 +42,7 @@ const month = formatDate(new Date().toISOString().slice(0, 10)).replace(/^\d+ /,
 const leaderLine = top.length
   ? `On the tests we have, ${top[0].label} comes out on top${top[1] ? `, followed by ${top.slice(1).map((r) => r.label).join(' and ')}` : ''}.`
   : undefined;
-const sections = [['answer', 'The short answer'], ...(normOn ? [['guide', "Norm's guide"]] : []), ['evidence', 'The evidence'], ['cost', 'What it costs']];
+const sections = [['answer', 'The short answer'], ...(normOn ? [['guide', "Norm's guide"]] : []), ['evidence', 'The evidence'], ['cost', 'If you build with it']];
 ---
 <Base
   title={`${task.label} (${month})`}
@@ -53,13 +56,14 @@ const sections = [['answer', 'The short answer'], ...(normOn ? [['guide', "Norm'
   ) : (
     <NormSays text={evidenceNote} fromData />
   )}
+  {v && <Verdict v={v} />}
 
   <div class="band">
     <div class="band-inner summary-grid">
-      <div class="summary">
+      {!v && <div class="summary">
         <span class="tag">Top of the tests</span>
         <p>{top.length ? top.map((r, i) => (<>{i > 0 && (i === top.length - 1 ? ' and ' : ', ')}<strong>{r.label}</strong></>)) : 'Not enough results yet.'}</p>
-      </div>
+      </div>}
       <div class="summary">
         <span class="tag">How close the evidence is</span>
         <p>{scores.closeness ? <><strong>{CLOSENESS_LABEL[scores.closeness]}.</strong> {scores.testsUsed} test{scores.testsUsed === 1 ? '' : 's'} with results.</> : 'Nothing measures this yet.'}</p>
@@ -122,7 +126,8 @@ const sections = [['answer', 'The short answer'], ...(normOn ? [['guide', "Norm'
       </div>
       {noResults.length > 0 && <p class="small muted" style="margin-top:1rem">Also relevant, but no results for current models yet: {noResults.map((t) => t.title).join(', ')}.</p>}
 
-      <div class="section-head" id="cost"><h2>What it costs</h2></div>
+      <div class="section-head" id="cost"><h2>If you build with it</h2></div>
+      <p class="section-sub">What the makers charge developers who use the models directly. Using an app? The plans above are what you pay.</p>
       <NormSays text={costNote} fromData mood="default" />
       <BarChart
         title="Cost per 1,000 typical requests"

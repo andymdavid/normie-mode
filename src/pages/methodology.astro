@@ -4,6 +4,8 @@ import Base from '../layouts/Base.astro';
 import { CLOSENESS_LABEL } from '../lib/tasks';
 import { EVIDENCE_STATUS_LABEL, TESTED_THRESHOLD, TYPICAL_REQUEST } from '../lib/overview';
 import { imported } from '../lib/imported';
+import { STANDARD_PLAN_MAX_USD, TOO_CLOSE_POINTS } from '../lib/verdict';
+import { PLAN_MAX_AGE_DAYS } from '../lib/rules';
 
 const { epoch, modelsdev, lmarena } = imported();
 ---
@@ -37,6 +39,17 @@ const { epoch, modelsdev, lmarena } = imported();
     <h2>The task score</h2>
     <p>On each test with at least three models, we place each model from 0 (lowest of the models we track) to 100 (highest). A model's task score is its average across the tests it has results for. Only models with results on at least half the tests get a score.</p>
     <p>It shows who leads among the models we track, not how good they are in absolute terms. A score of 0 means last of this group, not useless.</p>
+
+    <h2 id="verdict">The picks at the top of each task</h2>
+    <p>They follow a fixed rule, worked out from the task score and each app's plans, so they always agree with the charts:</p>
+    <ul class="plain-list">
+      <li><strong>Best overall:</strong> the model with the highest task score, and the cheapest plan that includes it.</li>
+      <li><strong>Best for ${STANDARD_PLAN_MAX_USD} a month or less:</strong> the highest-scoring model on a plan at that price or below.</li>
+      <li><strong>Best free:</strong> the highest-scoring model on a free plan.</li>
+      <li>If the runner-up is within {TOO_CLOSE_POINTS} points, we name both and put the cheaper plan first.</li>
+      <li>A model you have to pay extra for on top of a plan doesn't count as included in it.</li>
+    </ul>
+    <p>We check each app's plans against the maker's own pages at least every {PLAN_MAX_AGE_DAYS} days. Plans change often, so check the price before you buy.</p>
 
     <h2>Too close to call</h2>
     <p>Test results come with a likely range, shown as a thin line on the bar. When the top two models' ranges overlap, we say they're too close to call rather than naming a winner.</p>
