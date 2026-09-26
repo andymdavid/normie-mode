@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { graph } from './graph';
 import { NormMessageError, renderSlot, taskCostNote, taskEvidenceNote, taskFacts } from './norm';
 import { lintNormText } from './rules';
-import { allTaskPages, leadSentence, taskScores, topTwoTied } from './tasks';
+import { MIN_MODELS_TO_RANK, allTaskPages, effectiveTests, leadSentence, scoringTests, taskScores, testRows, topTwoTied } from './tasks';
 
 const pages = allTaskPages().map((t) => [t.id, t] as const);
 const clean = (s?: string) => {
@@ -15,6 +15,15 @@ describe("Norm's data-driven messages", () => {
     clean(note);
     const leader = taskScores(task).rows[0]?.label;
     if (leader) expect(note).toContain(leader);
+  });
+
+  it.each(pages)('%s: counts the same tests as the charts on the page', (_, task) => {
+    const charted = scoringTests(task).filter((t) => testRows(t).filter((r) => r.value !== undefined).length >= MIN_MODELS_TO_RANK);
+    const closeness = (id: string) => effectiveTests(task).find((x) => x.test === id)?.closeness;
+    const words = ['no', 'one', 'two', 'three', 'four', 'five', 'six'];
+    const f = taskFacts(task);
+    expect(f.direct_words).toBe(`${words[charted.filter((t) => closeness(t.id) === 'direct').length]} test${charted.filter((t) => closeness(t.id) === 'direct').length === 1 ? '' : 's'}`);
+    expect(f.related_words).toBe(`${words[charted.filter((t) => closeness(t.id) === 'related').length]} test${charted.filter((t) => closeness(t.id) === 'related').length === 1 ? '' : 's'}`);
   });
 
   it.each(pages)("%s: evidence note only mentions people's votes when the evidence is votes", (_, task) => {

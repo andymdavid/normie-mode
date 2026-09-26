@@ -4,7 +4,7 @@
 import { graph } from './graph';
 import { overviewRows } from './overview';
 import type { Intent } from './schema';
-import { effectiveTests, scoringTests, taskScores, testRows } from './tasks';
+import { MIN_MODELS_TO_RANK, effectiveTests, scoringTests, taskScores, testRows } from './tasks';
 
 export type Facts = Record<string, string | number | boolean | undefined>;
 
@@ -46,8 +46,8 @@ export function renderSlot(slot: string, facts: Facts): string | undefined {
 export function taskFacts(task: Intent): Facts {
   const g = graph();
   const scores = taskScores(task);
-  // Count the scoring tests a reader can see a chart for (at least one model has a result).
-  const shown = scoringTests(task).filter((t) => testRows(t).some((r) => r.value !== undefined));
+  // Count the scoring tests a reader can see a chart for (enough models to rank, as on the page).
+  const shown = scoringTests(task).filter((t) => testRows(t).filter((r) => r.value !== undefined).length >= MIN_MODELS_TO_RANK);
   const closenessOf = (id: string) => effectiveTests(task).find((x) => x.test === id)?.closeness;
   const direct = shown.filter((t) => closenessOf(t.id) === 'direct').length;
   const related = shown.filter((t) => closenessOf(t.id) === 'related').length;
