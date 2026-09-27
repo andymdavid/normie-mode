@@ -192,6 +192,10 @@ The strip above the header promotes Intelligence Snacks, the product owner's pod
 
 The signup posts to `https://intelligencesnacks.com/api/subscribe` (the podcast site's own endpoint, which adds the address to Beehiiv). That endpoint doesn't yet allow requests from other sites (CORS), so until it does, the form tells people it couldn't sign them up and links to intelligencesnacks.com. Beehiiv's embedded forms weren't used: the workspace plan doesn't allow creating forms through the API, and the embed is an iframe that can't match the site's design.
 
+### D-031 — Our own tests are published, scored and tagged "Tested by us" (accepted 2026-09-27)
+
+Our test results are published and feed the task score and verdict like any other test, as direct evidence on the tasks they measure (first: "Answering business questions from a spreadsheet" on the Excel and data analysis pages). They're told apart everywhere by a navy "Tested by us" tag, a colour used for nothing else (orange means "the maker says", lavender means draft or early, sage means independently tested). The verdict stays the only pick: the results page shows how each model did and which task pages the test feeds, not a separate "best overall". In the task score, models with the same number right score the same. This settles D-009's publication and scoring questions; the test protocol (how many runs, which models) is still to be written down.
+
 ## Reference sites
 
 Reviewed 2026-09-24 as models for structure and presentation:
@@ -295,7 +299,7 @@ Progress note (2026-09-24): Built as the homepage (`src/pages/index.astro`, data
 
 ### N-013 — First public editorial and own-test evidence (stage 6)
 
-- Status: `in_progress` (Norm's notes approved for coding, writing, studying, CVs and jobs, and business on 2026-09-26; own spreadsheet test not yet run)
+- Status: `in_progress` (Norm's notes approved for coding, writing, studying, CVs and jobs, and business on 2026-09-26; the first spreadsheet test run published and scored on 2026-09-27 under D-031. It covers six models; Claude Fable 5.1, GPT-6 Astra and the older models on free plans haven't taken it, and the harder messy-spreadsheet version hasn't been run)
 - Dependencies: product-owner review time; N-007
 - Work: product owner approves Norm's guide ("what to check") for the five hubs with the most demand; run the messy-spreadsheet test and publish it on the Excel page as the first direct evidence.
 - Acceptance criteria: at least five task pages show an approved "what to check" publicly; the Excel page shows our own test with every question and answer.
@@ -357,7 +361,7 @@ A published recommendation is flagged for review when: a newer version appears i
 ## Open decisions
 
 
-- D-009: First-party test protocol (a narrow micro-pilot is defined in `docs/evals/unusual-transactions.md`; the general protocol is still open)
+- D-009: First-party test protocol. Publication and scoring settled by D-031; still open: runs per model, which models each run covers, and when a harder version replaces an easier one.
 - D-014: Smallest useful intelligence layer
 - D-015: Pilot success gate
 

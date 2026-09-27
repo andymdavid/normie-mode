@@ -6,6 +6,7 @@ This file records meaningful changes to the Normie Mode product, implementation,
 
 ### Added
 
+- Our own spreadsheet test is published and counts towards the Excel and data analysis task scores and picks as direct evidence (D-031). It's marked everywhere with a navy "Tested by us" tag: on its evidence chart, the task cards, Tests explained, model pages, How it works and its results page, which now shows where the test counts instead of its own "best overall".
 - A menu button on phones: the second row of header links is gone, and the menu holds the main pages, the most popular tasks and the podcast. It works without JavaScript and closes with Escape or a tap outside.
 - How it works rebuilt: the four steps from test to pick, the evidence sources with dates and licences, a worked example of the coding task score test by test, the pick rules with the live coding verdict, and what the rankings can't tell you. Every number comes from the site's own data.
 - A proper footer: a lilac block, a large Norm who cycles through his faces, the Intelligence Snacks newsletter signup, links to top tasks, the site, the podcast and data sources, and the "Normie Mode" wordmark full width at the bottom.
@@ -35,6 +36,8 @@ This file records meaningful changes to the Normie Mode product, implementation,
 
 ### Fixed
 
+- A chart summary named one leader when several models were exactly level at the top; it now names them all.
+- The "Best AI for…" page mentioned "our own test" on the Excel card before the test was published.
 - `astro dev` kept serving a page's styles as they were when it started, so style changes only showed after a restart. It now drops a changed page's cached styles and reloads.
 - Norm counted tests that the page no longer charts (fewer than three of our models), so his note could mention more tests than the page showed.
 - `npm run import -- --offline` no longer stamps reused data with today's date; each snapshot keeps the date it was downloaded.
