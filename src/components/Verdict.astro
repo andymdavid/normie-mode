@@ -85,17 +85,18 @@ const reason = (p: Pick) => {
   .verdict-block { margin: 2.2rem 0 0; }
   /* Three equal blocks; best overall is marked by colour only, so every block reads the same way:
      label, model name, where to get it, and why (pinned to the bottom so the three line up). */
-  .verdict-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(16rem, 100%), 1fr)); gap: 1px; background: var(--hair); }
+  .verdict-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(16rem, 100%), 1fr)); gap: 0.75rem; }
   .verdict-pick { background: var(--band); padding: 1.4rem 1.5rem 1.3rem; display: flex; flex-direction: column; }
   .verdict-pick.is-lead { background: var(--orange); }
-  .verdict-label { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 0.6rem; font: 500 0.72rem var(--mono); text-transform: uppercase; margin-bottom: 0.9rem; }
+  /* Same height with or without the tie tag, so the model names line up across the cards. */
+  .verdict-label { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 0.6rem; min-height: 1.3rem; font: 500 0.72rem var(--mono); text-transform: uppercase; margin-bottom: 0.9rem; }
   .verdict-model, .verdict-option-name { font-size: 1.55rem; letter-spacing: -0.025em; line-height: 1.1; }
   .verdict-model { margin: 0 0 0.45rem; }
   .verdict-model a, .verdict-option-name { text-decoration: none; }
   .verdict-model a:hover, .verdict-option-name:hover { text-decoration: underline; }
   .verdict-action { font-size: 0.95rem; line-height: 1.4; margin: 0; }
   .verdict-action strong { font-weight: 600; }
-  .verdict-tie { display: inline-block; font: 500 0.7rem var(--mono); text-transform: uppercase; background: var(--ink); color: #fff; padding: 0.1rem 0.4rem; }
+  .verdict-tie { display: inline-block; line-height: 1.2; font: 500 0.7rem/1.2 var(--mono); text-transform: uppercase; background: var(--ink); color: #fff; padding: 0.1rem 0.4rem; }
   .verdict-options { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.9rem; }
   .verdict-options li { display: grid; gap: 0.45rem; }
   .verdict-reason { font-size: 0.85rem; color: var(--ink-2); margin: auto 0 0; padding-top: 1.2rem; }
