@@ -49,6 +49,22 @@ const fullTitle = title === 'Normie Mode' ? title : `${title} · Normie Mode`;
             <a href="/methodology" aria-current={path.startsWith('/methodology') ? 'page' : undefined}>How it works</a>
           </span>
         </nav>
+        <details class="mobile-menu" data-mobile-menu>
+          <summary aria-label="Menu"><span class="burger" aria-hidden="true"><span></span><span></span><span></span></span></summary>
+          <nav class="mobile-panel" aria-label="Menu">
+            <ul class="mobile-main">
+              <li><a href="/best-ai-for">Best AI for…</a></li>
+              <li><a href="/models">Models</a></li>
+              <li><a href="/benchmarks">Tests explained</a></li>
+              <li><a href="/methodology">How it works</a></li>
+            </ul>
+            <span class="footer-label">Popular tasks</span>
+            <ul class="mobile-tasks">
+              {topTasks.map((t) => <li><a href={taskPath(t)}>{t.label.replace(/^Best AI for /, '').replace(/^./, (c) => c.toUpperCase())}</a></li>)}
+            </ul>
+            <a class="mobile-podcast" href={PODCAST.url}><span class="promo-tag">Podcast</span> {PODCAST.name} →</a>
+          </nav>
+        </details>
       </div>
     </header>
     <main class="wrap">
@@ -120,6 +136,14 @@ const fullTitle = title === 'Normie Mode' ? title : `${title} · Normie Mode`;
       </div>
       <p class="footer-mark" aria-hidden="true">Normie Mode</p>
     </footer>
+    <script>
+      // Mobile menu: close on Escape or a tap outside it.
+      const menu = document.querySelector<HTMLDetailsElement>('[data-mobile-menu]');
+      if (menu) {
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && menu.open) { menu.open = false; menu.querySelector('summary')?.focus(); } });
+        document.addEventListener('click', (e) => { if (menu.open && !menu.contains(e.target as Node)) menu.open = false; });
+      }
+    </script>
     <script define:vars={{ newsletter: NEWSLETTER }}>
       // Footer Norm: cycle through his faces; hovering moves to the next one. Holds still for reduced motion.
       const norm = document.querySelector('[data-footer-norm]');

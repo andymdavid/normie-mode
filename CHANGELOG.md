@@ -6,6 +6,7 @@ This file records meaningful changes to the Normie Mode product, implementation,
 
 ### Added
 
+- A menu button on phones: the second row of header links is gone, and the menu holds the main pages, the most popular tasks and the podcast. It works without JavaScript and closes with Escape or a tap outside.
 - How it works rebuilt: the four steps from test to pick, the evidence sources with dates and licences, a worked example of the coding task score test by test, the pick rules with the live coding verdict, and what the rankings can't tell you. Every number comes from the site's own data.
 - A proper footer: a lilac block, a large Norm who cycles through his faces, the Intelligence Snacks newsletter signup, links to top tasks, the site, the podcast and data sources, and the "Normie Mode" wordmark full width at the bottom.
 - The strip above the header now promotes the Intelligence Snacks podcast; the preview notice is a small corner badge.
