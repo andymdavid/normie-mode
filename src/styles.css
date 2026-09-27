@@ -86,26 +86,41 @@ p { margin: 0 0 0.8rem; }
 .preview-badge { position: fixed; left: 0.75rem; bottom: calc(env(safe-area-inset-bottom, 0px) + 0.75rem); z-index: 30; background: var(--lavender); color: var(--ink); font: 0.72rem var(--mono); padding: 0.35rem 0.6rem; }
 main { padding-block: 3rem 5rem; }
 
-/* Footer: black block, full-width wordmark, link columns, podcast block (after State of AI Design) */
-.site-footer { background: var(--ink); color: #f5f4f0; margin-top: 2rem; }
-.footer-inner { max-width: 90rem; margin: 0 auto; padding: 3rem 1.25rem calc(env(safe-area-inset-bottom, 0px) + 1.5rem); }
-.footer-mark { font-weight: 500; letter-spacing: -0.06em; line-height: 0.85; font-size: min(calc((100vw - 2.5rem) / 5.75), 15.2rem); margin: 0 0 3.5rem; white-space: nowrap; }
-.footer-grid { display: grid; gap: 2rem 3rem; grid-template-columns: repeat(3, minmax(9rem, max-content)) minmax(min(18rem, 100%), 1fr); align-items: start; }
-@media (max-width: 56rem) { .footer-grid { grid-template-columns: repeat(auto-fit, minmax(min(11rem, 100%), 1fr)); } }
-.footer-label { display: block; font: 500 0.7rem var(--mono); text-transform: uppercase; color: #9a9994; margin-bottom: 1rem; }
+/* Footer: a lilac block whose left side steps up (square, not diagonal), a large Norm, the newsletter
+   signup, link columns, and the wordmark full width underneath everything. */
+.visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.site-footer { --footer-ink: #1a0f2e; --footer-muted: rgb(26 15 46 / 0.68); --footer-step: 3rem; background: var(--lavender); color: var(--footer-ink); margin-top: 4rem; padding-top: var(--footer-step); clip-path: polygon(0 0, 38% 0, 38% var(--footer-step), 100% var(--footer-step), 100% 100%, 0 100%); overflow: hidden; }
+.footer-inner { max-width: 90rem; margin: 0 auto; padding: 2.5rem 1.25rem 0; }
+.footer-top { display: grid; grid-template-columns: minmax(12rem, 1fr) minmax(0, 2.4fr); gap: 3rem; }
+@media (max-width: 52rem) { .footer-top { grid-template-columns: 1fr; gap: 2rem; } }
+.footer-norm { position: relative; display: block; width: 176px; height: 176px; }
+.footer-norm img { position: absolute; inset: 0; width: 100%; height: 100%; border-radius: 50%; opacity: 0; transition: opacity 0.5s ease; background: var(--page); }
+.footer-norm img.is-on { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .footer-norm img { transition: none; } }
+.footer-tagline { max-width: 16rem; margin-top: 1.3rem; font-size: 1.05rem; line-height: 1.35; }
+.footer-label { display: block; font: 500 0.7rem var(--mono); text-transform: uppercase; color: var(--footer-muted); margin-bottom: 0.9rem; }
+.footer-signup { max-width: 40rem; }
+.footer-signup-title { font-size: clamp(1.8rem, 3.4vw, 2.7rem); letter-spacing: -0.035em; line-height: 1.02; }
+.footer-signup-sub { margin: 0.9rem 0 1.4rem; max-width: 34rem; color: var(--footer-muted); }
+.footer-field { display: flex; border: 1px solid var(--footer-ink); background: rgb(255 255 255 / 0.25); }
+.footer-field input { flex: 1; min-width: 0; font: inherit; border: 0; background: transparent; color: var(--footer-ink); padding: 0.85rem 1rem; border-radius: 0; }
+.footer-field input::placeholder { color: var(--footer-muted); }
+.footer-field input:focus { outline: none; }
+.footer-field:focus-within { box-shadow: 0 0 0 2px var(--footer-ink); }
+.footer-field button { font: 600 0.9rem var(--sans); background: var(--footer-ink); color: #fff; border: 0; margin: 0.35rem; padding: 0 1.1rem; cursor: pointer; border-radius: 0; }
+.footer-field button:hover { background: #000; }
+.footer-field button:disabled { opacity: 0.6; cursor: default; }
+.footer-signup-status { min-height: 1.4em; margin: 0.6rem 0 0; font-size: 0.88rem; }
+.footer-signup-status a { font-weight: 500; }
+.footer-links { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(9rem, 100%), 1fr)); gap: 2rem; margin-top: 3.5rem; }
 .footer-col ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.55rem; font-size: 0.95rem; }
 .footer-col a { text-decoration: none; }
 .footer-col a:hover { text-decoration: underline; }
-.footer-col li:not(:has(a)) { color: #9a9994; }
-.footer-podcast { display: grid; background: var(--orange); color: var(--ink); text-decoration: none; padding: 1.3rem 1.4rem; justify-self: end; width: 100%; max-width: 26rem; }
-.footer-podcast .footer-label { color: var(--ink); margin-bottom: 0.7rem; }
-.footer-podcast-name { font-size: clamp(1.6rem, 3vw, 2.2rem); letter-spacing: -0.035em; line-height: 1; }
-.footer-podcast-pitch { font-size: 0.9rem; margin: 0.7rem 0 1.1rem; }
-.footer-podcast-cta { font: 500 0.75rem var(--mono); text-transform: uppercase; }
-.footer-podcast:hover .footer-podcast-cta { text-decoration: underline; }
-.footer-bottom { display: flex; flex-wrap: wrap; gap: 0.5rem 2rem; justify-content: space-between; border-top: 1px solid #3a3a38; margin-top: 3rem; padding-top: 1rem; font-size: 0.8rem; color: #9a9994; }
-.footer-bottom a { color: #f5f4f0; text-decoration: none; }
-.footer-bottom a:hover { text-decoration: underline; }
+.footer-col li:not(:has(a)) { color: var(--footer-muted); }
+.footer-bottom { display: flex; flex-wrap: wrap; gap: 0.4rem 2rem; border-top: 1px solid rgb(26 15 46 / 0.25); margin-top: 3.5rem; padding-top: 1rem; font-size: 0.82rem; color: var(--footer-muted); }
+.footer-bottom span:last-child { margin-left: auto; }
+@media (max-width: 52rem) { .footer-bottom span:last-child { margin-left: 0; } }
+.footer-mark { font-weight: 500; letter-spacing: -0.06em; line-height: 0.78; font-size: calc((100vw - 1.5rem) / 5.75); margin: 2.5rem 0 0; padding: 0 0.75rem; white-space: nowrap; color: var(--footer-ink); transform: translateY(0.1em); }
 
 /* Summary band: columns divided by hairlines, not cards */
 .band { background: var(--band); margin-inline: calc(50% - 50vw); padding: 0 calc(50vw - 50%); margin-block: 2.5rem 3.5rem; }

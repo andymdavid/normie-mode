@@ -1,7 +1,7 @@
 ---
 import '../styles.css';
 import { PREVIEW, formatDate } from '../lib/view';
-import { PODCAST } from '../lib/site';
+import { NEWSLETTER, PODCAST } from '../lib/site';
 import { tasksByDemand, taskPath } from '../lib/tasks';
 import { imported } from '../lib/imported';
 
@@ -56,46 +56,107 @@ const fullTitle = title === 'Normie Mode' ? title : `${title} · Normie Mode`;
     </main>
     <footer class="site-footer">
       <div class="footer-inner">
-        <p class="footer-mark" aria-hidden="true">Normie Mode</p>
-        <div class="footer-grid">
-          <div class="footer-col">
-            <span class="footer-label">Best AI for…</span>
-            <ul>
-              {topTasks.map((t) => <li><a href={taskPath(t)}>{t.label.replace(/^Best AI for /, '').replace(/^./, (c) => c.toUpperCase())}</a></li>)}
-              <li><a href="/best-ai-for">All tasks</a></li>
-            </ul>
+        <div class="footer-top">
+          <div class="footer-brand">
+            <a class="footer-norm" href="/" aria-label="Normie Mode home" data-footer-norm>
+              {['default', 'happy', 'smug', 'wise'].map((f, i) => <img src={`/norm-${f}.jpg`} alt="" width="176" height="176" loading="lazy" class={i === 0 ? 'is-on' : undefined} />)}
+            </a>
+            <p class="footer-tagline">What AI can actually do, in plain English, with the evidence underneath.</p>
           </div>
-          <div class="footer-col">
-            <span class="footer-label">Normie Mode</span>
-            <ul>
-              <li><a href="/models">Models</a></li>
-              <li><a href="/benchmarks">Tests explained</a></li>
-              <li><a href="/methodology">How it works</a></li>
-            </ul>
+          <div class="footer-main">
+            <form class="footer-signup" data-newsletter action={NEWSLETTER.fallback} novalidate>
+              <span class="footer-label">{PODCAST.name} newsletter</span>
+              <h2 class="footer-signup-title">The big AI ideas, in your inbox each week</h2>
+              <p class="footer-signup-sub">A few of the best ideas from each week's {PODCAST.name} podcast on AI, software and business, from the team behind Normie Mode.</p>
+              <div class="footer-field">
+                <label class="visually-hidden" for="footer-email">Email address</label>
+                <input id="footer-email" name="email" type="email" autocomplete="email" placeholder="What's your email?" required />
+                <input class="visually-hidden" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" />
+                <button type="submit">Subscribe</button>
+              </div>
+              <p class="footer-signup-status" role="status" aria-live="polite"></p>
+            </form>
+            <nav class="footer-links" aria-label="Footer">
+              <div class="footer-col">
+                <span class="footer-label">Best AI for…</span>
+                <ul>
+                  {topTasks.map((t) => <li><a href={taskPath(t)}>{t.label.replace(/^Best AI for /, '').replace(/^./, (c) => c.toUpperCase())}</a></li>)}
+                  <li><a href="/best-ai-for">All tasks</a></li>
+                </ul>
+              </div>
+              <div class="footer-col">
+                <span class="footer-label">Normie Mode</span>
+                <ul>
+                  <li><a href="/models">Models</a></li>
+                  <li><a href="/benchmarks">Tests explained</a></li>
+                  <li><a href="/methodology">How it works</a></li>
+                </ul>
+              </div>
+              <div class="footer-col">
+                <span class="footer-label">Listen</span>
+                <ul>
+                  <li><a href={PODCAST.url}>{PODCAST.name}</a></li>
+                  {PODCAST.links.filter((l) => l.label !== 'Newsletter').map((l) => <li><a href={l.url}>{l.label}</a></li>)}
+                </ul>
+              </div>
+              <div class="footer-col">
+                <span class="footer-label">Data from</span>
+                <ul>
+                  <li><a href={epoch?.meta.url}>Epoch AI</a></li>
+                  <li><a href={lmarena?.meta.url}>LMArena</a></li>
+                  <li><a href={modelsdev?.meta.url}>models.dev</a></li>
+                  <li>Makers' own pages</li>
+                </ul>
+              </div>
+            </nav>
           </div>
-          <div class="footer-col">
-            <span class="footer-label">Data from</span>
-            <ul>
-              <li><a href={epoch?.meta.url}>Epoch AI</a></li>
-              <li><a href={lmarena?.meta.url}>LMArena</a></li>
-              <li><a href={modelsdev?.meta.url}>models.dev</a></li>
-              <li>Makers' own pages</li>
-            </ul>
-          </div>
-          <a class="footer-podcast" href={PODCAST.url}>
-            <span class="footer-label">Listen</span>
-            <span class="footer-podcast-name">{PODCAST.name}</span>
-            <span class="footer-podcast-pitch">{PODCAST.tagline}. {PODCAST.pitch}</span>
-            <span class="footer-podcast-cta">Listen now →</span>
-          </a>
         </div>
         <div class="footer-bottom">
           <span>© {new Date().getFullYear()} Normie Mode</span>
-          <span>Data updated {updated} · Rankings compare the models we track; check prices before you buy</span>
-          <span class="footer-listen">{PODCAST.links.map((l, i) => <>{i > 0 && ' · '}<a href={l.url}>{l.label}</a></>)}</span>
+          <span>Data updated {updated}</span>
+          <span>Rankings compare the models we track. Check prices before you buy.</span>
         </div>
       </div>
+      <p class="footer-mark" aria-hidden="true">Normie Mode</p>
     </footer>
+    <script define:vars={{ newsletter: NEWSLETTER }}>
+      // Footer Norm: cycle through his faces; hovering moves to the next one. Holds still for reduced motion.
+      const norm = document.querySelector('[data-footer-norm]');
+      if (norm) {
+        const imgs = [...norm.querySelectorAll('img')];
+        let i = 0;
+        const next = () => { imgs[i].classList.remove('is-on'); i = (i + 1) % imgs.length; imgs[i].classList.add('is-on'); };
+        norm.addEventListener('mouseenter', next);
+        if (!matchMedia('(prefers-reduced-motion: reduce)').matches) setInterval(next, 3200);
+      }
+      // Newsletter: post to Intelligence Snacks; if that can't be reached from here, send people there.
+      for (const form of document.querySelectorAll('[data-newsletter]')) {
+        const status = form.querySelector('[role=status]');
+        const say = (html) => { status.innerHTML = html; };
+        form.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const email = form.email.value.trim();
+          if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return say('Please enter a valid email address.');
+          const button = form.querySelector('button');
+          button.disabled = true;
+          say('Signing you up…');
+          try {
+            const res = await fetch(newsletter.endpoint, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ email, website: form.website.value, source: newsletter.source }),
+            });
+            if (!res.ok) throw new Error(String(res.status));
+            form.reset();
+            say("Thanks, you're on the list.");
+          } catch {
+            say(`We couldn't sign you up from here. <a href="${newsletter.fallback}">Finish on Intelligence Snacks →</a>`);
+          } finally {
+            button.disabled = false;
+          }
+        });
+      }
+    </script>
     <script>
       // Contents list: mark the section currently in view.
       const links = [...document.querySelectorAll<HTMLAnchorElement>('.toc a')];

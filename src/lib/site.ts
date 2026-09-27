@@ -10,3 +10,14 @@ export const PODCAST = {
     { label: 'Newsletter', url: 'https://intelligencesnacks.com/' },
   ],
 };
+
+/**
+ * The footer's newsletter signup posts to the Intelligence Snacks site, which adds the address to
+ * Beehiiv. That site must allow requests from Normie Mode's domain (CORS); until it does, the form
+ * sends people to intelligencesnacks.com to finish signing up.
+ */
+export const NEWSLETTER = {
+  endpoint: 'https://intelligencesnacks.com/api/subscribe',
+  source: 'normie-mode-footer',
+  fallback: 'https://intelligencesnacks.com/',
+};
