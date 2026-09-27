@@ -188,7 +188,9 @@ The task score (D-023) scores a model with results on at least half of a task's 
 
 ### D-030 — Site chrome: podcast strip and footer (accepted 2026-09-26)
 
-The strip above the header promotes Intelligence Snacks, the product owner's podcast, as a feeder; the preview notice moves to a small corner badge. The footer follows State of AI Design: a black block with a full-width wordmark, link columns (top tasks, the site, data sources), a podcast block and a hairline bottom row. Podcast details live in `src/lib/site.ts`.
+The strip above the header promotes Intelligence Snacks, the product owner's podcast, as a feeder; the preview notice moves to a small corner badge. Revised the same day after Artificial Analysis's footer: a lilac block whose left side steps up (square, not AA's diagonal), a large Norm cycling through his faces, the Intelligence Snacks newsletter signup, link columns, and the "Normie Mode" wordmark full width underneath everything. Podcast and newsletter details live in `src/lib/site.ts`.
+
+The signup posts to `https://intelligencesnacks.com/api/subscribe` (the podcast site's own endpoint, which adds the address to Beehiiv). That endpoint doesn't yet allow requests from other sites (CORS), so until it does, the form tells people it couldn't sign them up and links to intelligencesnacks.com. Beehiiv's embedded forms weren't used: the workspace plan doesn't allow creating forms through the API, and the embed is an iframe that can't match the site's design.
 
 ## Reference sites
 

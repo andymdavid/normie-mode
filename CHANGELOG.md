@@ -7,7 +7,7 @@ This file records meaningful changes to the Normie Mode product, implementation,
 ### Added
 
 - How it works rebuilt: the four steps from test to pick, the evidence sources with dates and licences, a worked example of the coding task score test by test, the pick rules with the live coding verdict, and what the rankings can't tell you. Every number comes from the site's own data.
-- A proper footer (after State of AI Design): full-width wordmark, top tasks, site links, data sources, an Intelligence Snacks block and a bottom row with the data date.
+- A proper footer: a lilac block with a stepped top edge, a large Norm who cycles through his faces, the Intelligence Snacks newsletter signup, links to top tasks, the site, the podcast and data sources, and the "Normie Mode" wordmark full width at the bottom.
 - The strip above the header now promotes the Intelligence Snacks podcast; the preview notice is a small corner badge.
 - Norm's guides approved for coding, writing, studying, CVs and jobs, and business, so they show publicly.
 
