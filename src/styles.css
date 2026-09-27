@@ -178,7 +178,7 @@ a.card:hover { background: #efeee9; }
 /* Chart panel: title over a heavy rule, then rows (State of AI Design style) */
 .chart-card { background: var(--page); }
 .chart-card .chart-title { font-size: 1.35rem; letter-spacing: -0.02em; padding-bottom: 0.7rem; border-bottom: 2px solid var(--rule); margin: 0; }
-.chart-card .chart-tag { margin-left: 0.6rem; vertical-align: 0.2em; }
+.chart-card .chart-tag { margin-right: 0.5rem; vertical-align: 0.05em; }
 .chart-card .chart-sub { color: var(--muted); font-size: 0.8rem; margin: 0.6rem 0 0.2rem; }
 .chart-card .chart-summary { font-size: 0.95rem; color: var(--ink-2); margin: 0.6rem 0 0.4rem; }
 .chart-card .chart-foot { color: var(--faint); font: 0.7rem var(--mono); margin-top: 0.9rem; }

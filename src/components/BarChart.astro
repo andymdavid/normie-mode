@@ -56,8 +56,8 @@ const tie = tieFacts ? renderSlot('chart.tie', tieFacts) : undefined;
 const pct = (v: number) => `${Math.max(0, ((v - floor) / (max - floor || 1)) * 100)}%`;
 ---
 <section class={`chart-card${compact ? ' is-compact' : ''}`} id={id}>
-  <h3 class="chart-title">{title}{ours && <span class="badge ours chart-tag">Tested by us</span>}</h3>
-  <p class="chart-sub">{sub} · {lowerIsBetter ? 'Lower is better' : 'Higher is better'}</p>
+  <h3 class="chart-title">{title}</h3>
+  <p class="chart-sub">{ours && <span class="badge ours chart-tag">Tested by us</span>}{sub} · {lowerIsBetter ? 'Lower is better' : 'Higher is better'}</p>
   <p class="chart-summary">{summary}</p>
   <div class="bars-wrap">
   {sorted.length === 0 ? (

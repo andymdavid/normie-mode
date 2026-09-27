@@ -122,6 +122,15 @@ Revision after product-owner review ("very AI coding" look): structure still fol
 - **Single light look:** both references are light-only, so dark mode was removed to get one deliberate look right. It can be added back later.
 - Bars stay one colour rather than one per maker (a five-maker palette fails the colour-vision checks).
 
+Conventions added 2026-09-26 to 2026-09-27 after product-owner reviews. They live in shared components, so they apply to every page that uses them; new pages should reuse those components rather than restyle:
+
+- **Tags:** mono uppercase on a solid block. Black: "Keep in mind", "Too close to call", "Podcast". Navy: "Tested by us" only. Orange: "The maker says". Lavender: drafts, early results, the preview badge and the "Updated" date. Sage: independently tested. A tag leads the line it belongs to (a chart's grey subtitle, a pick's label line); it never wraps under a title.
+- **Picks** (`Verdict.astro`): three equal blocks with small gaps, best overall marked by colour only. Each block reads label, model, "Get it with *plan, price*" (plan notes in brackets, not bold), and a one-line reason pinned to the bottom ("Top of 8 models for this task"). Label lines share a height so model names align.
+- **Norm** (`NormSays.astro`): at most three appearances on a task page, each with its own job (opener, guide, how-to-read note above the evidence). More space below a bubble than above it, since he introduces what follows. No bubbles inside grid charts; a tie and its price gap go in the chart's summary line.
+- **Charts** (`BarChart.astro`): bars end in positions or plain values; ties at the top are named as ties; tests with fewer than three of our models get no chart.
+- **Task page order:** title and scope line, Norm's opener, picks with the main caveat beneath, Norm's guide, how the models compare, the evidence, if you build with it (D-032).
+- **Phones:** one header row with a menu button; grids use `minmax(min(…, 100%), 1fr)` so nothing is pushed off screen; check at 390px with device emulation, not a narrow headless window (it has a 500px minimum).
+
 ### D-023 — "Best AI for…" jobs as the way into everyday tasks (accepted 2026-09-24, replaces the overview heatmap)
 
 People reach comparisons through everyday jobs (writing code, office work, pulling data out of documents, writing, getting facts right, expert questions, maths, legal, health). Each job page is a stack of charts, one per test that measures the job, plus cost. The only words are a one-line plain description per test (`content/tests/`) and templated summary sentences generated from the data. Jobs live in `content/jobs/`. A job with thin evidence says so (for example "based only on people's votes"). The job list and its test mapping are editorial and open to revision.
