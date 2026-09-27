@@ -179,11 +179,11 @@ const sections = [
       />
       <div class="grid">
         {fresh.map((r) => (
-          <div class="card">
+          <div class="card new-card">
             <div class="eyebrow">{r.maker} · {formatDate(r.model.released_on)}</div>
             <h3><a href={`/models/${r.model.id}`}>{r.model.name}</a></h3>
-            {r.claim && <p class="small"><span class="badge sourced">The maker says</span> “{r.claim.headline}”</p>}
-            <p class="small muted">Independent results so far: <strong>{r.independentTests}</strong>.</p>
+            {r.claim && <p class="new-claim"><span class="badge sourced">The maker says</span><span>“{r.claim.headline}”</span></p>}
+            <p class="small muted new-count">Independent results so far: <strong>{r.independentTests}</strong></p>
           </div>
         ))}
       </div>
@@ -217,6 +217,12 @@ const sections = [
 </Base>
 
 <style>
+  .new-card { display: grid; align-content: start; }
+  .new-card h3 { margin: 0.5rem 0 1rem; }
+  .new-card h3 a { text-decoration: none; }
+  .new-card h3 a:hover { text-decoration: underline; }
+  .new-claim { display: grid; justify-items: start; gap: 0.5rem; font-size: 0.92rem; line-height: 1.45; margin: 0; }
+  .new-count { margin: 1rem 0 0; padding-top: 0.8rem; border-top: 1px solid var(--hair); }
   .updated-tag { margin: 1rem 0 0; }
   /* Same look as the preview badge: lavender, mono, sentence case. */
   .updated-tag span { display: inline-block; font: 0.72rem var(--mono); background: var(--lavender); color: var(--ink); padding: 0.35rem 0.6rem; }
