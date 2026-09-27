@@ -80,6 +80,8 @@ This file records meaningful changes to the Normie Mode product, implementation,
 
 ### Changed
 
+- Task pages lead with context (D-032): Norm's opener, the picks with the page's main caveat beneath them, then Norm's guide, then "How the models compare" and the evidence. Norm's guides are now approved and public on all 15 main task pages.
+- The picks are redesigned: best overall across the full width, the other picks beneath, each saying what to get, where to get it ("Get it with Claude Max, $100 a month") and why ("Top of the 8 models we could score for this task"). Ties list both in rank order, and plan notes are in everyday words.
 - People's votes alone can no longer put a model on a task chart that also has tests of real work (D-029); a new model joins once it has an independent result.
 - Charts label each model by its position ("1st", "10th") instead of task scores, vote ratings or the Epoch index, so a last place no longer reads as a score of 0. The exact figures stay in the tooltip.
 - Tests that only a couple of our models have taken no longer get a chart that names a leader; task pages list them as too few tested to compare.

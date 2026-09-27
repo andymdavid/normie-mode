@@ -176,6 +176,8 @@ Each task page leads with a verdict computed from the same data as its charts, s
 - Picks that collapse into one (e.g. the best model is also on a free plan) are shown once.
 - When the evidence is only general ability or votes, the verdict says so in its label, and a gap task shows no picks.
 
+Amended 2026-09-27: two picks that are too close to call are listed in rank order (cheaper-first read as if ranks were out of order), each with its plan and price. Each pick reads as what to get, where to get it, and why ("Top of the 8 models we could score for this task"); the task score number no longer appears in the picks.
+
 "Can AI do this well yet?" needs an absolute measure (our own tests or direct benchmarks) and is deferred until N-007 results are published.
 
 ### D-028 — Retire the pages left from the spreadsheet-first prototype (accepted 2026-09-26)
@@ -195,6 +197,10 @@ The signup posts to `https://intelligencesnacks.com/api/subscribe` (the podcast 
 ### D-031 — Our own tests are published, scored and tagged "Tested by us" (accepted 2026-09-27)
 
 Our test results are published and feed the task score and verdict like any other test, as direct evidence on the tasks they measure (first: "Answering business questions from a spreadsheet" on the Excel and data analysis pages). They're told apart everywhere by a navy "Tested by us" tag, a colour used for nothing else (orange means "the maker says", lavender means draft or early, sage means independently tested). The verdict stays the only pick: the results page shows how each model did and which task pages the test feeds, not a separate "best overall". In the task score, models with the same number right score the same. This settles D-009's publication and scoring questions; the test protocol (how many runs, which models) is still to be written down.
+
+### D-032 — Task page order: picks, then context, then charts (accepted 2026-09-27)
+
+Product-owner review: newcomers met charts before any context. Task pages now run: title and one plain line; Norm's opener (advice first, then what the evidence is); the picks, with the page's main caveat ("Keep in mind") right beneath them; Norm's guide (good at, trips up, how to get a good result); "How the models compare" (the task score chart, renamed from "The short answer"); the evidence; and "If you build with it". Norm's guides are approved on all 15 main task pages.
 
 ## Reference sites
 
