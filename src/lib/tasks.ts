@@ -6,7 +6,7 @@ import { imported } from './imported';
 import type { Closeness, Intent, ModelVersion, Test } from './schema';
 import { demandByIntent } from './demand';
 import { comparedModels } from './plans';
-import { latestRun } from './normie-tests';
+import { publishedRun, runDates } from './normie-tests';
 import { formatDate } from './view';
 
 /** The models on every chart: current versions plus older ones still used by an app's plan (D-026). */
@@ -41,7 +41,7 @@ export function testRows(test: Test): BarDatum[] {
 
 /** Our own test: share of answers right per model, from the latest run of the suite. */
 function ourTestRows(test: Test): BarDatum[] {
-  const run = latestRun(test.key);
+  const run = publishedRun(test.key);
   return currentModels().map((m) => {
     const base = { id: m.id, label: m.name, maker: makerOf(m), href: `/models/${m.id}` };
     const mine = run?.answers.filter((a) => a.model === m.id) ?? [];
@@ -98,8 +98,8 @@ export function testFloor(test: Test, rows: BarDatum[]): number {
 
 export function testSource(test: Test) {
   if (isOurTest(test)) {
-    const run = latestRun(test.key);
-    return { name: 'Normie Mode, tested by us', url: test.url, note: run ? `run ${formatDate(run.summary.run_id.slice(0, 10))} · see every answer` : undefined };
+    const run = publishedRun(test.key);
+    return { name: 'Normie Mode, tested by us', url: test.url, note: run ? `run ${runDates(run)} · see every answer` : undefined };
   }
   return test.source === 'epoch'
     ? { name: `${test.by} via Epoch AI`, url: test.url, note: 'CC BY 4.0' }

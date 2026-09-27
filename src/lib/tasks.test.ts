@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { graph } from './graph';
 import { imported } from './imported';
-import { latestRun } from './normie-tests';
+import { publishedRun } from './normie-tests';
 import { allTaskPages, effectiveTests, leaders, subtasksOf, taskScores, tasksByDemand } from './tasks';
 
 describe('tasks and tests', () => {
@@ -10,7 +10,7 @@ describe('tasks and tests', () => {
   const categories = new Set(lmarena?.entries.map((e) => e.category));
 
   it.each([...graph().tests.values()].map((t) => [t.id, t] as const))('%s points at real data', (_, t) => {
-    if (t.source === 'normie') expect(latestRun(t.key), `no saved run for ${t.key}`).toBeDefined();
+    if (t.source === 'normie') expect(publishedRun(t.key), `no saved run for ${t.key}`).toBeDefined();
     else expect(t.source === 'epoch' ? benchmarks.has(t.key) : categories.has(t.key)).toBe(true);
   });
 

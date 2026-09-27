@@ -5,15 +5,15 @@ import BarChart from '../../components/BarChart.astro';
 import { graph } from '../../lib/graph';
 import { makerOf, taskPath } from '../../lib/tasks';
 import { tasksUsingTest } from '../../lib/models';
-import { expectedAnswer, formatAnswer, givenAnswer, latestRun, rankRun } from '../../lib/normie-tests';
+import { expectedAnswer, formatAnswer, givenAnswer, publishedRun, rankRun, runDates } from '../../lib/normie-tests';
 import { SUITE_TITLE, toCsv } from '../../../evals/spreadsheet-questions/suite';
 
 export function getStaticPaths() {
-  return [...graph().tests.values()].filter((t) => t.source === 'normie' && latestRun(t.key)).map((t) => ({ params: { suite: t.key } }));
+  return [...graph().tests.values()].filter((t) => t.source === 'normie' && publishedRun(t.key)).map((t) => ({ params: { suite: t.key } }));
 }
 
 const g = graph();
-const run = latestRun(Astro.params.suite!)!;
+const run = publishedRun(Astro.params.suite!)!;
 const { summary, cases, answers } = run;
 const questions = cases[0].questions;
 const model = (id: string) => g.models.get(id)!;
@@ -38,7 +38,7 @@ const misses = answers
 const sheet = cases[0];
 const sheetAnswers = perModel.map((m) => ({ m, a: answers.find((x) => x.model === m.model && x.case === sheet.id)! }));
 const csvLines = toCsv(sheet.orders).split('\n');
-const runDate = new Date(`${summary.run_id.slice(0, 10)}T00:00:00Z`).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' });
+const runDate = runDates(run);
 ---
 <Base title={`Tested by us: ${SUITE_TITLE}`} description={`Our own test of ${perModel.length} AI models answering business questions from a spreadsheet, with every question and answer.`}>
   <div class="eyebrow"><a href="/benchmarks">Tests explained</a> · <span class="badge ours">Tested by us</span></div>

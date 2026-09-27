@@ -24,26 +24,73 @@ export interface RunSummary {
 }
 
 export interface TestRun {
+  /** Combined summary: one entry per model, from that model's most recent run. */
   summary: RunSummary;
   cases: Case[];
   answers: AnswerRecord[];
+  /** Every run folder the combined results draw on, oldest first. */
+  runIds: string[];
 }
 
-const root = (suite: string) => join(process.cwd(), 'evals', suite);
+const EVALS = join(process.cwd(), 'evals');
 
-/** Latest real (non-mock) run of a suite, with its cases and every saved answer. */
-export function latestRun(suite: string): TestRun | undefined {
-  const dir = join(root(suite), 'results');
-  if (!existsSync(dir)) return undefined;
-  const runId = readdirSync(dir).filter((d) => !d.endsWith('-mock') && existsSync(join(dir, d, 'summary.json'))).sort().at(-1);
-  if (!runId) return undefined;
-  const runDir = join(dir, runId);
-  const summary: RunSummary = JSON.parse(readFileSync(join(runDir, 'summary.json'), 'utf8'));
-  const answers: AnswerRecord[] = readdirSync(runDir)
-    .filter((f) => f.endsWith('.json') && f !== 'summary.json')
-    .map((f) => JSON.parse(readFileSync(join(runDir, f), 'utf8')));
-  const cases: Case[] = summary.cases.map((id) => JSON.parse(readFileSync(join(root(suite), 'cases', `${id}.json`), 'utf8')));
-  return { summary, cases, answers };
+interface SavedRun {
+  id: string;
+  summary: RunSummary & { version?: string; mock?: boolean };
+  answers: AnswerRecord[];
+}
+
+function savedRuns(suite: string, base: string): SavedRun[] {
+  const dir = join(base, suite, 'results');
+  if (!existsSync(dir)) return [];
+  return readdirSync(dir)
+    .filter((d) => !d.endsWith('-mock') && existsSync(join(dir, d, 'summary.json')))
+    .sort()
+    .map((id) => {
+      const runDir = join(dir, id);
+      return {
+        id,
+        summary: JSON.parse(readFileSync(join(runDir, 'summary.json'), 'utf8')),
+        answers: readdirSync(runDir)
+          .filter((f) => f.endsWith('.json') && f !== 'summary.json')
+          .map((f) => JSON.parse(readFileSync(join(runDir, f), 'utf8'))),
+      };
+    })
+    .filter((r) => !r.summary.mock);
+}
+
+/**
+ * The published results of a suite: every real run of its latest version, combined, with each
+ * model taken from its most recent run. So a run that only adds models (e.g. two new ones) adds to
+ * the results instead of replacing them, and a model re-run later replaces only its own answers.
+ */
+export function publishedRun(suite: string, base = EVALS): TestRun | undefined {
+  const runs = savedRuns(suite, base);
+  if (!runs.length) return undefined;
+  const version = runs.at(-1)!.summary.version;
+  const current = runs.filter((r) => r.summary.version === version);
+  const byModel = new Map<string, SavedRun>();
+  for (const r of current) for (const m of r.summary.models) byModel.set(m.model, r);
+  const models = [...byModel].map(([model, r]) => r.summary.models.find((m) => m.model === model)!);
+  const used = current.filter((r) => [...byModel.values()].includes(r));
+  const latest = used.at(-1)!;
+  const summary: RunSummary = {
+    ...latest.summary,
+    models,
+    total_cost_usd: Number(models.reduce((sum, m) => sum + m.cost_usd, 0).toFixed(4)),
+  };
+  const answers = [...byModel].flatMap(([model, r]) => r.answers.filter((a) => a.model === model));
+  const cases: Case[] = summary.cases.map((id) => JSON.parse(readFileSync(join(base, suite, 'cases', `${id}.json`), 'utf8')));
+  return { summary, cases, answers, runIds: used.map((r) => r.id) };
+}
+
+/** When the published results were run: "24 Sept 2026", or "24–28 Sept 2026" across several runs. */
+export function runDates(run: TestRun): string {
+  const day = (id: string) => new Date(`${id.slice(0, 10)}T00:00:00Z`);
+  const fmt = (d: Date, o: Intl.DateTimeFormatOptions) => d.toLocaleDateString('en-GB', { ...o, timeZone: 'UTC' });
+  const [a, b] = [day(run.runIds[0]), day(run.runIds.at(-1)!)];
+  if (a.getTime() === b.getTime()) return fmt(a, { day: 'numeric', month: 'short', year: 'numeric' });
+  return `${fmt(a, { day: 'numeric', month: 'short' })} – ${fmt(b, { day: 'numeric', month: 'short', year: 'numeric' })}`;
 }
 
 /** The model's final answer to one question, as it wrote it. */
