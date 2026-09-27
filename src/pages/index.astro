@@ -58,7 +58,8 @@ const sections = [
 ---
 <Base title="Normie Mode">
   <h1>Which AI is best right now?</h1>
-  <p class="lede">Pick your task to see which AI does it best, which app and plan gets you it, and the evidence behind it. Updated {updated}.</p>
+  <p class="lede">Pick your task to see which AI does it best, which app and plan gets you it, and the evidence behind it.</p>
+  <p class="updated-tag"><span>Updated {updated}</span></p>
   <div class="home-search"><Search /></div>
 
   <div class="with-toc">
@@ -216,6 +217,8 @@ const sections = [
 </Base>
 
 <style>
+  .updated-tag { margin: 1rem 0 0; }
+  .updated-tag span { display: inline-block; font: 500 0.7rem var(--mono); text-transform: uppercase; background: var(--band); padding: 0.2rem 0.5rem; }
   .home-search { margin-top: 2rem; max-width: 36rem; }
   .with-toc { margin-top: 3.5rem; }
   .model-summary { margin: 0 0 2rem; padding: 1.2rem 0; border-block: 1px solid var(--hair); }
