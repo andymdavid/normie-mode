@@ -23,18 +23,19 @@ const where = (o: Option) => {
   return o.plan.plan.price_usd === 0 && /free/i.test(name) ? name : `${name}, ${price(o.plan.plan.price_usd)}`;
 };
 const aside = (o: Option) => (o.plan?.entry.where ? ` (${lower(o.plan.entry.where)})` : '');
-const of = (o: Option) => `of the ${o.of} models we could score for this task`;
-const reason = (p: Pick) =>
-  p.options.length > 1
-    ? `${ordinal(p.options[0].position)} and ${ordinal(p.options[1].position)} ${of(p.options[0])}, only a few points apart.`
-    : p.options[0].position === 1 ? `Top ${of(p.options[0])}.` : `${ordinal(p.options[0].position)} ${of(p.options[0])}.`;
+/** "Top of 8 models for this task", "4th of 8…", or "2nd and 3rd of 8…" for a tie. */
+const reason = (p: Pick) => {
+  const [a, b] = p.options;
+  const place = b ? `${ordinal(a.position)} and ${ordinal(b.position)}` : a.position === 1 ? 'Top' : ordinal(a.position);
+  return `${place} of ${a.of} models for this task`;
+};
 ---
 <section class="verdict-block" aria-label="Our picks">
   {[lead, ...rest].length > 0 && (
     <div class="verdict-grid">
       {[lead, ...rest].map((p, i) => (
         <div class={`verdict-pick${i === 0 ? ' is-lead' : ''}`}>
-          <span class="verdict-label">{label(p)}</span>
+          <span class="verdict-label">{label(p)}{p.options.length > 1 && <span class="verdict-tie">Too close to call</span>}</span>
           {p.options.length === 1 ? (
             <>
               <p class="verdict-model"><a href={`/models/${p.options[0].modelId}`}>{p.options[0].name}</a></p>
@@ -42,7 +43,6 @@ const reason = (p: Pick) =>
             </>
           ) : (
             <>
-              <p class="verdict-tie">Too close to call, so either of these:</p>
               <ul class="verdict-options">
                 {p.options.map((o) => (
                   <li>
@@ -88,14 +88,14 @@ const reason = (p: Pick) =>
   .verdict-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(16rem, 100%), 1fr)); gap: 1px; background: var(--hair); }
   .verdict-pick { background: var(--band); padding: 1.4rem 1.5rem 1.3rem; display: flex; flex-direction: column; }
   .verdict-pick.is-lead { background: var(--orange); }
-  .verdict-label { font: 500 0.72rem var(--mono); text-transform: uppercase; margin-bottom: 0.9rem; }
+  .verdict-label { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 0.6rem; font: 500 0.72rem var(--mono); text-transform: uppercase; margin-bottom: 0.9rem; }
   .verdict-model, .verdict-option-name { font-size: 1.55rem; letter-spacing: -0.025em; line-height: 1.1; }
   .verdict-model { margin: 0 0 0.45rem; }
   .verdict-model a, .verdict-option-name { text-decoration: none; }
   .verdict-model a:hover, .verdict-option-name:hover { text-decoration: underline; }
   .verdict-action { font-size: 0.95rem; line-height: 1.4; margin: 0; }
   .verdict-action strong { font-weight: 600; }
-  .verdict-tie { font-size: 0.85rem; margin: 0 0 0.7rem; }
+  .verdict-tie { display: inline-block; font: 500 0.7rem var(--mono); text-transform: uppercase; background: var(--ink); color: #fff; padding: 0.1rem 0.4rem; }
   .verdict-options { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.9rem; }
   .verdict-options li { display: grid; gap: 0.45rem; }
   .verdict-reason { font-size: 0.85rem; color: var(--ink-2); margin: auto 0 0; padding-top: 1.2rem; }
