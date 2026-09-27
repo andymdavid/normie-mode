@@ -178,6 +178,7 @@ a.card:hover { background: #efeee9; }
 /* Chart panel: title over a heavy rule, then rows (State of AI Design style) */
 .chart-card { background: var(--page); }
 .chart-card .chart-title { font-size: 1.35rem; letter-spacing: -0.02em; padding-bottom: 0.7rem; border-bottom: 2px solid var(--rule); margin: 0; }
+.chart-card .chart-tag { margin-left: 0.6rem; vertical-align: 0.2em; }
 .chart-card .chart-sub { color: var(--muted); font-size: 0.8rem; margin: 0.6rem 0 0.2rem; }
 .chart-card .chart-summary { font-size: 0.95rem; color: var(--ink-2); margin: 0.6rem 0 0.4rem; }
 .chart-card .chart-foot { color: var(--faint); font: 0.7rem var(--mono); margin-top: 0.9rem; }
@@ -228,6 +229,8 @@ a.card:hover { background: #efeee9; }
 .badge.editorial, .badge.plain { background: var(--band); color: var(--ink-2); }
 .badge.conf-limited, .badge.draft, .badge.status-early { background: var(--lavender); color: var(--ink); }
 .badge.conf-insufficient { background: var(--bad-soft); color: var(--bad); }
+/* "Tested by us": our own test results. Navy is reserved for this so it never means anything else. */
+.badge.ours { background: var(--navy); color: #fff; }
 
 /* Tables: no box, mono header, hairline rows */
 .table-wrap { overflow-x: auto; border-top: 2px solid var(--rule); }

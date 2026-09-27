@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { graph } from './graph';
 import { imported } from './imported';
+import { latestRun } from './normie-tests';
 import { allTaskPages, effectiveTests, leaders, subtasksOf, taskScores, tasksByDemand } from './tasks';
 
 describe('tasks and tests', () => {
@@ -8,8 +9,15 @@ describe('tasks and tests', () => {
   const benchmarks = new Set(epoch?.benchmarks.map((b) => b.name));
   const categories = new Set(lmarena?.entries.map((e) => e.category));
 
-  it.each([...graph().tests.values()].map((t) => [t.id, t] as const))('%s points at real imported data', (_, t) => {
-    expect(t.source === 'epoch' ? benchmarks.has(t.key) : categories.has(t.key)).toBe(true);
+  it.each([...graph().tests.values()].map((t) => [t.id, t] as const))('%s points at real data', (_, t) => {
+    if (t.source === 'normie') expect(latestRun(t.key), `no saved run for ${t.key}`).toBeDefined();
+    else expect(t.source === 'epoch' ? benchmarks.has(t.key) : categories.has(t.key)).toBe(true);
+  });
+
+  it('scores our own test as direct evidence on the Excel page', () => {
+    const excel = graph().intents.get('excel-spreadsheets')!;
+    expect(taskScores(excel).closeness).toBe('direct');
+    expect(leaders(excel).used.some((t) => t.source === 'normie')).toBe(true);
   });
 
   it.each(tasksByDemand().map(({ task }) => [task.id, task] as const))('%s has a task page with evidence', (_, task) => {

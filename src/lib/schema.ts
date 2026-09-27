@@ -200,13 +200,15 @@ export type MakerClaim = z.infer<typeof makerClaimSchema>;
 /** A test as shown to readers: one plain line, who made it, and where its data comes from (D-021). */
 export const testSchema = z.object({
   id,
-  source: z.enum(['epoch', 'lmarena']),
-  /** Epoch benchmark name, or LMArena category. */
+  /** `normie`: a test we ran ourselves (evals/<key>/), shown with the "Tested by us" tag. */
+  source: z.enum(['epoch', 'lmarena', 'normie']),
+  /** Epoch benchmark name, LMArena category, or our test suite id. */
   key: z.string(),
   title: z.string(),
   what: z.string(),
   by: z.string(),
-  url: z.url(),
+  /** Where the test is described: the owner's page, or our own results page. */
+  url: z.union([z.url(), z.string().startsWith('/')]),
 });
 export type Test = z.infer<typeof testSchema>;
 

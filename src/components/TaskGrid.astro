@@ -1,7 +1,8 @@
 ---
 // Every hub task as a small ranking (its task score for the top three models), with links to its
 // more specific tasks so all task pages are one click from here.
-import { CLOSENESS_LABEL, subtasksOf, taskPath, taskScores, tasksByDemand } from '../lib/tasks';
+import { CLOSENESS_LABEL, effectiveTests, subtasksOf, taskPath, taskScores, tasksByDemand } from '../lib/tasks';
+import { graph } from '../lib/graph';
 import { planLabel } from '../lib/plans';
 import { verdict, type Option, type PickKind } from '../lib/verdict';
 interface Props { limit?: number }
@@ -36,7 +37,7 @@ const short = (label: string) => label.replace(/^Best AI for /, '').replace(/^./
       </ul>
       <p class="task-foot">
         {closeness ? `${CLOSENESS_LABEL[closeness]} · ${testsUsed} test${testsUsed === 1 ? '' : 's'}` : 'Not tested yet'}
-        {task.normie_test && ' · + our own test'}
+        {effectiveTests(task).some((t) => graph().tests.get(t.test)?.source === 'normie') && <span class="badge ours card-ours">Tested by us</span>}
       </p>
     </article>
   ))}
@@ -60,5 +61,6 @@ const short = (label: string) => label.replace(/^Best AI for /, '').replace(/^./
   .specific { list-style: none; margin: 0 0 0.7rem; padding: 0; display: flex; flex-wrap: wrap; gap: 0.35rem; align-content: start; }
   .specific li a { display: inline-block; font-size: 0.78rem; padding: 0.15rem 0.5rem; background: var(--band); text-decoration: none; }
   .specific li a:hover { background: var(--lavender); }
+  .card-ours { margin-left: 0.5rem; }
   .task-foot { margin: 0; font: 0.7rem var(--mono); text-transform: uppercase; color: var(--muted); }
 </style>

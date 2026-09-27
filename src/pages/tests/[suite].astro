@@ -1,15 +1,15 @@
 ---
-// Normie Mode test results page. Built only in preview until a run is signed off.
+// Our own test's results page ("Tested by us"): every question, answer and score, published.
 import Base from '../../layouts/Base.astro';
 import BarChart from '../../components/BarChart.astro';
 import { graph } from '../../lib/graph';
-import { makerOf } from '../../lib/tasks';
+import { makerOf, taskPath } from '../../lib/tasks';
+import { tasksUsingTest } from '../../lib/models';
 import { expectedAnswer, formatAnswer, givenAnswer, latestRun, rankRun } from '../../lib/normie-tests';
-import { PREVIEW } from '../../lib/view';
 import { SUITE_TITLE, toCsv } from '../../../evals/spreadsheet-questions/suite';
 
 export function getStaticPaths() {
-  return PREVIEW && latestRun('spreadsheet-questions') ? [{ params: { suite: 'spreadsheet-questions' } }] : [];
+  return [...graph().tests.values()].filter((t) => t.source === 'normie' && latestRun(t.key)).map((t) => ({ params: { suite: t.key } }));
 }
 
 const g = graph();
@@ -29,7 +29,8 @@ const costRows = perModel.map((m) => ({ ...base(m), value: m.cost_usd, display: 
 const timeRows = perModel.map((m) => ({ ...base(m), value: m.avg_seconds ?? undefined, display: m.avg_seconds ? `${Math.round(m.avg_seconds)}s` : undefined }));
 
 const ranked = rankRun(run);
-const best = ranked[0];
+const test = [...g.tests.values()].find((t) => t.source === 'normie' && t.key === Astro.params.suite)!;
+const usedBy = tasksUsingTest(test.id);
 const perfect = perModel.filter((m) => m.correct === m.total).sort((a, b) => a.cost_usd - b.cost_usd);
 const misses = answers
   .flatMap((a) => questions.filter((q) => !a.score.per_question[q.id]).map((q) => ({ a, q, c: cases.find((c) => c.id === a.case)! })))
@@ -39,47 +40,38 @@ const sheetAnswers = perModel.map((m) => ({ m, a: answers.find((x) => x.model ==
 const csvLines = toCsv(sheet.orders).split('\n');
 const runDate = new Date(`${summary.run_id.slice(0, 10)}T00:00:00Z`).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' });
 ---
-<Base title={`Normie Mode test: ${SUITE_TITLE}`} noindex>
-  <div class="eyebrow">Normie Mode test · <span class="badge draft">Draft, not published</span></div>
+<Base title={`Tested by us: ${SUITE_TITLE}`} description={`Our own test of ${perModel.length} AI models answering business questions from a spreadsheet, with every question and answer.`}>
+  <div class="eyebrow"><a href="/benchmarks">Tests explained</a> · <span class="badge ours">Tested by us</span></div>
   <h1>Can AI answer business questions from a spreadsheet?</h1>
   <p class="lede">We gave {perModel.length} AI models the same sales sheets and asked the questions a manager would ask. Every question has one right answer, so no one had to judge.</p>
 
   <div class="band">
     <div class="band-inner summary-grid">
       <div class="summary"><span class="tag">The short answer</span><p><strong>Yes, mostly.</strong> {perfect.length} of {perModel.length} models got every answer right. The rest made the most dangerous kind of mistake: a confident, plausible wrong number.</p></div>
-      <div class="summary"><span class="tag">Best overall</span><p><strong>{best.name}</strong>: {best.why.toLowerCase()}{perfect.length > 1 && <>, {Math.round(perfect.at(-1)!.cost_usd / perfect[0].cost_usd)}× less than {perfect.at(-1)!.name}</>}.</p></div>
+      <div class="summary"><span class="tag">Every answer right</span><p>{perfect.length ? <>{perfect.map((m, i) => <>{i > 0 && (i === perfect.length - 1 ? ' and ' : ', ')}<strong>{m.name}</strong></>)}.</> : 'No model.'}</p></div>
       <div class="summary"><span class="tag">What to check</span><p>When models got it wrong, they named the right customer or product but gave the <strong>wrong amount</strong>. Always sanity-check the numbers.</p></div>
       <div class="summary"><span class="tag">Test details</span><p>{cases.length} sheets × {questions.length} questions × {perModel.length} models, run {runDate}. Total cost to run: <strong>${summary.total_cost_usd.toFixed(2)}</strong>.</p></div>
     </div>
   </div>
 
-  <section class="best-block" aria-labelledby="best-h">
-    <div class="best-inner">
-      <div class="mono-label" id="best-h">Best overall in this test</div>
-      <p class="best-name"><a href={`/models/${best.model}`}>{best.name}</a></p>
-      <dl class="best-stats">
-        <div><dt>Answers right</dt><dd>{best.correct}/{best.total}</dd></div>
-        <div><dt>Cost, 5 sheets</dt><dd>${best.cost.toFixed(2)}</dd></div>
-        <div><dt>Time per sheet</dt><dd>{Math.round(best.seconds)}s</dd></div>
-      </dl>
-      <p class="best-rule">How we pick: most answers right first. If models tie, the cheaper one ranks higher, then the faster one. Based on this test only.</p>
-    </div>
+  <section class="counts" aria-labelledby="counts-h">
+    <h2 class="page-h2" id="counts-h">Where this test counts</h2>
+    <p class="section-sub">It's one of the tests behind the task score and picks on {usedBy.length === 1 ? 'this page' : 'these pages'}, marked "Tests this task". The picks there combine it with the other evidence.</p>
+    <ul class="counts-list">{usedBy.map(({ task }) => <li><a href={taskPath(task)}>{task.label}</a></li>)}</ul>
   </section>
 
-  <div class="section-head"><h2>Overall ranking</h2></div>
-  <p class="section-sub">Most answers right first, then cheapest, then fastest.</p>
+  <div class="section-head"><h2>How each model did</h2></div>
+  <p class="section-sub">Most answers right first. In the task score, models with the same number right score the same; cost and speed are shown for information.</p>
   <div class="table-wrap">
     <table>
-      <thead><tr><th>#</th><th>Model</th><th>Answers right</th><th>Cost (5 sheets)</th><th>Time per sheet</th><th>Why it's here</th></tr></thead>
+      <thead><tr><th>Model</th><th>Answers right</th><th>Cost (5 sheets)</th><th>Time per sheet</th></tr></thead>
       <tbody>
         {ranked.map((r) => (
           <tr>
-            <td class="num">{r.rank}</td>
             <td><a href={`/models/${r.model}`}><strong>{r.name}</strong></a><div class="small muted">{makerOf(model(r.model))}</div></td>
             <td class="num">{r.correct}/{r.total}</td>
             <td class="num">${r.cost.toFixed(2)}</td>
             <td class="num">{Math.round(r.seconds)}s</td>
-            <td class="small">{r.why}</td>
           </tr>
         ))}
       </tbody>
@@ -175,13 +167,7 @@ const runDate = new Date(`${summary.run_id.slice(0, 10)}T00:00:00Z`).toLocaleDat
 </Base>
 
 <style>
-  .best-block { background: var(--orange); margin-inline: calc(50% - 50vw); padding: 0 calc(50vw - 50%); }
-  .best-inner { max-width: 90rem; margin: 0 auto; padding: 1.5rem 1.25rem 1.75rem; }
-  .best-name { font-size: clamp(3rem, 8vw, 6.5rem); font-weight: 500; letter-spacing: -0.045em; line-height: 0.95; margin: 1.2rem 0 1.5rem; }
-  .best-name a { text-decoration: none; }
-  .best-stats { display: flex; flex-wrap: wrap; gap: 0; margin: 0 0 1.2rem; border-top: 1px solid var(--rule); }
-  .best-stats div { padding: 0.7rem 2.5rem 0 0; }
-  .best-stats dt { font: 500 0.7rem var(--mono); text-transform: uppercase; }
-  .best-stats dd { margin: 0.2rem 0 0; font: 500 1.6rem var(--mono); letter-spacing: -0.03em; }
-  .best-rule { font-size: 0.85rem; margin: 0; max-width: 40rem; }
+  .counts { margin-top: 1rem; }
+  .counts-list { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; }
+  .counts-list a { font-size: 1.05rem; }
 </style>

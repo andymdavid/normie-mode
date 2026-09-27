@@ -4,9 +4,8 @@ import Base from '../../layouts/Base.astro';
 import BarChart from '../../components/BarChart.astro';
 import NormSays from '../../components/NormSays.astro';
 import { graph } from '../../lib/graph';
-import { latestRun, rankRun } from '../../lib/normie-tests';
 import { overviewRows } from '../../lib/overview';
-import { CLOSENESS_LABEL, MIN_MODELS_TO_RANK, allTaskPages, effectiveTests, leadSentence, normLine, subtasksOf, taskPath, taskScores, tasksByDemand, testFloor, testRows, testSource } from '../../lib/tasks';
+import { CLOSENESS_LABEL, MIN_MODELS_TO_RANK, isOurTest, allTaskPages, effectiveTests, leadSentence, normLine, subtasksOf, taskPath, taskScores, tasksByDemand, testFloor, testRows, testSource } from '../../lib/tasks';
 import { PREVIEW, formatDate } from '../../lib/view';
 import { taskCostNote, taskEvidenceNote } from '../../lib/norm';
 import Verdict from '../../components/Verdict.astro';
@@ -29,7 +28,6 @@ const evidence = effectiveTests(task)
 const noResults = effectiveTests(task).filter((t) => !evidence.some((e) => e.test.id === t.test)).map((t) => g.tests.get(t.test)!);
 const tooFew = noResults.map((t) => ({ t, n: testRows(t).filter((r) => r.value !== undefined).length })).filter((x) => x.n > 0);
 const untested = noResults.filter((t) => !tooFew.some((x) => x.t.id === t.id));
-const ownRun = PREVIEW && task.normie_test ? latestRun(task.normie_test) : undefined;
 const norm = task.norm;
 const normOn = !!norm && (norm.status === 'approved' || PREVIEW);
 const costRows = overviewRows().map((r) => ({
@@ -84,13 +82,6 @@ const sections = [['answer', 'The short answer'], ...(normOn ? [['guide', "Norm'
     <nav class="toc" aria-label="On this page"><ol>{sections.map(([id, label]) => <li><a href={`#${id}`}>{label}</a></li>)}</ol></nav>
     <div>
       <div class="section-head" id="answer" style="margin-top:0"><h2>The short answer</h2></div>
-      {ownRun && (
-        <a class="card own-test" href={`/tests/${task.normie_test}`}>
-          <div class="mono-label">Normie Mode test · Draft</div>
-          <h3>We tested this ourselves</h3>
-          <p class="small">Best overall: <strong>{rankRun(ownRun)[0].name}</strong> ({rankRun(ownRun)[0].why.toLowerCase()}). See every question and answer →</p>
-        </a>
-      )}
       <BarChart
         title={`Task score: ${name}`}
         sub={`Position on a combined score from ${scores.testsUsed} test${scores.testsUsed === 1 ? '' : 's'}. The longer the bar, the further ahead`}
@@ -123,6 +114,7 @@ const sections = [['answer', 'The short answer'], ...(normOn ? [['guide', "Norm'
             summary={leadSentence(e.rows)}
             source={testSource(e.test)}
             showEmpty={false}
+            ours={isOurTest(e.test)}
           />
         ))}
       </div>
@@ -164,9 +156,6 @@ const sections = [['answer', 'The short answer'], ...(normOn ? [['guide', "Norm'
 </Base>
 
 <style>
-  .own-test { margin-bottom: 1.5rem; background: var(--lavender); }
-  .own-test:hover { background: var(--viz-soft); }
-  .own-test h3 { margin: 0.5rem 0 0.3rem; }
   .guide { display: grid; gap: 2rem; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); }
   .guide h3 { font-size: 1.1rem; padding-bottom: 0.6rem; border-bottom: 2px solid var(--rule); margin-bottom: 0.4rem; }
   .guide ul { list-style: none; margin: 0; padding: 0; }

@@ -116,7 +116,7 @@ const money = (v?: number) => (v === undefined ? undefined : v < 10 ? `$${v.toFi
             <tbody>
               {tests.map((t) => (
                 <tr>
-                  <td><a href={`/benchmarks/${t.test.id}`}>{t.test.title}</a><div class="small muted">{t.test.by}</div></td>
+                  <td><a href={t.test.source === 'normie' ? t.test.url : `/benchmarks/${t.test.id}`}>{t.test.title}</a>{t.test.source === 'normie' && <span class="badge ours" style="margin-left:0.5rem">Tested by us</span>}<div class="small muted">{t.test.by}</div></td>
                   <td class="num">{t.display}</td>
                   <td class="num">{ordinal(t.pos.position)} of {t.pos.of}</td>
                 </tr>

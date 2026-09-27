@@ -1,5 +1,5 @@
-// Reads Normie Mode test runs (evals/<suite>/results/<run>/) for the site. Draft-only until
-// the product owner signs a run off (AGENTS.md: results need review before publication).
+// Reads our own test runs (evals/<suite>/results/<run>/) for the site. Published and scored as
+// "Tested by us" evidence since the product owner signed off the first run (2026-09-27).
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { parseAnswers, type Case, type Question } from '../../evals/spreadsheet-questions/suite';

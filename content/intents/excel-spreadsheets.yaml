@@ -24,6 +24,8 @@ match:
   - analysing data
 covers: Asking questions about your data, cleaning up sheets, formulas and summaries.
 tests:
+  - test: spreadsheet-questions
+    closeness: direct
   - test: dtbench
     closeness: related
   - test: apex-agents

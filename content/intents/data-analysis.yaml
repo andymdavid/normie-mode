@@ -6,6 +6,15 @@ parent: excel-spreadsheets
 coverage: partial
 covers: Finding patterns, trends and answers in your data.
 normie_test: spreadsheet-questions
+tests:
+  - test: spreadsheet-questions
+    closeness: direct
+  - test: dtbench
+    closeness: related
+  - test: apex-agents
+    closeness: related
+  - test: arena-business
+    closeness: general
 norm:
   status: draft
   intro: AI can answer questions about your data. The risk is a confident answer built on the wrong rows, so ask it to show its working.

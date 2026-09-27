@@ -7,7 +7,7 @@ import { rankedTestRows, tasksUsingTest } from '../../lib/models';
 import { CLOSENESS_LABEL, leadSentence, taskPath, testFloor, testRows, testSource } from '../../lib/tasks';
 
 export function getStaticPaths() {
-  return [...graph().tests.keys()].filter((id) => tasksUsingTest(id).length && rankedTestRows(graph().tests.get(id)!).length).map((id) => ({ params: { id } }));
+  return [...graph().tests.keys()].filter((id) => graph().tests.get(id)!.source !== 'normie' && tasksUsingTest(id).length && rankedTestRows(graph().tests.get(id)!).length).map((id) => ({ params: { id } }));
 }
 const test = graph().tests.get(Astro.params.id!)!;
 const rows = testRows(test);

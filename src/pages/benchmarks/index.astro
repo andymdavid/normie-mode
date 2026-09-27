@@ -9,6 +9,7 @@ const tests = [...graph().tests.values()]
   .filter((t) => t.tasks > 0 && t.results > 0)
   .sort((a, b) => b.tasks - a.tasks || a.test.title.localeCompare(b.test.title));
 const groups = [
+  { id: 'ours', title: 'Tested by us', sub: "Tests we design and run ourselves, with every question and every model's answer published.", items: tests.filter((t) => t.test.source === 'normie') },
   { id: 'work', title: 'Tests of real work', sub: 'Set tasks with right and wrong answers, run by independent testers.', items: tests.filter((t) => t.test.source === 'epoch') },
   { id: 'votes', title: "People's votes", sub: 'People ask a question, see two anonymous answers and pick the better one. It shows which answers people prefer, not whether they were right.', items: tests.filter((t) => t.test.source === 'lmarena') },
 ];
@@ -18,13 +19,14 @@ const groups = [
   <h1>The tests behind our rankings</h1>
   <p class="lede">What each test checks, in one sentence, and which tasks it helps us rank.</p>
 
-  {groups.map((g) => (
+  {groups.filter((g) => g.items.length).map((g) => (
     <section>
       <h2 class="page-h2">{g.title}</h2>
       <p class="section-sub">{g.sub}</p>
       <div class="grid">
         {g.items.map(({ test, results, tasks }) => (
-          <a class="card" href={`/benchmarks/${test.id}`}>
+          <a class="card" href={test.source === 'normie' ? test.url : `/benchmarks/${test.id}`}>
+            {test.source === 'normie' && <span class="badge ours">Tested by us</span>}
             <h3>{test.title}</h3>
             <p class="small" style="margin-top:0.6rem">{test.what}</p>
             <p class="mono-label muted" style="margin:0">{test.by} · {results} model{results === 1 ? '' : 's'} · {tasks} task{tasks === 1 ? '' : 's'}</p>
@@ -37,4 +39,5 @@ const groups = [
 
 <style>
   .card h3 { font-size: 1.15rem; }
+  .card .badge.ours { margin-bottom: 0.7rem; }
 </style>

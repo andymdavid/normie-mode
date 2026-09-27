@@ -35,7 +35,9 @@ const pct = (v?: number) => (v === undefined ? '–' : (v * 100).toFixed(0));
 const tieTest = tests.find((t) => topTwoTied(testRows(t)));
 const tieRows = tieTest ? rankedTestRows(tieTest).slice(0, 4) : [];
 
+const ourTests = tests.filter((t) => t.source === 'normie');
 const sources = [
+  { name: 'Tested by us', ours: true, gives: "Our own tests of everyday work, with every question and every model's answer published", count: `${ourTests.length} test${ourTests.length === 1 ? '' : 's'}`, licence: 'Ours', url: ourTests[0]?.url, date: undefined },
   { name: 'Epoch AI', gives: 'Results from independent tests of real work, like fixing code or answering expert questions', count: `${tests.filter((t) => t.source === 'epoch').length} tests`, licence: epoch?.meta.licence, url: epoch?.meta.url, date: epoch?.meta.retrieved_at },
   { name: 'LMArena', gives: 'People comparing two anonymous answers and picking the better one', count: `${tests.filter((t) => t.source === 'lmarena').length} vote categories`, licence: lmarena?.meta.licence, url: lmarena?.meta.url, date: lmarena?.meta.as_of },
   { name: 'models.dev', gives: 'Prices, release dates and how much each model can read', count: `${models.length} models`, licence: modelsdev?.meta.licence, url: modelsdev?.meta.url, date: modelsdev?.meta.retrieved_at },
@@ -107,16 +109,16 @@ const sections = [
       </ol>
 
       <div class="section-head" id="sources"><h2>Where the evidence comes from</h2></div>
-      <p class="section-sub">Free, public sources whose licences let us show their data. Every chart names its source underneath.</p>
+      <p class="section-sub">Our own tests, plus free, public sources whose licences let us show their data. Every chart names its source underneath, and our own results carry the navy <span class="badge ours">Tested by us</span> tag.</p>
       <div class="source-grid">
         {sources.map((src) => (
           <div class="source">
-            <h3>{src.url ? <a href={src.url}>{src.name}</a> : src.name}</h3>
+            <h3>{src.url ? <a href={src.url}>{src.name}</a> : src.name}{'ours' in src && <span class="badge ours" style="margin-left:0.5rem;vertical-align:0.2em">Ours</span>}</h3>
             <p>{src.gives}</p>
             <dl>
               <dt>We use</dt><dd>{src.count}</dd>
               <dt>Licence</dt><dd>{src.licence}</dd>
-              <dt>As of</dt><dd>{formatDate(src.date?.slice(0, 10))}</dd>
+              {src.date && <><dt>As of</dt><dd>{formatDate(src.date.slice(0, 10))}</dd></>}
             </dl>
           </div>
         ))}
@@ -255,7 +257,7 @@ const sections = [
   .flow h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
   .flow p { font-size: 0.9rem; margin: 0; }
   .flow .flow-example { margin-top: 1rem; padding-top: 0.7rem; border-top: 1px solid rgba(0, 0, 0, 0.15); font: 0.78rem var(--mono); }
-  .source-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(15rem, 100%), 1fr)); gap: 1.5rem; }
+  .source-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(13rem, 100%), 1fr)); gap: 1.5rem; }
   .source h3 { font-size: 1.15rem; padding-bottom: 0.6rem; border-bottom: 2px solid var(--rule); margin-bottom: 0.7rem; }
   .source h3 a { text-decoration: none; }
   .source p { font-size: 0.9rem; color: var(--ink-2); min-height: 3.6em; }
