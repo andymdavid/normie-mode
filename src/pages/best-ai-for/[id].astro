@@ -35,6 +35,7 @@ const costRows = overviewRows().map((r) => ({
   value: r.costPer1000, display: r.costPer1000 === undefined ? undefined : `$${r.costPer1000 < 10 ? r.costPer1000.toFixed(2) : r.costPer1000.toFixed(0)}`,
 }));
 const v = verdict(task);
+const priceOf = (id: string) => overviewRows().find((r) => r.model.id === id)?.costPer1000;
 const evidenceNote = taskEvidenceNote(task);
 const costNote = taskCostNote(task);
 const others = tasksByDemand().filter((t) => t.task.id !== (hub?.id ?? task.id)).slice(0, 3);
@@ -105,7 +106,7 @@ const sections = [...(normOn ? [['guide', "Norm's guide"]] : []), ['compare', 'H
 
 
       <div class="section-head" id="evidence"><h2>The evidence</h2></div>
-      <p class="section-sub">Each test on its own, labelled by how closely it matches this task.</p>
+      <NormSays {...normLine('evidence', 'task-page')} />
       <div class="grid-2">
         {evidence.map((e) => (
           <BarChart
@@ -113,10 +114,11 @@ const sections = [...(normOn ? [['guide', "Norm's guide"]] : []), ['compare', 'H
             sub={`${CLOSENESS_LABEL[e.closeness]} · ${e.test.what}`}
             rows={e.rows}
             floor={testFloor(e.test, e.rows)}
-            summary={leadSentence(e.rows)}
+            summary={leadSentence(e.rows, false, 'leads', priceOf)}
             source={testSource(e.test)}
             showEmpty={false}
             ours={isOurTest(e.test)}
+            tieNote={false}
           />
         ))}
       </div>

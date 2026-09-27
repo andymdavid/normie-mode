@@ -1,0 +1,5 @@
+id: task-page
+# Approved by the product owner on 2026-09-27.
+status: approved
+lines:
+  evidence: Each chart is one test, labelled by how close it is to this task. Longer bar, better result. Where you see a thin line, that's the likely range; if two lines overlap, treat those models as level.

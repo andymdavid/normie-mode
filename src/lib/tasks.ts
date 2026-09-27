@@ -117,7 +117,11 @@ export function topTwoTied(rows: BarDatum[], lowerIsBetter = false): [BarDatum, 
   return a.low <= b.high ? [a, b] : undefined;
 }
 
-export function leadSentence(rows: BarDatum[], lowerIsBetter = false, verb = 'leads'): string | undefined {
+/**
+ * The chart's one-line summary. With `priceOf`, a tie at the top also says how much more the
+ * dearer model costs when the gap is big enough to matter (1.5 times or more).
+ */
+export function leadSentence(rows: BarDatum[], lowerIsBetter = false, verb = 'leads', priceOf?: (id: string) => number | undefined): string | undefined {
   const sorted = rows.filter((r) => r.value !== undefined).sort((a, b) => (lowerIsBetter ? a.value! - b.value! : b.value! - a.value!));
   if (sorted.length < MIN_MODELS_TO_RANK) return undefined;
   // Exactly level at the top (e.g. several models got every answer right): name them all.
@@ -129,7 +133,12 @@ export function leadSentence(rows: BarDatum[], lowerIsBetter = false, verb = 'le
   }
   if (topTwoTied(rows, lowerIsBetter)) {
     const next = sorted.slice(2, 4).map((r) => r.label);
-    return `${sorted[0].label} and ${sorted[1].label} are neck and neck at the top${next.length ? `, followed by ${next.join(' and ')}` : ''}.`;
+    const [p1, p2] = [priceOf?.(sorted[0].id), priceOf?.(sorted[1].id)];
+    const price =
+      p1 !== undefined && p2 !== undefined && Math.max(p1, p2) / Math.min(p1, p2) >= 1.5
+        ? `; ${p1 > p2 ? sorted[0].label : sorted[1].label} costs about ${Math.round(Math.max(p1, p2) / Math.min(p1, p2))} times as much`
+        : '';
+    return `${sorted[0].label} and ${sorted[1].label} are neck and neck at the top${next.length ? `, followed by ${next.join(' and ')}` : ''}${price}.`;
   }
   const [a, ...rest] = sorted;
   const next = rest.slice(0, 2).map((r) => r.label);
@@ -255,9 +264,10 @@ const LINE_MOODS: Record<string, 'default' | 'happy' | 'smug' | 'wise'> = {
   votes: 'wise',
   cost: 'default',
   normie_test: 'happy',
+  evidence: 'wise',
 };
 
-export function normLine(key: string): { text?: string; status: 'draft' | 'approved'; mood?: 'default' | 'happy' | 'smug' | 'wise' } {
-  const set = graph().norm.get('charts');
+export function normLine(key: string, setId = 'charts'): { text?: string; status: 'draft' | 'approved'; mood?: 'default' | 'happy' | 'smug' | 'wise' } {
+  const set = graph().norm.get(setId);
   return { text: set?.lines[key], status: set?.status ?? 'draft', mood: LINE_MOODS[key] };
 }

@@ -80,6 +80,7 @@ This file records meaningful changes to the Normie Mode product, implementation,
 
 ### Changed
 
+- Norm explains how to read the evidence once, at the top of each task page's evidence section, instead of commenting inside only the charts that had a tie. Those charts' summary lines now say when the leaders are neck and neck and how much more the dearer one costs.
 - Task pages lead with context (D-032): Norm's opener, the picks with the page's main caveat beneath them, then Norm's guide, then "How the models compare" and the evidence. Norm's guides are now approved and public on all 15 main task pages.
 - The picks are redesigned: three blocks with one type hierarchy (label, model, where to get it, why), best overall marked only by colour. Each says what to get, where to get it ("Get it with Claude Max, $100 a month") and why ("Top of the 8 models we could score for this task"). Ties list both in rank order at the same size, and plan notes are in everyday words.
 - People's votes alone can no longer put a model on a task chart that also has tests of real work (D-029); a new model joins once it has an independent result.
