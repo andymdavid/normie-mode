@@ -18,7 +18,7 @@ tests:
   - test: arena-non-english
     closeness: direct
 norm:
-  status: draft
+  status: approved
   intro: AI is a handy translator for everyday text. For anything important, ask a native speaker to check it.
   good_at:
     - Everyday translation of emails and documents.

@@ -42,7 +42,7 @@ const month = formatDate(new Date().toISOString().slice(0, 10)).replace(/^\d+ /,
 const leaderLine = top.length
   ? `On the tests we have, ${top[0].label} comes out on top${top[1] ? `, followed by ${top.slice(1).map((r) => r.label).join(' and ')}` : ''}.`
   : undefined;
-const sections = [['answer', 'The short answer'], ...(normOn ? [['guide', "Norm's guide"]] : []), ['evidence', 'The evidence'], ['cost', 'If you build with it']];
+const sections = [...(normOn ? [['guide', "Norm's guide"]] : []), ['compare', 'How the models compare'], ['evidence', 'The evidence'], ['cost', 'If you build with it']];
 ---
 <Base
   title={`${task.label} (${month})`}
@@ -56,14 +56,14 @@ const sections = [['answer', 'The short answer'], ...(normOn ? [['guide', "Norm'
   ) : (
     <NormSays text={evidenceNote} fromData />
   )}
-  {v && <Verdict v={v} />}
+  {v && <Verdict v={v} note={task.note} />}
 
-  <div class="band">
+  {!v && <div class="band">
     <div class="band-inner summary-grid">
-      {!v && <div class="summary">
+      <div class="summary">
         <span class="tag">Top of the tests</span>
         <p>{top.length ? top.map((r, i) => (<>{i > 0 && (i === top.length - 1 ? ' and ' : ', ')}<strong>{r.label}</strong></>)) : 'Not enough results yet.'}</p>
-      </div>}
+      </div>
       <div class="summary">
         <span class="tag">How close the evidence is</span>
         <p>{scores.closeness ? <><strong>{CLOSENESS_LABEL[scores.closeness]}.</strong> {scores.testsUsed} test{scores.testsUsed === 1 ? '' : 's'} with results.</> : 'Nothing measures this yet.'}</p>
@@ -76,23 +76,14 @@ const sections = [['answer', 'The short answer'], ...(normOn ? [['guide', "Norm'
       )}
       {task.note && <div class="summary"><span class="tag">Keep in mind</span><p>{task.note}</p></div>}
     </div>
-  </div>
+  </div>}
 
   <div class="with-toc">
     <nav class="toc" aria-label="On this page"><ol>{sections.map(([id, label]) => <li><a href={`#${id}`}>{label}</a></li>)}</ol></nav>
     <div>
-      <div class="section-head" id="answer" style="margin-top:0"><h2>The short answer</h2></div>
-      <BarChart
-        title={`Task score: ${name}`}
-        sub={`Position on a combined score from ${scores.testsUsed} test${scores.testsUsed === 1 ? '' : 's'}. The longer the bar, the further ahead`}
-        rows={scores.rows}
-        summary={leaderLine}
-        showEmpty={false}
-      />
-
       {normOn && (
         <>
-          <div class="section-head" id="guide"><h2>Norm's guide</h2></div>
+          <div class="section-head" id="guide" style="margin-top:0"><h2>Norm's guide</h2></div>
           <p class="section-sub">What I'd tell a friend who asked.{norm!.status === 'draft' && <span class="badge draft" style="margin-left:0.5rem">Draft</span>}</p>
           <div class="guide">
             <section><h3>What AI is good at</h3><ul>{norm!.good_at.map((x) => <li>{x}</li>)}</ul></section>
@@ -101,6 +92,17 @@ const sections = [['answer', 'The short answer'], ...(normOn ? [['guide', "Norm'
           </div>
         </>
       )}
+
+      <div class="section-head" id="compare" style={normOn ? undefined : 'margin-top:0'}><h2>How the models compare</h2></div>
+      <p class="section-sub">Every model we could score for {name}, combining the tests below.</p>
+      <BarChart
+        title={`Overall for ${name}`}
+        sub={`Position on a combined score from ${scores.testsUsed} test${scores.testsUsed === 1 ? '' : 's'}. The longer the bar, the further ahead`}
+        rows={scores.rows}
+        summary={leaderLine}
+        showEmpty={false}
+      />
+
 
       <div class="section-head" id="evidence"><h2>The evidence</h2></div>
       <p class="section-sub">Each test on its own, labelled by how closely it matches this task.</p>
@@ -156,6 +158,7 @@ const sections = [['answer', 'The short answer'], ...(normOn ? [['guide', "Norm'
 </Base>
 
 <style>
+  .with-toc { margin-top: 4rem; }
   .guide { display: grid; gap: 2rem; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); }
   .guide h3 { font-size: 1.1rem; padding-bottom: 0.6rem; border-bottom: 2px solid var(--rule); margin-bottom: 0.4rem; }
   .guide ul { list-style: none; margin: 0; padding: 0; }

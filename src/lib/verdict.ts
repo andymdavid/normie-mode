@@ -30,7 +30,7 @@ export interface Option {
 
 export interface Pick {
   kinds: PickKind[];
-  /** One option, or two when they're too close to call (cheaper plan first). */
+  /** One option, or two in rank order when they're too close to call. */
   options: Option[];
 }
 
@@ -83,7 +83,7 @@ export function verdict(task: Intent): Verdict | undefined {
     const first = option(idx[0], maxPrice);
     const second = idx[1] !== undefined ? option(idx[1], maxPrice) : undefined;
     if (!second || first.score - second.score >= TOO_CLOSE_POINTS) return [first];
-    return [first, second].sort((a, b) => (a.plan?.plan.price_usd ?? Infinity) - (b.plan?.plan.price_usd ?? Infinity));
+    return [first, second];
   };
 
   const picks: Pick[] = [];

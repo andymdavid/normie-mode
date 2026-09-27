@@ -18,13 +18,13 @@ plans:
     price_usd: 0
     models:
       - { model: gemini-3-6-flash, access: included, default: true, basis: maker }
-      - { model: gemini-3-1-pro, access: limited, where: "Varying access", basis: maker }
+      - { model: gemini-3-1-pro, access: limited, where: "Limited use", basis: maker }
   - id: ai-plus
     name: Google AI Plus
     price_usd: 4.99
     models:
       - { model: gemini-3-6-flash, access: included, default: true, basis: maker }
-      - { model: gemini-3-1-pro, access: limited, where: "Twice the free limits", basis: maker }
+      - { model: gemini-3-1-pro, access: limited, where: "Twice the free plan's use", basis: maker }
   - id: ai-pro
     name: Google AI Pro
     price_usd: 19.99

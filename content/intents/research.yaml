@@ -27,7 +27,7 @@ tests:
   - test: arena-expert
     closeness: related
 norm:
-  status: draft
+  status: approved
   intro: AI can save you hours of reading, but research is where getting facts right matters most. Always check the sources yourself.
   good_at:
     - Summarising long articles and reports.

@@ -22,7 +22,7 @@ tests:
   - test: apex-agents
     closeness: related
 norm:
-  status: draft
+  status: approved
   intro: AI is good at the thinking and writing behind a presentation. The design side depends more on the app you use.
   good_at:
     - Turning your notes into a clear outline.

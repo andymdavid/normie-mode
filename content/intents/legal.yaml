@@ -21,7 +21,7 @@ tests:
   - test: apex-agents
     closeness: related
 norm:
-  status: draft
+  status: approved
   intro: AI is handy for understanding legal wording, but it can't give you legal advice. Have anything important checked by a qualified person.
   good_at:
     - Explaining what a contract clause means in plain English.

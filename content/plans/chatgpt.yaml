@@ -24,24 +24,24 @@ plans:
     price_usd: 0
     models:
       - { model: gpt-5-6-luna, access: included, default: true, basis: press }
-      - { model: gpt-6-luna, access: limited, where: "Desktop app only, rolling out", basis: press }
+      - { model: gpt-6-luna, access: limited, where: "Desktop app only, still rolling out", basis: press }
   - id: go
     name: Go
     price_usd: 8
     models:
       - { model: gpt-5-6-luna, access: included, default: true, basis: press }
-      - { model: gpt-6-luna, access: limited, where: "Desktop app only, rolling out", basis: press }
+      - { model: gpt-6-luna, access: limited, where: "Desktop app only, still rolling out", basis: press }
   - id: plus
     name: Plus
     price_usd: 20
     models:
       - { model: gpt-5-6-sol, access: included, default: true, basis: press }
-      - { model: gpt-6-astra, access: included, where: "ChatGPT Work and Codex, not ordinary chat", basis: press }
-      - { model: gpt-6-sol, access: included, where: "ChatGPT Work and Codex, not ordinary chat", basis: press }
+      - { model: gpt-6-astra, access: included, where: "Only in ChatGPT's Work mode and Codex, not normal chat", basis: press }
+      - { model: gpt-6-sol, access: included, where: "Only in ChatGPT's Work mode and Codex, not normal chat", basis: press }
   - id: pro
     name: Pro
     price_usd: 100
     price_note: From $100 a month; a $200 tier has higher limits
     models:
-      - { model: gpt-6-astra, access: included, default: true, where: "Shown as GPT-6 Pro in chat", basis: press }
-      - { model: gpt-6-sol, access: included, where: "ChatGPT Work and Codex", basis: press }
+      - { model: gpt-6-astra, access: included, default: true, where: "Called GPT-6 Pro in the app", basis: press }
+      - { model: gpt-6-sol, access: included, where: "Only in ChatGPT's Work mode and Codex", basis: press }

@@ -1,42 +1,65 @@
 ---
-// The verdict at the top of a task page (D-027). Every value comes from `verdict()`; no prose here
-// says anything the data doesn't.
-import { formatPrice, planLabel } from '../lib/plans';
+// The picks at the top of a task page (D-027). Every value comes from `verdict()`; the words only
+// say what to get, where to get it and why, in that order.
+import { planLabel } from '../lib/plans';
 import { ordinal } from '../lib/models';
-import { PICK_LABEL, modelMaker, type Option, type Verdict } from '../lib/verdict';
+import { PICK_LABEL, type Option, type Pick, type Verdict } from '../lib/verdict';
 
 interface Props {
   v: Verdict;
+  /** A caveat that belongs next to the picks, e.g. what the tests don't cover. */
+  note?: string;
 }
-const { v } = Astro.props;
-const label = (kinds: string[]) =>
-  kinds.map((k, i) => (i === 0 ? PICK_LABEL[k as keyof typeof PICK_LABEL] : PICK_LABEL[k as keyof typeof PICK_LABEL].replace(/^Best/, 'best'))).join(', and ');
-const where = (o: Option) =>
-  o.plan ? `${planLabel(o.plan.app, o.plan.plan)} · ${formatPrice(o.plan.plan.price_usd)}` : 'Not in any app we cover; developers can use it directly';
-const tieLine = ([a, b]: Option[]) =>
-  a.plan && b.plan && a.plan.plan === b.plan.plan
-    ? `Too close to call. Both come with ${planLabel(a.plan.app, a.plan.plan)}:`
-    : a.plan?.plan.price_usd === b.plan?.plan.price_usd ? 'Too close to call:' : 'Too close to call. Cheaper first:';
-const drafts = v.plans.some((p) => p.app.status === 'draft');
+const { v, note } = Astro.props;
+const [lead, ...rest] = v.picks;
+const label = (p: Pick) => p.kinds.map((k, i) => (i === 0 ? PICK_LABEL[k] : PICK_LABEL[k].replace(/^Best/, 'best'))).join(', and ');
+const price = (usd: number) => (usd === 0 ? 'free' : `$${Number.isInteger(usd) ? usd : usd.toFixed(2)} a month`);
+const lower = (s: string) => s.charAt(0).toLowerCase() + s.slice(1);
+/** "Claude Max, $100 a month"; the plan's note, if any, goes after it in brackets, not bold. */
+const where = (o: Option) => {
+  if (!o.plan) return undefined;
+  const name = planLabel(o.plan.app, o.plan.plan);
+  // "Claude Free", not "Claude Free, free".
+  return o.plan.plan.price_usd === 0 && /free/i.test(name) ? name : `${name}, ${price(o.plan.plan.price_usd)}`;
+};
+const aside = (o: Option) => (o.plan?.entry.where ? ` (${lower(o.plan.entry.where)})` : '');
+const of = (o: Option) => `of the ${o.of} models we could score for this task`;
+const reason = (p: Pick) =>
+  p.options.length > 1
+    ? `${ordinal(p.options[0].position)} and ${ordinal(p.options[1].position)} ${of(p.options[0])}, only a few points apart.`
+    : p.options[0].position === 1 ? `Top ${of(p.options[0])}.` : `${ordinal(p.options[0].position)} ${of(p.options[0])}.`;
 ---
-<section class="verdict-block" aria-label="Our verdict">
-  <div class="verdict-picks">
-    {v.picks.map((p, i) => (
-      <div class={`verdict-pick${i === 0 ? ' is-lead' : ''}`}>
-        <span class="tag">{label(p.kinds)}</span>
-        {p.options.length > 1 && <p class="verdict-tie">{tieLine(p.options)}</p>}
-        {p.options.map((o) => (
-          <div class="verdict-option">
-            <p class="verdict-model"><a href={`/models/${o.modelId}`}>{o.name}</a> <span class="maker">{modelMaker(o.modelId)}</span></p>
-            <p class="verdict-plan">{where(o)}</p>
-            {o.plan?.entry.where && <p class="verdict-note">{o.plan.entry.where}</p>}
-            <p class="verdict-score">{ordinal(o.position)} of {o.of} · task score {o.score.toFixed(0)}</p>
-          </div>
-        ))}
-      </div>
-    ))}
-  </div>
-  <p class="verdict-basis">{v.basis}. Picks follow <a href="/methodology#verdict">a fixed rule</a> from the task score and each app's plans.{drafts && <span class="badge draft" style="margin-left:0.5rem">Plans draft</span>}</p>
+<section class="verdict-block" aria-label="Our picks">
+  {[lead, ...rest].length > 0 && (
+    <div class="verdict-grid">
+      {[lead, ...rest].map((p, i) => (
+        <div class={`verdict-pick${i === 0 ? ' is-lead' : ''}`}>
+          <span class="verdict-label">{label(p)}</span>
+          {p.options.length === 1 ? (
+            <>
+              <p class="verdict-model"><a href={`/models/${p.options[0].modelId}`}>{p.options[0].name}</a></p>
+              <p class="verdict-action">{where(p.options[0]) ? <>Get it with <strong>{where(p.options[0])}</strong>{aside(p.options[0])}</> : 'Not in any app we cover yet; developers can use it directly.'}</p>
+            </>
+          ) : (
+            <>
+              <p class="verdict-tie">Too close to call, so either:</p>
+              <ul class="verdict-options">
+                {p.options.map((o) => (
+                  <li>
+                    <a class="verdict-option-name" href={`/models/${o.modelId}`}>{o.name}</a>
+                    <span class="verdict-action">{where(o) ? <>with <strong>{where(o)}</strong>{aside(o)}</> : 'not in any app we cover yet'}</span>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
+          <p class="verdict-reason">{reason(p)}</p>
+        </div>
+      ))}
+    </div>
+  )}
+  {note && <p class="verdict-note"><span class="verdict-note-label">Keep in mind</span> {note}</p>}
+  <p class="verdict-basis">{v.basis}. The picks follow <a href="/methodology#verdict">a fixed rule</a> using the charts below and each app's plans.</p>
 
   <details class="verdict-paying">
     <summary>Already paying for one? See what each plan gives you here</summary>
@@ -47,7 +70,7 @@ const drafts = v.plans.some((p) => p.app.status === 'draft');
           {v.plans.map(({ app, plan, best, unscoredDefault }) => (
             <tr>
               <td><strong>{planLabel(app, plan)}</strong></td>
-              <td class="num">{formatPrice(plan.price_usd)}</td>
+              <td class="num">{price(plan.price_usd)}</td>
               <td>{best ? <><a href={`/models/${best.modelId}`}>{best.name}</a>{best.plan?.entry.where && <div class="small muted">{best.plan.entry.where}</div>}</> : <span class="muted">No score yet</span>}{unscoredDefault && <div class="small muted">Its main model, {unscoredDefault}, is too new to score yet.</div>}</td>
               <td class="num">{best ? `${ordinal(best.position)} of ${best.of}` : '–'}</td>
             </tr>
@@ -59,21 +82,31 @@ const drafts = v.plans.some((p) => p.app.status === 'draft');
 </section>
 
 <style>
-  .verdict-block { margin: 2rem 0 0; }
-  .verdict-picks { display: grid; gap: 1px; grid-template-columns: repeat(auto-fit, minmax(min(16rem, 100%), 1fr)); background: var(--hair); }
-  .verdict-pick { background: var(--band); padding: 1.3rem 1.4rem 1.2rem; }
-  .verdict-pick.is-lead { background: var(--orange); }
-  .verdict-pick .tag { display: block; font: 500 0.72rem var(--mono); text-transform: uppercase; margin-bottom: 0.8rem; }
-  .verdict-option + .verdict-option { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(0, 0, 0, 0.15); }
-  .verdict-model { font-size: 1.5rem; letter-spacing: -0.02em; line-height: 1.1; margin: 0 0 0.35rem; }
-  .verdict-model a { text-decoration: none; }
-  .verdict-model a:hover { text-decoration: underline; }
-  .verdict-model .maker { font-size: 0.85rem; letter-spacing: 0; color: var(--ink-2); }
-  .verdict-plan { margin: 0; font-size: 0.95rem; }
-  .verdict-note { margin: 0.15rem 0 0; font-size: 0.82rem; color: var(--ink-2); }
-  .verdict-score { margin: 0.5rem 0 0; font: 0.78rem var(--mono); color: var(--ink-2); }
-  .verdict-tie { font-size: 0.85rem; margin: 0 0 0.6rem; }
-  .verdict-basis { font-size: 0.85rem; color: var(--muted); margin: 0.8rem 0 0; }
+  .verdict-block { margin: 2.2rem 0 0; }
+  /* Best overall takes the full width; the other picks share the row beneath it. */
+  .verdict-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: var(--hair); }
+  .verdict-pick { background: var(--band); padding: 1.4rem 1.5rem 1.5rem; display: grid; align-content: start; }
+  .verdict-pick.is-lead { grid-column: 1 / -1; background: var(--orange); padding: 1.8rem 1.8rem 1.9rem; }
+  .verdict-grid:has(> .verdict-pick:nth-child(2):last-child) > .verdict-pick:nth-child(2) { grid-column: 1 / -1; }
+  @media (max-width: 40rem) { .verdict-grid { grid-template-columns: 1fr; } }
+  .verdict-label { font: 500 0.72rem var(--mono); text-transform: uppercase; margin-bottom: 0.9rem; }
+  .verdict-model { font-size: clamp(1.6rem, 3vw, 2rem); letter-spacing: -0.03em; line-height: 1.05; margin: 0 0 0.6rem; }
+  .is-lead .verdict-model { font-size: clamp(2.2rem, 5vw, 3.4rem); letter-spacing: -0.04em; margin-bottom: 0.8rem; }
+  .verdict-model a, .verdict-option-name { text-decoration: none; }
+  .verdict-model a:hover, .verdict-option-name:hover { text-decoration: underline; }
+  .verdict-action { font-size: 1rem; margin: 0; }
+  .is-lead .verdict-action { font-size: 1.1rem; }
+  .verdict-action strong { font-weight: 600; }
+  .verdict-tie { font-size: 0.95rem; margin: 0 0 0.6rem; }
+  .verdict-options { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.7rem; }
+  .verdict-options li { display: grid; gap: 0.15rem; }
+  .verdict-option-name { font-size: 1.35rem; letter-spacing: -0.02em; line-height: 1.1; }
+  .is-lead .verdict-option-name { font-size: clamp(1.7rem, 3.4vw, 2.3rem); letter-spacing: -0.03em; }
+  .is-lead .verdict-options { gap: 1rem; }
+  .verdict-reason { font-size: 0.88rem; color: var(--ink-2); margin: 1rem 0 0; padding-top: 0.8rem; border-top: 1px solid rgb(0 0 0 / 0.12); }
+  .verdict-note { margin: 1rem 0 0; font-size: 0.95rem; max-width: 52rem; }
+  .verdict-note-label { font: 500 0.7rem var(--mono); text-transform: uppercase; background: var(--ink); color: #fff; padding: 0.1rem 0.4rem; margin-right: 0.4rem; vertical-align: 0.1em; }
+  .verdict-basis { font-size: 0.85rem; color: var(--muted); margin: 0.7rem 0 0; }
   .verdict-paying { margin-top: 1.2rem; }
   .verdict-paying summary { cursor: pointer; font-size: 0.95rem; }
   .verdict-paying .table-wrap { margin-top: 1rem; }

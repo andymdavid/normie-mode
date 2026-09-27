@@ -25,7 +25,7 @@ tests:
   - test: arena-business
     closeness: related
 norm:
-  status: draft
+  status: approved
   intro: AI can explain financial ideas and help with the numbers, but it isn't an accountant. Check anything you'll file or act on.
   good_at:
     - Explaining financial terms and statements.

@@ -27,7 +27,7 @@ plans:
       - { model: claude-opus-5-5, access: included, default: true, basis: maker-tier }
       - { model: claude-sonnet-5, access: included, basis: maker-tier }
       - { model: claude-haiku-4-5, access: included, basis: maker-tier }
-      - { model: claude-fable-5-1, access: extra-cost, where: "Paid for with usage credits on top of the plan", basis: maker }
+      - { model: claude-fable-5-1, access: extra-cost, where: "Costs extra, on top of the plan", basis: maker }
   - id: max
     name: Max
     price_usd: 100
@@ -36,4 +36,4 @@ plans:
       - { model: claude-opus-5-5, access: included, default: true, basis: maker-tier }
       - { model: claude-sonnet-5, access: included, basis: maker-tier }
       - { model: claude-haiku-4-5, access: included, basis: maker-tier }
-      - { model: claude-fable-5-1, access: limited, where: "Up to half of the weekly usage limit", basis: maker }
+      - { model: claude-fable-5-1, access: limited, where: "For up to half your weekly allowance", basis: maker }

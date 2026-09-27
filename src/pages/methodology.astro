@@ -173,7 +173,7 @@ const sections = [
         <li><strong>Best overall:</strong> the highest task score, and the cheapest plan that includes it.</li>
         <li><strong>Best for ${STANDARD_PLAN_MAX_USD} a month or less:</strong> the highest-scoring model on a plan at that price or below.</li>
         <li><strong>Best free:</strong> the highest-scoring model on a free plan.</li>
-        <li><strong>Within {TOO_CLOSE_POINTS} points:</strong> we name both and put the cheaper plan first.</li>
+        <li><strong>Within {TOO_CLOSE_POINTS} points:</strong> it's too close to call, so we name both, higher-ranked first, each with its plan and price.</li>
         <li><strong>Extra cost doesn't count.</strong> A model you pay for on top of a plan isn't treated as included.</li>
       </ul>
       {exVerdict && (

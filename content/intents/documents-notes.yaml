@@ -34,7 +34,7 @@ tests:
   - test: arena-long-requests
     closeness: related
 norm:
-  status: draft
+  status: approved
   intro: AI is good at reading documents for you and pulling out what matters. Always spot-check the details against the original.
   good_at:
     - Summarising long documents.

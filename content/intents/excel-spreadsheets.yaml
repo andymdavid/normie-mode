@@ -34,7 +34,7 @@ tests:
     closeness: general
 normie_test: spreadsheet-questions
 norm:
-  status: draft
+  status: approved
   intro: AI can answer questions about your spreadsheets. The catch is that it can sound sure while using the wrong figures, so it's worth a quick check.
   good_at:
     - Answering questions about your data, like totals, top customers and trends.

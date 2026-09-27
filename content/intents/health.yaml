@@ -30,7 +30,7 @@ tests:
   - test: arena-science
     closeness: related
 norm:
-  status: draft
+  status: approved
   intro: AI can help you understand health information, but it isn't a doctor. If something feels wrong, talk to a professional.
   good_at:
     - Explaining medical terms in plain language.

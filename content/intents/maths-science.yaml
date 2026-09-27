@@ -30,7 +30,7 @@ tests:
   - test: arena-science
     closeness: related
 norm:
-  status: draft
+  status: approved
   intro: AI can work through maths and science problems step by step. Ask it to show its working, because small slips add up.
   good_at:
     - Working through problems step by step.
