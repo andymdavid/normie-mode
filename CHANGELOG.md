@@ -35,6 +35,7 @@ This file records meaningful changes to the Normie Mode product, implementation,
 
 ### Fixed
 
+- `astro dev` kept serving a page's styles as they were when it started, so style changes only showed after a restart. It now drops a changed page's cached styles and reloads.
 - Norm counted tests that the page no longer charts (fewer than three of our models), so his note could mention more tests than the page showed.
 - `npm run import -- --offline` no longer stamps reused data with today's date; each snapshot keeps the date it was downloaded.
 - Phones: the homepage's "People's votes" chart was pushed off screen, and the header wrapped into a jumble; the header now has two tidy rows.
