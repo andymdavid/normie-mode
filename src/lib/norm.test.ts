@@ -60,6 +60,13 @@ describe("Norm's data-driven messages", () => {
     ];
     expect(topTwoTied(rows)).toBeTruthy();
     expect(leadSentence(rows)).toBe('A and B are neck and neck at the top, followed by C.');
+    const level = [
+      { id: 'a', label: 'A', value: 100 },
+      { id: 'b', label: 'B', value: 100 },
+      { id: 'c', label: 'C', value: 100 },
+      { id: 'd', label: 'D', value: 90 },
+    ];
+    expect(leadSentence(level)).toBe('A, B and C are level at the top.');
   });
 });
 

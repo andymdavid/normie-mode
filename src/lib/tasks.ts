@@ -6,6 +6,7 @@ import { imported } from './imported';
 import type { Closeness, Intent, ModelVersion, Test } from './schema';
 import { demandByIntent } from './demand';
 import { comparedModels } from './plans';
+import { latestRun } from './normie-tests';
 import { formatDate } from './view';
 
 /** The models on every chart: current versions plus older ones still used by an app's plan (D-026). */
@@ -38,7 +39,24 @@ export function testRows(test: Test): BarDatum[] {
   return test.source === 'lmarena' ? withPositions(rows) : rows;
 }
 
+/** Our own test: share of answers right per model, from the latest run of the suite. */
+function ourTestRows(test: Test): BarDatum[] {
+  const run = latestRun(test.key);
+  return currentModels().map((m) => {
+    const base = { id: m.id, label: m.name, maker: makerOf(m), href: `/models/${m.id}` };
+    const mine = run?.answers.filter((a) => a.model === m.id) ?? [];
+    if (!mine.length) return base;
+    const correct = mine.reduce((s, a) => s + a.score.correct, 0);
+    const total = mine.reduce((s, a) => s + a.score.total, 0);
+    const v = (100 * correct) / total;
+    return { ...base, value: v, display: `${correct}/${total}`, tip: `${m.name}: ${correct} of ${total} answers right in our test` };
+  });
+}
+
+export const isOurTest = (test: Test) => test.source === 'normie';
+
 function rawTestRows(test: Test): BarDatum[] {
+  if (isOurTest(test)) return ourTestRows(test);
   const { epoch, lmarena } = imported();
   return currentModels().map((m) => {
     const base = { id: m.id, label: m.name, maker: makerOf(m), href: `/models/${m.id}` };
@@ -73,12 +91,16 @@ function rawTestRows(test: Test): BarDatum[] {
 
 /** Axis floor so rating differences are visible (ratings cluster far from zero). */
 export function testFloor(test: Test, rows: BarDatum[]): number {
-  if (test.source === 'epoch') return 0;
+  if (test.source !== 'lmarena') return 0;
   const lows = rows.filter((r) => r.low !== undefined).map((r) => r.low!);
   return lows.length ? Math.floor((Math.min(...lows) - 25) / 25) * 25 : 0;
 }
 
 export function testSource(test: Test) {
+  if (isOurTest(test)) {
+    const run = latestRun(test.key);
+    return { name: 'Normie Mode, tested by us', url: test.url, note: run ? `run ${formatDate(run.summary.run_id.slice(0, 10))} · see every answer` : undefined };
+  }
   return test.source === 'epoch'
     ? { name: `${test.by} via Epoch AI`, url: test.url, note: 'CC BY 4.0' }
     : { name: 'LMArena', url: test.url, note: `votes as of ${formatDate(imported().lmarena?.meta.as_of)}` };
@@ -98,6 +120,13 @@ export function topTwoTied(rows: BarDatum[], lowerIsBetter = false): [BarDatum, 
 export function leadSentence(rows: BarDatum[], lowerIsBetter = false, verb = 'leads'): string | undefined {
   const sorted = rows.filter((r) => r.value !== undefined).sort((a, b) => (lowerIsBetter ? a.value! - b.value! : b.value! - a.value!));
   if (sorted.length < MIN_MODELS_TO_RANK) return undefined;
+  // Exactly level at the top (e.g. several models got every answer right): name them all.
+  const level = sorted.filter((r) => r.value === sorted[0].value);
+  if (level.length > 1) {
+    const names = level.map((r) => r.label);
+    const list = `${names.slice(0, -1).join(', ')} and ${names.at(-1)}`;
+    return level.length === sorted.length ? `${list} all score the same.` : `${list} are level at the top.`;
+  }
   if (topTwoTied(rows, lowerIsBetter)) {
     const next = sorted.slice(2, 4).map((r) => r.label);
     return `${sorted[0].label} and ${sorted[1].label} are neck and neck at the top${next.length ? `, followed by ${next.join(' and ')}` : ''}.`;
