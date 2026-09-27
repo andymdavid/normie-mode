@@ -12,6 +12,8 @@ const refreshAstroStyles = {
   /** @param {{ file: string, server: import('vite').ViteDevServer }} ctx */
   handleHotUpdate({ file, server }) {
     if (!file.endsWith('.astro')) return;
+    // The legacy graph and each environment's graph have different node types; both have the same methods.
+    /** @type {any[]} */
     const graphs = [server.moduleGraph, ...Object.values(server.environments ?? {}).map((e) => e.moduleGraph)].filter(Boolean);
     for (const graph of graphs) {
       for (const [id, mod] of graph.idToModuleMap) if (id === file || id.startsWith(`${file}?`)) graph.invalidateModule(mod);
