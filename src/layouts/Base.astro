@@ -61,12 +61,12 @@ const fullTitle = title === 'Normie Mode' ? title : `${title} · Normie Mode`;
             <a class="footer-norm" href="/" aria-label="Normie Mode home" data-footer-norm>
               {['default', 'happy', 'smug', 'wise'].map((f, i) => <img src={`/norm-${f}.jpg`} alt="" width="176" height="176" loading="lazy" class={i === 0 ? 'is-on' : undefined} />)}
             </a>
-            <p class="footer-tagline">What AI can actually do, in plain English, with the evidence underneath.</p>
+            <p class="footer-tagline">AI benchmarks are hard to understand. We make sense of them and find you the best AI for the job at hand.</p>
           </div>
           <div class="footer-main">
             <form class="footer-signup" data-newsletter action={NEWSLETTER.fallback} novalidate>
               <span class="footer-label">{PODCAST.name} newsletter</span>
-              <h2 class="footer-signup-title">The big AI ideas, in your inbox each week</h2>
+              <h2 class="footer-signup-title">The big AI ideas each week, in your inbox</h2>
               <p class="footer-signup-sub">A few of the best ideas from each week's {PODCAST.name} podcast on AI, software and business, from the team behind Normie Mode.</p>
               <div class="footer-field">
                 <label class="visually-hidden" for="footer-email">Email address</label>
@@ -93,7 +93,7 @@ const fullTitle = title === 'Normie Mode' ? title : `${title} · Normie Mode`;
                 </ul>
               </div>
               <div class="footer-col">
-                <span class="footer-label">Listen</span>
+                <span class="footer-label">Follow</span>
                 <ul>
                   <li><a href={PODCAST.url}>{PODCAST.name}</a></li>
                   {PODCAST.links.filter((l) => l.label !== 'Newsletter').map((l) => <li><a href={l.url}>{l.label}</a></li>)}
