@@ -12,6 +12,8 @@ Read these files before making changes (the vision predates the D-018 direction 
 2. `docs/IMPLEMENTATION_PLAN.md`
 3. `CHANGELOG.md`
 
+Also read, when relevant: `docs/evals/README.md` before designing, running or publishing our own tests (anything under `evals/`), and `docs/norm-voice.md` before writing anything Norm says.
+
 ## Product guardrails
 
 - Normie Mode is model comparison translated for non-experts (D-018). Use the reference sites in `docs/IMPLEMENTATION_PLAN.md` for structure; make every label, metric and chart readable by someone whose job isn't AI.
@@ -49,6 +51,10 @@ After meaningful work:
 - Keep schema changes reversible while the product model is still being validated.
 - Treat evidence and recommendation history as append-oriented records; do not silently overwrite provenance.
 - Never publish generated editorial content or automatically change public recommendations without an accepted decision authorising it.
+
+## Our own tests
+
+Our tests ("Tested by us") follow `docs/evals/README.md`. In short: one right answer per question, scored automatically; fixed synthetic cases; the same prompt and default settings for every model; ask the product owner before any paid run; a committed run is a published run, so review it first; bump `SUITE_VERSION` whenever the prompt, cases or scoring change.
 
 ## Verification
 
