@@ -27,5 +27,8 @@ export default defineConfig({
   site: 'https://normiemode.example',
   trailingSlash: 'never',
   build: { format: 'file' },
+  // Hosting platforms serve the site under their own hostname; a static site has nothing to protect
+  // by refusing unknown hosts, so accept any (`npm run serve` behind a proxy needs this).
+  server: { allowedHosts: true },
   vite: { plugins: [refreshAstroStyles] },
 });

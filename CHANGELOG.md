@@ -6,6 +6,7 @@ This file records meaningful changes to the Normie Mode product, implementation,
 
 ### Added
 
+- Hosting scripts: `npm run setup` (install), `npm run serve` (install, build and serve on port 42001 on all addresses) and `npm run stop`, for platforms that take one command per field. The site accepts requests under any hostname, so it works behind a platform's proxy.
 - A guide to our own tests for anyone working on the repo (`docs/evals/README.md`): why we run them, the principles, how a suite is built, how to run and review one, and how results reach the site. AGENTS.md points to it.
 - Our own spreadsheet test is published and counts towards the Excel and data analysis task scores and picks as direct evidence (D-031). It's marked everywhere with a navy "Tested by us" tag: on its evidence chart, the task cards, Tests explained, model pages, How it works and its results page, which now shows where the test counts instead of its own "best overall".
 - A menu button on phones: the second row of header links is gone, and the menu holds the main pages, the most popular tasks and the podcast. It works without JavaScript and closes with Escape or a tap outside.
