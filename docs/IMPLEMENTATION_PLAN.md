@@ -32,7 +32,7 @@ Extended by D-026 (2026-09-26): models stay the comparison unit, and a "where yo
 
 ### D-013 — Technology stack (accepted 2026-09-23)
 
-Astro with TypeScript, generating a static site. Canonical content lives in the repository as YAML files under `content/`, loaded by a small graph loader (`src/lib/graph.ts`) and validated by Zod schemas (`src/lib/schema.ts`). The site and validator share that loader rather than using Astro content collections, so the same rules run in tests, the build gate and page rendering. A build-time validator (`src/lib/rules.ts`) enforces graph integrity, provenance rules, confidence ceilings, and freshness. Postgres is deferred until the freshness loop or intelligence layer needs a running service. Hosting is deferred; the site builds and previews locally.
+Astro with TypeScript, generating a static site. Canonical content lives in the repository as YAML files under `content/`, loaded by a small graph loader (`src/lib/graph.ts`) and validated by Zod schemas (`src/lib/schema.ts`). The site and validator share that loader rather than using Astro content collections, so the same rules run in tests, the build gate and page rendering. A build-time validator (`src/lib/rules.ts`) enforces graph integrity, provenance rules, confidence ceilings, and freshness. Postgres is deferred until the freshness loop or intelligence layer needs a running service. Hosting was deferred at this decision; D-033 and N-014 cover the later deployment request.
 
 ### D-012 — Initial data workflow (accepted 2026-09-23, follows from D-013)
 
@@ -211,6 +211,10 @@ Our test results are published and feed the task score and verdict like any othe
 
 Product-owner review: newcomers met charts before any context. Task pages now run: title and one plain line; Norm's opener (advice first, then what the evidence is); the picks, with the page's main caveat ("Keep in mind") right beneath them; Norm's guide (good at, trips up, how to get a good result); "How the models compare" (the task score chart, renamed from "The short answer"); the evidence; and "If you build with it". Norm's guides are approved on all 15 main task pages.
 
+### D-033 — CapRover A hosting from `deployed` (accepted 2026-09-29)
+
+Pete asked to host the existing site on CapRover A, with each update to the `deployed` branch building the live app. The GitHub source remains `origin`; a writable Forgejo mirror supplies the deployment branch. This supersedes only D-013's hosting deferral and does not change the content or editorial review rules.
+
 ## Reference sites
 
 Reviewed 2026-09-24 as models for structure and presentation:
@@ -222,6 +226,14 @@ Reviewed 2026-09-24 as models for structure and presentation:
 ## Current work (D-018 onwards)
 
 These tasks follow the direction reset and take priority over the Phase 1–3 backlog below.
+
+### N-014 — Deploy the public site on CapRover A
+
+- Status: `in_progress`
+- Dependencies: D-033
+- Work: package the site for CapRover, publish a writable Forgejo mirror, and configure automatic builds for `refs/heads/deployed`.
+- Acceptance criteria: a pushed `deployed` commit builds the live `normie-mode` app; the CapRover Git hash matches the branch; public HTTPS homepage and `/healthz` succeed.
+- Verification: local validation, tests, check and build; Forgejo webhook delivery and CapRover version; public HTTP checks.
 
 ### N-001 — Import free data sources
 

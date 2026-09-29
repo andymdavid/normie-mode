@@ -6,6 +6,7 @@ This file records meaningful changes to the Normie Mode product, implementation,
 
 ### Added
 
+- CapRover A deployment files and a release guide for automatic builds from the Forgejo `deployed` branch.
 - A Normie Mode-styled exit-intent newsletter signup, matching Intelligence Snacks' behavior: it appears once per desktop session and stays hidden after a successful subscription.
 - Hosting scripts: `npm run setup` (install), `npm run serve` (install, build and serve on port 42001 on all addresses) and `npm run stop`, for platforms that take one command per field. The site accepts requests under any hostname, so it works behind a platform's proxy.
 - A guide to our own tests for anyone working on the repo (`docs/evals/README.md`): why we run them, the principles, how a suite is built, how to run and review one, and how results reach the site. AGENTS.md points to it.
