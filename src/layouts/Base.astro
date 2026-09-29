@@ -4,6 +4,7 @@ import { PREVIEW, formatDate } from '../lib/view';
 import { NEWSLETTER, PODCAST } from '../lib/site';
 import { tasksByDemand, taskPath } from '../lib/tasks';
 import { imported } from '../lib/imported';
+import SignupModal from '../components/SignupModal.astro';
 
 interface Props {
   title: string;
@@ -70,6 +71,7 @@ const fullTitle = title === 'Normie Mode' ? title : `${title} · Normie Mode`;
     <main class="wrap">
       <slot />
     </main>
+    <SignupModal />
     <footer class="site-footer">
       <div class="footer-inner">
         <div class="footer-top">

@@ -146,6 +146,25 @@ main { padding-block: 3rem 5rem; }
 @media (max-width: 52rem) { .footer-bottom span:last-child { margin-left: 0; } }
 .footer-mark { font-weight: 500; letter-spacing: -0.06em; line-height: 0.78; font-size: calc((100vw - 1.5rem) / 5.75); margin: 2.5rem 0 0; padding: 0 0.75rem; white-space: nowrap; color: var(--footer-ink); transform: translateY(0.1em); }
 
+/* Exit-intent signup: the footer's lilac signup treatment in a focused dialog. */
+.signup-modal { --footer-ink: #1a0f2e; --footer-muted: rgb(26 15 46 / 0.68); width: min(calc(100% - 2rem), 48rem); margin: auto; padding: clamp(2rem, 5vw, 3.5rem); border: 0; border-radius: 0; background: var(--lavender); color: var(--footer-ink); box-shadow: 0 1.5rem 5rem rgb(0 0 0 / 0.28); }
+.signup-modal::backdrop { background: rgb(0 0 0 / 0.58); backdrop-filter: blur(3px); }
+.signup-modal-close { position: absolute; top: 1rem; right: 1rem; width: 2.25rem; height: 2.25rem; display: grid; place-items: center; border: 1px solid var(--footer-ink); border-radius: 0; background: transparent; color: var(--footer-ink); font: 1.5rem/1 var(--sans); cursor: pointer; }
+.signup-modal-close:hover { background: var(--footer-ink); color: #fff; }
+.signup-modal-layout { display: grid; grid-template-columns: 8.25rem minmax(0, 1fr); align-items: start; gap: 2rem; }
+.signup-modal-norm { width: 8.25rem; height: 8.25rem; border-radius: 50%; background: var(--page); }
+.signup-modal h2 { max-width: 30rem; font-size: clamp(2rem, 5vw, 3.15rem); line-height: 0.98; letter-spacing: -0.045em; }
+.signup-modal-copy { max-width: 31rem; margin: 1rem 0 1.6rem; color: var(--footer-muted); }
+.modal-signup .footer-field { width: 100%; }
+@media (max-width: 38rem) {
+  .signup-modal { padding: 3.5rem 1.25rem 1.5rem; }
+  .signup-modal-layout { grid-template-columns: 1fr; gap: 1.25rem; }
+  .signup-modal-norm { width: 5rem; height: 5rem; }
+  .signup-modal .footer-field { flex-direction: column; border: 0; background: transparent; gap: 0.5rem; }
+  .signup-modal .footer-field input[type='email'] { min-height: 3rem; border: 1px solid var(--footer-ink); background: rgb(255 255 255 / 0.25); }
+  .signup-modal .footer-field button { min-height: 3rem; margin: 0; }
+}
+
 /* Summary band: columns divided by hairlines, not cards */
 .band { background: var(--band); margin-inline: calc(50% - 50vw); padding: 0 calc(50vw - 50%); margin-block: 2.5rem 3.5rem; }
 .band .band-inner { max-width: 90rem; margin: 0 auto; padding: 1.75rem 1.25rem; }

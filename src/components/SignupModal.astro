@@ -1,0 +1,49 @@
+<dialog class="signup-modal" data-signup-modal aria-labelledby="signup-modal-title">
+  <button class="signup-modal-close" type="button" data-signup-close aria-label="Close signup">×</button>
+  <div class="signup-modal-layout">
+    <img class="signup-modal-norm" src="/norm-happy.jpg" alt="" width="132" height="132" loading="lazy" />
+    <div>
+      <span class="footer-label">Intelligence Snacks newsletter</span>
+      <h2 id="signup-modal-title">The big AI ideas each week, in your inbox</h2>
+      <p class="signup-modal-copy">A few of the best ideas from each week's Intelligence Snacks podcast on AI, software and business, from the team behind Normie Mode.</p>
+      <form class="modal-signup" data-newsletter data-newsletter-source="normie-mode-exit-modal" action="https://intelligencesnacks.com/" novalidate>
+        <div class="footer-field">
+          <label class="visually-hidden" for="modal-email">Email address</label>
+          <input id="modal-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="What's your email?" required />
+          <input class="visually-hidden" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" />
+          <button type="submit">Subscribe</button>
+        </div>
+        <p class="footer-signup-status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+</dialog>
+
+<script>
+  const modal = document.querySelector<HTMLDialogElement>('[data-signup-modal]');
+  if (modal) {
+    const shownKey = 'normie-mode-exit-signup-shown';
+    const subscribedKey = 'intelligence-snacks-subscribed';
+    const openModal = () => {
+      if (!modal.open) modal.showModal();
+      requestAnimationFrame(() => modal.querySelector<HTMLInputElement>('input[type="email"]')?.focus());
+    };
+    const closeModal = () => modal.close();
+
+    modal.querySelector<HTMLElement>('[data-signup-close]')?.addEventListener('click', closeModal);
+    modal.addEventListener('click', (event) => {
+      const bounds = modal.getBoundingClientRect();
+      const outside = event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom;
+      if (outside) closeModal();
+    });
+
+    let exitReady = false;
+    window.setTimeout(() => { exitReady = true; }, 5000);
+    document.addEventListener('mouseout', (event) => {
+      if (!exitReady || event.relatedTarget || event.clientY > 0 || window.matchMedia('(pointer: coarse)').matches) return;
+      if (sessionStorage.getItem(shownKey) || localStorage.getItem(subscribedKey)) return;
+      sessionStorage.setItem(shownKey, 'true');
+      openModal();
+    });
+  }
+</script>
