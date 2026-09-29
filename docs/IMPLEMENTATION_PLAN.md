@@ -213,7 +213,7 @@ Product-owner review: newcomers met charts before any context. Task pages now ru
 
 ### D-033 — CapRover A hosting from `deployed` (accepted 2026-09-29)
 
-Pete asked to host the existing site on CapRover A, with each update to the `deployed` branch building the live app. The original GitHub source remains `origin`; a GitHub fork under `humansinstitute` supplies the deployment branch and an exact-branch GitHub Actions trigger. This supersedes only D-013's hosting deferral and does not change the content or editorial review rules.
+Pete asked to host the existing site on CapRover A, with each update to the original `andymdavid/normie-mode` repository's `deployed` branch building the live app. The original GitHub source is `origin`; the temporary `humansinstitute` fork is not the intended deployment source. This supersedes only D-013's hosting deferral and does not change the content or editorial review rules.
 
 ## Reference sites
 
@@ -229,13 +229,13 @@ These tasks follow the direction reset and take priority over the Phase 1–3 ba
 
 ### N-014 — Deploy the public site on CapRover A
 
-- Status: `done` (2026-09-29)
+- Status: `in_progress` (2026-09-29; migration from the temporary fork)
 - Dependencies: D-033
-- Work: package the site for CapRover, publish a writable GitHub fork, and configure automatic builds for `refs/heads/deployed`.
+- Work: package the site for CapRover, publish the deployment changes and `deployed` branch to the original GitHub repository, and configure automatic builds for `refs/heads/deployed`.
 - Acceptance criteria: a pushed `deployed` commit builds the live `normie-mode` app; the CapRover Git hash matches the branch; public HTTPS homepage and `/healthz` succeed.
 - Verification: local validation, tests, check and build; GitHub Actions run and CapRover version; public HTTP checks.
 
-Progress note (2026-09-29): GitHub fork `humansinstitute/normie-mode` holds `main` and `deployed`; the original remains `origin`. The `deployed` push triggered the GitHub Actions workflow and a matching CapRover A build. The app has one instance on port 3000. Valid HTTPS homepage and `/healthz` both returned 200. Local validation, tests, type check and production build passed. The CapRover GitHub clone credential expires on 2027-03-30; rotate it before then.
+Progress note (2026-09-29): The temporary GitHub fork `humansinstitute/normie-mode` holds a verified deployment. Pete directed the deployment source to the original `andymdavid/normie-mode`; promotion of its deployment workflow depends on configuring the original repository's CapRover hook secret and verifying a build from its `deployed` branch. The CapRover GitHub clone credential expires on 2027-03-30; rotate it before then.
 
 ### N-001 — Import free data sources
 
