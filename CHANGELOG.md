@@ -6,6 +6,7 @@ This file records meaningful changes to the Normie Mode product, implementation,
 
 ### Added
 
+- A Normie Mode-styled exit-intent newsletter signup, matching Intelligence Snacks' behavior: it appears once per desktop session and stays hidden after a successful subscription.
 - Hosting scripts: `npm run setup` (install), `npm run serve` (install, build and serve on port 42001 on all addresses) and `npm run stop`, for platforms that take one command per field. The site accepts requests under any hostname, so it works behind a platform's proxy.
 - A guide to our own tests for anyone working on the repo (`docs/evals/README.md`): why we run them, the principles, how a suite is built, how to run and review one, and how results reach the site. AGENTS.md points to it.
 - Our own spreadsheet test is published and counts towards the Excel and data analysis task scores and picks as direct evidence (D-031). It's marked everywhere with a navy "Tested by us" tag: on its evidence chart, the task cards, Tests explained, model pages, How it works and its results page, which now shows where the test counts instead of its own "best overall".
@@ -38,6 +39,7 @@ This file records meaningful changes to the Normie Mode product, implementation,
 
 ### Fixed
 
+- The footer newsletter form now signs readers up to the same Beehiiv publication as Intelligence Snacks through a same-origin server endpoint, instead of being blocked by cross-origin browser rules. It also shows the subscription service's real errors and matches Intelligence Snacks' success state.
 - A run that only added some models would have replaced the published results of our own test. The site now combines every run of a test's current version, taking each model's latest answers.
 - A chart summary named one leader when several models were exactly level at the top; it now names them all.
 - The "Best AI for…" page mentioned "our own test" on the Excel card before the test was published.
@@ -83,6 +85,9 @@ This file records meaningful changes to the Normie Mode product, implementation,
 
 ### Changed
 
+- The homepage introduction now explains model, access and evidence more naturally—“which AI does it best, where to get it, and the evidence behind our pick”—and uses a shorter desktop line length for a balanced two-line read.
+- The footer introduction is slightly wider on desktop so it reads cleanly across three lines.
+- The footer now carries Intelligence Snacks' “Produced by Other Stuff in Perth, Western Australia” credit in place of the generic rankings disclaimer.
 - More space below Norm's notes than above them, and the "Tested by us" tag now leads its chart's subtitle instead of wrapping under the title.
 - Norm explains how to read the evidence once, at the top of each task page's evidence section, instead of commenting inside only the charts that had a tie. Those charts' summary lines now say when the leaders are neck and neck and how much more the dearer one costs.
 - Task pages lead with context (D-032): Norm's opener, the picks with the page's main caveat beneath them, then Norm's guide, then "How the models compare" and the evidence. Norm's guides are now approved and public on all 15 main task pages.
