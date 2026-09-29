@@ -48,6 +48,7 @@ p { margin: 0 0 0.8rem; }
 .muted { color: var(--muted); }
 .small { font-size: 0.85rem; }
 .lede { font-size: 1.15rem; color: var(--ink-2); max-width: 40rem; margin-top: 1.2rem; }
+@media (min-width: 52.01rem) { .home-lede { max-width: 28rem; } }
 .eyebrow, .mono-label { font: 500 0.72rem/1.4 var(--mono); text-transform: uppercase; letter-spacing: 0.02em; color: var(--ink); }
 .eyebrow a { text-decoration: none; }
 .num, td.num { font-family: var(--mono); font-variant-numeric: tabular-nums; }
