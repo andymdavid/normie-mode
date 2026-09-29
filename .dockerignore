@@ -1,0 +1,9 @@
+.git
+.github
+.astro
+dist
+node_modules
+tmp
+evals
+.env*
+*.log

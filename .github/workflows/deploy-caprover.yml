@@ -1,0 +1,24 @@
+name: Deploy Normie Mode
+
+on:
+  push:
+    branches:
+      - deployed
+
+permissions:
+  contents: read
+
+jobs:
+  trigger:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Trigger CapRover A build
+        env:
+          CAPROVER_DEPLOY_HOOK: ${{ secrets.CAPROVER_DEPLOY_HOOK }}
+        run: |
+          test -n "$CAPROVER_DEPLOY_HOOK"
+          curl --fail --silent --show-error --max-time 30 \
+            --output /dev/null \
+            --request POST \
+            "$CAPROVER_DEPLOY_HOOK"
