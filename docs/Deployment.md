@@ -16,11 +16,14 @@ the same fork and branch. Its managed GitHub clone credential expires on
 
 The Dockerfile builds the Astro site and serves the generated files with Bun.
 The app listens on `PORT=3000`; `/healthz` returns `ok`.
+Keep the CapRover app at one running instance and set its container HTTP port to
+3000.
 
 After validating and pushing `main`, promote with a fast-forward:
 
 ```sh
 git fetch release
+git push release main
 git switch deployed
 git merge --ff-only main
 git push release deployed
