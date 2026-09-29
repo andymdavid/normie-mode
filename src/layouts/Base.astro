@@ -154,7 +154,7 @@ const fullTitle = title === 'Normie Mode' ? title : `${title} · Normie Mode`;
         norm.addEventListener('mouseenter', next);
         if (!matchMedia('(prefers-reduced-motion: reduce)').matches) setInterval(next, 3200);
       }
-      // Newsletter: post to Intelligence Snacks; if that can't be reached from here, send people there.
+      // Newsletter: our same-origin endpoint passes the signup to Intelligence Snacks and Beehiiv.
       for (const form of document.querySelectorAll('[data-newsletter]')) {
         const status = form.querySelector('[role=status]');
         const say = (html) => { status.innerHTML = html; };
@@ -169,15 +169,20 @@ const fullTitle = title === 'Normie Mode' ? title : `${title} · Normie Mode`;
             const res = await fetch(newsletter.endpoint, {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ email, website: form.website.value, source: newsletter.source }),
+              body: JSON.stringify({ email, website: form.website.value, source: form.dataset.newsletterSource || newsletter.source }),
             });
-            if (!res.ok) throw new Error(String(res.status));
+            const result = await res.json().catch(() => ({}));
+            if (!res.ok) throw new Error(result.error || 'Unable to subscribe right now. Please try again.');
             form.reset();
-            say("Thanks, you're on the list.");
-          } catch {
-            say(`We couldn't sign you up from here. <a href="${newsletter.fallback}">Finish on Intelligence Snacks →</a>`);
+            form.email.disabled = true;
+            button.textContent = 'Subscribed';
+            say('Welcome to Intelligence Snacks.');
+            localStorage.setItem('intelligence-snacks-subscribed', 'true');
+            window.dispatchEvent(new CustomEvent('intelligence-snacks:subscribed'));
+          } catch (error) {
+            say(error instanceof Error ? error.message : `We couldn't sign you up. <a href="${newsletter.fallback}">Try Intelligence Snacks →</a>`);
           } finally {
-            button.disabled = false;
+            if (!form.email.disabled) button.disabled = false;
           }
         });
       }
