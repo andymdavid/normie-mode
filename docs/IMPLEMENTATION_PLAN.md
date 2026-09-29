@@ -213,7 +213,7 @@ Product-owner review: newcomers met charts before any context. Task pages now ru
 
 ### D-033 — CapRover A hosting from `deployed` (accepted 2026-09-29)
 
-Pete asked to host the existing site on CapRover A, with each update to the `deployed` branch building the live app. The GitHub source remains `origin`; a writable Forgejo mirror supplies the deployment branch. This supersedes only D-013's hosting deferral and does not change the content or editorial review rules.
+Pete asked to host the existing site on CapRover A, with each update to the `deployed` branch building the live app. The original GitHub source remains `origin`; a GitHub fork under `humansinstitute` supplies the deployment branch and an exact-branch GitHub Actions trigger. This supersedes only D-013's hosting deferral and does not change the content or editorial review rules.
 
 ## Reference sites
 
@@ -231,9 +231,9 @@ These tasks follow the direction reset and take priority over the Phase 1–3 ba
 
 - Status: `in_progress`
 - Dependencies: D-033
-- Work: package the site for CapRover, publish a writable Forgejo mirror, and configure automatic builds for `refs/heads/deployed`.
+- Work: package the site for CapRover, publish a writable GitHub fork, and configure automatic builds for `refs/heads/deployed`.
 - Acceptance criteria: a pushed `deployed` commit builds the live `normie-mode` app; the CapRover Git hash matches the branch; public HTTPS homepage and `/healthz` succeed.
-- Verification: local validation, tests, check and build; Forgejo webhook delivery and CapRover version; public HTTP checks.
+- Verification: local validation, tests, check and build; GitHub Actions run and CapRover version; public HTTP checks.
 
 ### N-001 — Import free data sources
 

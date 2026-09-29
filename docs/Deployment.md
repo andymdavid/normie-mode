@@ -1,13 +1,18 @@
 # Deployment
 
 The live site runs on CapRover A as `normie-mode`. CapRover builds the
-`deployed` branch from the public `rick/normie-mode` Forgejo mirror at
-`https://tower-stable-forgejo.b.otherstuff.ai/rick/normie-mode`.
-The original GitHub repository remains the `origin` remote. Rick's Forgejo
-account owns the deployment mirror because it cannot create repositories in
-the `other-stuff` organisation.
-The Forgejo push webhook must be active for push events on
-`refs/heads/deployed` only. A push to `main` does not deploy.
+`deployed` branch from the public GitHub fork at
+`https://github.com/humansinstitute/normie-mode` (`release` remote).
+The original GitHub repository remains the `origin` remote. The public
+`rick/normie-mode` Forgejo mirror is retained for reference; it is not a
+deployment source and has no active deployment hook.
+
+The GitHub Actions workflow in `.github/workflows/deploy-caprover.yml` runs
+only on pushes to `refs/heads/deployed` and calls CapRover's app webhook.
+The webhook URL is stored in the fork's `CAPROVER_DEPLOY_HOOK` Actions secret.
+A push to `main` does not deploy. CapRover's Git configuration must point to
+the same fork and branch. Its managed GitHub clone credential expires on
+2027-03-30 and must be rotated in CapRover before then.
 
 The Dockerfile builds the Astro site and serves the generated files with Bun.
 The app listens on `PORT=3000`; `/healthz` returns `ok`.
@@ -15,13 +20,14 @@ The app listens on `PORT=3000`; `/healthz` returns `ok`.
 After validating and pushing `main`, promote with a fast-forward:
 
 ```sh
-git fetch forgejo
+git fetch release
 git switch deployed
 git merge --ff-only main
-git push forgejo deployed
+git push release deployed
 git switch main
 ```
 
-Confirm the CapRover deployed Git hash equals `forgejo/deployed`, then check
-the public HTTPS homepage and `/healthz`. If the fast-forward fails, inspect
+Confirm the GitHub Actions run succeeded and the CapRover deployed Git hash
+equals `release/deployed`, then check the public HTTPS homepage and `/healthz`.
+If the fast-forward fails, inspect
 the branch history before making any further changes; do not force push.
