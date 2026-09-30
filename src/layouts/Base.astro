@@ -17,6 +17,7 @@ const topTasks = tasksByDemand().slice(0, 6).map((t) => t.task);
 const { epoch, lmarena, modelsdev } = imported();
 const updated = formatDate(epoch?.meta.retrieved_at.slice(0, 10));
 const fullTitle = title === 'Normie Mode' ? title : `${title} · Normie Mode`;
+const canonicalUrl = new URL(path, Astro.site);
 ---
 <html lang="en-GB">
   <head>
@@ -25,6 +26,7 @@ const fullTitle = title === 'Normie Mode' ? title : `${title} · Normie Mode`;
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     {(noindex || PREVIEW) && <meta name="robots" content="noindex" />}
+    <link rel="canonical" href={canonicalUrl} />
     <link rel="icon" href="/norm-default.jpg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

@@ -6,6 +6,7 @@ This file records meaningful changes to the Normie Mode product, implementation,
 
 ### Added
 
+- Google-compatible sitemap generation, a crawler-facing `robots.txt`, and canonical URLs for the live `normiemode.com` site; internal preview routes are excluded from the sitemap.
 - CapRover A deployment files and a release guide for automatic builds from the original GitHub repository's `deployed` branch.
 - A Normie Mode-styled exit-intent newsletter signup, matching Intelligence Snacks' behavior: it appears once per desktop session and stays hidden after a successful subscription.
 - Hosting scripts: `npm run setup` (install), `npm run serve` (install, build and serve on port 42001 on all addresses) and `npm run stop`, for platforms that take one command per field. The site accepts requests under any hostname, so it works behind a platform's proxy.

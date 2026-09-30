@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://normiemode.com/sitemap-index.xml

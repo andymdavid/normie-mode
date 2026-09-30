@@ -1,5 +1,6 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
+import sitemap from '@astrojs/sitemap';
 import { subscribe } from './server/index.ts';
 
 /** @type {import('astro').AstroIntegration} */
@@ -56,12 +57,18 @@ const refreshAstroStyles = {
 };
 
 export default defineConfig({
-  site: 'https://normiemode.example',
+  site: 'https://normiemode.com',
   trailingSlash: 'never',
   build: { format: 'file' },
   // Hosting platforms serve the site under their own hostname; a static site has nothing to protect
   // by refusing unknown hosts, so accept any (`npm run serve` behind a proxy needs this).
   server: { allowedHosts: true },
-  integrations: [subscriptionDevRoute],
+  integrations: [
+    subscriptionDevRoute,
+    sitemap({
+      // These routes only render in preview builds and must never be advertised to search engines.
+      filter: (page) => !['/demand', '/review'].some((path) => new URL(page).pathname === path),
+    }),
+  ],
   vite: { plugins: [refreshAstroStyles] },
 });

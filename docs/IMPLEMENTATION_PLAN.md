@@ -237,6 +237,8 @@ These tasks follow the direction reset and take priority over the Phase 1–3 ba
 
 Progress note (2026-09-29): The temporary GitHub fork `humansinstitute/normie-mode` holds a verified deployment. Pete directed the deployment source to the original `andymdavid/normie-mode`; promotion of its deployment workflow depends on configuring the original repository's CapRover hook secret and verifying a build from its `deployed` branch. The CapRover GitHub clone credential expires on 2027-03-30; rotate it before then.
 
+Progress note (2026-09-30): Production search-discovery files are now generated for `https://normiemode.com`: the build emits a sitemap index and page sitemap, `robots.txt` points crawlers to the index, and public pages declare their canonical URL. Preview-only `/demand` and `/review` routes are excluded. These files still need deployment and live HTTP verification as part of N-014.
+
 ### N-001 — Import free data sources
 
 - Status: `in_progress`
