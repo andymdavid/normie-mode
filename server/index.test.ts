@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { subscribe } from './index';
+import { canonicalRedirect, subscribe } from './index';
 
 afterEach(() => vi.unstubAllGlobals());
 
@@ -35,5 +35,34 @@ describe('newsletter subscription proxy', () => {
 
     expect(response.status).toBe(409);
     expect(await response.json()).toEqual({ error: 'This email is already subscribed.' });
+  });
+});
+
+describe('public URL canonicalization', () => {
+  it.each([
+    ['http://normiemode.com/models/example', {}, 'https://normiemode.com/models/example'],
+    ['https://www.normiemode.com/models/example', {}, 'https://normiemode.com/models/example'],
+    ['http://www.normiemode.com/models/example.html?from=test', {}, 'https://normiemode.com/models/example?from=test'],
+    ['https://normiemode.com/models/example.html', {}, 'https://normiemode.com/models/example'],
+    ['https://normiemode.com/models/example/index.html', {}, 'https://normiemode.com/models/example'],
+    ['https://normiemode.com/index.html', {}, 'https://normiemode.com/'],
+    [
+      'http://normie-mode:3000/models/example',
+      { 'X-Forwarded-Host': 'www.normiemode.com', 'X-Forwarded-Proto': 'https' },
+      'https://normiemode.com/models/example',
+    ],
+  ])('permanently redirects %s to the preferred URL', (url, headers, destination) => {
+    const response = canonicalRedirect(new Request(url, { headers }));
+
+    expect(response?.status).toBe(308);
+    expect(response?.headers.get('location')).toBe(destination);
+  });
+
+  it('does not redirect the canonical HTTPS URL', () => {
+    expect(canonicalRedirect(new Request('https://normiemode.com/models/example'))).toBeUndefined();
+  });
+
+  it('does not redirect internal deployment hosts', () => {
+    expect(canonicalRedirect(new Request('http://normie-mode:3000/healthz'))).toBeUndefined();
   });
 });

@@ -9,6 +9,7 @@ declare const Bun: {
 const distDirectory = join(fileURLToPath(new URL('.', import.meta.url)), '..', 'dist');
 const port = Number(process.env.PORT ?? 42001);
 const intelligenceSnacksSubscribeUrl = 'https://intelligencesnacks.com/api/subscribe';
+const canonicalHostname = 'normiemode.com';
 
 const json = (body: unknown, status = 200) => Response.json(body, {
   status,
@@ -82,20 +83,60 @@ async function staticResponse(request: Request) {
   return new Response('Not found', { status: 404, headers: { 'Cache-Control': 'no-cache' } });
 }
 
+/**
+ * Collapse public URL variants before serving content. CapRover terminates TLS in front of the
+ * app, so prefer its forwarded host and protocol when they are present. Unknown/internal hosts
+ * remain available for container health checks and local previews.
+ */
+export function canonicalRedirect(request: Request) {
+  const url = new URL(request.url);
+  const forwardedHost = request.headers.get('x-forwarded-host')?.split(',')[0]?.trim();
+  const forwardedProtocol = request.headers.get('x-forwarded-proto')?.split(',')[0]?.trim();
+  const requestedHost = (forwardedHost ?? url.host).toLowerCase();
+  const requestedHostname = requestedHost.replace(/:\d+$/, '');
+  const requestedProtocol = (forwardedProtocol ?? url.protocol.replace(/:$/, '')).toLowerCase();
+  const isPublicHost = requestedHostname === canonicalHostname || requestedHostname === `www.${canonicalHostname}`;
+
+  if (!isPublicHost) return;
+
+  let pathname = url.pathname;
+  if (pathname === '/index.html') pathname = '/';
+  else if (pathname.endsWith('/index.html')) pathname = pathname.slice(0, -'/index.html'.length) || '/';
+  else if (pathname.endsWith('.html')) pathname = pathname.slice(0, -'.html'.length) || '/';
+
+  const needsRedirect = requestedHostname !== canonicalHostname
+    || requestedProtocol !== 'https'
+    || pathname !== url.pathname;
+  if (!needsRedirect) return;
+
+  const destination = new URL(url);
+  destination.protocol = 'https:';
+  destination.hostname = canonicalHostname;
+  destination.port = '';
+  destination.pathname = pathname;
+  return Response.redirect(destination, 308);
+}
+
+export async function handleRequest(request: Request) {
+  const { pathname } = new URL(request.url);
+  if (pathname === '/healthz') return new Response('ok');
+
+  const redirect = canonicalRedirect(request);
+  if (redirect) return redirect;
+
+  if (pathname === '/api/subscribe') {
+    if (request.method !== 'POST') return json({ error: 'Method not allowed.' }, 405);
+    return subscribe(request);
+  }
+  if (request.method !== 'GET' && request.method !== 'HEAD') return new Response('Method not allowed', { status: 405 });
+  return staticResponse(request);
+}
+
 if (import.meta.main) {
   Bun.serve({
     port,
     hostname: '0.0.0.0',
-    async fetch(request) {
-      const { pathname } = new URL(request.url);
-      if (pathname === '/healthz') return new Response('ok');
-      if (pathname === '/api/subscribe') {
-        if (request.method !== 'POST') return json({ error: 'Method not allowed.' }, 405);
-        return subscribe(request);
-      }
-      if (request.method !== 'GET' && request.method !== 'HEAD') return new Response('Method not allowed', { status: 405 });
-      return staticResponse(request);
-    },
+    fetch: handleRequest,
   });
 
   console.log(`Normie Mode listening on port ${port}`);

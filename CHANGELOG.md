@@ -41,6 +41,7 @@ This file records meaningful changes to the Normie Mode product, implementation,
 
 ### Fixed
 
+- Duplicate public URL variants now permanently redirect to one canonical form: HTTPS, non-`www` and without generated `.html` suffixes.
 - The footer newsletter form now signs readers up to the same Beehiiv publication as Intelligence Snacks through a same-origin server endpoint, instead of being blocked by cross-origin browser rules. It also shows the subscription service's real errors and matches Intelligence Snacks' success state.
 - A run that only added some models would have replaced the published results of our own test. The site now combines every run of a test's current version, taking each model's latest answers.
 - A chart summary named one leader when several models were exactly level at the top; it now names them all.

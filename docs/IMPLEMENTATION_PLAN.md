@@ -239,6 +239,8 @@ Progress note (2026-09-29): The temporary GitHub fork `humansinstitute/normie-mo
 
 Progress note (2026-09-30): Production search-discovery files are now generated and live for `https://normiemode.com`: the build emits a sitemap index and page sitemap, `robots.txt` points crawlers to the index, and public pages declare their canonical URL. Preview-only `/demand` and `/review` routes are excluded. The deployment from the original repository's `deployed` branch was verified through the public sitemap, homepage and `/healthz`.
 
+Progress note (2026-10-09): Search Console reported 25 duplicate URLs last crawled during the 29–30 September canonical rollout. The public server now permanently redirects HTTP, `www` and generated `.html` variants to the HTTPS non-`www`, extensionless URL in one hop, while canonical tags and the sitemap continue to use that same form. Regression tests cover direct and CapRover-forwarded requests.
+
 ### N-001 — Import free data sources
 
 - Status: `in_progress`
