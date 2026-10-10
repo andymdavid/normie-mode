@@ -6,6 +6,7 @@ This file records meaningful changes to the Normie Mode product, implementation,
 
 ### Added
 
+- Complete site-wide Open Graph and Twitter/X preview metadata with canonical URLs and a stable branded 1200×630 share image.
 - Privacy-minimal structured server logs for claimed OpenAI and Anthropic crawler requests, without ordinary visitor, IP-address or query-string logging.
 - A local living SEO and answer-engine implementation record with baseline findings, prioritized work items, acceptance criteria, decision gates, measurements and an append-only session log.
 - A repeatable `npm run seo:audit` check for sitemap, canonical, indexing, metadata and internal-link integrity, with review diagnostics and a fixed 30-prompt answer-engine citation test.

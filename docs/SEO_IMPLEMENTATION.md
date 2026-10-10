@@ -131,8 +131,8 @@ These sources establish crawler eligibility and conventional search mechanics. T
 | --- | --- | --- | --- | --- |
 | SEO-001 | Measurement and repeatable baseline | `in_progress` | P0 | None |
 | SEO-002 | Search and answer-engine crawler access | `in_progress` | P0 | SEO-001 |
-| SEO-003 | Publisher identity and trust pages | `proposed` | P0 | Product-owner facts and review |
-| SEO-004 | Global metadata and social previews | `ready` | P0 | SEO-003 for final publisher data |
+| SEO-003 | Publisher identity and trust pages | `blocked` | P0 | Product-owner facts and review |
+| SEO-004 | Global metadata and social previews | `in_progress` | P0 | SEO-003 for final publisher data |
 | SEO-005 | Structured data | `proposed` | P0 | SEO-003, schema design review |
 | SEO-006 | Sitemap freshness and update signals | `ready` | P0 | Dependency-date calculation |
 | SEO-007 | Indexability and page-value audit | `ready` | P0 | Product-owner decision on weak pages |
@@ -231,7 +231,7 @@ Watch for:
 
 ### SEO-003 — Publisher identity and trust pages
 
-State: `proposed`
+State: `blocked`
 
 Purpose: Make ownership, accountability and editorial controls visible.
 
@@ -255,9 +255,11 @@ Verification:
 - Product-owner review.
 - Internal link check and structured-data validation after SEO-005.
 
+Blocker (2026-10-10): The plan names Andy David as the product owner and human reviewer, and the existing footer names Other Stuff as producer, but there is no approved public biography, monitored corrections/contact route, or approved wording for the relationship with Intelligence Snacks. Do not invent these. Technical metadata work can continue while the product owner supplies and approves those facts.
+
 ### SEO-004 — Global metadata and social previews
 
-State: `ready`
+State: `in_progress`
 
 Purpose: Improve result presentation and earned distribution.
 
@@ -278,6 +280,14 @@ Verification:
 
 - Build tests over every generated public page.
 - Manual preview checks in at least two social/link-preview validators.
+
+Progress (2026-10-10):
+
+- Added complete Open Graph and Twitter/X card fields to the shared layout, all derived from the same title, description and canonical URL as the visible page metadata.
+- Added safe props for content type, social image, image alt text and optional article dates. Final publisher/person relationships remain deferred to SEO-003/005.
+- Added a stable 1200×630 branded JPEG and extended `npm run seo:audit` so missing, inconsistent or non-canonical social metadata is a hard failure.
+- Local verification passed: production build and SEO audit across 102 public pages, 701 tests across 14 files, and type-check with zero errors (one pre-existing hint remains).
+- Remaining before `done`: deploy and check the homepage plus one detail page in two external preview validators.
 
 ### SEO-005 — Structured data
 
@@ -759,6 +769,12 @@ Append new entries; do not rewrite history except to correct a factual error, an
 - Added regression coverage for four crawler agents, non-logging of ordinary traffic, and query-string exclusion. Verification passed with 700 tests, type-check, content validation and production build.
 - Deployed `e691e17`; its GitHub deployment-hook run completed successfully. Follow-up OAI-SearchBot and Claude-SearchBot probes returned `200` and should now be visible as `crawler_request` JSON lines in the CapRover app log.
 - Final SEO-002 check requires a CapRover operator to confirm one of those lines. User-agent identity remains a claim, not cryptographic verification; OpenAI IP ranges can be cross-checked upstream, while Anthropic does not publish stable ranges.
+
+### 2026-10-10 — SEO-003 gated; SEO-004 implementation started
+
+- Marked SEO-003 blocked rather than inventing trust claims. It needs approved identity details, relationship wording and a monitored public corrections/contact route.
+- Added site-wide Open Graph and Twitter/X metadata with canonical absolute URLs and a stable default social image. Added deterministic audit coverage for completeness and consistency.
+- The default 1200×630 social image was generated from the existing Norm mascot reference, then resized and inspected locally; it contains the exact approved site name and existing positioning line only.
 
 ## Progress notes
 

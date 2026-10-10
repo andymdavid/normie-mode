@@ -255,6 +255,8 @@ Progress note (2026-10-09): Search Console reported 25 duplicate URLs last crawl
 
 Progress note (2026-10-10): The living implementation record is `docs/SEO_IMPLEMENTATION.md`. It contains the 102-page baseline, Search Console context, official crawler guidance, prioritized `SEO-001` to `SEO-018` work items, decision gates, measurements, risks and an append-only session log. Start with SEO-001; do not add more indexable task pages while SEO-007 is unresolved.
 
+Progress note (2026-10-10): SEO-003 is blocked on product-owner-approved public identity, relationship and monitored contact/corrections details. SEO-004 is in progress with shared social metadata and deterministic coverage; publisher/person schema remains gated on SEO-003.
+
 ### N-001 — Import free data sources
 
 - Status: `in_progress`

@@ -24,6 +24,7 @@ export interface PageAudit {
   jsonLd: number;
   openGraph: number;
   twitter: number;
+  social: Record<string, string | undefined>;
   mainTokens: Set<string>;
 }
 
@@ -157,6 +158,22 @@ function inspectPage(directory: string, url: string): PageAudit {
     jsonLd: scripts.filter((attrs) => attrs.get('type')?.toLowerCase() === 'application/ld+json').length,
     openGraph: metas.filter((attrs) => attrs.get('property')?.toLowerCase().startsWith('og:')).length,
     twitter: metas.filter((attrs) => attrs.get('name')?.toLowerCase().startsWith('twitter:')).length,
+    social: {
+      ogTitle: meta(html, 'property', 'og:title'),
+      ogDescription: meta(html, 'property', 'og:description'),
+      ogUrl: meta(html, 'property', 'og:url'),
+      ogType: meta(html, 'property', 'og:type'),
+      ogSiteName: meta(html, 'property', 'og:site_name'),
+      ogImage: meta(html, 'property', 'og:image'),
+      ogImageWidth: meta(html, 'property', 'og:image:width'),
+      ogImageHeight: meta(html, 'property', 'og:image:height'),
+      ogImageAlt: meta(html, 'property', 'og:image:alt'),
+      twitterCard: meta(html, 'name', 'twitter:card'),
+      twitterTitle: meta(html, 'name', 'twitter:title'),
+      twitterDescription: meta(html, 'name', 'twitter:description'),
+      twitterImage: meta(html, 'name', 'twitter:image'),
+      twitterImageAlt: meta(html, 'name', 'twitter:image:alt'),
+    },
     mainTokens: tokens(visible),
   };
 }
@@ -238,6 +255,13 @@ export function auditSite(directory = resolve('dist')): AuditResult {
     if (page.canonical !== expected) errors.push(`${page.route}: canonical is ${page.canonical ?? 'missing'}, expected ${expected}.`);
     if (page.robots?.toLowerCase().split(',').some((rule) => rule.trim() === 'noindex')) errors.push(`${page.route}: sitemap page is noindex.`);
     for (const link of page.internalLinks) if (!uniqueUrls.has(link)) errors.push(`${page.route}: internal page link is not canonical/in sitemap: ${link}.`);
+
+    const requiredSocial = ['ogTitle', 'ogDescription', 'ogUrl', 'ogType', 'ogSiteName', 'ogImage', 'ogImageWidth', 'ogImageHeight', 'ogImageAlt', 'twitterCard', 'twitterTitle', 'twitterDescription', 'twitterImage', 'twitterImageAlt'];
+    for (const field of requiredSocial) if (!page.social[field]) errors.push(`${page.route}: missing social metadata ${field}.`);
+    if (page.social.ogTitle !== page.title || page.social.twitterTitle !== page.title) errors.push(`${page.route}: social title does not match page title.`);
+    if (page.social.ogDescription !== page.description || page.social.twitterDescription !== page.description) errors.push(`${page.route}: social description does not match meta description.`);
+    if (page.social.ogUrl !== expected) errors.push(`${page.route}: Open Graph URL is ${page.social.ogUrl ?? 'missing'}, expected ${expected}.`);
+    if (page.social.ogImage && (!page.social.ogImage.startsWith(`${ORIGIN}/`) || page.social.twitterImage !== page.social.ogImage)) errors.push(`${page.route}: social image must be one absolute canonical site URL.`);
 
     if (page.title.length > TITLE_REVIEW_LENGTH) warnings.push(`${page.route}: review long title (${page.title.length} characters).`);
     if (page.description && (page.description.length < DESCRIPTION_MIN || page.description.length > DESCRIPTION_MAX)) {

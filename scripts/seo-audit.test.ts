@@ -35,7 +35,13 @@ Sitemap: https://normiemode.com/sitemap-index.xml
     <meta name="description" content="A clear description of this exact AI model, its evidence, costs, limits and the tasks where independent results show that it performs well.">
     ${options.noindex ? '<meta name="robots" content="noindex">' : ''}
     <link rel="canonical" href="${options.canonical ?? url}">
-    <meta property="og:title" content="Example model"><meta name="twitter:card" content="summary_large_image">
+    <meta property="og:title" content="${options.title ?? 'Example model · Normie Mode'}">
+    <meta property="og:description" content="A clear description of this exact AI model, its evidence, costs, limits and the tasks where independent results show that it performs well.">
+    <meta property="og:url" content="${options.canonical ?? url}"><meta property="og:type" content="website"><meta property="og:site_name" content="Normie Mode">
+    <meta property="og:image" content="https://normiemode.com/social.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Example model">
+    <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${options.title ?? 'Example model · Normie Mode'}">
+    <meta name="twitter:description" content="A clear description of this exact AI model, its evidence, costs, limits and the tasks where independent results show that it performs well.">
+    <meta name="twitter:image" content="https://normiemode.com/social.jpg"><meta name="twitter:image:alt" content="Example model">
     <script type="application/ld+json">{"@context":"https://schema.org"}</script>
     </head><body><main><h1>Example model</h1><p>${'Useful model evidence and methodology. '.repeat(30)}</p>${options.link ? `<a href="${options.link}">Broken</a>` : ''}</main></body></html>`);
   return directory;
@@ -77,8 +83,6 @@ describe('SEO audit', () => {
     const page = join(directory, 'models/example.html');
     writeFileSync(page, readFileSync(page, 'utf8')
       .replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>/, '')
-      .replace(/<meta property="og:title"[^>]*>/, '')
-      .replace(/<meta name="twitter:card"[^>]*>/, '')
       .replace(/<p>[\s\S]*?<\/p>/, '<p>Brief evidence.</p>'));
 
     const result = auditSite(directory);
@@ -87,7 +91,15 @@ describe('SEO audit', () => {
     expect(result.warnings.join('\n')).toMatch(/review long title/);
     expect(result.warnings.join('\n')).toMatch(/review thin main content/);
     expect(result.warnings.join('\n')).toMatch(/have no JSON-LD/);
-    expect(result.warnings.join('\n')).toMatch(/have no Open Graph/);
-    expect(result.warnings.join('\n')).toMatch(/have no Twitter\/X/);
+  });
+
+  it('fails incomplete social metadata', () => {
+    const directory = fixture();
+    const page = join(directory, 'models/example.html');
+    writeFileSync(page, readFileSync(page, 'utf8').replace(/<meta property="og:image:alt"[^>]*>/, ''));
+
+    const result = auditSite(directory);
+
+    expect(result.errors.join('\n')).toMatch(/missing social metadata ogImageAlt/);
   });
 });
