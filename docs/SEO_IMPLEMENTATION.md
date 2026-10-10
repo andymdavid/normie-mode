@@ -81,7 +81,7 @@ There is no guaranteed route to an answer-engine citation. This plan improves el
 - `/sitemap-index.xml`, `/sitemap-0.xml` and `/robots.txt` return `200`.
 - Sitemap XML is valid and contains 102 unique canonical URLs.
 - Sitemap has no `<lastmod>` values.
-- `robots.txt` allows all crawlers and points to the sitemap index.
+- `robots.txt` initially allowed all crawlers and pointed to the sitemap index; D-034 now permits search crawlers and disallows training crawlers explicitly.
 - Public HTML is statically rendered and usable without client-side JavaScript.
 - HTML responses are not compressed by the live server.
 - `HEAD` responses return `content-length: 0` instead of mirroring the corresponding `GET` representation.
@@ -130,7 +130,7 @@ These sources establish crawler eligibility and conventional search mechanics. T
 | ID | Workstream | State | Priority | Depends on |
 | --- | --- | --- | --- | --- |
 | SEO-001 | Measurement and repeatable baseline | `in_progress` | P0 | None |
-| SEO-002 | Search and answer-engine crawler access | `ready` | P0 | SEO-001 |
+| SEO-002 | Search and answer-engine crawler access | `in_progress` | P0 | SEO-001 |
 | SEO-003 | Publisher identity and trust pages | `proposed` | P0 | Product-owner facts and review |
 | SEO-004 | Global metadata and social previews | `ready` | P0 | SEO-003 for final publisher data |
 | SEO-005 | Structured data | `proposed` | P0 | SEO-003, schema design review |
@@ -192,7 +192,7 @@ Notes:
 
 ### SEO-002 — Search and answer-engine crawler access
 
-State: `ready`
+State: `in_progress`
 
 Purpose: Make crawler policy explicit and observable.
 
@@ -203,6 +203,12 @@ Work:
 - Verify representative public pages with search-crawler user agents.
 - Confirm CapRover/nginx/WAF does not challenge or rate-limit legitimate crawlers.
 - Document published crawler IP verification where available; do not trust user-agent strings alone for security decisions.
+
+Progress (2026-10-10):
+
+- D-034 records the accepted policy: permit `OAI-SearchBot` and `Claude-SearchBot`; disallow `GPTBot` and `ClaudeBot`; continue allowing user-triggered retrieval through the general public-crawler rule.
+- The repository `robots.txt` now expresses that policy explicitly and `npm run seo:audit` fails if it regresses.
+- Remaining before `done`: deploy, verify the representative production requests listed below, and confirm useful crawler identification in access logs.
 
 Acceptance criteria:
 
@@ -665,7 +671,7 @@ Record accepted decisions in `docs/IMPLEMENTATION_PLAN.md` as D-### entries befo
 
 | Decision | Why it matters | Status |
 | --- | --- | --- |
-| Allow or disallow GPTBot and ClaudeBot separately from search crawlers | Training policy is not the same as search visibility | Open |
+| Allow or disallow GPTBot and ClaudeBot separately from search crawlers | Training policy is not the same as search visibility | Accepted as D-034: disallow training, allow search |
 | Public publisher, author and reviewer identity details | Required for truthful trust pages and schema | Open |
 | Corrections contact/workflow | Must route to a monitored owner | Open |
 | Historical model page policy | Enrich, noindex or redirect materially changes public coverage | Open |
@@ -727,6 +733,14 @@ Append new entries; do not rewrite history except to correct a factual error, an
 - Froze 30 citation prompts in `docs/seo/citation-prompts-v1.yaml`. A real answer-engine baseline is still required before SEO-001 can be marked `done`.
 - Full verification passed: `npm run seo:audit`, 694 tests and `npm run check` with no errors. The type-check retains one pre-existing unused-variable hint outside this work.
 - Next: begin SEO-002 while the product owner supplies Search Console performance figures and/or runs the manual citation baseline.
+
+### 2026-10-10 — SEO-002 crawler policy implemented locally
+
+- Recorded D-034: Normie Mode permits OpenAI and Anthropic search crawlers but not their model-development crawlers. Their published controls are separate, and no documented search-visibility benefit was found for permitting training use.
+- Added explicit allow rules for `OAI-SearchBot` and `Claude-SearchBot`, explicit disallow rules for `GPTBot` and `ClaudeBot`, and retained the general public-crawler allow rule for ordinary and user-triggered retrieval.
+- Extended the deterministic SEO audit and regression suite to enforce the accepted crawler policy.
+- Local verification passed: the production build and SEO audit, 695 tests across 14 files, and Astro type-check with zero errors (one pre-existing unused-variable warning remains).
+- Production verification and access-log observation remain required after deployment before SEO-002 is `done`.
 
 ## Progress notes
 

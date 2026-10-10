@@ -90,6 +90,8 @@ This file records meaningful changes to the Normie Mode product, implementation,
 
 ### Changed
 
+- Public crawler policy now permits OpenAI and Anthropic search discovery while opting out of their separate model-development crawlers.
+
 - The homepage introduction now explains model, access and evidence more naturally—“which AI does it best, where to get it, and the evidence behind our pick”—and uses a shorter desktop line length for a balanced two-line read.
 - The footer introduction is slightly wider on desktop so it reads cleanly across three lines.
 - The footer now carries Intelligence Snacks' “Produced by Other Stuff in Perth, Western Australia” credit in place of the generic rankings disclaimer.

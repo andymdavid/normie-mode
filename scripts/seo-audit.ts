@@ -193,6 +193,35 @@ export function auditSite(directory = resolve('dist')): AuditResult {
   else {
     const robots = readFileSync(robotsPath, 'utf8');
     if (!robots.includes(`Sitemap: ${ORIGIN}/sitemap-index.xml`)) errors.push('robots.txt does not name the canonical sitemap index.');
+    const groups = new Map<string, string[]>();
+    let agents: string[] = [];
+    for (const sourceLine of robots.split(/\r?\n/)) {
+      const line = sourceLine.replace(/#.*$/, '').trim();
+      if (!line) {
+        agents = [];
+        continue;
+      }
+      const separator = line.indexOf(':');
+      if (separator < 0) continue;
+      const field = line.slice(0, separator).trim().toLowerCase();
+      const value = line.slice(separator + 1).trim();
+      if (field === 'user-agent') {
+        agents.push(value.toLowerCase());
+        if (!groups.has(value.toLowerCase())) groups.set(value.toLowerCase(), []);
+      } else if ((field === 'allow' || field === 'disallow') && agents.length) {
+        for (const agent of agents) groups.get(agent)?.push(`${field}:${value}`);
+      }
+    }
+    const requiredPolicy = new Map([
+      ['oai-searchbot', 'allow:/'],
+      ['claude-searchbot', 'allow:/'],
+      ['gptbot', 'disallow:/'],
+      ['claudebot', 'disallow:/'],
+      ['*', 'allow:/'],
+    ]);
+    for (const [agent, directive] of requiredPolicy) {
+      if (!groups.get(agent)?.includes(directive)) errors.push(`robots.txt must set ${agent} to ${directive}.`);
+    }
   }
 
   const pages = sitemapUrls.filter((url) => existsSync(routeFile(directory, url))).map((url) => inspectPage(directory, url));

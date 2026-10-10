@@ -13,7 +13,23 @@ function fixture(options: { canonical?: string; link?: string; noindex?: boolean
   mkdirSync(join(directory, 'models'), { recursive: true });
   const url = 'https://normiemode.com/models/example';
   writeFileSync(join(directory, 'sitemap-0.xml'), `<?xml version="1.0"?><urlset><url><loc>${url}</loc></url></urlset>`);
-  writeFileSync(join(directory, 'robots.txt'), 'User-agent: *\nAllow: /\n\nSitemap: https://normiemode.com/sitemap-index.xml\n');
+  writeFileSync(join(directory, 'robots.txt'), `User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: *
+Allow: /
+
+Sitemap: https://normiemode.com/sitemap-index.xml
+`);
   writeFileSync(join(directory, 'models/example.html'), `<!doctype html><html lang="en-GB"><head>
     <title>${options.title ?? 'Example model · Normie Mode'}</title>
     <meta name="description" content="A clear description of this exact AI model, its evidence, costs, limits and the tasks where independent results show that it performs well.">
@@ -44,6 +60,16 @@ describe('SEO audit', () => {
     const result = auditSite(fixture({ link: '/missing' }));
 
     expect(result.errors.join('\n')).toMatch(/internal page link is not canonical\/in sitemap/);
+  });
+
+  it('fails when training crawlers are allowed or search crawler policy is absent', () => {
+    const directory = fixture();
+    writeFileSync(join(directory, 'robots.txt'), 'User-agent: *\nAllow: /\n\nSitemap: https://normiemode.com/sitemap-index.xml\n');
+
+    const result = auditSite(directory);
+
+    expect(result.errors.join('\n')).toMatch(/oai-searchbot to allow:\//);
+    expect(result.errors.join('\n')).toMatch(/gptbot to disallow:\//);
   });
 
   it('reports review diagnostics without failing integrity', () => {

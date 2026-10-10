@@ -215,6 +215,10 @@ Product-owner review: newcomers met charts before any context. Task pages now ru
 
 Pete asked to host the existing site on CapRover A, with each update to the original `andymdavid/normie-mode` repository's `deployed` branch building the live app. The original GitHub source is `origin`; the temporary `humansinstitute` fork is not the intended deployment source. This supersedes only D-013's hosting deferral and does not change the content or editorial review rules.
 
+### D-034 — Permit answer-engine search crawlers, not training crawlers (accepted 2026-10-10)
+
+Normie Mode permits `OAI-SearchBot` and `Claude-SearchBot` to crawl public content for search discovery, and disallows `GPTBot` and `ClaudeBot` from using it for model development. User-triggered retrieval remains permitted under the general public-crawler rule. OpenAI documents that GPTBot controls potential model-training use independently from OAI-SearchBot's search inclusion, and Anthropic exposes separate search and training crawler controls; neither provider documents a search-visibility benefit from permitting its training crawler. This policy can be reconsidered only if credible published evidence establishes a product benefit that justifies model-development use.
+
 ## Reference sites
 
 Reviewed 2026-09-24 as models for structure and presentation:
