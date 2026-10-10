@@ -210,7 +210,8 @@ Progress (2026-10-10):
 - The repository `robots.txt` now expresses that policy explicitly and `npm run seo:audit` fails if it regresses.
 - Deployed and verified on 2026-10-10: both search-crawler user agents received `200` for `robots.txt`, the homepage, one task page, one model page and one benchmark page; the live file disallows both training crawlers.
 - The server now emits a structured, privacy-minimal record for claimed OpenAI and Anthropic crawler requests: timestamp, crawler, method, path and status. It deliberately excludes IP addresses, query strings and ordinary visitors, and labels user-agent identity as unverified.
-- Remaining before `done`: deploy the logging change and confirm one generated request appears in CapRover's live app logs.
+- Deployed crawler-only structured logging in `e691e17` and generated successful live OAI-SearchBot and Claude-SearchBot requests after the deployment hook completed.
+- Remaining before `done`: confirm either generated record appears in CapRover's live app logs; this workspace has no CapRover log credential.
 
 Acceptance criteria:
 
@@ -750,6 +751,14 @@ Append new entries; do not rewrite history except to correct a factual error, an
 - Confirmed the live `robots.txt` permits `OAI-SearchBot` and `Claude-SearchBot`, disallows `GPTBot` and `ClaudeBot`, and still names the canonical sitemap index.
 - Requested `robots.txt`, the homepage, `/best-ai-for/excel-spreadsheets`, `/models/gpt-5-5` and `/benchmarks/arena-overall` as each search crawler. All ten requests returned `200` with the expected content type and no redirect or challenge.
 - SEO-002 remains `in_progress` only because production access-log identification has not yet been inspected.
+
+### 2026-10-10 — Privacy-minimal crawler observability deployed
+
+- The application previously emitted no access records and this workspace had no credential for the CapRover app-log API.
+- Added structured stdout records only for claimed OpenAI and Anthropic crawler user agents. Records contain timestamp, crawler, method, path, response status and an explicit `unverified_user_agent` identity label; they exclude IP addresses, query strings and ordinary visits.
+- Added regression coverage for four crawler agents, non-logging of ordinary traffic, and query-string exclusion. Verification passed with 700 tests, type-check, content validation and production build.
+- Deployed `e691e17`; its GitHub deployment-hook run completed successfully. Follow-up OAI-SearchBot and Claude-SearchBot probes returned `200` and should now be visible as `crawler_request` JSON lines in the CapRover app log.
+- Final SEO-002 check requires a CapRover operator to confirm one of those lines. User-agent identity remains a claim, not cryptographic verification; OpenAI IP ranges can be cross-checked upstream, while Anthropic does not publish stable ranges.
 
 ## Progress notes
 
