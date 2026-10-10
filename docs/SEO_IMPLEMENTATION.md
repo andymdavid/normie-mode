@@ -134,7 +134,7 @@ These sources establish crawler eligibility and conventional search mechanics. T
 | SEO-003 | Publisher identity and trust pages | `blocked` | P0 | Product-owner facts and review |
 | SEO-004 | Global metadata and social previews | `in_progress` | P0 | SEO-003 for final publisher data |
 | SEO-005 | Structured data | `proposed` | P0 | SEO-003, schema design review |
-| SEO-006 | Sitemap freshness and update signals | `in_progress` | P0 | Dependency-date calculation |
+| SEO-006 | Sitemap freshness and update signals | `done` | P0 | Dependency-date calculation |
 | SEO-007 | Indexability and page-value audit | `ready` | P0 | Product-owner decision on weak pages |
 | SEO-008 | Thin historical model pages | `proposed` | P0 | SEO-007, D-004 |
 | SEO-009 | Specific-task differentiation | `proposed` | P0 | SEO-007, editorial review capacity |
@@ -152,7 +152,7 @@ These sources establish crawler eligibility and conventional search mechanics. T
 
 ### SEO-001 — Measurement and repeatable baseline
 
-State: `in_progress`
+State: `done`
 
 Purpose: Make progress measurable and prevent repeated ad hoc audits.
 
@@ -350,7 +350,8 @@ Progress (2026-10-10):
 - Recorded the first-party spreadsheet test's existing 2026-09-24 publication date in canonical content so its page has a truthful freshness source.
 - The SEO audit now fails invalid sitemap dates and reports omitted dates; representative route tests cover the homepage, task, model, benchmark and first-party test families.
 - Local verification passed: SEO audit and production build, 706 tests across 15 files, and type-check with zero errors (one pre-existing hint remains).
-- Remaining before `done`: deploy, verify the live child sitemap, and confirm an unchanged rebuild produces identical `lastmod` values.
+- Deployed in `ff7390a`. The live child sitemap contains 102 URLs and 102 valid `lastmod` timestamps across five source dates.
+- An immediate unchanged production rebuild produced the identical sitemap SHA-256 (`73c5f11986f1e34aab22381bb0e2bea451080bff9dbcbc4fc7f2d429fd1763d3`), confirming build time does not alter freshness.
 
 ### SEO-007 — Indexability and page-value audit
 
@@ -800,6 +801,13 @@ Append new entries; do not rewrite history except to correct a factual error, an
 - Added the missing canonical publication date for the already-published spreadsheet test and used approved plan-check dates where an undated model page depends on app availability.
 - Replaced task titles' wall-clock month with the route's evidence month, so unchanged pages no longer change title merely because a calendar month passed.
 - Verified 102 of 102 sitemap entries are dated, across five meaningful source dates; the repeatable SEO audit, 706 tests and type-check pass.
+
+### 2026-10-10 — SEO-006 deployed and completed
+
+- Deployed `ff7390a` to `main` and `deployed`; the live sitemap rolled over with all 102 entries dated.
+- Verified representative homepage, task, model, benchmark and first-party test routes in the live XML. The first-party test correctly uses its 2026-09-24 publication date while imported-data pages use their relevant retrieval/evidence dates.
+- Rebuilt the unchanged site and compared sitemap hashes before and after. They were identical, proving deployment/build time does not manufacture freshness.
+- SEO-006 acceptance criteria and verification are satisfied; marked `done`.
 
 ## Progress notes
 

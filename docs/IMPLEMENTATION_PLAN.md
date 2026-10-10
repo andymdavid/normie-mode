@@ -259,6 +259,8 @@ Progress note (2026-10-10): SEO-003 is blocked on product-owner-approved public 
 
 Progress note (2026-10-10): SEO-006 now derives sitemap freshness from recorded evidence, release, retrieval, review and plan-check dates rather than deployment time. All 102 routes have locally verified ISO `lastmod` values, and task-page title months use the same evidence date; production verification remains.
 
+Progress note (2026-10-10): SEO-006 is done. Commit `ff7390a` is live with 102/102 sitemap entries dated; representative route families were verified, and an unchanged rebuild produced a byte-identical sitemap, confirming build time does not alter freshness.
+
 ### N-001 — Import free data sources
 
 - Status: `in_progress`
