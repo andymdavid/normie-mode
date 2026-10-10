@@ -134,7 +134,7 @@ These sources establish crawler eligibility and conventional search mechanics. T
 | SEO-003 | Publisher identity and trust pages | `blocked` | P0 | Product-owner facts and review |
 | SEO-004 | Global metadata and social previews | `in_progress` | P0 | SEO-003 for final publisher data |
 | SEO-005 | Structured data | `proposed` | P0 | SEO-003, schema design review |
-| SEO-006 | Sitemap freshness and update signals | `ready` | P0 | Dependency-date calculation |
+| SEO-006 | Sitemap freshness and update signals | `in_progress` | P0 | Dependency-date calculation |
 | SEO-007 | Indexability and page-value audit | `ready` | P0 | Product-owner decision on weak pages |
 | SEO-008 | Thin historical model pages | `proposed` | P0 | SEO-007, D-004 |
 | SEO-009 | Specific-task differentiation | `proposed` | P0 | SEO-007, editorial review capacity |
@@ -320,7 +320,7 @@ Verification:
 
 ### SEO-006 — Sitemap freshness and update signals
 
-State: `ready`
+State: `in_progress`
 
 Purpose: Show meaningful changes without pretending every build changed every page.
 
@@ -341,6 +341,16 @@ Verification:
 
 - Snapshot/unit tests for representative homepage, task, model, benchmark and test routes.
 - Valid sitemap XML after build.
+
+Progress (2026-10-10):
+
+- Added route-aware freshness calculation from recorded release, publication, evaluation, retrieval, review, claim and plan-check dates. Build time is never used.
+- All 102 sitemap URLs now carry ISO `lastmod` timestamps. The current data produces five distinct dates rather than stamping every route with one deployment date.
+- Task-page title months now come from their evidence freshness date instead of the current clock, preventing unchanged monthly rebuilds from manufacturing apparent updates.
+- Recorded the first-party spreadsheet test's existing 2026-09-24 publication date in canonical content so its page has a truthful freshness source.
+- The SEO audit now fails invalid sitemap dates and reports omitted dates; representative route tests cover the homepage, task, model, benchmark and first-party test families.
+- Local verification passed: SEO audit and production build, 706 tests across 15 files, and type-check with zero errors (one pre-existing hint remains).
+- Remaining before `done`: deploy, verify the live child sitemap, and confirm an unchanged rebuild produces identical `lastmod` values.
 
 ### SEO-007 — Indexability and page-value audit
 
@@ -783,6 +793,13 @@ Append new entries; do not rewrite history except to correct a factual error, an
 - Verified the homepage and Excel task page expose matching title, description, canonical `og:url`, site name, type, absolute image URL, dimensions, alt text and corresponding Twitter/X fields.
 - Downloaded the live share image: `200`, `image/jpeg`, 99,232 bytes and 1200×630. Its `HEAD` response still omits accurate content headers, which remains tracked under SEO-013; social crawlers use GET.
 - Tried OpenGraph.xyz and Meta Tags for external rendered-preview verification. The former returned `429` to this environment and the latter requires client-side interaction, so the two-validator acceptance check remains open rather than being inferred from source tags.
+
+### 2026-10-10 — SEO-006 implementation completed locally
+
+- Added evidence-derived route freshness and sitemap `lastmod` values without using build or deployment time.
+- Added the missing canonical publication date for the already-published spreadsheet test and used approved plan-check dates where an undated model page depends on app availability.
+- Replaced task titles' wall-clock month with the route's evidence month, so unchanged pages no longer change title merely because a calendar month passed.
+- Verified 102 of 102 sitemap entries are dated, across five meaningful source dates; the repeatable SEO audit, 706 tests and type-check pass.
 
 ## Progress notes
 

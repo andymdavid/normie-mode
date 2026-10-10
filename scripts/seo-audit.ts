@@ -35,6 +35,11 @@ export interface AuditResult {
   sitemapUrls: string[];
 }
 
+interface SitemapEntry {
+  url: string;
+  lastmod?: string;
+}
+
 function decodeHtml(value: string) {
   return value
     .replace(/&amp;/g, '&')
@@ -187,7 +192,11 @@ export function auditSite(directory = resolve('dist')): AuditResult {
   if (!existsSync(sitemapPath)) return { errors: [`Missing ${SITEMAP}. Run npm run build first.`], warnings, pages: [], sitemapUrls: [] };
 
   const sitemapXml = readFileSync(sitemapPath, 'utf8');
-  const sitemapUrls = [...sitemapXml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => decodeHtml(match[1]));
+  const sitemapEntries: SitemapEntry[] = [...sitemapXml.matchAll(/<url>([\s\S]*?)<\/url>/g)].map((match) => ({
+    url: decodeHtml(match[1].match(/<loc>([^<]+)<\/loc>/)?.[1] ?? ''),
+    lastmod: match[1].match(/<lastmod>([^<]+)<\/lastmod>/)?.[1],
+  }));
+  const sitemapUrls = sitemapEntries.map((entry) => entry.url);
   const uniqueUrls = new Set(sitemapUrls);
   if (!sitemapUrls.length) errors.push(`${SITEMAP} contains no URLs.`);
   if (uniqueUrls.size !== sitemapUrls.length) errors.push(`${SITEMAP} contains ${sitemapUrls.length - uniqueUrls.size} duplicate URL(s).`);
@@ -205,6 +214,12 @@ export function auditSite(directory = resolve('dist')): AuditResult {
     }
     if (!existsSync(routeFile(directory, url))) errors.push(`Sitemap URL has no generated page: ${url}`);
   }
+  let withoutLastmod = 0;
+  for (const entry of sitemapEntries) {
+    if (!entry.lastmod) withoutLastmod += 1;
+    else if (!/^\d{4}-\d{2}-\d{2}(?:T\d{2}:\d{2}:\d{2}(?:\.\d{3})?Z)?$/.test(entry.lastmod)) errors.push(`${entry.url || 'Sitemap entry'}: invalid lastmod date.`);
+  }
+  if (withoutLastmod) warnings.push(`Sitemap: ${withoutLastmod} of ${sitemapEntries.length} URLs have no trustworthy dated dependency, so lastmod is omitted.`);
 
   if (!existsSync(robotsPath)) errors.push('Missing robots.txt.');
   else {

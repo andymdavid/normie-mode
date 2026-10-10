@@ -257,6 +257,8 @@ Progress note (2026-10-10): The living implementation record is `docs/SEO_IMPLEM
 
 Progress note (2026-10-10): SEO-003 is blocked on product-owner-approved public identity, relationship and monitored contact/corrections details. SEO-004 is in progress with shared social metadata and deterministic coverage; publisher/person schema remains gated on SEO-003.
 
+Progress note (2026-10-10): SEO-006 now derives sitemap freshness from recorded evidence, release, retrieval, review and plan-check dates rather than deployment time. All 102 routes have locally verified ISO `lastmod` values, and task-page title months use the same evidence date; production verification remains.
+
 ### N-001 — Import free data sources
 
 - Status: `in_progress`

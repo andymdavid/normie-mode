@@ -2,6 +2,7 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import { subscribe } from './server/index.ts';
+import { routeLastmod } from './src/lib/freshness.ts';
 
 /** @type {import('astro').AstroIntegration} */
 const subscriptionDevRoute = {
@@ -68,6 +69,10 @@ export default defineConfig({
     sitemap({
       // These routes only render in preview builds and must never be advertised to search engines.
       filter: (page) => !['/demand', '/review'].some((path) => new URL(page).pathname === path),
+      serialize: (item) => {
+        const lastmod = routeLastmod(new URL(item.url).pathname);
+        return lastmod ? { ...item, lastmod: `${lastmod}T00:00:00.000Z` } : item;
+      },
     }),
   ],
   vite: { plugins: [refreshAstroStyles] },

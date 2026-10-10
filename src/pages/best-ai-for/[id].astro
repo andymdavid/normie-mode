@@ -10,6 +10,7 @@ import { PREVIEW, formatDate } from '../../lib/view';
 import { taskCostNote, taskEvidenceNote } from '../../lib/norm';
 import Verdict from '../../components/Verdict.astro';
 import { verdict } from '../../lib/verdict';
+import { routeLastmod } from '../../lib/freshness';
 
 export function getStaticPaths() {
   return allTaskPages().map((task) => ({ params: { id: task.id } }));
@@ -39,14 +40,15 @@ const priceOf = (id: string) => overviewRows().find((r) => r.model.id === id)?.c
 const evidenceNote = taskEvidenceNote(task);
 const costNote = taskCostNote(task);
 const others = tasksByDemand().filter((t) => t.task.id !== (hub?.id ?? task.id)).slice(0, 3);
-const month = formatDate(new Date().toISOString().slice(0, 10)).replace(/^\d+ /, '');
+const updatedOn = routeLastmod(taskPath(task));
+const month = updatedOn ? formatDate(updatedOn).replace(/^\d+ /, '') : undefined;
 const leaderLine = top.length
   ? `On the tests we have, ${top[0].label} comes out on top${top[1] ? `, followed by ${top.slice(1).map((r) => r.label).join(' and ')}` : ''}.`
   : undefined;
 const sections = [...(normOn ? [['guide', "Norm's guide"]] : []), ['compare', 'How the models compare'], ['evidence', 'The evidence'], ['cost', 'If you build with it']];
 ---
 <Base
-  title={`${task.label} (${month})`}
+  title={`${task.label}${month ? ` (${month})` : ''}`}
   description={`${task.label}: which AI models do best at ${task.covers?.toLowerCase().replace(/\.$/, '')}, what to watch out for, and the evidence behind it.`}
 >
   <div class="eyebrow"><a href="/best-ai-for">Best AI for…</a>{hub && <> / <a href={taskPath(hub)}>{hub.label.replace(/^Best AI for /, '')}</a></>}</div>

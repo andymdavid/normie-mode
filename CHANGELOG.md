@@ -6,6 +6,7 @@ This file records meaningful changes to the Normie Mode product, implementation,
 
 ### Added
 
+- Evidence-derived sitemap `lastmod` dates for every public URL, with audit coverage that rejects invalid freshness values.
 - Complete site-wide Open Graph and Twitter/X preview metadata with canonical URLs and a stable branded 1200×630 share image.
 - Privacy-minimal structured server logs for claimed OpenAI and Anthropic crawler requests, without ordinary visitor, IP-address or query-string logging.
 - A local living SEO and answer-engine implementation record with baseline findings, prioritized work items, acceptance criteria, decision gates, measurements and an append-only session log.
@@ -92,6 +93,7 @@ This file records meaningful changes to the Normie Mode product, implementation,
 
 ### Changed
 
+- Dated task-page titles now use the page's evidence freshness month instead of changing with the wall clock.
 - Public crawler policy now permits OpenAI and Anthropic search discovery while opting out of their separate model-development crawlers.
 
 - The homepage introduction now explains model, access and evidence more naturally—“which AI does it best, where to get it, and the evidence behind our pick”—and uses a shorter desktop line length for a balanced two-line read.
