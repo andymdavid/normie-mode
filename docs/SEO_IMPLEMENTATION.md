@@ -208,7 +208,8 @@ Progress (2026-10-10):
 
 - D-034 records the accepted policy: permit `OAI-SearchBot` and `Claude-SearchBot`; disallow `GPTBot` and `ClaudeBot`; continue allowing user-triggered retrieval through the general public-crawler rule.
 - The repository `robots.txt` now expresses that policy explicitly and `npm run seo:audit` fails if it regresses.
-- Remaining before `done`: deploy, verify the representative production requests listed below, and confirm useful crawler identification in access logs.
+- Deployed and verified on 2026-10-10: both search-crawler user agents received `200` for `robots.txt`, the homepage, one task page, one model page and one benchmark page; the live file disallows both training crawlers.
+- Remaining before `done`: confirm useful crawler identification in production access logs.
 
 Acceptance criteria:
 
@@ -741,6 +742,13 @@ Append new entries; do not rewrite history except to correct a factual error, an
 - Extended the deterministic SEO audit and regression suite to enforce the accepted crawler policy.
 - Local verification passed: the production build and SEO audit, 695 tests across 14 files, and Astro type-check with zero errors (one pre-existing unused-variable warning remains).
 - Production verification and access-log observation remain required after deployment before SEO-002 is `done`.
+
+### 2026-10-10 — SEO-002 deployed and externally verified
+
+- Pushed `fae66c9` to both `origin/main` and the CapRover-watched `origin/deployed` branch using a fast-forward deployment.
+- Confirmed the live `robots.txt` permits `OAI-SearchBot` and `Claude-SearchBot`, disallows `GPTBot` and `ClaudeBot`, and still names the canonical sitemap index.
+- Requested `robots.txt`, the homepage, `/best-ai-for/excel-spreadsheets`, `/models/gpt-5-5` and `/benchmarks/arena-overall` as each search crawler. All ten requests returned `200` with the expected content type and no redirect or challenge.
+- SEO-002 remains `in_progress` only because production access-log identification has not yet been inspected.
 
 ## Progress notes
 
