@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { canonicalRedirect, subscribe } from './index';
+import { canonicalRedirect, handleRequest, subscribe } from './index';
 
 afterEach(() => vi.unstubAllGlobals());
 
@@ -64,5 +64,40 @@ describe('public URL canonicalization', () => {
 
   it('does not redirect internal deployment hosts', () => {
     expect(canonicalRedirect(new Request('http://normie-mode:3000/healthz'))).toBeUndefined();
+  });
+});
+
+describe('crawler request logging', () => {
+  it.each(['OAI-SearchBot/1.4', 'Claude-SearchBot/1.0', 'GPTBot/1.4', 'ClaudeBot/1.0'])(
+    'logs privacy-minimal structured data for %s',
+    async (userAgent) => {
+      const info = vi.spyOn(console, 'info').mockImplementation(() => undefined);
+
+      const response = await handleRequest(new Request('https://normiemode.com/healthz?private=value', {
+        headers: { 'User-Agent': userAgent },
+      }));
+
+      expect(response.status).toBe(200);
+      const entry = JSON.parse(String(info.mock.calls[0]?.[0]));
+      expect(entry).toMatchObject({
+        event: 'crawler_request',
+        method: 'GET',
+        path: '/healthz',
+        status: 200,
+        identity: 'unverified_user_agent',
+      });
+      expect(entry.crawler).toBe(userAgent.split('/')[0]);
+      expect(info.mock.calls[0]?.[0]).not.toContain('private=value');
+    },
+  );
+
+  it('does not log ordinary visitor requests', async () => {
+    const info = vi.spyOn(console, 'info').mockImplementation(() => undefined);
+
+    await handleRequest(new Request('https://normiemode.com/healthz', {
+      headers: { 'User-Agent': 'Mozilla/5.0' },
+    }));
+
+    expect(info).not.toHaveBeenCalled();
   });
 });

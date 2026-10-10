@@ -209,7 +209,8 @@ Progress (2026-10-10):
 - D-034 records the accepted policy: permit `OAI-SearchBot` and `Claude-SearchBot`; disallow `GPTBot` and `ClaudeBot`; continue allowing user-triggered retrieval through the general public-crawler rule.
 - The repository `robots.txt` now expresses that policy explicitly and `npm run seo:audit` fails if it regresses.
 - Deployed and verified on 2026-10-10: both search-crawler user agents received `200` for `robots.txt`, the homepage, one task page, one model page and one benchmark page; the live file disallows both training crawlers.
-- Remaining before `done`: confirm useful crawler identification in production access logs.
+- The server now emits a structured, privacy-minimal record for claimed OpenAI and Anthropic crawler requests: timestamp, crawler, method, path and status. It deliberately excludes IP addresses, query strings and ordinary visitors, and labels user-agent identity as unverified.
+- Remaining before `done`: deploy the logging change and confirm one generated request appears in CapRover's live app logs.
 
 Acceptance criteria:
 

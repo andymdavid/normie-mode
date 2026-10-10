@@ -10,6 +10,14 @@ const distDirectory = join(fileURLToPath(new URL('.', import.meta.url)), '..', '
 const port = Number(process.env.PORT ?? 42001);
 const intelligenceSnacksSubscribeUrl = 'https://intelligencesnacks.com/api/subscribe';
 const canonicalHostname = 'normiemode.com';
+const crawlerAgents = [
+  ['OAI-SearchBot', /\bOAI-SearchBot\b/i],
+  ['ChatGPT-User', /\bChatGPT-User\b/i],
+  ['GPTBot', /\bGPTBot\b/i],
+  ['Claude-SearchBot', /\bClaude-SearchBot\b/i],
+  ['Claude-User', /\bClaude-User\b/i],
+  ['ClaudeBot', /\bClaudeBot\b/i],
+] as const;
 
 const json = (body: unknown, status = 200) => Response.json(body, {
   status,
@@ -117,7 +125,7 @@ export function canonicalRedirect(request: Request) {
   return Response.redirect(destination, 308);
 }
 
-export async function handleRequest(request: Request) {
+async function routeRequest(request: Request) {
   const { pathname } = new URL(request.url);
   if (pathname === '/healthz') return new Response('ok');
 
@@ -130,6 +138,29 @@ export async function handleRequest(request: Request) {
   }
   if (request.method !== 'GET' && request.method !== 'HEAD') return new Response('Method not allowed', { status: 405 });
   return staticResponse(request);
+}
+
+/**
+ * Emit a privacy-minimal record only for claimed OpenAI/Anthropic crawler user agents. This makes
+ * crawler activity observable without retaining IP addresses, query strings or ordinary visits.
+ * A user-agent match is not proof of crawler identity; verify published IP ranges where available.
+ */
+export async function handleRequest(request: Request) {
+  const response = await routeRequest(request);
+  const userAgent = request.headers.get('user-agent') ?? '';
+  const crawler = crawlerAgents.find(([, pattern]) => pattern.test(userAgent))?.[0];
+  if (crawler) {
+    console.info(JSON.stringify({
+      event: 'crawler_request',
+      timestamp: new Date().toISOString(),
+      crawler,
+      method: request.method,
+      path: new URL(request.url).pathname,
+      status: response.status,
+      identity: 'unverified_user_agent',
+    }));
+  }
+  return response;
 }
 
 if (import.meta.main) {
