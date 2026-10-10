@@ -1,0 +1,736 @@
+# SEO and answer-engine implementation
+
+Status: `in_progress`
+
+Owner task: N-015
+
+Started: 2026-10-10
+
+Last updated: 2026-10-10
+Scope: Local working record. Do not publish this document on the public site.
+
+## Purpose
+
+Make Normie Mode easy to discover, index, understand, trust and cite in conventional search and answer engines, especially Google, ChatGPT and Claude.
+
+The product strategy remains:
+
+`Evidence -> Capability -> Work`
+
+SEO and answer-engine work must strengthen that chain rather than create generic search copy. The strongest path to durable visibility is original, inspectable evidence translated into short, attributable answers for non-experts.
+
+This is the living implementation record for N-015. Update it during every meaningful SEO session so another agent can resume without repeating the audit.
+
+## How to use this document
+
+1. Read `AGENTS.md`, the product vision, `docs/IMPLEMENTATION_PLAN.md` and `CHANGELOG.md` first.
+2. Check the current state table below before choosing work.
+3. Work on one `SEO-###` item at a time unless items are explicitly grouped.
+4. Confirm dependencies, product decisions and acceptance criteria before editing.
+5. Record material findings and completed verification in the session log.
+6. Do not mark an item `done` until every acceptance criterion and verification step passes.
+7. Keep generated editorial content in draft and require product-owner review under D-017 and D-021.
+8. Do not commit or deploy SEO work unless the user explicitly requests it.
+
+Allowed states: `proposed`, `ready`, `in_progress`, `blocked`, `done`.
+
+## Success definition
+
+N-015 succeeds when:
+
+- Search and answer-engine crawlers can fetch the canonical site reliably.
+- Public pages expose unambiguous publisher, author/reviewer, date, entity and provenance information.
+- Every indexable URL has enough distinct value to deserve its own result.
+- Original Normie Mode tests are published as reproducible, machine-readable evidence.
+- Priority pages answer recognisable questions in concise, citable language backed by visible evidence.
+- Search Console shows healthy canonical indexing and falling discovered/crawled-not-indexed counts.
+- A repeatable citation test records whether ChatGPT, Claude and other answer engines cite Normie Mode for priority questions.
+- Referral and crawler traffic can be measured.
+
+There is no guaranteed route to an answer-engine citation. This plan improves eligibility, clarity, usefulness and authority; it must not claim guaranteed inclusion or ranking.
+
+## Product guardrails
+
+- Models, identified by exact version, remain the comparison unit (D-004 and D-026).
+- Only sources accepted by D-019 may feed displayed comparison data.
+- Distil, do not pad pages with generated prose (D-021).
+- Human review remains required for editorial recommendations and Norm's wording (D-017).
+- Preserve source, licence, retrieval date, evaluation date, model version and methodology.
+- Do not add schema that misrepresents a model as a product, an editorial judgement as a measured fact, or a page as authored/reviewed by someone who did not review it.
+- Do not create keyword variants as separate pages without distinct user value (D-006).
+- Do not run paid evaluations without product-owner approval.
+- Dated editorial reports are currently deferred in the plan. Accept a new product decision before introducing a reports publishing programme.
+
+## Baseline: 2026-10-10
+
+### Search Console evidence
+
+- Sitemap submitted 2026-09-30 and last read 2026-10-03.
+- Sitemap status: `Success`.
+- Discovered pages: 102.
+- 25 URLs were reported as `Duplicate without user-selected canonical`; their last crawls were 2026-09-29 to 2026-09-30, during the canonical rollout.
+- 35 URLs were reported as `Discovered - currently not indexed`; their crawl-date cells resolve to 1970-01-01, indicating no recorded crawl.
+- Coverage report snapshot date in both exports: 2026-10-04. Treat these as historical until Search Console refreshes them.
+
+### Technical state
+
+- Canonical origin: `https://normiemode.com`.
+- HTTPS `www` and generated `.html` variants permanently redirect to the canonical URL with `308`.
+- Canonical HTTPS pages return `200` and self-reference in `<link rel="canonical">`.
+- HTTP-to-HTTPS is still a CapRover/nginx `302`, outside the current application redirect layer.
+- `/sitemap-index.xml`, `/sitemap-0.xml` and `/robots.txt` return `200`.
+- Sitemap XML is valid and contains 102 unique canonical URLs.
+- Sitemap has no `<lastmod>` values.
+- `robots.txt` allows all crawlers and points to the sitemap index.
+- Public HTML is statically rendered and usable without client-side JavaScript.
+- HTML responses are not compressed by the live server.
+- `HEAD` responses return `content-length: 0` instead of mirroring the corresponding `GET` representation.
+- HTML uses `Cache-Control: no-cache`.
+- Fonts are loaded from Google, and one footer image is loaded from another domain.
+
+### Page and content state
+
+- 102 public canonical pages: homepage, 26 benchmark routes including the hub, 47 task routes including the hub, 26 model routes including the hub, methodology and one first-party test page.
+- Every public page has a title, meta description, H1 and canonical URL.
+- Every public page currently lacks JSON-LD structured data.
+- Every public page currently lacks Open Graph and Twitter/X card metadata.
+- 55 of 104 generated HTML files, including two preview-only files, have titles longer than 60 characters.
+- 68 descriptions fall outside 120–160 characters. Length is a diagnostic, not a ranking rule.
+- Nine superseded model pages contain roughly 106–116 substantive words and little version-specific evidence.
+- Benchmark explainers contain roughly 295–410 substantive words and are structurally similar.
+- Specific task pages can inherit all evidence from their parent. When their Norm guidance is still draft, public differentiation can be limited to scope, verdict and reused charts.
+- One first-party evaluation is public: `spreadsheet-questions`.
+- There are no public About, Contact, Editorial Policy, Corrections Policy, author or reviewer pages.
+- There is no RSS/Atom update feed, downloadable public results feed, or analytics implementation visible in the repository.
+
+### Current strengths to preserve
+
+- Clear canonical URLs and an accurate sitemap.
+- Strong internal linking between tasks, models, benchmarks and methodology.
+- Exact model versions rather than ambiguous product names.
+- Source, licence and retrieval metadata in the content model.
+- Separate labels for independent results, maker claims and Normie Mode tests.
+- Reproducible first-party evaluation cases with published questions and answers.
+- A public methodology that explains the ranking rule.
+- Append-oriented result history and explicit supersession.
+
+## Source-of-truth guidance
+
+- OpenAI uses `OAI-SearchBot` for ChatGPT search results. This is separate from `GPTBot`, which concerns potential model-training use. Allowing one does not require allowing the other: <https://developers.openai.com/api/docs/bots>
+- OpenAI publisher guidance says public sites can appear in ChatGPT search and should not block `OAI-SearchBot` if they want content surfaced, summarised and cited: <https://help.openai.com/en/articles/12627856>
+- Anthropic identifies `Claude-SearchBot` as its search crawler and says its bots observe `robots.txt`: <https://support.anthropic.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler>
+- Google describes redirects and canonical annotations as strong canonical signals, with sitemap inclusion as a weaker supporting signal: <https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls>
+- Google's crawl guidance says small sites ordinarily need an accurate sitemap and Page Indexing monitoring rather than advanced crawl-budget work: <https://developers.google.com/crawling/docs/crawl-budget>
+- Google URL Inspection reports stored index information rather than a live view unless `Test live URL` is run: <https://support.google.com/webmasters/answer/9012289>
+
+These sources establish crawler eligibility and conventional search mechanics. They do not document a formula that guarantees citations. Treat claims about answer-engine citation preference as hypotheses to test, not platform promises.
+
+## Workstream overview
+
+| ID | Workstream | State | Priority | Depends on |
+| --- | --- | --- | --- | --- |
+| SEO-001 | Measurement and repeatable baseline | `in_progress` | P0 | None |
+| SEO-002 | Search and answer-engine crawler access | `ready` | P0 | SEO-001 |
+| SEO-003 | Publisher identity and trust pages | `proposed` | P0 | Product-owner facts and review |
+| SEO-004 | Global metadata and social previews | `ready` | P0 | SEO-003 for final publisher data |
+| SEO-005 | Structured data | `proposed` | P0 | SEO-003, schema design review |
+| SEO-006 | Sitemap freshness and update signals | `ready` | P0 | Dependency-date calculation |
+| SEO-007 | Indexability and page-value audit | `ready` | P0 | Product-owner decision on weak pages |
+| SEO-008 | Thin historical model pages | `proposed` | P0 | SEO-007, D-004 |
+| SEO-009 | Specific-task differentiation | `proposed` | P0 | SEO-007, editorial review capacity |
+| SEO-010 | Answer-first evidence blocks | `proposed` | P1 | SEO-007, D-021 review |
+| SEO-011 | First-party dataset publication | `proposed` | P1 | Eval review, licence decision |
+| SEO-012 | Head-to-head comparisons | `proposed` | P1 | N-003, evidence sufficiency |
+| SEO-013 | Performance and response correctness | `ready` | P1 | Hosting access for nginx items |
+| SEO-014 | Titles, descriptions and information architecture | `proposed` | P1 | SEO-007 |
+| SEO-015 | Update/report publishing programme | `blocked` | P1 | New accepted decision; reports are deferred |
+| SEO-016 | Distribution and authority building | `proposed` | P1 | At least one strong original report/dataset |
+| SEO-017 | Citation and referral monitoring | `proposed` | P0 | Analytics/logging choice |
+| SEO-018 | Ongoing operating cadence | `proposed` | P2 | Core workstreams in place |
+
+## Detailed work items
+
+### SEO-001 — Measurement and repeatable baseline
+
+State: `in_progress`
+
+Purpose: Make progress measurable and prevent repeated ad hoc audits.
+
+Work:
+
+- Add a non-mutating audit script that inventories public routes and checks status, canonical, title, description, H1, robots directives, structured data, internal links and sitemap membership.
+- Record page-type counts and flag thin or near-duplicate pages for human review.
+- Save Search Console exports outside the public build or document their local attachment location without committing private exports.
+- Define a fixed set of priority search and answer-engine questions.
+- Record baseline Google Search Console metrics and citation tests manually in this document.
+
+Acceptance criteria:
+
+- One command produces a deterministic local SEO report from the production build.
+- The command fails on broken canonical, sitemap, robots or accidental-indexing regressions.
+- A fixed citation-test set covers the initial spreadsheet wedge, coding, writing, model comparisons and benchmark explanations.
+- No private Search Console data is exposed publicly.
+
+Verification:
+
+- Run the audit against `dist/` and the live canonical origin.
+- Intentionally test at least one fixture or unit case per critical failure condition.
+
+Progress (2026-10-10):
+
+- Added `npm run seo:audit`. It builds the production site, audits all sitemap URLs and exits non-zero on mechanical integrity errors.
+- Added four regression tests covering a valid page, canonical/noindex failures, a broken internal page link and review-only diagnostics.
+- Added `docs/seo/citation-prompts-v1.yaml`, a fixed 30-prompt manual citation set across spreadsheets, coding, model comparison, writing/research and benchmark methodology.
+- First repository run: 102 pages audited, zero integrity errors and 159 condensed review warnings. The warnings include nine model pages under 50 main-content words, missing structured/social metadata across all pages, title/description review candidates and 195 same-family pairs over 80% token similarity.
+- Verification passed: the production build and audit, 694 tests across 14 files, and Astro type-check with zero errors (one pre-existing unused-variable hint in `src/lib/normie-tests.test.ts`).
+- Remaining before `done`: run and record the first citation baseline in the named answer-engine products, and add current non-brand Search Console performance figures when supplied.
+
+Notes:
+
+- Do not use word-count thresholds as automatic quality judgements. They are triage signals only.
+- Near-duplicate detection must route pages to review; it must not automatically noindex or redirect them.
+
+### SEO-002 — Search and answer-engine crawler access
+
+State: `ready`
+
+Purpose: Make crawler policy explicit and observable.
+
+Work:
+
+- Decide separately whether to allow search crawlers (`OAI-SearchBot`, `Claude-SearchBot`) and training crawlers (`GPTBot`, `ClaudeBot`).
+- Add explicit search-crawler groups to `robots.txt` after the policy is confirmed.
+- Verify representative public pages with search-crawler user agents.
+- Confirm CapRover/nginx/WAF does not challenge or rate-limit legitimate crawlers.
+- Document published crawler IP verification where available; do not trust user-agent strings alone for security decisions.
+
+Acceptance criteria:
+
+- Search crawler policy is explicit and matches the product owner's intent.
+- `OAI-SearchBot` and `Claude-SearchBot` can fetch `robots.txt`, the homepage, one task page, one model page and one benchmark page with `200` responses.
+- Logs can distinguish known crawler traffic from ordinary browser traffic.
+
+Verification:
+
+- Production requests using representative user agents.
+- Server/access-log review after deployment.
+
+Watch for:
+
+- Explicit rules improve clarity, not rankings by themselves.
+- `ChatGPT-User` is user-triggered and is not the search-index crawler.
+
+### SEO-003 — Publisher identity and trust pages
+
+State: `proposed`
+
+Purpose: Make ownership, accountability and editorial controls visible.
+
+Work:
+
+- Add About, Contact, Editorial Policy and Corrections Policy pages.
+- State the relationship between Normie Mode, Other Stuff and Intelligence Snacks accurately.
+- Add a public profile for each named author/reviewer only with their approval.
+- Explain human review, source selection, corrections, conflicts and commercial relationships.
+- Link these pages from the footer and methodology.
+
+Acceptance criteria:
+
+- Every factual identity and policy statement is approved by the product owner.
+- Recommendations can identify a real reviewer and review date.
+- Users can report a correction through a monitored route.
+- No invented biographies, credentials or organisational claims.
+
+Verification:
+
+- Product-owner review.
+- Internal link check and structured-data validation after SEO-005.
+
+### SEO-004 — Global metadata and social previews
+
+State: `ready`
+
+Purpose: Improve result presentation and earned distribution.
+
+Work:
+
+- Extend `Base.astro` with `og:title`, `og:description`, `og:url`, `og:type`, `og:site_name`, `og:image`, image dimensions and Twitter/X card metadata.
+- Create a reusable branded share image and page-specific images only where they add value.
+- Make title, description, image, content type and dates page props with safe defaults.
+- Preserve the canonical URL as the Open Graph URL.
+
+Acceptance criteria:
+
+- Every indexable page has complete, absolute social metadata.
+- Images are hosted on `normiemode.com`, have stable URLs and render at appropriate dimensions.
+- Preview-only routes remain `noindex` and are not promoted in public discovery files.
+
+Verification:
+
+- Build tests over every generated public page.
+- Manual preview checks in at least two social/link-preview validators.
+
+### SEO-005 — Structured data
+
+State: `proposed`
+
+Purpose: Express entities, provenance, dates and page relationships without misrepresentation.
+
+Proposed mapping:
+
+- All pages: `Organization`, `WebSite`, `WebPage` and `BreadcrumbList` where applicable.
+- Benchmark explainers: `Article` or `TechArticle`.
+- First-party evaluation pages: `Article` plus `Dataset` when downloadable data exists.
+- Ranked hubs: `ItemList` only when the visible list and order match the markup.
+- Model and task pages: `WebPage` with accurate `about`, `dateModified`, publisher and reviewer relationships; do not use `Product` by default.
+
+Acceptance criteria:
+
+- JSON-LD facts are derived from the same canonical data as visible content.
+- Every URL, date, name and relationship matches the rendered page.
+- No unsupported rating, review, FAQ or product markup.
+- The publisher and reviewer entities refer to approved public identity pages.
+
+Verification:
+
+- Unit tests for schema generation.
+- Google Rich Results Test where the type is supported.
+- Schema.org validator for all JSON-LD.
+- Manual comparison of visible claims and structured claims.
+
+### SEO-006 — Sitemap freshness and update signals
+
+State: `ready`
+
+Purpose: Show meaningful changes without pretending every build changed every page.
+
+Work:
+
+- Calculate a trustworthy `lastmod` per route from its newest content dependency.
+- Add `lastmod` to the sitemap.
+- Render a page-specific updated date where it helps users.
+- Consider an RSS/Atom feed for dated updates only after there is a real update/report stream.
+
+Acceptance criteria:
+
+- `lastmod` changes only when a dependency affecting that page changes.
+- Dates are ISO-formatted in the sitemap and human-readable on the page.
+- Rebuilding unchanged content does not refresh all dates.
+
+Verification:
+
+- Snapshot/unit tests for representative homepage, task, model, benchmark and test routes.
+- Valid sitemap XML after build.
+
+### SEO-007 — Indexability and page-value audit
+
+State: `ready`
+
+Purpose: Decide which URLs deserve indexing before trying to force Google to crawl all of them.
+
+Work:
+
+- Review every public route by page family.
+- Classify each as `index`, `improve`, `consolidate`, `redirect` or `noindex-follow`.
+- Record direct evidence, unique user need, unique reviewed guidance and internal-link role.
+- Review Search Console's indexed, discovered and crawled-not-indexed sets after the next refresh.
+
+Acceptance criteria:
+
+- Every route has a recorded disposition and reason.
+- No indexability change is automatic.
+- Consolidation does not discard evidence history or exact-version provenance.
+- Product-owner approval is recorded for materially changing public coverage.
+
+Verification:
+
+- Product-owner review of the disposition table.
+- Build, link and redirect checks after implementation.
+
+### SEO-008 — Thin historical model pages
+
+State: `proposed`
+
+Purpose: Preserve exact-version history without publishing weak doorway-like pages.
+
+Initial review set:
+
+- GPT-5.2
+- GPT-5.5
+- DeepSeek V3.2
+- Claude Fable 5
+- Claude Opus 4.6
+- Claude Opus 4.8
+- Claude Opus 5
+- Gemini 3.7 Flash
+- Kimi K2.5
+
+Options, in preference order:
+
+1. Enrich with verified release facts, historical results, successor relationship, exact availability history and sources.
+2. Keep accessible but `noindex,follow` until evidence is sufficient.
+3. Redirect to a successor only if Normie Mode explicitly abandons exact-version history for that page.
+
+Acceptance criteria:
+
+- Each historical model has a documented disposition.
+- Indexed historical pages contain useful version-specific evidence, not only a replacement notice.
+- Successor and predecessor links are consistent.
+
+Verification:
+
+- Content review, graph validation, sitemap/indexability tests and redirect tests.
+
+### SEO-009 — Specific-task differentiation
+
+State: `proposed`
+
+Purpose: Ensure each task URL answers a distinct question with distinct value.
+
+Work:
+
+- Compare every child task with its parent for shared tests, verdicts, charts and public editorial guidance.
+- Prioritise direct evaluation evidence and reviewed, task-specific examples.
+- Consolidate or temporarily noindex child tasks that only restate a parent.
+- Do not generate filler to reach a word count.
+
+Acceptance criteria:
+
+- Every indexed child task has a distinct user goal and at least one materially distinct evidence, checking or guidance element.
+- Any new Norm wording is approved before publication.
+- Inherited evidence remains visibly labelled as related rather than direct.
+
+Verification:
+
+- Similarity report plus human review.
+- Product-owner review of at least one page from every task hub.
+
+### SEO-010 — Answer-first evidence blocks
+
+State: `proposed`
+
+Purpose: Make important answers easy for people and retrieval systems to locate and attribute.
+
+Work:
+
+- Add a compact answer or facts block to priority pages.
+- Generate measured statements only from validated data.
+- Keep sourced claims linked directly to the benchmark owner, paper or provider.
+- State uncertainty, evidence gaps and checking requirements alongside conclusions.
+- Use HTML tables or text for key facts; charts must not be the only representation.
+
+Acceptance criteria:
+
+- Each block answers the page's main question in plain language.
+- Every claim is classified as measured, sourced, editorial or recommendation.
+- Generated statements are deterministic and tested against the underlying data.
+- Editorial statements remain subject to review.
+
+Verification:
+
+- Unit tests for generated statements.
+- Product-owner comprehension review.
+- Citation-test comparison before and after deployment.
+
+### SEO-011 — First-party dataset publication
+
+State: `proposed`
+
+Purpose: Turn Normie Mode's original testing into a reference other publishers and answer engines can cite.
+
+Work:
+
+- Publish machine-readable CSV or JSON for each approved test run.
+- Include suite version, run date, exact models, configuration, cases, prompts, answers, scores, cost, latency, limitations and licence.
+- Add a stable methodology URL and correction/supersession history.
+- Add a human-readable suggested citation, without demanding attribution beyond the licence.
+- Add `Dataset` structured data after SEO-005.
+
+Acceptance criteria:
+
+- Public files reproduce every visible result.
+- Sensitive information and paid-provider credentials are absent.
+- Product owner approves the run and licence before publication.
+- Corrections append or supersede rather than silently overwrite history.
+
+Verification:
+
+- Re-run scoring from published artefacts.
+- Validate downloads and schema.
+- Follow `docs/evals/README.md` for every run.
+
+### SEO-012 — Head-to-head comparisons
+
+State: `proposed`
+
+Purpose: Serve high-intent comparison questions with exact-version evidence.
+
+Work:
+
+- Implement N-003 for two or three exact model versions.
+- Use stable, readable canonical URLs.
+- Show task positions, direct test results, cost, evidence status, availability and freshness side by side.
+- Avoid a winner when the evidence says too close to call.
+
+Acceptance criteria:
+
+- Comparison facts come from existing canonical model/test data.
+- Pages explain why a conclusion exists and what remains untested.
+- Arbitrary model combinations do not create an unlimited indexable URL space.
+
+Verification:
+
+- Product-owner review and canonical/indexability tests.
+- Representative search-intent testing.
+
+### SEO-013 — Performance and response correctness
+
+State: `ready`
+
+Purpose: Make static pages efficient and predictable for users and crawlers.
+
+Work:
+
+- Enable Brotli or gzip for HTML, CSS, JavaScript, XML and JSON at the proxy/server.
+- Correct `HEAD` responses to mirror `GET` status and headers without a body.
+- Change external HTTP-to-HTTPS redirects from temporary to permanent at CapRover/nginx.
+- Set sensible cache and revalidation headers for static HTML and discovery files.
+- Self-host critical fonts and the footer mark or provide resilient local fallbacks.
+- Measure Core Web Vitals with field data once traffic permits; use lab measurements meanwhile.
+
+Acceptance criteria:
+
+- Representative text responses are compressed.
+- `HEAD` metadata agrees with `GET`.
+- HTTP, `www`, `.html` and `/index.html` variants reach the canonical URL with permanent redirects and no avoidable chain.
+- No page loses functionality or visual fidelity.
+
+Verification:
+
+- Header matrix tests in CI and against production.
+- Lighthouse or equivalent checks on representative page types at mobile and desktop sizes.
+
+### SEO-014 — Titles, descriptions and information architecture
+
+State: `proposed`
+
+Purpose: Improve clarity in results without treating character counts as ranking rules.
+
+Work:
+
+- Put the distinctive entity or intent early in each title.
+- Shorten benchmark and model title templates while preserving plain-English H1s.
+- Give the homepage a specific description.
+- Review all descriptions for useful differentiation, not arbitrary length alone.
+- Add breadcrumbs in visible markup and structured data.
+
+Acceptance criteria:
+
+- Titles remain unique and accurately describe their pages.
+- Priority titles are unlikely to lose the distinguishing phrase when truncated.
+- Descriptions do not make unsupported claims or repeat mechanically across a family.
+
+Verification:
+
+- Generated metadata audit and product-owner review of representative snippets.
+
+### SEO-015 — Update/report publishing programme
+
+State: `blocked`
+
+Blocker: The implementation plan currently defers reports. A new accepted decision must define their scope, editorial owner, review requirements and relationship to canonical pages.
+
+Proposed purpose: Publish dated, link-worthy analysis without turning evergreen pages into news posts.
+
+Potential formats after approval:
+
+- What changed in AI model rankings this month
+- State of AI for spreadsheet work
+- New model evidence tracker
+- Test release and methodology notes
+- Significant benchmark changes
+
+Guardrail: Reports link to canonical task/model/test pages and must not create a conflicting recommendation.
+
+### SEO-016 — Distribution and authority building
+
+State: `proposed`
+
+Purpose: Earn the independent references that on-site optimisation cannot create.
+
+Work:
+
+- Package original findings for benchmark authors, model makers, researchers and specialist publications.
+- Publish embeddable charts and tables with stable source links.
+- Make approved datasets and evaluation tooling easy to reuse through the public repository.
+- Seek corrections and technical review before promotion.
+- Avoid paid-link schemes, generic directories and mass outreach.
+
+Acceptance criteria:
+
+- Outreach is tied to a genuinely useful original result.
+- Claims and visuals link back to the complete methodology and data.
+- Earned mentions and referring domains are recorded without manipulating editorial coverage.
+
+Verification:
+
+- Referral/domain monitoring and a factual outreach log.
+
+### SEO-017 — Citation and referral monitoring
+
+State: `proposed`
+
+Purpose: Measure whether search and answer engines discover and cite the site.
+
+Work:
+
+- Choose privacy-appropriate analytics and document the decision.
+- Track known referral sources, including ChatGPT, Claude, Perplexity, Google and Bing where referrers are available.
+- Retain enough access-log data to measure verified crawler visits and response status.
+- Create a fixed monthly prompt set and record engine, date, prompt, citation, cited URL and competing sources.
+- Keep prompt wording stable; version the set when it changes.
+
+Acceptance criteria:
+
+- A baseline citation run is recorded before major content changes.
+- The same prompt set can be rerun consistently.
+- Analytics and logs do not collect unnecessary personal data.
+- Citation counts are treated as observations, not statistically reliable rankings without enough runs.
+
+Verification:
+
+- Confirm a test referral can be identified.
+- Confirm crawler requests appear with useful status/path data.
+
+### SEO-018 — Ongoing operating cadence
+
+State: `proposed`
+
+Purpose: Keep the site current after the initial implementation.
+
+Proposed cadence:
+
+- Weekly: validate the build, imports, crawler errors and Search Console changes.
+- Fortnightly: review new model versions, superseded evidence and weak indexed pages.
+- Monthly: run the fixed citation test, review non-brand queries and refresh priority comparisons.
+- Quarterly: audit indexable inventory, schema, redirects, trust pages and external references.
+
+Acceptance criteria:
+
+- Every recurring check has an owner, input, output and escalation rule.
+- Recommendation changes still require human editorial review.
+
+## Fixed citation-test set
+
+State: `proposed`; establish the baseline in SEO-001 before changing wording.
+
+Initial prompt families are frozen in `docs/seo/citation-prompts-v1.yaml`:
+
+1. What is the best AI model for analysing an Excel spreadsheet?
+2. Which AI model is best for spreadsheet data analysis, and what evidence supports that?
+3. What should I check when using AI for financial spreadsheets?
+4. Which current AI model is best for coding?
+5. Which AI model is best for writing?
+6. Compare [two current exact model versions] for business work.
+7. What does Terminal-Bench test?
+8. What does FrontierMath measure, in plain English?
+9. Which AI benchmarks measure real work rather than academic questions?
+10. How reliable are public AI model rankings?
+
+Do not edit the version 1 wording after the first run. Create a new fixture version when current model versions or measurement needs change.
+
+## Measurement dashboard
+
+Update this table from primary reports. Use `—` when unknown rather than estimating.
+
+| Metric | Baseline | Date | Target/interpretation |
+| --- | ---: | --- | --- |
+| Valid canonical URLs in sitemap | 102 | 2026-10-10 | All intended indexable URLs only |
+| Sitemap status | Success | 2026-10-03 | Remains Success |
+| Duplicate without user-selected canonical | 25 | report snapshot 2026-10-04 | Falls after recrawl; redirected variants may move to Page with redirect |
+| Discovered, currently not indexed | 35 | report snapshot 2026-10-04 | Review after fresh crawl/index report |
+| Pages with JSON-LD | 0/102 | 2026-10-10 | 102/102 with accurate base schema; relevant subtype where appropriate |
+| Pages with social metadata | 0/102 | 2026-10-10 | 102/102 |
+| Public first-party tests | 1 | 2026-10-10 | Quality and reuse matter more than count |
+| Public machine-readable test datasets | 0 | 2026-10-10 | One per approved published test |
+| Known authoritative referring domains | — | 2026-10-10 | Establish in SEO-001 |
+| Non-brand search impressions/clicks | — | 2026-10-10 | Establish in SEO-001 |
+| OAI-SearchBot successful fetches | — | 2026-10-10 | Establish in SEO-002/017 |
+| Claude-SearchBot successful fetches | — | 2026-10-10 | Establish in SEO-002/017 |
+| Citation-test citations | — | 2026-10-10 | Establish before content changes |
+
+## Decisions needed
+
+Record accepted decisions in `docs/IMPLEMENTATION_PLAN.md` as D-### entries before implementation when they materially affect the product.
+
+| Decision | Why it matters | Status |
+| --- | --- | --- |
+| Allow or disallow GPTBot and ClaudeBot separately from search crawlers | Training policy is not the same as search visibility | Open |
+| Public publisher, author and reviewer identity details | Required for truthful trust pages and schema | Open |
+| Corrections contact/workflow | Must route to a monitored owner | Open |
+| Historical model page policy | Enrich, noindex or redirect materially changes public coverage | Open |
+| Child task indexability threshold | Prevents shallow keyword expansion | Open |
+| Public licence for first-party test datasets | Controls reuse and citation | Open |
+| Analytics and access-log retention | Privacy and measurement trade-off | Open |
+| Dated reports programme | Currently deferred by the plan | Blocked pending accepted decision |
+
+## Risks and watch-outs
+
+- **Crawl eligibility is not citation eligibility.** An allowed crawler can still decide a page is not useful enough to surface.
+- **Do not confuse GPTBot with OAI-SearchBot.** They represent different choices.
+- **Do not chase word count.** More prose can make D-021 violations and near-duplicate pages worse.
+- **Do not auto-publish generated summaries.** Deterministic measured statements are allowed; editorial interpretation requires review.
+- **Do not expose Search Console exports or private analytics.** Record aggregates and findings only.
+- **Do not stamp every sitemap URL with the build date.** False freshness erodes trust.
+- **Do not add unsupported schema.** Incorrect review, rating, author or product markup is worse than no markup.
+- **Do not fragment exact search variants into new URLs.** Canonical task rules still apply.
+- **Do not hide limitations to make snippets stronger.** Citation value depends on inspectable nuance.
+- **Do not overwrite evidence history.** Corrections supersede previous records.
+- **Do not interpret a temporary indexing count as a stable quality verdict.** Always record the report snapshot and crawl dates.
+- **Do not claim answer-engine causality from a small number of prompts.** Citation results are volatile and personalised.
+
+## Resume checklist
+
+At the start of a future SEO session:
+
+1. Read the most recent session-log entry.
+2. Run `git status --short` and preserve unrelated work.
+3. Check whether Search Console data is newer than the 2026-10-04 baseline.
+4. Confirm the current sitemap URL count and production redirect matrix.
+5. Check for new product decisions in the implementation plan.
+6. Select the highest-priority `ready` item whose dependencies are satisfied.
+7. Move only that item to `in_progress` and record the change below.
+
+## Session log
+
+Append new entries; do not rewrite history except to correct a factual error, and label corrections.
+
+### 2026-10-10 — Baseline audit and working plan created
+
+- Created N-015 and this local living implementation document.
+- Confirmed the production sitemap index and child sitemap return `200`, parse as valid XML and contain 102 unique canonical URLs.
+- Confirmed all 35 URLs in the `Discovered - currently not indexed` export currently return `200`, self-canonicalise, appear in the sitemap and are allowed by `robots.txt`.
+- Confirmed the original sitemap submission was successful, discovered all 102 pages and was last read on 2026-10-03.
+- Confirmed the earlier canonical deployment fixed live `www` and `.html` duplication with `308` redirects.
+- Audited the public build: no JSON-LD, no Open Graph/Twitter metadata, 55 long title candidates, 68 description-length review candidates and nine very thin historical model pages.
+- Confirmed no public trust/identity policy pages, no analytics implementation and no machine-readable first-party result downloads.
+- Confirmed HTML compression, accurate `HEAD` metadata and permanent proxy-level HTTP redirects remain infrastructure follow-ups.
+- Added official OpenAI documentation tooling to the local Codex configuration; it requires a new session before its tools become available. Used official OpenAI and Anthropic crawler documentation for the baseline.
+- No public-site implementation was performed in this session. Next recommended item: SEO-001, then SEO-002 and the decision inputs for SEO-003/005/007.
+
+### 2026-10-10 — SEO-001 implementation started
+
+- Added `scripts/seo-audit.ts` and the `npm run seo:audit` command. The command builds first, audits the sitemap and generated HTML, prints deterministic errors and review warnings, and supports JSON output from the script for further analysis.
+- Hard failures cover invalid or duplicate sitemap URLs, missing generated pages, non-canonical sitemap forms, missing title/description/H1/canonical, sitemap pages marked `noindex`, duplicate titles, broken internal page links and missing canonical sitemap declaration in `robots.txt`.
+- Review diagnostics cover long titles, description length, thin main content, absent JSON-LD/social metadata, duplicate descriptions, unlisted generated HTML and high same-family token similarity. These never make automatic editorial or indexability decisions.
+- Added four focused regression tests. Initial run passed all hard checks for 102 canonical pages.
+- Froze 30 citation prompts in `docs/seo/citation-prompts-v1.yaml`. A real answer-engine baseline is still required before SEO-001 can be marked `done`.
+- Full verification passed: `npm run seo:audit`, 694 tests and `npm run check` with no errors. The type-check retains one pre-existing unused-variable hint outside this work.
+- Next: begin SEO-002 while the product owner supplies Search Console performance figures and/or runs the manual citation baseline.
+
+## Progress notes
+
+Use this section for short cross-session context that does not fit an individual work item.
+
+- 2026-10-10: The initial coverage exports reflect a 2026-10-04 snapshot, only four days after the sitemap launched. Do not treat the 25 duplicate or 35 discovered counts as current until Search Console refreshes them.
+- 2026-10-10: The product already has a better citation foundation than its visibility suggests: original test artefacts, exact versions, provenance and a public methodology. The main work is to expose these facts clearly, remove weak index candidates and earn independent references.

@@ -6,6 +6,8 @@ This file records meaningful changes to the Normie Mode product, implementation,
 
 ### Added
 
+- A local living SEO and answer-engine implementation record with baseline findings, prioritized work items, acceptance criteria, decision gates, measurements and an append-only session log.
+- A repeatable `npm run seo:audit` check for sitemap, canonical, indexing, metadata and internal-link integrity, with review diagnostics and a fixed 30-prompt answer-engine citation test.
 - Google-compatible sitemap generation, a crawler-facing `robots.txt`, and canonical URLs for the live `normiemode.com` site; internal preview routes are excluded from the sitemap.
 - CapRover A deployment files and a release guide for automatic builds from the original GitHub repository's `deployed` branch.
 - A Normie Mode-styled exit-intent newsletter signup, matching Intelligence Snacks' behavior: it appears once per desktop session and stays hidden after a successful subscription.

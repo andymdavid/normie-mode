@@ -12,6 +12,7 @@
     "stop": "pkill -f 'bun server/index.ts' || true",
     "check": "astro check",
     "validate": "tsx scripts/validate.ts",
+    "seo:audit": "npm run build && tsx scripts/seo-audit.ts",
     "test": "vitest run",
     "import": "tsx scripts/import.ts",
     "eval": "tsx scripts/eval.ts",

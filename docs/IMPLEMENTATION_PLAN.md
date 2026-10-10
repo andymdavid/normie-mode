@@ -241,6 +241,16 @@ Progress note (2026-09-30): Production search-discovery files are now generated 
 
 Progress note (2026-10-09): Search Console reported 25 duplicate URLs last crawled during the 29–30 September canonical rollout. The public server now permanently redirects HTTP, `www` and generated `.html` variants to the HTTPS non-`www`, extensionless URL in one hop, while canonical tags and the sitemap continue to use that same form. Regression tests cover direct and CapRover-forwarded requests.
 
+### N-015 — SEO and answer-engine visibility
+
+- Status: `in_progress` (implementation record and baseline created 2026-10-10)
+- Dependencies: N-014 for production crawl behaviour; D-017, D-019 and D-021 for identity, evidence and editorial controls.
+- Work: make public pages technically discoverable, distinctly useful, machine-understandable and citable; publish stronger first-party evidence; measure conventional search and answer-engine discovery without creating thin keyword pages or unreviewed editorial copy.
+- Acceptance criteria: crawler and indexability checks are repeatable; intended pages expose accurate canonical, publisher, date and provenance signals; weak pages are improved or deliberately excluded; approved first-party tests have reproducible public data; Search Console and a fixed answer-engine citation test show measurable progress.
+- Verification: the checks listed per work item in `docs/SEO_IMPLEMENTATION.md`, plus `npm run validate`, `npm test`, `npm run check`, `npm run build`, production header/link/schema checks and product-owner review where required.
+
+Progress note (2026-10-10): The living implementation record is `docs/SEO_IMPLEMENTATION.md`. It contains the 102-page baseline, Search Console context, official crawler guidance, prioritized `SEO-001` to `SEO-018` work items, decision gates, measurements, risks and an append-only session log. Start with SEO-001; do not add more indexable task pages while SEO-007 is unresolved.
+
 ### N-001 — Import free data sources
 
 - Status: `in_progress`
