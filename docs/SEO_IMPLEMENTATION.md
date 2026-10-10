@@ -287,7 +287,8 @@ Progress (2026-10-10):
 - Added safe props for content type, social image, image alt text and optional article dates. Final publisher/person relationships remain deferred to SEO-003/005.
 - Added a stable 1200×630 branded JPEG and extended `npm run seo:audit` so missing, inconsistent or non-canonical social metadata is a hard failure.
 - Local verification passed: production build and SEO audit across 102 public pages, 701 tests across 14 files, and type-check with zero errors (one pre-existing hint remains).
-- Remaining before `done`: deploy and check the homepage plus one detail page in two external preview validators.
+- Deployed in `08f4207`. Live source checks confirmed complete, matching metadata on the homepage and `/best-ai-for/excel-spreadsheets`; the image returns `200 image/jpeg` on GET and is exactly 1200×630.
+- Remaining before `done`: check those two URLs visually in two interactive external preview validators. OpenGraph.xyz rate-limited this environment and Meta Tags requires client-side interaction, so neither was recorded as a pass.
 
 ### SEO-005 — Structured data
 
@@ -775,6 +776,13 @@ Append new entries; do not rewrite history except to correct a factual error, an
 - Marked SEO-003 blocked rather than inventing trust claims. It needs approved identity details, relationship wording and a monitored public corrections/contact route.
 - Added site-wide Open Graph and Twitter/X metadata with canonical absolute URLs and a stable default social image. Added deterministic audit coverage for completeness and consistency.
 - The default 1200×630 social image was generated from the existing Norm mascot reference, then resized and inspected locally; it contains the exact approved site name and existing positioning line only.
+
+### 2026-10-10 — SEO-004 deployed and source-verified
+
+- Pushed atomic commit `08f4207` to `main` and `deployed`; the GitHub deployment-hook run completed successfully and the new tags are live.
+- Verified the homepage and Excel task page expose matching title, description, canonical `og:url`, site name, type, absolute image URL, dimensions, alt text and corresponding Twitter/X fields.
+- Downloaded the live share image: `200`, `image/jpeg`, 99,232 bytes and 1200×630. Its `HEAD` response still omits accurate content headers, which remains tracked under SEO-013; social crawlers use GET.
+- Tried OpenGraph.xyz and Meta Tags for external rendered-preview verification. The former returned `429` to this environment and the latter requires client-side interaction, so the two-validator acceptance check remains open rather than being inferred from source tags.
 
 ## Progress notes
 
