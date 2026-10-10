@@ -13,6 +13,7 @@
     "check": "astro check",
     "validate": "tsx scripts/validate.ts",
     "seo:audit": "npm run build && tsx scripts/seo-audit.ts",
+    "seo:indexability": "npm run build && tsx scripts/indexability-review.ts",
     "test": "vitest run",
     "import": "tsx scripts/import.ts",
     "eval": "tsx scripts/eval.ts",

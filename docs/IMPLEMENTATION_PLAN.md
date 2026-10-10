@@ -261,6 +261,8 @@ Progress note (2026-10-10): SEO-006 now derives sitemap freshness from recorded 
 
 Progress note (2026-10-10): SEO-006 is done. Commit `ff7390a` is live with 102/102 sitemap entries dated; representative route families were verified, and an unchanged rebuild produced a byte-identical sitemap, confirming build time does not alter freshness.
 
+Progress note (2026-10-10): SEO-007 has a reproducible 102-URL disposition register at `docs/seo/indexability-review.csv`. It proposes indexing 62 routes and temporarily applying `noindex,follow` to 31 undifferentiated child-task pages and nine thin historical model pages. No public coverage change has been made; product-owner approval is required.
+
 ### N-001 — Import free data sources
 
 - Status: `in_progress`

@@ -6,6 +6,7 @@ This file records meaningful changes to the Normie Mode product, implementation,
 
 ### Added
 
+- A reproducible 102-URL indexability review register with evidence and approval status for every proposed disposition; it does not change public indexing by itself.
 - Evidence-derived sitemap `lastmod` dates for every public URL, with audit coverage that rejects invalid freshness values.
 - Complete site-wide Open Graph and Twitter/X preview metadata with canonical URLs and a stable branded 1200×630 share image.
 - Privacy-minimal structured server logs for claimed OpenAI and Anthropic crawler requests, without ordinary visitor, IP-address or query-string logging.

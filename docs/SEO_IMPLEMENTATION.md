@@ -135,7 +135,7 @@ These sources establish crawler eligibility and conventional search mechanics. T
 | SEO-004 | Global metadata and social previews | `in_progress` | P0 | SEO-003 for final publisher data |
 | SEO-005 | Structured data | `proposed` | P0 | SEO-003, schema design review |
 | SEO-006 | Sitemap freshness and update signals | `done` | P0 | Dependency-date calculation |
-| SEO-007 | Indexability and page-value audit | `ready` | P0 | Product-owner decision on weak pages |
+| SEO-007 | Indexability and page-value audit | `in_progress` | P0 | Product-owner decision on weak pages |
 | SEO-008 | Thin historical model pages | `proposed` | P0 | SEO-007, D-004 |
 | SEO-009 | Specific-task differentiation | `proposed` | P0 | SEO-007, editorial review capacity |
 | SEO-010 | Answer-first evidence blocks | `proposed` | P1 | SEO-007, D-021 review |
@@ -355,7 +355,7 @@ Progress (2026-10-10):
 
 ### SEO-007 — Indexability and page-value audit
 
-State: `ready`
+State: `in_progress`
 
 Purpose: Decide which URLs deserve indexing before trying to force Google to crawl all of them.
 
@@ -377,6 +377,16 @@ Verification:
 
 - Product-owner review of the disposition table.
 - Build, link and redirect checks after implementation.
+
+Progress (2026-10-10):
+
+- Added the reproducible `npm run seo:indexability` review and generated `docs/seo/indexability-review.csv` with one row for each of the 102 public URLs.
+- The register records page family, parent, main-content words, inbound internal links, test count, unique tests versus parent, visible reviewed guidance, direct-test and graph-result counts, proposed disposition, reason and approval status.
+- Proposed `index` for 62 routes: core/collection pages, 26 benchmark pages, 16 parent task pages, 17 substantive/current model pages and the first-party test page.
+- Proposed temporary `noindex,follow` for 40 routes, without implementing it: all 31 child-task pages because their distinct guidance is draft/hidden and none has a unique direct test; and nine historical model pages with 37–46 main-content words and no useful version-specific evidence.
+- Ten child tasks have an extra related test, but none has unique direct evidence. The proposal keeps them accessible and followed while SEO-008/009 improves or consolidates them.
+- Local verification passed: repeatable production build/register generation, 708 tests across 16 files, and type-check with zero errors (one pre-existing hint remains).
+- Remaining before implementation: product-owner approval or revision of the 40 proposed temporary exclusions. No public indexability directive, sitemap membership or redirect has changed.
 
 ### SEO-008 — Thin historical model pages
 
@@ -808,6 +818,12 @@ Append new entries; do not rewrite history except to correct a factual error, an
 - Verified representative homepage, task, model, benchmark and first-party test routes in the live XML. The first-party test correctly uses its 2026-09-24 publication date while imported-data pages use their relevant retrieval/evidence dates.
 - Rebuilt the unchanged site and compared sitemap hashes before and after. They were identical, proving deployment/build time does not manufacture freshness.
 - SEO-006 acceptance criteria and verification are satisfied; marked `done`.
+
+### 2026-10-10 — SEO-007 disposition register drafted
+
+- Generated a deterministic, CSV-based review of all 102 public URLs at `docs/seo/indexability-review.csv`; `npm run seo:indexability` rebuilds it from the current production output and content graph.
+- Proposed retaining 62 URLs in search and temporarily applying `noindex,follow` to 40 weak URLs: 31 child tasks without unique direct evidence or visible reviewed guidance, plus nine thin historical model pages already identified by SEO-008.
+- This is a decision document only. No `noindex`, sitemap removal, redirect or canonical change was made. Product-owner approval is required before changing public coverage.
 
 ## Progress notes
 
