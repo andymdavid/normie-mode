@@ -11,6 +11,7 @@ import { taskCostNote, taskEvidenceNote } from '../../lib/norm';
 import Verdict from '../../components/Verdict.astro';
 import { verdict } from '../../lib/verdict';
 import { routeLastmod } from '../../lib/freshness';
+import { isTemporarilyNoindexedRoute } from '../../lib/indexability';
 
 export function getStaticPaths() {
   return allTaskPages().map((task) => ({ params: { id: task.id } }));
@@ -50,6 +51,7 @@ const sections = [...(normOn ? [['guide', "Norm's guide"]] : []), ['compare', 'H
 <Base
   title={`${task.label}${month ? ` (${month})` : ''}`}
   description={`${task.label}: which AI models do best at ${task.covers?.toLowerCase().replace(/\.$/, '')}, what to watch out for, and the evidence behind it.`}
+  noindex={isTemporarilyNoindexedRoute(taskPath(task))}
 >
   <div class="eyebrow"><a href="/best-ai-for">Best AI for…</a>{hub && <> / <a href={taskPath(hub)}>{hub.label.replace(/^Best AI for /, '')}</a></>}</div>
   <h1>{task.label}</h1>

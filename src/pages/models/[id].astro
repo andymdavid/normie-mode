@@ -8,6 +8,7 @@ import { ordinal, overviewRow, taskPositions, testPositions } from '../../lib/mo
 import { taskPath } from '../../lib/tasks';
 import { ACCESS_LABEL, formatPrice, isCompared, planLabel, plansFor } from '../../lib/plans';
 import { formatDate, modelName } from '../../lib/view';
+import { isTemporarilyNoindexedRoute } from '../../lib/indexability';
 
 export function getStaticPaths() {
   return [...graph().models.keys()].map((id) => ({ params: { id } }));
@@ -26,7 +27,7 @@ const predecessors = [...g.models.values()].filter((m) => m.successor === model.
 const top3 = tasks.filter((t) => t.pos.position <= 3);
 const money = (v?: number) => (v === undefined ? undefined : v < 10 ? `$${v.toFixed(2)}` : `$${v.toFixed(0)}`);
 ---
-<Base title={`${model.name}: what it's good at and what it costs`} description={`What ${model.name} from ${family.provider} is best for, where it ranks on independent tests, and what it costs.`}>
+<Base title={`${model.name}: what it's good at and what it costs`} description={`What ${model.name} from ${family.provider} is best for, where it ranks on independent tests, and what it costs.`} noindex={isTemporarilyNoindexedRoute(`/models/${model.id}`)}>
   <div class="eyebrow"><a href="/models">Models</a> · {family.provider}</div>
   <h1>{model.name}</h1>
   {!current && (

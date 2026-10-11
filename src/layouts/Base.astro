@@ -40,7 +40,7 @@ const socialImageUrl = new URL(image, Astro.site);
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
-    {(noindex || PREVIEW) && <meta name="robots" content="noindex" />}
+    {(noindex || PREVIEW) && <meta name="robots" content="noindex,follow" />}
     <link rel="canonical" href={canonicalUrl} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />

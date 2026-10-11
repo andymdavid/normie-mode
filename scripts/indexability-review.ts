@@ -83,7 +83,7 @@ export function indexabilityRows(directory = resolve('dist')) {
       graph_result_records: graphResultRecords,
       proposed_disposition: disposition,
       reason,
-      approval: disposition === 'index' ? 'reviewed-by-rule; owner review pending' : 'product-owner decision required',
+      approval: disposition === 'index' ? 'reviewed-by-rule; owner review pending' : 'approved by product owner 2026-10-11 (D-035)',
     };
   });
 }

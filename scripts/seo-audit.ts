@@ -1,6 +1,7 @@
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { extname, join, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { isTemporarilyNoindexedRoute } from '../src/lib/indexability';
 
 const ORIGIN = 'https://normiemode.com';
 const SITEMAP = 'sitemap-0.xml';
@@ -135,6 +136,11 @@ function listHtmlFiles(directory: string): string[] {
   });
 }
 
+function routeForFile(directory: string, file: string) {
+  const name = relative(directory, file).replaceAll('\\', '/').replace(/\.html$/, '');
+  return name === 'index' ? '/' : `/${name}`;
+}
+
 function inspectPage(directory: string, url: string): PageAudit {
   const file = routeFile(directory, url);
   const html = readFileSync(file, 'utf8');
@@ -256,7 +262,11 @@ export function auditSite(directory = resolve('dist')): AuditResult {
     }
   }
 
-  const pages = sitemapUrls.filter((url) => existsSync(routeFile(directory, url))).map((url) => inspectPage(directory, url));
+  const allowedUnlisted = new Set(['/demand', '/review']);
+  const generatedRoutes = listHtmlFiles(directory).map((file) => routeForFile(directory, file));
+  const publicRoutes = generatedRoutes.filter((route) => !allowedUnlisted.has(route)).sort((a, b) => a.localeCompare(b));
+  const publicUrls = new Set(publicRoutes.map((route) => `${ORIGIN}${route}`));
+  const pages = publicRoutes.map((route) => inspectPage(directory, `${ORIGIN}${route}`));
   const titles = new Map<string, string[]>();
   const descriptions = new Map<string, string[]>();
   let withoutJsonLd = 0;
@@ -268,8 +278,16 @@ export function auditSite(directory = resolve('dist')): AuditResult {
     if (!page.description) errors.push(`${page.route}: missing meta description.`);
     if (page.h1.length !== 1) errors.push(`${page.route}: expected one H1, found ${page.h1.length}.`);
     if (page.canonical !== expected) errors.push(`${page.route}: canonical is ${page.canonical ?? 'missing'}, expected ${expected}.`);
-    if (page.robots?.toLowerCase().split(',').some((rule) => rule.trim() === 'noindex')) errors.push(`${page.route}: sitemap page is noindex.`);
-    for (const link of page.internalLinks) if (!uniqueUrls.has(link)) errors.push(`${page.route}: internal page link is not canonical/in sitemap: ${link}.`);
+    const noindexRules = page.robots?.toLowerCase().split(',').map((rule) => rule.trim()) ?? [];
+    const shouldNoindex = isTemporarilyNoindexedRoute(page.route);
+    if (shouldNoindex) {
+      if (uniqueUrls.has(expected)) errors.push(`${page.route}: temporary noindex page is in the sitemap.`);
+      if (!noindexRules.includes('noindex') || !noindexRules.includes('follow')) errors.push(`${page.route}: expected robots noindex,follow.`);
+    } else {
+      if (!uniqueUrls.has(expected)) errors.push(`${page.route}: indexable public page is missing from the sitemap.`);
+      if (noindexRules.includes('noindex')) errors.push(`${page.route}: sitemap page is noindex.`);
+    }
+    for (const link of page.internalLinks) if (!publicUrls.has(link)) errors.push(`${page.route}: internal page link has no generated public page: ${link}.`);
 
     const requiredSocial = ['ogTitle', 'ogDescription', 'ogUrl', 'ogType', 'ogSiteName', 'ogImage', 'ogImageWidth', 'ogImageHeight', 'ogImageAlt', 'twitterCard', 'twitterTitle', 'twitterDescription', 'twitterImage', 'twitterImageAlt'];
     for (const field of requiredSocial) if (!page.social[field]) errors.push(`${page.route}: missing social metadata ${field}.`);
@@ -290,9 +308,9 @@ export function auditSite(directory = resolve('dist')): AuditResult {
     titles.set(page.title, [...(titles.get(page.title) ?? []), page.route]);
     descriptions.set(page.description, [...(descriptions.get(page.description) ?? []), page.route]);
   }
-  if (withoutJsonLd) warnings.push(`Site-wide: ${withoutJsonLd} of ${pages.length} sitemap pages have no JSON-LD.`);
-  if (withoutOpenGraph) warnings.push(`Site-wide: ${withoutOpenGraph} of ${pages.length} sitemap pages have no Open Graph metadata.`);
-  if (withoutTwitter) warnings.push(`Site-wide: ${withoutTwitter} of ${pages.length} sitemap pages have no Twitter/X card metadata.`);
+  if (withoutJsonLd) warnings.push(`Site-wide: ${withoutJsonLd} of ${pages.length} public pages have no JSON-LD.`);
+  if (withoutOpenGraph) warnings.push(`Site-wide: ${withoutOpenGraph} of ${pages.length} public pages have no Open Graph metadata.`);
+  if (withoutTwitter) warnings.push(`Site-wide: ${withoutTwitter} of ${pages.length} public pages have no Twitter/X card metadata.`);
   for (const [title, routes] of titles) if (title && routes.length > 1) errors.push(`Duplicate title on ${routes.join(', ')}: ${title}`);
   for (const [description, routes] of descriptions) if (description && routes.length > 1) warnings.push(`Duplicate description on ${routes.join(', ')}.`);
 
@@ -313,11 +331,6 @@ export function auditSite(directory = resolve('dist')): AuditResult {
     warnings.push(`Site-wide: ${similar.length - MAX_SIMILARITY_WARNINGS} additional same-family page pairs exceed ${SIMILARITY_REVIEW * 100}% token similarity; use --json for page data.`);
   }
 
-  const generated = new Set(listHtmlFiles(directory).map((file) => relative(directory, file)));
-  const expectedFiles = new Set(sitemapUrls.map((url) => relative(directory, routeFile(directory, url))));
-  const allowedUnlisted = new Set(['demand.html', 'review.html']);
-  for (const file of generated) if (!expectedFiles.has(file) && !allowedUnlisted.has(file)) warnings.push(`${file}: generated HTML is not in the sitemap.`);
-
   return { errors: [...new Set(errors)].sort(), warnings: [...new Set(warnings)].sort(), pages, sitemapUrls };
 }
 
@@ -325,7 +338,7 @@ function summary(result: AuditResult) {
   const counts = new Map<string, number>();
   for (const page of result.pages) counts.set(family(page.route), (counts.get(family(page.route)) ?? 0) + 1);
   const families = [...counts.entries()].sort(([a], [b]) => a.localeCompare(b)).map(([name, count]) => `${name} ${count}`).join(', ');
-  return `Audited ${result.pages.length} sitemap pages${families ? ` (${families})` : ''}.`;
+  return `Audited ${result.pages.length} public pages and ${result.sitemapUrls.length} sitemap URLs${families ? ` (${families})` : ''}.`;
 }
 
 const isMain = process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url);

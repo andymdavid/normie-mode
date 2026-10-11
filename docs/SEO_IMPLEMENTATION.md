@@ -135,9 +135,9 @@ These sources establish crawler eligibility and conventional search mechanics. T
 | SEO-004 | Global metadata and social previews | `in_progress` | P0 | SEO-003 for final publisher data |
 | SEO-005 | Structured data | `proposed` | P0 | SEO-003, schema design review |
 | SEO-006 | Sitemap freshness and update signals | `done` | P0 | Dependency-date calculation |
-| SEO-007 | Indexability and page-value audit | `in_progress` | P0 | Product-owner decision on weak pages |
-| SEO-008 | Thin historical model pages | `proposed` | P0 | SEO-007, D-004 |
-| SEO-009 | Specific-task differentiation | `proposed` | P0 | SEO-007, editorial review capacity |
+| SEO-007 | Indexability and page-value audit | `done` | P0 | — |
+| SEO-008 | Thin historical model pages | `in_progress` | P0 | D-035 temporary treatment active; enrichment remains |
+| SEO-009 | Specific-task differentiation | `in_progress` | P0 | D-035 temporary treatment active; editorial review capacity |
 | SEO-010 | Answer-first evidence blocks | `proposed` | P1 | SEO-007, D-021 review |
 | SEO-011 | First-party dataset publication | `proposed` | P1 | Eval review, licence decision |
 | SEO-012 | Head-to-head comparisons | `proposed` | P1 | N-003, evidence sufficiency |
@@ -192,7 +192,7 @@ Notes:
 
 ### SEO-002 — Search and answer-engine crawler access
 
-State: `in_progress`
+State: `done`
 
 Purpose: Make crawler policy explicit and observable.
 
@@ -388,11 +388,11 @@ Progress (2026-10-10):
 - Rationale: this is not a claim that thin pages impose a sitewide ranking penalty or that a 102-page site has a crawl-budget problem. It makes the submitted/indexable inventory match the pages Normie Mode currently considers useful search results, while avoiding competing near-identical parent/child answers. Google describes sitemap URLs as the canonical pages a site considers important, and `noindex` as the direct rule for keeping an accessible page out of results.
 - Trade-off: approved exclusions give up any current long-tail visibility from those URLs. They should be used only as a temporary, reviewed state; pages return to the sitemap and `index` only after their distinct value is verified.
 - Local verification passed: repeatable production build/register generation, 708 tests across 16 files, and type-check with zero errors (one pre-existing hint remains).
-- Remaining before implementation: product-owner approval or revision of the 40 proposed temporary exclusions. No public indexability directive, sitemap membership or redirect has changed.
+- Product-owner approval was given on 2026-10-11 and recorded as D-035. The 40 temporary exclusions are implemented as `noindex,follow` and omitted from the sitemap; automated checks require the other 62 public pages to remain indexable and submitted.
 
 ### SEO-008 — Thin historical model pages
 
-State: `proposed`
+State: `in_progress`
 
 Purpose: Preserve exact-version history without publishing weak doorway-like pages.
 
@@ -428,7 +428,7 @@ Verification:
 
 ### SEO-009 — Specific-task differentiation
 
-State: `proposed`
+State: `in_progress`
 
 Purpose: Ensure each task URL answers a distinct question with distinct value.
 
@@ -713,8 +713,8 @@ Record accepted decisions in `docs/IMPLEMENTATION_PLAN.md` as D-### entries befo
 | Allow or disallow GPTBot and ClaudeBot separately from search crawlers | Training policy is not the same as search visibility | Accepted as D-034: disallow training, allow search |
 | Public publisher, author and reviewer identity details | Required for truthful trust pages and schema | Open |
 | Corrections contact/workflow | Must route to a monitored owner | Open |
-| Historical model page policy | Enrich, noindex or redirect materially changes public coverage | Open |
-| Child task indexability threshold | Prevents shallow keyword expansion | Open |
+| Historical model page policy | Enrich, noindex or redirect materially changes public coverage | Accepted as D-035: temporary noindex; mandatory end-of-N-015 revisit |
+| Child task indexability threshold | Prevents shallow keyword expansion | Accepted as D-035: noindex until SEO-009 differentiation criteria are met |
 | Public licence for first-party test datasets | Controls reuse and citation | Open |
 | Analytics and access-log retention | Privacy and measurement trade-off | Open |
 | Dated reports programme | Currently deferred by the plan | Blocked pending accepted decision |
@@ -828,6 +828,13 @@ Append new entries; do not rewrite history except to correct a factual error, an
 - Generated a deterministic, CSV-based review of all 102 public URLs at `docs/seo/indexability-review.csv`; `npm run seo:indexability` rebuilds it from the current production output and content graph.
 - Proposed retaining 62 URLs in search and temporarily applying `noindex,follow` to 40 weak URLs: 31 child tasks without unique direct evidence or visible reviewed guidance, plus nine thin historical model pages already identified by SEO-008.
 - This is a decision document only. No `noindex`, sitemap removal, redirect or canonical change was made. Product-owner approval is required before changing public coverage.
+
+### 2026-10-11 — D-035 indexability treatment implemented
+
+- The product owner approved the proposed temporary treatment for all 40 reviewed URLs. D-035 records the scope, rationale, trade-off and restoration conditions.
+- Added one shared indexability policy used by page metadata, sitemap generation and the SEO audit: all 31 child tasks and the nine named historical model pages remain public with self-canonicals and internal links, carry `noindex,follow`, and are omitted from the sitemap.
+- Strengthened the audit so every ordinary generated page must be in exactly one intended state: indexable and submitted, or an approved temporary exclusion with `noindex,follow`. Internal links to an approved excluded page remain valid.
+- The disposition register records the approval. SEO-007 is complete; SEO-008 and SEO-009 remain in progress because exclusion is temporary, not the content-improvement outcome.
 
 ## Progress notes
 

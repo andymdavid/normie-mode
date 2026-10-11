@@ -219,6 +219,10 @@ Pete asked to host the existing site on CapRover A, with each update to the orig
 
 Normie Mode permits `OAI-SearchBot` and `Claude-SearchBot` to crawl public content for search discovery, and disallows `GPTBot` and `ClaudeBot` from using it for model development. User-triggered retrieval remains permitted under the general public-crawler rule. OpenAI documents that GPTBot controls potential model-training use independently from OAI-SearchBot's search inclusion, and Anthropic exposes separate search and training crawler controls; neither provider documents a search-visibility benefit from permitting its training crawler. This policy can be reconsidered only if credible published evidence establishes a product benefit that justifies model-development use.
 
+### D-035 — Temporarily exclude undifferentiated child tasks and thin historical models (accepted 2026-10-11)
+
+Keep all 31 child-task pages and the nine thin historical model pages public and internally linked, but apply `noindex,follow` and remove them from the sitemap until they provide distinct search value. Parent task pages and substantive model pages remain indexable. This is an editorial indexability decision, not a crawl-budget tactic or a claim of a sitewide thin-content penalty. It gives up long-tail visibility for those 40 URLs while active. Before N-015 closes, each of the nine model pages must be enriched and restored to the sitemap or receive an explicit retained-exclusion/redirect decision; child tasks return only after meeting SEO-009's differentiation criteria.
+
 ## Reference sites
 
 Reviewed 2026-09-24 as models for structure and presentation:
@@ -264,6 +268,8 @@ Progress note (2026-10-10): SEO-006 is done. Commit `ff7390a` is live with 102/1
 Progress note (2026-10-10): SEO-007 has a reproducible 102-URL disposition register at `docs/seo/indexability-review.csv`. It proposes indexing 62 routes and temporarily applying `noindex,follow` to 31 undifferentiated child-task pages and nine thin historical model pages. No public coverage change has been made; product-owner approval is required.
 
 Progress note (2026-10-11): The nine thin historical model pages are a mandatory end-of-N-015 revisit, not an indefinite exclusion. Each must ultimately be enriched and re-indexed or receive an explicit retained-exclusion/redirect decision. The proposed 40-page treatment is about an honest indexable inventory and avoiding near-identical search results, not a claimed sitewide penalty or crawl-budget saving.
+
+Progress note (2026-10-11): D-035 was accepted. The 40 weak pages now have a deterministic temporary `noindex,follow` policy and are omitted from the sitemap; automated checks guard the intended 62/40 split. SEO-008 and SEO-009 remain active improvement work, and production verification is recorded in the living SEO document.
 
 ### N-001 — Import free data sources
 

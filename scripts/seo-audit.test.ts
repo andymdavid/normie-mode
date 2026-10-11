@@ -62,10 +62,10 @@ describe('SEO audit', () => {
     expect(result.errors.join('\n')).toMatch(/sitemap page is noindex/);
   });
 
-  it('fails internal page links that are not canonical sitemap URLs', () => {
+  it('fails internal page links that have no generated public page', () => {
     const result = auditSite(fixture({ link: '/missing' }));
 
-    expect(result.errors.join('\n')).toMatch(/internal page link is not canonical\/in sitemap/);
+    expect(result.errors.join('\n')).toMatch(/internal page link has no generated public page/);
   });
 
   it('fails when training crawlers are allowed or search crawler policy is absent', () => {
