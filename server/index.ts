@@ -19,6 +19,26 @@ const crawlerAgents = [
   ['ClaudeBot', /\bClaudeBot\b/i],
 ] as const;
 
+function cacheControl(candidate: string) {
+  if (/^_astro\/[^/]+\.[a-z0-9_-]{6,}\.(?:css|js)$/i.test(candidate)) return 'public, max-age=31536000, immutable';
+  if (/\.(?:svg|png|jpe?g|webp|woff2?|otf)$/i.test(candidate)) return 'public, max-age=86400, stale-while-revalidate=604800';
+  if (/^(?:robots\.txt|sitemap(?:-index|-\d+)?\.xml)$/i.test(candidate)) return 'public, max-age=300, must-revalidate';
+  return 'public, max-age=0, must-revalidate';
+}
+
+function compressible(candidate: string) {
+  return /\.(?:html?|css|js|json|xml|txt|svg)$/i.test(candidate);
+}
+
+function acceptsGzip(header: string) {
+  return header.split(',').some((part) => {
+    const [encoding, ...parameters] = part.trim().toLowerCase().split(';');
+    if (encoding !== 'gzip' && encoding !== '*') return false;
+    const quality = parameters.map((value) => value.trim()).find((value) => value.startsWith('q='));
+    return quality ? Number(quality.slice(2)) > 0 : true;
+  });
+}
+
 const json = (body: unknown, status = 200) => Response.json(body, {
   status,
   headers: { 'Cache-Control': 'no-store' },
@@ -81,10 +101,21 @@ async function staticResponse(request: Request) {
   for (const candidate of candidates) {
     const file = Bun.file(join(distDirectory, candidate));
     if (await file.exists()) {
-      const immutable = /\.(?:css|js|svg|png|jpe?g|webp|woff2?|otf)$/i.test(candidate);
-      return new Response(request.method === 'HEAD' ? null : file, {
-        headers: { 'Cache-Control': immutable ? 'public, max-age=2592000, immutable' : 'no-cache' },
-      });
+      const gzip = compressible(candidate) && acceptsGzip(request.headers.get('accept-encoding') ?? '');
+      const headers = new Headers({ 'Cache-Control': cacheControl(candidate) });
+      if (file.type) headers.set('Content-Type', file.type);
+      if (gzip) {
+        headers.set('Content-Encoding', 'gzip');
+        headers.set('Vary', 'Accept-Encoding');
+      } else {
+        headers.set('Content-Length', String(file.size));
+      }
+      const body = request.method === 'HEAD'
+        ? null
+        : gzip
+          ? file.stream().pipeThrough(new CompressionStream('gzip'))
+          : file;
+      return new Response(body, { headers });
     }
   }
 

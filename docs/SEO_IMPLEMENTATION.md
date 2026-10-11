@@ -141,7 +141,7 @@ These sources establish crawler eligibility and conventional search mechanics. T
 | SEO-010 | Answer-first evidence blocks | `proposed` | P1 | SEO-007, D-021 review |
 | SEO-011 | First-party dataset publication | `proposed` | P1 | Eval review, licence decision |
 | SEO-012 | Head-to-head comparisons | `proposed` | P1 | N-003, evidence sufficiency |
-| SEO-013 | Performance and response correctness | `ready` | P1 | Hosting access for nginx items |
+| SEO-013 | Performance and response correctness | `in_progress` | P1 | Repository server complete; production/font checks remain |
 | SEO-014 | Titles, descriptions and information architecture | `proposed` | P1 | SEO-007 |
 | SEO-015 | Update/report publishing programme | `blocked` | P1 | New accepted decision; reports are deferred |
 | SEO-016 | Distribution and authority building | `proposed` | P1 | At least one strong original report/dataset |
@@ -530,7 +530,7 @@ Verification:
 
 ### SEO-013 — Performance and response correctness
 
-State: `ready`
+State: `in_progress`
 
 Purpose: Make static pages efficient and predictable for users and crawlers.
 
@@ -554,6 +554,14 @@ Verification:
 
 - Header matrix tests in CI and against production.
 - Lighthouse or equivalent checks on representative page types at mobile and desktop sizes.
+
+Progress (2026-10-11):
+
+- The Bun static server now negotiates gzip for HTML, CSS, JavaScript, XML, JSON, text and SVG responses.
+- `HEAD` returns the same status and representation headers as `GET`, without a body; uncompressed responses include the source byte length.
+- Fingerprinted Astro CSS/JavaScript receives a one-year immutable cache policy. Stable public images/fonts use one-day caching with stale revalidation, sitemap/robots files use five-minute revalidation, and HTML always revalidates.
+- Automated tests cover compressed `GET`/`HEAD` parity, uncompressed discovery-file length/cache metadata, and the distinction between fingerprinted assets and replaceable public images. A real Bun server was also checked locally with a valid gzip payload.
+- Remaining: deploy and verify the production header matrix; decide/download approved local font assets before removing Google Fonts; run representative mobile/desktop performance checks. Infrastructure-level compression or redirects are unnecessary if the application response survives the CapRover proxy unchanged, but production must confirm that.
 
 ### SEO-014 — Titles, descriptions and information architecture
 
@@ -841,6 +849,12 @@ Append new entries; do not rewrite history except to correct a factual error, an
 - Pushed atomic commit `eb616e7` to both `main` and the CapRover-watched `deployed` branch.
 - Verified the live child sitemap now contains 62 canonical URLs and 62 `lastmod` values. Neither `/best-ai-for/data-analysis` nor `/models/gpt-5-2` appears in it.
 - Verified representative child-task and historical-model pages return normally with self-canonicals and `noindex,follow`, while the indexed `/best-ai-for/excel-spreadsheets` parent has no `noindex` directive.
+
+### 2026-10-11 — SEO-013 response handling implemented locally
+
+- Added gzip negotiation, accurate bodyless `HEAD` responses and resource-specific cache policies to the Bun static server.
+- Verified the behavior through automated tests and a real local Bun process: compressed HTML `GET` and `HEAD` returned matching status/content/cache/encoding headers, the payload passed gzip validation, and the uncompressed sitemap returned its byte length with five-minute revalidation.
+- Production header verification, self-hosted font work and mobile/desktop performance measurements remain before SEO-013 can be completed.
 
 ## Progress notes
 

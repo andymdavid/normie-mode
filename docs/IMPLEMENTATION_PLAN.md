@@ -271,6 +271,8 @@ Progress note (2026-10-11): The nine thin historical model pages are a mandatory
 
 Progress note (2026-10-11): D-035 was accepted. The 40 weak pages now have a deterministic temporary `noindex,follow` policy and are omitted from the sitemap; automated checks guard the intended 62/40 split. SEO-008 and SEO-009 remain active improvement work, and production verification is recorded in the living SEO document.
 
+Progress note (2026-10-11): SEO-013 is in progress. The repository server now negotiates gzip, gives `HEAD` the same representation metadata as `GET`, and applies cache policies by resource mutability; automated and real local Bun checks pass. Production headers, local font assets and performance measurements remain.
+
 ### N-001 — Import free data sources
 
 - Status: `in_progress`
