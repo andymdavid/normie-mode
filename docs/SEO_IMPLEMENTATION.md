@@ -836,6 +836,12 @@ Append new entries; do not rewrite history except to correct a factual error, an
 - Strengthened the audit so every ordinary generated page must be in exactly one intended state: indexable and submitted, or an approved temporary exclusion with `noindex,follow`. Internal links to an approved excluded page remain valid.
 - The disposition register records the approval. SEO-007 is complete; SEO-008 and SEO-009 remain in progress because exclusion is temporary, not the content-improvement outcome.
 
+### 2026-10-11 — D-035 deployed and verified
+
+- Pushed atomic commit `eb616e7` to both `main` and the CapRover-watched `deployed` branch.
+- Verified the live child sitemap now contains 62 canonical URLs and 62 `lastmod` values. Neither `/best-ai-for/data-analysis` nor `/models/gpt-5-2` appears in it.
+- Verified representative child-task and historical-model pages return normally with self-canonicals and `noindex,follow`, while the indexed `/best-ai-for/excel-spreadsheets` parent has no `noindex` directive.
+
 ## Progress notes
 
 Use this section for short cross-session context that does not fit an individual work item.
