@@ -562,6 +562,8 @@ Progress (2026-10-11):
 - Fingerprinted Astro CSS/JavaScript receives a one-year immutable cache policy. Stable public images/fonts use one-day caching with stale revalidation, sitemap/robots files use five-minute revalidation, and HTML always revalidates.
 - Automated tests cover compressed `GET`/`HEAD` parity, uncompressed discovery-file length/cache metadata, and the distinction between fingerprinted assets and replaceable public images. A real Bun server was also checked locally with a valid gzip payload.
 - The first production probe showed nginx supplying `Content-Length: 0` on compressed `HEAD` when the app streamed compression without a known length. The server now materialises the small static compressed representation and sends its exact length for both methods; production re-verification is required after that correction.
+- Deployed commits `8b860b3` and `8b003e2`. Production now returns a valid gzip representation with identical 4,891-byte `GET` body, `GET` length and `HEAD` length for a representative model page; content type, encoding, cache policy and `Vary` also match. The sitemap has five-minute revalidation and accurate type/length; replaceable public images are no longer immutable.
+- Production `www`, `.html` and `/index.html` variants return application-controlled `308` redirects. CapRover's outer nginx still converts plain HTTP to HTTPS with `302` before the request reaches the app; changing that edge redirect to permanent requires CapRover/nginx configuration access.
 - Remaining: deploy and verify the production header matrix; decide/download approved local font assets before removing Google Fonts; run representative mobile/desktop performance checks. Infrastructure-level compression or redirects are unnecessary if the application response survives the CapRover proxy unchanged, but production must confirm that.
 
 ### SEO-014 — Titles, descriptions and information architecture
@@ -856,6 +858,12 @@ Append new entries; do not rewrite history except to correct a factual error, an
 - Added gzip negotiation, accurate bodyless `HEAD` responses and resource-specific cache policies to the Bun static server.
 - Verified the behavior through automated tests and a real local Bun process: compressed HTML `GET` and `HEAD` returned matching status/content/cache/encoding headers, the payload passed gzip validation, and the uncompressed sitemap returned its byte length with five-minute revalidation.
 - Production header verification, self-hosted font work and mobile/desktop performance measurements remain before SEO-013 can be completed.
+
+### 2026-10-11 — SEO-013 response handling deployed and verified
+
+- Deployed gzip, `HEAD` and cache-policy changes to `main` and `deployed`. A production proxy mismatch discovered during verification was corrected in a second atomic commit.
+- Confirmed a representative compressed page has matching 4,891-byte `GET`, body and `HEAD` lengths, valid gzip, consistent representation headers and always-revalidate HTML caching. Confirmed the sitemap and replaceable image policies separately.
+- Confirmed canonical `www`, `.html` and `/index.html` variants still redirect with `308`. The remaining plain-HTTP `302` is emitted by CapRover's nginx before the application and needs an infrastructure configuration change.
 
 ## Progress notes
 

@@ -273,6 +273,8 @@ Progress note (2026-10-11): D-035 was accepted. The 40 weak pages now have a det
 
 Progress note (2026-10-11): SEO-013 is in progress. The repository server now negotiates gzip, gives `HEAD` the same representation metadata as `GET`, and applies cache policies by resource mutability; automated and real local Bun checks pass. Production headers, local font assets and performance measurements remain.
 
+Progress note (2026-10-11): SEO-013 response changes are live and production-verified, including matching compressed `GET`/`HEAD` lengths through nginx. The application-controlled canonical variants remain permanent `308` redirects; CapRover's outer plain-HTTP redirect is still `302` and requires infrastructure access. Self-hosted fonts and performance measurements also remain.
+
 ### N-001 — Import free data sources
 
 - Status: `in_progress`
