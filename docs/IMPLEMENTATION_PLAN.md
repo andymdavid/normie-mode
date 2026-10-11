@@ -263,6 +263,8 @@ Progress note (2026-10-10): SEO-006 is done. Commit `ff7390a` is live with 102/1
 
 Progress note (2026-10-10): SEO-007 has a reproducible 102-URL disposition register at `docs/seo/indexability-review.csv`. It proposes indexing 62 routes and temporarily applying `noindex,follow` to 31 undifferentiated child-task pages and nine thin historical model pages. No public coverage change has been made; product-owner approval is required.
 
+Progress note (2026-10-11): The nine thin historical model pages are a mandatory end-of-N-015 revisit, not an indefinite exclusion. Each must ultimately be enriched and re-indexed or receive an explicit retained-exclusion/redirect decision. The proposed 40-page treatment is about an honest indexable inventory and avoiding near-identical search results, not a claimed sitewide penalty or crawl-budget saving.
+
 ### N-001 — Import free data sources
 
 - Status: `in_progress`

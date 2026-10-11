@@ -385,6 +385,8 @@ Progress (2026-10-10):
 - Proposed `index` for 62 routes: core/collection pages, 26 benchmark pages, 16 parent task pages, 17 substantive/current model pages and the first-party test page.
 - Proposed temporary `noindex,follow` for 40 routes, without implementing it: all 31 child-task pages because their distinct guidance is draft/hidden and none has a unique direct test; and nine historical model pages with 37–46 main-content words and no useful version-specific evidence.
 - Ten child tasks have an extra related test, but none has unique direct evidence. The proposal keeps them accessible and followed while SEO-008/009 improves or consolidates them.
+- Rationale: this is not a claim that thin pages impose a sitewide ranking penalty or that a 102-page site has a crawl-budget problem. It makes the submitted/indexable inventory match the pages Normie Mode currently considers useful search results, while avoiding competing near-identical parent/child answers. Google describes sitemap URLs as the canonical pages a site considers important, and `noindex` as the direct rule for keeping an accessible page out of results.
+- Trade-off: approved exclusions give up any current long-tail visibility from those URLs. They should be used only as a temporary, reviewed state; pages return to the sitemap and `index` only after their distinct value is verified.
 - Local verification passed: repeatable production build/register generation, 708 tests across 16 files, and type-check with zero errors (one pre-existing hint remains).
 - Remaining before implementation: product-owner approval or revision of the 40 proposed temporary exclusions. No public indexability directive, sitemap membership or redirect has changed.
 
@@ -393,6 +395,8 @@ Progress (2026-10-10):
 State: `proposed`
 
 Purpose: Preserve exact-version history without publishing weak doorway-like pages.
+
+Mandatory end-of-program work item: revisit all nine pages before closing N-015. For each page, either publish reviewed version-specific evidence and restore `index` plus sitemap membership, or record an explicit decision to retain `noindex,follow`/redirect it. Temporary exclusion must not silently become permanent.
 
 Initial review set:
 
