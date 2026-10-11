@@ -80,10 +80,11 @@ describe('static response metadata', () => {
     const head = await handleRequest(new Request('https://normiemode.com/models/example', { method: 'HEAD', headers }));
 
     expect(head.status).toBe(get.status);
-    for (const name of ['cache-control', 'content-type', 'content-encoding', 'vary']) {
+    for (const name of ['cache-control', 'content-type', 'content-encoding', 'content-length', 'vary']) {
       expect(head.headers.get(name)).toBe(get.headers.get(name));
     }
     expect(head.headers.get('content-encoding')).toBe('gzip');
+    expect(Number(head.headers.get('content-length'))).toBeGreaterThan(0);
     expect(await head.text()).toBe('');
     expect((await get.arrayBuffer()).byteLength).toBeGreaterThan(0);
   });

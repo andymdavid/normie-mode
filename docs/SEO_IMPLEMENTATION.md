@@ -561,6 +561,7 @@ Progress (2026-10-11):
 - `HEAD` returns the same status and representation headers as `GET`, without a body; uncompressed responses include the source byte length.
 - Fingerprinted Astro CSS/JavaScript receives a one-year immutable cache policy. Stable public images/fonts use one-day caching with stale revalidation, sitemap/robots files use five-minute revalidation, and HTML always revalidates.
 - Automated tests cover compressed `GET`/`HEAD` parity, uncompressed discovery-file length/cache metadata, and the distinction between fingerprinted assets and replaceable public images. A real Bun server was also checked locally with a valid gzip payload.
+- The first production probe showed nginx supplying `Content-Length: 0` on compressed `HEAD` when the app streamed compression without a known length. The server now materialises the small static compressed representation and sends its exact length for both methods; production re-verification is required after that correction.
 - Remaining: deploy and verify the production header matrix; decide/download approved local font assets before removing Google Fonts; run representative mobile/desktop performance checks. Infrastructure-level compression or redirects are unnecessary if the application response survives the CapRover proxy unchanged, but production must confirm that.
 
 ### SEO-014 — Titles, descriptions and information architecture

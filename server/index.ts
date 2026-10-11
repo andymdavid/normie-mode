@@ -104,17 +104,17 @@ async function staticResponse(request: Request) {
       const gzip = compressible(candidate) && acceptsGzip(request.headers.get('accept-encoding') ?? '');
       const headers = new Headers({ 'Cache-Control': cacheControl(candidate) });
       if (file.type) headers.set('Content-Type', file.type);
+      const compressed = gzip
+        ? new Uint8Array(await new Response(file.stream().pipeThrough(new CompressionStream('gzip'))).arrayBuffer())
+        : undefined;
       if (gzip) {
         headers.set('Content-Encoding', 'gzip');
         headers.set('Vary', 'Accept-Encoding');
-      } else {
-        headers.set('Content-Length', String(file.size));
       }
+      headers.set('Content-Length', String(compressed?.byteLength ?? file.size));
       const body = request.method === 'HEAD'
         ? null
-        : gzip
-          ? file.stream().pipeThrough(new CompressionStream('gzip'))
-          : file;
+        : compressed ?? file;
       return new Response(body, { headers });
     }
   }
