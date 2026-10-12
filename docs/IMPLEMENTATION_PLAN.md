@@ -312,6 +312,8 @@ Progress note (2026-10-12): SEO-011 is done. The spreadsheet results page now li
 
 Progress note (2026-09-24): `npm run import` (or `-- --offline` to reuse `.cache/`) writes `data/epoch.json`, `data/modelsdev.json` and `data/lmarena.json`. Model mappings live in `source_ids` on each `content/models/*.yaml`. Maker claims live in `content/claims/`. Known gaps: 19 Epoch benchmarks (including SWE-bench Pro and WebDev Arena) have no score file in Epoch's metadata and are skipped; only LMArena's text leaderboard is imported so far; the OpenAI claim wording needs checking by hand because their page blocks automated fetching.
 
+Progress note (2026-10-12): a user-scoped Wingman pipeline now runs the accepted-source import weekly in an isolated clone, executes the complete verification suite, pushes only a timestamped review branch and asks an agent to identify mapping and product-surface impacts. It never merges, deploys or publishes recommendation changes. The first no-push dry run passed and exposed several new unmapped models; those mappings and a Flight Deck review destination remain outstanding.
+
 ### N-002 — Overview page mockup
 
 - Status: `in_progress`

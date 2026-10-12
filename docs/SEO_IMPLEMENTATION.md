@@ -146,7 +146,7 @@ These sources establish crawler eligibility and conventional search mechanics. T
 | SEO-015 | Update/report publishing programme | `blocked` | P1 | New accepted decision; reports are deferred |
 | SEO-016 | Distribution and authority building | `proposed` | P1 | At least one strong original report/dataset |
 | SEO-017 | Citation and referral monitoring | `proposed` | P0 | Analytics/logging choice |
-| SEO-018 | Ongoing operating cadence | `proposed` | P2 | Core workstreams in place |
+| SEO-018 | Ongoing operating cadence | `in_progress` | P2 | Flight Deck destination and remaining checks |
 
 ## Detailed work items
 
@@ -595,7 +595,7 @@ Progress (2026-10-11):
 
 ### SEO-014 — Titles, descriptions and information architecture
 
-State: `proposed`
+State: `done`
 
 Purpose: Improve clarity in results without treating character counts as ranking rules.
 
@@ -696,7 +696,7 @@ Verification:
 
 ### SEO-018 — Ongoing operating cadence
 
-State: `proposed`
+State: `in_progress`
 
 Purpose: Keep the site current after the initial implementation.
 
@@ -711,6 +711,8 @@ Acceptance criteria:
 
 - Every recurring check has an owner, input, output and escalation rule.
 - Recommendation changes still require human editorial review.
+
+Implementation note (2026-10-12): `normie-mode-evidence-refresh` v1 is installed as a user-scoped Wingman pipeline. At 07:00 each Monday in `Australia/Perth`, it refreshes Epoch AI, models.dev and LMArena in an isolated clone, rejects unexpected tracked-file changes, runs validation/type-check/build/tests, and pushes a timestamped `evidence-refresh/*` review branch. A separate agent then reports timestamp-only versus substantive changes, unmapped models and affected rankings, recommendations, comparisons and answer surfaces. It cannot merge, deploy or publish. Optional Flight Deck task creation remains disabled until a deliberate workspace/channel destination is configured.
 
 ## Fixed citation-test set
 
@@ -956,6 +958,12 @@ Append new entries; do not rewrite history except to correct a factual error, an
 - Built a preview-only, allowlisted Claude Opus 5.5 vs Gemini 3.8 Flash page with shared task scores, same-test results, cost, evidence, availability, freshness and explicit limitations.
 - The first candidate, Claude Opus 5.5 vs GPT-6 Sol, failed the evidence gate and was not built. GPT-6 Sol has no task positions and only one shared test result.
 - No comparison page is in the public build or sitemap. Product-owner wording and comprehension review is required before activation.
+
+### 2026-10-12 — Weekly evidence-refresh pipeline installed
+
+- Added the user-scoped Wingman `normie-mode-evidence-refresh` v1 pipeline with a Monday 07:00 Perth schedule, isolated checkout, accepted-source import, full repository verification, review-branch push and read-only impact analysis.
+- Publication remains deliberately manual: the pipeline never merges, changes recommendation status, fast-forwards `deployed` or deploys the site. Flight Deck task creation is opt-in and awaits an explicit workspace/channel destination.
+- A no-push dry run passed. It found current snapshots materially ahead of the repository: 1,139 rather than 981 mapped Epoch results and 601 rather than 588 mapped LMArena entries, with LMArena current to 2026-10-08. New unmapped models require editorial mapping review before any refreshed evidence is merged.
 
 ## Progress notes
 
