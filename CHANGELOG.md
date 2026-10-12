@@ -6,6 +6,7 @@ This file records meaningful changes to the Normie Mode product, implementation,
 
 ### Added
 
+- Answer-first evidence blocks on benchmark and current-model pages, with explicit measured-result labels, linked evidence and limitations; task recommendations and first-party test findings now state their claim type too.
 - A reproducible 102-URL indexability review register with evidence and approval status for every proposed disposition; it does not change public indexing by itself.
 - Evidence-derived sitemap `lastmod` dates for every public URL, with audit coverage that rejects invalid freshness values.
 - Complete site-wide Open Graph and Twitter/X preview metadata with canonical URLs and a stable branded 1200×630 share image.

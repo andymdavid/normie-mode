@@ -483,7 +483,8 @@ Progress (2026-10-12):
 - Benchmark pages now draft a deterministic measured-result summary from the same ranked rows as the chart, cite the original test owner directly, and distinguish preference votes from correctness tests.
 - Current model pages now draft a deterministic task-position summary, link up to three evidence pages and state exact-version evidence limits. The generator refuses to manufacture a ranking when task evidence is insufficient; unit tests cover both paths.
 - Existing task verdicts are labelled `Rule-based recommendation`, and the published first-party test's short answer is labelled `Measured result`.
-- Local build passes. Representative wording is awaiting product-owner comprehension review before deployment; the fixed citation test must then be compared after deployment.
+- The product owner approved the representative wording. Commit `1cf73ad` is live, and production checks confirm the expected measured-result or rule-based-recommendation labels and conclusions on representative benchmark, current-model, task and first-party-test pages.
+- The fixed citation test still needs its post-deployment comparison before this item can be marked done.
 
 ### SEO-011 — First-party dataset publication
 
@@ -906,6 +907,12 @@ Append new entries; do not rewrite history except to correct a factual error, an
 - Added local deterministic answer blocks for benchmark and current model pages, explicit rule-based classification on task verdicts, and measured-result classification on the published first-party test.
 - Each new block places its classification, conclusion, evidence links and limitation together. Benchmark evidence links directly to the original test owner; model conclusions derive from existing task positions and exact-version evidence counts.
 - Added unit tests for a model with measured task positions and a new model without enough relevant evidence. No wording or recommendation has been deployed; product-owner review remains required.
+
+### 2026-10-12 — SEO-010 answer-first blocks approved and deployed
+
+- Product-owner comprehension review approved the representative benchmark, evidence-rich model and evidence-limited model wording.
+- Pushed `1cf73ad` to `main`, fast-forwarded `deployed` to the same commit and verified both remote refs match.
+- Verified the approved benchmark and model conclusions, task `Rule-based recommendation` label, and first-party-test `Measured result` label on their public URLs. The fixed citation-test comparison remains outstanding.
 
 ## Progress notes
 

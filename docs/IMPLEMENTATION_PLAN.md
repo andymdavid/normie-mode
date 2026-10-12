@@ -283,6 +283,8 @@ Progress note (2026-10-12): SEO-014 is done. Shared visible breadcrumbs and cano
 
 Progress note (2026-10-12): SEO-010 has locally built deterministic answer-first blocks for benchmark and current model pages, plus explicit classification of task recommendations and first-party measured results. The draft is not deployed pending product-owner comprehension review; citation comparison follows deployment.
 
+Progress note (2026-10-12): The product owner approved SEO-010 wording and commit `1cf73ad` was deployed. Production checks passed across benchmark, current-model, task-recommendation and first-party-test pages; the fixed citation-test comparison remains before completion.
+
 ### N-001 — Import free data sources
 
 - Status: `in_progress`
