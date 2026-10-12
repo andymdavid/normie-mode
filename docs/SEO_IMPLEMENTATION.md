@@ -978,6 +978,31 @@ Append new entries; do not rewrite history except to correct a factual error, an
 - The three pages render 308, 305 and 318 substantive words respectively and remain indexable. Historical evidence is explicitly not presented as a current recommendation.
 - The shared evidence section also makes eight of the original nine D-035 historical pages substantive by the audit's 200-word rule. Their `noindex,follow` state remains unchanged pending the promised separate restoration review; DeepSeek V3.2 is still thin at 171 words.
 
+### 2026-10-12 — Refreshed verdict editorial review
+
+- Rechecked every hub verdict against the accepted scoring, coverage, plan and close-call rules. Automated tests confirm that no recommendation rests only on people's votes where a real-work test exists, every plan pick contains the exact version shown, and five-point close calls remain explicit.
+- The candidate changes at least one displayed pick on all 15 hub pages. This is mostly the intended effect of newly mapped Opus 5.5, Sonnet 5.5 and GPT-6.1 Sol evidence rather than a methodology change.
+
+| Hub task | Production headline | Refreshed candidate | Editorial assessment |
+| --- | --- | --- | --- |
+| Coding | Fable 5.1 / GPT-6 Astra close overall; Kimi K3 free | Opus 5.5 overall and under $25; Sonnet 5.5 free | Supported by two of three relevant tests for each new Claude pick; approve with displayed coverage. |
+| Writing | Opus 5.5 overall; Gemini 3.1 Pro / Kimi K3 free close | Opus unchanged; Sonnet 5.5 / Gemini 3.1 Pro free close | Safe close call; no absolute winner claim beyond the task score. |
+| Studying | Gemini 3.8 Flash / Fable 5.1 close; Kimi K3 / Gemini 3.6 Flash free close | Fable 5.1 / Gemini 3.8 Flash close; Gemini 3.8 Flash / Sonnet 5.5 under $25 close; Sonnet 5.5 free | Rank ordering changes, but the winner remains a close call and free access is maker-backed. |
+| CVs and jobs | Opus 5.5 overall; Kimi K3 / Gemini 3.1 Pro free close | Opus unchanged; Sonnet 5.5 free | Supported; simpler free verdict from the refreshed evidence. |
+| Business | Fable 5.1 overall; Gemini 3.8 Flash under $25; Kimi K3 free | Opus 5.5 overall and under $25; Sonnet 5.5 free | Material but supported by newly mapped work evidence; approve with normal limitations. |
+| Research | GPT-6 Astra / GPT-5.6 Sol close; Gemini 3.6 Flash / Kimi K3 free close | Opus 5.5 overall and under $25; Sonnet 5.5 / Gemini 3.6 Flash free close | Material; supported and still exposes the free close call. |
+| Health | Opus 5.5 / Fable 5.1 close | Fable 5.1 overall; Opus 5.5 / Gemini 3.8 Flash under $25 close | Treat as task-score guidance, not medical advice; existing health safety copy remains essential. |
+| Documents and notes | Fable 5.1 overall; Gemini 3.8 Flash under $25; Gemini 3.1 Pro free | Opus 5.5 overall and under $25; Gemini 3.1 Pro free | Supported; free pick unchanged. |
+| Finance and accounting | Fable 5.1 overall; Gemini 3.8 Flash under $25; Kimi K3 free | Opus 5.5 overall and under $25; Sonnet 5.5 free | Material but supported by refreshed professional-work evidence. |
+| Maths and science | Fable 5.1 overall; Gemini 3.8 Flash under $25; Kimi K3 / Gemini 3.6 Flash free close | Fable unchanged; Gemini 3.8 Flash / Opus 5.5 under $25 close; Sonnet 5.5 free | Supported; paid result becomes more cautious, not less. |
+| Excel and spreadsheets | Fable 5.1 overall; GPT-6 Astra / Gemini 3.8 Flash under $25 close; Sonnet 5 free | Opus 5.5 overall and under $25; Gemini 3.6 Flash free | Supported by the published first-party spreadsheet test plus relevant imported evidence; material citation-target change. |
+| Presentations | Fable 5.1 overall; Gemini 3.8 Flash under $25; Kimi K3 free | Opus 5.5 overall and under $25; Sonnet 5.5 free | Supported by newly mapped work evidence. |
+| Personal planning | Opus 5.5 overall; Kimi K3 / Gemini 3.1 Pro free close | Gemini 3.8 Flash / Opus 5.5 overall and under $25 close; Gemini 3.1 Pro / Kimi K3 free close | Same contenders; refreshed data correctly makes the paid result more cautious. |
+| Translation and languages | Opus 5.5 / Fable 5.1 close; Gemini 3.1 Pro / Gemini 3.6 Flash free close | Paid picks unchanged; Gemini 3.1 Pro free | Narrow change supported by refreshed ordering. |
+| Legal | Fable 5.1 overall; Gemini 3.8 Flash under $25; Kimi K3 free | Opus 5.5 / Fable 5.1 overall close; Opus 5.5 under $25; Sonnet 5.5 free | Keep the existing legal limitation prominent; evidence supports a close overall result, not an unconditional legal recommendation. |
+
+- Editorial recommendation: approve the refresh as a single evidence/version update. Do not selectively retain older winners, because that would make task pages disagree with their displayed charts and the published fixed rule. D-038 remains proposed until the product owner explicitly approves publication.
+
 ## Progress notes
 
 Use this section for short cross-session context that does not fit an individual work item.
