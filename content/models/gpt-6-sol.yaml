@@ -2,7 +2,8 @@ id: gpt-6-sol
 family: gpt
 name: GPT-6 Sol
 released_on: 2026-09-22
-lifecycle: current
+lifecycle: superseded
+successor: gpt-6-1-sol
 verification:
   status: verified
   sources:
@@ -10,5 +11,6 @@ verification:
 source_ids:
   epoch:
     - gpt-6-sol
+  epoch_index: GPT-6 Sol
   modelsdev: openai/gpt-6-sol
 openrouter_id: openai/gpt-6-sol

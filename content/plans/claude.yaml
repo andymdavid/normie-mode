@@ -3,7 +3,7 @@ app: Claude
 maker: Anthropic
 url: https://claude.ai
 status: approved
-checked_on: 2026-09-26
+checked_on: 2026-10-12
 sources:
   - url: https://claude.com/pricing
     title: Claude plans and pricing
@@ -11,22 +11,28 @@ sources:
   - url: https://support.claude.com/en/articles/15424964-claude-fable-models-on-your-plan
     title: Claude Fable models on your plan
     kind: maker
+  - url: https://www.anthropic.com/claude-sonnet-5-5
+    title: Introducing Claude Sonnet 5.5
+    kind: maker
+  - url: https://www.anthropic.com/claude-haiku-5-5
+    title: Introducing Claude Haiku 5.5
+    kind: maker
 note: The pricing page names model tiers (Opus, Sonnet, Haiku) but not versions; we map each tier to its current version.
 plans:
   - id: free
     name: Free
     price_usd: 0
     models:
-      - { model: claude-sonnet-5, access: included, default: true, basis: maker-tier }
-      - { model: claude-haiku-4-5, access: included, basis: maker-tier }
+      - { model: claude-sonnet-5-5, access: included, default: true, basis: maker-tier }
+      - { model: claude-haiku-5-5, access: included, basis: maker-tier }
   - id: pro
     name: Pro
     price_usd: 20
     price_note: $17 a month if paid yearly
     models:
       - { model: claude-opus-5-5, access: included, default: true, basis: maker-tier }
-      - { model: claude-sonnet-5, access: included, basis: maker-tier }
-      - { model: claude-haiku-4-5, access: included, basis: maker-tier }
+      - { model: claude-sonnet-5-5, access: included, basis: maker-tier }
+      - { model: claude-haiku-5-5, access: included, basis: maker-tier }
       - { model: claude-fable-5-1, access: extra-cost, where: "Costs extra, on top of the plan", basis: maker }
   - id: max
     name: Max
@@ -34,6 +40,6 @@ plans:
     price_note: From $100 a month; a $200 tier has four times the usage
     models:
       - { model: claude-opus-5-5, access: included, default: true, basis: maker-tier }
-      - { model: claude-sonnet-5, access: included, basis: maker-tier }
-      - { model: claude-haiku-4-5, access: included, basis: maker-tier }
+      - { model: claude-sonnet-5-5, access: included, basis: maker-tier }
+      - { model: claude-haiku-5-5, access: included, basis: maker-tier }
       - { model: claude-fable-5-1, access: limited, where: "For up to half your weekly allowance", basis: maker }

@@ -2,7 +2,8 @@ id: claude-haiku-4-5
 family: claude
 name: Claude Haiku 4.5
 released_on: 2025-10-15
-lifecycle: current
+lifecycle: superseded
+successor: claude-haiku-5-5
 verification:
   status: unverified
   note: Confirm against the provider model list.

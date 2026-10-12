@@ -2,7 +2,8 @@ id: claude-sonnet-5
 family: claude
 name: Claude Sonnet 5
 released_on: 2026-06-29
-lifecycle: current
+lifecycle: superseded
+successor: claude-sonnet-5-5
 verification:
   status: verified
   sources:
