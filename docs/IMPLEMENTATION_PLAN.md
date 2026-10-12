@@ -231,9 +231,9 @@ Publish Normie Mode-authored synthetic cases, prompts, questions, answer keys, s
 
 The October evidence refresh makes Claude Sonnet 5, Claude Haiku 4.5 and GPT-6 Sol historical versions. Enrich those pages immediately and retain them in the index rather than extending D-035 automatically. Each page must identify its successor, cite the provider launch record, preserve exact-version Epoch and LMArena evidence where available, show archived API price and limits, and explain that historical rankings are not current recommendations. D-035 remains unchanged for the nine pages it specifically approved; restoring those pages requires their own review.
 
-### D-038 — Publish October evidence-derived verdict refresh (proposed 2026-10-12)
+### D-038 — Publish October evidence-derived verdict refresh (accepted 2026-10-12)
 
-Approve the 2026-10-12 source refresh and its deterministic changes to all 15 hub-task verdict blocks. The candidate uses the existing accepted D-023/D-027/D-029 scoring and plan rules without changing methodology: models need results on at least half the usable tests and at least one real-work test when such evidence exists; picks within five points remain a close call. Publication would merge the reviewed evidence, exact model mappings and plan updates together. Until product-owner approval, the candidate stays on `evidence-refresh-review/20261012` and neither `main` nor `deployed` changes.
+Publish the 2026-10-12 source refresh and its deterministic changes to all 15 hub-task verdict blocks. The candidate uses the existing accepted D-023/D-027/D-029 scoring and plan rules without changing methodology: models need results on at least half the usable tests and at least one real-work test when such evidence exists; picks within five points remain a close call. The product owner approved the complete evidence, exact-model mapping, plan and verdict update after reviewing its task-by-task impact.
 
 ## Reference sites
 

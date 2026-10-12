@@ -1001,7 +1001,7 @@ Append new entries; do not rewrite history except to correct a factual error, an
 | Translation and languages | Opus 5.5 / Fable 5.1 close; Gemini 3.1 Pro / Gemini 3.6 Flash free close | Paid picks unchanged; Gemini 3.1 Pro free | Narrow change supported by refreshed ordering. |
 | Legal | Fable 5.1 overall; Gemini 3.8 Flash under $25; Kimi K3 free | Opus 5.5 / Fable 5.1 overall close; Opus 5.5 under $25; Sonnet 5.5 free | Keep the existing legal limitation prominent; evidence supports a close overall result, not an unconditional legal recommendation. |
 
-- Editorial recommendation: approve the refresh as a single evidence/version update. Do not selectively retain older winners, because that would make task pages disagree with their displayed charts and the published fixed rule. D-038 remains proposed until the product owner explicitly approves publication.
+- The product owner approved the refresh as a single evidence/version update under D-038. Older winners were not selectively retained because that would make task pages disagree with their displayed charts and the published fixed rule.
 
 ## Progress notes
 

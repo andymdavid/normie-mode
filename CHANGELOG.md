@@ -98,9 +98,9 @@ This file records meaningful changes to the Normie Mode product, implementation,
 
 ### Changed
 
-- The October evidence refresh has completed its 15-task editorial impact review and remains unpublished pending explicit product-owner approval.
+- The October evidence refresh and its resulting changes across all 15 main task verdicts passed editorial review and were approved for publication.
 - Historical model pages now preserve exact-version launch context, successor relationships, archived API specifications and benchmark/voting evidence instead of showing only a replacement notice.
-- Refreshed review data now maps 1,209 Epoch benchmark results, 26 Epoch index scores, 26 models.dev records and 734 LMArena entries; task verdict changes remain unpublished pending product-owner review.
+- Refreshed data now maps 1,209 Epoch benchmark results, 26 Epoch index scores, 26 models.dev records and 734 LMArena entries, with reviewed task verdict changes derived from the same published rule.
 - Search and social titles now lead with the task, exact model or benchmark identity, with concise unique descriptions across all indexed pages.
 - Task, model and test detail pages now show semantic breadcrumbs with matching canonical structured data.
 - Static text responses now support gzip, `HEAD` mirrors `GET` metadata without sending a body, and cache lifetimes distinguish fingerprinted build assets from replaceable images, discovery files and HTML.
