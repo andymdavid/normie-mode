@@ -139,7 +139,7 @@ These sources establish crawler eligibility and conventional search mechanics. T
 | SEO-008 | Thin historical model pages | `in_progress` | P0 | D-035 temporary treatment active; enrichment remains |
 | SEO-009 | Specific-task differentiation | `in_progress` | P0 | D-035 temporary treatment active; editorial review capacity |
 | SEO-010 | Answer-first evidence blocks | `in_progress` | P1 | Product-owner comprehension review |
-| SEO-011 | First-party dataset publication | `in_progress` | P1 | Product-owner licence and publication approval |
+| SEO-011 | First-party dataset publication | `done` | P1 | — |
 | SEO-012 | Head-to-head comparisons | `proposed` | P1 | N-003, evidence sufficiency |
 | SEO-013 | Performance and response correctness | `in_progress` | P1 | Repository server complete; production/font checks remain |
 | SEO-014 | Titles, descriptions and information architecture | `done` | P1 | — |
@@ -292,7 +292,7 @@ Progress (2026-10-10):
 
 ### SEO-005 — Structured data
 
-State: `in_progress`
+State: `done`
 
 Purpose: Express entities, provenance, dates and page relationships without misrepresentation.
 
@@ -520,7 +520,8 @@ Progress (2026-10-12):
 - Added tests that regenerate every recorded score from the exported case and raw response, and check complete case/result/CSV coverage.
 - Added preview-only download links, a suggested citation and `Dataset` JSON-LD with JSON and CSV distributions. Normal production builds emit none of them until publication is approved.
 - D-036 records product-owner approval of CC BY 4.0 for Normie Mode-authored cases, prompts, questions, answer keys, scores, annotations and compiled structure. Raw model-generated responses remain available for audit but are explicitly excluded from the licence grant.
-- Public activation is implemented. Local validation, 721 tests, type-check, production build and SEO audit pass; the generated JSON contains 5 cases and 30 model-case results, while the CSV contains all 180 question observations. Remaining before completion: live download/schema checks.
+- Public activation is implemented. Local validation, 721 tests, type-check, production build and SEO audit pass; the generated JSON contains 5 cases and 30 model-case results, while the CSV contains all 180 question observations.
+- Production verification passed: both downloads return `200` with the correct JSON/CSV content type, size and complete record counts; the results page links both files, states the scoped CC BY 4.0 terms, and exposes matching `Dataset` JSON-LD. SEO-011 is complete.
 
 ### SEO-012 — Head-to-head comparisons
 
@@ -735,7 +736,7 @@ Update this table from primary reports. Use `—` when unknown rather than estim
 | Pages with JSON-LD | 0/102 | 2026-10-10 | 102/102 with accurate base schema; relevant subtype where appropriate |
 | Pages with social metadata | 0/102 | 2026-10-10 | 102/102 |
 | Public first-party tests | 1 | 2026-10-10 | Quality and reuse matter more than count |
-| Public machine-readable test datasets | 0 | 2026-10-10 | One per approved published test |
+| Public machine-readable test datasets | 1 | 2026-10-12 | One per approved published test |
 | Known authoritative referring domains | — | 2026-10-10 | Establish in SEO-001 |
 | Non-brand search impressions/clicks | — | 2026-10-10 | Establish in SEO-001 |
 | OAI-SearchBot successful fetches | — | 2026-10-10 | Establish in SEO-002/017 |
@@ -935,6 +936,12 @@ Append new entries; do not rewrite history except to correct a factual error, an
 - Built preview-only JSON and CSV exports from the already approved spreadsheet run; no new paid run or result change was made.
 - The JSON preserves full provenance and raw reproducibility data. The CSV provides one row for each of 180 model-case-question observations. Automated checks recompute every score from the exported cases and responses.
 - Added preview-only download presentation and `Dataset` structured data. The normal production build excludes the files, links and schema while licence scope and publication approval remain open.
+
+### 2026-10-12 — SEO-011 dataset published
+
+- D-036 approved scoped CC BY 4.0 reuse. Deployed JSON and CSV downloads for the spreadsheet test, linked them from the results page and activated matching `Dataset` JSON-LD.
+- Live JSON and CSV return `200` with the correct content types and contain all 5 cases, 30 model-case results and 180 question observations. The public page states that raw model-generated responses are audit material outside Normie Mode's licence grant.
+- SEO-011 is complete. The dataset is excluded from the page sitemap because the canonical human results page describes and links both distributions.
 
 ## Progress notes
 

@@ -297,6 +297,8 @@ Progress note (2026-10-12): SEO-011 has a preview-only draft dataset package for
 
 Progress note (2026-10-12): D-036 approves publication of the spreadsheet dataset under scoped CC BY 4.0. Normie Mode-authored material and the compiled structure are licensed; raw model responses are included for audit but excluded from the grant. Public activation and production verification are in progress.
 
+Progress note (2026-10-12): SEO-011 is done. The spreadsheet results page now links complete JSON and 180-observation CSV downloads with scoped CC BY 4.0 terms and `Dataset` JSON-LD. Live files return `200` with correct types and complete counts; commits `7c287ef` and `677d3f0` are deployed.
+
 ### N-001 — Import free data sources
 
 - Status: `in_progress`
