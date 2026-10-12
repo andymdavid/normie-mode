@@ -1,6 +1,7 @@
 // Model and test views built from the same data as the task pages (D-028), so a model page can
 // never disagree with a chart: positions come from `taskScores` and `testRows`.
 import { graph } from './graph';
+import { imported } from './imported';
 import { overviewRows, type OverviewRow } from './overview';
 import { MIN_MODELS_TO_RANK, allTaskPages, effectiveTests, ordinal, scoringTests, taskScores, tasksByDemand, testRows, type CLOSENESS_LABEL } from './tasks';
 import type { Intent, Test } from './schema';
@@ -55,6 +56,31 @@ export function testPositions(modelId: string): { test: Test; display: string; p
 
 export function overviewRow(modelId: string): OverviewRow | undefined {
   return overviewRows().find((r) => r.model.id === modelId);
+}
+
+/** Archived source facts for an exact version after it leaves the current comparison set. */
+export function historicalModelEvidence(modelId: string) {
+  const { epoch, modelsdev, lmarena } = imported();
+  const spec = modelsdev?.models.find((item) => item.model === modelId);
+  const index = epoch?.index.find((item) => item.model === modelId);
+  const results = (epoch?.results ?? []).filter((item) => item.model === modelId);
+  const benchmarks = [...new Set(results.map((item) => item.benchmark))].sort();
+  const arena = (lmarena?.entries ?? [])
+    .filter((item) => item.model === modelId && item.category === 'overall')
+    .sort((a, b) => b.rating - a.rating)[0];
+
+  return {
+    spec,
+    index,
+    resultCount: results.length,
+    benchmarks,
+    arena,
+    sources: {
+      epoch: epoch?.meta,
+      modelsdev: modelsdev?.meta,
+      lmarena: lmarena?.meta,
+    },
+  };
 }
 
 /** Task pages that use a test, with how closely it matches each one. */
