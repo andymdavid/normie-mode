@@ -142,7 +142,7 @@ These sources establish crawler eligibility and conventional search mechanics. T
 | SEO-011 | First-party dataset publication | `proposed` | P1 | Eval review, licence decision |
 | SEO-012 | Head-to-head comparisons | `proposed` | P1 | N-003, evidence sufficiency |
 | SEO-013 | Performance and response correctness | `in_progress` | P1 | Repository server complete; production/font checks remain |
-| SEO-014 | Titles, descriptions and information architecture | `proposed` | P1 | SEO-007 |
+| SEO-014 | Titles, descriptions and information architecture | `in_progress` | P1 | Metadata templates awaiting product-owner review |
 | SEO-015 | Update/report publishing programme | `blocked` | P1 | New accepted decision; reports are deferred |
 | SEO-016 | Distribution and authority building | `proposed` | P1 | At least one strong original report/dataset |
 | SEO-017 | Citation and referral monitoring | `proposed` | P0 | Analytics/logging choice |
@@ -292,7 +292,7 @@ Progress (2026-10-10):
 
 ### SEO-005 — Structured data
 
-State: `proposed`
+State: `in_progress`
 
 Purpose: Express entities, provenance, dates and page relationships without misrepresentation.
 
@@ -590,6 +590,13 @@ Verification:
 
 - Generated metadata audit and product-owner review of representative snippets.
 
+Progress (2026-10-12):
+
+- Drafted deterministic factual metadata templates for indexed task, model and benchmark pages without changing their on-page H1s. Benchmark titles now lead with the benchmark identity (for example `APEX-Agents` or `LMArena business`), model titles name tests/price/access, and task titles no longer spend search-result space on a generated month.
+- Added a specific homepage description and concise metadata for the benchmark collection and published first-party spreadsheet test.
+- Local production build/audit: the 62 indexed pages retain unique titles and descriptions; title candidates over 60 characters fall from 40 to one, the maximum falls from 83 to 62, and no description exceeds 157 characters. Description length remains a review aid rather than a target; concise unique text is not padded to reach an arbitrary minimum.
+- Added unit coverage for benchmark identity/uniqueness/length, stable task metadata and the compact model template. Product-owner review of representative snippets remains required before deployment.
+
 ### SEO-015 — Update/report publishing programme
 
 State: `blocked`
@@ -864,6 +871,12 @@ Append new entries; do not rewrite history except to correct a factual error, an
 - Deployed gzip, `HEAD` and cache-policy changes to `main` and `deployed`. A production proxy mismatch discovered during verification was corrected in a second atomic commit.
 - Confirmed a representative compressed page has matching 4,891-byte `GET`, body and `HEAD` lengths, valid gzip, consistent representation headers and always-revalidate HTML caching. Confirmed the sitemap and replaceable image policies separately.
 - Confirmed canonical `www`, `.html` and `/index.html` variants still redirect with `308`. The remaining plain-HTTP `302` is emitted by CapRover's nginx before the application and needs an infrastructure configuration change.
+
+### 2026-10-12 — SEO-014 metadata templates drafted
+
+- Replaced repetitive title/description drafts with deterministic factual templates for tasks, models and benchmarks, plus specific homepage, benchmark-index and first-party-test metadata.
+- The local audit retains unique titles/descriptions across all 62 indexed pages and reduces titles over 60 characters from 40 to one. On-page headings and recommendations are unchanged.
+- This is held at the product-owner review gate and has not been deployed. Representative snippets should be reviewed before the change reaches `deployed`.
 
 ## Progress notes
 

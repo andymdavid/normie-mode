@@ -9,6 +9,7 @@ import { taskPath } from '../../lib/tasks';
 import { ACCESS_LABEL, formatPrice, isCompared, planLabel, plansFor } from '../../lib/plans';
 import { formatDate, modelName } from '../../lib/view';
 import { isTemporarilyNoindexedRoute } from '../../lib/indexability';
+import { modelMetadata } from '../../lib/page-metadata';
 
 export function getStaticPaths() {
   return [...graph().models.keys()].map((id) => ({ params: { id } }));
@@ -26,8 +27,9 @@ const claims = [...g.claims.values()].filter((c) => c.model_version === model.id
 const predecessors = [...g.models.values()].filter((m) => m.successor === model.id);
 const top3 = tasks.filter((t) => t.pos.position <= 3);
 const money = (v?: number) => (v === undefined ? undefined : v < 10 ? `$${v.toFixed(2)}` : `$${v.toFixed(0)}`);
+const metadata = modelMetadata(model.name, family.provider);
 ---
-<Base title={`${model.name}: what it's good at and what it costs`} description={`What ${model.name} from ${family.provider} is best for, where it ranks on independent tests, and what it costs.`} noindex={isTemporarilyNoindexedRoute(`/models/${model.id}`)}>
+<Base title={metadata.title} description={metadata.description} noindex={isTemporarilyNoindexedRoute(`/models/${model.id}`)}>
   <div class="eyebrow"><a href="/models">Models</a> · {family.provider}</div>
   <h1>{model.name}</h1>
   {!current && (

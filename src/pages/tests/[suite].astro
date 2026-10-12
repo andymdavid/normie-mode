@@ -6,7 +6,7 @@ import { graph } from '../../lib/graph';
 import { makerOf, taskPath } from '../../lib/tasks';
 import { tasksUsingTest } from '../../lib/models';
 import { expectedAnswer, formatAnswer, givenAnswer, publishedRun, rankRun, runDates } from '../../lib/normie-tests';
-import { SUITE_TITLE, toCsv } from '../../../evals/spreadsheet-questions/suite';
+import { toCsv } from '../../../evals/spreadsheet-questions/suite';
 
 export function getStaticPaths() {
   return [...graph().tests.values()].filter((t) => t.source === 'normie' && publishedRun(t.key)).map((t) => ({ params: { suite: t.key } }));
@@ -40,7 +40,7 @@ const sheetAnswers = perModel.map((m) => ({ m, a: answers.find((x) => x.model ==
 const csvLines = toCsv(sheet.orders).split('\n');
 const runDate = runDates(run);
 ---
-<Base title={`Tested by us: ${SUITE_TITLE}`} description={`Our own test of ${perModel.length} AI models answering business questions from a spreadsheet, with every question and answer.`}>
+<Base title="AI spreadsheet test: business questions" description={`Results from our reproducible test of ${perModel.length} AI models answering business questions from a spreadsheet, with every question and answer published.`}>
   <div class="eyebrow"><a href="/benchmarks">Tests explained</a> · <span class="badge ours">Tested by us</span></div>
   <h1>Can AI answer business questions from a spreadsheet?</h1>
   <p class="lede">We gave {perModel.length} AI models the same sales sheets and asked the questions a manager would ask. Every question has one right answer, so no one had to judge.</p>

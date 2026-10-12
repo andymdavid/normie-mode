@@ -275,6 +275,8 @@ Progress note (2026-10-11): SEO-013 is in progress. The repository server now ne
 
 Progress note (2026-10-11): SEO-013 response changes are live and production-verified, including matching compressed `GET`/`HEAD` lengths through nginx. The application-controlled canonical variants remain permanent `308` redirects; CapRover's outer plain-HTTP redirect is still `302` and requires infrastructure access. Self-hosted fonts and performance measurements also remain.
 
+Progress note (2026-10-12): SEO-014 has locally verified metadata templates for indexed tasks, models and benchmarks. All 62 indexed titles/descriptions remain unique and long-title review candidates fall from 40 to one. The templates are not deployed pending product-owner review of representative snippets.
+
 ### N-001 — Import free data sources
 
 - Status: `in_progress`

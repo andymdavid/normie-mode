@@ -5,6 +5,7 @@ import BarChart from '../../components/BarChart.astro';
 import { graph } from '../../lib/graph';
 import { rankedTestRows, tasksUsingTest } from '../../lib/models';
 import { CLOSENESS_LABEL, leadSentence, taskPath, testFloor, testRows, testSource } from '../../lib/tasks';
+import { benchmarkMetadata } from '../../lib/page-metadata';
 
 export function getStaticPaths() {
   return [...graph().tests.keys()].filter((id) => graph().tests.get(id)!.source !== 'normie' && tasksUsingTest(id).length && rankedTestRows(graph().tests.get(id)!).length).map((id) => ({ params: { id } }));
@@ -13,8 +14,9 @@ const test = graph().tests.get(Astro.params.id!)!;
 const rows = testRows(test);
 const tasks = tasksUsingTest(test.id);
 const votes = test.source === 'lmarena';
+const metadata = benchmarkMetadata(test, rows.filter((row) => row.value !== undefined).length);
 ---
-<Base title={`${test.title}: the test explained`} description={`${test.what} How the main AI models did, in plain English.`}>
+<Base title={metadata.title} description={metadata.description}>
   <div class="eyebrow"><a href="/benchmarks">Tests explained</a> · {votes ? "People's votes" : 'Test of real work'}</div>
   <h1>{test.title}</h1>
   <p class="lede">{test.what}</p>
