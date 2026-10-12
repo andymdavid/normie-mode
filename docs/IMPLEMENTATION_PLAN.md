@@ -289,6 +289,8 @@ Progress note (2026-10-12): SEO-010 citation preflight confirmed `200` responses
 
 Progress note (2026-10-12): The first post-deployment citation prompt produced no Normie Mode citation in either ChatGPT or Claude (0/2 observations). The exact prompt is recorded; answers and competing source URLs were not supplied. Prioritise reusable first-party spreadsheet evidence before expanding the citation sample.
 
+Progress note (2026-10-12): SEO-011 has a preview-only draft dataset package for the approved spreadsheet run: complete JSON, 180-row question-level CSV, download presentation and `Dataset` JSON-LD. Automated tests recompute every exported score. Production remains unchanged pending explicit licence scope and publication approval.
+
 ### N-001 — Import free data sources
 
 - Status: `in_progress`

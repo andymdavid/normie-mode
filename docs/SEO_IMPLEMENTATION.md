@@ -139,7 +139,7 @@ These sources establish crawler eligibility and conventional search mechanics. T
 | SEO-008 | Thin historical model pages | `in_progress` | P0 | D-035 temporary treatment active; enrichment remains |
 | SEO-009 | Specific-task differentiation | `in_progress` | P0 | D-035 temporary treatment active; editorial review capacity |
 | SEO-010 | Answer-first evidence blocks | `in_progress` | P1 | Product-owner comprehension review |
-| SEO-011 | First-party dataset publication | `proposed` | P1 | Eval review, licence decision |
+| SEO-011 | First-party dataset publication | `in_progress` | P1 | Product-owner licence and publication approval |
 | SEO-012 | Head-to-head comparisons | `proposed` | P1 | N-003, evidence sufficiency |
 | SEO-013 | Performance and response correctness | `in_progress` | P1 | Repository server complete; production/font checks remain |
 | SEO-014 | Titles, descriptions and information architecture | `done` | P1 | — |
@@ -489,7 +489,7 @@ Progress (2026-10-12):
 
 ### SEO-011 — First-party dataset publication
 
-State: `proposed`
+State: `in_progress`
 
 Purpose: Turn Normie Mode's original testing into a reference other publishers and answer engines can cite.
 
@@ -513,6 +513,14 @@ Verification:
 - Re-run scoring from published artefacts.
 - Validate downloads and schema.
 - Follow `docs/evals/README.md` for every run.
+
+Progress (2026-10-12):
+
+- Built a deterministic draft JSON package containing the five fixed cases, generated prompts, answer keys, all 30 model-case responses, parsed answers, scores, exact model routes, providers, costs, timings and recorded token usage. A flattened CSV contains all 180 model-case-question observations.
+- Added tests that regenerate every recorded score from the exported case and raw response, and check complete case/result/CSV coverage.
+- Added preview-only download links, a suggested citation and `Dataset` JSON-LD with JSON and CSV distributions. Normal production builds emit none of them until publication is approved.
+- Reuse terms remain deliberately unset. CC BY 4.0 is recommended for Normie Mode-authored cases, prompts, answer keys, annotations and compiled data; the final scope must avoid claiming rights Normie Mode may not hold in raw model-generated prose.
+- Remaining before publication: product-owner licence/scope approval, rights wording review, full verification, public activation and live download/schema checks.
 
 ### SEO-012 — Head-to-head comparisons
 
@@ -921,6 +929,12 @@ Append new entries; do not rewrite history except to correct a factual error, an
 - The workspace has neither an authenticated ChatGPT/Claude product session nor provider credentials. Ordinary web search is not a valid substitute for the fixture's required fresh product conversations with web search enabled.
 - Recorded the missing pre-deployment baseline as a methodology limitation and added `docs/seo/citation-results-v1.yaml` for append-only post-deployment results. SEO-010 remains `in_progress` until those product-surface runs are supplied.
 - Recorded the first exact prompt, “What is the best AI model for analysing an Excel spreadsheet?”, as zero Normie Mode citations in ChatGPT and Claude. Answers and competing URLs were not supplied, so this is two citation observations rather than a complete source-comparison record.
+
+### 2026-10-12 — SEO-011 dataset package drafted
+
+- Built preview-only JSON and CSV exports from the already approved spreadsheet run; no new paid run or result change was made.
+- The JSON preserves full provenance and raw reproducibility data. The CSV provides one row for each of 180 model-case-question observations. Automated checks recompute every score from the exported cases and responses.
+- Added preview-only download presentation and `Dataset` structured data. The normal production build excludes the files, links and schema while licence scope and publication approval remain open.
 
 ## Progress notes
 

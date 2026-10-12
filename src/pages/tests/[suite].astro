@@ -8,6 +8,7 @@ import { tasksUsingTest } from '../../lib/models';
 import { expectedAnswer, formatAnswer, givenAnswer, publishedRun, rankRun, runDates } from '../../lib/normie-tests';
 import { toCsv } from '../../../evals/spreadsheet-questions/suite';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { DATASET_PUBLICATIONS, datasetVisible } from '../../lib/dataset-publication';
 
 export function getStaticPaths() {
   return [...graph().tests.values()].filter((t) => t.source === 'normie' && publishedRun(t.key)).map((t) => ({ params: { suite: t.key } }));
@@ -40,8 +41,30 @@ const sheet = cases[0];
 const sheetAnswers = perModel.map((m) => ({ m, a: answers.find((x) => x.model === m.model && x.case === sheet.id)! }));
 const csvLines = toCsv(sheet.orders).split('\n');
 const runDate = runDates(run);
+const showDataset = datasetVisible(test.key);
+const datasetPublication = DATASET_PUBLICATIONS[test.key];
+const datasetJsonLd = showDataset ? JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Dataset',
+  name: test.title,
+  description: test.what,
+  url: new URL(`/tests/${test.key}`, Astro.site),
+  identifier: `normie-mode:${test.key}:v${summary.version ?? '1'}`,
+  version: summary.version ?? '1',
+  datePublished: test.published_on,
+  creator: { '@type': 'Organization', name: 'Normie Mode', url: Astro.site },
+  isAccessibleForFree: true,
+  ...(datasetPublication?.licence ? { license: datasetPublication.licence.url } : {}),
+  distribution: [
+    { '@type': 'DataDownload', encodingFormat: 'application/json', contentUrl: new URL(`/datasets/${test.key}.json`, Astro.site) },
+    { '@type': 'DataDownload', encodingFormat: 'text/csv', contentUrl: new URL(`/datasets/${test.key}.csv`, Astro.site) },
+  ],
+  measurementTechnique: 'Fixed synthetic spreadsheet cases with automatically scored questions',
+  variableMeasured: ['Answer correctness', 'Cost', 'Response time'],
+}) : undefined;
 ---
 <Base title="AI spreadsheet test: business questions" description={`Results from our reproducible test of ${perModel.length} AI models answering business questions from a spreadsheet, with every question and answer published.`}>
+  {datasetJsonLd && <script type="application/ld+json" set:html={datasetJsonLd} />}
   <Breadcrumbs items={[
     { label: 'Tests explained', href: '/benchmarks' },
     { label: 'Tested by us', badge: 'ours' },
@@ -162,6 +185,21 @@ const runDate = runDates(run);
     </table>
   </div>
 
+  {showDataset && (
+    <section class="dataset-card" aria-labelledby="dataset-heading">
+      <span class="tag">Reusable data · Draft</span>
+      <h2 id="dataset-heading">Download the complete test</h2>
+      <p>The files include all five synthetic sheets, exact prompts and answer keys, every model response, question-level scores, model routes, providers, costs, timings and token usage.</p>
+      <p class="dataset-links"><a href={`/datasets/${test.key}.json`} download>Complete JSON</a><a href={`/datasets/${test.key}.csv`} download>Question-level CSV</a></p>
+      {datasetPublication?.licence ? (
+        <p class="small muted">Licence: <a href={datasetPublication.licence.url}>{datasetPublication.licence.name}</a>. {datasetPublication.licence.scope}</p>
+      ) : (
+        <p class="small muted"><strong>Preview only:</strong> reuse terms have not been approved, so these files are not published and no public licence is granted yet.</p>
+      )}
+      <p class="small muted"><strong>Suggested citation:</strong> Normie Mode (2026), “Answering business questions from a spreadsheet”, version {summary.version ?? '1'}, <span class="mono">normiemode.com/tests/{test.key}</span>.</p>
+    </section>
+  )}
+
   <div class="section-head"><h2>How we tested</h2></div>
   <ul class="small muted" style="max-width:46rem">
     <li>Every model got identical sheets and instructions, through OpenRouter at its default settings, once per sheet.</li>
@@ -175,4 +213,9 @@ const runDate = runDates(run);
   .counts { margin-top: 1rem; }
   .counts-list { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; }
   .counts-list a { font-size: 1.05rem; }
+  .dataset-card { margin: 2.5rem 0; padding: 1.25rem; background: var(--band); max-width: 58rem; }
+  .dataset-card h2 { margin: 0.45rem 0 0.6rem; }
+  .dataset-card p { max-width: 50rem; }
+  .dataset-links { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+  .dataset-links a { display: inline-block; padding: 0.55rem 0.75rem; color: white; background: var(--navy); font-weight: 600; text-decoration: none; }
 </style>
