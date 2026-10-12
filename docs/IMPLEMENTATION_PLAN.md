@@ -277,6 +277,8 @@ Progress note (2026-10-11): SEO-013 response changes are live and production-ver
 
 Progress note (2026-10-12): SEO-014 has locally verified metadata templates for indexed tasks, models and benchmarks. All 62 indexed titles/descriptions remain unique and long-title review candidates fall from 40 to one. The templates are not deployed pending product-owner review of representative snippets.
 
+Progress note (2026-10-12): The SEO-014 metadata templates were approved and deployed in `0bec41d`. Representative live pages match the approved HTML, Open Graph and Twitter metadata. Visible breadcrumb semantics remain.
+
 ### N-001 — Import free data sources
 
 - Status: `in_progress`

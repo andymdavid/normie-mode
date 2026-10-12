@@ -596,6 +596,7 @@ Progress (2026-10-12):
 - Added a specific homepage description and concise metadata for the benchmark collection and published first-party spreadsheet test.
 - Local production build/audit: the 62 indexed pages retain unique titles and descriptions; title candidates over 60 characters fall from 40 to one, the maximum falls from 83 to 62, and no description exceeds 157 characters. Description length remains a review aid rather than a target; concise unique text is not padded to reach an arbitrary minimum.
 - Added unit coverage for benchmark identity/uniqueness/length, stable task metadata and the compact model template. Product-owner review of representative snippets remains required before deployment.
+- Product-owner review was approved on 2026-10-12. Commit `0bec41d` was deployed to `main` and `deployed`; representative homepage, benchmark, model, task and first-party-test pages were checked live, including equality between HTML, Open Graph and Twitter titles.
 
 ### SEO-015 — Update/report publishing programme
 
@@ -877,6 +878,12 @@ Append new entries; do not rewrite history except to correct a factual error, an
 - Replaced repetitive title/description drafts with deterministic factual templates for tasks, models and benchmarks, plus specific homepage, benchmark-index and first-party-test metadata.
 - The local audit retains unique titles/descriptions across all 62 indexed pages and reduces titles over 60 characters from 40 to one. On-page headings and recommendations are unchanged.
 - This is held at the product-owner review gate and has not been deployed. Representative snippets should be reviewed before the change reaches `deployed`.
+
+### 2026-10-12 — SEO-014 metadata templates approved and deployed
+
+- The product owner approved the representative templates. Pushed `0bec41d` to `main` and fast-forwarded `deployed` to the same commit.
+- Verified the homepage, two benchmark types, a model, two task pages and the published first-party test on production. Their titles and descriptions match the approved templates, and HTML/Open Graph/Twitter titles agree.
+- Visible breadcrumb semantics and their production review remain before SEO-014 can be completed.
 
 ## Progress notes
 
