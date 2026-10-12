@@ -10,6 +10,7 @@ import { ACCESS_LABEL, formatPrice, isCompared, planLabel, plansFor } from '../.
 import { formatDate, modelName } from '../../lib/view';
 import { isTemporarilyNoindexedRoute } from '../../lib/indexability';
 import { modelMetadata } from '../../lib/page-metadata';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
 
 export function getStaticPaths() {
   return [...graph().models.keys()].map((id) => ({ params: { id } }));
@@ -30,7 +31,11 @@ const money = (v?: number) => (v === undefined ? undefined : v < 10 ? `$${v.toFi
 const metadata = modelMetadata(model.name, family.provider);
 ---
 <Base title={metadata.title} description={metadata.description} noindex={isTemporarilyNoindexedRoute(`/models/${model.id}`)}>
-  <div class="eyebrow"><a href="/models">Models</a> · {family.provider}</div>
+  <Breadcrumbs items={[
+    { label: 'Models', href: '/models' },
+    { label: family.provider },
+    { label: model.name },
+  ]} />
   <h1>{model.name}</h1>
   {!current && (
     <div class="flag">

@@ -12,6 +12,7 @@ import Verdict from '../../components/Verdict.astro';
 import { verdict } from '../../lib/verdict';
 import { isTemporarilyNoindexedRoute } from '../../lib/indexability';
 import { taskMetadata } from '../../lib/page-metadata';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
 
 export function getStaticPaths() {
   return allTaskPages().map((task) => ({ params: { id: task.id } }));
@@ -52,7 +53,11 @@ const sections = [...(normOn ? [['guide', "Norm's guide"]] : []), ['compare', 'H
   description={metadata.description}
   noindex={isTemporarilyNoindexedRoute(taskPath(task))}
 >
-  <div class="eyebrow"><a href="/best-ai-for">Best AI for…</a>{hub && <> / <a href={taskPath(hub)}>{hub.label.replace(/^Best AI for /, '')}</a></>}</div>
+  <Breadcrumbs items={[
+    { label: 'Best AI for…', href: '/best-ai-for' },
+    ...(hub ? [{ label: hub.label.replace(/^Best AI for /, ''), href: taskPath(hub) }] : []),
+    { label: task.label.replace(/^Best AI for /, '') },
+  ]} />
   <h1>{task.label}</h1>
   <p class="lede">{task.covers}</p>
   {normOn ? (

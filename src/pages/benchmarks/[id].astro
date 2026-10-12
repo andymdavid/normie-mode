@@ -6,6 +6,7 @@ import { graph } from '../../lib/graph';
 import { rankedTestRows, tasksUsingTest } from '../../lib/models';
 import { CLOSENESS_LABEL, leadSentence, taskPath, testFloor, testRows, testSource } from '../../lib/tasks';
 import { benchmarkMetadata } from '../../lib/page-metadata';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
 
 export function getStaticPaths() {
   return [...graph().tests.keys()].filter((id) => graph().tests.get(id)!.source !== 'normie' && tasksUsingTest(id).length && rankedTestRows(graph().tests.get(id)!).length).map((id) => ({ params: { id } }));
@@ -17,7 +18,11 @@ const votes = test.source === 'lmarena';
 const metadata = benchmarkMetadata(test, rows.filter((row) => row.value !== undefined).length);
 ---
 <Base title={metadata.title} description={metadata.description}>
-  <div class="eyebrow"><a href="/benchmarks">Tests explained</a> · {votes ? "People's votes" : 'Test of real work'}</div>
+  <Breadcrumbs items={[
+    { label: 'Tests explained', href: '/benchmarks' },
+    { label: votes ? "People's votes" : 'Test of real work' },
+    { label: test.title },
+  ]} />
   <h1>{test.title}</h1>
   <p class="lede">{test.what}</p>
 
