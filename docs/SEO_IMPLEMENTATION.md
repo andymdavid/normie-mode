@@ -963,7 +963,7 @@ Append new entries; do not rewrite history except to correct a factual error, an
 
 - Added the user-scoped Wingman `normie-mode-evidence-refresh` v1 pipeline with a Monday 07:00 Perth schedule, isolated checkout, accepted-source import, full repository verification, review-branch push and read-only impact analysis.
 - Publication remains deliberately manual: the pipeline never merges, changes recommendation status, fast-forwards `deployed` or deploys the site. Flight Deck task creation is opt-in and awaits an explicit workspace/channel destination.
-- A no-push dry run passed. It found current snapshots materially ahead of the repository: 1,139 rather than 981 mapped Epoch results and 601 rather than 588 mapped LMArena entries, with LMArena current to 2026-10-08. New unmapped models require editorial mapping review before any refreshed evidence is merged.
+- A no-push dry run passed, followed by the first supervised run. Review branch `evidence-refresh/20261012-090126Z` at `b12cb9e` contains current snapshots: 1,139 rather than 981 mapped Epoch results and 601 rather than 588 mapped LMArena entries, with LMArena current to 2026-10-08. New unmapped models require editorial mapping review before this branch is merged.
 
 ## Progress notes
 
