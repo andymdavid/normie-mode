@@ -7,6 +7,7 @@ import { rankedTestRows, tasksUsingTest } from '../../lib/models';
 import { CLOSENESS_LABEL, leadSentence, taskPath, testFloor, testRows, testSource } from '../../lib/tasks';
 import { benchmarkMetadata } from '../../lib/page-metadata';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import EvidenceAnswer from '../../components/EvidenceAnswer.astro';
 
 export function getStaticPaths() {
   return [...graph().tests.keys()].filter((id) => graph().tests.get(id)!.source !== 'normie' && tasksUsingTest(id).length && rankedTestRows(graph().tests.get(id)!).length).map((id) => ({ params: { id } }));
@@ -16,6 +17,7 @@ const rows = testRows(test);
 const tasks = tasksUsingTest(test.id);
 const votes = test.source === 'lmarena';
 const metadata = benchmarkMetadata(test, rows.filter((row) => row.value !== undefined).length);
+const summary = leadSentence(rows);
 ---
 <Base title={metadata.title} description={metadata.description}>
   <Breadcrumbs items={[
@@ -25,6 +27,16 @@ const metadata = benchmarkMetadata(test, rows.filter((row) => row.value !== unde
   ]} />
   <h1>{test.title}</h1>
   <p class="lede">{test.what}</p>
+  {summary && (
+    <EvidenceAnswer
+      answer={summary}
+      classification="Measured result"
+      sources={[{ label: test.by, href: test.url }]}
+      limitation={votes
+        ? 'These are preference votes, not checks that an answer was factually correct.'
+        : 'This result covers this test only; use the related task pages to see it alongside other evidence.'}
+    />
+  )}
 
   <div class="band">
     <div class="band-inner summary-grid">
@@ -44,7 +56,7 @@ const metadata = benchmarkMetadata(test, rows.filter((row) => row.value !== unde
     sub={votes ? 'Rating from blind votes' : 'Share of tasks done correctly'}
     rows={rows}
     floor={testFloor(test, rows)}
-    summary={leadSentence(rows)}
+    summary={summary}
     source={testSource(test)}
   />
 

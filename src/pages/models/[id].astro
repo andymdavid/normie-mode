@@ -11,6 +11,8 @@ import { formatDate, modelName } from '../../lib/view';
 import { isTemporarilyNoindexedRoute } from '../../lib/indexability';
 import { modelMetadata } from '../../lib/page-metadata';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import EvidenceAnswer from '../../components/EvidenceAnswer.astro';
+import { modelAnswer } from '../../lib/answer-summary';
 
 export function getStaticPaths() {
   return [...graph().models.keys()].map((id) => ({ params: { id } }));
@@ -29,6 +31,7 @@ const predecessors = [...g.models.values()].filter((m) => m.successor === model.
 const top3 = tasks.filter((t) => t.pos.position <= 3);
 const money = (v?: number) => (v === undefined ? undefined : v < 10 ? `$${v.toFixed(2)}` : `$${v.toFixed(0)}`);
 const metadata = modelMetadata(model.name, family.provider);
+const answer = current && row ? modelAnswer(model.name, tasks, row.independentTests) : undefined;
 ---
 <Base title={metadata.title} description={metadata.description} noindex={isTemporarilyNoindexedRoute(`/models/${model.id}`)}>
   <Breadcrumbs items={[
@@ -48,6 +51,16 @@ const metadata = modelMetadata(model.name, family.provider);
     </div>
   )}
   <p class="lede">{family.provider}'s {family.name} model{model.released_on && <>, released {formatDate(model.released_on)}</>}.</p>
+
+  {answer && <EvidenceAnswer
+    answer={answer.answer}
+    classification="Measured result"
+    sources={tests.slice(0, 3).map(({ test }) => ({
+      label: test.title,
+      href: test.source === 'normie' ? test.url : `/benchmarks/${test.id}`,
+    }))}
+    limitation={answer.limitation}
+  />}
 
   {current && (
     <div class="band">

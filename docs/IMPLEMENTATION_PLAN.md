@@ -281,6 +281,8 @@ Progress note (2026-10-12): The SEO-014 metadata templates were approved and dep
 
 Progress note (2026-10-12): SEO-014 is done. Shared visible breadcrumbs and canonical `BreadcrumbList` data are live across task, model, benchmark and first-party-test detail pages (`37079ff`, `9edc5b7`); representative production hierarchies parse correctly.
 
+Progress note (2026-10-12): SEO-010 has locally built deterministic answer-first blocks for benchmark and current model pages, plus explicit classification of task recommendations and first-party measured results. The draft is not deployed pending product-owner comprehension review; citation comparison follows deployment.
+
 ### N-001 — Import free data sources
 
 - Status: `in_progress`

@@ -138,7 +138,7 @@ These sources establish crawler eligibility and conventional search mechanics. T
 | SEO-007 | Indexability and page-value audit | `done` | P0 | — |
 | SEO-008 | Thin historical model pages | `in_progress` | P0 | D-035 temporary treatment active; enrichment remains |
 | SEO-009 | Specific-task differentiation | `in_progress` | P0 | D-035 temporary treatment active; editorial review capacity |
-| SEO-010 | Answer-first evidence blocks | `proposed` | P1 | SEO-007, D-021 review |
+| SEO-010 | Answer-first evidence blocks | `in_progress` | P1 | Product-owner comprehension review |
 | SEO-011 | First-party dataset publication | `proposed` | P1 | Eval review, licence decision |
 | SEO-012 | Head-to-head comparisons | `proposed` | P1 | N-003, evidence sufficiency |
 | SEO-013 | Performance and response correctness | `in_progress` | P1 | Repository server complete; production/font checks remain |
@@ -452,7 +452,7 @@ Verification:
 
 ### SEO-010 — Answer-first evidence blocks
 
-State: `proposed`
+State: `in_progress`
 
 Purpose: Make important answers easy for people and retrieval systems to locate and attribute.
 
@@ -476,6 +476,14 @@ Verification:
 - Unit tests for generated statements.
 - Product-owner comprehension review.
 - Citation-test comparison before and after deployment.
+
+Progress (2026-10-12):
+
+- Drafted a shared answer-first block with an explicit claim class, plain-text conclusion, linked evidence and adjacent limitation.
+- Benchmark pages now draft a deterministic measured-result summary from the same ranked rows as the chart, cite the original test owner directly, and distinguish preference votes from correctness tests.
+- Current model pages now draft a deterministic task-position summary, link up to three evidence pages and state exact-version evidence limits. The generator refuses to manufacture a ranking when task evidence is insufficient; unit tests cover both paths.
+- Existing task verdicts are labelled `Rule-based recommendation`, and the published first-party test's short answer is labelled `Measured result`.
+- Local build passes. Representative wording is awaiting product-owner comprehension review before deployment; the fixed citation test must then be compared after deployment.
 
 ### SEO-011 — First-party dataset publication
 
@@ -892,6 +900,12 @@ Append new entries; do not rewrite history except to correct a factual error, an
 - Added matching `BreadcrumbList` JSON-LD from the same source. Only real linked ancestors and the canonical current URL enter structured data; visual provider/category labels do not invent destinations.
 - Verified live parent and child tasks, model, third-party benchmark and first-party test examples. Every hierarchy and canonical URL parsed correctly with no generated `.html` forms.
 - SEO-014 is complete: metadata is unique and approved, distinctive terms lead titles, descriptions remain factual and differentiated, and visible/machine-readable breadcrumbs are live.
+
+### 2026-10-12 — SEO-010 answer-first blocks drafted
+
+- Added local deterministic answer blocks for benchmark and current model pages, explicit rule-based classification on task verdicts, and measured-result classification on the published first-party test.
+- Each new block places its classification, conclusion, evidence links and limitation together. Benchmark evidence links directly to the original test owner; model conclusions derive from existing task positions and exact-version evidence counts.
+- Added unit tests for a model with measured task positions and a new model without enough relevant evidence. No wording or recommendation has been deployed; product-owner review remains required.
 
 ## Progress notes
 
