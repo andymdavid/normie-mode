@@ -279,6 +279,8 @@ Progress note (2026-10-12): SEO-014 has locally verified metadata templates for 
 
 Progress note (2026-10-12): The SEO-014 metadata templates were approved and deployed in `0bec41d`. Representative live pages match the approved HTML, Open Graph and Twitter metadata. Visible breadcrumb semantics remain.
 
+Progress note (2026-10-12): SEO-014 is done. Shared visible breadcrumbs and canonical `BreadcrumbList` data are live across task, model, benchmark and first-party-test detail pages (`37079ff`, `9edc5b7`); representative production hierarchies parse correctly.
+
 ### N-001 — Import free data sources
 
 - Status: `in_progress`

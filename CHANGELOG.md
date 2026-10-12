@@ -95,6 +95,7 @@ This file records meaningful changes to the Normie Mode product, implementation,
 ### Changed
 
 - Search and social titles now lead with the task, exact model or benchmark identity, with concise unique descriptions across all indexed pages.
+- Task, model and test detail pages now show semantic breadcrumbs with matching canonical structured data.
 - Static text responses now support gzip, `HEAD` mirrors `GET` metadata without sending a body, and cache lifetimes distinguish fingerprinted build assets from replaceable images, discovery files and HTML.
 - Thirty-one child-task pages without distinct direct evidence and nine thin historical model pages now remain accessible and internally linked but use temporary `noindex,follow` and are omitted from the sitemap until they are improved; all other public pages remain submitted for indexing (D-035).
 - Dated task-page titles now use the page's evidence freshness month instead of changing with the wall clock.

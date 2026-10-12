@@ -142,7 +142,7 @@ These sources establish crawler eligibility and conventional search mechanics. T
 | SEO-011 | First-party dataset publication | `proposed` | P1 | Eval review, licence decision |
 | SEO-012 | Head-to-head comparisons | `proposed` | P1 | N-003, evidence sufficiency |
 | SEO-013 | Performance and response correctness | `in_progress` | P1 | Repository server complete; production/font checks remain |
-| SEO-014 | Titles, descriptions and information architecture | `in_progress` | P1 | Metadata templates awaiting product-owner review |
+| SEO-014 | Titles, descriptions and information architecture | `done` | P1 | — |
 | SEO-015 | Update/report publishing programme | `blocked` | P1 | New accepted decision; reports are deferred |
 | SEO-016 | Distribution and authority building | `proposed` | P1 | At least one strong original report/dataset |
 | SEO-017 | Citation and referral monitoring | `proposed` | P0 | Analytics/logging choice |
@@ -259,7 +259,7 @@ Blocker (2026-10-10): The plan names Andy David as the product owner and human r
 
 ### SEO-004 — Global metadata and social previews
 
-State: `in_progress`
+State: `done`
 
 Purpose: Improve result presentation and earned distribution.
 
@@ -597,6 +597,7 @@ Progress (2026-10-12):
 - Local production build/audit: the 62 indexed pages retain unique titles and descriptions; title candidates over 60 characters fall from 40 to one, the maximum falls from 83 to 62, and no description exceeds 157 characters. Description length remains a review aid rather than a target; concise unique text is not padded to reach an arbitrary minimum.
 - Added unit coverage for benchmark identity/uniqueness/length, stable task metadata and the compact model template. Product-owner review of representative snippets remains required before deployment.
 - Product-owner review was approved on 2026-10-12. Commit `0bec41d` was deployed to `main` and `deployed`; representative homepage, benchmark, model, task and first-party-test pages were checked live, including equality between HTML, Open Graph and Twitter titles.
+- Commits `37079ff` and `9edc5b7` added visible semantic breadcrumbs and matching canonical `BreadcrumbList` data to task, model, benchmark and first-party-test detail pages. Production checks covered parent/child task hierarchy and all four page families. SEO-014 acceptance criteria are satisfied.
 
 ### SEO-015 — Update/report publishing programme
 
@@ -884,6 +885,13 @@ Append new entries; do not rewrite history except to correct a factual error, an
 - The product owner approved the representative templates. Pushed `0bec41d` to `main` and fast-forwarded `deployed` to the same commit.
 - Verified the homepage, two benchmark types, a model, two task pages and the published first-party test on production. Their titles and descriptions match the approved templates, and HTML/Open Graph/Twitter titles agree.
 - Visible breadcrumb semantics and their production review remain before SEO-014 can be completed.
+
+### 2026-10-12 — SEO-014 breadcrumbs deployed and work item completed
+
+- Replaced detail-page eyebrow trails with a shared visible breadcrumb navigation using a labelled `nav`, ordered list, linked ancestors and `aria-current` on the current page.
+- Added matching `BreadcrumbList` JSON-LD from the same source. Only real linked ancestors and the canonical current URL enter structured data; visual provider/category labels do not invent destinations.
+- Verified live parent and child tasks, model, third-party benchmark and first-party test examples. Every hierarchy and canonical URL parsed correctly with no generated `.html` forms.
+- SEO-014 is complete: metadata is unique and approved, distinctive terms lead titles, descriptions remain factual and differentiated, and visible/machine-readable breadcrumbs are live.
 
 ## Progress notes
 
