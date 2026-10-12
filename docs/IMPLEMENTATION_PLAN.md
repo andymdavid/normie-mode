@@ -223,6 +223,10 @@ Normie Mode permits `OAI-SearchBot` and `Claude-SearchBot` to crawl public conte
 
 Keep all 31 child-task pages and the nine thin historical model pages public and internally linked, but apply `noindex,follow` and remove them from the sitemap until they provide distinct search value. Parent task pages and substantive model pages remain indexable. This is an editorial indexability decision, not a crawl-budget tactic or a claim of a sitewide thin-content penalty. It gives up long-tail visibility for those 40 URLs while active. Before N-015 closes, each of the nine model pages must be enriched and restored to the sitemap or receive an explicit retained-exclusion/redirect decision; child tasks return only after meeting SEO-009's differentiation criteria.
 
+### D-036 — Publish first-party test data under scoped CC BY 4.0 (accepted 2026-10-12)
+
+Publish Normie Mode-authored synthetic cases, prompts, questions, answer keys, scores, annotations and compiled dataset structure under Creative Commons Attribution 4.0 International. Reusers may copy, adapt and use that material commercially when they credit Normie Mode, link the licence and identify changes. Raw model-generated responses remain available for auditability but are expressly outside Normie Mode's licence grant because Normie Mode does not claim rights it may not hold in provider output. Each dataset must state this scope beside its downloads and in its machine-readable record.
+
 ## Reference sites
 
 Reviewed 2026-09-24 as models for structure and presentation:
@@ -290,6 +294,8 @@ Progress note (2026-10-12): SEO-010 citation preflight confirmed `200` responses
 Progress note (2026-10-12): The first post-deployment citation prompt produced no Normie Mode citation in either ChatGPT or Claude (0/2 observations). The exact prompt is recorded; answers and competing source URLs were not supplied. Prioritise reusable first-party spreadsheet evidence before expanding the citation sample.
 
 Progress note (2026-10-12): SEO-011 has a preview-only draft dataset package for the approved spreadsheet run: complete JSON, 180-row question-level CSV, download presentation and `Dataset` JSON-LD. Automated tests recompute every exported score. Production remains unchanged pending explicit licence scope and publication approval.
+
+Progress note (2026-10-12): D-036 approves publication of the spreadsheet dataset under scoped CC BY 4.0. Normie Mode-authored material and the compiled structure are licensed; raw model responses are included for audit but excluded from the grant. Public activation and production verification are in progress.
 
 ### N-001 — Import free data sources
 

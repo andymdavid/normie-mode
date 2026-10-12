@@ -55,6 +55,7 @@ const datasetJsonLd = showDataset ? JSON.stringify({
   creator: { '@type': 'Organization', name: 'Normie Mode', url: Astro.site },
   isAccessibleForFree: true,
   ...(datasetPublication?.licence ? { license: datasetPublication.licence.url } : {}),
+  ...(datasetPublication?.licence ? { conditionsOfAccess: datasetPublication.licence.scope } : {}),
   distribution: [
     { '@type': 'DataDownload', encodingFormat: 'application/json', contentUrl: new URL(`/datasets/${test.key}.json`, Astro.site) },
     { '@type': 'DataDownload', encodingFormat: 'text/csv', contentUrl: new URL(`/datasets/${test.key}.csv`, Astro.site) },
@@ -187,7 +188,7 @@ const datasetJsonLd = showDataset ? JSON.stringify({
 
   {showDataset && (
     <section class="dataset-card" aria-labelledby="dataset-heading">
-      <span class="tag">Reusable data · Draft</span>
+      <span class="tag">Reusable data</span>
       <h2 id="dataset-heading">Download the complete test</h2>
       <p>The files include all five synthetic sheets, exact prompts and answer keys, every model response, question-level scores, model routes, providers, costs, timings and token usage.</p>
       <p class="dataset-links"><a href={`/datasets/${test.key}.json`} download>Complete JSON</a><a href={`/datasets/${test.key}.csv`} download>Question-level CSV</a></p>

@@ -519,8 +519,8 @@ Progress (2026-10-12):
 - Built a deterministic draft JSON package containing the five fixed cases, generated prompts, answer keys, all 30 model-case responses, parsed answers, scores, exact model routes, providers, costs, timings and recorded token usage. A flattened CSV contains all 180 model-case-question observations.
 - Added tests that regenerate every recorded score from the exported case and raw response, and check complete case/result/CSV coverage.
 - Added preview-only download links, a suggested citation and `Dataset` JSON-LD with JSON and CSV distributions. Normal production builds emit none of them until publication is approved.
-- Reuse terms remain deliberately unset. CC BY 4.0 is recommended for Normie Mode-authored cases, prompts, answer keys, annotations and compiled data; the final scope must avoid claiming rights Normie Mode may not hold in raw model-generated prose.
-- Remaining before publication: product-owner licence/scope approval, rights wording review, full verification, public activation and live download/schema checks.
+- D-036 records product-owner approval of CC BY 4.0 for Normie Mode-authored cases, prompts, questions, answer keys, scores, annotations and compiled structure. Raw model-generated responses remain available for audit but are explicitly excluded from the licence grant.
+- Public activation is implemented. Local validation, 721 tests, type-check, production build and SEO audit pass; the generated JSON contains 5 cases and 30 model-case results, while the CSV contains all 180 question observations. Remaining before completion: live download/schema checks.
 
 ### SEO-012 — Head-to-head comparisons
 

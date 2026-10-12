@@ -3,11 +3,12 @@ import { publicDataset, publicDatasetCsv } from './public-dataset';
 import { score } from '../../evals/spreadsheet-questions/suite';
 
 describe('public first-party dataset', () => {
-  it('reproduces the complete published spreadsheet run without granting a draft licence', () => {
+  it('reproduces the complete published spreadsheet run with the approved scoped licence', () => {
     const dataset = publicDataset('spreadsheet-questions');
 
     expect(dataset.identifier).toBe('normie-mode:spreadsheet-questions:v1');
-    expect(dataset.licence).toBeNull();
+    expect(dataset.licence?.url).toBe('https://creativecommons.org/licenses/by/4.0/');
+    expect(dataset.licence?.scope).toContain('Raw model-generated responses');
     expect(dataset.cases).toHaveLength(5);
     expect(dataset.results).toHaveLength(30);
     expect(dataset.results.every((result) => result.response && result.score.total === 6)).toBe(true);
