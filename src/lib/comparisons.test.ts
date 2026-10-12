@@ -14,8 +14,8 @@ describe('curated model comparisons', () => {
     expect(comparison.tasks.length).toBeGreaterThanOrEqual(3);
     expect(comparison.tests.length).toBeGreaterThanOrEqual(5);
     expect(comparison.answer).toContain(`${comparison.tasks.length} tasks where both exact versions can be scored`);
-    expect(comparison.answer).toContain('so this is not an overall winner');
-    expect(comparison.coverage[1].additionalTasks).toBeGreaterThan(0);
+    expect(comparison.answer).toContain('overall winner');
+    expect(comparison.coverage.every((coverage) => coverage.tasks >= comparison.tasks.length)).toBe(true);
     expect(comparison.tasks.every((task) => task.scores.every(Number.isFinite))).toBe(true);
   });
 });

@@ -965,6 +965,13 @@ Append new entries; do not rewrite history except to correct a factual error, an
 - Publication remains deliberately manual: the pipeline never merges, changes recommendation status, fast-forwards `deployed` or deploys the site. Flight Deck task creation is opt-in and awaits an explicit workspace/channel destination.
 - A no-push dry run passed, followed by the first supervised run. Review branch `evidence-refresh/20261012-090126Z` at `b12cb9e` contains current snapshots: 1,139 rather than 981 mapped Epoch results and 601 rather than 588 mapped LMArena entries, with LMArena current to 2026-10-08. New unmapped models require editorial mapping review before this branch is merged.
 
+### 2026-10-12 — First refresh mapped and impact-reviewed
+
+- Verified the new Claude Sonnet 5.5, Claude Haiku 5.5 and GPT-6.1 Sol versions against their makers, added their exact source mappings and updated the Claude and ChatGPT app mappings. Exact aliases also recover previously missed Opus 5.5, GPT-6 Sol, GPT-6 Luna, GPT-5.5 and DeepSeek V4 Pro evidence.
+- Re-importing with those mappings produces 1,209 Epoch results, 26 Epoch index scores, 26 models.dev records and 734 LMArena entries. Gemini 4 Argon remains unmapped: Google says it is still limited to trusted testers and has not yet reached broad developer or consumer availability.
+- All 15 main task verdict blocks differ from production. This is therefore a recommendation-changing refresh and remains review-only. No merge, deployment or publication has occurred.
+- Three former current models become historical: Claude Sonnet 5, Claude Haiku 4.5 and GPT-6 Sol. D-037 records their indexability as an open decision; D-035 did not pre-approve automatically excluding future historical pages.
+
 ## Progress notes
 
 Use this section for short cross-session context that does not fit an individual work item.

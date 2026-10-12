@@ -6,6 +6,7 @@ This file records meaningful changes to the Normie Mode product, implementation,
 
 ### Added
 
+- Provider-verified records and source mappings for Claude Sonnet 5.5, Claude Haiku 5.5 and GPT-6.1 Sol, prepared for editorial review alongside the refreshed evidence.
 - A supervised weekly Wingman evidence-refresh pipeline for Epoch AI, models.dev and LMArena. It verifies changes in an isolated clone and prepares a review branch and impact report without merging, deploying or publishing recommendations.
 - Downloadable JSON and CSV for the published spreadsheet test, including its cases, prompts, answers, scores and provenance; Normie Mode-authored material is reusable under scoped CC BY 4.0, with raw model responses excluded from the licence grant.
 - Answer-first evidence blocks on benchmark and current-model pages, with explicit measured-result labels, linked evidence and limitations; task recommendations and first-party test findings now state their claim type too.
@@ -97,6 +98,7 @@ This file records meaningful changes to the Normie Mode product, implementation,
 
 ### Changed
 
+- Refreshed review data now maps 1,209 Epoch benchmark results, 26 Epoch index scores, 26 models.dev records and 734 LMArena entries; task verdict changes remain unpublished pending product-owner review.
 - Search and social titles now lead with the task, exact model or benchmark identity, with concise unique descriptions across all indexed pages.
 - Task, model and test detail pages now show semantic breadcrumbs with matching canonical structured data.
 - Static text responses now support gzip, `HEAD` mirrors `GET` metadata without sending a body, and cache lifetimes distinguish fingerprinted build assets from replaceable images, discovery files and HTML.

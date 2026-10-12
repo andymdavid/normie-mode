@@ -56,7 +56,10 @@ export function comparisonData(definition: ComparisonDefinition) {
   const additionalTasks = positions.map((items) => items.length - tasks.length) as [number, number];
   const additionalTests = testPositionsByModel.map((items, side) => items.filter((item) => !testSets[side === 0 ? 1 : 0].has(item.test.id)).length) as [number, number];
   const closeSentence = close === 0 ? 'None is within five points.' : `${close} task${close === 1 ? ' is' : 's are'} within five points.`;
-  const answer = `On the ${tasks.length} tasks where both exact versions can be scored, ${models[0].name} is higher on ${wins[0]} and ${models[1].name} on ${wins[1]}. ${closeSentence} ${models[1].name} has scores for ${additionalTasks[1]} additional tasks where ${models[0].name} cannot yet be scored, so this is not an overall winner.`;
+  const coverageSentence = additionalTasks[0] === 0 && additionalTasks[1] === 0
+    ? 'Both versions can be scored on the same tasks, but Normie Mode does not combine different kinds of work into one overall winner.'
+    : `${models[0].name} has ${additionalTasks[0]} additional scored task${additionalTasks[0] === 1 ? '' : 's'} and ${models[1].name} has ${additionalTasks[1]}; the uneven coverage means this is not an overall winner.`;
+  const answer = `On the ${tasks.length} tasks where both exact versions can be scored, ${models[0].name} is higher on ${wins[0]} and ${models[1].name} on ${wins[1]}. ${closeSentence} ${coverageSentence}`;
 
   return {
     definition,

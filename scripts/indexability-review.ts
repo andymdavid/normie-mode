@@ -3,6 +3,7 @@ import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { auditSite } from './seo-audit';
 import { graph } from '../src/lib/graph';
+import { isTemporarilyNoindexedRoute } from '../src/lib/indexability';
 
 const ORIGIN = 'https://normiemode.com';
 const OUTPUT = resolve('docs/seo/indexability-review.csv');
@@ -83,7 +84,9 @@ export function indexabilityRows(directory = resolve('dist')) {
       graph_result_records: graphResultRecords,
       proposed_disposition: disposition,
       reason,
-      approval: disposition === 'index' ? 'reviewed-by-rule; owner review pending' : 'approved by product owner 2026-10-11 (D-035)',
+      approval: disposition === 'noindex-follow' && isTemporarilyNoindexedRoute(page.route)
+        ? 'approved by product owner 2026-10-11 (D-035)'
+        : 'reviewed-by-rule; owner review pending',
     };
   });
 }
