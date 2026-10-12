@@ -732,7 +732,7 @@ Update this table from primary reports. Use `—` when unknown rather than estim
 | Non-brand search impressions/clicks | — | 2026-10-10 | Establish in SEO-001 |
 | OAI-SearchBot successful fetches | — | 2026-10-10 | Establish in SEO-002/017 |
 | Claude-SearchBot successful fetches | — | 2026-10-10 | Establish in SEO-002/017 |
-| Citation-test citations | — | 2026-10-10 | Establish before content changes |
+| Citation-test citations | 0/2 prompt-engine observations | 2026-10-12 | Partial post-SEO-010 baseline; expand and repeat monthly |
 
 ## Decisions needed
 
@@ -920,6 +920,7 @@ Append new entries; do not rewrite history except to correct a factual error, an
 - Confirmed representative evidence pages return `200` to both `OAI-SearchBot` and `Claude-SearchBot` after the SEO-010 deployment.
 - The workspace has neither an authenticated ChatGPT/Claude product session nor provider credentials. Ordinary web search is not a valid substitute for the fixture's required fresh product conversations with web search enabled.
 - Recorded the missing pre-deployment baseline as a methodology limitation and added `docs/seo/citation-results-v1.yaml` for append-only post-deployment results. SEO-010 remains `in_progress` until those product-surface runs are supplied.
+- Recorded the first exact prompt, “What is the best AI model for analysing an Excel spreadsheet?”, as zero Normie Mode citations in ChatGPT and Claude. Answers and competing URLs were not supplied, so this is two citation observations rather than a complete source-comparison record.
 
 ## Progress notes
 

@@ -12,18 +12,32 @@ methodology_note: >-
 runs:
   - id: 2026-10-12-chatgpt-post-seo-010
     engine: ChatGPT
-    product_surface: null
+    product_surface: Web search enabled; product tier and model not recorded
     deployment_commit: 96f2afb
-    status: pending_manual_run
-    run_on: null
-    results: []
+    status: partial
+    run_on: 2026-10-12
+    results:
+      - family: spreadsheet_work
+        prompt_number: 1
+        cited_normie_mode: false
+        cited_urls: []
+        competing_sources: []
+        answer: null
+        notes: Product owner reported four cited sites; their names and URLs were not captured.
   - id: 2026-10-12-claude-post-seo-010
     engine: Claude
-    product_surface: null
+    product_surface: Web search enabled; product tier and model not recorded
     deployment_commit: 96f2afb
-    status: pending_manual_run
-    run_on: null
-    results: []
+    status: partial
+    run_on: 2026-10-12
+    results:
+      - family: spreadsheet_work
+        prompt_number: 1
+        cited_normie_mode: false
+        cited_urls: []
+        competing_sources: []
+        answer: null
+        notes: Product owner reported that Normie Mode was not cited; other sources were not captured.
 
 # Add one record per prompt without changing the fixture wording:
 # results:
