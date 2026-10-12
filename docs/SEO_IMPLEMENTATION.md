@@ -972,6 +972,12 @@ Append new entries; do not rewrite history except to correct a factual error, an
 - All 15 main task verdict blocks differ from production. This is therefore a recommendation-changing refresh and remains review-only. No merge, deployment or publication has occurred.
 - Three former current models become historical: Claude Sonnet 5, Claude Haiku 4.5 and GPT-6 Sol. D-037 records their indexability as an open decision; D-035 did not pre-approve automatically excluding future historical pages.
 
+### 2026-10-12 — Newly historical model pages enriched
+
+- D-037 accepted immediate enrichment rather than extending temporary exclusions. Claude Sonnet 5, Claude Haiku 4.5 and GPT-6 Sol now retain provider-confirmed launch context, successor relationships, archived API prices and limits, and exact-version Epoch/LMArena history where available.
+- The three pages render 308, 305 and 318 substantive words respectively and remain indexable. Historical evidence is explicitly not presented as a current recommendation.
+- The shared evidence section also makes eight of the original nine D-035 historical pages substantive by the audit's 200-word rule. Their `noindex,follow` state remains unchanged pending the promised separate restoration review; DeepSeek V3.2 is still thin at 171 words.
+
 ## Progress notes
 
 Use this section for short cross-session context that does not fit an individual work item.

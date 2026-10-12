@@ -227,9 +227,9 @@ Keep all 31 child-task pages and the nine thin historical model pages public and
 
 Publish Normie Mode-authored synthetic cases, prompts, questions, answer keys, scores, annotations and compiled dataset structure under Creative Commons Attribution 4.0 International. Reusers may copy, adapt and use that material commercially when they credit Normie Mode, link the licence and identify changes. Raw model-generated responses remain available for auditability but are expressly outside Normie Mode's licence grant because Normie Mode does not claim rights it may not hold in provider output. Each dataset must state this scope beside its downloads and in its machine-readable record.
 
-### D-037 — Indexability of newly superseded model pages (proposed 2026-10-12)
+### D-037 — Enrich and retain newly superseded model pages (accepted 2026-10-12)
 
-The October evidence refresh makes Claude Sonnet 5, Claude Haiku 4.5 and GPT-6 Sol historical versions. D-035 approved temporary `noindex,follow` for nine specifically reviewed historical pages, not an automatic rule for every future successor. Keep these three newly historical pages under the existing public indexing policy until the product owner chooses between temporary exclusion and immediate enrichment. The indexability register may recommend exclusion, but must label it `owner review pending`; it must not claim D-035 approval or change their robots/sitemap treatment automatically.
+The October evidence refresh makes Claude Sonnet 5, Claude Haiku 4.5 and GPT-6 Sol historical versions. Enrich those pages immediately and retain them in the index rather than extending D-035 automatically. Each page must identify its successor, cite the provider launch record, preserve exact-version Epoch and LMArena evidence where available, show archived API price and limits, and explain that historical rankings are not current recommendations. D-035 remains unchanged for the nine pages it specifically approved; restoring those pages requires their own review.
 
 ## Reference sites
 
@@ -319,6 +319,8 @@ Progress note (2026-09-24): `npm run import` (or `-- --offline` to reuse `.cache
 Progress note (2026-10-12): a user-scoped Wingman pipeline now runs the accepted-source import weekly in an isolated clone, executes the complete verification suite, pushes only a timestamped review branch and asks an agent to identify mapping and product-surface impacts. It never merges, deploys or publishes recommendation changes. The dry run and first supervised run passed; branch `evidence-refresh/20261012-090126Z` (`b12cb9e`) contains the refreshed snapshots. Several new unmapped models and a Flight Deck review destination remain outstanding.
 
 Progress note (2026-10-12): the first mapping review adds provider-verified Claude Sonnet 5.5, Claude Haiku 5.5 and GPT-6.1 Sol; exact Epoch index IDs for Opus 5.5, GPT-6 Sol and GPT-6 Luna; and exact LMArena aliases for GPT-5.5 and DeepSeek V4 Pro. A fresh import now maps 1,209 Epoch results, 26 index scores, 26 models.dev records and 734 LMArena entries. Gemini 4 Argon remains deliberately unmapped because Google's launch page says broad developer and consumer availability is still pending. All 15 hub verdict blocks differ from production, so the refresh requires product-owner review before merge or deployment.
+
+Progress note (2026-10-12): D-037 is accepted. Claude Sonnet 5, Claude Haiku 4.5 and GPT-6 Sol now render 305–318 substantive words with verified launch context, successor links, archived specifications and exact-version evidence, and remain indexable. The reusable historical-evidence section also lifts eight of the original nine D-035 model pages above 200 words, but their existing `noindex,follow` treatment remains until a separate restoration review; DeepSeek V3.2 remains below the threshold.
 
 ### N-002 — Overview page mockup
 

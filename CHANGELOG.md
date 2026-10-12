@@ -98,6 +98,7 @@ This file records meaningful changes to the Normie Mode product, implementation,
 
 ### Changed
 
+- Historical model pages now preserve exact-version launch context, successor relationships, archived API specifications and benchmark/voting evidence instead of showing only a replacement notice.
 - Refreshed review data now maps 1,209 Epoch benchmark results, 26 Epoch index scores, 26 models.dev records and 734 LMArena entries; task verdict changes remain unpublished pending product-owner review.
 - Search and social titles now lead with the task, exact model or benchmark identity, with concise unique descriptions across all indexed pages.
 - Task, model and test detail pages now show semantic breadcrumbs with matching canonical structured data.
