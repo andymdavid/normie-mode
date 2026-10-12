@@ -1,0 +1,113 @@
+---
+import Base from '../../layouts/Base.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import EvidenceAnswer from '../../components/EvidenceAnswer.astro';
+import { comparisonData, visibleComparisons } from '../../lib/comparisons';
+import { ordinal } from '../../lib/models';
+import { formatPrice, planLabel } from '../../lib/plans';
+import { taskPath } from '../../lib/tasks';
+import { formatDate } from '../../lib/view';
+import { routeLastmod } from '../../lib/freshness';
+
+export function getStaticPaths() {
+  return visibleComparisons().map((definition) => ({ params: { slug: definition.slug }, props: { definition } }));
+}
+
+const { definition } = Astro.props;
+const comparison = comparisonData(definition);
+const [left, right] = comparison.models;
+const [leftOverview, rightOverview] = comparison.overview;
+const money = (value?: number) => value === undefined ? 'Not published' : value < 10 ? `$${value.toFixed(2)}` : `$${value.toFixed(0)}`;
+const title = `${left.name} vs ${right.name}: tests, tasks & price`;
+const description = `Compare ${left.name} and ${right.name} across shared task scores, independent test results, API cost, evidence and app availability.`;
+const evidenceUpdated = [left.id, right.id].map((id) => routeLastmod(`/models/${id}`)).filter((date): date is string => Boolean(date)).sort().at(-1);
+const unmatchedTests = (side: 0 | 1) => comparison.coverage[side].additionalTests === 0
+  ? `${comparison.models[side].name} has no other test results without a matching ${comparison.models[side === 0 ? 1 : 0].name} result`
+  : `${comparison.models[side].name} has ${comparison.coverage[side].additionalTests} other test result${comparison.coverage[side].additionalTests === 1 ? '' : 's'} without a matching ${comparison.models[side === 0 ? 1 : 0].name} result`;
+---
+<Base title={title} description={description}>
+  <Breadcrumbs items={[
+    { label: 'Models', href: '/models' },
+    { label: 'Compare models' },
+    { label: `${left.name} vs ${right.name}` },
+  ]} />
+  <h1>{left.name} vs {right.name}</h1>
+  <p class="lede">The same evidence, side by side. Exact model versions only.</p>
+
+  <EvidenceAnswer
+    answer={comparison.answer}
+    classification="Measured result"
+    sources={comparison.tasks.slice(0, 3).map(({ task }) => ({ label: task.label, href: taskPath(task) }))}
+    limitation="Only shared scored tasks are compared head to head. Tests available for one version but not the other can change the apparent picture."
+  />
+
+  <div class="table-wrap overview-table">
+    <table>
+      <thead><tr><th>At a glance</th><th>{left.name}</th><th>{right.name}</th></tr></thead>
+      <tbody>
+        <tr><th>Evidence</th><td><strong>{comparison.evidenceLabels[0]}</strong><br/><span class="small muted">{leftOverview.independentTests} independent results</span></td><td><strong>{comparison.evidenceLabels[1]}</strong><br/><span class="small muted">{rightOverview.independentTests} independent results</span></td></tr>
+        <tr><th>Scored tasks</th><td><strong>{comparison.coverage[0].tasks}</strong><br/><span class="small muted">{comparison.coverage[0].additionalTasks} beyond the shared set</span></td><td><strong>{comparison.coverage[1].tasks}</strong><br/><span class="small muted">{comparison.coverage[1].additionalTasks} beyond the shared set</span></td></tr>
+        <tr><th>API cost</th><td><strong>{money(leftOverview.costPer1000)}</strong><br/><span class="small muted">per 1,000 typical requests</span></td><td><strong>{money(rightOverview.costPer1000)}</strong><br/><span class="small muted">per 1,000 typical requests</span></td></tr>
+        <tr><th>Released</th><td>{formatDate(left.released_on)}</td><td>{formatDate(right.released_on)}</td></tr>
+        {evidenceUpdated && <tr><th>Evidence updated</th><td colspan="2">{formatDate(evidenceUpdated)}</td></tr>}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 class="page-h2">Task scores</h2>
+  <p class="section-sub">Higher is better. A gap of five points or less is labelled close rather than treated as a meaningful win.</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Task</th><th>{left.name}</th><th>{right.name}</th><th>What the scores say</th></tr></thead>
+      <tbody>{comparison.tasks.map((row) => (
+        <tr>
+          <td><a href={taskPath(row.task)}>{row.task.label}</a></td>
+          <td class="num"><strong>{row.scores[0]}</strong><div class="small muted">{ordinal(row.positions[0].position)} of {row.positions[0].of}</div></td>
+          <td class="num"><strong>{row.scores[1]}</strong><div class="small muted">{ordinal(row.positions[1].position)} of {row.positions[1].of}</div></td>
+          <td>{row.close ? 'Close' : row.leader === 0 ? `${left.name} higher` : `${right.name} higher`}</td>
+        </tr>
+      ))}</tbody>
+    </table>
+  </div>
+
+  <h2 class="page-h2">Tests both versions have taken</h2>
+  <p class="section-sub">These are direct results from the same test. Positions are among all tracked models with a result, not only these two. {unmatchedTests(0)}; {unmatchedTests(1)}.</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Test</th><th>{left.name}</th><th>{right.name}</th></tr></thead>
+      <tbody>{comparison.tests.map(({ test, results }) => (
+        <tr>
+          <td><a href={test.source === 'normie' ? test.url : `/benchmarks/${test.id}`}>{test.title}</a><div class="small muted">{test.by}</div></td>
+          {results.map((result) => <td class="num"><strong>{result.display}</strong><div class="small muted">{ordinal(result.pos.position)} of {result.pos.of}</div></td>)}
+        </tr>
+      ))}</tbody>
+    </table>
+  </div>
+
+  <h2 class="page-h2">Where you can use them</h2>
+  <div class="compare-plans">
+    {comparison.plans.map((plans, side) => (
+      <section class="card">
+        <h3>{comparison.models[side].name}</h3>
+        {plans.length ? <ul>{plans.map(({ app, plan }) => <li><a href={app.url}>{planLabel(app, plan)}</a> — {formatPrice(plan.price_usd)}</li>)}</ul> : <p class="muted">No approved consumer plan mapping yet.</p>}
+      </section>
+    ))}
+  </div>
+
+  <h2 class="page-h2">What this comparison cannot tell you</h2>
+  <ul class="small muted limits">
+    <li>A higher score on one task does not mean the model is better for every prompt inside that task.</li>
+    <li>People's preference votes measure which answer voters liked, not whether every claim was correct.</li>
+    <li>Tests, prices and plan access change. Results are never carried from an older model version to a newer one.</li>
+  </ul>
+</Base>
+
+<style>
+  .overview-table { margin: 2rem 0; }
+  .overview-table th:first-child { width: 28%; }
+  .compare-plans { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; }
+  .compare-plans h3 { margin-top: 0; }
+  .compare-plans ul { margin-bottom: 0; padding-left: 1.2rem; }
+  .limits { max-width: 50rem; }
+  @media (max-width: 640px) { .compare-plans { grid-template-columns: 1fr; } }
+</style>

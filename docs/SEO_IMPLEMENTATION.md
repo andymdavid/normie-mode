@@ -140,7 +140,7 @@ These sources establish crawler eligibility and conventional search mechanics. T
 | SEO-009 | Specific-task differentiation | `in_progress` | P0 | D-035 temporary treatment active; editorial review capacity |
 | SEO-010 | Answer-first evidence blocks | `in_progress` | P1 | Product-owner comprehension review |
 | SEO-011 | First-party dataset publication | `done` | P1 | — |
-| SEO-012 | Head-to-head comparisons | `proposed` | P1 | N-003, evidence sufficiency |
+| SEO-012 | Head-to-head comparisons | `in_progress` | P1 | Product-owner comprehension review |
 | SEO-013 | Performance and response correctness | `in_progress` | P1 | Repository server complete; production/font checks remain |
 | SEO-014 | Titles, descriptions and information architecture | `done` | P1 | — |
 | SEO-015 | Update/report publishing programme | `blocked` | P1 | New accepted decision; reports are deferred |
@@ -525,7 +525,7 @@ Progress (2026-10-12):
 
 ### SEO-012 — Head-to-head comparisons
 
-State: `proposed`
+State: `in_progress`
 
 Purpose: Serve high-intent comparison questions with exact-version evidence.
 
@@ -546,6 +546,14 @@ Verification:
 
 - Product-owner review and canonical/indexability tests.
 - Representative search-intent testing.
+
+Progress (2026-10-12):
+
+- Added a curated allowlist rather than accepting arbitrary model pairs. The first local draft compares Claude Opus 5.5 with Gemini 3.8 Flash, an exact-version pair already present in the fixed research citation prompt.
+- The page derives shared task scores, common-test results and positions, API cost, evidence status, release/freshness dates and approved consumer plans from the same canonical functions as model and task pages.
+- The deterministic answer limits itself to the five tasks where both versions can be scored, labels five-point gaps as close, and states the additional task/test coverage that prevents an overall-winner claim.
+- Claude Opus 5.5 vs GPT-6 Sol was rejected for now: GPT-6 Sol has no canonical task positions and shares only the first-party spreadsheet test. This is an evidence sufficiency decision, not a generated-content gap to fill.
+- The route is absent from normal builds and the sitemap pending product-owner comprehension review.
 
 ### SEO-013 — Performance and response correctness
 
@@ -942,6 +950,12 @@ Append new entries; do not rewrite history except to correct a factual error, an
 - D-036 approved scoped CC BY 4.0 reuse. Deployed JSON and CSV downloads for the spreadsheet test, linked them from the results page and activated matching `Dataset` JSON-LD.
 - Live JSON and CSV return `200` with the correct content types and contain all 5 cases, 30 model-case results and 180 question observations. The public page states that raw model-generated responses are audit material outside Normie Mode's licence grant.
 - SEO-011 is complete. The dataset is excluded from the page sitemap because the canonical human results page describes and links both distributions.
+
+### 2026-10-12 — SEO-012 first comparison drafted
+
+- Built a preview-only, allowlisted Claude Opus 5.5 vs Gemini 3.8 Flash page with shared task scores, same-test results, cost, evidence, availability, freshness and explicit limitations.
+- The first candidate, Claude Opus 5.5 vs GPT-6 Sol, failed the evidence gate and was not built. GPT-6 Sol has no task positions and only one shared test result.
+- No comparison page is in the public build or sitemap. Product-owner wording and comprehension review is required before activation.
 
 ## Progress notes
 

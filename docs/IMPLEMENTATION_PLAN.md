@@ -398,8 +398,9 @@ Progress note (2026-09-24): Built as the homepage (`src/pages/index.astro`, data
 
 ### N-003 — Head-to-head comparison page
 
-- Status: `proposed`
+- Status: `in_progress` (first curated exact-version comparison drafted 2026-10-12)
 - Dependencies: N-002 reviewed
+- Progress note (2026-10-12): Built a local, allowlisted comparison for Claude Opus 5.5 and Gemini 3.8 Flash from canonical task, test, cost, plan and evidence data. Claude Opus 5.5 vs GPT-6 Sol was considered first because it appears in the citation fixture, but rejected: GPT-6 Sol currently has only one shared first-party result and no canonical task positions. The draft is not public pending product-owner comprehension review.
 
 ### N-004 — Model page redesign
 
