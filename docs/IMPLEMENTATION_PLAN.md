@@ -285,6 +285,8 @@ Progress note (2026-10-12): SEO-010 has locally built deterministic answer-first
 
 Progress note (2026-10-12): The product owner approved SEO-010 wording and commit `1cf73ad` was deployed. Production checks passed across benchmark, current-model, task-recommendation and first-party-test pages; the fixed citation-test comparison remains before completion.
 
+Progress note (2026-10-12): SEO-010 citation preflight confirmed `200` responses for both search crawlers, but this workspace has no authenticated ChatGPT or Claude product surface. The absent pre-deployment run cannot be reconstructed; `docs/seo/citation-results-v1.yaml` now holds pending append-only runs for the first honest post-deployment baseline.
+
 ### N-001 — Import free data sources
 
 - Status: `in_progress`

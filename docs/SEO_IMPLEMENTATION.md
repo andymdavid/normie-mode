@@ -484,7 +484,8 @@ Progress (2026-10-12):
 - Current model pages now draft a deterministic task-position summary, link up to three evidence pages and state exact-version evidence limits. The generator refuses to manufacture a ranking when task evidence is insufficient; unit tests cover both paths.
 - Existing task verdicts are labelled `Rule-based recommendation`, and the published first-party test's short answer is labelled `Measured result`.
 - The product owner approved the representative wording. Commit `1cf73ad` is live, and production checks confirm the expected measured-result or rule-based-recommendation labels and conclusions on representative benchmark, current-model, task and first-party-test pages.
-- The fixed citation test still needs its post-deployment comparison before this item can be marked done.
+- Citation preflight confirmed that both named search crawlers receive `200` on representative live evidence pages. This workspace has no authenticated ChatGPT or Claude product session, so it cannot truthfully execute the required product-surface test.
+- No version 1 citation run was recorded before SEO-010 deployed. A true retrospective before/after comparison is therefore impossible; `docs/seo/citation-results-v1.yaml` records that limitation and provides append-only pending ChatGPT and Claude runs for the first reproducible post-deployment baseline.
 
 ### SEO-011 — First-party dataset publication
 
@@ -913,6 +914,12 @@ Append new entries; do not rewrite history except to correct a factual error, an
 - Product-owner comprehension review approved the representative benchmark, evidence-rich model and evidence-limited model wording.
 - Pushed `1cf73ad` to `main`, fast-forwarded `deployed` to the same commit and verified both remote refs match.
 - Verified the approved benchmark and model conclusions, task `Rule-based recommendation` label, and first-party-test `Measured result` label on their public URLs. The fixed citation-test comparison remains outstanding.
+
+### 2026-10-12 — Citation-test preflight
+
+- Confirmed representative evidence pages return `200` to both `OAI-SearchBot` and `Claude-SearchBot` after the SEO-010 deployment.
+- The workspace has neither an authenticated ChatGPT/Claude product session nor provider credentials. Ordinary web search is not a valid substitute for the fixture's required fresh product conversations with web search enabled.
+- Recorded the missing pre-deployment baseline as a methodology limitation and added `docs/seo/citation-results-v1.yaml` for append-only post-deployment results. SEO-010 remains `in_progress` until those product-surface runs are supplied.
 
 ## Progress notes
 
