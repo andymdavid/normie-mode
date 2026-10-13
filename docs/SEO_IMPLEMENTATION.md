@@ -59,7 +59,7 @@ There is no guaranteed route to an answer-engine citation. This plan improves el
 - Do not add schema that misrepresents a model as a product, an editorial judgement as a measured fact, or a page as authored/reviewed by someone who did not review it.
 - Do not create keyword variants as separate pages without distinct user value (D-006).
 - Do not run paid evaluations without product-owner approval.
-- Dated editorial reports are currently deferred in the plan. Accept a new product decision before introducing a reports publishing programme.
+- Dated editorial reports follow D-040: supervised drafts only, with Andy David's review and canonical pages remaining authoritative.
 
 ## Baseline: 2026-10-10
 
@@ -143,7 +143,7 @@ These sources establish crawler eligibility and conventional search mechanics. T
 | SEO-012 | Head-to-head comparisons | `in_progress` | P1 | Product-owner comprehension review |
 | SEO-013 | Performance and response correctness | `in_progress` | P1 | Edge redirect access, local fonts and browser measurements |
 | SEO-014 | Titles, descriptions and information architecture | `done` | P1 | — |
-| SEO-015 | Update/report publishing programme | `blocked` | P1 | New accepted decision; reports are deferred |
+| SEO-015 | Update/report publishing programme | `ready` | P1 | D-040 accepted; templates and routes remain |
 | SEO-016 | Distribution and authority building | `proposed` | P1 | At least one strong original report/dataset |
 | SEO-017 | Citation and referral monitoring | `proposed` | P0 | Analytics/logging choice |
 | SEO-018 | Ongoing operating cadence | `in_progress` | P2 | Flight Deck destination and remaining checks |
@@ -649,9 +649,9 @@ Progress (2026-10-12):
 
 ### SEO-015 — Update/report publishing programme
 
-State: `blocked`
+State: `ready`
 
-Blocker: The implementation plan currently defers reports. A new accepted decision must define their scope, editorial owner, review requirements and relationship to canonical pages.
+Decision: D-040 approves a supervised programme: one monthly evidence and ranking-change report, plus release notes for major model-version and Normie Mode test changes. Every report remains draft until Andy David reviews it, and canonical task, model, benchmark and test pages remain authoritative.
 
 Proposed purpose: Publish dated, link-worthy analysis without turning evergreen pages into news posts.
 
@@ -664,6 +664,8 @@ Potential formats after approval:
 - Significant benchmark changes
 
 Guardrail: Reports link to canonical task/model/test pages and must not create a conflicting recommendation.
+
+Next implementation: define the report content schema and preview-only template, then prepare the first report as a draft. No pipeline or agent may publish it or change a canonical recommendation.
 
 ### SEO-016 — Distribution and authority building
 
@@ -787,7 +789,7 @@ Record accepted decisions in `docs/IMPLEMENTATION_PLAN.md` as D-### entries befo
 | Child task indexability threshold | Prevents shallow keyword expansion | Accepted as D-035: noindex until SEO-009 differentiation criteria are met |
 | Public licence for first-party test datasets | Controls reuse and citation | Open |
 | Analytics and access-log retention | Privacy and measurement trade-off | Open |
-| Dated reports programme | Currently deferred by the plan | Blocked pending accepted decision |
+| Dated reports programme | Defines scope, review and relationship to canonical pages | Accepted as D-040: supervised monthly change report plus major model/test release notes |
 
 ## Risks and watch-outs
 
@@ -1029,6 +1031,12 @@ Append new entries; do not rewrite history except to correct a factual error, an
 - Extended the shared historical evidence section to expose exact-version benchmark results already held in canonical content, with links to their original sources.
 - DeepSeek V3.2 now shows its five SpreadsheetBench 2 paper results. The indexability register classifies all nine D-035 historical pages as substantive candidates for indexing.
 - D-039 was approved. The nine pages now return to the sitemap and default indexing, while the 31 child-task exclusions remain active.
+
+### 2026-10-13 — SEO-015 reports programme approved
+
+- D-040 approves one monthly evidence and ranking-change report plus release notes for major model-version and Normie Mode test changes.
+- Reports remain drafts until Andy David reviews them, link to the underlying canonical pages and cannot override those pages' recommendations.
+- SEO-015 moves from `blocked` to `ready`; templates, content records and public routes have not yet been implemented.
 
 ## Progress notes
 

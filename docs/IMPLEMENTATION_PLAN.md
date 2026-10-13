@@ -239,6 +239,10 @@ Publish the 2026-10-12 source refresh and its deterministic changes to all 15 hu
 
 Restore the nine model pages temporarily excluded by D-035 to `index,follow` and sitemap membership. All nine now retain exact-version evidence and successor context; the final gap, DeepSeek V3.2, exposes its five published SpreadsheetBench 2 records. The reproducible review classifies every page as a substantive historical destination. D-035 remains active for the 31 undifferentiated child-task pages. The product owner approved restoration on 2026-10-13.
 
+### D-040 — Supervised evidence and ranking reports (accepted 2026-10-13)
+
+Publish one dated evidence and ranking-change report each month, plus release notes when a major model version or Normie Mode test materially changes the evidence. Reports summarise verified changes and link to the canonical task, model, benchmark and test pages; those canonical pages remain authoritative if wording or recommendations differ. Every report starts as a draft and requires Andy David's editorial review before publication. The programme does not authorise an automated pipeline or agent to publish a report, change a recommendation or override the accepted evidence and recommendation rules.
+
 ## Reference sites
 
 Reviewed 2026-09-24 as models for structure and presentation:
@@ -316,6 +320,8 @@ Progress note (2026-10-13): D-039 was accepted. SEO-008 is complete locally: all
 Progress note (2026-10-13): The SEO-009 audit records all 31 child tasks in `docs/seo/child-task-review.csv`: eight have direct evidence and merit editorial enrichment; 23 remain evidence-limited. No child page is ready for index restoration because all task-specific guidance remains draft.
 
 Progress note (2026-10-13): SEO-005 now has the non-identity structured-data layer locally: canonical site/page entities, benchmark/test articles, exact visible ranked lists and factual `about` relationships. Publisher/reviewer entities remain blocked on SEO-003 facts. SEO-012's first comparison now has a working noindex preview, inbound preview links, dependency freshness and visibility tests; publication still requires owner review.
+
+Progress note (2026-10-13): D-040 approves SEO-015's supervised reports programme: one monthly evidence/ranking-change report and major model/test release notes, all draft until Andy reviews them and always subordinate to canonical pages. Report templates and public routes remain implementation work.
 
 ### N-001 — Import free data sources
 
@@ -466,9 +472,9 @@ Five families, tracked at exact version: Anthropic Claude, OpenAI GPT, Google Ge
 
 Include a benchmark when it (1) directly measures a slice task or a core capability, (2) publishes methodology, and (3) has results on at least one in-scope model version. Aggregator sites are never the cited source for a result; cite the benchmark owner, paper, or provider report, and label provider-reported results. Initial set: SpreadsheetBench (v1), SpreadsheetBench 2, AA-AnalystAgent.
 
-### D-010 — Task page and report boundary (proposed)
+### D-010 — Task page and report boundary (resolved by D-040)
 
-Task pages are the canonical, evergreen answer for an intent cluster and own the recommendation. Reports are dated, editorial pieces (comparisons, "what changed") that must link to and never restate a different recommendation from the canonical task page. Canonical URLs: `/tasks/<task>`, `/capabilities/<capability>`, `/models/<model-version>`, `/benchmarks/<benchmark>`, `/sources/<source>`. Reports are deferred from the first slice.
+Task pages are the canonical, evergreen answer for an intent cluster and own the recommendation. Reports are dated, editorial pieces (comparisons, "what changed") that must link to and never restate a different recommendation from the canonical task page. Canonical URLs: `/tasks/<task>`, `/capabilities/<capability>`, `/models/<model-version>`, `/benchmarks/<benchmark>`, `/sources/<source>`. D-040 accepts the boundary and introduces a supervised reports programme.
 
 ### D-011 — Freshness policy (proposed)
 

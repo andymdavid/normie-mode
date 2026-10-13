@@ -6,6 +6,7 @@ This file records meaningful changes to the Normie Mode product, implementation,
 
 ### Added
 
+- An approved, supervised reports programme for monthly evidence and ranking changes and major model/test releases; reports remain drafts until editorial review and canonical pages remain authoritative.
 - Canonical site/page, article, visible-ranking and entity-relationship structured data derived from the same records as each page; publisher and reviewer identities remain intentionally absent pending approved public facts.
 - A complete review register for all 31 child-task pages, identifying eight direct-evidence enrichment candidates and the specific evidence or review gap for every retained exclusion.
 - Provider-verified records and source mappings for Claude Sonnet 5.5, Claude Haiku 5.5 and GPT-6.1 Sol, prepared for editorial review alongside the refreshed evidence.
