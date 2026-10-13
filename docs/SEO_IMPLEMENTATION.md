@@ -426,6 +426,12 @@ Verification:
 
 - Content review, graph validation, sitemap/indexability tests and redirect tests.
 
+Progress (2026-10-13):
+
+- Historical pages now expose exact-version results already held in canonical content, alongside imported Epoch, LMArena and models.dev records. This closes the remaining content gap for DeepSeek V3.2 with five published SpreadsheetBench 2 results.
+- The generated 105-URL register now proposes `index` for all nine pages; DeepSeek V3.2 renders 200 main-content words and the other eight render 237–301. Counts remain review signals, not automatic quality decisions; the basis for restoration is inspectable exact-version evidence plus successor context.
+- D-039 records the proposed restoration. The existing `noindex,follow` directives and sitemap omissions remain unchanged until the product owner approves that public-coverage change.
+
 ### SEO-009 — Specific-task differentiation
 
 State: `in_progress`
@@ -1002,6 +1008,12 @@ Append new entries; do not rewrite history except to correct a factual error, an
 | Legal | Fable 5.1 overall; Gemini 3.8 Flash under $25; Kimi K3 free | Opus 5.5 / Fable 5.1 overall close; Opus 5.5 under $25; Sonnet 5.5 free | Keep the existing legal limitation prominent; evidence supports a close overall result, not an unconditional legal recommendation. |
 
 - The product owner approved the refresh as a single evidence/version update under D-038. Older winners were not selectively retained because that would make task pages disagree with their displayed charts and the published fixed rule.
+
+### 2026-10-13 — Historical model restoration review prepared
+
+- Extended the shared historical evidence section to expose exact-version benchmark results already held in canonical content, with links to their original sources.
+- DeepSeek V3.2 now shows its five SpreadsheetBench 2 paper results. The indexability register classifies all nine D-035 historical pages as substantive candidates for indexing.
+- Proposed D-039 to restore those nine pages to the sitemap and default indexing. No public indexability change has been made pending product-owner approval.
 
 ## Progress notes
 

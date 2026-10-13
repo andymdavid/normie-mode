@@ -60,6 +60,7 @@ export function overviewRow(modelId: string): OverviewRow | undefined {
 
 /** Archived source facts for an exact version after it leaves the current comparison set. */
 export function historicalModelEvidence(modelId: string) {
+  const g = graph();
   const { epoch, modelsdev, lmarena } = imported();
   const spec = modelsdev?.models.find((item) => item.model === modelId);
   const index = epoch?.index.find((item) => item.model === modelId);
@@ -68,6 +69,14 @@ export function historicalModelEvidence(modelId: string) {
   const arena = (lmarena?.entries ?? [])
     .filter((item) => item.model === modelId && item.category === 'overall')
     .sort((a, b) => b.rating - a.rating)[0];
+  const recordedResults = [...g.results.values()]
+    .filter((item) => item.model_version === modelId)
+    .map((item) => ({
+      result: item,
+      benchmark: g.benchmarks.get(item.benchmark),
+      source: g.sources.get(item.source),
+    }))
+    .sort((a, b) => a.result.published_on.localeCompare(b.result.published_on));
 
   return {
     spec,
@@ -75,6 +84,7 @@ export function historicalModelEvidence(modelId: string) {
     resultCount: results.length,
     benchmarks,
     arena,
+    recordedResults,
     sources: {
       epoch: epoch?.meta,
       modelsdev: modelsdev?.meta,

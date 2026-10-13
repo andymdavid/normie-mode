@@ -98,6 +98,7 @@ This file records meaningful changes to the Normie Mode product, implementation,
 
 ### Changed
 
+- Historical model pages now expose exact-version benchmark results held in canonical content; this closes the remaining evidence gap before the nine temporarily excluded pages receive a separate restoration decision.
 - The October evidence refresh and its resulting changes across all 15 main task verdicts passed editorial review and were approved for publication.
 - Historical model pages now preserve exact-version launch context, successor relationships, archived API specifications and benchmark/voting evidence instead of showing only a replacement notice.
 - Refreshed data now maps 1,209 Epoch benchmark results, 26 Epoch index scores, 26 models.dev records and 734 LMArena entries, with reviewed task verdict changes derived from the same published rule.
