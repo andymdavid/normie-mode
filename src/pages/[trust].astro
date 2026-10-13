@@ -1,0 +1,86 @@
+---
+import Base from '../layouts/Base.astro';
+import { TRUST_PAGES, visibleTrustPages, type TrustPage } from '../lib/trust-pages';
+import { PREVIEW } from '../lib/view';
+
+export function getStaticPaths() {
+  return visibleTrustPages(PREVIEW).map((page) => ({ params: { trust: page.slug }, props: { page } }));
+}
+
+const { page } = Astro.props as { page: TrustPage };
+---
+<Base title={page.title} description={page.description} noindex>
+  <div class="eyebrow">Draft for review</div>
+
+  {page.slug === 'about' && (
+    <>
+      <h1>About Normie Mode</h1>
+      <p class="lede">Normie Mode helps people understand what AI models can actually do, which models are strongest for particular work, and what evidence supports each comparison.</p>
+
+      <h2>What we do</h2>
+      <p>We translate benchmarks, prices and model specifications into plain language while preserving the exact model version, source, retrieval date and limitations behind important claims.</p>
+
+      <h2>Who is behind it</h2>
+      <p>Normie Mode is produced by <a href="https://otherstuff.ai/about/" rel="external">Other Stuff</a>, an AI-first product studio in Perth, Western Australia. <a href="https://intelligencesnacks.com/" rel="external">Intelligence Snacks</a> is a related podcast and newsletter from the same team about AI, work and business.</p>
+      <p>Andy David is Normie Mode's product owner and current human editorial reviewer. Andy is a co-founder of Other Stuff with a background in venture design, management consulting and technology startups, including process improvement for enterprises and SMEs.</p>
+    </>
+  )}
+
+  {page.slug === 'contact' && (
+    <>
+      <h1>Contact Normie Mode</h1>
+      <p class="lede">Questions, comments and corrections are welcome.</p>
+      <p>Email <a href="mailto:info@otherstuff.studio?subject=Normie%20Mode">info@otherstuff.studio</a>. For a correction, use <strong>Normie Mode correction</strong> in the subject and include:</p>
+      <ul>
+        <li>the page URL;</li>
+        <li>the item you believe is wrong; and</li>
+        <li>a supporting source, if one is available.</li>
+      </ul>
+      <p>For enquiries about Other Stuff's services, use the <a href="https://otherstuff.ai/contact/" rel="external">Other Stuff contact page</a>.</p>
+    </>
+  )}
+
+  {page.slug === 'editorial-policy' && (
+    <>
+      <h1>Editorial policy</h1>
+      <p class="lede">Our comparisons should show what the evidence says, where it came from and what it cannot tell you.</p>
+
+      <h2>What we compare</h2>
+      <p>Normie Mode compares exact model versions, not apps or subscription plans. Apps and plans are shown only to explain where a model is available.</p>
+
+      <h2>How claims are labelled</h2>
+      <p>We keep measured results, provider-reported claims, sourced facts, editorial assessments and recommendations distinguishable. Important evidence identifies its original source, model or product version, evaluation or retrieval date, methodology and licence where applicable.</p>
+
+      <h2>How we choose sources</h2>
+      <p>We prefer original benchmark owners, research papers and model providers over aggregators. Recommendations must explain the evidence used, their limitations, what still needs checking and when they were reviewed.</p>
+
+      <h2>Human review and commercial relationships</h2>
+      <p>AI tools and agents may help collect data, run checks and prepare drafts, but generated editorial copy and recommendation changes require human review before publication. Andy David is the current human reviewer.</p>
+      <p>A commercial or personal relationship that could reasonably affect a comparison will be disclosed on the relevant page. Payment does not buy a ranking or recommendation.</p>
+    </>
+  )}
+
+  {page.slug === 'corrections' && (
+    <>
+      <h1>Corrections policy</h1>
+      <p class="lede">Accuracy matters because model names, evidence and availability change quickly.</p>
+
+      <h2>Report an error</h2>
+      <p>Email <a href="mailto:info@otherstuff.studio?subject=Normie%20Mode%20correction">info@otherstuff.studio</a> with the page URL, the statement or result you believe is wrong, and a source that supports the correction if one is available.</p>
+
+      <h2>What happens next</h2>
+      <p>We review reports against the original evidence. When a material correction is needed, we update the affected page and preserve the provenance of evidence records. Corrected results are added as new records that identify what they supersede rather than silently overwriting history. Recommendation changes still require human editorial review.</p>
+      <p>We may also update a page when newer evidence makes an older statement incomplete without making it incorrect.</p>
+    </>
+  )}
+
+  <nav class="policy-links" aria-label="Trust and policy pages">
+    {TRUST_PAGES.filter((item) => item.slug !== page.slug).map((item) => <a href={`/${item.slug}`}>{item.title}</a>)}
+  </nav>
+</Base>
+
+<style>
+  h2 { margin-top: 2.5rem; }
+  p, li { max-width: 48rem; }
+  .policy-links { display: flex; flex-wrap: wrap; gap: 0.75rem 1.25rem; margin-top: 3.5rem; padding-top: 1.25rem; border-top: 2px solid var(--ink); }
+</style>
