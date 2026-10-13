@@ -64,7 +64,18 @@ const datasetJsonLd = showDataset ? JSON.stringify({
   variableMeasured: ['Answer correctness', 'Cost', 'Response time'],
 }) : undefined;
 ---
-<Base title="AI spreadsheet test: business questions" description={`Results from our reproducible test of ${perModel.length} AI models answering business questions from a spreadsheet, with every question and answer published.`}>
+<Base
+  title="AI spreadsheet test: business questions"
+  description={`Results from our reproducible test of ${perModel.length} AI models answering business questions from a spreadsheet, with every question and answer published.`}
+  contentType="article"
+  publishedTime={test.published_on}
+  schemaType="Article"
+  schemaAbout={{ name: test.title }}
+  schemaList={{
+    name: 'How each model did',
+    items: ranked.map((result) => ({ name: result.name, url: `/models/${result.model}` })),
+  }}
+>
   {datasetJsonLd && <script type="application/ld+json" set:html={datasetJsonLd} />}
   <Breadcrumbs items={[
     { label: 'Tests explained', href: '/benchmarks' },

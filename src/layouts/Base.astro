@@ -5,6 +5,7 @@ import { NEWSLETTER, PODCAST } from '../lib/site';
 import { tasksByDemand, taskPath } from '../lib/tasks';
 import { imported } from '../lib/imported';
 import SignupModal from '../components/SignupModal.astro';
+import { pageStructuredData, serialiseStructuredData, type PageSchemaType, type StructuredListItem } from '../lib/structured-data';
 
 interface Props {
   title: string;
@@ -15,6 +16,9 @@ interface Props {
   contentType?: 'website' | 'article';
   publishedTime?: string;
   modifiedTime?: string;
+  schemaType?: PageSchemaType;
+  schemaAbout?: { name: string; url?: string };
+  schemaList?: { name: string; items: StructuredListItem[] };
 }
 const {
   title,
@@ -25,6 +29,9 @@ const {
   contentType = 'website',
   publishedTime,
   modifiedTime,
+  schemaType = 'WebPage',
+  schemaAbout,
+  schemaList,
 } = Astro.props;
 const path = Astro.url.pathname.replace(/\.html$/, '').replace(/\/index$/, '') || '/';
 const topTasks = tasksByDemand().slice(0, 6).map((t) => t.task);
@@ -33,6 +40,17 @@ const updated = formatDate(epoch?.meta.retrieved_at.slice(0, 10));
 const fullTitle = title === 'Normie Mode' ? title : `${title} · Normie Mode`;
 const canonicalUrl = new URL(path, Astro.site);
 const socialImageUrl = new URL(image, Astro.site);
+const structuredData = serialiseStructuredData(pageStructuredData({
+  site: Astro.site!,
+  url: canonicalUrl,
+  name: fullTitle,
+  description,
+  type: schemaType,
+  published: publishedTime,
+  modified: modifiedTime,
+  about: schemaAbout,
+  list: schemaList,
+}));
 ---
 <html lang="en-GB">
   <head>
@@ -62,6 +80,7 @@ const socialImageUrl = new URL(image, Astro.site);
     <meta name="twitter:image" content={socialImageUrl} />
     <meta name="twitter:image:alt" content={imageAlt} />
     <link rel="icon" href="/norm-default.jpg" />
+    <script type="application/ld+json" set:html={structuredData} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" />

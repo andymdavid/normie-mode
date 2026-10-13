@@ -52,6 +52,11 @@ const sections = [...(normOn ? [['guide', "Norm's guide"]] : []), ['compare', 'H
   title={metadata.title}
   description={metadata.description}
   noindex={isTemporarilyNoindexedRoute(taskPath(task))}
+  schemaAbout={{ name: task.label }}
+  schemaList={scores.rows.length ? {
+    name: `AI models ranked for ${name}`,
+    items: scores.rows.map((row) => ({ name: row.label, url: row.href! })),
+  } : undefined}
 >
   <Breadcrumbs items={[
     { label: 'Best AI for…', href: '/best-ai-for' },

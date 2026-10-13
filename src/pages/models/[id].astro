@@ -35,7 +35,12 @@ const answer = current && row ? modelAnswer(model.name, tasks, row.independentTe
 const history = !current ? historicalModelEvidence(model.id) : undefined;
 const verificationSources = model.verification.sources.map((id) => g.sources.get(id)).filter((source) => source !== undefined);
 ---
-<Base title={metadata.title} description={metadata.description} noindex={isTemporarilyNoindexedRoute(`/models/${model.id}`)}>
+<Base
+  title={metadata.title}
+  description={metadata.description}
+  noindex={isTemporarilyNoindexedRoute(`/models/${model.id}`)}
+  schemaAbout={{ name: model.name }}
+>
   <Breadcrumbs items={[
     { label: 'Models', href: '/models' },
     { label: family.provider },

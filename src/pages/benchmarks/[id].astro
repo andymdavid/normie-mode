@@ -19,7 +19,17 @@ const votes = test.source === 'lmarena';
 const metadata = benchmarkMetadata(test, rows.filter((row) => row.value !== undefined).length);
 const summary = leadSentence(rows);
 ---
-<Base title={metadata.title} description={metadata.description}>
+<Base
+  title={metadata.title}
+  description={metadata.description}
+  contentType="article"
+  schemaType="TechArticle"
+  schemaAbout={{ name: test.title, url: test.url }}
+  schemaList={{
+    name: 'How the models did',
+    items: rows.filter((row) => row.value !== undefined).map((row) => ({ name: row.label, url: row.href! })),
+  }}
+>
   <Breadcrumbs items={[
     { label: 'Tests explained', href: '/benchmarks' },
     { label: votes ? "People's votes" : 'Test of real work' },

@@ -14,7 +14,14 @@ const rows = overviewRows()
 const replaced = [...g.models.values()].filter((m) => !isCompared(m.id)).sort((a, b) => a.name.localeCompare(b.name));
 const money = (v?: number) => (v === undefined ? '–' : v < 10 ? `$${v.toFixed(2)}` : `$${v.toFixed(0)}`);
 ---
-<Base title="The AI models we track" description="The current AI models from Anthropic, OpenAI, Google, DeepSeek and Moonshot: what each is best for, what it costs and how well it's been tested.">
+<Base
+  title="The AI models we track"
+  description="The current AI models from Anthropic, OpenAI, Google, DeepSeek and Moonshot: what each is best for, what it costs and how well it's been tested."
+  schemaList={{
+    name: 'The AI models we track',
+    items: rows.map((row) => ({ name: row.model.name, url: `/models/${row.model.id}` })),
+  }}
+>
   <div class="eyebrow">Models</div>
   <h1>The models we track</h1>
   <p class="lede">The AI models behind ChatGPT, Claude, Gemini and others, most often in a task's top three first.</p>
