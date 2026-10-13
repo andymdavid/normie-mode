@@ -6,6 +6,8 @@ This file records meaningful changes to the Normie Mode product, implementation,
 
 ### Added
 
+- Canonical site/page, article, visible-ranking and entity-relationship structured data derived from the same records as each page; publisher and reviewer identities remain intentionally absent pending approved public facts.
+- A complete review register for all 31 child-task pages, identifying eight direct-evidence enrichment candidates and the specific evidence or review gap for every retained exclusion.
 - Provider-verified records and source mappings for Claude Sonnet 5.5, Claude Haiku 5.5 and GPT-6.1 Sol, prepared for editorial review alongside the refreshed evidence.
 - A supervised weekly Wingman evidence-refresh pipeline for Epoch AI, models.dev and LMArena. It verifies changes in an isolated clone and prepares a review branch and impact report without merging, deploying or publishing recommendations.
 - Downloadable JSON and CSV for the published spreadsheet test, including its cases, prompts, answers, scores and provenance; Normie Mode-authored material is reusable under scoped CC BY 4.0, with raw model responses excluded from the licence grant.
@@ -98,6 +100,8 @@ This file records meaningful changes to the Normie Mode product, implementation,
 
 ### Changed
 
+- The first curated head-to-head comparison now has a reliable preview path, preview-only model links, dependency-derived freshness and explicit production/indexing guards while it awaits publication review.
+- The nine enriched historical model pages have returned to default indexing and sitemap membership; the 31 undifferentiated child-task pages remain temporarily excluded.
 - Historical model pages now expose exact-version benchmark results held in canonical content; this closes the remaining evidence gap before the nine temporarily excluded pages receive a separate restoration decision.
 - The October evidence refresh and its resulting changes across all 15 main task verdicts passed editorial review and were approved for publication.
 - Historical model pages now preserve exact-version launch context, successor relationships, archived API specifications and benchmark/voting evidence instead of showing only a replacement notice.

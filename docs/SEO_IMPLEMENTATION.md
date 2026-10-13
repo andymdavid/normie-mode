@@ -129,19 +129,19 @@ These sources establish crawler eligibility and conventional search mechanics. T
 
 | ID | Workstream | State | Priority | Depends on |
 | --- | --- | --- | --- | --- |
-| SEO-001 | Measurement and repeatable baseline | `in_progress` | P0 | None |
-| SEO-002 | Search and answer-engine crawler access | `in_progress` | P0 | SEO-001 |
+| SEO-001 | Measurement and repeatable baseline | `in_progress` | P0 | Search Console figures and authenticated citation runs |
+| SEO-002 | Search and answer-engine crawler access | `in_progress` | P0 | CapRover crawler-log confirmation |
 | SEO-003 | Publisher identity and trust pages | `blocked` | P0 | Product-owner facts and review |
-| SEO-004 | Global metadata and social previews | `in_progress` | P0 | SEO-003 for final publisher data |
-| SEO-005 | Structured data | `proposed` | P0 | SEO-003, schema design review |
+| SEO-004 | Global metadata and social previews | `in_progress` | P0 | Two interactive preview checks |
+| SEO-005 | Structured data | `in_progress` | P0 | SEO-003 for approved publisher/reviewer entities |
 | SEO-006 | Sitemap freshness and update signals | `done` | P0 | Dependency-date calculation |
 | SEO-007 | Indexability and page-value audit | `done` | P0 | — |
-| SEO-008 | Thin historical model pages | `in_progress` | P0 | D-035 temporary treatment active; enrichment remains |
+| SEO-008 | Thin historical model pages | `done` | P0 | D-039 restoration approved |
 | SEO-009 | Specific-task differentiation | `in_progress` | P0 | D-035 temporary treatment active; editorial review capacity |
-| SEO-010 | Answer-first evidence blocks | `in_progress` | P1 | Product-owner comprehension review |
+| SEO-010 | Answer-first evidence blocks | `in_progress` | P1 | Authenticated ChatGPT and Claude citation runs |
 | SEO-011 | First-party dataset publication | `done` | P1 | — |
 | SEO-012 | Head-to-head comparisons | `in_progress` | P1 | Product-owner comprehension review |
-| SEO-013 | Performance and response correctness | `in_progress` | P1 | Repository server complete; production/font checks remain |
+| SEO-013 | Performance and response correctness | `in_progress` | P1 | Edge redirect access, local fonts and browser measurements |
 | SEO-014 | Titles, descriptions and information architecture | `done` | P1 | — |
 | SEO-015 | Update/report publishing programme | `blocked` | P1 | New accepted decision; reports are deferred |
 | SEO-016 | Distribution and authority building | `proposed` | P1 | At least one strong original report/dataset |
@@ -152,7 +152,7 @@ These sources establish crawler eligibility and conventional search mechanics. T
 
 ### SEO-001 — Measurement and repeatable baseline
 
-State: `done`
+State: `in_progress`
 
 Purpose: Make progress measurable and prevent repeated ad hoc audits.
 
@@ -192,7 +192,7 @@ Notes:
 
 ### SEO-002 — Search and answer-engine crawler access
 
-State: `done`
+State: `in_progress`
 
 Purpose: Make crawler policy explicit and observable.
 
@@ -259,7 +259,7 @@ Blocker (2026-10-10): The plan names Andy David as the product owner and human r
 
 ### SEO-004 — Global metadata and social previews
 
-State: `done`
+State: `in_progress`
 
 Purpose: Improve result presentation and earned distribution.
 
@@ -292,7 +292,7 @@ Progress (2026-10-10):
 
 ### SEO-005 — Structured data
 
-State: `done`
+State: `in_progress`
 
 Purpose: Express entities, provenance, dates and page relationships without misrepresentation.
 
@@ -318,9 +318,15 @@ Verification:
 - Schema.org validator for all JSON-LD.
 - Manual comparison of visible claims and structured claims.
 
+Progress (2026-10-13):
+
+- Canonical `WebSite` and `WebPage` entities now cover public pages. Benchmark explainers expose `TechArticle`; the first-party test exposes `Article` alongside its existing `Dataset`; and visible model/task rankings expose matching `ItemList` data. Detail pages use factual `about` relationships from canonical entities.
+- Focused tests compare the generated structures with visible canonical data. Unsupported ratings, reviews, products and FAQ markup remain excluded.
+- `Organization`, `Person`, publisher, author and reviewer relationships remain blocked on SEO-003's approved public identity pages. Unsupported identity claims were deliberately not added to finish the technical portion early.
+
 ### SEO-006 — Sitemap freshness and update signals
 
-State: `in_progress`
+State: `done`
 
 Purpose: Show meaningful changes without pretending every build changed every page.
 
@@ -355,7 +361,7 @@ Progress (2026-10-10):
 
 ### SEO-007 — Indexability and page-value audit
 
-State: `in_progress`
+State: `done`
 
 Purpose: Decide which URLs deserve indexing before trying to force Google to crawl all of them.
 
@@ -392,7 +398,7 @@ Progress (2026-10-10):
 
 ### SEO-008 — Thin historical model pages
 
-State: `in_progress`
+State: `done`
 
 Purpose: Preserve exact-version history without publishing weak doorway-like pages.
 
@@ -430,7 +436,7 @@ Progress (2026-10-13):
 
 - Historical pages now expose exact-version results already held in canonical content, alongside imported Epoch, LMArena and models.dev records. This closes the remaining content gap for DeepSeek V3.2 with five published SpreadsheetBench 2 results.
 - The generated 105-URL register now proposes `index` for all nine pages; DeepSeek V3.2 renders 200 main-content words and the other eight render 237–301. Counts remain review signals, not automatic quality decisions; the basis for restoration is inspectable exact-version evidence plus successor context.
-- D-039 records the proposed restoration. The existing `noindex,follow` directives and sitemap omissions remain unchanged until the product owner approves that public-coverage change.
+- D-039 was approved on 2026-10-13. All nine pages now use default indexing and return to the sitemap; the 31 child-task exclusions remain unchanged.
 
 ### SEO-009 — Specific-task differentiation
 
@@ -455,6 +461,12 @@ Verification:
 
 - Similarity report plus human review.
 - Product-owner review of at least one page from every task hub.
+
+Progress (2026-10-13):
+
+- Added `docs/seo/child-task-review.csv`, covering all 31 child tasks with their distinct goal, parent, evidence/directness inventory, reviewed-guidance state and a page-specific enrichment need.
+- Eight pages have direct evidence and are candidates for editorial enrichment: book writing, chemistry, creative writing, data analysis, essay writing, language learning, marketing, and scripts/content. The other 23 should retain `noindex,follow` until direct or task-specific evidence improves.
+- All child-task guidance is still draft, so none is proposed for immediate restoration. The next gate is owner review of representative enriched pages across the affected hubs, not bulk index activation.
 
 ### SEO-010 — Answer-first evidence blocks
 
@@ -495,7 +507,7 @@ Progress (2026-10-12):
 
 ### SEO-011 — First-party dataset publication
 
-State: `in_progress`
+State: `done`
 
 Purpose: Turn Normie Mode's original testing into a reference other publishers and answer engines can cite.
 
@@ -560,6 +572,8 @@ Progress (2026-10-12):
 - The deterministic answer limits itself to the five tasks where both versions can be scored, labels five-point gaps as close, and states the additional task/test coverage that prevents an overall-winner claim.
 - Claude Opus 5.5 vs GPT-6 Sol was rejected for now: GPT-6 Sol has no canonical task positions and shares only the first-party spreadsheet test. This is an evidence sufficiency decision, not a generated-content gap to fill.
 - The route is absent from normal builds and the sitemap pending product-owner comprehension review.
+- The preview route now builds through the established `NORMIE_PREVIEW=1` path, carries its canonical plus `noindex,follow`, stays out of the preview sitemap, and receives preview-only links from both participating model pages. Production emits neither the route nor those links.
+- Comparison freshness derives from both exact model pages. Tests cover production/preview visibility, allowlisting, model links, sitemap exclusion and stable freshness. Publication and the final claim-class label remain owner review items.
 
 ### SEO-013 — Performance and response correctness
 
@@ -594,10 +608,11 @@ Progress (2026-10-11):
 - `HEAD` returns the same status and representation headers as `GET`, without a body; uncompressed responses include the source byte length.
 - Fingerprinted Astro CSS/JavaScript receives a one-year immutable cache policy. Stable public images/fonts use one-day caching with stale revalidation, sitemap/robots files use five-minute revalidation, and HTML always revalidates.
 - Automated tests cover compressed `GET`/`HEAD` parity, uncompressed discovery-file length/cache metadata, and the distinction between fingerprinted assets and replaceable public images. A real Bun server was also checked locally with a valid gzip payload.
-- The first production probe showed nginx supplying `Content-Length: 0` on compressed `HEAD` when the app streamed compression without a known length. The server now materialises the small static compressed representation and sends its exact length for both methods; production re-verification is required after that correction.
+- The first production probe showed nginx supplying `Content-Length: 0` on compressed `HEAD` when the app streamed compression without a known length. The server now materialises the small static compressed representation and sends its exact length for both methods; the correction was subsequently verified in production.
 - Deployed commits `8b860b3` and `8b003e2`. Production now returns a valid gzip representation with identical 4,891-byte `GET` body, `GET` length and `HEAD` length for a representative model page; content type, encoding, cache policy and `Vary` also match. The sitemap has five-minute revalidation and accurate type/length; replaceable public images are no longer immutable.
 - Production `www`, `.html` and `/index.html` variants return application-controlled `308` redirects. CapRover's outer nginx still converts plain HTTP to HTTPS with `302` before the request reaches the app; changing that edge redirect to permanent requires CapRover/nginx configuration access.
-- Remaining: deploy and verify the production header matrix; decide/download approved local font assets before removing Google Fonts; run representative mobile/desktop performance checks. Infrastructure-level compression or redirects are unnecessary if the application response survives the CapRover proxy unchanged, but production must confirm that.
+- A 2026-10-13 production header matrix reconfirmed gzip and matching representation metadata for HTML, sitemap and robots responses, plus the intended cache policy for a replaceable public image. The 20 focused server tests also pass.
+- Remaining: change CapRover's outer HTTP redirect from `302` to permanent with infrastructure access; decide/download approved local Geist assets before removing Google Fonts; and run representative mobile/desktop performance checks in a browser/Lighthouse environment. The public PageSpeed API was quota-limited and this workspace has no browser installed.
 
 ### SEO-014 — Titles, descriptions and information architecture
 
@@ -1013,7 +1028,7 @@ Append new entries; do not rewrite history except to correct a factual error, an
 
 - Extended the shared historical evidence section to expose exact-version benchmark results already held in canonical content, with links to their original sources.
 - DeepSeek V3.2 now shows its five SpreadsheetBench 2 paper results. The indexability register classifies all nine D-035 historical pages as substantive candidates for indexing.
-- Proposed D-039 to restore those nine pages to the sitemap and default indexing. No public indexability change has been made pending product-owner approval.
+- D-039 was approved. The nine pages now return to the sitemap and default indexing, while the 31 child-task exclusions remain active.
 
 ## Progress notes
 

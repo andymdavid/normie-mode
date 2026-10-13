@@ -235,9 +235,9 @@ The October evidence refresh makes Claude Sonnet 5, Claude Haiku 4.5 and GPT-6 S
 
 Publish the 2026-10-12 source refresh and its deterministic changes to all 15 hub-task verdict blocks. The candidate uses the existing accepted D-023/D-027/D-029 scoring and plan rules without changing methodology: models need results on at least half the usable tests and at least one real-work test when such evidence exists; picks within five points remain a close call. The product owner approved the complete evidence, exact-model mapping, plan and verdict update after reviewing its task-by-task impact.
 
-### D-039 — Restore the nine enriched historical model pages (proposed 2026-10-13)
+### D-039 — Restore the nine enriched historical model pages (accepted 2026-10-13)
 
-Restore the nine model pages temporarily excluded by D-035 to `index,follow` and sitemap membership. All nine now retain exact-version evidence and successor context; the final gap, DeepSeek V3.2, exposes its five published SpreadsheetBench 2 records. The reproducible review now classifies every page as a substantive historical destination. D-035 remains active for the 31 undifferentiated child-task pages. This changes public search coverage and requires product-owner approval before implementation.
+Restore the nine model pages temporarily excluded by D-035 to `index,follow` and sitemap membership. All nine now retain exact-version evidence and successor context; the final gap, DeepSeek V3.2, exposes its five published SpreadsheetBench 2 records. The reproducible review classifies every page as a substantive historical destination. D-035 remains active for the 31 undifferentiated child-task pages. The product owner approved restoration on 2026-10-13.
 
 ## Reference sites
 
@@ -311,7 +311,11 @@ Progress note (2026-10-12): D-036 approves publication of the spreadsheet datase
 
 Progress note (2026-10-12): SEO-011 is done. The spreadsheet results page now links complete JSON and 180-observation CSV downloads with scoped CC BY 4.0 terms and `Dataset` JSON-LD. Live files return `200` with correct types and complete counts; commits `7c287ef` and `677d3f0` are deployed.
 
-Progress note (2026-10-13): SEO-008 enrichment is complete locally. Historical pages now expose canonical exact-version results as well as imported evidence; DeepSeek V3.2 reaches the review threshold with five published SpreadsheetBench 2 records, and all nine D-035 pages are proposed for restoration under D-039. No indexability change has been made pending approval.
+Progress note (2026-10-13): D-039 was accepted. SEO-008 is complete locally: all nine enriched historical pages return to default indexing and sitemap membership, while the 31 child-task exclusions remain active. Production deployment and verification remain.
+
+Progress note (2026-10-13): The SEO-009 audit records all 31 child tasks in `docs/seo/child-task-review.csv`: eight have direct evidence and merit editorial enrichment; 23 remain evidence-limited. No child page is ready for index restoration because all task-specific guidance remains draft.
+
+Progress note (2026-10-13): SEO-005 now has the non-identity structured-data layer locally: canonical site/page entities, benchmark/test articles, exact visible ranked lists and factual `about` relationships. Publisher/reviewer entities remain blocked on SEO-003 facts. SEO-012's first comparison now has a working noindex preview, inbound preview links, dependency freshness and visibility tests; publication still requires owner review.
 
 ### N-001 — Import free data sources
 
