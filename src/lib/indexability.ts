@@ -1,18 +1,8 @@
 import { graph } from './graph';
 
-// D-035: these exact-version pages stay public for provenance and navigation, but are
-// temporarily excluded from search until they contain useful version-specific evidence.
-export const TEMPORARILY_NOINDEXED_MODEL_IDS = new Set([
-  'claude-fable-5',
-  'claude-opus-4-6',
-  'claude-opus-4-8',
-  'claude-opus-5',
-  'deepseek-v3-2',
-  'gemini-3-7-flash',
-  'gpt-5-2',
-  'gpt-5-5',
-  'kimi-k2-5',
-]);
+// D-039 restored the original D-035 historical-model set after enrichment.
+// Keep the explicit set so any future temporary exclusion remains reviewed and testable.
+export const TEMPORARILY_NOINDEXED_MODEL_IDS = new Set<string>();
 
 export function isTemporarilyNoindexedRoute(pathname: string) {
   const path = pathname.replace(/\.html$/, '').replace(/\/$/, '') || '/';

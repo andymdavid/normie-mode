@@ -7,9 +7,9 @@ describe('temporary indexability policy (D-035)', () => {
     expect(isTemporarilyNoindexedRoute('/best-ai-for/excel-spreadsheets')).toBe(false);
   });
 
-  it('excludes exactly the nine approved historical model pages', () => {
-    expect(TEMPORARILY_NOINDEXED_MODEL_IDS.size).toBe(9);
-    expect(isTemporarilyNoindexedRoute('/models/gpt-5-2')).toBe(true);
+  it('restores all nine enriched historical model pages under D-039', () => {
+    expect(TEMPORARILY_NOINDEXED_MODEL_IDS.size).toBe(0);
+    expect(isTemporarilyNoindexedRoute('/models/gpt-5-2')).toBe(false);
     expect(isTemporarilyNoindexedRoute('/models/gpt-5-6-luna')).toBe(false);
   });
 });

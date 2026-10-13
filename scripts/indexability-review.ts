@@ -8,6 +8,17 @@ import { isTemporarilyNoindexedRoute } from '../src/lib/indexability';
 const ORIGIN = 'https://normiemode.com';
 const OUTPUT = resolve('docs/seo/indexability-review.csv');
 const D037_INDEXED_MODELS = new Set(['claude-sonnet-5', 'claude-haiku-4-5', 'gpt-6-sol']);
+const D039_INDEXED_MODELS = new Set([
+  'claude-fable-5',
+  'claude-opus-4-6',
+  'claude-opus-4-8',
+  'claude-opus-5',
+  'deepseek-v3-2',
+  'gemini-3-7-flash',
+  'gpt-5-2',
+  'gpt-5-5',
+  'kimi-k2-5',
+]);
 
 function csv(value: string | number | boolean) {
   const text = String(value);
@@ -89,6 +100,8 @@ export function indexabilityRows(directory = resolve('dist')) {
         ? 'approved by product owner 2026-10-11 (D-035)'
         : disposition === 'index' && family === 'models' && D037_INDEXED_MODELS.has(parts[1])
           ? 'approved by product owner 2026-10-12 (D-037)'
+          : disposition === 'index' && family === 'models' && D039_INDEXED_MODELS.has(parts[1])
+            ? 'approved by product owner 2026-10-13 (D-039)'
           : 'reviewed-by-rule; owner review pending',
     };
   });

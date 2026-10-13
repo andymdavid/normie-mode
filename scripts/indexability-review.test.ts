@@ -12,11 +12,11 @@ describe('indexability review', () => {
     const rows = indexabilityRows();
 
     expect(rows).toHaveLength(105);
-    expect(rows.filter((row) => row.proposed_disposition === 'index')).toHaveLength(73);
-    expect(rows.filter((row) => row.proposed_disposition === 'noindex-follow')).toHaveLength(32);
+    expect(rows.filter((row) => row.proposed_disposition === 'index')).toHaveLength(74);
+    expect(rows.filter((row) => row.proposed_disposition === 'noindex-follow')).toHaveLength(31);
     expect(rows.find((row) => row.url.endsWith('/best-ai-for/data-analysis'))?.approval).toContain('D-035');
     expect(rows.find((row) => row.url.endsWith('/models/gpt-5-2'))?.proposed_disposition).toBe('index');
-    expect(rows.find((row) => row.url.endsWith('/models/gpt-5-2'))?.approval).toContain('owner review pending');
+    expect(rows.find((row) => row.url.endsWith('/models/gpt-5-2'))?.approval).toContain('D-039');
     expect(rows.find((row) => row.url.endsWith('/models/gpt-6-sol'))?.approval).toContain('D-037');
   });
 
