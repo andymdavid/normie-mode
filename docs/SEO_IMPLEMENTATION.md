@@ -257,6 +257,12 @@ Verification:
 
 Blocker (2026-10-10): The plan names Andy David as the product owner and human reviewer, and the existing footer names Other Stuff as producer, but there is no approved public biography, monitored corrections/contact route, or approved wording for the relationship with Intelligence Snacks. Do not invent these. Technical metadata work can continue while the product owner supplies and approves those facts.
 
+Progress (2026-10-13):
+
+- Added preview-only drafts for `/about`, `/contact`, `/editorial-policy` and `/corrections`. Production builds omit all four routes and the sitemap excludes them; no identity or publisher schema is emitted.
+- Public-source wording describes Other Stuff as the producer and Intelligence Snacks as a related podcast/newsletter from the same team. It does not claim ownership or editorial control that the sources do not establish.
+- Owner approval is still required for naming Andy David publicly with the proposed profile, using `info@otherstuff.studio` as the monitored Normie Mode corrections route, the relationship wording, and the statement that payment cannot buy a ranking or recommendation.
+
 ### SEO-004 — Global metadata and social previews
 
 State: `in_progress`

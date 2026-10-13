@@ -6,6 +6,7 @@ This file records meaningful changes to the Normie Mode product, implementation,
 
 ### Added
 
+- Preview-only drafts for About, Contact, Editorial Policy and Corrections Policy, grounded in public producer/profile sources and withheld from production pending factual approval.
 - An approved, supervised reports programme for monthly evidence and ranking changes and major model/test releases; reports remain drafts until editorial review and canonical pages remain authoritative.
 - Canonical site/page, article, visible-ranking and entity-relationship structured data derived from the same records as each page; publisher and reviewer identities remain intentionally absent pending approved public facts.
 - A complete review register for all 31 child-task pages, identifying eight direct-evidence enrichment candidates and the specific evidence or review gap for every retained exclusion.

@@ -325,6 +325,8 @@ Progress note (2026-10-13): The SEO-009 audit records all 31 child tasks in `doc
 
 Progress note (2026-10-13): SEO-005 now has the non-identity structured-data layer locally: canonical site/page entities, benchmark/test articles, exact visible ranked lists and factual `about` relationships. Publisher/reviewer entities remain blocked on SEO-003 facts. SEO-012's first comparison now has a working noindex preview, inbound preview links, dependency freshness and visibility tests; publication still requires owner review.
 
+Progress note (2026-10-13): SEO-003 now has preview-only drafts for About, Contact, Editorial Policy and Corrections Policy based on public Other Stuff and Intelligence Snacks sources. Production still omits the routes and identity schema. Product-owner approval remains required for the relationship wording, Andy David profile, shared corrections inbox and commercial-independence statement.
+
 Progress note (2026-10-13): D-040 approves SEO-015's supervised reports programme: one monthly evidence/ranking-change report and major model/test release notes, all draft until Andy reviews them and always subordinate to canonical pages. Report templates and public routes remain implementation work.
 
 ### N-001 — Import free data sources
