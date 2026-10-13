@@ -131,7 +131,7 @@ These sources establish crawler eligibility and conventional search mechanics. T
 | --- | --- | --- | --- | --- |
 | SEO-001 | Measurement and repeatable baseline | `in_progress` | P0 | Search Console figures and authenticated citation runs |
 | SEO-002 | Search and answer-engine crawler access | `in_progress` | P0 | CapRover crawler-log confirmation |
-| SEO-003 | Publisher identity and trust pages | `blocked` | P0 | Product-owner facts and review |
+| SEO-003 | Publisher identity and trust pages | `done` | P0 | D-042 approved |
 | SEO-004 | Global metadata and social previews | `in_progress` | P0 | Two interactive preview checks |
 | SEO-005 | Structured data | `in_progress` | P0 | SEO-003 for approved publisher/reviewer entities |
 | SEO-006 | Sitemap freshness and update signals | `done` | P0 | Dependency-date calculation |
@@ -231,7 +231,7 @@ Watch for:
 
 ### SEO-003 — Publisher identity and trust pages
 
-State: `blocked`
+State: `done`
 
 Purpose: Make ownership, accountability and editorial controls visible.
 
@@ -262,6 +262,7 @@ Progress (2026-10-13):
 - Added preview-only drafts for `/about`, `/contact`, `/editorial-policy` and `/corrections`. Production builds omit all four routes and the sitemap excludes them; no identity or publisher schema is emitted.
 - Public-source wording describes Other Stuff as the producer and Intelligence Snacks as a related podcast/newsletter from the same team. It does not claim ownership or editorial control that the sources do not establish.
 - Owner approval is still required for naming Andy David publicly with the proposed profile, using `info@otherstuff.studio` as the monitored Normie Mode corrections route, the relationship wording, and the statement that payment cannot buy a ranking or recommendation.
+- D-042 records approval of all four points. The pages are public, linked from the footer and represented by matching publisher/reviewer entities; production verification is recorded in the session log.
 
 ### SEO-004 — Global metadata and social previews
 
@@ -778,6 +779,8 @@ Update this table from primary reports. Use `—` when unknown rather than estim
 | Pages with social metadata | 0/102 | 2026-10-10 | 102/102 |
 | Public first-party tests | 1 | 2026-10-10 | Quality and reuse matter more than count |
 | Public machine-readable test datasets | 1 | 2026-10-12 | One per approved published test |
+| Overall Google Search impressions/clicks | 269 / 4 | 3-month view supplied 2026-10-13 | 1.5% CTR; average position 56; property data begins 2026-09-29 |
+| Google indexed / not indexed pages | 76 / 62 | report last updated 2026-10-09 | Four exclusion reasons; compare after recrawl of D-039 and D-042 changes |
 | Known authoritative referring domains | — | 2026-10-10 | Establish in SEO-001 |
 | Non-brand search impressions/clicks | — | 2026-10-10 | Establish in SEO-001 |
 | OAI-SearchBot successful fetches | — | 2026-10-10 | Establish in SEO-002/017 |
@@ -791,8 +794,8 @@ Record accepted decisions in `docs/IMPLEMENTATION_PLAN.md` as D-### entries befo
 | Decision | Why it matters | Status |
 | --- | --- | --- |
 | Allow or disallow GPTBot and ClaudeBot separately from search crawlers | Training policy is not the same as search visibility | Accepted as D-034: disallow training, allow search |
-| Public publisher, author and reviewer identity details | Required for truthful trust pages and schema | Open |
-| Corrections contact/workflow | Must route to a monitored owner | Open |
+| Public publisher, author and reviewer identity details | Required for truthful trust pages and schema | Accepted as D-042: Other Stuff producer/publisher; Andy David product owner and reviewer |
+| Corrections contact/workflow | Must route to a monitored owner | Accepted as D-042: `info@otherstuff.studio` with a Normie Mode subject line |
 | Historical model page policy | Enrich, noindex or redirect materially changes public coverage | Accepted as D-035: temporary noindex; mandatory end-of-N-015 revisit |
 | Child task indexability threshold | Prevents shallow keyword expansion | Accepted as D-035: noindex until SEO-009 differentiation criteria are met |
 | Public licence for first-party test datasets | Controls reuse and citation | Open |
@@ -1039,6 +1042,13 @@ Append new entries; do not rewrite history except to correct a factual error, an
 - Extended the shared historical evidence section to expose exact-version benchmark results already held in canonical content, with links to their original sources.
 - DeepSeek V3.2 now shows its five SpreadsheetBench 2 paper results. The indexability register classifies all nine D-035 historical pages as substantive candidates for indexing.
 - D-039 was approved. The nine pages now return to the sitemap and default indexing, while the 31 child-task exclusions remain active.
+
+### 2026-10-13 — Trust pages and first Search Console baseline approved
+
+- D-042 approved the About, Contact, Editorial Policy and Corrections Policy drafts, their public relationship/profile facts, `info@otherstuff.studio` correction route and commercial-independence wording.
+- Activated the four routes, footer links and matching Other Stuff publisher/Andy David reviewer structured data. Production verification follows deployment.
+- Recorded the supplied unfiltered three-month Search Performance totals: 269 impressions, 4 clicks, 1.5% CTR and average position 56. Because no query filter was applied, these are overall rather than non-brand figures.
+- Recorded the Page Indexing snapshot last updated 2026-10-09: 76 indexed and 62 not indexed across four reasons. It predates the D-039 restoration and should not be treated as a current view of those URLs.
 
 ### 2026-10-13 — SEO-015 reports programme approved
 

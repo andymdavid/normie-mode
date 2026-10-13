@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { pageStructuredData, serialiseStructuredData } from './structured-data';
 
 describe('pageStructuredData', () => {
-  it('derives a canonical WebSite and WebPage without unsupported identity claims', () => {
+  it('derives canonical site, page, approved publisher and reviewer entities', () => {
     const result = pageStructuredData({
       site: 'https://normiemode.com',
       url: '/models/claude-sonnet-5-5',
@@ -12,14 +12,17 @@ describe('pageStructuredData', () => {
     });
     expect(result['@graph']).toEqual(expect.arrayContaining([
       expect.objectContaining({ '@type': 'WebSite', '@id': 'https://normiemode.com/#website' }),
+      expect.objectContaining({ '@type': 'Organization', '@id': 'https://normiemode.com/#publisher', name: 'Other Stuff' }),
+      expect.objectContaining({ '@type': 'Person', '@id': 'https://normiemode.com/about#andy-david', name: 'Andy David' }),
       expect.objectContaining({
         '@type': 'WebPage',
         '@id': 'https://normiemode.com/models/claude-sonnet-5-5#webpage',
         isPartOf: { '@id': 'https://normiemode.com/#website' },
+        publisher: { '@id': 'https://normiemode.com/#publisher' },
+        reviewedBy: { '@id': 'https://normiemode.com/about#andy-david' },
         about: { '@type': 'Thing', name: 'Claude Sonnet 5.5' },
       }),
     ]));
-    expect(JSON.stringify(result)).not.toMatch(/Organization|Person|publisher|author|reviewer/);
   });
 
   it('adds article dates and an ItemList that exactly preserves visible order', () => {
@@ -39,12 +42,12 @@ describe('pageStructuredData', () => {
         ],
       },
     });
-    expect(result['@graph'][1]).toMatchObject({
+    expect(result['@graph'].find((item) => item['@id'] === 'https://normiemode.com/benchmarks/example#webpage')).toMatchObject({
       '@type': ['WebPage', 'TechArticle'],
       datePublished: '2026-09-24',
       dateModified: '2026-10-12',
     });
-    expect(result['@graph'][2]).toMatchObject({
+    expect(result['@graph'].find((item) => item['@type'] === 'ItemList')).toMatchObject({
       '@type': 'ItemList',
       numberOfItems: 2,
       itemListElement: [

@@ -9,8 +9,7 @@ export function getStaticPaths() {
 
 const { page } = Astro.props as { page: TrustPage };
 ---
-<Base title={page.title} description={page.description} noindex>
-  <div class="eyebrow">Draft for review</div>
+<Base title={page.title} description={page.description}>
 
   {page.slug === 'about' && (
     <>
@@ -22,7 +21,7 @@ const { page } = Astro.props as { page: TrustPage };
 
       <h2>Who is behind it</h2>
       <p>Normie Mode is produced by <a href="https://otherstuff.ai/about/" rel="external">Other Stuff</a>, an AI-first product studio in Perth, Western Australia. <a href="https://intelligencesnacks.com/" rel="external">Intelligence Snacks</a> is a related podcast and newsletter from the same team about AI, work and business.</p>
-      <p>Andy David is Normie Mode's product owner and current human editorial reviewer. Andy is a co-founder of Other Stuff with a background in venture design, management consulting and technology startups, including process improvement for enterprises and SMEs.</p>
+      <p id="andy-david">Andy David is Normie Mode's product owner and current human editorial reviewer. Andy is a co-founder of Other Stuff with a background in venture design, management consulting and technology startups, including process improvement for enterprises and SMEs.</p>
     </>
   )}
 

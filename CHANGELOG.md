@@ -6,6 +6,7 @@ This file records meaningful changes to the Normie Mode product, implementation,
 
 ### Added
 
+- Public About, Contact, Editorial Policy and Corrections Policy pages with an approved producer/reviewer profile and monitored corrections route.
 - Preview-only drafts for About, Contact, Editorial Policy and Corrections Policy, grounded in public producer/profile sources and withheld from production pending factual approval.
 - An approved, supervised reports programme for monthly evidence and ranking changes and major model/test releases; reports remain drafts until editorial review and canonical pages remain authoritative.
 - Canonical site/page, article, visible-ranking and entity-relationship structured data derived from the same records as each page; publisher and reviewer identities remain intentionally absent pending approved public facts.
@@ -102,6 +103,7 @@ This file records meaningful changes to the Normie Mode product, implementation,
 
 ### Changed
 
+- Public structured data now identifies Other Stuff as publisher and Andy David as the current human reviewer, matching the visible trust pages.
 - Citation and crawler monitoring now follows an approved privacy-minimal policy: aggregate measurement only, no fingerprinting or visitor profiles, and raw operational logs retained for no longer than 90 days.
 - The first curated head-to-head comparison now has a reliable preview path, preview-only model links, dependency-derived freshness and explicit production/indexing guards while it awaits publication review.
 - The nine enriched historical model pages have returned to default indexing and sitemap membership; the 31 undifferentiated child-task pages remain temporarily excluded.

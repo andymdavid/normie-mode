@@ -27,6 +27,6 @@ export const TRUST_PAGES: TrustPage[] = [
   },
 ];
 
-export function visibleTrustPages(preview: boolean) {
-  return preview ? TRUST_PAGES : [];
+export function visibleTrustPages(_preview: boolean) {
+  return TRUST_PAGES;
 }

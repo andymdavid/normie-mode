@@ -19,15 +19,13 @@ export interface PageStructuredDataInput {
 
 const absolute = (value: string | URL, site: string | URL) => new URL(value, site).href;
 
-/**
- * Shared site/page schema. It deliberately omits publisher, author and reviewer
- * until the public identity records required by SEO-003 have been approved.
- */
 export function pageStructuredData(input: PageStructuredDataInput) {
   const site = absolute('/', input.site);
   const url = absolute(input.url, site);
   const websiteId = `${site}#website`;
   const pageId = `${url}#webpage`;
+  const publisherId = `${site}#publisher`;
+  const reviewerId = `${site}about#andy-david`;
   const type = input.type ?? 'WebPage';
   const page = {
     '@type': type === 'WebPage' ? 'WebPage' : ['WebPage', type],
@@ -36,6 +34,8 @@ export function pageStructuredData(input: PageStructuredDataInput) {
     name: input.name,
     description: input.description,
     isPartOf: { '@id': websiteId },
+    publisher: { '@id': publisherId },
+    reviewedBy: { '@id': reviewerId },
     ...(input.published ? { datePublished: input.published } : {}),
     ...(input.modified ? { dateModified: input.modified } : {}),
     ...(input.about ? {
@@ -55,6 +55,21 @@ export function pageStructuredData(input: PageStructuredDataInput) {
       name: 'Normie Mode',
       description: 'What AI can actually do, explained in plain English with the evidence underneath.',
       inLanguage: 'en-GB',
+      publisher: { '@id': publisherId },
+    },
+    {
+      '@type': 'Organization',
+      '@id': publisherId,
+      name: 'Other Stuff',
+      url: 'https://otherstuff.ai/',
+    },
+    {
+      '@type': 'Person',
+      '@id': reviewerId,
+      name: 'Andy David',
+      url: `${site}about#andy-david`,
+      affiliation: { '@id': publisherId },
+      sameAs: 'https://otherstuff.ai/about/',
     },
     page,
   ];

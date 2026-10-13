@@ -247,6 +247,10 @@ Publish one dated evidence and ranking-change report each month, plus release no
 
 Measure aggregate referral and crawler activity without fingerprinting visitors or building individual profiles. Record only the fields needed to identify a referring service, requested path, response status and coarse time period; do not retain full query strings or use the data for advertising. Where raw operational logs are necessary for security or troubleshooting, restrict access and delete them within 90 days. Publish only aggregate findings. Claimed crawler user agents remain unverified until checked against the crawler operator's published network information where available.
 
+### D-042 — Publish trust, identity and corrections pages (accepted 2026-10-13)
+
+Publish the reviewed About, Contact, Editorial Policy and Corrections Policy pages. Normie Mode is described as produced by Other Stuff; Intelligence Snacks is a related podcast and newsletter from the same team. Andy David may be named as product owner and current human editorial reviewer with the approved short profile. `info@otherstuff.studio` is the monitored contact and corrections route. The editorial policy states that relevant commercial relationships are disclosed and payment cannot buy a ranking or recommendation. The approved facts may support truthful `Organization`, `Person`, publisher and reviewer structured data.
+
 ## Reference sites
 
 Reviewed 2026-09-24 as models for structure and presentation:
@@ -326,6 +330,8 @@ Progress note (2026-10-13): The SEO-009 audit records all 31 child tasks in `doc
 Progress note (2026-10-13): SEO-005 now has the non-identity structured-data layer locally: canonical site/page entities, benchmark/test articles, exact visible ranked lists and factual `about` relationships. Publisher/reviewer entities remain blocked on SEO-003 facts. SEO-012's first comparison now has a working noindex preview, inbound preview links, dependency freshness and visibility tests; publication still requires owner review.
 
 Progress note (2026-10-13): SEO-003 now has preview-only drafts for About, Contact, Editorial Policy and Corrections Policy based on public Other Stuff and Intelligence Snacks sources. Production still omits the routes and identity schema. Product-owner approval remains required for the relationship wording, Andy David profile, shared corrections inbox and commercial-independence statement.
+
+Progress note (2026-10-13): D-042 was accepted. The four trust pages, footer links and matching Other Stuff/Andy David publisher-reviewer structured data are ready for production verification. Search Console supplied the first overall performance snapshot: 269 impressions, 4 clicks, 1.5% CTR and average position 56; the 9 October indexing snapshot reports 76 indexed and 62 not indexed.
 
 Progress note (2026-10-13): D-040 approves SEO-015's supervised reports programme: one monthly evidence/ranking-change report and major model/test release notes, all draft until Andy reviews them and always subordinate to canonical pages. Report templates and public routes remain implementation work.
 

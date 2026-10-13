@@ -69,10 +69,10 @@ export default defineConfig({
   integrations: [
     subscriptionDevRoute,
     sitemap({
-      // These routes only render in preview builds and must never be advertised to search engines.
+      // Preview-only and non-page routes must never be advertised to search engines.
       filter: (page) => {
         const path = new URL(page).pathname;
-        return !['/demand', '/review', '/about', '/contact', '/editorial-policy', '/corrections'].includes(path) && !path.startsWith('/datasets/') && !isTemporarilyNoindexedRoute(path) && !isDraftComparisonRoute(path);
+        return !['/demand', '/review'].includes(path) && !path.startsWith('/datasets/') && !isTemporarilyNoindexedRoute(path) && !isDraftComparisonRoute(path);
       },
       serialize: (item) => {
         const lastmod = routeLastmod(new URL(item.url).pathname);
