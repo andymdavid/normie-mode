@@ -145,7 +145,7 @@ These sources establish crawler eligibility and conventional search mechanics. T
 | SEO-014 | Titles, descriptions and information architecture | `done` | P1 | — |
 | SEO-015 | Update/report publishing programme | `ready` | P1 | D-040 accepted; templates and routes remain |
 | SEO-016 | Distribution and authority building | `proposed` | P1 | At least one strong original report/dataset |
-| SEO-017 | Citation and referral monitoring | `proposed` | P0 | Analytics/logging choice |
+| SEO-017 | Citation and referral monitoring | `ready` | P0 | D-041 accepted; implementation and baseline remain |
 | SEO-018 | Ongoing operating cadence | `in_progress` | P2 | Flight Deck destination and remaining checks |
 
 ## Detailed work items
@@ -693,7 +693,9 @@ Verification:
 
 ### SEO-017 — Citation and referral monitoring
 
-State: `proposed`
+State: `ready`
+
+Decision: D-041 permits privacy-minimal aggregate referral and crawler monitoring. It prohibits fingerprinting and visitor profiles, limits raw operational-log retention to 90 days, and requires public reporting to use aggregates only.
 
 Purpose: Measure whether search and answer engines discover and cite the site.
 
@@ -788,7 +790,7 @@ Record accepted decisions in `docs/IMPLEMENTATION_PLAN.md` as D-### entries befo
 | Historical model page policy | Enrich, noindex or redirect materially changes public coverage | Accepted as D-035: temporary noindex; mandatory end-of-N-015 revisit |
 | Child task indexability threshold | Prevents shallow keyword expansion | Accepted as D-035: noindex until SEO-009 differentiation criteria are met |
 | Public licence for first-party test datasets | Controls reuse and citation | Open |
-| Analytics and access-log retention | Privacy and measurement trade-off | Open |
+| Analytics and access-log retention | Privacy and measurement trade-off | Accepted as D-041: aggregate monitoring, no fingerprinting/profiles, raw operational logs retained no longer than 90 days |
 | Dated reports programme | Defines scope, review and relationship to canonical pages | Accepted as D-040: supervised monthly change report plus major model/test release notes |
 
 ## Risks and watch-outs
@@ -1037,6 +1039,12 @@ Append new entries; do not rewrite history except to correct a factual error, an
 - D-040 approves one monthly evidence and ranking-change report plus release notes for major model-version and Normie Mode test changes.
 - Reports remain drafts until Andy David reviews them, link to the underlying canonical pages and cannot override those pages' recommendations.
 - SEO-015 moves from `blocked` to `ready`; templates, content records and public routes have not yet been implemented.
+
+### 2026-10-13 — SEO-017 monitoring policy approved
+
+- Recorded D-041: citation, referral and crawler measurement may use privacy-minimal aggregate data, without visitor fingerprinting or profiles.
+- Raw operational logs, when needed for security or troubleshooting, are access-restricted and retained for no longer than 90 days; public reporting uses aggregates only.
+- SEO-017 moves from `proposed` to `ready`. The existing crawler-only records already omit IP addresses, query strings and ordinary visits; aggregate referral measurement and a production retention mechanism remain implementation work.
 
 ## Progress notes
 

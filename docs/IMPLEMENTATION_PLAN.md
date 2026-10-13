@@ -243,6 +243,10 @@ Restore the nine model pages temporarily excluded by D-035 to `index,follow` and
 
 Publish one dated evidence and ranking-change report each month, plus release notes when a major model version or Normie Mode test materially changes the evidence. Reports summarise verified changes and link to the canonical task, model, benchmark and test pages; those canonical pages remain authoritative if wording or recommendations differ. Every report starts as a draft and requires Andy David's editorial review before publication. The programme does not authorise an automated pipeline or agent to publish a report, change a recommendation or override the accepted evidence and recommendation rules.
 
+### D-041 — Privacy-minimal citation and crawler monitoring (accepted 2026-10-13)
+
+Measure aggregate referral and crawler activity without fingerprinting visitors or building individual profiles. Record only the fields needed to identify a referring service, requested path, response status and coarse time period; do not retain full query strings or use the data for advertising. Where raw operational logs are necessary for security or troubleshooting, restrict access and delete them within 90 days. Publish only aggregate findings. Claimed crawler user agents remain unverified until checked against the crawler operator's published network information where available.
+
 ## Reference sites
 
 Reviewed 2026-09-24 as models for structure and presentation:

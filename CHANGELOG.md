@@ -101,6 +101,7 @@ This file records meaningful changes to the Normie Mode product, implementation,
 
 ### Changed
 
+- Citation and crawler monitoring now follows an approved privacy-minimal policy: aggregate measurement only, no fingerprinting or visitor profiles, and raw operational logs retained for no longer than 90 days.
 - The first curated head-to-head comparison now has a reliable preview path, preview-only model links, dependency-derived freshness and explicit production/indexing guards while it awaits publication review.
 - The nine enriched historical model pages have returned to default indexing and sitemap membership; the 31 undifferentiated child-task pages remain temporarily excluded.
 - Historical model pages now expose exact-version benchmark results held in canonical content; this closes the remaining evidence gap before the nine temporarily excluded pages receive a separate restoration decision.
