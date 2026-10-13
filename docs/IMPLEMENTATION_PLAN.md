@@ -335,6 +335,8 @@ Progress note (2026-10-13): D-042 was accepted. The four trust pages, footer lin
 
 Progress note (2026-10-13): D-040 approves SEO-015's supervised reports programme: one monthly evidence/ranking-change report and major model/test release notes, all draft until Andy reviews them and always subordinate to canonical pages. Report templates and public routes remain implementation work.
 
+Progress note (2026-10-13): The published trust-page copy remains unchanged, but About and Editorial Policy now use the established D-022 visual system: full-width summary bands, numbered rule-led sections, mono labels and structured identity/review blocks. Contact and Corrections use the same spacing rhythm and navigation treatment. Local validation, 728 tests, type checks and the production build pass; deployment verification remains.
+
 ### N-001 — Import free data sources
 
 - Status: `in_progress`

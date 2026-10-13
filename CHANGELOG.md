@@ -103,6 +103,7 @@ This file records meaningful changes to the Normie Mode product, implementation,
 
 ### Changed
 
+- About and Editorial Policy now follow the site's established visual system, with structured summary bands, numbered sections and clearer identity and review blocks; Contact and Corrections now share the same spacing and policy navigation treatment.
 - Public structured data now identifies Other Stuff as publisher and Andy David as the current human reviewer, matching the visible trust pages.
 - Citation and crawler monitoring now follows an approved privacy-minimal policy: aggregate measurement only, no fingerprinting or visitor profiles, and raw operational logs retained for no longer than 90 days.
 - The first curated head-to-head comparison now has a reliable preview path, preview-only model links, dependency-derived freshness and explicit production/indexing guards while it awaits publication review.

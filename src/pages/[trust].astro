@@ -10,76 +10,184 @@ export function getStaticPaths() {
 const { page } = Astro.props as { page: TrustPage };
 ---
 <Base title={page.title} description={page.description}>
+  <article class:list={['trust-page', `trust-${page.slug}`]}>
+    {page.slug === 'about' && (
+      <>
+        <header class="trust-hero">
+          <span class="eyebrow">About</span>
+          <h1>What AI can actually do</h1>
+          <p class="lede">Normie Mode helps people understand what AI models can actually do, which models are strongest for particular work, and what evidence supports each comparison.</p>
+        </header>
 
-  {page.slug === 'about' && (
-    <>
-      <h1>About Normie Mode</h1>
-      <p class="lede">Normie Mode helps people understand what AI models can actually do, which models are strongest for particular work, and what evidence supports each comparison.</p>
+        <div class="band trust-band" aria-label="How Normie Mode works">
+          <div class="band-inner trust-principles">
+            <div><span class="mono-label">01 · Evidence</span><p>Benchmarks, prices and model specifications</p></div>
+            <div><span class="mono-label">02 · Translation</span><p>Plain language</p></div>
+            <div><span class="mono-label">03 · Accountability</span><p>Exact versions, sources, dates and limitations</p></div>
+          </div>
+        </div>
 
-      <h2>What we do</h2>
-      <p>We translate benchmarks, prices and model specifications into plain language while preserving the exact model version, source, retrieval date and limitations behind important claims.</p>
+        <section>
+          <div class="section-head" style="margin-top:0"><h2>What we do</h2></div>
+          <p class="section-copy">We translate benchmarks, prices and model specifications into plain language while preserving the exact model version, source, retrieval date and limitations behind important claims.</p>
+        </section>
 
-      <h2>Who is behind it</h2>
-      <p>Normie Mode is produced by <a href="https://otherstuff.ai/about/" rel="external">Other Stuff</a>, an AI-first product studio in Perth, Western Australia. <a href="https://intelligencesnacks.com/" rel="external">Intelligence Snacks</a> is a related podcast and newsletter from the same team about AI, work and business.</p>
-      <p id="andy-david">Andy David is Normie Mode's product owner and current human editorial reviewer. Andy is a co-founder of Other Stuff with a background in venture design, management consulting and technology startups, including process improvement for enterprises and SMEs.</p>
-    </>
-  )}
+        <section>
+          <div class="section-head"><h2>Who is behind it</h2></div>
+          <div class="identity-grid">
+            <div class="identity-block identity-primary">
+              <span class="mono-label">Produced by</span>
+              <h3><a href="https://otherstuff.ai/about/" rel="external">Other Stuff</a></h3>
+              <p>Normie Mode is produced by Other Stuff, an AI-first product studio in Perth, Western Australia.</p>
+              <p><a href="https://intelligencesnacks.com/" rel="external">Intelligence Snacks</a> is a related podcast and newsletter from the same team about AI, work and business.</p>
+            </div>
+            <div class="identity-block" id="andy-david">
+              <span class="mono-label">Product owner + human reviewer</span>
+              <h3>Andy David</h3>
+              <p>Andy David is Normie Mode's product owner and current human editorial reviewer. Andy is a co-founder of Other Stuff with a background in venture design, management consulting and technology startups, including process improvement for enterprises and SMEs.</p>
+            </div>
+          </div>
+        </section>
+      </>
+    )}
 
-  {page.slug === 'contact' && (
-    <>
-      <h1>Contact Normie Mode</h1>
-      <p class="lede">Questions, comments and corrections are welcome.</p>
-      <p>Email <a href="mailto:info@otherstuff.studio?subject=Normie%20Mode">info@otherstuff.studio</a>. For a correction, use <strong>Normie Mode correction</strong> in the subject and include:</p>
-      <ul>
-        <li>the page URL;</li>
-        <li>the item you believe is wrong; and</li>
-        <li>a supporting source, if one is available.</li>
-      </ul>
-      <p>For enquiries about Other Stuff's services, use the <a href="https://otherstuff.ai/contact/" rel="external">Other Stuff contact page</a>.</p>
-    </>
-  )}
+    {page.slug === 'contact' && (
+      <>
+        <header class="trust-hero compact">
+          <span class="eyebrow">Contact</span>
+          <h1>Contact Normie Mode</h1>
+          <p class="lede">Questions, comments and corrections are welcome.</p>
+        </header>
+        <section class="contact-panel">
+          <div>
+            <span class="mono-label">Email</span>
+            <p class="contact-address"><a href="mailto:info@otherstuff.studio?subject=Normie%20Mode">info@otherstuff.studio</a></p>
+          </div>
+          <div>
+            <span class="mono-label">For a correction</span>
+            <p>Use <strong>Normie Mode correction</strong> in the subject and include:</p>
+            <ul>
+              <li>the page URL;</li>
+              <li>the item you believe is wrong; and</li>
+              <li>a supporting source, if one is available.</li>
+            </ul>
+          </div>
+        </section>
+        <p class="secondary-action">For enquiries about Other Stuff's services, use the <a href="https://otherstuff.ai/contact/" rel="external">Other Stuff contact page</a>.</p>
+      </>
+    )}
 
-  {page.slug === 'editorial-policy' && (
-    <>
-      <h1>Editorial policy</h1>
-      <p class="lede">Our comparisons should show what the evidence says, where it came from and what it cannot tell you.</p>
+    {page.slug === 'editorial-policy' && (
+      <>
+        <header class="trust-hero">
+          <span class="eyebrow">Editorial policy</span>
+          <h1>Evidence first.<br />Human reviewed.</h1>
+          <p class="lede">Our comparisons should show what the evidence says, where it came from and what it cannot tell you.</p>
+        </header>
 
-      <h2>What we compare</h2>
-      <p>Normie Mode compares exact model versions, not apps or subscription plans. Apps and plans are shown only to explain where a model is available.</p>
+        <div class="band trust-band" aria-label="Editorial principles">
+          <div class="band-inner trust-principles">
+            <div><span class="mono-label">01 · Compare</span><p>Exact model versions</p></div>
+            <div><span class="mono-label">02 · Show</span><p>Sources, dates and limitations</p></div>
+            <div><span class="mono-label">03 · Review</span><p>Recommendations by a human</p></div>
+          </div>
+        </div>
 
-      <h2>How claims are labelled</h2>
-      <p>We keep measured results, provider-reported claims, sourced facts, editorial assessments and recommendations distinguishable. Important evidence identifies its original source, model or product version, evaluation or retrieval date, methodology and licence where applicable.</p>
+        <div class="policy-sections">
+          <section>
+            <div class="section-head" style="margin-top:0"><h2>What we compare</h2></div>
+            <p class="section-copy">Normie Mode compares exact model versions, not apps or subscription plans. Apps and plans are shown only to explain where a model is available.</p>
+          </section>
+          <section>
+            <div class="section-head"><h2>How claims are labelled</h2></div>
+            <p class="section-copy">We keep measured results, provider-reported claims, sourced facts, editorial assessments and recommendations distinguishable. Important evidence identifies its original source, model or product version, evaluation or retrieval date, methodology and licence where applicable.</p>
+          </section>
+          <section>
+            <div class="section-head"><h2>How we choose sources</h2></div>
+            <p class="section-copy">We prefer original benchmark owners, research papers and model providers over aggregators. Recommendations must explain the evidence used, their limitations, what still needs checking and when they were reviewed.</p>
+          </section>
+          <section>
+            <div class="section-head"><h2>Human review and commercial relationships</h2></div>
+            <div class="editorial-grid">
+              <p>AI tools and agents may help collect data, run checks and prepare drafts, but generated editorial copy and recommendation changes require human review before publication. Andy David is the current human reviewer.</p>
+              <p>A commercial or personal relationship that could reasonably affect a comparison will be disclosed on the relevant page. Payment does not buy a ranking or recommendation.</p>
+            </div>
+          </section>
+        </div>
+      </>
+    )}
 
-      <h2>How we choose sources</h2>
-      <p>We prefer original benchmark owners, research papers and model providers over aggregators. Recommendations must explain the evidence used, their limitations, what still needs checking and when they were reviewed.</p>
+    {page.slug === 'corrections' && (
+      <>
+        <header class="trust-hero compact">
+          <span class="eyebrow">Corrections</span>
+          <h1>Corrections policy</h1>
+          <p class="lede">Accuracy matters because model names, evidence and availability change quickly.</p>
+        </header>
+        <div class="compact-sections">
+          <section>
+            <div class="section-head" style="margin-top:0"><h2>Report an error</h2></div>
+            <p class="section-copy">Email <a href="mailto:info@otherstuff.studio?subject=Normie%20Mode%20correction">info@otherstuff.studio</a> with the page URL, the statement or result you believe is wrong, and a source that supports the correction if one is available.</p>
+          </section>
+          <section>
+            <div class="section-head"><h2>What happens next</h2></div>
+            <p class="section-copy">We review reports against the original evidence. When a material correction is needed, we update the affected page and preserve the provenance of evidence records. Corrected results are added as new records that identify what they supersede rather than silently overwriting history. Recommendation changes still require human editorial review.</p>
+            <p class="section-copy muted">We may also update a page when newer evidence makes an older statement incomplete without making it incorrect.</p>
+          </section>
+        </div>
+      </>
+    )}
 
-      <h2>Human review and commercial relationships</h2>
-      <p>AI tools and agents may help collect data, run checks and prepare drafts, but generated editorial copy and recommendation changes require human review before publication. Andy David is the current human reviewer.</p>
-      <p>A commercial or personal relationship that could reasonably affect a comparison will be disclosed on the relevant page. Payment does not buy a ranking or recommendation.</p>
-    </>
-  )}
-
-  {page.slug === 'corrections' && (
-    <>
-      <h1>Corrections policy</h1>
-      <p class="lede">Accuracy matters because model names, evidence and availability change quickly.</p>
-
-      <h2>Report an error</h2>
-      <p>Email <a href="mailto:info@otherstuff.studio?subject=Normie%20Mode%20correction">info@otherstuff.studio</a> with the page URL, the statement or result you believe is wrong, and a source that supports the correction if one is available.</p>
-
-      <h2>What happens next</h2>
-      <p>We review reports against the original evidence. When a material correction is needed, we update the affected page and preserve the provenance of evidence records. Corrected results are added as new records that identify what they supersede rather than silently overwriting history. Recommendation changes still require human editorial review.</p>
-      <p>We may also update a page when newer evidence makes an older statement incomplete without making it incorrect.</p>
-    </>
-  )}
-
-  <nav class="policy-links" aria-label="Trust and policy pages">
-    {TRUST_PAGES.filter((item) => item.slug !== page.slug).map((item) => <a href={`/${item.slug}`}>{item.title}</a>)}
-  </nav>
+    <nav class="policy-links" aria-label="Trust and policy pages">
+      <span class="mono-label">More about Normie Mode</span>
+      <div>
+        {TRUST_PAGES.filter((item) => item.slug !== page.slug).map((item) => <a href={`/${item.slug}`}>{item.title}<span aria-hidden="true"> →</span></a>)}
+      </div>
+    </nav>
+  </article>
 </Base>
 
 <style>
-  h2 { margin-top: 2.5rem; }
-  p, li { max-width: 48rem; }
-  .policy-links { display: flex; flex-wrap: wrap; gap: 0.75rem 1.25rem; margin-top: 3.5rem; padding-top: 1.25rem; border-top: 2px solid var(--ink); }
+  .trust-page { counter-reset: section; }
+  .trust-hero { padding: 1rem 0 1.25rem; min-height: 18rem; display: flex; flex-direction: column; justify-content: flex-end; }
+  .trust-hero.compact { min-height: 14rem; }
+  .trust-hero .eyebrow { margin-bottom: 1.2rem; }
+  .trust-hero h1 { max-width: 62rem; }
+  .trust-hero .lede { max-width: 43rem; margin-top: 1.5rem; font-size: clamp(1.1rem, 1.8vw, 1.35rem); }
+  .trust-band { margin-top: 2rem; margin-bottom: 4.5rem; }
+  .trust-principles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); padding-block: 0 !important; }
+  .trust-principles > div { min-height: 10.5rem; padding: 1.5rem 1.5rem 1.6rem 0; display: flex; flex-direction: column; justify-content: space-between; }
+  .trust-principles > div + div { border-left: 1px solid var(--hair); padding-left: 1.5rem; }
+  .trust-principles > div:first-child { background: var(--orange); box-shadow: -50vw 0 0 var(--orange); }
+  .trust-principles p { max-width: 17rem; margin: 1.5rem 0 0; font-size: 1.2rem; line-height: 1.25; letter-spacing: -0.02em; }
+  .section-copy { max-width: 48rem; font-size: 1.08rem; line-height: 1.6; }
+  .identity-grid, .editorial-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: var(--hair); }
+  .identity-block { background: var(--band); min-height: 20rem; padding: 1.5rem; display: flex; flex-direction: column; }
+  .identity-block.identity-primary { background: var(--lavender); }
+  .identity-block h3 { margin: auto 0 1.2rem; font-size: clamp(1.8rem, 3vw, 2.7rem); }
+  .identity-block p { max-width: 34rem; }
+  .editorial-grid > p { margin: 0; padding: 1.5rem; min-height: 12rem; background: var(--band); font-size: 1.02rem; }
+  .editorial-grid > p:first-child { background: var(--lavender); }
+  .contact-panel { display: grid; grid-template-columns: minmax(14rem, 0.75fr) minmax(18rem, 1.25fr); gap: 1px; background: var(--ink); margin-top: 2.5rem; }
+  .contact-panel > div { background: var(--band); padding: 1.5rem; min-height: 14rem; }
+  .contact-panel > div:first-child { background: var(--orange); }
+  .contact-address { margin-top: 4rem; font-size: clamp(1.25rem, 2.5vw, 2rem); letter-spacing: -0.03em; overflow-wrap: anywhere; }
+  .contact-panel ul { margin: 1rem 0 0; padding-left: 1.2rem; }
+  .contact-panel li + li { margin-top: 0.4rem; }
+  .secondary-action { margin: 1.25rem 0 0; max-width: 48rem; }
+  .compact-sections { max-width: 64rem; margin-top: 3.5rem; }
+  .policy-links { margin-top: 5rem; padding: 1.4rem 0 0; border-top: 2px solid var(--ink); }
+  .policy-links > div { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 1rem; gap: 1px; background: var(--hair); }
+  .policy-links a { min-height: 5rem; padding: 1rem; background: var(--band); display: flex; justify-content: space-between; align-items: flex-end; text-decoration: none; }
+  .policy-links a:hover { background: var(--lavender); text-decoration: underline; }
+  @media (max-width: 46rem) {
+    .trust-hero, .trust-hero.compact { min-height: 0; padding-top: 1.5rem; }
+    .trust-principles, .identity-grid, .editorial-grid, .contact-panel, .policy-links > div { grid-template-columns: 1fr; }
+    .trust-principles > div { min-height: 7rem; padding: 1.2rem 0; }
+    .trust-principles > div + div { border-left: 0; border-top: 1px solid var(--hair); padding-left: 0; }
+    .trust-principles > div:first-child { box-shadow: -50vw 0 0 var(--orange), 50vw 0 0 var(--orange); }
+    .identity-block { min-height: 16rem; }
+    .contact-panel > div { min-height: 10rem; }
+    .contact-address { margin-top: 2.5rem; }
+  }
 </style>
