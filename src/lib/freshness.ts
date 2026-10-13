@@ -31,7 +31,7 @@ function snapshotFor(source: string | undefined) {
  * rebuild does not manufacture freshness. Editorial copy without a recorded date is deliberately
  * excluded until its content schema carries one.
  */
-export function routeLastmod(pathname: string) {
+export function routeLastmod(pathname: string): string | undefined {
   const g = graph();
   const snapshots = imported();
   const snapshotDate = latest(snapshots);
@@ -65,6 +65,19 @@ export function routeLastmod(pathname: string) {
   if (parts[0] === 'tests' && parts[1]) {
     const test = g.tests.get(parts[1]);
     return latest(test, [...g.results.values()].filter((result) => result.benchmark === parts[1]), snapshotFor(test?.source));
+  }
+
+  if (parts[0] === 'compare' && parts[1]) {
+    const ids = [...g.models.keys()];
+    const pair = ids.flatMap((left) => ids.map((right) => [left, right] as const))
+      .find(([left, right]) => `${left}-vs-${right}` === parts[1]);
+    if (pair) {
+      return pair
+        .map((id) => routeLastmod(`/models/${id}`))
+        .filter((date): date is string => Boolean(date))
+        .sort()
+        .at(-1);
+    }
   }
 
   if (pathname === '/models') return latest([...g.models.values()], [...g.results.values()], snapshots);

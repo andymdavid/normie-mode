@@ -13,6 +13,7 @@ import { modelMetadata } from '../../lib/page-metadata';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import EvidenceAnswer from '../../components/EvidenceAnswer.astro';
 import { modelAnswer } from '../../lib/answer-summary';
+import { comparisonsForModel } from '../../lib/comparisons';
 
 export function getStaticPaths() {
   return [...graph().models.keys()].map((id) => ({ params: { id } }));
@@ -34,6 +35,7 @@ const metadata = modelMetadata(model.name, family.provider);
 const answer = current && row ? modelAnswer(model.name, tasks, row.independentTests) : undefined;
 const history = !current ? historicalModelEvidence(model.id) : undefined;
 const verificationSources = model.verification.sources.map((id) => g.sources.get(id)).filter((source) => source !== undefined);
+const comparisons = comparisonsForModel(model.id);
 ---
 <Base
   title={metadata.title}
@@ -165,6 +167,18 @@ const verificationSources = model.verification.sources.map((id) => g.sources.get
           </tbody>
         </table>
       </div>
+    </>
+  )}
+
+  {comparisons.length > 0 && (
+    <>
+      <h2 class="page-h2">Compare with another model</h2>
+      <ul class="card comparisons">
+        {comparisons.map((comparison) => {
+          const otherId = comparison.models.find((id) => id !== model.id)!;
+          return <li><a href={`/compare/${comparison.slug}`}><strong>{model.name} vs {modelName(otherId)}</strong></a></li>;
+        })}
+      </ul>
     </>
   )}
 

@@ -4,6 +4,7 @@ import sitemap from '@astrojs/sitemap';
 import { subscribe } from './server/index.ts';
 import { routeLastmod } from './src/lib/freshness.ts';
 import { isTemporarilyNoindexedRoute } from './src/lib/indexability.ts';
+import { isDraftComparisonRoute } from './src/lib/comparisons.ts';
 
 /** @type {import('astro').AstroIntegration} */
 const subscriptionDevRoute = {
@@ -71,7 +72,7 @@ export default defineConfig({
       // These routes only render in preview builds and must never be advertised to search engines.
       filter: (page) => {
         const path = new URL(page).pathname;
-        return !['/demand', '/review'].includes(path) && !path.startsWith('/datasets/') && !isTemporarilyNoindexedRoute(path);
+        return !['/demand', '/review'].includes(path) && !path.startsWith('/datasets/') && !isTemporarilyNoindexedRoute(path) && !isDraftComparisonRoute(path);
       },
       serialize: (item) => {
         const lastmod = routeLastmod(new URL(item.url).pathname);

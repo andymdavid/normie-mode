@@ -8,6 +8,7 @@ describe('route freshness', () => {
     '/models/claude-opus-5-5',
     '/benchmarks/arena-overall',
     '/tests/spreadsheet-questions',
+    '/compare/claude-opus-5-5-vs-gemini-3-8-flash',
   ])('returns a stable ISO date for %s', (route) => {
     const first = routeLastmod(route);
     expect(first).toMatch(/^\d{4}-\d{2}-\d{2}$/);

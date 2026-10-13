@@ -2,14 +2,13 @@ import { graph } from './graph';
 import { EVIDENCE_STATUS_LABEL } from './overview';
 import { overviewRow, taskPositions, testPositions } from './models';
 import { plansFor } from './plans';
+import { PREVIEW } from './view';
 
 export interface ComparisonDefinition {
   slug: string;
   models: [string, string];
   status: 'draft' | 'published';
 }
-
-export const COMPARISON_PREVIEW = process.env.NORMIE_COMPARISON_PREVIEW === '1';
 
 export const COMPARISONS: ComparisonDefinition[] = [
   {
@@ -19,8 +18,16 @@ export const COMPARISONS: ComparisonDefinition[] = [
   },
 ];
 
-export function visibleComparisons() {
-  return COMPARISONS.filter((comparison) => comparison.status === 'published' || COMPARISON_PREVIEW);
+export function visibleComparisons(preview = PREVIEW) {
+  return COMPARISONS.filter((comparison) => comparison.status === 'published' || preview);
+}
+
+export function comparisonsForModel(modelId: string, preview = PREVIEW) {
+  return visibleComparisons(preview).filter((comparison) => comparison.models.includes(modelId));
+}
+
+export function isDraftComparisonRoute(pathname: string) {
+  return COMPARISONS.some((comparison) => comparison.status === 'draft' && pathname === `/compare/${comparison.slug}`);
 }
 
 export function comparisonData(definition: ComparisonDefinition) {

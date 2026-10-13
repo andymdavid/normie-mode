@@ -1,10 +1,16 @@
 import { describe, expect, it } from 'vitest';
-import { COMPARISONS, comparisonData, visibleComparisons } from './comparisons';
+import { COMPARISONS, comparisonData, comparisonsForModel, isDraftComparisonRoute, visibleComparisons } from './comparisons';
 
 describe('curated model comparisons', () => {
-  it('only exposes allowlisted published comparisons by default', () => {
+  it('keeps draft comparisons out of production and exposes them in preview', () => {
     expect(COMPARISONS).toHaveLength(1);
-    expect(visibleComparisons()).toEqual([]);
+    expect(visibleComparisons(false)).toEqual([]);
+    expect(visibleComparisons(true)).toEqual(COMPARISONS);
+    expect(comparisonsForModel('claude-opus-5-5', false)).toEqual([]);
+    expect(comparisonsForModel('claude-opus-5-5', true)).toEqual(COMPARISONS);
+    expect(comparisonsForModel('gpt-6-sol', true)).toEqual([]);
+    expect(isDraftComparisonRoute('/compare/claude-opus-5-5-vs-gemini-3-8-flash')).toBe(true);
+    expect(isDraftComparisonRoute('/compare/arbitrary-pair')).toBe(false);
   });
 
   it('derives shared task and test facts from canonical model data', () => {
