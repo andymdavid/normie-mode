@@ -38,7 +38,7 @@ const { page } = Astro.props as { page: TrustPage };
             <div class="identity-block identity-primary">
               <span class="mono-label">Produced by</span>
               <div class="identity-name">
-                <img src="/other-stuff-logo.webp" alt="" width="72" height="72" />
+                <img src="/other-stuff-logo.webp" alt="" width="48" height="48" />
                 <h3><a href="https://otherstuff.ai/about/" rel="external">Other Stuff</a></h3>
               </div>
               <p>Normie Mode is produced by Other Stuff, an AI-first product studio in Perth, Western Australia.</p>
@@ -50,7 +50,7 @@ const { page } = Astro.props as { page: TrustPage };
             <div class="identity-block" id="andy-david">
               <span class="mono-label">Product owner + human reviewer</span>
               <div class="identity-name">
-                <img class="andy-portrait" src="/andy-david.webp" alt="" width="72" height="72" loading="lazy" />
+                <img src="/andy-david.webp" alt="" width="48" height="48" loading="lazy" />
                 <h3>Andy David</h3>
               </div>
               <p>Andy David is Normie Mode's product owner and current human editorial reviewer. Andy is a co-founder of Other Stuff with a background in venture design, management consulting and technology startups, including process improvement for enterprises and SMEs.</p>
@@ -174,8 +174,7 @@ const { page } = Astro.props as { page: TrustPage };
   .identity-block { background: var(--band); min-height: 20rem; padding: 1.5rem; display: flex; flex-direction: column; }
   .identity-block.identity-primary { background: var(--lavender); }
   .identity-name { margin: auto 0 1.2rem; display: flex; align-items: center; gap: 1rem; }
-  .identity-name img { width: 4.5rem; height: 4.5rem; flex: 0 0 auto; object-fit: cover; }
-  .identity-name .andy-portrait { object-fit: contain; object-position: center bottom; }
+  .identity-name img { width: 3rem; height: 3rem; flex: 0 0 auto; object-fit: cover; }
   .identity-block h3 { margin: 0; font-size: clamp(1.8rem, 3vw, 2.7rem); }
   .identity-block p { max-width: 34rem; }
   .related-brand { display: flex; align-items: center; gap: 0.8rem; margin-top: 0.55rem; }
