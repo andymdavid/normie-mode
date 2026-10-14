@@ -38,22 +38,34 @@ const { page } = Astro.props as { page: TrustPage };
             <div class="identity-block identity-primary">
               <span class="mono-label">Produced by</span>
               <div class="identity-name">
-                <img src="/other-stuff-logo.webp" alt="" width="48" height="48" />
+                <img src="/other-stuff-logo.webp" alt="" width="40" height="40" />
                 <h3><a href="https://otherstuff.ai/about/" rel="external">Other Stuff</a></h3>
               </div>
               <p>Normie Mode is produced by Other Stuff, an AI-first product studio in Perth, Western Australia.</p>
-              <div class="related-brand">
-                <img src="/intelligence-snacks-logo.webp" alt="" width="64" height="42" loading="lazy" />
-                <p><a href="https://intelligencesnacks.com/" rel="external">Intelligence Snacks</a> is a related podcast and newsletter from the same team about AI, work and business.</p>
-              </div>
             </div>
-            <div class="identity-block" id="andy-david">
-              <span class="mono-label">Product owner + human reviewer</span>
+
+            <div class="identity-block identity-snacks">
+              <span class="mono-label">Podcast + newsletter</span>
               <div class="identity-name">
-                <img src="/andy-david.webp" alt="" width="48" height="48" loading="lazy" />
-                <h3>Andy David</h3>
+                <img class="snacks-mark" src="/intelligence-snacks-logo.webp" alt="" width="56" height="36" loading="lazy" />
+                <h3><a href="https://intelligencesnacks.com/" rel="external">Intelligence Snacks</a></h3>
               </div>
-              <p>Andy David is Normie Mode's product owner and current human editorial reviewer. Andy is a co-founder of Other Stuff with a background in venture design, management consulting and technology startups, including process improvement for enterprises and SMEs.</p>
+              <p>Intelligence Snacks is a related podcast and newsletter from the same team about AI, work and business.</p>
+            </div>
+
+            <div class="identity-block identity-people" id="andy-david">
+              <span class="mono-label">Other Stuff co-founders</span>
+              <div class="founders">
+                <a class="founder" href="https://x.com/andymdavid" rel="me external">
+                  <img src="/andy-david.webp" alt="" width="40" height="40" loading="lazy" />
+                  <span><strong>Andy David</strong><small>@andymdavid</small></span>
+                </a>
+                <a class="founder" href="https://x.com/Pete_Winn" rel="me external">
+                  <img src="/pete-winn.webp" alt="" width="40" height="40" loading="lazy" />
+                  <span><strong>Pete Winn</strong><small>@Pete_Winn</small></span>
+                </a>
+              </div>
+              <p>Andy is Normie Mode's product owner and current human editorial reviewer.</p>
             </div>
           </div>
         </section>
@@ -170,16 +182,23 @@ const { page } = Astro.props as { page: TrustPage };
   .trust-principles > div:first-child { background: var(--orange); box-shadow: -50vw 0 0 var(--orange); }
   .trust-principles p { max-width: 17rem; margin: 1.5rem 0 0; font-size: 1.2rem; line-height: 1.25; letter-spacing: -0.02em; }
   .section-copy { max-width: 48rem; font-size: 1.08rem; line-height: 1.6; }
-  .identity-grid, .editorial-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: var(--hair); }
-  .identity-block { background: var(--band); min-height: 20rem; padding: 1.5rem; display: flex; flex-direction: column; }
+  .identity-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--hair); }
+  .editorial-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: var(--hair); }
+  .identity-block { background: var(--band); min-height: 16rem; padding: 1.35rem; display: flex; flex-direction: column; }
   .identity-block.identity-primary { background: var(--lavender); }
-  .identity-name { margin: auto 0 1.2rem; display: flex; align-items: center; gap: 1rem; }
-  .identity-name img { width: 3rem; height: 3rem; flex: 0 0 auto; object-fit: cover; }
-  .identity-block h3 { margin: 0; font-size: clamp(1.8rem, 3vw, 2.7rem); }
-  .identity-block p { max-width: 34rem; }
-  .related-brand { display: flex; align-items: center; gap: 0.8rem; margin-top: 0.55rem; }
-  .related-brand img { width: 4rem; height: auto; flex: 0 0 auto; }
-  .related-brand p { margin: 0; }
+  .identity-block.identity-snacks { background: var(--orange); }
+  .identity-name { margin: 1.6rem 0 1.2rem; display: flex; align-items: center; gap: 0.8rem; }
+  .identity-name img { width: 2.5rem; height: 2.5rem; flex: 0 0 auto; object-fit: cover; }
+  .identity-name img.snacks-mark { width: 3.5rem; height: auto; }
+  .identity-block h3 { margin: 0; font-size: 1.35rem; letter-spacing: -0.025em; line-height: 1.1; }
+  .identity-block p { max-width: 30rem; margin: auto 0 0; font-size: 0.95rem; line-height: 1.5; }
+  .founders { display: grid; gap: 0.8rem; margin: 1.45rem 0 1.2rem; }
+  .founder { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+  .founder:hover strong { text-decoration: underline; }
+  .founder img { width: 2.5rem; height: 2.5rem; object-fit: cover; flex: 0 0 auto; }
+  .founder span { display: grid; line-height: 1.2; }
+  .founder strong { font-size: 1rem; font-weight: 600; }
+  .founder small { margin-top: 0.15rem; color: var(--muted); font: 0.72rem var(--mono); }
   .editorial-grid > p { margin: 0; padding: 1.5rem; min-height: 12rem; background: var(--band); font-size: 1.02rem; }
   .editorial-grid > p:first-child { background: var(--lavender); }
   .contact-panel { display: grid; grid-template-columns: minmax(14rem, 0.75fr) minmax(18rem, 1.25fr); gap: 1px; background: var(--ink); margin-top: 2.5rem; }
@@ -200,7 +219,7 @@ const { page } = Astro.props as { page: TrustPage };
     .trust-principles > div { min-height: 7rem; padding: 1.2rem; }
     .trust-principles > div + div { border-left: 0; border-top: 1px solid var(--hair); }
     .trust-principles > div:first-child { box-shadow: -50vw 0 0 var(--orange), 50vw 0 0 var(--orange); }
-    .identity-block { min-height: 16rem; }
+    .identity-block { min-height: 13rem; }
     .contact-panel > div { min-height: 10rem; }
     .contact-address { margin-top: 2.5rem; }
   }
