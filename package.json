@@ -12,6 +12,8 @@
     "stop": "pkill -f 'bun server/index.ts' || true",
     "check": "astro check",
     "validate": "tsx scripts/validate.ts",
+    "seo:audit": "npm run build && tsx scripts/seo-audit.ts",
+    "seo:indexability": "npm run build && tsx scripts/indexability-review.ts",
     "test": "vitest run",
     "import": "tsx scripts/import.ts",
     "eval": "tsx scripts/eval.ts",
@@ -19,6 +21,7 @@
     "demand": "tsx scripts/demand.ts"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
     "astro": "^7.3.4",
     "csv-parse": "^7.0.2",
     "fflate": "^0.8.3",

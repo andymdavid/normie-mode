@@ -2,7 +2,9 @@ id: gpt-6-sol
 family: gpt
 name: GPT-6 Sol
 released_on: 2026-09-22
-lifecycle: current
+lifecycle: superseded
+successor: gpt-6-1-sol
+summary: OpenAI launched GPT-6 Sol for complex coding, computer use and professional workflows in ChatGPT Work, Codex and the API. GPT-6.1 Sol replaced it one week later with stronger results and cheaper cached input at the same standard input and output prices.
 verification:
   status: verified
   sources:
@@ -10,5 +12,6 @@ verification:
 source_ids:
   epoch:
     - gpt-6-sol
+  epoch_index: GPT-6 Sol
   modelsdev: openai/gpt-6-sol
 openrouter_id: openai/gpt-6-sol

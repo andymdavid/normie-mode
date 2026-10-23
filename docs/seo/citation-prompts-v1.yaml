@@ -1,0 +1,48 @@
+version: 1
+created_on: 2026-10-10
+purpose: >-
+  Fixed manual prompt set for measuring whether answer engines cite Normie Mode.
+  Preserve exact wording within a version. Create a new version when prompts or
+  named model versions change.
+instructions:
+  - Run in a fresh conversation with web search enabled.
+  - Do not mention Normie Mode in the prompt.
+  - Record engine, product surface, date, answer, cited URLs and competing sources.
+  - Do not retry a prompt only because Normie Mode was not cited.
+  - Treat results as observations, not statistically reliable rankings.
+prompts:
+  spreadsheet_work:
+    - What is the best AI model for analysing an Excel spreadsheet?
+    - Which AI model is best for spreadsheet data analysis, and what evidence supports that?
+    - Which current AI models have been independently tested on spreadsheet work?
+    - What should I check when using AI to answer business questions from a spreadsheet?
+    - Can I trust AI to analyse a messy spreadsheet without checking its answers?
+    - Compare Claude Opus 5.5, GPT-6 Sol and Gemini 3.8 Flash for spreadsheet analysis.
+  coding:
+    - Which current AI model is best for coding?
+    - Which independent benchmarks best measure whether an AI can complete real software work?
+    - Compare Claude Opus 5.5 and GPT-6 Sol for coding, using independent evidence.
+    - What does Terminal-Bench test, in plain English?
+    - What does FrontierCode test, and how should I interpret its results?
+    - Is people's preference data enough to decide which AI is best for coding?
+  model_comparison:
+    - Compare Claude Opus 5.5, GPT-6 Sol and Gemini 3.8 Flash for everyday work.
+    - Which current AI model is the most capable overall according to independent tests?
+    - Which current AI model gives the best capability for its API cost?
+    - Where can I use Claude Opus 5.5, and which plans include it?
+    - How much independent evidence should I require before trusting claims about a new AI model?
+    - Why does the exact model version matter when comparing ChatGPT, Claude and Gemini?
+  writing_and_research:
+    - Which current AI model is best for writing?
+    - Which current AI model is best for academic research?
+    - What evidence can show whether one AI writes better than another?
+    - What are the limits of using people's votes to rank AI writing quality?
+    - Compare Claude Opus 5.5 and Gemini 3.8 Flash for research work.
+    - What should I verify when an AI helps with research or factual questions?
+  benchmarks_and_methodology:
+    - Which AI benchmarks test real work rather than academic questions?
+    - What does FrontierMath measure, in plain English?
+    - How reliable are public AI model rankings?
+    - When are two AI benchmark results too close to call?
+    - How should benchmark scores, people's votes and price be combined when choosing an AI model?
+    - What information should a trustworthy AI model comparison disclose?

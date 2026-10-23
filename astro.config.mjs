@@ -1,6 +1,10 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
+import sitemap from '@astrojs/sitemap';
 import { subscribe } from './server/index.ts';
+import { routeLastmod } from './src/lib/freshness.ts';
+import { isTemporarilyNoindexedRoute } from './src/lib/indexability.ts';
+import { isDraftComparisonRoute } from './src/lib/comparisons.ts';
 
 /** @type {import('astro').AstroIntegration} */
 const subscriptionDevRoute = {
@@ -56,12 +60,25 @@ const refreshAstroStyles = {
 };
 
 export default defineConfig({
-  site: 'https://normiemode.example',
+  site: 'https://normiemode.com',
   trailingSlash: 'never',
   build: { format: 'file' },
   // Hosting platforms serve the site under their own hostname; a static site has nothing to protect
   // by refusing unknown hosts, so accept any (`npm run serve` behind a proxy needs this).
   server: { allowedHosts: true },
-  integrations: [subscriptionDevRoute],
+  integrations: [
+    subscriptionDevRoute,
+    sitemap({
+      // Preview-only and non-page routes must never be advertised to search engines.
+      filter: (page) => {
+        const path = new URL(page).pathname;
+        return !['/demand', '/review'].includes(path) && !path.startsWith('/datasets/') && !isTemporarilyNoindexedRoute(path) && !isDraftComparisonRoute(path);
+      },
+      serialize: (item) => {
+        const lastmod = routeLastmod(new URL(item.url).pathname);
+        return lastmod ? { ...item, lastmod: `${lastmod}T00:00:00.000Z` } : item;
+      },
+    }),
+  ],
   vite: { plugins: [refreshAstroStyles] },
 });

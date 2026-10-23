@@ -5,7 +5,7 @@
   "url": "https://models.dev",
   "licence": "MIT",
   "attribution": "models.dev (https://github.com/anomalyco/models.dev)",
-  "retrieved_at": "2026-09-26T05:43:29.704Z"
+  "retrieved_at": "2026-10-12T09:34:48.405Z"
  },
  "models": [
   {
@@ -208,6 +208,56 @@
    "knowledge": "2025-02-28"
   },
   {
+   "model": "claude-haiku-5-5",
+   "source_model": "anthropic/claude-haiku-5-5",
+   "name": "Claude Haiku 5.5",
+   "released_on": "2026-10-07",
+   "price": {
+    "input": 0.1,
+    "output": 0.5,
+    "cache_read": 0.01
+   },
+   "context": 1000000,
+   "max_output": 128000,
+   "input_modalities": [
+    "text",
+    "image",
+    "pdf"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "reasoning": true,
+   "tool_call": true,
+   "open_weights": false,
+   "knowledge": "2026-06"
+  },
+  {
+   "model": "claude-sonnet-5-5",
+   "source_model": "anthropic/claude-sonnet-5-5",
+   "name": "Claude Sonnet 5.5",
+   "released_on": "2026-09-28",
+   "price": {
+    "input": 2,
+    "output": 10,
+    "cache_read": 0.1
+   },
+   "context": 1000000,
+   "max_output": 128000,
+   "input_modalities": [
+    "text",
+    "image",
+    "pdf"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "reasoning": true,
+   "tool_call": true,
+   "open_weights": false,
+   "knowledge": "2026-06"
+  },
+  {
    "model": "deepseek-v4-1-flash",
    "source_model": "deepseek/deepseek-flash",
    "name": "DeepSeek V4.1 Flash",
@@ -237,9 +287,9 @@
    "name": "DeepSeek V4 Pro",
    "released_on": "2026-08-12",
    "price": {
-    "input": 0.435,
-    "output": 0.87,
-    "cache_read": 0.003625
+    "input": 0.66,
+    "output": 1.98,
+    "cache_read": 0.022
    },
    "context": 1000000,
    "max_output": 393216,
@@ -410,6 +460,31 @@
    "reasoning": true,
    "tool_call": true,
    "open_weights": true
+  },
+  {
+   "model": "gpt-6-1-sol",
+   "source_model": "openai/gpt-6.1-sol",
+   "name": "GPT-6.1 Sol",
+   "released_on": "2026-09-29",
+   "price": {
+    "input": 2,
+    "output": 10,
+    "cache_read": 0.1
+   },
+   "context": 1050000,
+   "max_output": 128000,
+   "input_modalities": [
+    "text",
+    "image",
+    "pdf"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "reasoning": true,
+   "tool_call": true,
+   "open_weights": false,
+   "knowledge": "2026-04-30"
   },
   {
    "model": "gpt-6-astra",

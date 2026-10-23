@@ -9,6 +9,35 @@ declare const Bun: {
 const distDirectory = join(fileURLToPath(new URL('.', import.meta.url)), '..', 'dist');
 const port = Number(process.env.PORT ?? 42001);
 const intelligenceSnacksSubscribeUrl = 'https://intelligencesnacks.com/api/subscribe';
+const canonicalHostname = 'normiemode.com';
+const crawlerAgents = [
+  ['OAI-SearchBot', /\bOAI-SearchBot\b/i],
+  ['ChatGPT-User', /\bChatGPT-User\b/i],
+  ['GPTBot', /\bGPTBot\b/i],
+  ['Claude-SearchBot', /\bClaude-SearchBot\b/i],
+  ['Claude-User', /\bClaude-User\b/i],
+  ['ClaudeBot', /\bClaudeBot\b/i],
+] as const;
+
+function cacheControl(candidate: string) {
+  if (/^_astro\/[^/]+\.[a-z0-9_-]{6,}\.(?:css|js)$/i.test(candidate)) return 'public, max-age=31536000, immutable';
+  if (/\.(?:svg|png|jpe?g|webp|woff2?|otf)$/i.test(candidate)) return 'public, max-age=86400, stale-while-revalidate=604800';
+  if (/^(?:robots\.txt|sitemap(?:-index|-\d+)?\.xml)$/i.test(candidate)) return 'public, max-age=300, must-revalidate';
+  return 'public, max-age=0, must-revalidate';
+}
+
+function compressible(candidate: string) {
+  return /\.(?:html?|css|js|json|xml|txt|svg)$/i.test(candidate);
+}
+
+function acceptsGzip(header: string) {
+  return header.split(',').some((part) => {
+    const [encoding, ...parameters] = part.trim().toLowerCase().split(';');
+    if (encoding !== 'gzip' && encoding !== '*') return false;
+    const quality = parameters.map((value) => value.trim()).find((value) => value.startsWith('q='));
+    return quality ? Number(quality.slice(2)) > 0 : true;
+  });
+}
 
 const json = (body: unknown, status = 200) => Response.json(body, {
   status,
@@ -72,30 +101,104 @@ async function staticResponse(request: Request) {
   for (const candidate of candidates) {
     const file = Bun.file(join(distDirectory, candidate));
     if (await file.exists()) {
-      const immutable = /\.(?:css|js|svg|png|jpe?g|webp|woff2?|otf)$/i.test(candidate);
-      return new Response(request.method === 'HEAD' ? null : file, {
-        headers: { 'Cache-Control': immutable ? 'public, max-age=2592000, immutable' : 'no-cache' },
-      });
+      const gzip = compressible(candidate) && acceptsGzip(request.headers.get('accept-encoding') ?? '');
+      const headers = new Headers({ 'Cache-Control': cacheControl(candidate) });
+      if (file.type) headers.set('Content-Type', file.type);
+      const compressed = gzip
+        ? new Uint8Array(await new Response(file.stream().pipeThrough(new CompressionStream('gzip'))).arrayBuffer())
+        : undefined;
+      if (gzip) {
+        headers.set('Content-Encoding', 'gzip');
+        headers.set('Vary', 'Accept-Encoding');
+      }
+      headers.set('Content-Length', String(compressed?.byteLength ?? file.size));
+      const body = request.method === 'HEAD'
+        ? null
+        : compressed ?? file;
+      return new Response(body, { headers });
     }
   }
 
   return new Response('Not found', { status: 404, headers: { 'Cache-Control': 'no-cache' } });
 }
 
+/**
+ * Collapse public URL variants before serving content. CapRover terminates TLS in front of the
+ * app, so prefer its forwarded host and protocol when they are present. Unknown/internal hosts
+ * remain available for container health checks and local previews.
+ */
+export function canonicalRedirect(request: Request) {
+  const url = new URL(request.url);
+  const forwardedHost = request.headers.get('x-forwarded-host')?.split(',')[0]?.trim();
+  const forwardedProtocol = request.headers.get('x-forwarded-proto')?.split(',')[0]?.trim();
+  const requestedHost = (forwardedHost ?? url.host).toLowerCase();
+  const requestedHostname = requestedHost.replace(/:\d+$/, '');
+  const requestedProtocol = (forwardedProtocol ?? url.protocol.replace(/:$/, '')).toLowerCase();
+  const isPublicHost = requestedHostname === canonicalHostname || requestedHostname === `www.${canonicalHostname}`;
+
+  if (!isPublicHost) return;
+
+  let pathname = url.pathname;
+  if (pathname === '/index.html') pathname = '/';
+  else if (pathname.endsWith('/index.html')) pathname = pathname.slice(0, -'/index.html'.length) || '/';
+  else if (pathname.endsWith('.html')) pathname = pathname.slice(0, -'.html'.length) || '/';
+
+  const needsRedirect = requestedHostname !== canonicalHostname
+    || requestedProtocol !== 'https'
+    || pathname !== url.pathname;
+  if (!needsRedirect) return;
+
+  const destination = new URL(url);
+  destination.protocol = 'https:';
+  destination.hostname = canonicalHostname;
+  destination.port = '';
+  destination.pathname = pathname;
+  return Response.redirect(destination, 308);
+}
+
+async function routeRequest(request: Request) {
+  const { pathname } = new URL(request.url);
+  if (pathname === '/healthz') return new Response('ok');
+
+  const redirect = canonicalRedirect(request);
+  if (redirect) return redirect;
+
+  if (pathname === '/api/subscribe') {
+    if (request.method !== 'POST') return json({ error: 'Method not allowed.' }, 405);
+    return subscribe(request);
+  }
+  if (request.method !== 'GET' && request.method !== 'HEAD') return new Response('Method not allowed', { status: 405 });
+  return staticResponse(request);
+}
+
+/**
+ * Emit a privacy-minimal record only for claimed OpenAI/Anthropic crawler user agents. This makes
+ * crawler activity observable without retaining IP addresses, query strings or ordinary visits.
+ * A user-agent match is not proof of crawler identity; verify published IP ranges where available.
+ */
+export async function handleRequest(request: Request) {
+  const response = await routeRequest(request);
+  const userAgent = request.headers.get('user-agent') ?? '';
+  const crawler = crawlerAgents.find(([, pattern]) => pattern.test(userAgent))?.[0];
+  if (crawler) {
+    console.info(JSON.stringify({
+      event: 'crawler_request',
+      timestamp: new Date().toISOString(),
+      crawler,
+      method: request.method,
+      path: new URL(request.url).pathname,
+      status: response.status,
+      identity: 'unverified_user_agent',
+    }));
+  }
+  return response;
+}
+
 if (import.meta.main) {
   Bun.serve({
     port,
     hostname: '0.0.0.0',
-    async fetch(request) {
-      const { pathname } = new URL(request.url);
-      if (pathname === '/healthz') return new Response('ok');
-      if (pathname === '/api/subscribe') {
-        if (request.method !== 'POST') return json({ error: 'Method not allowed.' }, 405);
-        return subscribe(request);
-      }
-      if (request.method !== 'GET' && request.method !== 'HEAD') return new Response('Method not allowed', { status: 405 });
-      return staticResponse(request);
-    },
+    fetch: handleRequest,
   });
 
   console.log(`Normie Mode listening on port ${port}`);

@@ -6,10 +6,13 @@ import NormSays from '../../components/NormSays.astro';
 import { graph } from '../../lib/graph';
 import { overviewRows } from '../../lib/overview';
 import { CLOSENESS_LABEL, MIN_MODELS_TO_RANK, isOurTest, allTaskPages, effectiveTests, leadSentence, normLine, subtasksOf, taskPath, taskScores, tasksByDemand, testFloor, testRows, testSource } from '../../lib/tasks';
-import { PREVIEW, formatDate } from '../../lib/view';
+import { PREVIEW } from '../../lib/view';
 import { taskCostNote, taskEvidenceNote } from '../../lib/norm';
 import Verdict from '../../components/Verdict.astro';
 import { verdict } from '../../lib/verdict';
+import { isTemporarilyNoindexedRoute } from '../../lib/indexability';
+import { taskMetadata } from '../../lib/page-metadata';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
 
 export function getStaticPaths() {
   return allTaskPages().map((task) => ({ params: { id: task.id } }));
@@ -39,17 +42,27 @@ const priceOf = (id: string) => overviewRows().find((r) => r.model.id === id)?.c
 const evidenceNote = taskEvidenceNote(task);
 const costNote = taskCostNote(task);
 const others = tasksByDemand().filter((t) => t.task.id !== (hub?.id ?? task.id)).slice(0, 3);
-const month = formatDate(new Date().toISOString().slice(0, 10)).replace(/^\d+ /, '');
+const metadata = taskMetadata(task.label);
 const leaderLine = top.length
   ? `On the tests we have, ${top[0].label} comes out on top${top[1] ? `, followed by ${top.slice(1).map((r) => r.label).join(' and ')}` : ''}.`
   : undefined;
 const sections = [...(normOn ? [['guide', "Norm's guide"]] : []), ['compare', 'How the models compare'], ['evidence', 'The evidence'], ['cost', 'If you build with it']];
 ---
 <Base
-  title={`${task.label} (${month})`}
-  description={`${task.label}: which AI models do best at ${task.covers?.toLowerCase().replace(/\.$/, '')}, what to watch out for, and the evidence behind it.`}
+  title={metadata.title}
+  description={metadata.description}
+  noindex={isTemporarilyNoindexedRoute(taskPath(task))}
+  schemaAbout={{ name: task.label }}
+  schemaList={scores.rows.length ? {
+    name: `AI models ranked for ${name}`,
+    items: scores.rows.map((row) => ({ name: row.label, url: row.href! })),
+  } : undefined}
 >
-  <div class="eyebrow"><a href="/best-ai-for">Best AI for…</a>{hub && <> / <a href={taskPath(hub)}>{hub.label.replace(/^Best AI for /, '')}</a></>}</div>
+  <Breadcrumbs items={[
+    { label: 'Best AI for…', href: '/best-ai-for' },
+    ...(hub ? [{ label: hub.label.replace(/^Best AI for /, ''), href: taskPath(hub) }] : []),
+    { label: task.label.replace(/^Best AI for /, '') },
+  ]} />
   <h1>{task.label}</h1>
   <p class="lede">{task.covers}</p>
   {normOn ? (

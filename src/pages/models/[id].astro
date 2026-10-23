@@ -4,10 +4,16 @@
 import Base from '../../layouts/Base.astro';
 import { graph } from '../../lib/graph';
 import { EVIDENCE_STATUS_LABEL } from '../../lib/overview';
-import { ordinal, overviewRow, taskPositions, testPositions } from '../../lib/models';
+import { historicalModelEvidence, ordinal, overviewRow, taskPositions, testPositions } from '../../lib/models';
 import { taskPath } from '../../lib/tasks';
 import { ACCESS_LABEL, formatPrice, isCompared, planLabel, plansFor } from '../../lib/plans';
 import { formatDate, modelName } from '../../lib/view';
+import { isTemporarilyNoindexedRoute } from '../../lib/indexability';
+import { modelMetadata } from '../../lib/page-metadata';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import EvidenceAnswer from '../../components/EvidenceAnswer.astro';
+import { modelAnswer } from '../../lib/answer-summary';
+import { comparisonsForModel } from '../../lib/comparisons';
 
 export function getStaticPaths() {
   return [...graph().models.keys()].map((id) => ({ params: { id } }));
@@ -25,9 +31,23 @@ const claims = [...g.claims.values()].filter((c) => c.model_version === model.id
 const predecessors = [...g.models.values()].filter((m) => m.successor === model.id);
 const top3 = tasks.filter((t) => t.pos.position <= 3);
 const money = (v?: number) => (v === undefined ? undefined : v < 10 ? `$${v.toFixed(2)}` : `$${v.toFixed(0)}`);
+const metadata = modelMetadata(model.name, family.provider);
+const answer = current && row ? modelAnswer(model.name, tasks, row.independentTests) : undefined;
+const history = !current ? historicalModelEvidence(model.id) : undefined;
+const verificationSources = model.verification.sources.map((id) => g.sources.get(id)).filter((source) => source !== undefined);
+const comparisons = comparisonsForModel(model.id);
 ---
-<Base title={`${model.name}: what it's good at and what it costs`} description={`What ${model.name} from ${family.provider} is best for, where it ranks on independent tests, and what it costs.`}>
-  <div class="eyebrow"><a href="/models">Models</a> · {family.provider}</div>
+<Base
+  title={metadata.title}
+  description={metadata.description}
+  noindex={isTemporarilyNoindexedRoute(`/models/${model.id}`)}
+  schemaAbout={{ name: model.name }}
+>
+  <Breadcrumbs items={[
+    { label: 'Models', href: '/models' },
+    { label: family.provider },
+    { label: model.name },
+  ]} />
   <h1>{model.name}</h1>
   {!current && (
     <div class="flag">
@@ -40,6 +60,17 @@ const money = (v?: number) => (v === undefined ? undefined : v < 10 ? `$${v.toFi
     </div>
   )}
   <p class="lede">{family.provider}'s {family.name} model{model.released_on && <>, released {formatDate(model.released_on)}</>}.</p>
+  {model.summary && <p>{model.summary}</p>}
+
+  {answer && <EvidenceAnswer
+    answer={answer.answer}
+    classification="Measured result"
+    sources={tests.slice(0, 3).map(({ test }) => ({
+      label: test.title,
+      href: test.source === 'normie' ? test.url : `/benchmarks/${test.id}`,
+    }))}
+    limitation={answer.limitation}
+  />}
 
   {current && (
     <div class="band">
@@ -63,6 +94,61 @@ const money = (v?: number) => (v === undefined ? undefined : v < 10 ? `$${v.toFi
     </div>
   )}
 
+  {!current && history && (
+    <>
+      <h2 class="page-h2">Its place in the model line</h2>
+      <p class="section-sub">Facts about this exact historical version, kept separate from the results of its replacement.</p>
+      <div class="band">
+        <div class="band-inner summary-grid">
+          <div class="summary">
+            <span class="tag">Independent evidence</span>
+            <p>{history.index || history.resultCount
+              ? <><strong>{history.resultCount} benchmark result{history.resultCount === 1 ? '' : 's'}</strong>{history.index ? ', plus an Epoch capability index record.' : '.'}</>
+              : 'No Epoch benchmark result is mapped to this exact version.'}</p>
+          </div>
+          <div class="summary">
+            <span class="tag">People's votes</span>
+            <p>{history.arena
+              ? <><strong>#{history.arena.rank} overall</strong> from {history.arena.votes.toLocaleString('en-GB')} LMArena votes in the archived snapshot.</>
+              : 'No overall LMArena record is mapped to this exact version.'}</p>
+          </div>
+          <div class="summary">
+            <span class="tag">Original API price</span>
+            <p>{history.spec?.price?.input !== undefined && history.spec.price.output !== undefined
+              ? <><strong>${history.spec.price.input} in · ${history.spec.price.output} out</strong> per million tokens in the archived models.dev record.</>
+              : 'No archived token price is available.'}</p>
+          </div>
+          <div class="summary">
+            <span class="tag">Context window</span>
+            <p>{history.spec?.context
+              ? <><strong>{history.spec.context.toLocaleString('en-GB')} tokens</strong>{history.spec.max_output ? <>, with up to {history.spec.max_output.toLocaleString('en-GB')} output tokens.</> : '.'}</>
+              : 'No archived context limit is available.'}</p>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="page-h2">What the historical evidence records</h2>
+      <p>
+        These records stay attached to {model.name}; they are not carried over to {model.successor ? modelName(model.successor) : 'a newer model'}.
+        That matters because a successor can have different training, prices and behaviour even when it keeps the same family name.
+      </p>
+      <ul class="claims">
+        {history.index && <li><div>Epoch recorded this version in its capability index.<span class="cites"><a href={history.sources.epoch?.url}>Epoch AI</a> · retrieved {formatDate(history.sources.epoch?.retrieved_at.slice(0, 10))}</span></div><span class="badge measured">Measured</span></li>}
+        {history.benchmarks.length > 0 && <li><div>Epoch maps results from {history.benchmarks.length} distinct benchmark{history.benchmarks.length === 1 ? '' : 's'} to this exact version, including {history.benchmarks.slice(0, 4).join(', ')}{history.benchmarks.length > 4 ? ', and others' : ''}.<span class="cites"><a href={history.sources.epoch?.url}>Epoch AI</a></span></div><span class="badge measured">Measured</span></li>}
+        {history.arena && <li><div>LMArena's archived overall record contains {history.arena.votes.toLocaleString('en-GB')} blind comparison votes for this exact version.<span class="cites"><a href={history.sources.lmarena?.url}>LMArena</a> · leaderboard {history.sources.lmarena?.as_of ? `as of ${formatDate(history.sources.lmarena.as_of)}` : 'snapshot'}</span></div><span class="badge measured">Measured</span></li>}
+        {history.recordedResults.length > 0 && <li><div>
+          Normie Mode's evidence record preserves {history.recordedResults.length} published result{history.recordedResults.length === 1 ? '' : 's'} for this exact version across {[...new Set(history.recordedResults.map(({ benchmark, result }) => benchmark?.name ?? result.benchmark))].join(', ')}.
+          <span class="cites">{[...new Map(history.recordedResults.filter(({ source }) => source).map(({ source }) => [source!.id, source!])).values()].map((source) => <><a href={source.url}>{source.title}</a> · </>)}published {formatDate(history.recordedResults.at(-1)!.result.published_on)}</span>
+        </div><span class="badge measured">Measured</span></li>}
+        {history.spec && <li><div>models.dev preserves its API identifier, token prices, limits and supported input types.<span class="cites"><a href={history.sources.modelsdev?.url}>models.dev</a> · retrieved {formatDate(history.sources.modelsdev?.retrieved_at.slice(0, 10))}</span></div><span class="badge sourced">Source record</span></li>}
+      </ul>
+
+      <p class="card muted">
+        Historical rankings are context, not a current recommendation. Public leaderboards change as voters, competing models and test methods change; use the successor page for today's comparison.
+      </p>
+    </>
+  )}
+
   {plans.length > 0 && (
     <>
       <h2 class="page-h2">Where you can use it</h2>
@@ -81,6 +167,18 @@ const money = (v?: number) => (v === undefined ? undefined : v < 10 ? `$${v.toFi
           </tbody>
         </table>
       </div>
+    </>
+  )}
+
+  {comparisons.length > 0 && (
+    <>
+      <h2 class="page-h2">Compare with another model</h2>
+      <ul class="card comparisons">
+        {comparisons.map((comparison) => {
+          const otherId = comparison.models.find((id) => id !== model.id)!;
+          return <li><a href={`/compare/${comparison.slug}`}><strong>{model.name} vs {modelName(otherId)}</strong></a></li>;
+        })}
+      </ul>
     </>
   )}
 
@@ -151,7 +249,7 @@ const money = (v?: number) => (v === undefined ? undefined : v < 10 ? `$${v.toFi
     <dt>Name checked</dt>
     <dd>
       {model.verification.status === 'verified'
-        ? model.verification.sources.map((id) => { const s = g.sources.get(id)!; return <a href={s.url}>Confirmed with {s.publisher}</a>; })
+        ? verificationSources.map((s) => <a href={s.url}>Confirmed with {s.publisher}</a>)
         : <span class="muted">Not yet confirmed with the maker</span>}
     </dd>
   </dl>

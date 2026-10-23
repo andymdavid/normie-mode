@@ -1,0 +1,47 @@
+---
+interface Item {
+  label: string;
+  href?: string;
+  badge?: 'ours';
+}
+
+interface Props {
+  items: Item[];
+}
+
+const { items } = Astro.props;
+const canonicalPath = Astro.url.pathname.replace(/\.html$/, '').replace(/\/index$/, '') || '/';
+const structuredItems = items
+  .map((item, index) => ({ item, index }))
+  .filter(({ item, index }) => item.href || index === items.length - 1)
+  .map(({ item }, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: item.label,
+    item: new URL(item.href ?? canonicalPath, Astro.site).href,
+  }));
+const jsonLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: structuredItems,
+}).replaceAll('<', '\\u003c');
+---
+<nav class="eyebrow breadcrumbs" aria-label="Breadcrumb">
+  <ol>
+    {items.map((item, index) => (
+      <li>
+        {item.href
+          ? <a href={item.href}>{item.label}</a>
+          : <span class:list={{ badge: item.badge, ours: item.badge === 'ours' }} aria-current={index === items.length - 1 ? 'page' : undefined}>{item.label}</span>}
+      </li>
+    ))}
+  </ol>
+</nav>
+<script type="application/ld+json" set:html={jsonLd} />
+
+<style>
+  ol { display: flex; flex-wrap: wrap; gap: 0.35rem; list-style: none; margin: 0; padding: 0; }
+  li { display: flex; gap: 0.35rem; }
+  li + li::before { content: '/'; color: var(--muted); }
+  [aria-current='page'] { color: var(--muted); }
+</style>

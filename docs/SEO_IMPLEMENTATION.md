@@ -1,0 +1,1070 @@
+# SEO and answer-engine implementation
+
+Status: `in_progress`
+
+Owner task: N-015
+
+Started: 2026-10-10
+
+Last updated: 2026-10-10
+Scope: Local working record. Do not publish this document on the public site.
+
+## Purpose
+
+Make Normie Mode easy to discover, index, understand, trust and cite in conventional search and answer engines, especially Google, ChatGPT and Claude.
+
+The product strategy remains:
+
+`Evidence -> Capability -> Work`
+
+SEO and answer-engine work must strengthen that chain rather than create generic search copy. The strongest path to durable visibility is original, inspectable evidence translated into short, attributable answers for non-experts.
+
+This is the living implementation record for N-015. Update it during every meaningful SEO session so another agent can resume without repeating the audit.
+
+## How to use this document
+
+1. Read `AGENTS.md`, the product vision, `docs/IMPLEMENTATION_PLAN.md` and `CHANGELOG.md` first.
+2. Check the current state table below before choosing work.
+3. Work on one `SEO-###` item at a time unless items are explicitly grouped.
+4. Confirm dependencies, product decisions and acceptance criteria before editing.
+5. Record material findings and completed verification in the session log.
+6. Do not mark an item `done` until every acceptance criterion and verification step passes.
+7. Keep generated editorial content in draft and require product-owner review under D-017 and D-021.
+8. Do not commit or deploy SEO work unless the user explicitly requests it.
+
+Allowed states: `proposed`, `ready`, `in_progress`, `blocked`, `done`.
+
+## Success definition
+
+N-015 succeeds when:
+
+- Search and answer-engine crawlers can fetch the canonical site reliably.
+- Public pages expose unambiguous publisher, author/reviewer, date, entity and provenance information.
+- Every indexable URL has enough distinct value to deserve its own result.
+- Original Normie Mode tests are published as reproducible, machine-readable evidence.
+- Priority pages answer recognisable questions in concise, citable language backed by visible evidence.
+- Search Console shows healthy canonical indexing and falling discovered/crawled-not-indexed counts.
+- A repeatable citation test records whether ChatGPT, Claude and other answer engines cite Normie Mode for priority questions.
+- Referral and crawler traffic can be measured.
+
+There is no guaranteed route to an answer-engine citation. This plan improves eligibility, clarity, usefulness and authority; it must not claim guaranteed inclusion or ranking.
+
+## Product guardrails
+
+- Models, identified by exact version, remain the comparison unit (D-004 and D-026).
+- Only sources accepted by D-019 may feed displayed comparison data.
+- Distil, do not pad pages with generated prose (D-021).
+- Human review remains required for editorial recommendations and Norm's wording (D-017).
+- Preserve source, licence, retrieval date, evaluation date, model version and methodology.
+- Do not add schema that misrepresents a model as a product, an editorial judgement as a measured fact, or a page as authored/reviewed by someone who did not review it.
+- Do not create keyword variants as separate pages without distinct user value (D-006).
+- Do not run paid evaluations without product-owner approval.
+- Dated editorial reports follow D-040: supervised drafts only, with Andy David's review and canonical pages remaining authoritative.
+
+## Baseline: 2026-10-10
+
+### Search Console evidence
+
+- Sitemap submitted 2026-09-30 and last read 2026-10-03.
+- Sitemap status: `Success`.
+- Discovered pages: 102.
+- 25 URLs were reported as `Duplicate without user-selected canonical`; their last crawls were 2026-09-29 to 2026-09-30, during the canonical rollout.
+- 35 URLs were reported as `Discovered - currently not indexed`; their crawl-date cells resolve to 1970-01-01, indicating no recorded crawl.
+- Coverage report snapshot date in both exports: 2026-10-04. Treat these as historical until Search Console refreshes them.
+
+### Technical state
+
+- Canonical origin: `https://normiemode.com`.
+- HTTPS `www` and generated `.html` variants permanently redirect to the canonical URL with `308`.
+- Canonical HTTPS pages return `200` and self-reference in `<link rel="canonical">`.
+- HTTP-to-HTTPS is still a CapRover/nginx `302`, outside the current application redirect layer.
+- `/sitemap-index.xml`, `/sitemap-0.xml` and `/robots.txt` return `200`.
+- Sitemap XML is valid and contains 102 unique canonical URLs.
+- Sitemap has no `<lastmod>` values.
+- `robots.txt` initially allowed all crawlers and pointed to the sitemap index; D-034 now permits search crawlers and disallows training crawlers explicitly.
+- Public HTML is statically rendered and usable without client-side JavaScript.
+- HTML responses are not compressed by the live server.
+- `HEAD` responses return `content-length: 0` instead of mirroring the corresponding `GET` representation.
+- HTML uses `Cache-Control: no-cache`.
+- Fonts are loaded from Google, and one footer image is loaded from another domain.
+
+### Page and content state
+
+- 102 public canonical pages: homepage, 26 benchmark routes including the hub, 47 task routes including the hub, 26 model routes including the hub, methodology and one first-party test page.
+- Every public page has a title, meta description, H1 and canonical URL.
+- Every public page currently lacks JSON-LD structured data.
+- Every public page currently lacks Open Graph and Twitter/X card metadata.
+- 55 of 104 generated HTML files, including two preview-only files, have titles longer than 60 characters.
+- 68 descriptions fall outside 120–160 characters. Length is a diagnostic, not a ranking rule.
+- Nine superseded model pages contain roughly 106–116 substantive words and little version-specific evidence.
+- Benchmark explainers contain roughly 295–410 substantive words and are structurally similar.
+- Specific task pages can inherit all evidence from their parent. When their Norm guidance is still draft, public differentiation can be limited to scope, verdict and reused charts.
+- One first-party evaluation is public: `spreadsheet-questions`.
+- There are no public About, Contact, Editorial Policy, Corrections Policy, author or reviewer pages.
+- There is no RSS/Atom update feed, downloadable public results feed, or analytics implementation visible in the repository.
+
+### Current strengths to preserve
+
+- Clear canonical URLs and an accurate sitemap.
+- Strong internal linking between tasks, models, benchmarks and methodology.
+- Exact model versions rather than ambiguous product names.
+- Source, licence and retrieval metadata in the content model.
+- Separate labels for independent results, maker claims and Normie Mode tests.
+- Reproducible first-party evaluation cases with published questions and answers.
+- A public methodology that explains the ranking rule.
+- Append-oriented result history and explicit supersession.
+
+## Source-of-truth guidance
+
+- OpenAI uses `OAI-SearchBot` for ChatGPT search results. This is separate from `GPTBot`, which concerns potential model-training use. Allowing one does not require allowing the other: <https://developers.openai.com/api/docs/bots>
+- OpenAI publisher guidance says public sites can appear in ChatGPT search and should not block `OAI-SearchBot` if they want content surfaced, summarised and cited: <https://help.openai.com/en/articles/12627856>
+- Anthropic identifies `Claude-SearchBot` as its search crawler and says its bots observe `robots.txt`: <https://support.anthropic.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler>
+- Google describes redirects and canonical annotations as strong canonical signals, with sitemap inclusion as a weaker supporting signal: <https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls>
+- Google's crawl guidance says small sites ordinarily need an accurate sitemap and Page Indexing monitoring rather than advanced crawl-budget work: <https://developers.google.com/crawling/docs/crawl-budget>
+- Google URL Inspection reports stored index information rather than a live view unless `Test live URL` is run: <https://support.google.com/webmasters/answer/9012289>
+
+These sources establish crawler eligibility and conventional search mechanics. They do not document a formula that guarantees citations. Treat claims about answer-engine citation preference as hypotheses to test, not platform promises.
+
+## Workstream overview
+
+| ID | Workstream | State | Priority | Depends on |
+| --- | --- | --- | --- | --- |
+| SEO-001 | Measurement and repeatable baseline | `in_progress` | P0 | Search Console figures and authenticated citation runs |
+| SEO-002 | Search and answer-engine crawler access | `in_progress` | P0 | CapRover crawler-log confirmation |
+| SEO-003 | Publisher identity and trust pages | `done` | P0 | D-042 approved |
+| SEO-004 | Global metadata and social previews | `in_progress` | P0 | Two interactive preview checks |
+| SEO-005 | Structured data | `in_progress` | P0 | SEO-003 for approved publisher/reviewer entities |
+| SEO-006 | Sitemap freshness and update signals | `done` | P0 | Dependency-date calculation |
+| SEO-007 | Indexability and page-value audit | `done` | P0 | — |
+| SEO-008 | Thin historical model pages | `done` | P0 | D-039 restoration approved |
+| SEO-009 | Specific-task differentiation | `in_progress` | P0 | D-035 temporary treatment active; editorial review capacity |
+| SEO-010 | Answer-first evidence blocks | `in_progress` | P1 | Authenticated ChatGPT and Claude citation runs |
+| SEO-011 | First-party dataset publication | `done` | P1 | — |
+| SEO-012 | Head-to-head comparisons | `in_progress` | P1 | Product-owner comprehension review |
+| SEO-013 | Performance and response correctness | `in_progress` | P1 | Edge redirect access, local fonts and browser measurements |
+| SEO-014 | Titles, descriptions and information architecture | `done` | P1 | — |
+| SEO-015 | Update/report publishing programme | `ready` | P1 | D-040 accepted; templates and routes remain |
+| SEO-016 | Distribution and authority building | `proposed` | P1 | At least one strong original report/dataset |
+| SEO-017 | Citation and referral monitoring | `ready` | P0 | D-041 accepted; implementation and baseline remain |
+| SEO-018 | Ongoing operating cadence | `in_progress` | P2 | Flight Deck destination and remaining checks |
+
+## Detailed work items
+
+### SEO-001 — Measurement and repeatable baseline
+
+State: `in_progress`
+
+Purpose: Make progress measurable and prevent repeated ad hoc audits.
+
+Work:
+
+- Add a non-mutating audit script that inventories public routes and checks status, canonical, title, description, H1, robots directives, structured data, internal links and sitemap membership.
+- Record page-type counts and flag thin or near-duplicate pages for human review.
+- Save Search Console exports outside the public build or document their local attachment location without committing private exports.
+- Define a fixed set of priority search and answer-engine questions.
+- Record baseline Google Search Console metrics and citation tests manually in this document.
+
+Acceptance criteria:
+
+- One command produces a deterministic local SEO report from the production build.
+- The command fails on broken canonical, sitemap, robots or accidental-indexing regressions.
+- A fixed citation-test set covers the initial spreadsheet wedge, coding, writing, model comparisons and benchmark explanations.
+- No private Search Console data is exposed publicly.
+
+Verification:
+
+- Run the audit against `dist/` and the live canonical origin.
+- Intentionally test at least one fixture or unit case per critical failure condition.
+
+Progress (2026-10-10):
+
+- Added `npm run seo:audit`. It builds the production site, audits all sitemap URLs and exits non-zero on mechanical integrity errors.
+- Added four regression tests covering a valid page, canonical/noindex failures, a broken internal page link and review-only diagnostics.
+- Added `docs/seo/citation-prompts-v1.yaml`, a fixed 30-prompt manual citation set across spreadsheets, coding, model comparison, writing/research and benchmark methodology.
+- First repository run: 102 pages audited, zero integrity errors and 159 condensed review warnings. The warnings include nine model pages under 50 main-content words, missing structured/social metadata across all pages, title/description review candidates and 195 same-family pairs over 80% token similarity.
+- Verification passed: the production build and audit, 694 tests across 14 files, and Astro type-check with zero errors (one pre-existing unused-variable hint in `src/lib/normie-tests.test.ts`).
+- Remaining before `done`: run and record the first citation baseline in the named answer-engine products, and add current non-brand Search Console performance figures when supplied.
+
+Notes:
+
+- Do not use word-count thresholds as automatic quality judgements. They are triage signals only.
+- Near-duplicate detection must route pages to review; it must not automatically noindex or redirect them.
+
+### SEO-002 — Search and answer-engine crawler access
+
+State: `in_progress`
+
+Purpose: Make crawler policy explicit and observable.
+
+Work:
+
+- Decide separately whether to allow search crawlers (`OAI-SearchBot`, `Claude-SearchBot`) and training crawlers (`GPTBot`, `ClaudeBot`).
+- Add explicit search-crawler groups to `robots.txt` after the policy is confirmed.
+- Verify representative public pages with search-crawler user agents.
+- Confirm CapRover/nginx/WAF does not challenge or rate-limit legitimate crawlers.
+- Document published crawler IP verification where available; do not trust user-agent strings alone for security decisions.
+
+Progress (2026-10-10):
+
+- D-034 records the accepted policy: permit `OAI-SearchBot` and `Claude-SearchBot`; disallow `GPTBot` and `ClaudeBot`; continue allowing user-triggered retrieval through the general public-crawler rule.
+- The repository `robots.txt` now expresses that policy explicitly and `npm run seo:audit` fails if it regresses.
+- Deployed and verified on 2026-10-10: both search-crawler user agents received `200` for `robots.txt`, the homepage, one task page, one model page and one benchmark page; the live file disallows both training crawlers.
+- The server now emits a structured, privacy-minimal record for claimed OpenAI and Anthropic crawler requests: timestamp, crawler, method, path and status. It deliberately excludes IP addresses, query strings and ordinary visitors, and labels user-agent identity as unverified.
+- Deployed crawler-only structured logging in `e691e17` and generated successful live OAI-SearchBot and Claude-SearchBot requests after the deployment hook completed.
+- Remaining before `done`: confirm either generated record appears in CapRover's live app logs; this workspace has no CapRover log credential.
+
+Acceptance criteria:
+
+- Search crawler policy is explicit and matches the product owner's intent.
+- `OAI-SearchBot` and `Claude-SearchBot` can fetch `robots.txt`, the homepage, one task page, one model page and one benchmark page with `200` responses.
+- Logs can distinguish known crawler traffic from ordinary browser traffic.
+
+Verification:
+
+- Production requests using representative user agents.
+- Server/access-log review after deployment.
+
+Watch for:
+
+- Explicit rules improve clarity, not rankings by themselves.
+- `ChatGPT-User` is user-triggered and is not the search-index crawler.
+
+### SEO-003 — Publisher identity and trust pages
+
+State: `done`
+
+Purpose: Make ownership, accountability and editorial controls visible.
+
+Work:
+
+- Add About, Contact, Editorial Policy and Corrections Policy pages.
+- State the relationship between Normie Mode, Other Stuff and Intelligence Snacks accurately.
+- Add a public profile for each named author/reviewer only with their approval.
+- Explain human review, source selection, corrections, conflicts and commercial relationships.
+- Link these pages from the footer and methodology.
+
+Acceptance criteria:
+
+- Every factual identity and policy statement is approved by the product owner.
+- Recommendations can identify a real reviewer and review date.
+- Users can report a correction through a monitored route.
+- No invented biographies, credentials or organisational claims.
+
+Verification:
+
+- Product-owner review.
+- Internal link check and structured-data validation after SEO-005.
+
+Blocker (2026-10-10): The plan names Andy David as the product owner and human reviewer, and the existing footer names Other Stuff as producer, but there is no approved public biography, monitored corrections/contact route, or approved wording for the relationship with Intelligence Snacks. Do not invent these. Technical metadata work can continue while the product owner supplies and approves those facts.
+
+Progress (2026-10-13):
+
+- Added preview-only drafts for `/about`, `/contact`, `/editorial-policy` and `/corrections`. Production builds omit all four routes and the sitemap excludes them; no identity or publisher schema is emitted.
+- Public-source wording describes Other Stuff as the producer and Intelligence Snacks as a related podcast/newsletter from the same team. It does not claim ownership or editorial control that the sources do not establish.
+- Owner approval is still required for naming Andy David publicly with the proposed profile, using `info@otherstuff.studio` as the monitored Normie Mode corrections route, the relationship wording, and the statement that payment cannot buy a ranking or recommendation.
+- D-042 records approval of all four points. The pages are public, linked from the footer and represented by matching publisher/reviewer entities; production verification is recorded in the session log.
+
+### SEO-004 — Global metadata and social previews
+
+State: `in_progress`
+
+Purpose: Improve result presentation and earned distribution.
+
+Work:
+
+- Extend `Base.astro` with `og:title`, `og:description`, `og:url`, `og:type`, `og:site_name`, `og:image`, image dimensions and Twitter/X card metadata.
+- Create a reusable branded share image and page-specific images only where they add value.
+- Make title, description, image, content type and dates page props with safe defaults.
+- Preserve the canonical URL as the Open Graph URL.
+
+Acceptance criteria:
+
+- Every indexable page has complete, absolute social metadata.
+- Images are hosted on `normiemode.com`, have stable URLs and render at appropriate dimensions.
+- Preview-only routes remain `noindex` and are not promoted in public discovery files.
+
+Verification:
+
+- Build tests over every generated public page.
+- Manual preview checks in at least two social/link-preview validators.
+
+Progress (2026-10-10):
+
+- Added complete Open Graph and Twitter/X card fields to the shared layout, all derived from the same title, description and canonical URL as the visible page metadata.
+- Added safe props for content type, social image, image alt text and optional article dates. Final publisher/person relationships remain deferred to SEO-003/005.
+- Added a stable 1200×630 branded JPEG and extended `npm run seo:audit` so missing, inconsistent or non-canonical social metadata is a hard failure.
+- Local verification passed: production build and SEO audit across 102 public pages, 701 tests across 14 files, and type-check with zero errors (one pre-existing hint remains).
+- Deployed in `08f4207`. Live source checks confirmed complete, matching metadata on the homepage and `/best-ai-for/excel-spreadsheets`; the image returns `200 image/jpeg` on GET and is exactly 1200×630.
+- Remaining before `done`: check those two URLs visually in two interactive external preview validators. OpenGraph.xyz rate-limited this environment and Meta Tags requires client-side interaction, so neither was recorded as a pass.
+
+### SEO-005 — Structured data
+
+State: `in_progress`
+
+Purpose: Express entities, provenance, dates and page relationships without misrepresentation.
+
+Proposed mapping:
+
+- All pages: `Organization`, `WebSite`, `WebPage` and `BreadcrumbList` where applicable.
+- Benchmark explainers: `Article` or `TechArticle`.
+- First-party evaluation pages: `Article` plus `Dataset` when downloadable data exists.
+- Ranked hubs: `ItemList` only when the visible list and order match the markup.
+- Model and task pages: `WebPage` with accurate `about`, `dateModified`, publisher and reviewer relationships; do not use `Product` by default.
+
+Acceptance criteria:
+
+- JSON-LD facts are derived from the same canonical data as visible content.
+- Every URL, date, name and relationship matches the rendered page.
+- No unsupported rating, review, FAQ or product markup.
+- The publisher and reviewer entities refer to approved public identity pages.
+
+Verification:
+
+- Unit tests for schema generation.
+- Google Rich Results Test where the type is supported.
+- Schema.org validator for all JSON-LD.
+- Manual comparison of visible claims and structured claims.
+
+Progress (2026-10-13):
+
+- Canonical `WebSite` and `WebPage` entities now cover public pages. Benchmark explainers expose `TechArticle`; the first-party test exposes `Article` alongside its existing `Dataset`; and visible model/task rankings expose matching `ItemList` data. Detail pages use factual `about` relationships from canonical entities.
+- Focused tests compare the generated structures with visible canonical data. Unsupported ratings, reviews, products and FAQ markup remain excluded.
+- `Organization`, `Person`, publisher, author and reviewer relationships remain blocked on SEO-003's approved public identity pages. Unsupported identity claims were deliberately not added to finish the technical portion early.
+
+### SEO-006 — Sitemap freshness and update signals
+
+State: `done`
+
+Purpose: Show meaningful changes without pretending every build changed every page.
+
+Work:
+
+- Calculate a trustworthy `lastmod` per route from its newest content dependency.
+- Add `lastmod` to the sitemap.
+- Render a page-specific updated date where it helps users.
+- Consider an RSS/Atom feed for dated updates only after there is a real update/report stream.
+
+Acceptance criteria:
+
+- `lastmod` changes only when a dependency affecting that page changes.
+- Dates are ISO-formatted in the sitemap and human-readable on the page.
+- Rebuilding unchanged content does not refresh all dates.
+
+Verification:
+
+- Snapshot/unit tests for representative homepage, task, model, benchmark and test routes.
+- Valid sitemap XML after build.
+
+Progress (2026-10-10):
+
+- Added route-aware freshness calculation from recorded release, publication, evaluation, retrieval, review, claim and plan-check dates. Build time is never used.
+- All 102 sitemap URLs now carry ISO `lastmod` timestamps. The current data produces five distinct dates rather than stamping every route with one deployment date.
+- Task-page title months now come from their evidence freshness date instead of the current clock, preventing unchanged monthly rebuilds from manufacturing apparent updates.
+- Recorded the first-party spreadsheet test's existing 2026-09-24 publication date in canonical content so its page has a truthful freshness source.
+- The SEO audit now fails invalid sitemap dates and reports omitted dates; representative route tests cover the homepage, task, model, benchmark and first-party test families.
+- Local verification passed: SEO audit and production build, 706 tests across 15 files, and type-check with zero errors (one pre-existing hint remains).
+- Deployed in `ff7390a`. The live child sitemap contains 102 URLs and 102 valid `lastmod` timestamps across five source dates.
+- An immediate unchanged production rebuild produced the identical sitemap SHA-256 (`73c5f11986f1e34aab22381bb0e2bea451080bff9dbcbc4fc7f2d429fd1763d3`), confirming build time does not alter freshness.
+
+### SEO-007 — Indexability and page-value audit
+
+State: `done`
+
+Purpose: Decide which URLs deserve indexing before trying to force Google to crawl all of them.
+
+Work:
+
+- Review every public route by page family.
+- Classify each as `index`, `improve`, `consolidate`, `redirect` or `noindex-follow`.
+- Record direct evidence, unique user need, unique reviewed guidance and internal-link role.
+- Review Search Console's indexed, discovered and crawled-not-indexed sets after the next refresh.
+
+Acceptance criteria:
+
+- Every route has a recorded disposition and reason.
+- No indexability change is automatic.
+- Consolidation does not discard evidence history or exact-version provenance.
+- Product-owner approval is recorded for materially changing public coverage.
+
+Verification:
+
+- Product-owner review of the disposition table.
+- Build, link and redirect checks after implementation.
+
+Progress (2026-10-10):
+
+- Added the reproducible `npm run seo:indexability` review and generated `docs/seo/indexability-review.csv` with one row for each of the 102 public URLs.
+- The register records page family, parent, main-content words, inbound internal links, test count, unique tests versus parent, visible reviewed guidance, direct-test and graph-result counts, proposed disposition, reason and approval status.
+- Proposed `index` for 62 routes: core/collection pages, 26 benchmark pages, 16 parent task pages, 17 substantive/current model pages and the first-party test page.
+- Proposed temporary `noindex,follow` for 40 routes, without implementing it: all 31 child-task pages because their distinct guidance is draft/hidden and none has a unique direct test; and nine historical model pages with 37–46 main-content words and no useful version-specific evidence.
+- Ten child tasks have an extra related test, but none has unique direct evidence. The proposal keeps them accessible and followed while SEO-008/009 improves or consolidates them.
+- Rationale: this is not a claim that thin pages impose a sitewide ranking penalty or that a 102-page site has a crawl-budget problem. It makes the submitted/indexable inventory match the pages Normie Mode currently considers useful search results, while avoiding competing near-identical parent/child answers. Google describes sitemap URLs as the canonical pages a site considers important, and `noindex` as the direct rule for keeping an accessible page out of results.
+- Trade-off: approved exclusions give up any current long-tail visibility from those URLs. They should be used only as a temporary, reviewed state; pages return to the sitemap and `index` only after their distinct value is verified.
+- Local verification passed: repeatable production build/register generation, 708 tests across 16 files, and type-check with zero errors (one pre-existing hint remains).
+- Product-owner approval was given on 2026-10-11 and recorded as D-035. The 40 temporary exclusions are implemented as `noindex,follow` and omitted from the sitemap; automated checks require the other 62 public pages to remain indexable and submitted.
+
+### SEO-008 — Thin historical model pages
+
+State: `done`
+
+Purpose: Preserve exact-version history without publishing weak doorway-like pages.
+
+Mandatory end-of-program work item: revisit all nine pages before closing N-015. For each page, either publish reviewed version-specific evidence and restore `index` plus sitemap membership, or record an explicit decision to retain `noindex,follow`/redirect it. Temporary exclusion must not silently become permanent.
+
+Initial review set:
+
+- GPT-5.2
+- GPT-5.5
+- DeepSeek V3.2
+- Claude Fable 5
+- Claude Opus 4.6
+- Claude Opus 4.8
+- Claude Opus 5
+- Gemini 3.7 Flash
+- Kimi K2.5
+
+Options, in preference order:
+
+1. Enrich with verified release facts, historical results, successor relationship, exact availability history and sources.
+2. Keep accessible but `noindex,follow` until evidence is sufficient.
+3. Redirect to a successor only if Normie Mode explicitly abandons exact-version history for that page.
+
+Acceptance criteria:
+
+- Each historical model has a documented disposition.
+- Indexed historical pages contain useful version-specific evidence, not only a replacement notice.
+- Successor and predecessor links are consistent.
+
+Verification:
+
+- Content review, graph validation, sitemap/indexability tests and redirect tests.
+
+Progress (2026-10-13):
+
+- Historical pages now expose exact-version results already held in canonical content, alongside imported Epoch, LMArena and models.dev records. This closes the remaining content gap for DeepSeek V3.2 with five published SpreadsheetBench 2 results.
+- The generated 105-URL register now proposes `index` for all nine pages; DeepSeek V3.2 renders 200 main-content words and the other eight render 237–301. Counts remain review signals, not automatic quality decisions; the basis for restoration is inspectable exact-version evidence plus successor context.
+- D-039 was approved on 2026-10-13. All nine pages now use default indexing and return to the sitemap; the 31 child-task exclusions remain unchanged.
+
+### SEO-009 — Specific-task differentiation
+
+State: `in_progress`
+
+Purpose: Ensure each task URL answers a distinct question with distinct value.
+
+Work:
+
+- Compare every child task with its parent for shared tests, verdicts, charts and public editorial guidance.
+- Prioritise direct evaluation evidence and reviewed, task-specific examples.
+- Consolidate or temporarily noindex child tasks that only restate a parent.
+- Do not generate filler to reach a word count.
+
+Acceptance criteria:
+
+- Every indexed child task has a distinct user goal and at least one materially distinct evidence, checking or guidance element.
+- Any new Norm wording is approved before publication.
+- Inherited evidence remains visibly labelled as related rather than direct.
+
+Verification:
+
+- Similarity report plus human review.
+- Product-owner review of at least one page from every task hub.
+
+Progress (2026-10-13):
+
+- Added `docs/seo/child-task-review.csv`, covering all 31 child tasks with their distinct goal, parent, evidence/directness inventory, reviewed-guidance state and a page-specific enrichment need.
+- Eight pages have direct evidence and are candidates for editorial enrichment: book writing, chemistry, creative writing, data analysis, essay writing, language learning, marketing, and scripts/content. The other 23 should retain `noindex,follow` until direct or task-specific evidence improves.
+- All child-task guidance is still draft, so none is proposed for immediate restoration. The next gate is owner review of representative enriched pages across the affected hubs, not bulk index activation.
+
+### SEO-010 — Answer-first evidence blocks
+
+State: `in_progress`
+
+Purpose: Make important answers easy for people and retrieval systems to locate and attribute.
+
+Work:
+
+- Add a compact answer or facts block to priority pages.
+- Generate measured statements only from validated data.
+- Keep sourced claims linked directly to the benchmark owner, paper or provider.
+- State uncertainty, evidence gaps and checking requirements alongside conclusions.
+- Use HTML tables or text for key facts; charts must not be the only representation.
+
+Acceptance criteria:
+
+- Each block answers the page's main question in plain language.
+- Every claim is classified as measured, sourced, editorial or recommendation.
+- Generated statements are deterministic and tested against the underlying data.
+- Editorial statements remain subject to review.
+
+Verification:
+
+- Unit tests for generated statements.
+- Product-owner comprehension review.
+- Citation-test comparison before and after deployment.
+
+Progress (2026-10-12):
+
+- Drafted a shared answer-first block with an explicit claim class, plain-text conclusion, linked evidence and adjacent limitation.
+- Benchmark pages now draft a deterministic measured-result summary from the same ranked rows as the chart, cite the original test owner directly, and distinguish preference votes from correctness tests.
+- Current model pages now draft a deterministic task-position summary, link up to three evidence pages and state exact-version evidence limits. The generator refuses to manufacture a ranking when task evidence is insufficient; unit tests cover both paths.
+- Existing task verdicts are labelled `Rule-based recommendation`, and the published first-party test's short answer is labelled `Measured result`.
+- The product owner approved the representative wording. Commit `1cf73ad` is live, and production checks confirm the expected measured-result or rule-based-recommendation labels and conclusions on representative benchmark, current-model, task and first-party-test pages.
+- Citation preflight confirmed that both named search crawlers receive `200` on representative live evidence pages. This workspace has no authenticated ChatGPT or Claude product session, so it cannot truthfully execute the required product-surface test.
+- No version 1 citation run was recorded before SEO-010 deployed. A true retrospective before/after comparison is therefore impossible; `docs/seo/citation-results-v1.yaml` records that limitation and provides append-only pending ChatGPT and Claude runs for the first reproducible post-deployment baseline.
+
+### SEO-011 — First-party dataset publication
+
+State: `done`
+
+Purpose: Turn Normie Mode's original testing into a reference other publishers and answer engines can cite.
+
+Work:
+
+- Publish machine-readable CSV or JSON for each approved test run.
+- Include suite version, run date, exact models, configuration, cases, prompts, answers, scores, cost, latency, limitations and licence.
+- Add a stable methodology URL and correction/supersession history.
+- Add a human-readable suggested citation, without demanding attribution beyond the licence.
+- Add `Dataset` structured data after SEO-005.
+
+Acceptance criteria:
+
+- Public files reproduce every visible result.
+- Sensitive information and paid-provider credentials are absent.
+- Product owner approves the run and licence before publication.
+- Corrections append or supersede rather than silently overwrite history.
+
+Verification:
+
+- Re-run scoring from published artefacts.
+- Validate downloads and schema.
+- Follow `docs/evals/README.md` for every run.
+
+Progress (2026-10-12):
+
+- Built a deterministic draft JSON package containing the five fixed cases, generated prompts, answer keys, all 30 model-case responses, parsed answers, scores, exact model routes, providers, costs, timings and recorded token usage. A flattened CSV contains all 180 model-case-question observations.
+- Added tests that regenerate every recorded score from the exported case and raw response, and check complete case/result/CSV coverage.
+- Added preview-only download links, a suggested citation and `Dataset` JSON-LD with JSON and CSV distributions. Normal production builds emit none of them until publication is approved.
+- D-036 records product-owner approval of CC BY 4.0 for Normie Mode-authored cases, prompts, questions, answer keys, scores, annotations and compiled structure. Raw model-generated responses remain available for audit but are explicitly excluded from the licence grant.
+- Public activation is implemented. Local validation, 721 tests, type-check, production build and SEO audit pass; the generated JSON contains 5 cases and 30 model-case results, while the CSV contains all 180 question observations.
+- Production verification passed: both downloads return `200` with the correct JSON/CSV content type, size and complete record counts; the results page links both files, states the scoped CC BY 4.0 terms, and exposes matching `Dataset` JSON-LD. SEO-011 is complete.
+
+### SEO-012 — Head-to-head comparisons
+
+State: `in_progress`
+
+Purpose: Serve high-intent comparison questions with exact-version evidence.
+
+Work:
+
+- Implement N-003 for two or three exact model versions.
+- Use stable, readable canonical URLs.
+- Show task positions, direct test results, cost, evidence status, availability and freshness side by side.
+- Avoid a winner when the evidence says too close to call.
+
+Acceptance criteria:
+
+- Comparison facts come from existing canonical model/test data.
+- Pages explain why a conclusion exists and what remains untested.
+- Arbitrary model combinations do not create an unlimited indexable URL space.
+
+Verification:
+
+- Product-owner review and canonical/indexability tests.
+- Representative search-intent testing.
+
+Progress (2026-10-12):
+
+- Added a curated allowlist rather than accepting arbitrary model pairs. The first local draft compares Claude Opus 5.5 with Gemini 3.8 Flash, an exact-version pair already present in the fixed research citation prompt.
+- The page derives shared task scores, common-test results and positions, API cost, evidence status, release/freshness dates and approved consumer plans from the same canonical functions as model and task pages.
+- The deterministic answer limits itself to the five tasks where both versions can be scored, labels five-point gaps as close, and states the additional task/test coverage that prevents an overall-winner claim.
+- Claude Opus 5.5 vs GPT-6 Sol was rejected for now: GPT-6 Sol has no canonical task positions and shares only the first-party spreadsheet test. This is an evidence sufficiency decision, not a generated-content gap to fill.
+- The route is absent from normal builds and the sitemap pending product-owner comprehension review.
+- The preview route now builds through the established `NORMIE_PREVIEW=1` path, carries its canonical plus `noindex,follow`, stays out of the preview sitemap, and receives preview-only links from both participating model pages. Production emits neither the route nor those links.
+- Comparison freshness derives from both exact model pages. Tests cover production/preview visibility, allowlisting, model links, sitemap exclusion and stable freshness. Publication and the final claim-class label remain owner review items.
+
+### SEO-013 — Performance and response correctness
+
+State: `in_progress`
+
+Purpose: Make static pages efficient and predictable for users and crawlers.
+
+Work:
+
+- Enable Brotli or gzip for HTML, CSS, JavaScript, XML and JSON at the proxy/server.
+- Correct `HEAD` responses to mirror `GET` status and headers without a body.
+- Change external HTTP-to-HTTPS redirects from temporary to permanent at CapRover/nginx.
+- Set sensible cache and revalidation headers for static HTML and discovery files.
+- Self-host critical fonts and the footer mark or provide resilient local fallbacks.
+- Measure Core Web Vitals with field data once traffic permits; use lab measurements meanwhile.
+
+Acceptance criteria:
+
+- Representative text responses are compressed.
+- `HEAD` metadata agrees with `GET`.
+- HTTP, `www`, `.html` and `/index.html` variants reach the canonical URL with permanent redirects and no avoidable chain.
+- No page loses functionality or visual fidelity.
+
+Verification:
+
+- Header matrix tests in CI and against production.
+- Lighthouse or equivalent checks on representative page types at mobile and desktop sizes.
+
+Progress (2026-10-11):
+
+- The Bun static server now negotiates gzip for HTML, CSS, JavaScript, XML, JSON, text and SVG responses.
+- `HEAD` returns the same status and representation headers as `GET`, without a body; uncompressed responses include the source byte length.
+- Fingerprinted Astro CSS/JavaScript receives a one-year immutable cache policy. Stable public images/fonts use one-day caching with stale revalidation, sitemap/robots files use five-minute revalidation, and HTML always revalidates.
+- Automated tests cover compressed `GET`/`HEAD` parity, uncompressed discovery-file length/cache metadata, and the distinction between fingerprinted assets and replaceable public images. A real Bun server was also checked locally with a valid gzip payload.
+- The first production probe showed nginx supplying `Content-Length: 0` on compressed `HEAD` when the app streamed compression without a known length. The server now materialises the small static compressed representation and sends its exact length for both methods; the correction was subsequently verified in production.
+- Deployed commits `8b860b3` and `8b003e2`. Production now returns a valid gzip representation with identical 4,891-byte `GET` body, `GET` length and `HEAD` length for a representative model page; content type, encoding, cache policy and `Vary` also match. The sitemap has five-minute revalidation and accurate type/length; replaceable public images are no longer immutable.
+- Production `www`, `.html` and `/index.html` variants return application-controlled `308` redirects. CapRover's outer nginx still converts plain HTTP to HTTPS with `302` before the request reaches the app; changing that edge redirect to permanent requires CapRover/nginx configuration access.
+- A 2026-10-13 production header matrix reconfirmed gzip and matching representation metadata for HTML, sitemap and robots responses, plus the intended cache policy for a replaceable public image. The 20 focused server tests also pass.
+- Remaining: change CapRover's outer HTTP redirect from `302` to permanent with infrastructure access; decide/download approved local Geist assets before removing Google Fonts; and run representative mobile/desktop performance checks in a browser/Lighthouse environment. The public PageSpeed API was quota-limited and this workspace has no browser installed.
+
+### SEO-014 — Titles, descriptions and information architecture
+
+State: `done`
+
+Purpose: Improve clarity in results without treating character counts as ranking rules.
+
+Work:
+
+- Put the distinctive entity or intent early in each title.
+- Shorten benchmark and model title templates while preserving plain-English H1s.
+- Give the homepage a specific description.
+- Review all descriptions for useful differentiation, not arbitrary length alone.
+- Add breadcrumbs in visible markup and structured data.
+
+Acceptance criteria:
+
+- Titles remain unique and accurately describe their pages.
+- Priority titles are unlikely to lose the distinguishing phrase when truncated.
+- Descriptions do not make unsupported claims or repeat mechanically across a family.
+
+Verification:
+
+- Generated metadata audit and product-owner review of representative snippets.
+
+Progress (2026-10-12):
+
+- Drafted deterministic factual metadata templates for indexed task, model and benchmark pages without changing their on-page H1s. Benchmark titles now lead with the benchmark identity (for example `APEX-Agents` or `LMArena business`), model titles name tests/price/access, and task titles no longer spend search-result space on a generated month.
+- Added a specific homepage description and concise metadata for the benchmark collection and published first-party spreadsheet test.
+- Local production build/audit: the 62 indexed pages retain unique titles and descriptions; title candidates over 60 characters fall from 40 to one, the maximum falls from 83 to 62, and no description exceeds 157 characters. Description length remains a review aid rather than a target; concise unique text is not padded to reach an arbitrary minimum.
+- Added unit coverage for benchmark identity/uniqueness/length, stable task metadata and the compact model template. Product-owner review of representative snippets remains required before deployment.
+- Product-owner review was approved on 2026-10-12. Commit `0bec41d` was deployed to `main` and `deployed`; representative homepage, benchmark, model, task and first-party-test pages were checked live, including equality between HTML, Open Graph and Twitter titles.
+- Commits `37079ff` and `9edc5b7` added visible semantic breadcrumbs and matching canonical `BreadcrumbList` data to task, model, benchmark and first-party-test detail pages. Production checks covered parent/child task hierarchy and all four page families. SEO-014 acceptance criteria are satisfied.
+
+### SEO-015 — Update/report publishing programme
+
+State: `ready`
+
+Decision: D-040 approves a supervised programme: one monthly evidence and ranking-change report, plus release notes for major model-version and Normie Mode test changes. Every report remains draft until Andy David reviews it, and canonical task, model, benchmark and test pages remain authoritative.
+
+Proposed purpose: Publish dated, link-worthy analysis without turning evergreen pages into news posts.
+
+Potential formats after approval:
+
+- What changed in AI model rankings this month
+- State of AI for spreadsheet work
+- New model evidence tracker
+- Test release and methodology notes
+- Significant benchmark changes
+
+Guardrail: Reports link to canonical task/model/test pages and must not create a conflicting recommendation.
+
+Next implementation: define the report content schema and preview-only template, then prepare the first report as a draft. No pipeline or agent may publish it or change a canonical recommendation.
+
+### SEO-016 — Distribution and authority building
+
+State: `proposed`
+
+Purpose: Earn the independent references that on-site optimisation cannot create.
+
+Work:
+
+- Package original findings for benchmark authors, model makers, researchers and specialist publications.
+- Publish embeddable charts and tables with stable source links.
+- Make approved datasets and evaluation tooling easy to reuse through the public repository.
+- Seek corrections and technical review before promotion.
+- Avoid paid-link schemes, generic directories and mass outreach.
+
+Acceptance criteria:
+
+- Outreach is tied to a genuinely useful original result.
+- Claims and visuals link back to the complete methodology and data.
+- Earned mentions and referring domains are recorded without manipulating editorial coverage.
+
+Verification:
+
+- Referral/domain monitoring and a factual outreach log.
+
+### SEO-017 — Citation and referral monitoring
+
+State: `ready`
+
+Decision: D-041 permits privacy-minimal aggregate referral and crawler monitoring. It prohibits fingerprinting and visitor profiles, limits raw operational-log retention to 90 days, and requires public reporting to use aggregates only.
+
+Purpose: Measure whether search and answer engines discover and cite the site.
+
+Work:
+
+- Choose privacy-appropriate analytics and document the decision.
+- Track known referral sources, including ChatGPT, Claude, Perplexity, Google and Bing where referrers are available.
+- Retain enough access-log data to measure verified crawler visits and response status.
+- Create a fixed monthly prompt set and record engine, date, prompt, citation, cited URL and competing sources.
+- Keep prompt wording stable; version the set when it changes.
+
+Acceptance criteria:
+
+- A baseline citation run is recorded before major content changes.
+- The same prompt set can be rerun consistently.
+- Analytics and logs do not collect unnecessary personal data.
+- Citation counts are treated as observations, not statistically reliable rankings without enough runs.
+
+Verification:
+
+- Confirm a test referral can be identified.
+- Confirm crawler requests appear with useful status/path data.
+
+### SEO-018 — Ongoing operating cadence
+
+State: `in_progress`
+
+Purpose: Keep the site current after the initial implementation.
+
+Proposed cadence:
+
+- Weekly: validate the build, imports, crawler errors and Search Console changes.
+- Fortnightly: review new model versions, superseded evidence and weak indexed pages.
+- Monthly: run the fixed citation test, review non-brand queries and refresh priority comparisons.
+- Quarterly: audit indexable inventory, schema, redirects, trust pages and external references.
+
+Acceptance criteria:
+
+- Every recurring check has an owner, input, output and escalation rule.
+- Recommendation changes still require human editorial review.
+
+Implementation note (2026-10-12): `normie-mode-evidence-refresh` v1 is installed as a user-scoped Wingman pipeline. At 07:00 each Monday in `Australia/Perth`, it refreshes Epoch AI, models.dev and LMArena in an isolated clone, rejects unexpected tracked-file changes, runs validation/type-check/build/tests, and pushes a timestamped `evidence-refresh/*` review branch. A separate agent then reports timestamp-only versus substantive changes, unmapped models and affected rankings, recommendations, comparisons and answer surfaces. It cannot merge, deploy or publish. Optional Flight Deck task creation remains disabled until a deliberate workspace/channel destination is configured.
+
+## Fixed citation-test set
+
+State: `proposed`; establish the baseline in SEO-001 before changing wording.
+
+Initial prompt families are frozen in `docs/seo/citation-prompts-v1.yaml`:
+
+1. What is the best AI model for analysing an Excel spreadsheet?
+2. Which AI model is best for spreadsheet data analysis, and what evidence supports that?
+3. What should I check when using AI for financial spreadsheets?
+4. Which current AI model is best for coding?
+5. Which AI model is best for writing?
+6. Compare [two current exact model versions] for business work.
+7. What does Terminal-Bench test?
+8. What does FrontierMath measure, in plain English?
+9. Which AI benchmarks measure real work rather than academic questions?
+10. How reliable are public AI model rankings?
+
+Do not edit the version 1 wording after the first run. Create a new fixture version when current model versions or measurement needs change.
+
+## Measurement dashboard
+
+Update this table from primary reports. Use `—` when unknown rather than estimating.
+
+| Metric | Baseline | Date | Target/interpretation |
+| --- | ---: | --- | --- |
+| Valid canonical URLs in sitemap | 102 | 2026-10-10 | All intended indexable URLs only |
+| Sitemap status | Success | 2026-10-03 | Remains Success |
+| Duplicate without user-selected canonical | 25 | report snapshot 2026-10-04 | Falls after recrawl; redirected variants may move to Page with redirect |
+| Discovered, currently not indexed | 35 | report snapshot 2026-10-04 | Review after fresh crawl/index report |
+| Pages with JSON-LD | 0/102 | 2026-10-10 | 102/102 with accurate base schema; relevant subtype where appropriate |
+| Pages with social metadata | 0/102 | 2026-10-10 | 102/102 |
+| Public first-party tests | 1 | 2026-10-10 | Quality and reuse matter more than count |
+| Public machine-readable test datasets | 1 | 2026-10-12 | One per approved published test |
+| Overall Google Search impressions/clicks | 269 / 4 | 3-month view supplied 2026-10-13 | 1.5% CTR; average position 56; property data begins 2026-09-29 |
+| Google indexed / not indexed pages | 76 / 62 | report last updated 2026-10-09 | Four exclusion reasons; compare after recrawl of D-039 and D-042 changes |
+| Known authoritative referring domains | — | 2026-10-10 | Establish in SEO-001 |
+| Non-brand search impressions/clicks | — | 2026-10-10 | Establish in SEO-001 |
+| OAI-SearchBot successful fetches | — | 2026-10-10 | Establish in SEO-002/017 |
+| Claude-SearchBot successful fetches | — | 2026-10-10 | Establish in SEO-002/017 |
+| Citation-test citations | 0/2 prompt-engine observations | 2026-10-12 | Partial post-SEO-010 baseline; expand and repeat monthly |
+
+## Decisions needed
+
+Record accepted decisions in `docs/IMPLEMENTATION_PLAN.md` as D-### entries before implementation when they materially affect the product.
+
+| Decision | Why it matters | Status |
+| --- | --- | --- |
+| Allow or disallow GPTBot and ClaudeBot separately from search crawlers | Training policy is not the same as search visibility | Accepted as D-034: disallow training, allow search |
+| Public publisher, author and reviewer identity details | Required for truthful trust pages and schema | Accepted as D-042: Other Stuff producer/publisher; Andy David product owner and reviewer |
+| Corrections contact/workflow | Must route to a monitored owner | Accepted as D-042: `info@otherstuff.studio` with a Normie Mode subject line |
+| Historical model page policy | Enrich, noindex or redirect materially changes public coverage | Accepted as D-035: temporary noindex; mandatory end-of-N-015 revisit |
+| Child task indexability threshold | Prevents shallow keyword expansion | Accepted as D-035: noindex until SEO-009 differentiation criteria are met |
+| Public licence for first-party test datasets | Controls reuse and citation | Open |
+| Analytics and access-log retention | Privacy and measurement trade-off | Accepted as D-041: aggregate monitoring, no fingerprinting/profiles, raw operational logs retained no longer than 90 days |
+| Dated reports programme | Defines scope, review and relationship to canonical pages | Accepted as D-040: supervised monthly change report plus major model/test release notes |
+
+## Risks and watch-outs
+
+- **Crawl eligibility is not citation eligibility.** An allowed crawler can still decide a page is not useful enough to surface.
+- **Do not confuse GPTBot with OAI-SearchBot.** They represent different choices.
+- **Do not chase word count.** More prose can make D-021 violations and near-duplicate pages worse.
+- **Do not auto-publish generated summaries.** Deterministic measured statements are allowed; editorial interpretation requires review.
+- **Do not expose Search Console exports or private analytics.** Record aggregates and findings only.
+- **Do not stamp every sitemap URL with the build date.** False freshness erodes trust.
+- **Do not add unsupported schema.** Incorrect review, rating, author or product markup is worse than no markup.
+- **Do not fragment exact search variants into new URLs.** Canonical task rules still apply.
+- **Do not hide limitations to make snippets stronger.** Citation value depends on inspectable nuance.
+- **Do not overwrite evidence history.** Corrections supersede previous records.
+- **Do not interpret a temporary indexing count as a stable quality verdict.** Always record the report snapshot and crawl dates.
+- **Do not claim answer-engine causality from a small number of prompts.** Citation results are volatile and personalised.
+
+## Resume checklist
+
+At the start of a future SEO session:
+
+1. Read the most recent session-log entry.
+2. Run `git status --short` and preserve unrelated work.
+3. Check whether Search Console data is newer than the 2026-10-04 baseline.
+4. Confirm the current sitemap URL count and production redirect matrix.
+5. Check for new product decisions in the implementation plan.
+6. Select the highest-priority `ready` item whose dependencies are satisfied.
+7. Move only that item to `in_progress` and record the change below.
+
+## Session log
+
+Append new entries; do not rewrite history except to correct a factual error, and label corrections.
+
+### 2026-10-10 — Baseline audit and working plan created
+
+- Created N-015 and this local living implementation document.
+- Confirmed the production sitemap index and child sitemap return `200`, parse as valid XML and contain 102 unique canonical URLs.
+- Confirmed all 35 URLs in the `Discovered - currently not indexed` export currently return `200`, self-canonicalise, appear in the sitemap and are allowed by `robots.txt`.
+- Confirmed the original sitemap submission was successful, discovered all 102 pages and was last read on 2026-10-03.
+- Confirmed the earlier canonical deployment fixed live `www` and `.html` duplication with `308` redirects.
+- Audited the public build: no JSON-LD, no Open Graph/Twitter metadata, 55 long title candidates, 68 description-length review candidates and nine very thin historical model pages.
+- Confirmed no public trust/identity policy pages, no analytics implementation and no machine-readable first-party result downloads.
+- Confirmed HTML compression, accurate `HEAD` metadata and permanent proxy-level HTTP redirects remain infrastructure follow-ups.
+- Added official OpenAI documentation tooling to the local Codex configuration; it requires a new session before its tools become available. Used official OpenAI and Anthropic crawler documentation for the baseline.
+- No public-site implementation was performed in this session. Next recommended item: SEO-001, then SEO-002 and the decision inputs for SEO-003/005/007.
+
+### 2026-10-10 — SEO-001 implementation started
+
+- Added `scripts/seo-audit.ts` and the `npm run seo:audit` command. The command builds first, audits the sitemap and generated HTML, prints deterministic errors and review warnings, and supports JSON output from the script for further analysis.
+- Hard failures cover invalid or duplicate sitemap URLs, missing generated pages, non-canonical sitemap forms, missing title/description/H1/canonical, sitemap pages marked `noindex`, duplicate titles, broken internal page links and missing canonical sitemap declaration in `robots.txt`.
+- Review diagnostics cover long titles, description length, thin main content, absent JSON-LD/social metadata, duplicate descriptions, unlisted generated HTML and high same-family token similarity. These never make automatic editorial or indexability decisions.
+- Added four focused regression tests. Initial run passed all hard checks for 102 canonical pages.
+- Froze 30 citation prompts in `docs/seo/citation-prompts-v1.yaml`. A real answer-engine baseline is still required before SEO-001 can be marked `done`.
+- Full verification passed: `npm run seo:audit`, 694 tests and `npm run check` with no errors. The type-check retains one pre-existing unused-variable hint outside this work.
+- Next: begin SEO-002 while the product owner supplies Search Console performance figures and/or runs the manual citation baseline.
+
+### 2026-10-10 — SEO-002 crawler policy implemented locally
+
+- Recorded D-034: Normie Mode permits OpenAI and Anthropic search crawlers but not their model-development crawlers. Their published controls are separate, and no documented search-visibility benefit was found for permitting training use.
+- Added explicit allow rules for `OAI-SearchBot` and `Claude-SearchBot`, explicit disallow rules for `GPTBot` and `ClaudeBot`, and retained the general public-crawler allow rule for ordinary and user-triggered retrieval.
+- Extended the deterministic SEO audit and regression suite to enforce the accepted crawler policy.
+- Local verification passed: the production build and SEO audit, 695 tests across 14 files, and Astro type-check with zero errors (one pre-existing unused-variable warning remains).
+- Production verification and access-log observation remain required after deployment before SEO-002 is `done`.
+
+### 2026-10-10 — SEO-002 deployed and externally verified
+
+- Pushed `fae66c9` to both `origin/main` and the CapRover-watched `origin/deployed` branch using a fast-forward deployment.
+- Confirmed the live `robots.txt` permits `OAI-SearchBot` and `Claude-SearchBot`, disallows `GPTBot` and `ClaudeBot`, and still names the canonical sitemap index.
+- Requested `robots.txt`, the homepage, `/best-ai-for/excel-spreadsheets`, `/models/gpt-5-5` and `/benchmarks/arena-overall` as each search crawler. All ten requests returned `200` with the expected content type and no redirect or challenge.
+- SEO-002 remains `in_progress` only because production access-log identification has not yet been inspected.
+
+### 2026-10-10 — Privacy-minimal crawler observability deployed
+
+- The application previously emitted no access records and this workspace had no credential for the CapRover app-log API.
+- Added structured stdout records only for claimed OpenAI and Anthropic crawler user agents. Records contain timestamp, crawler, method, path, response status and an explicit `unverified_user_agent` identity label; they exclude IP addresses, query strings and ordinary visits.
+- Added regression coverage for four crawler agents, non-logging of ordinary traffic, and query-string exclusion. Verification passed with 700 tests, type-check, content validation and production build.
+- Deployed `e691e17`; its GitHub deployment-hook run completed successfully. Follow-up OAI-SearchBot and Claude-SearchBot probes returned `200` and should now be visible as `crawler_request` JSON lines in the CapRover app log.
+- Final SEO-002 check requires a CapRover operator to confirm one of those lines. User-agent identity remains a claim, not cryptographic verification; OpenAI IP ranges can be cross-checked upstream, while Anthropic does not publish stable ranges.
+
+### 2026-10-10 — SEO-003 gated; SEO-004 implementation started
+
+- Marked SEO-003 blocked rather than inventing trust claims. It needs approved identity details, relationship wording and a monitored public corrections/contact route.
+- Added site-wide Open Graph and Twitter/X metadata with canonical absolute URLs and a stable default social image. Added deterministic audit coverage for completeness and consistency.
+- The default 1200×630 social image was generated from the existing Norm mascot reference, then resized and inspected locally; it contains the exact approved site name and existing positioning line only.
+
+### 2026-10-10 — SEO-004 deployed and source-verified
+
+- Pushed atomic commit `08f4207` to `main` and `deployed`; the GitHub deployment-hook run completed successfully and the new tags are live.
+- Verified the homepage and Excel task page expose matching title, description, canonical `og:url`, site name, type, absolute image URL, dimensions, alt text and corresponding Twitter/X fields.
+- Downloaded the live share image: `200`, `image/jpeg`, 99,232 bytes and 1200×630. Its `HEAD` response still omits accurate content headers, which remains tracked under SEO-013; social crawlers use GET.
+- Tried OpenGraph.xyz and Meta Tags for external rendered-preview verification. The former returned `429` to this environment and the latter requires client-side interaction, so the two-validator acceptance check remains open rather than being inferred from source tags.
+
+### 2026-10-10 — SEO-006 implementation completed locally
+
+- Added evidence-derived route freshness and sitemap `lastmod` values without using build or deployment time.
+- Added the missing canonical publication date for the already-published spreadsheet test and used approved plan-check dates where an undated model page depends on app availability.
+- Replaced task titles' wall-clock month with the route's evidence month, so unchanged pages no longer change title merely because a calendar month passed.
+- Verified 102 of 102 sitemap entries are dated, across five meaningful source dates; the repeatable SEO audit, 706 tests and type-check pass.
+
+### 2026-10-10 — SEO-006 deployed and completed
+
+- Deployed `ff7390a` to `main` and `deployed`; the live sitemap rolled over with all 102 entries dated.
+- Verified representative homepage, task, model, benchmark and first-party test routes in the live XML. The first-party test correctly uses its 2026-09-24 publication date while imported-data pages use their relevant retrieval/evidence dates.
+- Rebuilt the unchanged site and compared sitemap hashes before and after. They were identical, proving deployment/build time does not manufacture freshness.
+- SEO-006 acceptance criteria and verification are satisfied; marked `done`.
+
+### 2026-10-10 — SEO-007 disposition register drafted
+
+- Generated a deterministic, CSV-based review of all 102 public URLs at `docs/seo/indexability-review.csv`; `npm run seo:indexability` rebuilds it from the current production output and content graph.
+- Proposed retaining 62 URLs in search and temporarily applying `noindex,follow` to 40 weak URLs: 31 child tasks without unique direct evidence or visible reviewed guidance, plus nine thin historical model pages already identified by SEO-008.
+- This is a decision document only. No `noindex`, sitemap removal, redirect or canonical change was made. Product-owner approval is required before changing public coverage.
+
+### 2026-10-11 — D-035 indexability treatment implemented
+
+- The product owner approved the proposed temporary treatment for all 40 reviewed URLs. D-035 records the scope, rationale, trade-off and restoration conditions.
+- Added one shared indexability policy used by page metadata, sitemap generation and the SEO audit: all 31 child tasks and the nine named historical model pages remain public with self-canonicals and internal links, carry `noindex,follow`, and are omitted from the sitemap.
+- Strengthened the audit so every ordinary generated page must be in exactly one intended state: indexable and submitted, or an approved temporary exclusion with `noindex,follow`. Internal links to an approved excluded page remain valid.
+- The disposition register records the approval. SEO-007 is complete; SEO-008 and SEO-009 remain in progress because exclusion is temporary, not the content-improvement outcome.
+
+### 2026-10-11 — D-035 deployed and verified
+
+- Pushed atomic commit `eb616e7` to both `main` and the CapRover-watched `deployed` branch.
+- Verified the live child sitemap now contains 62 canonical URLs and 62 `lastmod` values. Neither `/best-ai-for/data-analysis` nor `/models/gpt-5-2` appears in it.
+- Verified representative child-task and historical-model pages return normally with self-canonicals and `noindex,follow`, while the indexed `/best-ai-for/excel-spreadsheets` parent has no `noindex` directive.
+
+### 2026-10-11 — SEO-013 response handling implemented locally
+
+- Added gzip negotiation, accurate bodyless `HEAD` responses and resource-specific cache policies to the Bun static server.
+- Verified the behavior through automated tests and a real local Bun process: compressed HTML `GET` and `HEAD` returned matching status/content/cache/encoding headers, the payload passed gzip validation, and the uncompressed sitemap returned its byte length with five-minute revalidation.
+- Production header verification, self-hosted font work and mobile/desktop performance measurements remain before SEO-013 can be completed.
+
+### 2026-10-11 — SEO-013 response handling deployed and verified
+
+- Deployed gzip, `HEAD` and cache-policy changes to `main` and `deployed`. A production proxy mismatch discovered during verification was corrected in a second atomic commit.
+- Confirmed a representative compressed page has matching 4,891-byte `GET`, body and `HEAD` lengths, valid gzip, consistent representation headers and always-revalidate HTML caching. Confirmed the sitemap and replaceable image policies separately.
+- Confirmed canonical `www`, `.html` and `/index.html` variants still redirect with `308`. The remaining plain-HTTP `302` is emitted by CapRover's nginx before the application and needs an infrastructure configuration change.
+
+### 2026-10-12 — SEO-014 metadata templates drafted
+
+- Replaced repetitive title/description drafts with deterministic factual templates for tasks, models and benchmarks, plus specific homepage, benchmark-index and first-party-test metadata.
+- The local audit retains unique titles/descriptions across all 62 indexed pages and reduces titles over 60 characters from 40 to one. On-page headings and recommendations are unchanged.
+- This is held at the product-owner review gate and has not been deployed. Representative snippets should be reviewed before the change reaches `deployed`.
+
+### 2026-10-12 — SEO-014 metadata templates approved and deployed
+
+- The product owner approved the representative templates. Pushed `0bec41d` to `main` and fast-forwarded `deployed` to the same commit.
+- Verified the homepage, two benchmark types, a model, two task pages and the published first-party test on production. Their titles and descriptions match the approved templates, and HTML/Open Graph/Twitter titles agree.
+- Visible breadcrumb semantics and their production review remain before SEO-014 can be completed.
+
+### 2026-10-12 — SEO-014 breadcrumbs deployed and work item completed
+
+- Replaced detail-page eyebrow trails with a shared visible breadcrumb navigation using a labelled `nav`, ordered list, linked ancestors and `aria-current` on the current page.
+- Added matching `BreadcrumbList` JSON-LD from the same source. Only real linked ancestors and the canonical current URL enter structured data; visual provider/category labels do not invent destinations.
+- Verified live parent and child tasks, model, third-party benchmark and first-party test examples. Every hierarchy and canonical URL parsed correctly with no generated `.html` forms.
+- SEO-014 is complete: metadata is unique and approved, distinctive terms lead titles, descriptions remain factual and differentiated, and visible/machine-readable breadcrumbs are live.
+
+### 2026-10-12 — SEO-010 answer-first blocks drafted
+
+- Added local deterministic answer blocks for benchmark and current model pages, explicit rule-based classification on task verdicts, and measured-result classification on the published first-party test.
+- Each new block places its classification, conclusion, evidence links and limitation together. Benchmark evidence links directly to the original test owner; model conclusions derive from existing task positions and exact-version evidence counts.
+- Added unit tests for a model with measured task positions and a new model without enough relevant evidence. No wording or recommendation has been deployed; product-owner review remains required.
+
+### 2026-10-12 — SEO-010 answer-first blocks approved and deployed
+
+- Product-owner comprehension review approved the representative benchmark, evidence-rich model and evidence-limited model wording.
+- Pushed `1cf73ad` to `main`, fast-forwarded `deployed` to the same commit and verified both remote refs match.
+- Verified the approved benchmark and model conclusions, task `Rule-based recommendation` label, and first-party-test `Measured result` label on their public URLs. The fixed citation-test comparison remains outstanding.
+
+### 2026-10-12 — Citation-test preflight
+
+- Confirmed representative evidence pages return `200` to both `OAI-SearchBot` and `Claude-SearchBot` after the SEO-010 deployment.
+- The workspace has neither an authenticated ChatGPT/Claude product session nor provider credentials. Ordinary web search is not a valid substitute for the fixture's required fresh product conversations with web search enabled.
+- Recorded the missing pre-deployment baseline as a methodology limitation and added `docs/seo/citation-results-v1.yaml` for append-only post-deployment results. SEO-010 remains `in_progress` until those product-surface runs are supplied.
+- Recorded the first exact prompt, “What is the best AI model for analysing an Excel spreadsheet?”, as zero Normie Mode citations in ChatGPT and Claude. Answers and competing URLs were not supplied, so this is two citation observations rather than a complete source-comparison record.
+
+### 2026-10-12 — SEO-011 dataset package drafted
+
+- Built preview-only JSON and CSV exports from the already approved spreadsheet run; no new paid run or result change was made.
+- The JSON preserves full provenance and raw reproducibility data. The CSV provides one row for each of 180 model-case-question observations. Automated checks recompute every score from the exported cases and responses.
+- Added preview-only download presentation and `Dataset` structured data. The normal production build excludes the files, links and schema while licence scope and publication approval remain open.
+
+### 2026-10-12 — SEO-011 dataset published
+
+- D-036 approved scoped CC BY 4.0 reuse. Deployed JSON and CSV downloads for the spreadsheet test, linked them from the results page and activated matching `Dataset` JSON-LD.
+- Live JSON and CSV return `200` with the correct content types and contain all 5 cases, 30 model-case results and 180 question observations. The public page states that raw model-generated responses are audit material outside Normie Mode's licence grant.
+- SEO-011 is complete. The dataset is excluded from the page sitemap because the canonical human results page describes and links both distributions.
+
+### 2026-10-12 — SEO-012 first comparison drafted
+
+- Built a preview-only, allowlisted Claude Opus 5.5 vs Gemini 3.8 Flash page with shared task scores, same-test results, cost, evidence, availability, freshness and explicit limitations.
+- The first candidate, Claude Opus 5.5 vs GPT-6 Sol, failed the evidence gate and was not built. GPT-6 Sol has no task positions and only one shared test result.
+- No comparison page is in the public build or sitemap. Product-owner wording and comprehension review is required before activation.
+
+### 2026-10-12 — Weekly evidence-refresh pipeline installed
+
+- Added the user-scoped Wingman `normie-mode-evidence-refresh` v1 pipeline with a Monday 07:00 Perth schedule, isolated checkout, accepted-source import, full repository verification, review-branch push and read-only impact analysis.
+- Publication remains deliberately manual: the pipeline never merges, changes recommendation status, fast-forwards `deployed` or deploys the site. Flight Deck task creation is opt-in and awaits an explicit workspace/channel destination.
+- A no-push dry run passed, followed by the first supervised run. Review branch `evidence-refresh/20261012-090126Z` at `b12cb9e` contains current snapshots: 1,139 rather than 981 mapped Epoch results and 601 rather than 588 mapped LMArena entries, with LMArena current to 2026-10-08. New unmapped models require editorial mapping review before this branch is merged.
+
+### 2026-10-12 — First refresh mapped and impact-reviewed
+
+- Verified the new Claude Sonnet 5.5, Claude Haiku 5.5 and GPT-6.1 Sol versions against their makers, added their exact source mappings and updated the Claude and ChatGPT app mappings. Exact aliases also recover previously missed Opus 5.5, GPT-6 Sol, GPT-6 Luna, GPT-5.5 and DeepSeek V4 Pro evidence.
+- Re-importing with those mappings produces 1,209 Epoch results, 26 Epoch index scores, 26 models.dev records and 734 LMArena entries. Gemini 4 Argon remains unmapped: Google says it is still limited to trusted testers and has not yet reached broad developer or consumer availability.
+- All 15 main task verdict blocks differ from production. This is therefore a recommendation-changing refresh and remains review-only. No merge, deployment or publication has occurred.
+- Three former current models become historical: Claude Sonnet 5, Claude Haiku 4.5 and GPT-6 Sol. D-037 records their indexability as an open decision; D-035 did not pre-approve automatically excluding future historical pages.
+
+### 2026-10-12 — Newly historical model pages enriched
+
+- D-037 accepted immediate enrichment rather than extending temporary exclusions. Claude Sonnet 5, Claude Haiku 4.5 and GPT-6 Sol now retain provider-confirmed launch context, successor relationships, archived API prices and limits, and exact-version Epoch/LMArena history where available.
+- The three pages render 308, 305 and 318 substantive words respectively and remain indexable. Historical evidence is explicitly not presented as a current recommendation.
+- The shared evidence section also makes eight of the original nine D-035 historical pages substantive by the audit's 200-word rule. Their `noindex,follow` state remains unchanged pending the promised separate restoration review; DeepSeek V3.2 is still thin at 171 words.
+
+### 2026-10-12 — Refreshed verdict editorial review
+
+- Rechecked every hub verdict against the accepted scoring, coverage, plan and close-call rules. Automated tests confirm that no recommendation rests only on people's votes where a real-work test exists, every plan pick contains the exact version shown, and five-point close calls remain explicit.
+- The candidate changes at least one displayed pick on all 15 hub pages. This is mostly the intended effect of newly mapped Opus 5.5, Sonnet 5.5 and GPT-6.1 Sol evidence rather than a methodology change.
+
+| Hub task | Production headline | Refreshed candidate | Editorial assessment |
+| --- | --- | --- | --- |
+| Coding | Fable 5.1 / GPT-6 Astra close overall; Kimi K3 free | Opus 5.5 overall and under $25; Sonnet 5.5 free | Supported by two of three relevant tests for each new Claude pick; approve with displayed coverage. |
+| Writing | Opus 5.5 overall; Gemini 3.1 Pro / Kimi K3 free close | Opus unchanged; Sonnet 5.5 / Gemini 3.1 Pro free close | Safe close call; no absolute winner claim beyond the task score. |
+| Studying | Gemini 3.8 Flash / Fable 5.1 close; Kimi K3 / Gemini 3.6 Flash free close | Fable 5.1 / Gemini 3.8 Flash close; Gemini 3.8 Flash / Sonnet 5.5 under $25 close; Sonnet 5.5 free | Rank ordering changes, but the winner remains a close call and free access is maker-backed. |
+| CVs and jobs | Opus 5.5 overall; Kimi K3 / Gemini 3.1 Pro free close | Opus unchanged; Sonnet 5.5 free | Supported; simpler free verdict from the refreshed evidence. |
+| Business | Fable 5.1 overall; Gemini 3.8 Flash under $25; Kimi K3 free | Opus 5.5 overall and under $25; Sonnet 5.5 free | Material but supported by newly mapped work evidence; approve with normal limitations. |
+| Research | GPT-6 Astra / GPT-5.6 Sol close; Gemini 3.6 Flash / Kimi K3 free close | Opus 5.5 overall and under $25; Sonnet 5.5 / Gemini 3.6 Flash free close | Material; supported and still exposes the free close call. |
+| Health | Opus 5.5 / Fable 5.1 close | Fable 5.1 overall; Opus 5.5 / Gemini 3.8 Flash under $25 close | Treat as task-score guidance, not medical advice; existing health safety copy remains essential. |
+| Documents and notes | Fable 5.1 overall; Gemini 3.8 Flash under $25; Gemini 3.1 Pro free | Opus 5.5 overall and under $25; Gemini 3.1 Pro free | Supported; free pick unchanged. |
+| Finance and accounting | Fable 5.1 overall; Gemini 3.8 Flash under $25; Kimi K3 free | Opus 5.5 overall and under $25; Sonnet 5.5 free | Material but supported by refreshed professional-work evidence. |
+| Maths and science | Fable 5.1 overall; Gemini 3.8 Flash under $25; Kimi K3 / Gemini 3.6 Flash free close | Fable unchanged; Gemini 3.8 Flash / Opus 5.5 under $25 close; Sonnet 5.5 free | Supported; paid result becomes more cautious, not less. |
+| Excel and spreadsheets | Fable 5.1 overall; GPT-6 Astra / Gemini 3.8 Flash under $25 close; Sonnet 5 free | Opus 5.5 overall and under $25; Gemini 3.6 Flash free | Supported by the published first-party spreadsheet test plus relevant imported evidence; material citation-target change. |
+| Presentations | Fable 5.1 overall; Gemini 3.8 Flash under $25; Kimi K3 free | Opus 5.5 overall and under $25; Sonnet 5.5 free | Supported by newly mapped work evidence. |
+| Personal planning | Opus 5.5 overall; Kimi K3 / Gemini 3.1 Pro free close | Gemini 3.8 Flash / Opus 5.5 overall and under $25 close; Gemini 3.1 Pro / Kimi K3 free close | Same contenders; refreshed data correctly makes the paid result more cautious. |
+| Translation and languages | Opus 5.5 / Fable 5.1 close; Gemini 3.1 Pro / Gemini 3.6 Flash free close | Paid picks unchanged; Gemini 3.1 Pro free | Narrow change supported by refreshed ordering. |
+| Legal | Fable 5.1 overall; Gemini 3.8 Flash under $25; Kimi K3 free | Opus 5.5 / Fable 5.1 overall close; Opus 5.5 under $25; Sonnet 5.5 free | Keep the existing legal limitation prominent; evidence supports a close overall result, not an unconditional legal recommendation. |
+
+- The product owner approved the refresh as a single evidence/version update under D-038. Older winners were not selectively retained because that would make task pages disagree with their displayed charts and the published fixed rule.
+
+### 2026-10-13 — Historical model restoration review prepared
+
+- Extended the shared historical evidence section to expose exact-version benchmark results already held in canonical content, with links to their original sources.
+- DeepSeek V3.2 now shows its five SpreadsheetBench 2 paper results. The indexability register classifies all nine D-035 historical pages as substantive candidates for indexing.
+- D-039 was approved. The nine pages now return to the sitemap and default indexing, while the 31 child-task exclusions remain active.
+
+### 2026-10-13 — Trust pages and first Search Console baseline approved
+
+- D-042 approved the About, Contact, Editorial Policy and Corrections Policy drafts, their public relationship/profile facts, `info@otherstuff.studio` correction route and commercial-independence wording.
+- Activated the four routes, footer links and matching Other Stuff publisher/Andy David reviewer structured data. Production verification follows deployment.
+- Recorded the supplied unfiltered three-month Search Performance totals: 269 impressions, 4 clicks, 1.5% CTR and average position 56. Because no query filter was applied, these are overall rather than non-brand figures.
+- Recorded the Page Indexing snapshot last updated 2026-10-09: 76 indexed and 62 not indexed across four reasons. It predates the D-039 restoration and should not be treated as a current view of those URLs.
+
+### 2026-10-13 — SEO-015 reports programme approved
+
+- D-040 approves one monthly evidence and ranking-change report plus release notes for major model-version and Normie Mode test changes.
+- Reports remain drafts until Andy David reviews them, link to the underlying canonical pages and cannot override those pages' recommendations.
+- SEO-015 moves from `blocked` to `ready`; templates, content records and public routes have not yet been implemented.
+
+### 2026-10-13 — SEO-017 monitoring policy approved
+
+- Recorded D-041: citation, referral and crawler measurement may use privacy-minimal aggregate data, without visitor fingerprinting or profiles.
+- Raw operational logs, when needed for security or troubleshooting, are access-restricted and retained for no longer than 90 days; public reporting uses aggregates only.
+- SEO-017 moves from `proposed` to `ready`. The existing crawler-only records already omit IP addresses, query strings and ordinary visits; aggregate referral measurement and a production retention mechanism remain implementation work.
+
+## Progress notes
+
+Use this section for short cross-session context that does not fit an individual work item.
+
+- 2026-10-10: The initial coverage exports reflect a 2026-10-04 snapshot, only four days after the sitemap launched. Do not treat the 25 duplicate or 35 discovered counts as current until Search Console refreshes them.
+- 2026-10-10: The product already has a better citation foundation than its visibility suggests: original test artefacts, exact versions, provenance and a public methodology. The main work is to expose these facts clearly, remove weak index candidates and earn independent references.

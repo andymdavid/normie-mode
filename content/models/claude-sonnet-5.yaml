@@ -1,8 +1,10 @@
 id: claude-sonnet-5
 family: claude
 name: Claude Sonnet 5
-released_on: 2026-06-29
-lifecycle: current
+released_on: 2026-06-30
+lifecycle: superseded
+successor: claude-sonnet-5-5
+summary: At launch, Anthropic made Sonnet 5 the default Claude model on Free and Pro and described it as an agentic upgrade over Sonnet 4.6. Sonnet 5.5 replaced it three months later with faster output and lower typical task cost.
 verification:
   status: verified
   sources:

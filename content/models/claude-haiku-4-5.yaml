@@ -2,10 +2,13 @@ id: claude-haiku-4-5
 family: claude
 name: Claude Haiku 4.5
 released_on: 2025-10-15
-lifecycle: current
+lifecycle: superseded
+successor: claude-haiku-5-5
 verification:
-  status: unverified
-  note: Confirm against the provider model list.
+  status: verified
+  sources:
+    - anthropic-claude-haiku-4-5
+summary: Anthropic launched Haiku 4.5 as its small, fast model for responsive work such as assistants, customer service and pair programming. Haiku 5.5 replaced it with lower token prices, a larger context window and higher limits.
 source_ids:
   epoch:
     - claude-haiku-4-5-20251001

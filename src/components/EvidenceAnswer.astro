@@ -1,0 +1,33 @@
+---
+interface Link {
+  label: string;
+  href: string;
+}
+
+interface Props {
+  answer: string;
+  classification: 'Measured result' | 'Sourced fact' | 'Rule-based recommendation' | 'Editorial assessment';
+  sources?: Link[];
+  limitation?: string;
+}
+
+const { answer, classification, sources = [], limitation } = Astro.props;
+---
+<section class="evidence-answer" aria-labelledby="answer-heading">
+  <p class="answer-label"><span id="answer-heading">Answer in brief</span><span class="answer-type">{classification}</span></p>
+  <p class="answer-text">{answer}</p>
+  {(sources.length > 0 || limitation) && (
+    <p class="answer-detail">
+      {sources.length > 0 && <>Evidence: {sources.map((source, index) => <>{index > 0 && ', '}<a href={source.href}>{source.label}</a></>)}.</>}
+      {limitation && <> <strong>Limit:</strong> {limitation}</>}
+    </p>
+  )}
+</section>
+
+<style>
+  .evidence-answer { max-width: 58rem; margin: 1.5rem 0 2rem; padding: 1.15rem 1.25rem 1.2rem; background: var(--band); }
+  .answer-label { display: flex; flex-wrap: wrap; align-items: center; gap: 0.55rem 0.75rem; margin: 0 0 0.65rem; font: 500 0.72rem var(--mono); text-transform: uppercase; }
+  .answer-type { background: var(--lavender); padding: 0.15rem 0.45rem; }
+  .answer-text { margin: 0; font-size: clamp(1.1rem, 2vw, 1.35rem); line-height: 1.35; letter-spacing: -0.015em; }
+  .answer-detail { margin: 0.7rem 0 0; color: var(--ink-2); font-size: 0.88rem; }
+</style>

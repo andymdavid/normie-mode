@@ -3,8 +3,11 @@ app: ChatGPT
 maker: OpenAI
 url: https://chatgpt.com
 status: approved
-checked_on: 2026-09-26
+checked_on: 2026-10-12
 sources:
+  - url: https://openai.com/index/introducing-gpt-6-1-sol/
+    title: Introducing GPT-6.1 Sol
+    kind: maker
   - url: https://help.openai.com/en/articles/20001354-gpt-56-and-gpt-6-pro-in-chatgpt
     title: GPT-5.6 and GPT-6 Pro in ChatGPT (couldn't be read automatically)
     kind: maker
@@ -37,11 +40,11 @@ plans:
     models:
       - { model: gpt-5-6-sol, access: included, default: true, basis: press }
       - { model: gpt-6-astra, access: included, where: "Only in ChatGPT's Work mode and Codex, not normal chat", basis: press }
-      - { model: gpt-6-sol, access: included, where: "Only in ChatGPT's Work mode and Codex, not normal chat", basis: press }
+      - { model: gpt-6-1-sol, access: included, where: "Only in ChatGPT Work and Codex, not normal chat", basis: maker }
   - id: pro
     name: Pro
     price_usd: 100
     price_note: From $100 a month; a $200 tier has higher limits
     models:
       - { model: gpt-6-astra, access: included, default: true, where: "Called GPT-6 Pro in the app", basis: press }
-      - { model: gpt-6-sol, access: included, where: "Only in ChatGPT's Work mode and Codex", basis: press }
+      - { model: gpt-6-1-sol, access: included, where: "Only in ChatGPT Work and Codex, not normal chat", basis: maker }

@@ -11,3 +11,6 @@ source_ids:
     - gpt-5.5
   epoch_index: GPT-5.5
   modelsdev: openai/gpt-5.5
+  lmarena:
+    - gpt-5.5-high
+    - gpt-5.5

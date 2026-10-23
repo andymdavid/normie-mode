@@ -207,6 +207,8 @@ export const testSchema = z.object({
   title: z.string(),
   what: z.string(),
   by: z.string(),
+  /** Publication date for our own test; imported sources use their snapshot retrieval date. */
+  published_on: date.optional(),
   /** Where the test is described: the owner's page, or our own results page. */
   url: z.union([z.url(), z.string().startsWith('/')]),
 });

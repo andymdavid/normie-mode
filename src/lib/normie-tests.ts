@@ -17,6 +17,7 @@ export interface AnswerRecord {
 
 export interface RunSummary {
   suite: string;
+  version?: string;
   run_id: string;
   total_cost_usd: number;
   cases: string[];

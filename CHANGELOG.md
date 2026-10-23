@@ -6,6 +6,22 @@ This file records meaningful changes to the Normie Mode product, implementation,
 
 ### Added
 
+- Public About, Contact, Editorial Policy and Corrections Policy pages with an approved producer/reviewer profile and monitored corrections route.
+- Preview-only drafts for About, Contact, Editorial Policy and Corrections Policy, grounded in public producer/profile sources and withheld from production pending factual approval.
+- An approved, supervised reports programme for monthly evidence and ranking changes and major model/test releases; reports remain drafts until editorial review and canonical pages remain authoritative.
+- Canonical site/page, article, visible-ranking and entity-relationship structured data derived from the same records as each page; publisher and reviewer identities remain intentionally absent pending approved public facts.
+- A complete review register for all 31 child-task pages, identifying eight direct-evidence enrichment candidates and the specific evidence or review gap for every retained exclusion.
+- Provider-verified records and source mappings for Claude Sonnet 5.5, Claude Haiku 5.5 and GPT-6.1 Sol, prepared for editorial review alongside the refreshed evidence.
+- A supervised weekly Wingman evidence-refresh pipeline for Epoch AI, models.dev and LMArena. It verifies changes in an isolated clone and prepares a review branch and impact report without merging, deploying or publishing recommendations.
+- Downloadable JSON and CSV for the published spreadsheet test, including its cases, prompts, answers, scores and provenance; Normie Mode-authored material is reusable under scoped CC BY 4.0, with raw model responses excluded from the licence grant.
+- Answer-first evidence blocks on benchmark and current-model pages, with explicit measured-result labels, linked evidence and limitations; task recommendations and first-party test findings now state their claim type too.
+- A reproducible 102-URL indexability review register with evidence and approval status for every proposed disposition; it does not change public indexing by itself.
+- Evidence-derived sitemap `lastmod` dates for every public URL, with audit coverage that rejects invalid freshness values.
+- Complete site-wide Open Graph and Twitter/X preview metadata with canonical URLs and a stable branded 1200×630 share image.
+- Privacy-minimal structured server logs for claimed OpenAI and Anthropic crawler requests, without ordinary visitor, IP-address or query-string logging.
+- A local living SEO and answer-engine implementation record with baseline findings, prioritized work items, acceptance criteria, decision gates, measurements and an append-only session log.
+- A repeatable `npm run seo:audit` check for sitemap, canonical, indexing, metadata and internal-link integrity, with review diagnostics and a fixed 30-prompt answer-engine citation test.
+- Google-compatible sitemap generation, a crawler-facing `robots.txt`, and canonical URLs for the live `normiemode.com` site; internal preview routes are excluded from the sitemap.
 - CapRover A deployment files and a release guide for automatic builds from the original GitHub repository's `deployed` branch.
 - A Normie Mode-styled exit-intent newsletter signup, matching Intelligence Snacks' behavior: it appears once per desktop session and stays hidden after a successful subscription.
 - Hosting scripts: `npm run setup` (install), `npm run serve` (install, build and serve on port 42001 on all addresses) and `npm run stop`, for platforms that take one command per field. The site accepts requests under any hostname, so it works behind a platform's proxy.
@@ -40,6 +56,7 @@ This file records meaningful changes to the Normie Mode product, implementation,
 
 ### Fixed
 
+- Duplicate public URL variants now permanently redirect to one canonical form: HTTPS, non-`www` and without generated `.html` suffixes.
 - The footer newsletter form now signs readers up to the same Beehiiv publication as Intelligence Snacks through a same-origin server endpoint, instead of being blocked by cross-origin browser rules. It also shows the subscription service's real errors and matches Intelligence Snacks' success state.
 - A run that only added some models would have replaced the published results of our own test. The site now combines every run of a test's current version, taking each model's latest answers.
 - A chart summary named one leader when several models were exactly level at the top; it now names them all.
@@ -85,6 +102,23 @@ This file records meaningful changes to the Normie Mode product, implementation,
 - Codex agent operating guide and concise progress-note protocol.
 
 ### Changed
+
+- The About page identity section now uses three consistent columns for Other Stuff, Intelligence Snacks, and co-founders Andy David and Pete Winn, with compact brand imagery and links to both founders on X.
+- About and Editorial Policy now follow the site's established visual system, with structured summary bands, numbered sections and clearer identity and review blocks; Contact and Corrections now share the same spacing and policy navigation treatment.
+- Public structured data now identifies Other Stuff as publisher and Andy David as the current human reviewer, matching the visible trust pages.
+- Citation and crawler monitoring now follows an approved privacy-minimal policy: aggregate measurement only, no fingerprinting or visitor profiles, and raw operational logs retained for no longer than 90 days.
+- The first curated head-to-head comparison now has a reliable preview path, preview-only model links, dependency-derived freshness and explicit production/indexing guards while it awaits publication review.
+- The nine enriched historical model pages have returned to default indexing and sitemap membership; the 31 undifferentiated child-task pages remain temporarily excluded.
+- Historical model pages now expose exact-version benchmark results held in canonical content; this closes the remaining evidence gap before the nine temporarily excluded pages receive a separate restoration decision.
+- The October evidence refresh and its resulting changes across all 15 main task verdicts passed editorial review and were approved for publication.
+- Historical model pages now preserve exact-version launch context, successor relationships, archived API specifications and benchmark/voting evidence instead of showing only a replacement notice.
+- Refreshed data now maps 1,209 Epoch benchmark results, 26 Epoch index scores, 26 models.dev records and 734 LMArena entries, with reviewed task verdict changes derived from the same published rule.
+- Search and social titles now lead with the task, exact model or benchmark identity, with concise unique descriptions across all indexed pages.
+- Task, model and test detail pages now show semantic breadcrumbs with matching canonical structured data.
+- Static text responses now support gzip, `HEAD` mirrors `GET` metadata without sending a body, and cache lifetimes distinguish fingerprinted build assets from replaceable images, discovery files and HTML.
+- Thirty-one child-task pages without distinct direct evidence and nine thin historical model pages now remain accessible and internally linked but use temporary `noindex,follow` and are omitted from the sitemap until they are improved; all other public pages remain submitted for indexing (D-035).
+- Dated task-page titles now use the page's evidence freshness month instead of changing with the wall clock.
+- Public crawler policy now permits OpenAI and Anthropic search discovery while opting out of their separate model-development crawlers.
 
 - The homepage introduction now explains model, access and evidence more naturally—“which AI does it best, where to get it, and the evidence behind our pick”—and uses a shorter desktop line length for a balanced two-line read.
 - The footer introduction is slightly wider on desktop so it reads cleanly across three lines.
