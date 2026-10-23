@@ -7,9 +7,8 @@ reference; it is not a deployment source and has no active deployment hook.
 
 The GitHub Actions workflow in `.github/workflows/deploy-caprover.yml` runs
 only on pushes to `refs/heads/deployed` and calls CapRover's app webhook.
-The webhook URL must be stored in the original repository's
-`CAPROVER_DEPLOY_HOOK` Actions secret before promoting this workflow to
-`deployed`.
+The webhook URL is stored in the original repository's
+`CAPROVER_DEPLOY_HOOK` Actions secret.
 A push to `main` does not deploy. CapRover's Git configuration must point to
 the original repository and branch. Its managed GitHub clone credential expires on
 2027-03-30 and must be rotated in CapRover before then.
