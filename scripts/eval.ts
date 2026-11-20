@@ -94,7 +94,7 @@ for (const t of targets) {
   console.log(`  ${t.name.padEnd(22)} ${t.route.padEnd(34)} ≈ $${(each * calls).toFixed(3)}`);
 }
 console.log(`\nEstimated total: $${estimate.toFixed(2)} (budget cap $${BUDGET.toFixed(2)})`);
-const manifest = { suite: SUITE_ID, version: SUITE_VERSION, models: [...modelIds].sort(), runs: RUNS, budget: BUDGET, cases_sha256: createHash('sha256').update(JSON.stringify(cases.map(c => ({ id: c.id, prompt: buildPrompt(c) })))).digest('hex') };
+const manifest = { suite: SUITE_ID, version: SUITE_VERSION, models: [...modelIds].sort(), routes: targets.map(t => ({ model:t.id, route:t.route, price:priceMap.get(t.route) })).sort((a,b) => a.model.localeCompare(b.model)), runs: RUNS, budget: BUDGET, cases_sha256: createHash('sha256').update(JSON.stringify(cases.map(c => ({ id: c.id, prompt: buildPrompt(c) })))).digest('hex') };
 if (DRY) { console.log('Approval manifest:', JSON.stringify(manifest)); process.exit(0); }
 if (!MOCK) {
   const approvalPath = arg('approval');
