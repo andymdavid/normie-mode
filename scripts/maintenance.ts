@@ -42,11 +42,17 @@ try {
   state.discoverySince ??= [acceptedDate,new Date(Date.now()-90*86400000).toISOString().slice(0,10)].sort()[0];
   const baselineDate=state.discoverySince;
   const mapped = new Set([...g.models.values()].map(m=>m.source_ids.modelsdev));
+  report.mappingDrift=[];
   for(const [provider,p] of Object.entries<any>(catalogue)) {
     if(!['anthropic','openai','google','deepseek','moonshotai'].includes(provider)) continue;
     for(const [id,m] of Object.entries<any>(p.models??{})) {
       const key=`${provider}/${id}`;
-      if(mapped.has(key)||!(m.modalities?.output??[]).includes('text')||/image|tts|live|audio|embed/i.test(id)) continue;
+      if(mapped.has(key)) {
+        const canonical=[...g.models.values()].find(model=>model.source_ids.modelsdev===key)!;
+        if(canonical.released_on && m.release_date && canonical.released_on!==m.release_date) report.mappingDrift.push({source:key,canonical:canonical.id,recordedRelease:canonical.released_on,sourceRelease:m.release_date,action:'Verify exact identity; do not transfer new evidence to the predecessor'});
+        continue;
+      }
+      if(!(m.modalities?.output??[]).includes('text')||/image|tts|live|audio|embed/i.test(id)) continue;
       // Persist unresolved discoveries without a rolling-window expiry. No automatic canonical mapping.
       if(!state.candidates[key] && (m.release_date??'')<baselineDate) continue;
       const old=state.candidates[key];

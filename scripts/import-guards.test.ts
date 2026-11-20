@@ -18,6 +18,12 @@ describe('import safety', () => {
     expect(() => guardSnapshot('lmarena', {...snapshot(10), meta:{as_of:'2026-01-01',retrieved_at:'2026-11-19T00:00:00Z'}}, snapshot(10))).toThrow('backwards');
     expect(() => guardSnapshot('lmarena', {...snapshot(1), entries:[{model:'x',category:'overall',rating:NaN}]})).toThrow('invalid');
   });
+  it('rejects a mutable specification alias changing exact versions', () => {
+    const meta = {retrieved_at:'2026-11-20T00:00:00Z'};
+    const previous = {meta,models:[{model:'september',source_model:'provider/latest',released_on:'2026-09-10'}]};
+    const next = {meta,models:[{model:'september',source_model:'provider/latest',released_on:'2026-10-17'}]};
+    expect(() => guardSnapshot('modelsdev',next,previous)).toThrow('mutable alias changed version');
+  });
   it('leaves all accepted files untouched if one source fails', () => {
     const dir = mkdtempSync(join(tmpdir(), 'normie-atomic-'));
     writeFileSync(join(dir,'modelsdev.json'), JSON.stringify({meta:{retrieved_at:'2026-11-19T00:00:00Z'},models:[{model:'old'}]}));
