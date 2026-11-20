@@ -5,7 +5,7 @@
   "url": "https://epoch.ai/benchmarks",
   "licence": "CC BY 4.0",
   "attribution": "Epoch AI, 'Capabilities & Benchmarking', https://epoch.ai/benchmarks",
-  "retrieved_at": "2026-10-12T09:34:47.347Z"
+  "retrieved_at": "2026-11-20T04:24:45.170Z"
  },
  "benchmarks": [
   {
@@ -13,7 +13,7 @@
    "file": "gpqa_diamond.csv",
    "score_column": "Best score (across scorers)",
    "random_baseline": 0.25,
-   "score_ceiling": 1,
+   "score_ceiling": 0.97,
    "released_on": "2023-11-20",
    "in_index": true
   },
@@ -40,7 +40,7 @@
    "file": "frontiermath_tiers_1_3_v2.csv",
    "score_column": "Best score (across scorers)",
    "random_baseline": 0,
-   "score_ceiling": 1,
+   "score_ceiling": 0.95,
    "released_on": "2026-06-12",
    "in_index": true
   },
@@ -77,8 +77,8 @@
    "score_column": "Best score (across scorers)",
    "random_baseline": 0,
    "score_ceiling": 1,
-   "released_on": "2024-08-13",
-   "in_index": true
+   "released_on": "1.0",
+   "in_index": false
   },
   {
    "name": "SimpleQA Verified",
@@ -261,15 +261,6 @@
    "in_index": true
   },
   {
-   "name": "Lech Mazur Writing",
-   "file": "lech_mazur_writing_external.csv",
-   "score_column": "Mean score",
-   "random_baseline": 0,
-   "score_ceiling": 1,
-   "released_on": "2025-01-31",
-   "in_index": true
-  },
-  {
    "name": "MMLU",
    "file": "mmlu_external.csv",
    "score_column": "EM",
@@ -303,15 +294,6 @@
    "random_baseline": 0.5,
    "score_ceiling": 1,
    "released_on": "2019-11-26",
-   "in_index": true
-  },
-  {
-   "name": "ScienceQA",
-   "file": "science_qa_external.csv",
-   "score_column": "Score",
-   "random_baseline": 0.25,
-   "score_ceiling": 1,
-   "released_on": "2022-09-20",
    "in_index": true
   },
   {
@@ -408,10 +390,10 @@
    "name": "HLE",
    "file": "hle_external.csv",
    "score_column": "Accuracy",
-   "random_baseline": 0.048,
+   "random_baseline": 0,
    "score_ceiling": 1,
-   "released_on": "2025-01-23",
-   "in_index": true
+   "released_on": "1.0",
+   "in_index": false
   },
   {
    "name": "PostTrainBench",
@@ -518,8 +500,8 @@
    "score_column": "Pass@1",
    "random_baseline": 0,
    "score_ceiling": 1,
-   "released_on": "2026-05-26",
-   "in_index": true
+   "released_on": "1.0",
+   "in_index": false
   },
   {
    "name": "ProofBench",
@@ -623,195 +605,204 @@
   {
    "name": "WeirdML v3",
    "file": "weirdml_v3_external.csv",
-   "score_column": "Score",
+   "score_column": "Max performance",
+   "random_baseline": 0,
+   "score_ceiling": 0.9,
+   "released_on": "2026-09-18",
+   "in_index": true
+  },
+  {
+   "name": "SpireClimb",
+   "file": "spireclimb.csv",
+   "score_column": "Best score (across scorers)",
    "random_baseline": 0,
    "score_ceiling": 1,
-   "released_on": "1.0",
-   "in_index": false
+   "released_on": "2026-10-14",
+   "in_index": true
   }
  ],
  "index": [
   {
-   "model": "claude-opus-5-5",
-   "source_model": "Claude Opus 5.5",
-   "eci": 167.33,
-   "low": 164.06,
-   "high": 171.68
-  },
-  {
    "model": "gpt-6-astra",
    "source_model": "GPT-6 Astra",
-   "eci": 166.45,
-   "low": 163.34,
-   "high": 171.46
+   "eci": 169.2,
+   "low": 166.33,
+   "high": 172.48
+  },
+  {
+   "model": "claude-opus-5-5",
+   "source_model": "Claude Opus 5.5",
+   "eci": 168.7,
+   "low": 165.87,
+   "high": 171.89
   },
   {
    "model": "gpt-6-1-sol",
    "source_model": "GPT-6.1 Sol",
-   "eci": 166.09,
-   "low": 162.89,
-   "high": 170.63
-  },
-  {
-   "model": "claude-sonnet-5-5",
-   "source_model": "Claude Sonnet 5.5",
-   "eci": 165.03,
-   "low": 161.68,
-   "high": 169.06
+   "eci": 168.63,
+   "low": 165.7,
+   "high": 171.91
   },
   {
    "model": "claude-fable-5-1",
    "source_model": "Claude Fable 5.1",
-   "eci": 164.7,
-   "low": 161.63,
-   "high": 168.81
+   "eci": 167.09,
+   "low": 164.43,
+   "high": 170.11
+  },
+  {
+   "model": "claude-sonnet-5-5",
+   "source_model": "Claude Sonnet 5.5",
+   "eci": 166.59,
+   "low": 163.83,
+   "high": 169.65
   },
   {
    "model": "claude-opus-5",
    "source_model": "Claude Opus 5",
-   "eci": 162.78,
-   "low": 160.12,
-   "high": 166.47
-  },
-  {
-   "model": "gpt-6-sol",
-   "source_model": "GPT-6 Sol",
-   "eci": 162.72,
-   "low": 160.07,
-   "high": 166.57
+   "eci": 164.74,
+   "low": 162.3,
+   "high": 167.66
   },
   {
    "model": "claude-fable-5",
    "source_model": "Claude Fable 5",
-   "eci": 162.06,
-   "low": 159.28,
-   "high": 166.18
+   "eci": 164.21,
+   "low": 161.78,
+   "high": 166.86
+  },
+  {
+   "model": "gpt-6-sol",
+   "source_model": "GPT-6 Sol",
+   "eci": 163.82,
+   "low": 161.4,
+   "high": 166.57
   },
   {
    "model": "gpt-5-6-sol",
    "source_model": "GPT-5.6 Sol",
-   "eci": 161.66,
-   "low": 159.27,
-   "high": 165.1
+   "eci": 163.05,
+   "low": 160.76,
+   "high": 165.59
   },
   {
    "model": "gpt-5-5",
    "source_model": "GPT-5.5",
-   "eci": 159.1,
-   "low": 156.66,
-   "high": 162.27
+   "eci": 160.19,
+   "low": 158.2,
+   "high": 162.43
   },
   {
    "model": "claude-opus-4-8",
    "source_model": "Claude Opus 4.8",
-   "eci": 158.21,
-   "low": 156.04,
-   "high": 160.77
-  },
-  {
-   "model": "kimi-k3",
-   "source_model": "Kimi K3",
-   "eci": 157.45,
-   "low": 155.15,
-   "high": 160.03
-  },
-  {
-   "model": "gemini-3-7-flash",
-   "source_model": "Gemini 3.7 Flash",
-   "eci": 157.27,
-   "low": 155.37,
-   "high": 159.87
+   "eci": 159.91,
+   "low": 157.82,
+   "high": 162.21
   },
   {
    "model": "gemini-3-8-flash",
    "source_model": "Gemini 3.8 Flash",
-   "eci": 156.71,
-   "low": 154.41,
-   "high": 160.26
+   "eci": 158.83,
+   "low": 156.86,
+   "high": 160.97
   },
   {
-   "model": "gpt-5-6-luna",
-   "source_model": "GPT-5.6 Luna",
-   "eci": 156.39,
-   "low": 153.98,
-   "high": 158.7
+   "model": "kimi-k3",
+   "source_model": "Kimi K3",
+   "eci": 158.6,
+   "low": 156.63,
+   "high": 160.8
   },
   {
-   "model": "gpt-6-luna",
-   "source_model": "GPT-6 Luna",
-   "eci": 156.28,
-   "low": 153.67,
-   "high": 158.75
-  },
-  {
-   "model": "claude-sonnet-5",
-   "source_model": "Claude Sonnet 5",
-   "eci": 156.21,
-   "low": 153.48,
-   "high": 158.79
-  },
-  {
-   "model": "deepseek-v4-pro",
-   "source_model": "DeepSeek V4 Pro 0813",
-   "eci": 155.31,
-   "low": 153.48,
-   "high": 157.45
-  },
-  {
-   "model": "claude-opus-4-6",
-   "source_model": "Claude Opus 4.6",
-   "eci": 155.24,
-   "low": 153.36,
-   "high": 157.28
+   "model": "gemini-3-7-flash",
+   "source_model": "Gemini 3.7 Flash",
+   "eci": 158.38,
+   "low": 156.41,
+   "high": 160.53
   },
   {
    "model": "deepseek-v4-1-flash",
    "source_model": "DeepSeek V4.1 Flash",
-   "eci": 154.9,
-   "low": 148.49,
-   "high": 157.33
+   "eci": 157,
+   "low": 155.08,
+   "high": 159.03
+  },
+  {
+   "model": "claude-sonnet-5",
+   "source_model": "Claude Sonnet 5",
+   "eci": 156.9,
+   "low": 154.91,
+   "high": 159.08
+  },
+  {
+   "model": "gpt-5-6-luna",
+   "source_model": "GPT-5.6 Luna",
+   "eci": 156.7,
+   "low": 154.87,
+   "high": 158.77
+  },
+  {
+   "model": "gpt-6-luna",
+   "source_model": "GPT-6 Luna",
+   "eci": 156.39,
+   "low": 154.5,
+   "high": 158.47
+  },
+  {
+   "model": "claude-opus-4-6",
+   "source_model": "Claude Opus 4.6",
+   "eci": 156.35,
+   "low": 154.59,
+   "high": 158.29
   },
   {
    "model": "gemini-3-1-pro",
    "source_model": "Gemini 3.1 Pro",
-   "eci": 154.77,
-   "low": 152.44,
-   "high": 157.27
+   "eci": 156.25,
+   "low": 154.49,
+   "high": 158.15
+  },
+  {
+   "model": "deepseek-v4-pro",
+   "source_model": "DeepSeek V4 Pro 0813",
+   "eci": 155.96,
+   "low": 154.1,
+   "high": 157.99
   },
   {
    "model": "gemini-3-6-flash",
    "source_model": "Gemini 3.6 Flash",
-   "eci": 154.25,
-   "low": 152.58,
-   "high": 156.22
+   "eci": 155.24,
+   "low": 153.42,
+   "high": 157.18
   },
   {
    "model": "gpt-5-2",
    "source_model": "GPT-5.2",
-   "eci": 153.45,
-   "low": 151.55,
-   "high": 155.37
+   "eci": 154.52,
+   "low": 152.94,
+   "high": 156.31
   },
   {
    "model": "kimi-k2-5",
    "source_model": "Kimi K2.5",
-   "eci": 148.03,
-   "low": 146.43,
-   "high": 149.33
+   "eci": 148.8,
+   "low": 147.3,
+   "high": 150.35
   },
   {
    "model": "gemini-3-5-flash-lite",
    "source_model": "Gemini 3.5 Flash-Lite",
-   "eci": 145.13,
-   "low": 142.87,
-   "high": 146.56
+   "eci": 145.65,
+   "low": 143.98,
+   "high": 147.32
   },
   {
    "model": "claude-haiku-4-5",
    "source_model": "Claude Haiku 4.5",
-   "eci": 142.41,
-   "low": 139.4,
-   "high": 144.07
+   "eci": 142.76,
+   "low": 141.15,
+   "high": 144.34
   }
  ],
  "results": [
@@ -822,7 +813,8 @@
    "benchmark": "GPQA diamond",
    "value": 0.8983585858585859,
    "stderr": 0.017287759372442393,
-   "evaluated_on": "2026-10-09"
+   "evaluated_on": "2026-10-09",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FZU5ebpDaDPiDZLgv7cG8B9.eval"
   },
   {
    "model": "claude-haiku-5-5",
@@ -831,7 +823,8 @@
    "benchmark": "GPQA diamond",
    "value": 0.8964646464646465,
    "stderr": 0.019774484382483127,
-   "evaluated_on": "2026-10-09"
+   "evaluated_on": "2026-10-09",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FZEKWTGJiWFscHimMkiUmec.eval"
   },
   {
    "model": "gpt-6-1-sol",
@@ -840,7 +833,8 @@
    "benchmark": "GPQA diamond",
    "value": 0.9539141414141414,
    "stderr": 0.013780748450364692,
-   "evaluated_on": "2026-09-29"
+   "evaluated_on": "2026-09-29",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FLspviLnbeZ82WCngWp6rwR.eval"
   },
   {
    "model": "claude-sonnet-5-5",
@@ -849,7 +843,8 @@
    "benchmark": "GPQA diamond",
    "value": 0.9558080808080808,
    "stderr": 0.013710320714521202,
-   "evaluated_on": "2026-09-29"
+   "evaluated_on": "2026-09-29",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FQPk8jbJvo4986sbWtdte6J.eval"
   },
   {
    "model": "gpt-6-luna",
@@ -858,7 +853,8 @@
    "benchmark": "GPQA diamond",
    "value": 0.9046717171717171,
    "stderr": 0.018537378631915503,
-   "evaluated_on": "2026-09-22"
+   "evaluated_on": "2026-09-22",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2F7F3QFMAkwnCV62HcvxP96q.eval"
   },
   {
    "model": "gpt-6-sol",
@@ -867,7 +863,8 @@
    "benchmark": "GPQA diamond",
    "value": 0.9431818181818182,
    "stderr": 0.014938512008159717,
-   "evaluated_on": "2026-09-22"
+   "evaluated_on": "2026-09-22",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FaJD7ZfFftu2cZoToJhhzF7.eval"
   },
   {
    "model": "claude-opus-5-5",
@@ -876,7 +873,8 @@
    "benchmark": "GPQA diamond",
    "value": 0.9059343434343434,
    "stderr": 0.019434397190192135,
-   "evaluated_on": "2026-09-22"
+   "evaluated_on": "2026-09-22",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2F6gmbahPSxHf9xVhAYqpnhi.eval"
   },
   {
    "model": "gemini-3-8-flash",
@@ -885,7 +883,8 @@
    "benchmark": "GPQA diamond",
    "value": 0.9539141414141414,
    "stderr": 0.01401136318210652,
-   "evaluated_on": "2026-09-02"
+   "evaluated_on": "2026-09-02",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FBr3mjs2GrYcCwX9AMwcihU.eval"
   },
   {
    "model": "gpt-6-astra",
@@ -894,7 +893,8 @@
    "benchmark": "GPQA diamond",
    "value": 0.9577020202020202,
    "stderr": 0.013696812097020311,
-   "evaluated_on": "2026-08-30"
+   "evaluated_on": "2026-08-30",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2F3h8STJpG2VzY9LiBUzwotv.eval"
   },
   {
    "model": "deepseek-v4-pro",
@@ -903,7 +903,8 @@
    "benchmark": "GPQA diamond",
    "value": 0.9166666666666666,
    "stderr": 0.015242573629934338,
-   "evaluated_on": "2026-08-18"
+   "evaluated_on": "2026-08-18",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FnEJGtXGN588zynPkynZkxz.eval"
   },
   {
    "model": "gemini-3-7-flash",
@@ -912,7 +913,8 @@
    "benchmark": "GPQA diamond",
    "value": 0.9482323232323232,
    "stderr": 0.013456525292246259,
-   "evaluated_on": "2026-08-14"
+   "evaluated_on": "2026-08-14",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FXyVL3VffJ6UboY97vxpohL.eval"
   },
   {
    "model": "gpt-5-6-sol",
@@ -1140,7 +1142,8 @@
    "benchmark": "GPQA diamond",
    "value": 0.9412878787878788,
    "stderr": 0.014028967942064968,
-   "evaluated_on": "2026-08-02"
+   "evaluated_on": "2026-08-02",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2F86SY5JbPB49xXhHFQW6tHu.eval"
   },
   {
    "model": "claude-opus-5",
@@ -1149,7 +1152,8 @@
    "benchmark": "GPQA diamond",
    "value": 0.9387626262626263,
    "stderr": 0.014782015056089346,
-   "evaluated_on": "2026-07-24"
+   "evaluated_on": "2026-07-24",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FD3mtasTumfvjR4fjmnHWRy.eval"
   },
   {
    "model": "kimi-k3",
@@ -1158,7 +1162,8 @@
    "benchmark": "GPQA diamond",
    "value": 0.9311868686868687,
    "stderr": 0.014937225364194858,
-   "evaluated_on": "2026-07-16"
+   "evaluated_on": "2026-07-16",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FB8MaPUe3EYwUZASsNqE7C9.eval"
   },
   {
    "model": "gpt-5-2",
@@ -1177,7 +1182,8 @@
    "benchmark": "GPQA diamond",
    "value": 0.9160353535353535,
    "stderr": 0.01728284355494035,
-   "evaluated_on": "2026-07-09"
+   "evaluated_on": "2026-07-09",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FLWkDtkmd3TNmLzMhfZD5HW.eval"
   },
   {
    "model": "gpt-5-6-sol",
@@ -1186,7 +1192,8 @@
    "benchmark": "GPQA diamond",
    "value": 0.9349747474747475,
    "stderr": 0.01570109070867593,
-   "evaluated_on": "2026-07-09"
+   "evaluated_on": "2026-07-09",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FnuKCgZReCBsXKCkNj9bK37.eval"
   },
   {
    "model": "claude-sonnet-5",
@@ -1195,7 +1202,8 @@
    "benchmark": "GPQA diamond",
    "value": 0.9053030303030303,
    "stderr": 0.01783832131341021,
-   "evaluated_on": "2026-07-01"
+   "evaluated_on": "2026-07-01",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FHhiYxEx3Bf8YDPUh34K4DC.eval"
   },
   {
    "model": "claude-opus-4-8",
@@ -1204,7 +1212,8 @@
    "benchmark": "GPQA diamond",
    "value": 0.9103535353535354,
    "stderr": 0.019157125794612026,
-   "evaluated_on": "2026-06-07"
+   "evaluated_on": "2026-06-07",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FdqgqP2uEPswfECCVj2Kbr9.eval"
   },
   {
    "model": "gpt-5-5",
@@ -1975,7 +1984,8 @@
    "benchmark": "OTIS Mock AIME 2024-2025",
    "value": 0.9833333333333333,
    "stderr": 0.006405884289881728,
-   "evaluated_on": "2026-10-08"
+   "evaluated_on": "2026-10-08",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2F7eHNiVQCzLcAyj5LxmeeSU.eval"
   },
   {
    "model": "claude-haiku-5-5",
@@ -1984,7 +1994,8 @@
    "benchmark": "OTIS Mock AIME 2024-2025",
    "value": 0.9888888888888889,
    "stderr": 0.005362818328685681,
-   "evaluated_on": "2026-10-07"
+   "evaluated_on": "2026-10-07",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FiiEPrSjWXHH6Zq9CK4Zmcr.eval"
   },
   {
    "model": "claude-haiku-5-5",
@@ -1993,7 +2004,8 @@
    "benchmark": "OTIS Mock AIME 2024-2025",
    "value": 0.9722222222222222,
    "stderr": 0.013109441770118595,
-   "evaluated_on": "2026-10-07"
+   "evaluated_on": "2026-10-07",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FLycbwGumF6Q7ySpmGY94XW.eval"
   },
   {
    "model": "gpt-6-1-sol",
@@ -2002,7 +2014,8 @@
    "benchmark": "OTIS Mock AIME 2024-2025",
    "value": 1,
    "stderr": 0,
-   "evaluated_on": "2026-09-29"
+   "evaluated_on": "2026-09-29",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FDi7y6sES4PGQbXNkXYhdqM.eval"
   },
   {
    "model": "claude-sonnet-5-5",
@@ -2011,7 +2024,8 @@
    "benchmark": "OTIS Mock AIME 2024-2025",
    "value": 1,
    "stderr": 0,
-   "evaluated_on": "2026-09-29"
+   "evaluated_on": "2026-09-29",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FbSEaZLPehiNVDQL7HP9EJS.eval"
   },
   {
    "model": "gpt-6-luna",
@@ -2020,7 +2034,8 @@
    "benchmark": "OTIS Mock AIME 2024-2025",
    "value": 0.9888888888888889,
    "stderr": 0.006674027922425511,
-   "evaluated_on": "2026-09-22"
+   "evaluated_on": "2026-09-22",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2F4uDz9b6SosxDSZf7swMD9D.eval"
   },
   {
    "model": "gpt-6-sol",
@@ -2029,7 +2044,8 @@
    "benchmark": "OTIS Mock AIME 2024-2025",
    "value": 1,
    "stderr": 0,
-   "evaluated_on": "2026-09-22"
+   "evaluated_on": "2026-09-22",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FVZAUcNkzeMSMm9paxBhj6B.eval"
   },
   {
    "model": "claude-opus-5-5",
@@ -2038,7 +2054,8 @@
    "benchmark": "OTIS Mock AIME 2024-2025",
    "value": 1,
    "stderr": 0,
-   "evaluated_on": "2026-09-22"
+   "evaluated_on": "2026-09-22",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FLSfona7P3jCAnZFXJ2YA7F.eval"
   },
   {
    "model": "gemini-3-8-flash",
@@ -2047,7 +2064,8 @@
    "benchmark": "OTIS Mock AIME 2024-2025",
    "value": 0.9888888888888889,
    "stderr": 0.008724007409153888,
-   "evaluated_on": "2026-09-02"
+   "evaluated_on": "2026-09-02",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FNeYuqgQyWtFWAHEjQYPm5Z.eval"
   },
   {
    "model": "claude-fable-5-1",
@@ -2056,7 +2074,8 @@
    "benchmark": "OTIS Mock AIME 2024-2025",
    "value": 1,
    "stderr": 0,
-   "evaluated_on": "2026-09-01"
+   "evaluated_on": "2026-09-01",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FmRAASXsUuoJmc2oR5G89zR.eval"
   },
   {
    "model": "gpt-6-astra",
@@ -2065,7 +2084,8 @@
    "benchmark": "OTIS Mock AIME 2024-2025",
    "value": 1,
    "stderr": 0,
-   "evaluated_on": "2026-08-30"
+   "evaluated_on": "2026-08-30",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FL7kW8yxFKCjVXhxNnt3VTq.eval"
   },
   {
    "model": "deepseek-v4-pro",
@@ -2074,7 +2094,8 @@
    "benchmark": "OTIS Mock AIME 2024-2025",
    "value": 0.9861111111111112,
    "stderr": 0.00990980650017605,
-   "evaluated_on": "2026-08-18"
+   "evaluated_on": "2026-08-18",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2F4HVvM9ZWKKPLQPcC8WYYMT.eval"
   },
   {
    "model": "gemini-3-7-flash",
@@ -2083,7 +2104,8 @@
    "benchmark": "OTIS Mock AIME 2024-2025",
    "value": 0.9722222222222222,
    "stderr": 0.018586784946171872,
-   "evaluated_on": "2026-08-14"
+   "evaluated_on": "2026-08-14",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FkQjrYCaa7yYyMXofeR23Dd.eval"
   },
   {
    "model": "gpt-5-6-sol",
@@ -2311,7 +2333,8 @@
    "benchmark": "OTIS Mock AIME 2024-2025",
    "value": 0.9416666666666667,
    "stderr": 0.030926354359015452,
-   "evaluated_on": "2026-08-02"
+   "evaluated_on": "2026-08-02",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FajQFZGMjvyMTH2ULDZhwtz.eval"
   },
   {
    "model": "claude-opus-5",
@@ -2320,7 +2343,8 @@
    "benchmark": "OTIS Mock AIME 2024-2025",
    "value": 0.9888888888888889,
    "stderr": 0.011111111111111112,
-   "evaluated_on": "2026-07-24"
+   "evaluated_on": "2026-07-24",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FKxvHAT9SV2dTDn7jBnTk6f.eval"
   },
   {
    "model": "kimi-k3",
@@ -2329,7 +2353,8 @@
    "benchmark": "OTIS Mock AIME 2024-2025",
    "value": 0.9722222222222222,
    "stderr": 0.011158359139033182,
-   "evaluated_on": "2026-07-16"
+   "evaluated_on": "2026-07-16",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FA33om9MTYMC7xYeLv9X7Ha.eval"
   },
   {
    "model": "gpt-5-2",
@@ -2348,7 +2373,8 @@
    "benchmark": "OTIS Mock AIME 2024-2025",
    "value": 0.9833333333333333,
    "stderr": 0.011650421590325524,
-   "evaluated_on": "2026-07-09"
+   "evaluated_on": "2026-07-09",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FAhtQ5ggs4pTfLDqHFjueGy.eval"
   },
   {
    "model": "gpt-5-6-sol",
@@ -2357,7 +2383,8 @@
    "benchmark": "OTIS Mock AIME 2024-2025",
    "value": 1,
    "stderr": 0,
-   "evaluated_on": "2026-07-09"
+   "evaluated_on": "2026-07-09",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2F7RjsANKwwsePSstcZeSMhX.eval"
   },
   {
    "model": "claude-sonnet-5",
@@ -2366,7 +2393,8 @@
    "benchmark": "OTIS Mock AIME 2024-2025",
    "value": 0.9472222222222222,
    "stderr": 0.022644349282618412,
-   "evaluated_on": "2026-07-01"
+   "evaluated_on": "2026-07-01",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FT2wFfuSkUdyjpyqurxNmNK.eval"
   },
   {
    "model": "claude-fable-5",
@@ -2375,7 +2403,8 @@
    "benchmark": "OTIS Mock AIME 2024-2025",
    "value": 0.9972222222222222,
    "stderr": 0.002777777777777778,
-   "evaluated_on": "2026-06-10"
+   "evaluated_on": "2026-06-10",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FeiLEpRUvK48wUKDh4sYkzV.eval"
   },
   {
    "model": "claude-opus-4-8",
@@ -2384,7 +2413,8 @@
    "benchmark": "OTIS Mock AIME 2024-2025",
    "value": 0.9833333333333333,
    "stderr": 0.014101901870444154,
-   "evaluated_on": "2026-06-07"
+   "evaluated_on": "2026-06-07",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2F37pJqPpXTE6ia9ikmmGPJ4.eval"
   },
   {
    "model": "gemini-3-1-pro",
@@ -2482,13 +2512,24 @@
    "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FaQiAg6mt8HPHXjKcJvax2d.eval"
   },
   {
+   "model": "deepseek-v4-1-flash",
+   "source_model": "deepseek-v4.1-flash_max",
+   "effort": "max",
+   "benchmark": "SimpleQA Verified",
+   "value": 0.429,
+   "stderr": 0.015658997547870177,
+   "evaluated_on": "2026-10-13",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2F3JJ4ChNxMo8CGAh3HrKNrw.eval"
+  },
+  {
    "model": "claude-haiku-5-5",
    "source_model": "claude-haiku-5-5_max",
    "effort": "max",
    "benchmark": "SimpleQA Verified",
    "value": 0.238,
    "stderr": 0.013473586661967093,
-   "evaluated_on": "2026-10-09"
+   "evaluated_on": "2026-10-09",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FNwnrUMtveqHDYB2Um4ycmA.eval"
   },
   {
    "model": "gpt-6-1-sol",
@@ -2497,7 +2538,8 @@
    "benchmark": "SimpleQA Verified",
    "value": 0.739,
    "stderr": 0.013895037677965185,
-   "evaluated_on": "2026-09-29"
+   "evaluated_on": "2026-09-29",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FdfT5VD7cQug8XW6GQHyJUF.eval"
   },
   {
    "model": "claude-sonnet-5-5",
@@ -2506,7 +2548,8 @@
    "benchmark": "SimpleQA Verified",
    "value": 0.465,
    "stderr": 0.015780495050030086,
-   "evaluated_on": "2026-09-29"
+   "evaluated_on": "2026-09-29",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FGtJ5yd3ZPQ7HVcm6Q9ssQz.eval"
   },
   {
    "model": "gpt-6-luna",
@@ -2515,7 +2558,8 @@
    "benchmark": "SimpleQA Verified",
    "value": 0.414,
    "stderr": 0.015583544104177553,
-   "evaluated_on": "2026-09-22"
+   "evaluated_on": "2026-09-22",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FHX9sRVWJtZiNvneALnVzs8.eval"
   },
   {
    "model": "gpt-6-sol",
@@ -2524,7 +2568,8 @@
    "benchmark": "SimpleQA Verified",
    "value": 0.607,
    "stderr": 0.015452824654081525,
-   "evaluated_on": "2026-09-22"
+   "evaluated_on": "2026-09-22",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FdonMeEKBZZdqpQsojKWJEm.eval"
   },
   {
    "model": "claude-opus-5-5",
@@ -2533,7 +2578,8 @@
    "benchmark": "SimpleQA Verified",
    "value": 0.722,
    "stderr": 0.014174516461485273,
-   "evaluated_on": "2026-09-22"
+   "evaluated_on": "2026-09-22",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FCgLfiGcNwMPVzxr8GdNUAK.eval"
   },
   {
    "model": "gemini-3-8-flash",
@@ -2542,7 +2588,8 @@
    "benchmark": "SimpleQA Verified",
    "value": 0.697,
    "stderr": 0.014539683710535193,
-   "evaluated_on": "2026-09-02"
+   "evaluated_on": "2026-09-02",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FgZ4bwozTKtpmZTqnqX3a33.eval"
   },
   {
    "model": "claude-fable-5-1",
@@ -2551,7 +2598,8 @@
    "benchmark": "SimpleQA Verified",
    "value": 0.708,
    "stderr": 0.014385511563477433,
-   "evaluated_on": "2026-09-01"
+   "evaluated_on": "2026-09-01",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FExyL3GN8s34tizrXV3VmS3.eval"
   },
   {
    "model": "gpt-6-astra",
@@ -2560,7 +2608,8 @@
    "benchmark": "SimpleQA Verified",
    "value": 0.756,
    "stderr": 0.013588548437881386,
-   "evaluated_on": "2026-08-30"
+   "evaluated_on": "2026-08-30",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FPppwnX7EjXx2SeTcFN8Ujn.eval"
   },
   {
    "model": "kimi-k3",
@@ -2755,67 +2804,164 @@
    "evaluated_on": "2026-08-10"
   },
   {
-   "model": "gpt-6-1-sol",
-   "source_model": "gpt-6.1-sol_max",
-   "effort": "max",
+   "model": "gpt-5-2",
+   "source_model": "gpt-5.2-2025-12-11_xhigh",
+   "effort": "xhigh",
    "benchmark": "Chess Puzzles",
-   "value": 0.61,
-   "stderr": 0.04902071300001973,
-   "evaluated_on": "2026-09-29"
+   "value": 0.48,
+   "stderr": 0.05021167315686782,
+   "evaluated_on": "2026-10-14",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FYGX23vJ7GJBaYUVLvHnXn5.eval"
   },
   {
-   "model": "gpt-6-luna",
-   "source_model": "gpt-6-luna_max",
+   "model": "kimi-k3",
+   "source_model": "kimi-k3_max",
    "effort": "max",
+   "benchmark": "Chess Puzzles",
+   "value": 0.36,
+   "stderr": 0.048241815132442176,
+   "evaluated_on": "2026-10-13",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FnzQV9YvictnDF2EwxqTJQs.eval"
+  },
+  {
+   "model": "kimi-k3",
+   "source_model": "kimi-k3_high",
+   "effort": "high",
+   "benchmark": "Chess Puzzles",
+   "value": 0.37,
+   "stderr": 0.048523658709390974,
+   "evaluated_on": "2026-10-13",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FX2QNPHFXuWosA6AiuvVtDv.eval"
+  },
+  {
+   "model": "kimi-k3",
+   "source_model": "kimi-k3_low",
+   "effort": "low",
+   "benchmark": "Chess Puzzles",
+   "value": 0.18,
+   "stderr": 0.03861229196653691,
+   "evaluated_on": "2026-10-13",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FVPSX7EnwWuBrCPnpYGMUEM.eval"
+  },
+  {
+   "model": "gpt-5-2",
+   "source_model": "gpt-5.2-2025-12-11_medium",
+   "effort": "medium",
+   "benchmark": "Chess Puzzles",
+   "value": 0.36,
+   "stderr": 0.04824181513244218,
+   "evaluated_on": "2026-10-13",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FWpdE2FAG4gvAbvgemVXgPA.eval"
+  },
+  {
+   "model": "gpt-5-2",
+   "source_model": "gpt-5.2-2025-12-11_high",
+   "effort": "high",
+   "benchmark": "Chess Puzzles",
+   "value": 0.45,
+   "stderr": 0.05,
+   "evaluated_on": "2026-10-13",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FY9hzf2ioQTW9ezDvCGzTCu.eval"
+  },
+  {
+   "model": "gpt-5-2",
+   "source_model": "gpt-5.2-2025-12-11_low",
+   "effort": "low",
+   "benchmark": "Chess Puzzles",
+   "value": 0.26,
+   "stderr": 0.04408440022768081,
+   "evaluated_on": "2026-10-13",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FgajcfzsiUXo8AyTudT22bP.eval"
+  },
+  {
+   "model": "gpt-5-2",
+   "source_model": "gpt-5.2-2025-12-11_none",
+   "effort": "none",
+   "benchmark": "Chess Puzzles",
+   "value": 0.02,
+   "stderr": 0.014070529413628968,
+   "evaluated_on": "2026-10-13",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FMuBMyrNUmTRebT8AA8AY8g.eval"
+  },
+  {
+   "model": "gpt-5-5",
+   "source_model": "gpt-5.5_xhigh",
+   "effort": "xhigh",
+   "benchmark": "Chess Puzzles",
+   "value": 0.63,
+   "stderr": 0.048523658709390974,
+   "evaluated_on": "2026-10-13",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FDFWQcrbMegFAcEWZKWoJxC.eval"
+  },
+  {
+   "model": "gpt-5-5",
+   "source_model": "gpt-5.5_low",
+   "effort": "low",
+   "benchmark": "Chess Puzzles",
+   "value": 0.3,
+   "stderr": 0.04605661864718382,
+   "evaluated_on": "2026-10-13",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2F4EayGByBV2xodNBkrZMcFb.eval"
+  },
+  {
+   "model": "gpt-5-5",
+   "source_model": "gpt-5.5_none",
+   "effort": "none",
+   "benchmark": "Chess Puzzles",
+   "value": 0.09,
+   "stderr": 0.028762349126466143,
+   "evaluated_on": "2026-10-13",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FQfS2PrjUFMNnceRZmCmewP.eval"
+  },
+  {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_max",
+   "effort": "max",
+   "benchmark": "Chess Puzzles",
+   "value": 0.43,
+   "stderr": 0.0497569851956243,
+   "evaluated_on": "2026-10-13",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FLUfGWqWQim7rdBPgSpbrXS.eval"
+  },
+  {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_low",
+   "effort": "low",
+   "benchmark": "Chess Puzzles",
+   "value": 0.17,
+   "stderr": 0.03775251680686369,
+   "evaluated_on": "2026-10-13",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FFagAUZ7m5PJHseDATvp2vf.eval"
+  },
+  {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_none",
+   "effort": "none",
+   "benchmark": "Chess Puzzles",
+   "value": 0.03,
+   "stderr": 0.01714466079977653,
+   "evaluated_on": "2026-10-13",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2F5Q7zWYmoRik8mhABL4wpVR.eval"
+  },
+  {
+   "model": "gpt-5-6-sol",
+   "source_model": "gpt-5.6-sol_max",
+   "effort": "max",
+   "benchmark": "Chess Puzzles",
+   "value": 0.59,
+   "stderr": 0.049431107042371025,
+   "evaluated_on": "2026-10-13",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FoWqwMmwEd7LU3eU5Ftak64.eval"
+  },
+  {
+   "model": "gpt-5-6-sol",
+   "source_model": "gpt-5.6-sol_low",
+   "effort": "low",
    "benchmark": "Chess Puzzles",
    "value": 0.31,
    "stderr": 0.04648231987117317,
-   "evaluated_on": "2026-09-22"
-  },
-  {
-   "model": "gemini-3-8-flash",
-   "source_model": "gemini-3.8-flash_high",
-   "effort": "high",
-   "benchmark": "Chess Puzzles",
-   "value": 0.61,
-   "stderr": 0.04902071300001973,
-   "evaluated_on": "2026-09-02"
-  },
-  {
-   "model": "claude-fable-5-1",
-   "source_model": "claude-fable-5-1_max",
-   "effort": "max",
-   "benchmark": "Chess Puzzles",
-   "value": 0.47,
-   "stderr": 0.05016135580465918,
-   "evaluated_on": "2026-09-01"
-  },
-  {
-   "model": "gpt-6-astra",
-   "source_model": "gpt-6-astra_max",
-   "effort": "max",
-   "benchmark": "Chess Puzzles",
-   "value": 0.72,
-   "stderr": 0.04512608598542129,
-   "evaluated_on": "2026-08-30"
-  },
-  {
-   "model": "deepseek-v4-pro",
-   "source_model": "deepseek-v4-pro-0813_max",
-   "effort": "max",
-   "benchmark": "Chess Puzzles",
-   "value": 0.47,
-   "stderr": 0.05016135580465918,
-   "evaluated_on": "2026-08-18"
-  },
-  {
-   "model": "gemini-3-7-flash",
-   "source_model": "gemini-3.7-flash_high",
-   "effort": "high",
-   "benchmark": "Chess Puzzles",
-   "value": 0.47,
-   "stderr": 0.05016135580465918,
-   "evaluated_on": "2026-08-14"
+   "evaluated_on": "2026-10-13",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FV6aVGtn9gAmRep2oBGsqVN.eval"
   },
   {
    "model": "gpt-5-6-sol",
@@ -2823,178 +2969,59 @@
    "effort": "none",
    "benchmark": "Chess Puzzles",
    "value": 0.07,
-   "stderr": 0.025643239997624273,
-   "evaluated_on": "2026-08-07",
-   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FKFAFU6kX7qVekqq6QR524K.eval"
-  },
-  {
-   "model": "gpt-5-5",
-   "source_model": "gpt-5.5_none",
-   "effort": "none",
-   "benchmark": "Chess Puzzles",
-   "value": 0.1,
-   "stderr": 0.03015113445777636,
-   "evaluated_on": "2026-08-07",
-   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FXRVSYnR4bhQ8Zb62Un7GrS.eval"
-  },
-  {
-   "model": "kimi-k3",
-   "source_model": "kimi-k3_low",
-   "effort": "low",
-   "benchmark": "Chess Puzzles",
-   "value": 0.2,
-   "stderr": 0.04020151261036849,
-   "evaluated_on": "2026-08-07",
-   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FBUBiYK8WB8XDb9u7s9kTDf.eval"
-  },
-  {
-   "model": "kimi-k3",
-   "source_model": "kimi-k3_high",
-   "effort": "high",
-   "benchmark": "Chess Puzzles",
-   "value": 0.25,
-   "stderr": 0.04351941398892446,
-   "evaluated_on": "2026-08-07",
-   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2Fd8egYFK9XNSEHWvv4JFxWx.eval"
-  },
-  {
-   "model": "gpt-5-6-sol",
-   "source_model": "gpt-5.6-sol_low",
-   "effort": "low",
-   "benchmark": "Chess Puzzles",
-   "value": 0.27,
-   "stderr": 0.04461960433384738,
-   "evaluated_on": "2026-08-07",
-   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2F7cL3BzoAaiHmdMNRCVLE6s.eval"
-  },
-  {
-   "model": "gpt-5-5",
-   "source_model": "gpt-5.5_low",
-   "effort": "low",
-   "benchmark": "Chess Puzzles",
-   "value": 0.26,
-   "stderr": 0.0440844002276808,
-   "evaluated_on": "2026-08-07",
-   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FEnbN27oUrNyfbxuPwtZey2.eval"
-  },
-  {
-   "model": "gpt-5-6-luna",
-   "source_model": "gpt-5.6-luna_none",
-   "effort": "none",
-   "benchmark": "Chess Puzzles",
-   "value": 0.02,
-   "stderr": 0.014070529413628968,
-   "evaluated_on": "2026-08-07",
-   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2Fd9jMGFp8BwebW7sufdxbnC.eval"
-  },
-  {
-   "model": "gemini-3-6-flash",
-   "source_model": "gemini-3.6-flash_minimal",
-   "effort": "minimal",
-   "benchmark": "Chess Puzzles",
-   "value": 0.35,
-   "stderr": 0.047937248544110224,
-   "evaluated_on": "2026-08-07",
-   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FhL24cexf97QKVLsv73H5TT.eval"
-  },
-  {
-   "model": "gemini-3-6-flash",
-   "source_model": "gemini-3.6-flash_low",
-   "effort": "low",
-   "benchmark": "Chess Puzzles",
-   "value": 0.43,
-   "stderr": 0.0497569851956243,
-   "evaluated_on": "2026-08-07",
-   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FDLvSYBHHLcHECeL5SpNgVK.eval"
-  },
-  {
-   "model": "gpt-5-6-luna",
-   "source_model": "gpt-5.6-luna_low",
-   "effort": "low",
-   "benchmark": "Chess Puzzles",
-   "value": 0.21,
-   "stderr": 0.040936018074033236,
-   "evaluated_on": "2026-08-07",
-   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FUhmACN5spAPyAtWWBf4MAP.eval"
+   "stderr": 0.02564323999762428,
+   "evaluated_on": "2026-10-13",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FWvV6QREDDXeDEGdrKztDsy.eval"
   },
   {
    "model": "claude-opus-4-6",
    "source_model": "claude-opus-4-6_max",
    "effort": "max",
    "benchmark": "Chess Puzzles",
-   "value": 0.14,
-   "stderr": 0.0348735088019777,
-   "evaluated_on": "2026-08-06",
-   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FFF8iU7vP5ecg6PdvDyE7XG.eval"
-  },
-  {
-   "model": "gemini-3-5-flash-lite",
-   "source_model": "gemini-3.5-flash-lite_minimal",
-   "effort": "minimal",
-   "benchmark": "Chess Puzzles",
    "value": 0.21,
    "stderr": 0.040936018074033236,
-   "evaluated_on": "2026-08-06",
-   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FX6WHjwmjSHe7pF8R7F3zsT.eval"
+   "evaluated_on": "2026-10-13",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FaKc2rzsA6YPYwCkE7nhvvB.eval"
   },
   {
-   "model": "gemini-3-5-flash-lite",
-   "source_model": "gemini-3.5-flash-lite_low",
-   "effort": "low",
+   "model": "gpt-6-astra",
+   "source_model": "gpt-6-astra_max",
+   "effort": "max",
    "benchmark": "Chess Puzzles",
-   "value": 0.18,
-   "stderr": 0.03861229196653691,
-   "evaluated_on": "2026-08-06",
-   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2Fi62SEaSpi6GbBmWqEDSDmV.eval"
+   "value": 0.74,
+   "stderr": 0.0440844002276808,
+   "evaluated_on": "2026-10-13",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FKaEir82ukWPm2Fq4FanY2M.eval"
   },
   {
-   "model": "gemini-3-5-flash-lite",
-   "source_model": "gemini-3.5-flash-lite_high",
-   "effort": "high",
+   "model": "gpt-6-sol",
+   "source_model": "gpt-6-sol_max",
+   "effort": "max",
    "benchmark": "Chess Puzzles",
-   "value": 0.22,
-   "stderr": 0.041633319989322654,
-   "evaluated_on": "2026-08-06",
-   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FBSSNShjap29bDUHz4gA9oh.eval"
+   "value": 0.56,
+   "stderr": 0.049888765156985884,
+   "evaluated_on": "2026-10-13",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FN9uFn7EZFsvHNcHEwEy3J6.eval"
   },
   {
-   "model": "gemini-3-1-pro",
-   "source_model": "gemini-3.1-pro-preview_high",
-   "effort": "high",
+   "model": "gpt-6-luna",
+   "source_model": "gpt-6-luna_max",
+   "effort": "max",
    "benchmark": "Chess Puzzles",
-   "value": 0.49,
-   "stderr": 0.05024183937956914,
-   "evaluated_on": "2026-08-06",
-   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2F4mzBGLow3HkS8BmAYCzGTR.eval"
-  },
-  {
-   "model": "claude-opus-5",
-   "source_model": "claude-opus-5_low",
-   "effort": "low",
-   "benchmark": "Chess Puzzles",
-   "value": 0.2,
-   "stderr": 0.04020151261036849,
-   "evaluated_on": "2026-08-06",
-   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2F3dXpsUjaVEbBN72dnw4Vzq.eval"
-  },
-  {
-   "model": "claude-opus-5",
-   "source_model": "claude-opus-5",
-   "benchmark": "Chess Puzzles",
-   "value": 0.33,
-   "stderr": 0.04725815626252608,
-   "evaluated_on": "2026-08-06",
-   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FUxakyoDNbLKtxnxeMsa7cU.eval"
+   "value": 0.36,
+   "stderr": 0.04824181513244218,
+   "evaluated_on": "2026-10-13",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FJevnk9hi9oRBbGcFu2JxBC.eval"
   },
   {
    "model": "claude-opus-4-8",
-   "source_model": "claude-opus-4-8_none",
-   "effort": "none",
+   "source_model": "claude-opus-4-8_max",
+   "effort": "max",
    "benchmark": "Chess Puzzles",
-   "value": 0.13,
-   "stderr": 0.03379976689896311,
-   "evaluated_on": "2026-08-06",
-   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FoU38rqq2TvJTxvvPsnEQsH.eval"
+   "value": 0.52,
+   "stderr": 0.05021167315686782,
+   "evaluated_on": "2026-10-13",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FPEZpuEuU65bu3ZtvjLytHq.eval"
   },
   {
    "model": "claude-opus-4-8",
@@ -3002,29 +3029,119 @@
    "effort": "low",
    "benchmark": "Chess Puzzles",
    "value": 0.29,
-   "stderr": 0.04560480215720686,
-   "evaluated_on": "2026-08-06",
-   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2F5u3LkMVq4Dy8CfiwA2EAVr.eval"
+   "stderr": 0.045604802157206865,
+   "evaluated_on": "2026-10-13",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FicTHLT2S2egxYtgbjQHUng.eval"
+  },
+  {
+   "model": "claude-opus-4-8",
+   "source_model": "claude-opus-4-8_none",
+   "effort": "none",
+   "benchmark": "Chess Puzzles",
+   "value": 0.19,
+   "stderr": 0.039427724440366255,
+   "evaluated_on": "2026-10-13",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FjDWEviMweCdzGxLfz8sdBm.eval"
   },
   {
    "model": "claude-fable-5",
-   "source_model": "claude-fable-5_low",
+   "source_model": "claude-fable-5_max",
+   "effort": "max",
+   "benchmark": "Chess Puzzles",
+   "value": 0.47,
+   "stderr": 0.05016135580465918,
+   "evaluated_on": "2026-10-13",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FbxS76CJuVws8iwWU2Wr2PM.eval"
+  },
+  {
+   "model": "gemini-3-1-pro",
+   "source_model": "gemini-3.1-pro-preview_high",
+   "effort": "high",
+   "benchmark": "Chess Puzzles",
+   "value": 0.51,
+   "stderr": 0.05024183937956913,
+   "evaluated_on": "2026-10-13",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FFTDFCpXzDTgfgWBNdHLHGc.eval"
+  },
+  {
+   "model": "gemini-3-5-flash-lite",
+   "source_model": "gemini-3.5-flash-lite_high",
+   "effort": "high",
+   "benchmark": "Chess Puzzles",
+   "value": 0.16,
+   "stderr": 0.036845294917747066,
+   "evaluated_on": "2026-10-13",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FJJyzHWKJUA3iTZDU8iYefz.eval"
+  },
+  {
+   "model": "gemini-3-5-flash-lite",
+   "source_model": "gemini-3.5-flash-lite_low",
    "effort": "low",
    "benchmark": "Chess Puzzles",
-   "value": 0.28,
-   "stderr": 0.04512608598542129,
-   "evaluated_on": "2026-08-06",
-   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2Faftzew4ra4iax5D4R4vvfF.eval"
+   "value": 0.21,
+   "stderr": 0.040936018074033236,
+   "evaluated_on": "2026-10-13",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2Fd5QCJNq9uLtxjhiMhqXLmg.eval"
   },
   {
    "model": "claude-fable-5",
    "source_model": "claude-fable-5_high",
    "effort": "high",
    "benchmark": "Chess Puzzles",
-   "value": 0.41,
-   "stderr": 0.04943110704237103,
-   "evaluated_on": "2026-08-06",
-   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FSoCkYbcxzkYHXqcqnEQwFN.eval"
+   "value": 0.45,
+   "stderr": 0.05,
+   "evaluated_on": "2026-10-13",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2F9ZFhnyMNCKZ8XdR58WGD3D.eval"
+  },
+  {
+   "model": "claude-fable-5",
+   "source_model": "claude-fable-5_low",
+   "effort": "low",
+   "benchmark": "Chess Puzzles",
+   "value": 0.31,
+   "stderr": 0.04648231987117317,
+   "evaluated_on": "2026-10-13",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2F2jKf4iEfVQnHkgAwEtD9Nn.eval"
+  },
+  {
+   "model": "claude-sonnet-5",
+   "source_model": "claude-sonnet-5_max",
+   "effort": "max",
+   "benchmark": "Chess Puzzles",
+   "value": 0.45,
+   "stderr": 0.05,
+   "evaluated_on": "2026-10-13",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FPN9exWpeJGXJB8tZGX32e4.eval"
+  },
+  {
+   "model": "claude-sonnet-5",
+   "source_model": "claude-sonnet-5_xhigh",
+   "effort": "xhigh",
+   "benchmark": "Chess Puzzles",
+   "value": 0.34,
+   "stderr": 0.04760952285695234,
+   "evaluated_on": "2026-10-13",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FDFzqUCfxnQPUdK8b8D7aYu.eval"
+  },
+  {
+   "model": "gemini-3-5-flash-lite",
+   "source_model": "gemini-3.5-flash-lite_minimal",
+   "effort": "minimal",
+   "benchmark": "Chess Puzzles",
+   "value": 0.07,
+   "stderr": 0.02564323999762428,
+   "evaluated_on": "2026-10-13",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FgzQH7StUXaxAtXgxkTgyxJ.eval"
+  },
+  {
+   "model": "claude-opus-5",
+   "source_model": "claude-opus-5_max",
+   "effort": "max",
+   "benchmark": "Chess Puzzles",
+   "value": 0.43,
+   "stderr": 0.0497569851956243,
+   "evaluated_on": "2026-10-13",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FRLN98bmQSMnc5Zv39BF4M2.eval"
   },
   {
    "model": "gemini-3-6-flash",
@@ -3033,138 +3150,147 @@
    "benchmark": "Chess Puzzles",
    "value": 0.4,
    "stderr": 0.0492365963917331,
-   "evaluated_on": "2026-08-02"
+   "evaluated_on": "2026-10-13",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FZDeGG5QYkdgVqzGPmmnbfx.eval"
+  },
+  {
+   "model": "deepseek-v4-pro",
+   "source_model": "deepseek-v4-pro-0813_max",
+   "effort": "max",
+   "benchmark": "Chess Puzzles",
+   "value": 0.46,
+   "stderr": 0.05009082659620331,
+   "evaluated_on": "2026-10-13",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FC56VHYLMeww2wXebeJh3gg.eval"
   },
   {
    "model": "claude-opus-5",
-   "source_model": "claude-opus-5_max",
+   "source_model": "claude-opus-5_low",
+   "effort": "low",
+   "benchmark": "Chess Puzzles",
+   "value": 0.27,
+   "stderr": 0.044619604333847374,
+   "evaluated_on": "2026-10-13",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FXTW92PMsypptnTGBFuLCxe.eval"
+  },
+  {
+   "model": "claude-fable-5-1",
+   "source_model": "claude-fable-5-1_max",
    "effort": "max",
+   "benchmark": "Chess Puzzles",
+   "value": 0.48,
+   "stderr": 0.05021167315686782,
+   "evaluated_on": "2026-10-13",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FaLrHd8RCiNo3Yb4GqSawM7.eval"
+  },
+  {
+   "model": "gemini-3-6-flash",
+   "source_model": "gemini-3.6-flash_low",
+   "effort": "low",
    "benchmark": "Chess Puzzles",
    "value": 0.42,
    "stderr": 0.04960449637488583,
-   "evaluated_on": "2026-07-24"
+   "evaluated_on": "2026-10-13",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FhJ6XXLBm9yfXtSbbhWuwpw.eval"
   },
   {
-   "model": "kimi-k3",
-   "source_model": "kimi-k3_max",
+   "model": "gemini-3-6-flash",
+   "source_model": "gemini-3.6-flash_minimal",
+   "effort": "minimal",
+   "benchmark": "Chess Puzzles",
+   "value": 0.29,
+   "stderr": 0.04560480215720686,
+   "evaluated_on": "2026-10-13",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FbeSbPHiiWcwJBSzYRh7Kh4.eval"
+  },
+  {
+   "model": "claude-opus-5-5",
+   "source_model": "claude-opus-5-5_max",
    "effort": "max",
    "benchmark": "Chess Puzzles",
-   "value": 0.39,
-   "stderr": 0.04902071300001973,
-   "evaluated_on": "2026-07-16"
+   "value": 0.67,
+   "stderr": 0.04725815626252609,
+   "evaluated_on": "2026-10-13",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FF2tuCm5VmNDAaYYh6qYdRy.eval"
   },
   {
-   "model": "gpt-5-2",
-   "source_model": "gpt-5.2-2025-12-11_none",
-   "effort": "none",
-   "benchmark": "Chess Puzzles",
-   "value": 0.04,
-   "stderr": 0.01969463855669324,
-   "evaluated_on": "2026-07-13",
-   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FjMRYcMRgjaXW3N6q2JogNW.eval"
-  },
-  {
-   "model": "gpt-5-6-luna",
-   "source_model": "gpt-5.6-luna_max",
+   "model": "claude-sonnet-5-5",
+   "source_model": "claude-sonnet-5-5_max",
    "effort": "max",
    "benchmark": "Chess Puzzles",
-   "value": 0.4,
-   "stderr": 0.0492365963917331,
-   "evaluated_on": "2026-07-09"
-  },
-  {
-   "model": "gpt-5-6-sol",
-   "source_model": "gpt-5.6-sol_max",
-   "effort": "max",
-   "benchmark": "Chess Puzzles",
-   "value": 0.55,
-   "stderr": 0.05,
-   "evaluated_on": "2026-07-09"
-  },
-  {
-   "model": "claude-sonnet-5",
-   "source_model": "claude-sonnet-5_xhigh",
-   "effort": "xhigh",
-   "benchmark": "Chess Puzzles",
-   "value": 0.35,
-   "stderr": 0.047937248544110224,
-   "evaluated_on": "2026-06-30"
-  },
-  {
-   "model": "claude-sonnet-5",
-   "source_model": "claude-sonnet-5_max",
-   "effort": "max",
-   "benchmark": "Chess Puzzles",
-   "value": 0.16,
-   "stderr": 0.036845294917747066,
-   "evaluated_on": "2026-06-30",
-   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FczNLsHc7tBqBWtWaoTSLXh.eval"
-  },
-  {
-   "model": "claude-fable-5",
-   "source_model": "claude-fable-5_max",
-   "effort": "max",
-   "benchmark": "Chess Puzzles",
-   "value": 0.41,
+   "value": 0.59,
    "stderr": 0.04943110704237103,
-   "evaluated_on": "2026-06-09"
+   "evaluated_on": "2026-10-13",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FkXU32N6tFkQLx5ei6nRJFS.eval"
   },
   {
-   "model": "claude-opus-4-8",
-   "source_model": "claude-opus-4-8_max",
-   "effort": "max",
-   "benchmark": "Chess Puzzles",
-   "value": 0.34,
-   "stderr": 0.04760952285695234,
-   "evaluated_on": "2026-05-29"
-  },
-  {
-   "model": "gemini-3-1-pro",
-   "source_model": "gemini-3.1-pro-preview",
-   "benchmark": "Chess Puzzles",
-   "value": 0.55,
-   "stderr": 0.05,
-   "evaluated_on": "2026-02-19",
-   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2F4QfM9qyeWGqNc8YTcQNV76.eval"
-  },
-  {
-   "model": "gpt-5-2",
-   "source_model": "gpt-5.2-2025-12-11_xhigh",
-   "effort": "xhigh",
-   "benchmark": "Chess Puzzles",
-   "value": 0.49,
-   "stderr": 0.05,
-   "evaluated_on": "2025-12-15"
-  },
-  {
-   "model": "gpt-5-2",
-   "source_model": "gpt-5.2-2025-12-11_medium",
-   "effort": "medium",
-   "benchmark": "Chess Puzzles",
-   "value": 0.4,
-   "stderr": 0.0492365963917331,
-   "evaluated_on": "2025-12-11",
-   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FfCzTfk9GNPokGEVSg2ry4s.eval"
-  },
-  {
-   "model": "gpt-5-2",
-   "source_model": "gpt-5.2-2025-12-11_high",
+   "model": "gemini-3-7-flash",
+   "source_model": "gemini-3.7-flash_high",
    "effort": "high",
    "benchmark": "Chess Puzzles",
-   "value": 0.4,
-   "stderr": 0.0492365963917331,
-   "evaluated_on": "2025-12-11",
-   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FR3bUSJCQiuGjg6TzBo7k8Q.eval"
+   "value": 0.66,
+   "stderr": 0.04760952285695234,
+   "evaluated_on": "2026-10-13",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FXu34dKTAdpBWL6advf6DMg.eval"
   },
   {
-   "model": "gpt-5-2",
-   "source_model": "gpt-5.2-2025-12-11_low",
+   "model": "gpt-6-1-sol",
+   "source_model": "gpt-6.1-sol_max",
+   "effort": "max",
+   "benchmark": "Chess Puzzles",
+   "value": 0.68,
+   "stderr": 0.04688261722621507,
+   "evaluated_on": "2026-10-13",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FKkGEgrjYDnofMoUJBCykcH.eval"
+  },
+  {
+   "model": "claude-haiku-5-5",
+   "source_model": "claude-haiku-5-5_max",
+   "effort": "max",
+   "benchmark": "Chess Puzzles",
+   "value": 0.55,
+   "stderr": 0.049999999999999996,
+   "evaluated_on": "2026-10-13",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FKEyuvehfRGtcdgNfNavy62.eval"
+  },
+  {
+   "model": "deepseek-v4-1-flash",
+   "source_model": "deepseek-v4.1-flash_max",
+   "effort": "max",
+   "benchmark": "Chess Puzzles",
+   "value": 0.48,
+   "stderr": 0.05021167315686782,
+   "evaluated_on": "2026-10-13",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FACpDTbhRPwce2BWQTWD8iC.eval"
+  },
+  {
+   "model": "gemini-3-8-flash",
+   "source_model": "gemini-3.8-flash_high",
+   "effort": "high",
+   "benchmark": "Chess Puzzles",
+   "value": 0.58,
+   "stderr": 0.04960449637488583,
+   "evaluated_on": "2026-10-13",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FHpyy6CpmXmd5q7Zbdq63CR.eval"
+  },
+  {
+   "model": "claude-haiku-5-5",
+   "source_model": "claude-haiku-5-5_low",
    "effort": "low",
    "benchmark": "Chess Puzzles",
-   "value": 0.23,
-   "stderr": 0.04229525846816508,
-   "evaluated_on": "2025-12-11",
-   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FSUBFSiYKfaantxswKig2a2.eval"
+   "value": 0.24,
+   "stderr": 0.04292346959909278,
+   "evaluated_on": "2026-10-13",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FKSXLphjiiXtuGdqv9f7ENL.eval"
+  },
+  {
+   "model": "claude-haiku-5-5",
+   "source_model": "claude-haiku-5-5_max",
+   "effort": "max",
+   "benchmark": "EBR-bench",
+   "value": 0.43809523809523804,
+   "stderr": 0.017817416127494958,
+   "evaluated_on": "2026-10-09"
   },
   {
    "model": "gpt-6-1-sol",
@@ -3700,12 +3826,193 @@
    "evaluated_on": "2026-07-24"
   },
   {
+   "model": "claude-fable-5",
+   "source_model": "claude-fable-5_max",
+   "effort": "max",
+   "benchmark": "MirrorCode",
+   "value": 0.7,
+   "stderr": 0.10440053112638316,
+   "evaluated_on": "2026-10-30"
+  },
+  {
    "model": "claude-opus-5-5",
    "source_model": "claude-opus-5-5_max",
    "effort": "max",
    "benchmark": "MirrorCode",
-   "value": 0.774,
-   "stderr": 0.0831,
+   "value": 0.9555555555555556,
+   "stderr": 0.025545201491160446,
+   "evaluated_on": "2026-10-30"
+  },
+  {
+   "model": "gpt-6-sol",
+   "source_model": "gpt-6-sol_max",
+   "effort": "max",
+   "benchmark": "MirrorCode",
+   "value": 0.4888888888888889,
+   "stderr": 0.11205944504585896,
+   "evaluated_on": "2026-10-29"
+  },
+  {
+   "model": "gpt-6-astra",
+   "source_model": "gpt-6-astra_max",
+   "effort": "max",
+   "benchmark": "MirrorCode",
+   "value": 0.6,
+   "stderr": 0.11818736805705578,
+   "evaluated_on": "2026-10-29",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FFGZUtmNQZpZtk8ft5uCJkA.eval"
+  },
+  {
+   "model": "gpt-5-5",
+   "source_model": "gpt-5.5_xhigh",
+   "effort": "xhigh",
+   "benchmark": "MirrorCode",
+   "value": 0.23333333333333334,
+   "stderr": 0.10131411680782823,
+   "evaluated_on": "2026-10-29"
+  },
+  {
+   "model": "gpt-5-2",
+   "source_model": "gpt-5.2-2025-12-11_xhigh",
+   "effort": "xhigh",
+   "benchmark": "MirrorCode",
+   "value": 0.32222222222222224,
+   "stderr": 0.09955810654328077,
+   "evaluated_on": "2026-10-21"
+  },
+  {
+   "model": "deepseek-v4-1-flash",
+   "source_model": "deepseek-v4.1-flash_max",
+   "effort": "max",
+   "benchmark": "MirrorCode",
+   "value": 0.6444444444444445,
+   "stderr": 0.11369999821616648,
+   "evaluated_on": "2026-10-21"
+  },
+  {
+   "model": "gemini-3-7-flash",
+   "source_model": "gemini-3.7-flash_high",
+   "effort": "high",
+   "benchmark": "MirrorCode",
+   "value": 0.4111111111111111,
+   "stderr": 0.12157113738962926,
+   "evaluated_on": "2026-10-21",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2Feeq6feqZLzfjfVsx4aeAWL.eval"
+  },
+  {
+   "model": "gpt-5-6-luna",
+   "source_model": "gpt-5.6-luna_max",
+   "effort": "max",
+   "benchmark": "MirrorCode",
+   "value": 0.2111111111111111,
+   "stderr": 0.09822049844066655,
+   "evaluated_on": "2026-10-21"
+  },
+  {
+   "model": "claude-haiku-5-5",
+   "source_model": "claude-haiku-5-5_max",
+   "effort": "max",
+   "benchmark": "MirrorCode",
+   "value": 0.7888888888888889,
+   "stderr": 0.08045286284110595,
+   "evaluated_on": "2026-10-21",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FifSAAMJA9S73m6pAyRWxUD.eval"
+  },
+  {
+   "model": "gemini-3-6-flash",
+   "source_model": "gemini-3.6-flash_high",
+   "effort": "high",
+   "benchmark": "MirrorCode",
+   "value": 0.23333333333333334,
+   "stderr": 0.09315175080076958,
+   "evaluated_on": "2026-10-21"
+  },
+  {
+   "model": "claude-opus-4-6",
+   "source_model": "claude-opus-4-6_max",
+   "effort": "max",
+   "benchmark": "MirrorCode",
+   "value": 0.3333333333333333,
+   "stderr": 0.10026420125303973,
+   "evaluated_on": "2026-10-21",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FQ8sNp4aYrjtYQgVS3BRDTd.eval"
+  },
+  {
+   "model": "claude-sonnet-5",
+   "source_model": "claude-sonnet-5_max",
+   "effort": "max",
+   "benchmark": "MirrorCode",
+   "value": 0.6333333333333333,
+   "stderr": 0.10690449676496976,
+   "evaluated_on": "2026-10-21"
+  },
+  {
+   "model": "gpt-6-luna",
+   "source_model": "gpt-6-luna_max",
+   "effort": "max",
+   "benchmark": "MirrorCode",
+   "value": 0.26666666666666666,
+   "stderr": 0.09026709338484401,
+   "evaluated_on": "2026-10-21",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FWQ4gVVhGBfWoRkRwUvNYgs.eval"
+  },
+  {
+   "model": "claude-opus-4-8",
+   "source_model": "claude-opus-4-8_max",
+   "effort": "max",
+   "benchmark": "MirrorCode",
+   "value": 0.6555555555555556,
+   "stderr": 0.10846044638639055,
+   "evaluated_on": "2026-10-21",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2F2Nf4PQvFjvbixGhtQXGQoS.eval"
+  },
+  {
+   "model": "claude-opus-5",
+   "source_model": "claude-opus-5_max",
+   "effort": "max",
+   "benchmark": "MirrorCode",
+   "value": 0.8777777777777778,
+   "stderr": 0.07176288606639566,
+   "evaluated_on": "2026-10-20",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FmNbPPJ3qiGSKnpqRsbxeKv.eval"
+  },
+  {
+   "model": "deepseek-v4-pro",
+   "source_model": "deepseek-v4-pro-0813_max",
+   "effort": "max",
+   "benchmark": "MirrorCode",
+   "value": 0.3333333333333333,
+   "stderr": 0.10026420125303973,
+   "evaluated_on": "2026-10-20",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2F4sSMLxWLPihKZSUFVUjwTh.eval"
+  },
+  {
+   "model": "gpt-6-1-sol",
+   "source_model": "gpt-6.1-sol_max",
+   "effort": "max",
+   "benchmark": "MirrorCode",
+   "value": 0.6111111111111112,
+   "stderr": 0.11346708571848581,
+   "evaluated_on": "2026-10-05",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FjGPEpcBgJ4gakLdxgAqbR8.eval"
+  },
+  {
+   "model": "claude-sonnet-5-5",
+   "source_model": "claude-sonnet-5-5_max",
+   "effort": "max",
+   "benchmark": "MirrorCode",
+   "value": 0.9777777777777777,
+   "stderr": 0.015141892085983264,
+   "evaluated_on": "2026-10-05",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FUTD5SC5v2BgiwNauF9YrFo.eval"
+  },
+  {
+   "model": "claude-opus-5-5",
+   "source_model": "claude-opus-5-5_high",
+   "effort": "high",
+   "benchmark": "MirrorCode",
+   "value": 0.7889,
+   "stderr": 0.0788,
    "evaluated_on": "2026-09-22"
   },
   {
@@ -3716,6 +4023,36 @@
    "value": 0.733,
    "stderr": 0.0917,
    "evaluated_on": "2026-09-10"
+  },
+  {
+   "model": "claude-fable-5-1",
+   "source_model": "claude-fable-5-1_max",
+   "effort": "max",
+   "benchmark": "MirrorCode",
+   "value": 0.9333333333333333,
+   "stderr": 0.03917131009286688,
+   "evaluated_on": "2026-09-09",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2Fj3QzF2QVnNghvyFneqEuiu.eval"
+  },
+  {
+   "model": "kimi-k3",
+   "source_model": "kimi-k3_max",
+   "effort": "max",
+   "benchmark": "MirrorCode",
+   "value": 0.5444444444444444,
+   "stderr": 0.11439589045541113,
+   "evaluated_on": "2026-09-03",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FbeEmcaWF8wxsWTLD5bMYxi.eval"
+  },
+  {
+   "model": "gemini-3-8-flash",
+   "source_model": "gemini-3.8-flash_high",
+   "effort": "high",
+   "benchmark": "MirrorCode",
+   "value": 0.3888888888888889,
+   "stderr": 0.11915339216404011,
+   "evaluated_on": "2026-09-02",
+   "source_link": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FFi32v8c7rD82qhgYVcsz7g.eval"
   },
   {
    "model": "gpt-6-astra",
@@ -3945,6 +4282,20 @@
    "value": 0.965
   },
   {
+   "model": "claude-sonnet-5-5",
+   "source_model": "claude-sonnet-5-5_max",
+   "effort": "max",
+   "benchmark": "ARC-AGI",
+   "value": 0.965
+  },
+  {
+   "model": "claude-sonnet-5-5",
+   "source_model": "claude-sonnet-5-5_xhigh",
+   "effort": "xhigh",
+   "benchmark": "ARC-AGI",
+   "value": 0.965
+  },
+  {
    "model": "claude-fable-5-1",
    "source_model": "claude-fable-5-1_high",
    "effort": "high",
@@ -4015,6 +4366,13 @@
    "value": 0.9450000000000001
   },
   {
+   "model": "deepseek-v4-1-flash",
+   "source_model": "deepseek-v4.1-flash_max",
+   "effort": "max",
+   "benchmark": "ARC-AGI",
+   "value": 0.9450000000000001
+  },
+  {
    "model": "gpt-6-1-sol",
    "source_model": "gpt-6.1-sol_low",
    "effort": "low",
@@ -4059,6 +4417,13 @@
   {
    "model": "claude-opus-4-8",
    "source_model": "claude-opus-4-8_high",
+   "effort": "high",
+   "benchmark": "ARC-AGI",
+   "value": 0.92
+  },
+  {
+   "model": "claude-sonnet-5-5",
+   "source_model": "claude-sonnet-5-5_high",
    "effort": "high",
    "benchmark": "ARC-AGI",
    "value": 0.92
@@ -4113,6 +4478,13 @@
    "value": 0.905
   },
   {
+   "model": "deepseek-v4-1-flash",
+   "source_model": "deepseek-v4.1-flash_low",
+   "effort": "low",
+   "benchmark": "ARC-AGI",
+   "value": 0.905
+  },
+  {
    "model": "deepseek-v4-pro",
    "source_model": "deepseek-v4-pro-0813_max",
    "effort": "max",
@@ -4127,9 +4499,23 @@
    "value": 0.9
   },
   {
+   "model": "claude-haiku-5-5",
+   "source_model": "claude-haiku-5-5_max",
+   "effort": "max",
+   "benchmark": "ARC-AGI",
+   "value": 0.89
+  },
+  {
    "model": "claude-opus-5-5",
    "source_model": "claude-opus-5-5_low",
    "effort": "low",
+   "benchmark": "ARC-AGI",
+   "value": 0.885
+  },
+  {
+   "model": "deepseek-v4-1-flash",
+   "source_model": "deepseek-v4.1-flash_high",
+   "effort": "high",
    "benchmark": "ARC-AGI",
    "value": 0.885
   },
@@ -4160,6 +4546,13 @@
    "effort": "xhigh",
    "benchmark": "ARC-AGI",
    "value": 0.8767
+  },
+  {
+   "model": "claude-haiku-5-5",
+   "source_model": "claude-haiku-5-5_xhigh",
+   "effort": "xhigh",
+   "benchmark": "ARC-AGI",
+   "value": 0.875
   },
   {
    "model": "deepseek-v4-pro",
@@ -4233,6 +4626,13 @@
    "value": 0.8316666666666666
   },
   {
+   "model": "claude-haiku-5-5",
+   "source_model": "claude-haiku-5-5_high",
+   "effort": "high",
+   "benchmark": "ARC-AGI",
+   "value": 0.8150000000000001
+  },
+  {
    "model": "gpt-5-2",
    "source_model": "gpt-5.2-2025-12-11_high",
    "effort": "high",
@@ -4297,6 +4697,20 @@
    "value": 0.7033333333333333
   },
   {
+   "model": "claude-sonnet-5-5",
+   "source_model": "claude-sonnet-5-5_medium",
+   "effort": "medium",
+   "benchmark": "ARC-AGI",
+   "value": 0.7000000000000001
+  },
+  {
+   "model": "claude-sonnet-5-5",
+   "source_model": "claude-sonnet-5-5_low",
+   "effort": "low",
+   "benchmark": "ARC-AGI",
+   "value": 0.67
+  },
+  {
    "model": "kimi-k3",
    "source_model": "kimi-k3_low",
    "effort": "low",
@@ -4315,6 +4729,13 @@
    "effort": "medium",
    "benchmark": "ARC-AGI",
    "value": 0.61
+  },
+  {
+   "model": "claude-haiku-5-5",
+   "source_model": "claude-haiku-5-5_medium",
+   "effort": "medium",
+   "benchmark": "ARC-AGI",
+   "value": 0.5733333333333333
   },
   {
    "model": "gpt-5-6-luna",
@@ -4336,6 +4757,13 @@
    "effort": "high",
    "benchmark": "ARC-AGI",
    "value": 0.535
+  },
+  {
+   "model": "claude-haiku-5-5",
+   "source_model": "claude-haiku-5-5_low",
+   "effort": "low",
+   "benchmark": "ARC-AGI",
+   "value": 0.5033333333333334
   },
   {
    "model": "gpt-6-luna",
@@ -4412,6 +4840,13 @@
    "effort": "none",
    "benchmark": "ARC-AGI",
    "value": 0.08833333333333335
+  },
+  {
+   "model": "deepseek-v4-1-flash",
+   "source_model": "deepseek-v4.1-flash_none",
+   "effort": "none",
+   "benchmark": "ARC-AGI",
+   "value": 0.07833333333333332
   },
   {
    "model": "gemini-3-5-flash-lite",
@@ -4580,6 +5015,54 @@
    "source_link": "https://fiction.live/stories/Fiction-liveBench-Mar-14-2025/oQdzQvKHw8JyXbN87/home"
   },
   {
+   "model": "claude-fable-5",
+   "source_model": "claude-fable-5_high",
+   "effort": "high",
+   "benchmark": "GeoBench",
+   "value": 0.89
+  },
+  {
+   "model": "gemini-3-8-flash",
+   "source_model": "gemini-3.8-flash_unknown",
+   "effort": "unknown",
+   "benchmark": "GeoBench",
+   "value": 0.86
+  },
+  {
+   "model": "claude-fable-5-1",
+   "source_model": "claude-fable-5-1_high",
+   "effort": "high",
+   "benchmark": "GeoBench",
+   "value": 0.84
+  },
+  {
+   "model": "gemini-3-1-pro",
+   "source_model": "gemini-3.1-pro-preview",
+   "benchmark": "GeoBench",
+   "value": 0.84
+  },
+  {
+   "model": "claude-opus-4-8",
+   "source_model": "claude-opus-4-8_high",
+   "effort": "high",
+   "benchmark": "GeoBench",
+   "value": 0.81
+  },
+  {
+   "model": "claude-sonnet-5",
+   "source_model": "claude-sonnet-5_high",
+   "effort": "high",
+   "benchmark": "GeoBench",
+   "value": 0.74
+  },
+  {
+   "model": "gpt-5-6-sol",
+   "source_model": "gpt-5.6-sol_high",
+   "effort": "high",
+   "benchmark": "GeoBench",
+   "value": 0.73
+  },
+  {
    "model": "claude-fable-5-1",
    "source_model": "claude-fable-5-1_unknown",
    "effort": "unknown",
@@ -4669,6 +5152,41 @@
    "source_link": "https://os-world.github.io/"
   },
   {
+   "model": "claude-opus-5-5",
+   "source_model": "claude-opus-5-5_unknown",
+   "effort": "unknown",
+   "benchmark": "SimpleBench",
+   "value": 0.8840000000000001
+  },
+  {
+   "model": "claude-fable-5-1",
+   "source_model": "claude-fable-5-1_unknown",
+   "effort": "unknown",
+   "benchmark": "SimpleBench",
+   "value": 0.866
+  },
+  {
+   "model": "gpt-6-astra",
+   "source_model": "gpt-6-astra_unknown",
+   "effort": "unknown",
+   "benchmark": "SimpleBench",
+   "value": 0.836
+  },
+  {
+   "model": "gpt-6-1-sol",
+   "source_model": "gpt-6.1-sol_unknown",
+   "effort": "unknown",
+   "benchmark": "SimpleBench",
+   "value": 0.8290000000000001
+  },
+  {
+   "model": "gemini-3-8-flash",
+   "source_model": "gemini-3.8-flash_unknown",
+   "effort": "unknown",
+   "benchmark": "SimpleBench",
+   "value": 0.8240000000000001
+  },
+  {
    "model": "claude-fable-5",
    "source_model": "claude-fable-5_max",
    "effort": "max",
@@ -4690,6 +5208,20 @@
    "source_link": "https://simple-bench.com/"
   },
   {
+   "model": "claude-sonnet-5-5",
+   "source_model": "claude-sonnet-5-5_unknown",
+   "effort": "unknown",
+   "benchmark": "SimpleBench",
+   "value": 0.7590000000000001
+  },
+  {
+   "model": "gpt-6-sol",
+   "source_model": "gpt-6-sol_unknown",
+   "effort": "unknown",
+   "benchmark": "SimpleBench",
+   "value": 0.731
+  },
+  {
    "model": "gpt-5-5",
    "source_model": "gpt-5.5_unknown",
    "effort": "unknown",
@@ -4703,6 +5235,13 @@
    "benchmark": "SimpleBench",
    "value": 0.6759999999999999,
    "source_link": "https://simple-bench.com/"
+  },
+  {
+   "model": "deepseek-v4-1-flash",
+   "source_model": "deepseek-v4.1-flash_unknown",
+   "effort": "unknown",
+   "benchmark": "SimpleBench",
+   "value": 0.667
   },
   {
    "model": "claude-opus-4-8",
@@ -4738,6 +5277,13 @@
    "effort": "unknown",
    "benchmark": "SimpleBench",
    "value": 0.606
+  },
+  {
+   "model": "claude-haiku-5-5",
+   "source_model": "claude-haiku-5-5_unknown",
+   "effort": "unknown",
+   "benchmark": "SimpleBench",
+   "value": 0.5920000000000001
   },
   {
    "model": "gpt-5-6-luna",
@@ -4938,17 +5484,17 @@
    "value": 0.629
   },
   {
+   "model": "gemini-3-1-pro",
+   "source_model": "gemini-3.1-pro-preview",
+   "benchmark": "Terminal Bench",
+   "value": 0.614232209738
+  },
+  {
    "model": "gpt-5-2",
    "source_model": "gpt-5.2-2025-12-11_unknown",
    "effort": "unknown",
    "benchmark": "Terminal Bench",
    "value": 0.606741573034
-  },
-  {
-   "model": "gemini-3-1-pro",
-   "source_model": "gemini-3.1-pro-preview",
-   "benchmark": "Terminal Bench",
-   "value": 0.593632958801
   },
   {
    "model": "claude-opus-4-6",
@@ -5050,7 +5596,7 @@
    "source_model": "gpt-6-astra_max",
    "effort": "max",
    "benchmark": "WeirdML",
-   "value": 0.9328000000000001
+   "value": 0.9326000000000001
   },
   {
    "model": "claude-fable-5-1",
@@ -5203,7 +5749,7 @@
    "source_model": "claude-sonnet-5_high",
    "effort": "high",
    "benchmark": "WeirdML",
-   "value": 0.6878000000000001
+   "value": 0.6898000000000001
   },
   {
    "model": "gpt-5-5",
@@ -5354,6 +5900,13 @@
    "value": 0.5970000000000001
   },
   {
+   "model": "claude-haiku-5-5",
+   "source_model": "claude-haiku-5-5_max",
+   "effort": "max",
+   "benchmark": "APEX-Agents",
+   "value": 0.561
+  },
+  {
    "model": "gpt-5-5",
    "source_model": "gpt-5.5_unknown",
    "effort": "unknown",
@@ -5382,18 +5935,18 @@
    "value": 0.525
   },
   {
-   "model": "kimi-k3",
-   "source_model": "kimi-k3_unknown",
-   "effort": "unknown",
-   "benchmark": "APEX-Agents",
-   "value": 0.506
-  },
-  {
    "model": "claude-opus-4-8",
    "source_model": "claude-opus-4-8_max",
    "effort": "max",
    "benchmark": "APEX-Agents",
    "value": 0.489
+  },
+  {
+   "model": "kimi-k3",
+   "source_model": "kimi-k3_unknown",
+   "effort": "unknown",
+   "benchmark": "APEX-Agents",
+   "value": 0.478
   },
   {
    "model": "deepseek-v4-pro",
@@ -5448,7 +6001,7 @@
    "model": "gemini-3-1-pro",
    "source_model": "gemini-3.1-pro-preview",
    "benchmark": "APEX-Agents",
-   "value": 0.353
+   "value": 0.35100000000000003
   },
   {
    "model": "gemini-3-5-flash-lite",
@@ -5681,6 +6234,13 @@
    "value": 0.8458333333333333
   },
   {
+   "model": "claude-sonnet-5-5",
+   "source_model": "claude-sonnet-5-5_xhigh",
+   "effort": "xhigh",
+   "benchmark": "ARC-AGI-2",
+   "value": 0.8388888888888889
+  },
+  {
    "model": "gpt-5-5",
    "source_model": "gpt-5.5_high",
    "effort": "high",
@@ -5749,6 +6309,13 @@
    "value": 0.7666666666666667
   },
   {
+   "model": "deepseek-v4-1-flash",
+   "source_model": "deepseek-v4.1-flash_max",
+   "effort": "max",
+   "benchmark": "ARC-AGI-2",
+   "value": 0.7291666666666666
+  },
+  {
    "model": "claude-opus-4-8",
    "source_model": "claude-opus-4-8_high",
    "effort": "high",
@@ -5784,6 +6351,20 @@
    "value": 0.6888888888888888
   },
   {
+   "model": "deepseek-v4-1-flash",
+   "source_model": "deepseek-v4.1-flash_high",
+   "effort": "high",
+   "benchmark": "ARC-AGI-2",
+   "value": 0.675
+  },
+  {
+   "model": "claude-sonnet-5-5",
+   "source_model": "claude-sonnet-5-5_high",
+   "effort": "high",
+   "benchmark": "ARC-AGI-2",
+   "value": 0.6736111111111112
+  },
+  {
    "model": "gpt-5-6-sol",
    "source_model": "gpt-5.6-sol_medium",
    "effort": "medium",
@@ -5810,6 +6391,20 @@
    "effort": "max",
    "benchmark": "ARC-AGI-2",
    "value": 0.6125
+  },
+  {
+   "model": "claude-haiku-5-5",
+   "source_model": "claude-haiku-5-5_xhigh",
+   "effort": "xhigh",
+   "benchmark": "ARC-AGI-2",
+   "value": 0.6125
+  },
+  {
+   "model": "deepseek-v4-1-flash",
+   "source_model": "deepseek-v4.1-flash_low",
+   "effort": "low",
+   "benchmark": "ARC-AGI-2",
+   "value": 0.6055555555555555
   },
   {
    "model": "kimi-k3",
@@ -5952,6 +6547,13 @@
    "value": 0.3333
   },
   {
+   "model": "claude-sonnet-5-5",
+   "source_model": "claude-sonnet-5-5_medium",
+   "effort": "medium",
+   "benchmark": "ARC-AGI-2",
+   "value": 0.3277777777777777
+  },
+  {
    "model": "gpt-6-sol",
    "source_model": "gpt-6-sol_low",
    "effort": "low",
@@ -5964,6 +6566,13 @@
    "effort": "high",
    "benchmark": "ARC-AGI-2",
    "value": 0.3138888888888889
+  },
+  {
+   "model": "claude-haiku-5-5",
+   "source_model": "claude-haiku-5-5_high",
+   "effort": "high",
+   "benchmark": "ARC-AGI-2",
+   "value": 0.3069444444444444
   },
   {
    "model": "gemini-3-6-flash",
@@ -5985,6 +6594,13 @@
    "effort": "medium",
    "benchmark": "ARC-AGI-2",
    "value": 0.2667
+  },
+  {
+   "model": "claude-sonnet-5-5",
+   "source_model": "claude-sonnet-5-5_low",
+   "effort": "low",
+   "benchmark": "ARC-AGI-2",
+   "value": 0.24027777777777776
   },
   {
    "model": "gpt-6-luna",
@@ -6021,6 +6637,13 @@
    "value": 0.0972
   },
   {
+   "model": "claude-haiku-5-5",
+   "source_model": "claude-haiku-5-5_medium",
+   "effort": "medium",
+   "benchmark": "ARC-AGI-2",
+   "value": 0.09444444444444443
+  },
+  {
    "model": "gpt-5-6-luna",
    "source_model": "gpt-5.6-luna_medium",
    "effort": "medium",
@@ -6049,6 +6672,13 @@
    "value": 0.04583333333333333
   },
   {
+   "model": "claude-haiku-5-5",
+   "source_model": "claude-haiku-5-5_low",
+   "effort": "low",
+   "benchmark": "ARC-AGI-2",
+   "value": 0.027777777777777776
+  },
+  {
    "model": "gemini-3-6-flash",
    "source_model": "gemini-3.6-flash_minimal",
    "effort": "minimal",
@@ -6072,6 +6702,13 @@
   {
    "model": "claude-haiku-4-5",
    "source_model": "claude-haiku-4-5-20251001",
+   "benchmark": "ARC-AGI-2",
+   "value": 0.0125
+  },
+  {
+   "model": "deepseek-v4-1-flash",
+   "source_model": "deepseek-v4.1-flash_none",
+   "effort": "none",
    "benchmark": "ARC-AGI-2",
    "value": 0.0125
   },
@@ -6127,6 +6764,14 @@
    "stderr": 0.0196
   },
   {
+   "model": "claude-sonnet-5-5",
+   "source_model": "claude-sonnet-5-5_xhigh",
+   "effort": "xhigh",
+   "benchmark": "HLE",
+   "value": 0.4612,
+   "stderr": 0.0195
+  },
+  {
    "model": "gemini-3-8-flash",
    "source_model": "gemini-3.8-flash_unknown",
    "effort": "unknown",
@@ -6141,6 +6786,14 @@
    "benchmark": "HLE",
    "value": 0.3444,
    "stderr": 0.018600000000000002
+  },
+  {
+   "model": "claude-haiku-5-5",
+   "source_model": "claude-haiku-5-5_unknown",
+   "effort": "unknown",
+   "benchmark": "HLE",
+   "value": 0.3012,
+   "stderr": 0.0183
   },
   {
    "model": "gpt-5-2",
@@ -6165,59 +6818,87 @@
    "stderr": 0.0154
   },
   {
+   "model": "claude-fable-5-1",
+   "source_model": "claude-fable-5-1_max",
+   "effort": "max",
+   "benchmark": "PostTrainBench",
+   "value": 0.4465
+  },
+  {
+   "model": "claude-opus-5-5",
+   "source_model": "claude-opus-5-5_max",
+   "effort": "max",
+   "benchmark": "PostTrainBench",
+   "value": 0.438
+  },
+  {
+   "model": "gpt-6-astra",
+   "source_model": "gpt-6-astra_max",
+   "effort": "max",
+   "benchmark": "PostTrainBench",
+   "value": 0.41880000000000006
+  },
+  {
+   "model": "gpt-6-1-sol",
+   "source_model": "gpt-6.1-sol_max",
+   "effort": "max",
+   "benchmark": "PostTrainBench",
+   "value": 0.3879
+  },
+  {
    "model": "claude-fable-5",
    "source_model": "claude-fable-5_max",
    "effort": "max",
    "benchmark": "PostTrainBench",
-   "value": 0.4179
-  },
-  {
-   "model": "gpt-5-6-sol",
-   "source_model": "gpt-5.6-sol_max",
-   "effort": "max",
-   "benchmark": "PostTrainBench",
-   "value": 0.36229999999999996
+   "value": 0.37270000000000003
   },
   {
    "model": "claude-opus-5",
    "source_model": "claude-opus-5_unknown",
    "effort": "unknown",
    "benchmark": "PostTrainBench",
-   "value": 0.3504
-  },
-  {
-   "model": "claude-opus-4-8",
-   "source_model": "claude-opus-4-8_high",
-   "effort": "high",
-   "benchmark": "PostTrainBench",
-   "value": 0.33840000000000003
-  },
-  {
-   "model": "claude-opus-4-8",
-   "source_model": "claude-opus-4-8_max",
-   "effort": "max",
-   "benchmark": "PostTrainBench",
-   "value": 0.329
+   "value": 0.3566
   },
   {
    "model": "kimi-k3",
    "source_model": "kimi-k3_unknown",
    "effort": "unknown",
    "benchmark": "PostTrainBench",
-   "value": 0.3196
+   "value": 0.3148
+  },
+  {
+   "model": "gpt-5-6-sol",
+   "source_model": "gpt-5.6-sol_max",
+   "effort": "max",
+   "benchmark": "PostTrainBench",
+   "value": 0.31010000000000004
+  },
+  {
+   "model": "claude-opus-4-8",
+   "source_model": "claude-opus-4-8_max",
+   "effort": "max",
+   "benchmark": "PostTrainBench",
+   "value": 0.31
+  },
+  {
+   "model": "claude-opus-4-8",
+   "source_model": "claude-opus-4-8_high",
+   "effort": "high",
+   "benchmark": "PostTrainBench",
+   "value": 0.3066
   },
   {
    "model": "gpt-5-5",
    "source_model": "gpt-5.5_xhigh",
    "effort": "xhigh",
    "benchmark": "PostTrainBench",
-   "value": 0.2723
+   "value": 0.23870000000000002
   },
   {
    "model": "gemini-3-1-pro",
    "source_model": "gemini-3.1-pro-preview",
    "benchmark": "PostTrainBench",
-   "value": 0.21989999999999998
+   "value": 0.1811
   },
   {
    "model": "claude-fable-5-1",
@@ -6479,6 +7160,41 @@
    "value": 0.43700000000000006
   },
   {
+   "model": "claude-haiku-5-5",
+   "source_model": "claude-haiku-5-5_max",
+   "effort": "max",
+   "benchmark": "CursorBench",
+   "value": 0.484
+  },
+  {
+   "model": "claude-haiku-5-5",
+   "source_model": "claude-haiku-5-5_xhigh",
+   "effort": "xhigh",
+   "benchmark": "CursorBench",
+   "value": 0.443
+  },
+  {
+   "model": "claude-haiku-5-5",
+   "source_model": "claude-haiku-5-5_high",
+   "effort": "high",
+   "benchmark": "CursorBench",
+   "value": 0.423
+  },
+  {
+   "model": "claude-haiku-5-5",
+   "source_model": "claude-haiku-5-5_medium",
+   "effort": "medium",
+   "benchmark": "CursorBench",
+   "value": 0.369
+  },
+  {
+   "model": "claude-haiku-5-5",
+   "source_model": "claude-haiku-5-5_low",
+   "effort": "low",
+   "benchmark": "CursorBench",
+   "value": 0.309
+  },
+  {
    "model": "gpt-5-6-sol",
    "source_model": "gpt-5.6-sol_max",
    "effort": "max",
@@ -6616,7 +7332,7 @@
    "source_model": "gpt-5.6-sol_xhigh",
    "effort": "xhigh",
    "benchmark": "CritPt",
-   "value": 0.286
+   "value": 0.285714285714286
   },
   {
    "model": "claude-fable-5",
@@ -6752,6 +7468,13 @@
    "value": 0.228571428571429
   },
   {
+   "model": "claude-haiku-5-5",
+   "source_model": "claude-haiku-5-5_xhigh",
+   "effort": "xhigh",
+   "benchmark": "CritPt",
+   "value": 0.225714285714286
+  },
+  {
    "model": "claude-opus-4-8",
    "source_model": "claude-opus-4-8_max",
    "effort": "max",
@@ -6787,9 +7510,30 @@
    "value": 0.19428571428571403
   },
   {
+   "model": "claude-haiku-5-5",
+   "source_model": "claude-haiku-5-5_max",
+   "effort": "max",
+   "benchmark": "CritPt",
+   "value": 0.188571428571429
+  },
+  {
    "model": "gpt-5-5",
    "source_model": "gpt-5.5_medium",
    "effort": "medium",
+   "benchmark": "CritPt",
+   "value": 0.18571428571428603
+  },
+  {
+   "model": "claude-haiku-5-5",
+   "source_model": "claude-haiku-5-5_high",
+   "effort": "high",
+   "benchmark": "CritPt",
+   "value": 0.18571428571428603
+  },
+  {
+   "model": "deepseek-v4-pro",
+   "source_model": "deepseek-v4-pro-0813_high",
+   "effort": "high",
    "benchmark": "CritPt",
    "value": 0.18571428571428603
   },
@@ -6891,6 +7635,13 @@
    "value": 0.142857142857143
   },
   {
+   "model": "claude-haiku-5-5",
+   "source_model": "claude-haiku-5-5_medium",
+   "effort": "medium",
+   "benchmark": "CritPt",
+   "value": 0.128571428571429
+  },
+  {
    "model": "gemini-3-8-flash",
    "source_model": "gemini-3.8-flash_medium",
    "effort": "medium",
@@ -6924,6 +7675,13 @@
    "effort": "medium",
    "benchmark": "CritPt",
    "value": 0.0942857142857143
+  },
+  {
+   "model": "claude-haiku-5-5",
+   "source_model": "claude-haiku-5-5_low",
+   "effort": "low",
+   "benchmark": "CritPt",
+   "value": 0.0914285714285714
   },
   {
    "model": "claude-sonnet-5",
@@ -7118,6 +7876,13 @@
    "value": 0.134
   },
   {
+   "model": "claude-opus-5-5",
+   "source_model": "claude-opus-5-5_unknown",
+   "effort": "unknown",
+   "benchmark": "Remote Labor Index",
+   "value": 0.2125
+  },
+  {
    "model": "gpt-6-astra",
    "source_model": "gpt-6-astra_unknown",
    "effort": "unknown",
@@ -7142,7 +7907,14 @@
    "source_model": "claude-fable-5_unknown",
    "effort": "unknown",
    "benchmark": "Remote Labor Index",
-   "value": 0.158
+   "value": 0.1583
+  },
+  {
+   "model": "deepseek-v4-1-flash",
+   "source_model": "deepseek-v4.1-flash_unknown",
+   "effort": "unknown",
+   "benchmark": "Remote Labor Index",
+   "value": 0.0958
   },
   {
    "model": "claude-opus-4-8",
@@ -7184,7 +7956,7 @@
    "source_model": "gpt-5.2-2025-12-11_medium",
    "effort": "medium",
    "benchmark": "Remote Labor Index",
-   "value": 0.025019999999999997
+   "value": 0.025
   },
   {
    "model": "gpt-5-2",
@@ -7773,14 +8545,16 @@
    "source_model": "claude-opus-5-5_max",
    "effort": "max",
    "benchmark": "ProofBench",
-   "value": 1
+   "value": 1,
+   "stderr": 0
   },
   {
    "model": "claude-sonnet-5-5",
    "source_model": "claude-sonnet-5-5_max",
    "effort": "max",
    "benchmark": "ProofBench",
-   "value": 1
+   "value": 1,
+   "stderr": 0
   },
   {
    "model": "claude-opus-5",
@@ -7788,7 +8562,7 @@
    "effort": "max",
    "benchmark": "ProofBench",
    "value": 0.99,
-   "stderr": 0.04163
+   "stderr": 0.01
   },
   {
    "model": "gpt-6-astra",
@@ -7810,7 +8584,14 @@
    "effort": "max",
    "benchmark": "ProofBench",
    "value": 0.9500000000000001,
-   "stderr": 0.042300000000000004
+   "stderr": 0.0219
+  },
+  {
+   "model": "claude-haiku-5-5",
+   "source_model": "claude-haiku-5-5_max",
+   "effort": "max",
+   "benchmark": "ProofBench",
+   "value": 0.89
   },
   {
    "model": "kimi-k3",
@@ -7818,7 +8599,7 @@
    "effort": "unknown",
    "benchmark": "ProofBench",
    "value": 0.87,
-   "stderr": 0.04606
+   "stderr": 0.0338
   },
   {
    "model": "gpt-5-6-sol",
@@ -7826,7 +8607,7 @@
    "effort": "max",
    "benchmark": "ProofBench",
    "value": 0.8300000000000001,
-   "stderr": 0.04208
+   "stderr": 0.03775
   },
   {
    "model": "gpt-6-sol",
@@ -7841,7 +8622,7 @@
    "effort": "max",
    "benchmark": "ProofBench",
    "value": 0.77,
-   "stderr": 0.04761
+   "stderr": 0.042300000000000004
   },
   {
    "model": "claude-opus-4-8",
@@ -7864,7 +8645,7 @@
    "effort": "max",
    "benchmark": "ProofBench",
    "value": 0.6,
-   "stderr": 0.05009
+   "stderr": 0.049240000000000006
   },
   {
    "model": "gemini-3-7-flash",
@@ -7901,7 +8682,8 @@
    "source_model": "deepseek-v4-pro-0813_unknown",
    "effort": "unknown",
    "benchmark": "ProofBench",
-   "value": 0.5
+   "value": 0.5,
+   "stderr": 0.05025
   },
   {
    "model": "gemini-3-8-flash",
@@ -7923,7 +8705,7 @@
    "source_model": "gemini-3.1-pro-preview",
    "benchmark": "ProofBench",
    "value": 0.26,
-   "stderr": 0.04386
+   "stderr": 0.04408
   },
   {
    "model": "gpt-5-2",
@@ -8011,11 +8793,25 @@
    "value": 0.465
   },
   {
+   "model": "claude-haiku-5-5",
+   "source_model": "claude-haiku-5-5_max",
+   "effort": "max",
+   "benchmark": "FrontierCode",
+   "value": 0.4636
+  },
+  {
    "model": "kimi-k3",
    "source_model": "kimi-k3_unknown",
    "effort": "unknown",
    "benchmark": "FrontierCode",
    "value": 0.44170000000000004
+  },
+  {
+   "model": "deepseek-v4-1-flash",
+   "source_model": "deepseek-v4.1-flash_high",
+   "effort": "high",
+   "benchmark": "FrontierCode",
+   "value": 0.4387
   },
   {
    "model": "gemini-3-7-flash",
@@ -8494,6 +9290,118 @@
    "value": 0.4449
   },
   {
+   "model": "claude-sonnet-5-5",
+   "source_model": "claude-sonnet-5-5_max",
+   "effort": "max",
+   "benchmark": "LMCA",
+   "value": 0.6826000000000001
+  },
+  {
+   "model": "claude-opus-5-5",
+   "source_model": "claude-opus-5-5_high",
+   "effort": "high",
+   "benchmark": "LMCA",
+   "value": 0.6591
+  },
+  {
+   "model": "claude-opus-5-5",
+   "source_model": "claude-opus-5-5_xhigh",
+   "effort": "xhigh",
+   "benchmark": "LMCA",
+   "value": 0.6618
+  },
+  {
+   "model": "claude-sonnet-5-5",
+   "source_model": "claude-sonnet-5-5_xhigh",
+   "effort": "xhigh",
+   "benchmark": "LMCA",
+   "value": 0.6631999999999999
+  },
+  {
+   "model": "claude-opus-5-5",
+   "source_model": "claude-opus-5-5_medium",
+   "effort": "medium",
+   "benchmark": "LMCA",
+   "value": 0.6566
+  },
+  {
+   "model": "claude-opus-5-5",
+   "source_model": "claude-opus-5-5_low",
+   "effort": "low",
+   "benchmark": "LMCA",
+   "value": 0.6492
+  },
+  {
+   "model": "claude-sonnet-5-5",
+   "source_model": "claude-sonnet-5-5_medium",
+   "effort": "medium",
+   "benchmark": "LMCA",
+   "value": 0.6545000000000001
+  },
+  {
+   "model": "claude-sonnet-5-5",
+   "source_model": "claude-sonnet-5-5_high",
+   "effort": "high",
+   "benchmark": "LMCA",
+   "value": 0.6593000000000001
+  },
+  {
+   "model": "claude-sonnet-5-5",
+   "source_model": "claude-sonnet-5-5_low",
+   "effort": "low",
+   "benchmark": "LMCA",
+   "value": 0.6454000000000001
+  },
+  {
+   "model": "gpt-6-1-sol",
+   "source_model": "gpt-6.1-sol_max",
+   "effort": "max",
+   "benchmark": "LMCA",
+   "value": 0.6278
+  },
+  {
+   "model": "claude-haiku-5-5",
+   "source_model": "claude-haiku-5-5_max",
+   "effort": "max",
+   "benchmark": "LMCA",
+   "value": 0.5106
+  },
+  {
+   "model": "claude-haiku-5-5",
+   "source_model": "claude-haiku-5-5_xhigh",
+   "effort": "xhigh",
+   "benchmark": "LMCA",
+   "value": 0.47990000000000005
+  },
+  {
+   "model": "claude-haiku-5-5",
+   "source_model": "claude-haiku-5-5_high",
+   "effort": "high",
+   "benchmark": "LMCA",
+   "value": 0.452
+  },
+  {
+   "model": "claude-haiku-5-5",
+   "source_model": "claude-haiku-5-5_medium",
+   "effort": "medium",
+   "benchmark": "LMCA",
+   "value": 0.456
+  },
+  {
+   "model": "claude-haiku-5-5",
+   "source_model": "claude-haiku-5-5_low",
+   "effort": "low",
+   "benchmark": "LMCA",
+   "value": 0.4483
+  },
+  {
+   "model": "claude-haiku-5-5",
+   "source_model": "claude-haiku-5-5_none",
+   "effort": "none",
+   "benchmark": "LMCA",
+   "value": 0.3926
+  },
+  {
    "model": "claude-opus-5",
    "source_model": "claude-opus-5_max",
    "effort": "max",
@@ -8910,10 +9818,140 @@
    "model": "claude-sonnet-5-5",
    "source_model": "claude-sonnet-5-5_max",
    "effort": "max",
+   "benchmark": "DTBench",
+   "value": 0.9733
+  },
+  {
+   "model": "claude-opus-5-5",
+   "source_model": "claude-opus-5-5_high",
+   "effort": "high",
+   "benchmark": "DTBench",
+   "value": 0.9653
+  },
+  {
+   "model": "claude-opus-5-5",
+   "source_model": "claude-opus-5-5_xhigh",
+   "effort": "xhigh",
+   "benchmark": "DTBench",
+   "value": 0.9733
+  },
+  {
+   "model": "claude-sonnet-5-5",
+   "source_model": "claude-sonnet-5-5_xhigh",
+   "effort": "xhigh",
+   "benchmark": "DTBench",
+   "value": 0.96
+  },
+  {
+   "model": "claude-opus-5-5",
+   "source_model": "claude-opus-5-5_medium",
+   "effort": "medium",
+   "benchmark": "DTBench",
+   "value": 0.9653
+  },
+  {
+   "model": "claude-opus-5-5",
+   "source_model": "claude-opus-5-5_low",
+   "effort": "low",
+   "benchmark": "DTBench",
+   "value": 0.9547
+  },
+  {
+   "model": "claude-sonnet-5-5",
+   "source_model": "claude-sonnet-5-5_medium",
+   "effort": "medium",
+   "benchmark": "DTBench",
+   "value": 0.9387000000000001
+  },
+  {
+   "model": "claude-sonnet-5-5",
+   "source_model": "claude-sonnet-5-5_high",
+   "effort": "high",
+   "benchmark": "DTBench",
+   "value": 0.9413
+  },
+  {
+   "model": "claude-sonnet-5-5",
+   "source_model": "claude-sonnet-5-5_low",
+   "effort": "low",
+   "benchmark": "DTBench",
+   "value": 0.9333
+  },
+  {
+   "model": "gpt-6-1-sol",
+   "source_model": "gpt-6.1-sol_max",
+   "effort": "max",
+   "benchmark": "DTBench",
+   "value": 0.9653
+  },
+  {
+   "model": "claude-haiku-5-5",
+   "source_model": "claude-haiku-5-5_max",
+   "effort": "max",
+   "benchmark": "DTBench",
+   "value": 0.9499
+  },
+  {
+   "model": "claude-haiku-5-5",
+   "source_model": "claude-haiku-5-5_xhigh",
+   "effort": "xhigh",
+   "benchmark": "DTBench",
+   "value": 0.872
+  },
+  {
+   "model": "claude-haiku-5-5",
+   "source_model": "claude-haiku-5-5_high",
+   "effort": "high",
+   "benchmark": "DTBench",
+   "value": 0.8667
+  },
+  {
+   "model": "claude-haiku-5-5",
+   "source_model": "claude-haiku-5-5_medium",
+   "effort": "medium",
+   "benchmark": "DTBench",
+   "value": 0.8427
+  },
+  {
+   "model": "claude-haiku-5-5",
+   "source_model": "claude-haiku-5-5_low",
+   "effort": "low",
+   "benchmark": "DTBench",
+   "value": 0.8107
+  },
+  {
+   "model": "claude-haiku-5-5",
+   "source_model": "claude-haiku-5-5_none",
+   "effort": "none",
+   "benchmark": "DTBench",
+   "value": 0.752
+  },
+  {
+   "model": "claude-sonnet-5-5",
+   "source_model": "claude-sonnet-5-5_max",
+   "effort": "max",
    "benchmark": "FrontierMath-Erdos",
    "value": 0.029,
    "stderr": 0.021,
    "evaluated_on": "2026-10-08"
+  },
+  {
+   "model": "gpt-6-1-sol",
+   "source_model": "gpt-6.1-sol_max",
+   "effort": "max",
+   "benchmark": "FrontierMath-Erdos",
+   "value": 0.04411764705882353,
+   "stderr": 0.02508828598537234,
+   "evaluated_on": "2026-10-01"
+  },
+  {
+   "model": "gpt-6-sol",
+   "source_model": "gpt-6-sol_max",
+   "effort": "max",
+   "benchmark": "FrontierMath-Erdos",
+   "value": 0.014705882352941176,
+   "stderr": 0.014705882352941176,
+   "evaluated_on": "2026-09-30"
   },
   {
    "model": "claude-opus-5-5",
@@ -8923,6 +9961,15 @@
    "value": 0.0294,
    "stderr": 0.0206,
    "evaluated_on": "2026-09-24"
+  },
+  {
+   "model": "gemini-3-8-flash",
+   "source_model": "gemini-3.8-flash_high",
+   "effort": "high",
+   "benchmark": "FrontierMath-Erdos",
+   "value": 0,
+   "stderr": 0,
+   "evaluated_on": "2026-09-02"
   },
   {
    "model": "claude-fable-5-1",
@@ -8937,6 +9984,24 @@
    "model": "gpt-5-5",
    "source_model": "gpt-5.5_xhigh",
    "effort": "xhigh",
+   "benchmark": "FrontierMath-Erdos",
+   "value": 0,
+   "stderr": 0,
+   "evaluated_on": "2026-08-28"
+  },
+  {
+   "model": "kimi-k3",
+   "source_model": "kimi-k3_max",
+   "effort": "max",
+   "benchmark": "FrontierMath-Erdos",
+   "value": 0,
+   "stderr": 0,
+   "evaluated_on": "2026-08-28"
+  },
+  {
+   "model": "claude-opus-5",
+   "source_model": "claude-opus-5_max",
+   "effort": "max",
    "benchmark": "FrontierMath-Erdos",
    "value": 0,
    "stderr": 0,
@@ -9168,11 +10233,53 @@
    "evaluated_on": "2026-09-10"
   },
   {
+   "model": "gpt-6-astra",
+   "source_model": "gpt-6-astra_max",
+   "effort": "max",
+   "benchmark": "FrontierSWE",
+   "value": 0.6550757455882352
+  },
+  {
+   "model": "claude-opus-5-5",
+   "source_model": "claude-opus-5-5_max",
+   "effort": "max",
+   "benchmark": "FrontierSWE",
+   "value": 0.623309882352941
+  },
+  {
+   "model": "claude-sonnet-5-5",
+   "source_model": "claude-sonnet-5-5_max",
+   "effort": "max",
+   "benchmark": "FrontierSWE",
+   "value": 0.618892994117647
+  },
+  {
    "model": "claude-fable-5-1",
    "source_model": "claude-fable-5-1_max",
    "effort": "max",
    "benchmark": "FrontierSWE",
    "value": 0.5629078999999999
+  },
+  {
+   "model": "claude-opus-5",
+   "source_model": "claude-opus-5_max",
+   "effort": "max",
+   "benchmark": "FrontierSWE",
+   "value": 0.5201176764705882
+  },
+  {
+   "model": "claude-fable-5",
+   "source_model": "claude-fable-5_max",
+   "effort": "max",
+   "benchmark": "FrontierSWE",
+   "value": 0.4696449352941177
+  },
+  {
+   "model": "claude-haiku-5-5",
+   "source_model": "claude-haiku-5-5_max",
+   "effort": "max",
+   "benchmark": "FrontierSWE",
+   "value": 0.4376868294117648
   },
   {
    "model": "gpt-5-6-sol",
@@ -9196,46 +10303,11 @@
    "value": 0.20260590588235297
   },
   {
-   "model": "gpt-6-astra",
-   "source_model": "gpt-6-astra_max",
-   "effort": "max",
-   "benchmark": "FrontierSWE",
-   "value": 0.6550757455882352
-  },
-  {
-   "model": "claude-opus-5",
-   "source_model": "claude-opus-5_max",
-   "effort": "max",
-   "benchmark": "FrontierSWE",
-   "value": 0.5201176764705882
-  },
-  {
-   "model": "claude-fable-5",
-   "source_model": "claude-fable-5_max",
-   "effort": "max",
-   "benchmark": "FrontierSWE",
-   "value": 0.4696449352941177
-  },
-  {
    "model": "gemini-3-8-flash",
    "source_model": "gemini-3.8-flash_high",
    "effort": "high",
    "benchmark": "FrontierSWE",
    "value": 0.19626902941176463
-  },
-  {
-   "model": "claude-opus-5-5",
-   "source_model": "claude-opus-5-5_max",
-   "effort": "max",
-   "benchmark": "FrontierSWE",
-   "value": 0.623309882352941
-  },
-  {
-   "model": "claude-sonnet-5-5",
-   "source_model": "claude-sonnet-5-5_max",
-   "effort": "max",
-   "benchmark": "FrontierSWE",
-   "value": 0.618892994117647
   },
   {
    "model": "claude-fable-5",
@@ -9248,28 +10320,28 @@
    "model": "gemini-3-1-pro",
    "source_model": "gemini-3.1-pro-preview",
    "benchmark": "SciCode",
-   "value": 0.58912037037037
+   "value": 0.586805555555556
   },
   {
    "model": "gpt-5-5",
    "source_model": "gpt-5.5_xhigh",
    "effort": "xhigh",
    "benchmark": "SciCode",
-   "value": 0.561342592592593
+   "value": 0.55787037037037
   },
   {
    "model": "gpt-5-5",
    "source_model": "gpt-5.5_high",
    "effort": "high",
    "benchmark": "SciCode",
-   "value": 0.559027777777778
+   "value": 0.561342592592593
   },
   {
    "model": "gpt-5-5",
    "source_model": "gpt-5.5_medium",
    "effort": "medium",
    "benchmark": "SciCode",
-   "value": 0.534722222222222
+   "value": 0.545138888888889
   },
   {
    "model": "claude-opus-4-8",
@@ -9297,7 +10369,7 @@
    "source_model": "claude-haiku-4-5-20251001_unknown",
    "effort": "unknown",
    "benchmark": "SciCode",
-   "value": 0.43287037037037
+   "value": 0.42245370370370405
   },
   {
    "model": "claude-sonnet-5",
@@ -9311,14 +10383,14 @@
    "source_model": "gpt-5.6-sol_high",
    "effort": "high",
    "benchmark": "SciCode",
-   "value": 0.569444444444444
+   "value": 0.577546296296296
   },
   {
    "model": "gpt-5-6-sol",
    "source_model": "gpt-5.6-sol_medium",
    "effort": "medium",
    "benchmark": "SciCode",
-   "value": 0.564814814814815
+   "value": 0.574074074074074
   },
   {
    "model": "gpt-5-6-sol",
@@ -9332,14 +10404,14 @@
    "source_model": "gpt-5.6-sol_xhigh",
    "effort": "xhigh",
    "benchmark": "SciCode",
-   "value": 0.560185185185185
+   "value": 0.570601851851852
   },
   {
    "model": "gpt-5-6-sol",
    "source_model": "gpt-5.6-sol_low",
    "effort": "low",
    "benchmark": "SciCode",
-   "value": 0.554398148148148
+   "value": 0.563657407407407
   },
   {
    "model": "gpt-5-6-luna",
@@ -9353,28 +10425,28 @@
    "source_model": "gpt-5.6-luna_high",
    "effort": "high",
    "benchmark": "SciCode",
-   "value": 0.506944444444444
+   "value": 0.516203703703704
   },
   {
    "model": "gpt-5-6-luna",
    "source_model": "gpt-5.6-luna_xhigh",
    "effort": "xhigh",
    "benchmark": "SciCode",
-   "value": 0.5
+   "value": 0.50462962962963
   },
   {
    "model": "gpt-5-6-luna",
    "source_model": "gpt-5.6-luna_medium",
    "effort": "medium",
    "benchmark": "SciCode",
-   "value": 0.45833333333333304
+   "value": 0.467592592592593
   },
   {
    "model": "gpt-5-6-luna",
    "source_model": "gpt-5.6-luna_low",
    "effort": "low",
    "benchmark": "SciCode",
-   "value": 0.456018518518519
+   "value": 0.460648148148148
   },
   {
    "model": "claude-opus-5",
@@ -9423,7 +10495,7 @@
    "source_model": "gemini-3.6-flash_high",
    "effort": "high",
    "benchmark": "SciCode",
-   "value": 0.52662037037037
+   "value": 0.533564814814815
   },
   {
    "model": "gemini-3-5-flash-lite",
@@ -9443,7 +10515,7 @@
    "source_model": "kimi-k3_low",
    "effort": "low",
    "benchmark": "SciCode",
-   "value": 0.511574074074074
+   "value": 0.52662037037037
   },
   {
    "model": "kimi-k2-5",
@@ -9470,7 +10542,7 @@
    "source_model": "gpt-5.6-luna_none",
    "effort": "none",
    "benchmark": "SciCode",
-   "value": 0.399305555555556
+   "value": 0.403935185185185
   },
   {
    "model": "claude-fable-5-1",
@@ -9498,42 +10570,42 @@
    "source_model": "claude-fable-5-1_high",
    "effort": "high",
    "benchmark": "SciCode",
-   "value": 0.576388888888889
+   "value": 0.586805555555556
   },
   {
    "model": "gemini-3-7-flash",
    "source_model": "gemini-3.7-flash_high",
    "effort": "high",
    "benchmark": "SciCode",
-   "value": 0.568287037037037
+   "value": 0.571759259259259
   },
   {
    "model": "claude-fable-5-1",
    "source_model": "claude-fable-5-1_low",
    "effort": "low",
    "benchmark": "SciCode",
-   "value": 0.556712962962963
+   "value": 0.56712962962963
   },
   {
    "model": "claude-fable-5-1",
    "source_model": "claude-fable-5-1_medium",
    "effort": "medium",
    "benchmark": "SciCode",
-   "value": 0.553240740740741
+   "value": 0.563657407407407
   },
   {
    "model": "gemini-3-8-flash",
    "source_model": "gemini-3.8-flash_medium",
    "effort": "medium",
    "benchmark": "SciCode",
-   "value": 0.543981481481482
+   "value": 0.550925925925926
   },
   {
    "model": "gemini-3-8-flash",
    "source_model": "gemini-3.8-flash_low",
    "effort": "low",
    "benchmark": "SciCode",
-   "value": 0.542824074074074
+   "value": 0.549768518518518
   },
   {
    "model": "gemini-3-8-flash",
@@ -9837,6 +10909,48 @@
    "value": 0.35532407407407407
   },
   {
+   "model": "claude-haiku-5-5",
+   "source_model": "claude-haiku-5-5_max",
+   "effort": "max",
+   "benchmark": "SciCode",
+   "value": 0.549768518518518
+  },
+  {
+   "model": "claude-haiku-5-5",
+   "source_model": "claude-haiku-5-5_xhigh",
+   "effort": "xhigh",
+   "benchmark": "SciCode",
+   "value": 0.517361111111111
+  },
+  {
+   "model": "claude-haiku-5-5",
+   "source_model": "claude-haiku-5-5_low",
+   "effort": "low",
+   "benchmark": "SciCode",
+   "value": 0.491898148148148
+  },
+  {
+   "model": "claude-haiku-5-5",
+   "source_model": "claude-haiku-5-5_medium",
+   "effort": "medium",
+   "benchmark": "SciCode",
+   "value": 0.48958333333333304
+  },
+  {
+   "model": "claude-haiku-5-5",
+   "source_model": "claude-haiku-5-5_high",
+   "effort": "high",
+   "benchmark": "SciCode",
+   "value": 0.487268518518519
+  },
+  {
+   "model": "deepseek-v4-pro",
+   "source_model": "deepseek-v4-pro-0813_high",
+   "effort": "high",
+   "benchmark": "SciCode",
+   "value": 0.517361111111111
+  },
+  {
    "model": "claude-fable-5",
    "source_model": "claude-fable-5_unknown",
    "effort": "unknown",
@@ -9955,6 +11069,27 @@
    "value": 0.5119305856832972
   },
   {
+   "model": "claude-sonnet-5-5",
+   "source_model": "claude-sonnet-5-5_unknown",
+   "effort": "unknown",
+   "benchmark": "Blueprint-Bench 2",
+   "value": 0.3926247288503253
+  },
+  {
+   "model": "claude-haiku-5-5",
+   "source_model": "claude-haiku-5-5_unknown",
+   "effort": "unknown",
+   "benchmark": "Blueprint-Bench 2",
+   "value": 0.32971800433839465
+  },
+  {
+   "model": "gpt-6-1-sol",
+   "source_model": "gpt-6.1-sol_unknown",
+   "effort": "unknown",
+   "benchmark": "Blueprint-Bench 2",
+   "value": 0.43167028199566154
+  },
+  {
    "model": "claude-opus-4-6",
    "source_model": "claude-opus-4-6_high",
    "effort": "high",
@@ -9966,98 +11101,175 @@
    "source_model": "gpt-6-astra_xhigh",
    "effort": "xhigh",
    "benchmark": "WeirdML v3",
-   "value": 0.4222023136363637
+   "value": 0.5404530212121212
   },
   {
    "model": "claude-fable-5-1",
    "source_model": "claude-fable-5-1_xhigh",
    "effort": "xhigh",
    "benchmark": "WeirdML v3",
-   "value": 0.2597021272727273
+   "value": 0.4352721909090909
   },
   {
    "model": "claude-opus-5",
    "source_model": "claude-opus-5_xhigh",
    "effort": "xhigh",
    "benchmark": "WeirdML v3",
-   "value": 0.19011175378787878
+   "value": 0.32538207196969704
   },
   {
    "model": "claude-fable-5",
    "source_model": "claude-fable-5_xhigh",
    "effort": "xhigh",
    "benchmark": "WeirdML v3",
-   "value": 0.1552890606060606
+   "value": 0.2786194878787879
   },
   {
    "model": "gpt-5-6-sol",
    "source_model": "gpt-5.6-sol_xhigh",
    "effort": "xhigh",
    "benchmark": "WeirdML v3",
-   "value": 0.14992224545454547
+   "value": 0.21448963636363638
   },
   {
    "model": "kimi-k3",
    "source_model": "kimi-k3_high",
    "effort": "high",
    "benchmark": "WeirdML v3",
-   "value": 0.07268865151515151
+   "value": 0.15409355909090908
   },
   {
    "model": "gemini-3-8-flash",
    "source_model": "gemini-3.8-flash_high",
    "effort": "high",
    "benchmark": "WeirdML v3",
-   "value": 0.07378749090909091
+   "value": 0.14574070909090908
   },
   {
    "model": "deepseek-v4-1-flash",
    "source_model": "deepseek-v4.1-flash_high",
    "effort": "high",
    "benchmark": "WeirdML v3",
-   "value": 0.05946331818181818
+   "value": 0.11577238636363638
   },
   {
    "model": "gpt-5-6-luna",
    "source_model": "gpt-5.6-luna_xhigh",
    "effort": "xhigh",
    "benchmark": "WeirdML v3",
-   "value": 0.05157952272727273
+   "value": 0.09344040909090909
   },
   {
    "model": "claude-opus-5-5",
    "source_model": "claude-opus-5-5_xhigh",
    "effort": "xhigh",
    "benchmark": "WeirdML v3",
-   "value": 0.3120028142857143
+   "value": 0.49830967402597404
   },
   {
    "model": "gpt-6-sol",
    "source_model": "gpt-6-sol_xhigh",
    "effort": "xhigh",
    "benchmark": "WeirdML v3",
-   "value": 0.19731756666666667
+   "value": 0.2756275515151515
   },
   {
    "model": "gpt-6-luna",
    "source_model": "gpt-6-luna_xhigh",
    "effort": "xhigh",
    "benchmark": "WeirdML v3",
-   "value": 0.07874124242424242
+   "value": 0.12022755303030304
   },
   {
    "model": "gpt-6-1-sol",
    "source_model": "gpt-6.1-sol_xhigh",
    "effort": "xhigh",
    "benchmark": "WeirdML v3",
-   "value": 0.354727146969697
+   "value": 0.5060326727272727
   },
   {
    "model": "claude-sonnet-5-5",
    "source_model": "claude-sonnet-5-5_xhigh",
    "effort": "xhigh",
    "benchmark": "WeirdML v3",
-   "value": 0.19996849696969698
+   "value": 0.36991362034632036
+  },
+  {
+   "model": "claude-haiku-5-5",
+   "source_model": "claude-haiku-5-5_xhigh",
+   "effort": "xhigh",
+   "benchmark": "WeirdML v3",
+   "value": 0.24131188181818183
+  },
+  {
+   "model": "gpt-5-2",
+   "source_model": "gpt-5.2-2025-12-11_xhigh",
+   "effort": "xhigh",
+   "benchmark": "WeirdML v3",
+   "value": 0.09720329675324677
+  },
+  {
+   "model": "gpt-6-sol",
+   "source_model": "gpt-6-sol_max",
+   "effort": "max",
+   "benchmark": "SpireClimb",
+   "value": 0.09166666666666667,
+   "stderr": 0.024324094573715753,
+   "evaluated_on": "2026-11-05"
+  },
+  {
+   "model": "claude-fable-5-1",
+   "source_model": "claude-fable-5-1_max",
+   "effort": "max",
+   "benchmark": "SpireClimb",
+   "value": 0.02,
+   "stderr": 0.011389895949029987,
+   "evaluated_on": "2026-11-05"
+  },
+  {
+   "model": "claude-sonnet-5-5",
+   "source_model": "claude-sonnet-5-5_max",
+   "effort": "max",
+   "benchmark": "SpireClimb",
+   "value": 0.013333333333333334,
+   "stderr": 0.009364170421755878,
+   "evaluated_on": "2026-11-05"
+  },
+  {
+   "model": "gpt-6-luna",
+   "source_model": "gpt-6-luna_max",
+   "effort": "max",
+   "benchmark": "SpireClimb",
+   "value": 0,
+   "stderr": 0,
+   "evaluated_on": "2026-11-05"
+  },
+  {
+   "model": "claude-opus-5-5",
+   "source_model": "claude-opus-5-5_max",
+   "effort": "max",
+   "benchmark": "SpireClimb",
+   "value": 0.058333333333333334,
+   "stderr": 0.020285004230980282,
+   "evaluated_on": "2026-11-04"
+  },
+  {
+   "model": "gpt-6-1-sol",
+   "source_model": "gpt-6.1-sol_max",
+   "effort": "max",
+   "benchmark": "SpireClimb",
+   "value": 0.23833333333333334,
+   "stderr": 0.03653377199465138,
+   "evaluated_on": "2026-11-04"
+  },
+  {
+   "model": "gpt-6-astra",
+   "source_model": "gpt-6-astra_max",
+   "effort": "max",
+   "benchmark": "SpireClimb",
+   "value": 0.33999999999999997,
+   "stderr": 0.04131325151634216,
+   "evaluated_on": "2026-11-04"
   }
  ]
 }
