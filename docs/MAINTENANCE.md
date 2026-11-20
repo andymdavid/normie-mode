@@ -4,7 +4,7 @@ Daily checks replace the proposed hourly monitor (D-040). Checks also run after 
 
 ## Commands
 
-- `npm run verify`: check, build, tests, SEO. Build precedes tests because indexability tests inspect generated HTML.
+- `npm run verify`: check, build, ordinary tests, built-site tests and SEO. `npm test` needs no build; `npm run test:site` separately checks the built HTML/indexability register.
 - `npm run impact`: machine-readable picks for all hub tasks, using the same Astro/Vite modules as public pages.
 - `npm run maintenance -- daily`: health, accepted-source age, persistent model discovery and overdue plan checks.
 - `npm run maintenance -- weekly`: built-site tests, SEO, provider-plan page observations and three evaluation estimates. Changed HTML requires human interpretation; HTTP 200 never counts as verified plan access.
@@ -23,6 +23,8 @@ Scheduler jobs use an exactly Flight Deck-bound launcher session to call the det
 Proposed/installed times are recorded in the handoff: daily 07:00, weekly Tuesday 08:00, monthly first day 09:00, Australia/Perth. No hourly job. An unchanged daily result creates no new task comment; new issues and recovery do. Weekly review packages go to the same task. Independent consumer-product citation checks remain manual fixtures with exact tier/model/date/citations and no retry for a missing citation.
 
 ## Evaluation approval and publication
+
+**Operator hold (20 November 2026): do not perform paid runs until the user explicitly lifts the hold. Cost estimates are informational.**
 
 1. Run `npm run eval -- --suite <suite> --models <canonical-ids> --runs 1 --budget <USD> --dry-run`.
 2. Review the estimate and copy the exact printed manifest into `{ "approved_by": "<human>", "approved_on": "YYYY-MM-DD", "manifest": <printed-object> }`.

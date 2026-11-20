@@ -11,7 +11,7 @@ In the first test (`spreadsheet-questions`), four of six models scored 30/30, so
 - **Messier sheet (~190 rows):** four customers written several ways ("Ltd", capitals, "&" or "and"); 3–5 orders typed in twice with the same order ID; returns as negative-quantity rows; about 30% of dates written day/month/year; a 5% price rise from April on some products.
 - **Owner's notes in the prompt** explain each of these, as a real owner would, so every answer is defensible.
 - **Eight harder questions:** March net revenue; biggest customer and amount (spellings must be merged); top-three customers' share of revenue; customers who ordered in Q1 but not Q2; the biggest month-on-month increase; the value of returns; how many rows are duplicates; average Q2 order value.
-- **The mess has to matter:** a sheet is only used if the lazy reading (not merging spellings, counting duplicates twice) gives the wrong biggest customer. Tests enforce this and recalculate the answer key independently.
+- **The mess has to matter:** a sheet is only used if the lazy reading (not merging spellings, counting duplicates twice) gives the wrong biggest customer. Tests enforce this and independently recalculate March revenue, the biggest customer, returns and duplicate counts. The other four question keys still need independent reference calculations before result publication (November test audit).
 
 ## Scoring
 

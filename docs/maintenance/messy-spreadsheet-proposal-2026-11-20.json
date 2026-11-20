@@ -101,5 +101,7 @@
     "runs": 1,
     "budget": 20,
     "cases_sha256": "54a32c1d0bc0b174b64d36d31fb39d8202a257b7c3b9a5d3f5cd3371d9db5e34"
-  }
+  },
+  "onHold": true,
+  "holdReason": "User instruction 2026-11-20: no paid runs for now."
 }

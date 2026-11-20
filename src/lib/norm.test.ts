@@ -1,46 +1,52 @@
-import { describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { graph } from './graph';
 import { NormMessageError, renderSlot, taskCostNote, taskEvidenceNote, taskFacts } from './norm';
 import { lintNormText } from './rules';
-import { MIN_MODELS_TO_RANK, allTaskPages, effectiveTests, leadSentence, scoringTests, taskScores, testRows, topTwoTied } from './tasks';
+import { allTaskPages, leadSentence, taskScores, topTwoTied } from './tasks';
+import * as taskData from './tasks';
 
 const pages = allTaskPages().map((t) => [t.id, t] as const);
-const clean = (s?: string) => {
-  expect(s ?? '').not.toMatch(/\{|\}|undefined|NaN|Infinity/);
-};
+afterEach(() => vi.restoreAllMocks());
+const clean = (s?: string) => expect(s ?? '').not.toMatch(/\{|\}|undefined|NaN|Infinity/);
 
 describe("Norm's data-driven messages", () => {
-  it.each(pages)('%s: evidence note renders and names the chart leader', (_, task) => {
-    const note = taskEvidenceNote(task);
-    clean(note);
+  // One page contract reuses facts/messages instead of recalculating them in four cases.
+  // Every task page is still checked, with its ID in the failure name.
+  it.each(pages)('%s: messages agree with the page evidence and prices', (_, task) => {
+    const evidence = taskEvidenceNote(task);
+    const cost = taskCostNote(task);
+    const facts = taskFacts(task);
+    clean(evidence);
+    clean(cost);
     const leader = taskScores(task).rows[0]?.label;
-    if (leader) expect(note).toContain(leader);
-  });
-
-  it.each(pages)('%s: counts the same tests as the charts on the page', (_, task) => {
-    const charted = scoringTests(task).filter((t) => testRows(t).filter((r) => r.value !== undefined).length >= MIN_MODELS_TO_RANK);
-    const closeness = (id: string) => effectiveTests(task).find((x) => x.test === id)?.closeness;
-    const words = ['no', 'one', 'two', 'three', 'four', 'five', 'six'];
-    const f = taskFacts(task);
-    expect(f.direct_words).toBe(`${words[charted.filter((t) => closeness(t.id) === 'direct').length]} test${charted.filter((t) => closeness(t.id) === 'direct').length === 1 ? '' : 's'}`);
-    expect(f.related_words).toBe(`${words[charted.filter((t) => closeness(t.id) === 'related').length]} test${charted.filter((t) => closeness(t.id) === 'related').length === 1 ? '' : 's'}`);
-  });
-
-  it.each(pages)("%s: evidence note only mentions people's votes when the evidence is votes", (_, task) => {
-    const f = taskFacts(task);
-    const note = taskEvidenceNote(task) ?? '';
-    if (/people's votes/.test(note) && !f.inherited) expect(f.votes_only || f.mostly_votes || f.half_votes).toBe(true);
-    if (f.inherited) expect(note).toContain(String(f.hub));
-  });
-
-  it.each(pages)('%s: cost note matches the prices of the top-scoring models', (_, task) => {
-    const note = taskCostNote(task);
-    clean(note);
-    const f = taskFacts(task);
-    if (note && !f.leaders_similar_price) {
-      expect(note).toContain(`${f.cheapest_leader} is the cheapest`);
-      expect(note).toContain('models that score best for');
+    if (leader) expect(evidence).toContain(leader);
+    if (/people's votes/.test(evidence ?? '') && !facts.inherited)
+      expect(facts.votes_only || facts.mostly_votes || facts.half_votes).toBe(true);
+    if (facts.inherited) expect(evidence).toContain(String(facts.hub));
+    if (cost && !facts.leaders_similar_price) {
+      expect(cost).toContain(`${facts.cheapest_leader} is the cheapest`);
+      expect(cost).toContain('models that score best for');
     }
+  });
+
+  it('counts visible direct and related evidence without counting a sparse test', () => {
+    const task = graph().intents.get('excel-spreadsheets')!;
+    const tests = ['spreadsheet-questions', 'dtbench', 'gpqa-diamond'].map(id => graph().tests.get(id)!);
+    vi.spyOn(taskData, 'scoringTests').mockReturnValue(tests);
+    vi.spyOn(taskData, 'effectiveTests').mockReturnValue([
+      {test:'spreadsheet-questions',closeness:'direct'},
+      {test:'dtbench',closeness:'related'},
+      {test:'gpqa-diamond',closeness:'direct'},
+    ]);
+    vi.spyOn(taskData, 'testRows').mockImplementation(test =>
+      ['a','b','c'].slice(0,test.id === 'gpqa-diamond' ? 2 : 3)
+        .map(id => ({id,label:id,value:50})),
+    );
+    vi.spyOn(taskData, 'taskScores').mockReturnValue({rows:[],testsUsed:2,closeness:'direct'});
+    expect(taskFacts(task)).toMatchObject({
+      direct_words:'one test', related_words:'one test', direct_verb:'measures',
+      related_clause:', and one test covers related skills',
+    });
   });
 
   it('fails loudly when a template needs a fact the page does not have', () => {
@@ -60,13 +66,12 @@ describe("Norm's data-driven messages", () => {
     ];
     expect(topTwoTied(rows)).toBeTruthy();
     expect(leadSentence(rows)).toBe('A and B are neck and neck at the top, followed by C.');
-    const level = [
+    expect(leadSentence([
       { id: 'a', label: 'A', value: 100 },
       { id: 'b', label: 'B', value: 100 },
       { id: 'c', label: 'C', value: 100 },
       { id: 'd', label: 'D', value: 90 },
-    ];
-    expect(leadSentence(level)).toBe('A, B and C are level at the top.');
+    ])).toBe('A, B and C are level at the top.');
   });
 });
 

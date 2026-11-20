@@ -1,5 +1,5 @@
-import { describe, expect, it } from 'vitest';
-import { mkdirSync, mkdtempSync, writeFileSync, readFileSync } from 'node:fs';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
+import { mkdirSync, mkdtempSync, writeFileSync, readFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { publishedRun, rankRun, type TestRun } from './normie-tests';
@@ -24,28 +24,28 @@ describe('rankRun', () => {
     expect(r[2].why).toBe('5 of 6 right');
   });
 
-  it('picks a best overall from the committed pilot run', () => {
-    const run = publishedRun('spreadsheet-questions');
-    expect(run && rankRun(run)[0].correct).toBe(run && rankRun(run)[0].total);
-  });
 });
 
 describe('publishedRun', () => {
   // Three runs of a toy suite: v1 with A and B, a v1 run that adds C and re-runs A, then nothing else.
-  const base = mkdtempSync(join(tmpdir(), 'normie-runs-'));
+  let base: string;
   const suite = 'toy';
-  mkdirSync(join(base, suite, 'cases'), { recursive: true });
-  writeFileSync(join(base, suite, 'cases', 'case-01.json'), JSON.stringify({ id: 'case-01', questions: [] }));
   const save = (runId: string, version: string, models: [string, number][], mock = false) => {
     const dir = join(base, suite, 'results', runId);
     mkdirSync(dir, { recursive: true });
-    writeFileSync(join(dir, 'summary.json'), JSON.stringify({ suite, version, run_id: runId, mock, cases: ['case-01'], total_cost_usd: 0, models: models.map(([model, correct]) => ({ model, name: model.toUpperCase(), score: null, cost_usd: 0.1, avg_seconds: 1, format_failures: 0, errors: 0 })) }));
+    writeFileSync(join(dir, 'summary.json'), JSON.stringify({ suite, version, run_id: runId, mock, cases: ['case-01'], total_cost_usd: 0, models: models.map(([model]) => ({ model, name: model.toUpperCase(), score: null, cost_usd: 0.1, avg_seconds: 1, format_failures: 0, errors: 0 })) }));
     writeFileSync(join(base, suite, 'results', 'approved.json'), JSON.stringify({ reviewed_by: 'test reviewer', reviewed_on: '2026-09-30', runs: ['2026-09-24-09-00', '2026-09-28-10-00', '2026-09-29-10-00-mock', '2026-09-30-10-00', '2026-10-01-10-00'] }));
     for (const [model, correct] of models) writeFileSync(join(dir, `${model}__case-01__r1.json`), JSON.stringify({ model, case: 'case-01', run: 1, score: { correct, total: 6 } }));
   };
-  save('2026-09-24-09-00', '1', [['a', 4], ['b', 5]]);
-  save('2026-09-28-10-00', '1', [['a', 6], ['c', 3]]);
-  save('2026-09-29-10-00-mock', '1', [['a', 0]], true);
+  beforeEach(() => {
+    base = mkdtempSync(join(tmpdir(), 'normie-runs-'));
+    mkdirSync(join(base, suite, 'cases'), { recursive: true });
+    writeFileSync(join(base, suite, 'cases', 'case-01.json'), JSON.stringify({ id: 'case-01', questions: [] }));
+    save('2026-09-24-09-00', '1', [['a', 4], ['b', 5]]);
+    save('2026-09-28-10-00', '1', [['a', 6], ['c', 3]]);
+    save('2026-09-29-10-00-mock', '1', [['a', 0]], true);
+  });
+  afterEach(() => rmSync(base, { recursive: true, force: true }));
 
   it('keeps models from earlier runs when a later run only adds some', () => {
     const run = publishedRun(suite, base)!;

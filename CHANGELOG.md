@@ -6,6 +6,8 @@ This file records meaningful changes to the Normie Mode product, implementation,
 
 ### Added
 
+- A readable software-test audit and linked definition inventory, fewer duplicated/repeated cases, independent fixed-fixture evidence counts and separate no-build/site test commands; paid evaluations are on hold.
+
 - Nine provider-verified November model candidates, exact source aliases, refreshed Google US consumer-plan access and primary-source additions for new Claude/OpenAI availability, prepared for publication review.
 - Original retrieval provenance for preserved historical specs when a mutable provider API alias moves to a newer exact model version.
 

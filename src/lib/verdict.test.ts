@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { cachedTaskScores, scoredOnVotesOnly } from './models';
+import { cachedTaskScores } from './models';
 import { allTaskPages } from './tasks';
 import { STANDARD_PLAN_MAX_USD, TOO_CLOSE_POINTS, verdict } from './verdict';
 
@@ -44,9 +44,8 @@ describe('task page verdicts (D-027)', () => {
         }
       });
 
-      it("never picks a model scored on people's votes alone when the task has tests of real work (D-029)", () => {
-        for (const p of v.picks) for (const o of p.options) expect(scoredOnVotesOnly(task, o.modelId)).toBe(false);
-      });
+      // D-029 is checked for every scored model in tasks.test.ts; the position check
+      // above proves picks are members of that already-checked set.
 
       it('shows each pick once', () => {
         const keys = v.picks.map((p) => p.options.map((o) => o.modelId).join());

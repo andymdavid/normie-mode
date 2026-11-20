@@ -1,5 +1,7 @@
 # November maintenance review
 
+**Paid-run hold, 20 November: the user instructed no paid evaluations for now. The estimate is informational and is not an approval request.**
+
 The maintenance implementation and live scheduler are separate from approval to publish new model data. The daily, weekly and monthly deterministic pipelines have each completed successfully. The scheduler's exact-bound daily launcher also posted a task comment from its own session, verifying the Flight Deck reporting path.
 
 Review the nine new exact-version model records, the refreshed snapshots and `catchup-impact-2026-11-20.json`. Google US plan access is freshly verified; new Claude and OpenAI access rows cite primary sources but retain old whole-plan review dates because older prices/defaults were not re-verified. Kimi's global USD plan/model mapping remains unresolved; do not replace it with China pricing or infer consumer-chat access from Coding Plan documentation.
