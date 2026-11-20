@@ -5,6 +5,7 @@ import { join } from 'node:path';
 import { parse as parseCsv } from 'csv-parse/sync';
 import { unzipSync, strFromU8 } from 'fflate';
 import { parquetReadObjects } from 'hyparquet';
+import { aliasMap, identityKey, publishSnapshots } from './import-guards';
 import { loadGraph } from '../src/lib/graph';
 import {
   DATA_DIR,
@@ -35,7 +36,8 @@ const reverse = (pick: (m: (typeof models)[number]) => string[]) => {
 const epochIds = reverse((m) => m.source_ids.epoch);
 const epochIndexIds = reverse((m) => (m.source_ids.epoch_index ? [m.source_ids.epoch_index] : []));
 const modelsDevIds = reverse((m) => (m.source_ids.modelsdev ? [m.source_ids.modelsdev] : []));
-const arenaIds = reverse((m) => m.source_ids.lmarena);
+const arenaIds = aliasMap(models.flatMap((m) => m.source_ids.lmarena.map((alias): [string, string] => [alias, m.id])));
+const snapshots = new Map<string, unknown>();
 
 const report: string[] = [];
 
@@ -43,7 +45,7 @@ async function fetchCached(url: string, file: string): Promise<Buffer> {
   mkdirSync(CACHE, { recursive: true });
   const path = join(CACHE, file);
   if (OFFLINE && existsSync(path)) return readFileSync(path);
-  const res = await fetch(url);
+  const res = await fetch(url, { signal: AbortSignal.timeout(60_000) });
   if (!res.ok) throw new Error(`${url}: HTTP ${res.status}`);
   const buf = Buffer.from(await res.arrayBuffer());
   writeFileSync(path, buf);
@@ -55,7 +57,7 @@ const retrievedAt = (file: string) => statSync(join(CACHE, file)).mtime.toISOStr
 
 function write(name: string, data: unknown) {
   mkdirSync(DATA_DIR, { recursive: true });
-  writeFileSync(join(DATA_DIR, `${name}.json`), `${JSON.stringify(data, null, 1)}\n`);
+  snapshots.set(name, data);
 }
 
 const num = (v: unknown) => (v === '' || v === undefined || v === null ? undefined : Number(v));
@@ -210,7 +212,7 @@ async function importArena() {
   let asOf = '';
   for (const r of rows) {
     asOf = r.leaderboard_publish_date ?? asOf;
-    const model = arenaIds.get(r.model_name);
+    const model = arenaIds.get(identityKey(r.model_name));
     if (!model) {
       if (r.category === 'overall' && TRACKED_ORGS.test(r.organization ?? '') && Number(r.rank) <= 60) {
         report.push(`  Unmapped LMArena model: ${r.model_name} (rank ${r.rank})`);
@@ -253,4 +255,8 @@ for (const [name, run] of [['Epoch', importEpoch], ['models.dev', importModelsDe
     process.exitCode = 1;
   }
 }
+if (!process.exitCode) {
+  try { publishSnapshots(DATA_DIR, snapshots); }
+  catch (error) { report.push(`Batch rejected: ${(error as Error).message}`); process.exitCode = 1; }
+} else report.push('Batch rejected: no accepted snapshots changed.');
 console.log(report.join('\n'));

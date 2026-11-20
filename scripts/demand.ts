@@ -27,7 +27,8 @@ for (const region of REGIONS) {
       const q = stem + prefix;
       const url = `https://suggestqueries.google.com/complete/search?client=firefox&hl=en&gl=${region}&q=${encodeURIComponent(q)}`;
       try {
-        const res = await fetch(url);
+        const res = await fetch(url, { signal: AbortSignal.timeout(15_000) });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const [, list] = (await res.json()) as [string, string[]];
         list.forEach((query, position) => {
           if (!query.startsWith(stem.trim())) return;
@@ -55,6 +56,7 @@ const out = {
   },
   suggestions,
 };
+if (failures || !suggestions.length) throw new Error(`Demand refresh incomplete (${failures} failures); accepted snapshot preserved`);
 mkdirSync(join(process.cwd(), 'data'), { recursive: true });
 writeFileSync(join(process.cwd(), 'data', 'demand.json'), `${JSON.stringify(out, null, 1)}\n`);
 console.log(`${suggestions.length} suggestions (${new Set(suggestions.map((s) => s.tail)).size} distinct) from ${out.meta.requests} requests, ${failures} failed.`);
