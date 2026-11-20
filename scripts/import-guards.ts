@@ -22,6 +22,13 @@ export function guardSnapshot(name: string, next: any, previous?: any) {
   const priorModels = new Set(old.map((r: any) => r.model));
   const models = new Set(rows.map((r: any) => r.model));
   if (priorModels.size && models.size < priorModels.size * 0.7) throw new Error(`${name}: model coverage loss`);
+  if (name === 'modelsdev') {
+    for (const row of rows) {
+      const prior = old.find((entry: any) => entry.model === row.model && entry.source_model === row.source_model);
+      if (prior?.released_on && row.released_on && prior.released_on !== row.released_on && !row.archived_retrieved_at)
+        throw new Error(`modelsdev: mutable alias changed version for ${row.model} (${prior.released_on} -> ${row.released_on}); review exact identity before importing`);
+    }
+  }
   if (name === 'lmarena') {
     const oldCategories = new Set(old.map((r: any) => r.category));
     for (const category of oldCategories) if (!rows.some((r: any) => r.category === category)) throw new Error(`lmarena: missing category ${category}`);
