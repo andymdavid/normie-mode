@@ -2,6 +2,7 @@
 import { requestJsonBotCrypto, resolveBaseUrl } from '/app/clis/lib/auth.ts';
 import { writeFileSync } from 'node:fs';
 const mode=Bun.argv[2]??'daily';
+const prefix='/api/owners/npub1jss47s4fvv6usl7tn6yp5zamv2u60923ncgfea0e6thkza5p7c3q0afmzy';
 const api='/api/owners/npub1jss47s4fvv6usl7tn6yp5zamv2u60923ncgfea0e6thkza5p7c3q0afmzy';
 const definitions:any=await requestJsonBotCrypto(resolveBaseUrl(),'GET',`${api}/pipelines/definitions`);
 const definition=definitions.definitions.find((d:any)=>d.name===`normie-mode-${mode}-maintenance`);
