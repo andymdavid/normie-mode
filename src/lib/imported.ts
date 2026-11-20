@@ -52,6 +52,8 @@ export interface EpochSnapshot {
 }
 
 export interface ModelsDevEntry {
+  /** Retrieval of preserved specs for an archived exact version. */
+  archived_retrieved_at?: string;
   model: string;
   source_model: string;
   name: string;

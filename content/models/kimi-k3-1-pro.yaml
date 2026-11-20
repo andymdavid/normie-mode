@@ -1,0 +1,17 @@
+id: kimi-k3-1-pro
+family: kimi
+name: Kimi K3.1 Pro
+released_on: 2026-10-23
+lifecycle: current
+verification:
+  status: verified
+  sources:
+    - kimi-k3-1-pro
+source_ids:
+  epoch:
+    - kimi-k3.1-pro
+  epoch_index: Kimi K3.1 Pro
+  modelsdev: moonshotai/kimi-k3.1-pro
+  lmarena:
+    - Kimi K3.1 Pro (Max)
+openrouter_id: moonshotai/kimi-k3.1-pro

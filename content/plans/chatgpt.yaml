@@ -5,6 +5,12 @@ url: https://chatgpt.com
 status: approved
 checked_on: 2026-10-12
 sources:
+  - url: https://openai.com/index/introducing-gpt-6-2-astra-sol/
+    title: GPT-6.2 Astra and Sol availability
+    kind: maker
+  - url: https://openai.com/index/introducing-gpt-6-1-terra/
+    title: GPT-6.1 Terra availability
+    kind: maker
   - url: https://openai.com/index/introducing-gpt-6-1-sol/
     title: Introducing GPT-6.1 Sol
     kind: maker
@@ -20,31 +26,88 @@ sources:
   - url: https://the-decoder.com/openai-rolls-out-gpt-6-astra-to-top-tier-chatgpt-plans-at-half-the-rate-of-gpt-5-6-sol/
     title: "The Decoder: GPT-6 Astra on top-tier ChatGPT plans"
     kind: press
-note: OpenAI's help and pricing pages block automated reading, so this is from press coverage and needs checking by hand. Which model answers depends on the part of the app (Chat, Work or Codex).
+note: OpenAI's help and pricing pages block automated reading, so this is from
+  press coverage and needs checking by hand. Which model answers depends on the
+  part of the app (Chat, Work or Codex). New Work/Codex model access is
+  provider-verified on 20 November; older Chat defaults and subscription prices
+  are not re-verified by this update, so the overall checked_on remains
+  unchanged.
 plans:
   - id: free
     name: Free
     price_usd: 0
     models:
-      - { model: gpt-5-6-luna, access: included, default: true, basis: press }
-      - { model: gpt-6-luna, access: limited, where: "Desktop app only, still rolling out", basis: press }
+      - model: gpt-5-6-luna
+        access: included
+        default: true
+        basis: press
+      - model: gpt-6-luna
+        access: limited
+        where: Desktop app only, still rolling out
+        basis: press
   - id: go
     name: Go
     price_usd: 8
     models:
-      - { model: gpt-5-6-luna, access: included, default: true, basis: press }
-      - { model: gpt-6-luna, access: limited, where: "Desktop app only, still rolling out", basis: press }
+      - model: gpt-5-6-luna
+        access: included
+        default: true
+        basis: press
+      - model: gpt-6-luna
+        access: limited
+        where: Desktop app only, still rolling out
+        basis: press
   - id: plus
     name: Plus
     price_usd: 20
     models:
-      - { model: gpt-5-6-sol, access: included, default: true, basis: press }
-      - { model: gpt-6-astra, access: included, where: "Only in ChatGPT's Work mode and Codex, not normal chat", basis: press }
-      - { model: gpt-6-1-sol, access: included, where: "Only in ChatGPT Work and Codex, not normal chat", basis: maker }
+      - model: gpt-5-6-sol
+        access: included
+        default: true
+        basis: press
+      - model: gpt-6-astra
+        access: included
+        where: Only in ChatGPT's Work mode and Codex, not normal chat
+        basis: press
+      - model: gpt-6-1-sol
+        access: included
+        where: Only in ChatGPT Work and Codex, not normal chat
+        basis: maker
+      - model: gpt-6-2-astra
+        access: included
+        where: ChatGPT Work and Codex; not ordinary Chat mode
+        basis: maker
+      - model: gpt-6-2-sol
+        access: included
+        where: ChatGPT Work and Codex; not ordinary Chat mode
+        basis: maker
+      - model: gpt-6-1-terra
+        access: included
+        where: ChatGPT Work and Codex; not ordinary Chat mode
+        basis: maker
   - id: pro
     name: Pro
     price_usd: 100
     price_note: From $100 a month; a $200 tier has higher limits
     models:
-      - { model: gpt-6-astra, access: included, default: true, where: "Called GPT-6 Pro in the app", basis: press }
-      - { model: gpt-6-1-sol, access: included, where: "Only in ChatGPT Work and Codex, not normal chat", basis: maker }
+      - model: gpt-6-astra
+        access: included
+        default: true
+        where: Called GPT-6 Pro in the app
+        basis: press
+      - model: gpt-6-1-sol
+        access: included
+        where: Only in ChatGPT Work and Codex, not normal chat
+        basis: maker
+      - model: gpt-6-2-astra
+        access: included
+        where: ChatGPT Work and Codex; not ordinary Chat mode
+        basis: maker
+      - model: gpt-6-2-sol
+        access: included
+        where: ChatGPT Work and Codex; not ordinary Chat mode
+        basis: maker
+      - model: gpt-6-1-terra
+        access: included
+        where: ChatGPT Work and Codex; not ordinary Chat mode
+        basis: maker

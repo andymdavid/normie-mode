@@ -1,0 +1,5002 @@
+{
+  "preparedOn": "2026-11-20",
+  "publicationStatus": "needs-owner-review",
+  "before": [
+    {
+      "task": "coding",
+      "scores": [
+        {
+          "model": "claude-opus-5-5",
+          "score": 100
+        },
+        {
+          "model": "claude-fable-5-1",
+          "score": 82.435
+        },
+        {
+          "model": "claude-sonnet-5-5",
+          "score": 77.132
+        },
+        {
+          "model": "gpt-6-astra",
+          "score": 76.998
+        },
+        {
+          "model": "gpt-5-6-sol",
+          "score": 72.526
+        },
+        {
+          "model": "kimi-k3",
+          "score": 69.822
+        },
+        {
+          "model": "gemini-3-8-flash",
+          "score": 69.459
+        },
+        {
+          "model": "gpt-6-1-sol",
+          "score": 59.611
+        },
+        {
+          "model": "gpt-5-6-luna",
+          "score": 48.623
+        },
+        {
+          "model": "gemini-3-6-flash",
+          "score": 39.618
+        },
+        {
+          "model": "gemini-3-1-pro",
+          "score": 16.638
+        },
+        {
+          "model": "deepseek-v4-pro",
+          "score": 8.914
+        }
+      ],
+      "picks": [
+        {
+          "kinds": [
+            "best",
+            "standard"
+          ],
+          "options": [
+            {
+              "model": "claude-opus-5-5",
+              "plan": "pro",
+              "app": "claude",
+              "price": 20
+            }
+          ]
+        },
+        {
+          "kinds": [
+            "free"
+          ],
+          "options": [
+            {
+              "model": "claude-sonnet-5-5",
+              "plan": "free",
+              "app": "claude",
+              "price": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "task": "writing",
+      "scores": [
+        {
+          "model": "claude-opus-5-5",
+          "score": 100
+        },
+        {
+          "model": "claude-fable-5-1",
+          "score": 80.78
+        },
+        {
+          "model": "gemini-3-8-flash",
+          "score": 65.432
+        },
+        {
+          "model": "claude-sonnet-5-5",
+          "score": 53.897
+        },
+        {
+          "model": "gemini-3-1-pro",
+          "score": 52.197
+        },
+        {
+          "model": "kimi-k3",
+          "score": 47.077
+        },
+        {
+          "model": "gemini-3-6-flash",
+          "score": 44.847
+        },
+        {
+          "model": "gpt-5-6-sol",
+          "score": 43.227
+        },
+        {
+          "model": "deepseek-v4-1-flash",
+          "score": 34.027
+        },
+        {
+          "model": "gpt-6-1-sol",
+          "score": 32.337
+        },
+        {
+          "model": "deepseek-v4-pro",
+          "score": 28.352
+        },
+        {
+          "model": "gpt-6-astra",
+          "score": 19.334
+        },
+        {
+          "model": "gemini-3-5-flash-lite",
+          "score": 8.527
+        },
+        {
+          "model": "gpt-5-6-luna",
+          "score": 4.871
+        }
+      ],
+      "picks": [
+        {
+          "kinds": [
+            "best",
+            "standard"
+          ],
+          "options": [
+            {
+              "model": "claude-opus-5-5",
+              "plan": "pro",
+              "app": "claude",
+              "price": 20
+            }
+          ]
+        },
+        {
+          "kinds": [
+            "free"
+          ],
+          "options": [
+            {
+              "model": "claude-sonnet-5-5",
+              "plan": "free",
+              "app": "claude",
+              "price": 0
+            },
+            {
+              "model": "gemini-3-1-pro",
+              "plan": "free",
+              "app": "gemini",
+              "price": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "task": "studying",
+      "scores": [
+        {
+          "model": "claude-fable-5-1",
+          "score": 95.128
+        },
+        {
+          "model": "gemini-3-8-flash",
+          "score": 93.031
+        },
+        {
+          "model": "claude-sonnet-5-5",
+          "score": 92.988
+        },
+        {
+          "model": "claude-opus-5-5",
+          "score": 83.67
+        },
+        {
+          "model": "gpt-6-luna",
+          "score": 76.757
+        },
+        {
+          "model": "kimi-k3",
+          "score": 76.643
+        },
+        {
+          "model": "gpt-5-6-sol",
+          "score": 74.146
+        },
+        {
+          "model": "claude-haiku-5-5",
+          "score": 73.458
+        },
+        {
+          "model": "gemini-3-6-flash",
+          "score": 72.587
+        },
+        {
+          "model": "gpt-6-1-sol",
+          "score": 72.32
+        },
+        {
+          "model": "gpt-6-astra",
+          "score": 69.031
+        },
+        {
+          "model": "gemini-3-1-pro",
+          "score": 68.216
+        },
+        {
+          "model": "deepseek-v4-1-flash",
+          "score": 63.939
+        },
+        {
+          "model": "gpt-5-6-luna",
+          "score": 56.42
+        },
+        {
+          "model": "deepseek-v4-pro",
+          "score": 49.618
+        },
+        {
+          "model": "gemini-3-5-flash-lite",
+          "score": 0
+        }
+      ],
+      "picks": [
+        {
+          "kinds": [
+            "best"
+          ],
+          "options": [
+            {
+              "model": "claude-fable-5-1",
+              "plan": "max",
+              "app": "claude",
+              "price": 100
+            },
+            {
+              "model": "gemini-3-8-flash",
+              "plan": "ai-pro",
+              "app": "gemini",
+              "price": 19.99
+            }
+          ]
+        },
+        {
+          "kinds": [
+            "standard"
+          ],
+          "options": [
+            {
+              "model": "gemini-3-8-flash",
+              "plan": "ai-pro",
+              "app": "gemini",
+              "price": 19.99
+            },
+            {
+              "model": "claude-sonnet-5-5",
+              "plan": "free",
+              "app": "claude",
+              "price": 0
+            }
+          ]
+        },
+        {
+          "kinds": [
+            "free"
+          ],
+          "options": [
+            {
+              "model": "claude-sonnet-5-5",
+              "plan": "free",
+              "app": "claude",
+              "price": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "task": "cv-jobs",
+      "scores": [
+        {
+          "model": "claude-opus-5-5",
+          "score": 100
+        },
+        {
+          "model": "claude-fable-5-1",
+          "score": 80.734
+        },
+        {
+          "model": "gemini-3-8-flash",
+          "score": 63.035
+        },
+        {
+          "model": "claude-sonnet-5-5",
+          "score": 55.721
+        },
+        {
+          "model": "kimi-k3",
+          "score": 49.347
+        },
+        {
+          "model": "gemini-3-1-pro",
+          "score": 46.801
+        },
+        {
+          "model": "gpt-5-6-sol",
+          "score": 45.84
+        },
+        {
+          "model": "gemini-3-6-flash",
+          "score": 41.924
+        },
+        {
+          "model": "deepseek-v4-1-flash",
+          "score": 36.561
+        },
+        {
+          "model": "gpt-6-1-sol",
+          "score": 35.246
+        },
+        {
+          "model": "deepseek-v4-pro",
+          "score": 24.291
+        },
+        {
+          "model": "gpt-6-astra",
+          "score": 20.802
+        },
+        {
+          "model": "gpt-5-6-luna",
+          "score": 7.306
+        },
+        {
+          "model": "gemini-3-5-flash-lite",
+          "score": 3.804
+        }
+      ],
+      "picks": [
+        {
+          "kinds": [
+            "best",
+            "standard"
+          ],
+          "options": [
+            {
+              "model": "claude-opus-5-5",
+              "plan": "pro",
+              "app": "claude",
+              "price": 20
+            }
+          ]
+        },
+        {
+          "kinds": [
+            "free"
+          ],
+          "options": [
+            {
+              "model": "claude-sonnet-5-5",
+              "plan": "free",
+              "app": "claude",
+              "price": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "task": "business",
+      "scores": [
+        {
+          "model": "claude-opus-5-5",
+          "score": 97.835
+        },
+        {
+          "model": "claude-fable-5-1",
+          "score": 86.518
+        },
+        {
+          "model": "claude-sonnet-5-5",
+          "score": 77.818
+        },
+        {
+          "model": "gpt-6-astra",
+          "score": 66.168
+        },
+        {
+          "model": "kimi-k3",
+          "score": 54.552
+        },
+        {
+          "model": "gemini-3-8-flash",
+          "score": 50.567
+        },
+        {
+          "model": "gpt-6-1-sol",
+          "score": 48.843
+        },
+        {
+          "model": "gemini-3-6-flash",
+          "score": 46.871
+        },
+        {
+          "model": "deepseek-v4-1-flash",
+          "score": 36.814
+        },
+        {
+          "model": "deepseek-v4-pro",
+          "score": 33.813
+        },
+        {
+          "model": "gemini-3-1-pro",
+          "score": 32.215
+        },
+        {
+          "model": "gpt-5-6-luna",
+          "score": 26.513
+        },
+        {
+          "model": "gemini-3-5-flash-lite",
+          "score": 0
+        }
+      ],
+      "picks": [
+        {
+          "kinds": [
+            "best",
+            "standard"
+          ],
+          "options": [
+            {
+              "model": "claude-opus-5-5",
+              "plan": "pro",
+              "app": "claude",
+              "price": 20
+            }
+          ]
+        },
+        {
+          "kinds": [
+            "free"
+          ],
+          "options": [
+            {
+              "model": "claude-sonnet-5-5",
+              "plan": "free",
+              "app": "claude",
+              "price": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "task": "research",
+      "scores": [
+        {
+          "model": "claude-opus-5-5",
+          "score": 96.718
+        },
+        {
+          "model": "gpt-6-astra",
+          "score": 80.826
+        },
+        {
+          "model": "gpt-5-6-sol",
+          "score": 80.492
+        },
+        {
+          "model": "gpt-6-1-sol",
+          "score": 78.407
+        },
+        {
+          "model": "claude-sonnet-5-5",
+          "score": 68.435
+        },
+        {
+          "model": "claude-fable-5-1",
+          "score": 66.314
+        },
+        {
+          "model": "gemini-3-6-flash",
+          "score": 64.765
+        },
+        {
+          "model": "kimi-k3",
+          "score": 64.052
+        },
+        {
+          "model": "gemini-3-8-flash",
+          "score": 55.875
+        },
+        {
+          "model": "gemini-3-1-pro",
+          "score": 52.94
+        },
+        {
+          "model": "deepseek-v4-pro",
+          "score": 40.922
+        },
+        {
+          "model": "gpt-5-6-luna",
+          "score": 35.85
+        }
+      ],
+      "picks": [
+        {
+          "kinds": [
+            "best",
+            "standard"
+          ],
+          "options": [
+            {
+              "model": "claude-opus-5-5",
+              "plan": "pro",
+              "app": "claude",
+              "price": 20
+            }
+          ]
+        },
+        {
+          "kinds": [
+            "free"
+          ],
+          "options": [
+            {
+              "model": "claude-sonnet-5-5",
+              "plan": "free",
+              "app": "claude",
+              "price": 0
+            },
+            {
+              "model": "gemini-3-6-flash",
+              "plan": "free",
+              "app": "gemini",
+              "price": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "task": "health",
+      "scores": [
+        {
+          "model": "claude-fable-5-1",
+          "score": 100
+        },
+        {
+          "model": "claude-opus-5-5",
+          "score": 90.073
+        },
+        {
+          "model": "gemini-3-8-flash",
+          "score": 87.437
+        },
+        {
+          "model": "kimi-k3",
+          "score": 69.819
+        },
+        {
+          "model": "gemini-3-1-pro",
+          "score": 66.188
+        },
+        {
+          "model": "gemini-3-6-flash",
+          "score": 54.378
+        },
+        {
+          "model": "deepseek-v4-1-flash",
+          "score": 48.343
+        },
+        {
+          "model": "claude-sonnet-5-5",
+          "score": 44.526
+        },
+        {
+          "model": "deepseek-v4-pro",
+          "score": 44.225
+        },
+        {
+          "model": "gemini-3-5-flash-lite",
+          "score": 24.301
+        },
+        {
+          "model": "gpt-5-6-sol",
+          "score": 24.205
+        },
+        {
+          "model": "gpt-6-1-sol",
+          "score": 18.562
+        },
+        {
+          "model": "gpt-6-astra",
+          "score": 16.134
+        },
+        {
+          "model": "gpt-5-6-luna",
+          "score": 0
+        }
+      ],
+      "picks": [
+        {
+          "kinds": [
+            "best"
+          ],
+          "options": [
+            {
+              "model": "claude-fable-5-1",
+              "plan": "max",
+              "app": "claude",
+              "price": 100
+            }
+          ]
+        },
+        {
+          "kinds": [
+            "standard"
+          ],
+          "options": [
+            {
+              "model": "claude-opus-5-5",
+              "plan": "pro",
+              "app": "claude",
+              "price": 20
+            },
+            {
+              "model": "gemini-3-8-flash",
+              "plan": "ai-pro",
+              "app": "gemini",
+              "price": 19.99
+            }
+          ]
+        },
+        {
+          "kinds": [
+            "free"
+          ],
+          "options": [
+            {
+              "model": "kimi-k3",
+              "plan": "free",
+              "app": "kimi",
+              "price": 0
+            },
+            {
+              "model": "gemini-3-1-pro",
+              "plan": "free",
+              "app": "gemini",
+              "price": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "task": "documents-notes",
+      "scores": [
+        {
+          "model": "claude-opus-5-5",
+          "score": 100
+        },
+        {
+          "model": "claude-fable-5-1",
+          "score": 90.632
+        },
+        {
+          "model": "gemini-3-8-flash",
+          "score": 77.038
+        },
+        {
+          "model": "gemini-3-1-pro",
+          "score": 68.661
+        },
+        {
+          "model": "gpt-5-6-sol",
+          "score": 62.977
+        },
+        {
+          "model": "gemini-3-6-flash",
+          "score": 58.887
+        },
+        {
+          "model": "gpt-6-astra",
+          "score": 55.617
+        },
+        {
+          "model": "kimi-k3",
+          "score": 55.384
+        },
+        {
+          "model": "deepseek-v4-pro",
+          "score": 45.371
+        },
+        {
+          "model": "gpt-6-luna",
+          "score": 43.079
+        },
+        {
+          "model": "deepseek-v4-1-flash",
+          "score": 41.121
+        },
+        {
+          "model": "gpt-5-6-luna",
+          "score": 18.654
+        },
+        {
+          "model": "gemini-3-5-flash-lite",
+          "score": 0
+        }
+      ],
+      "picks": [
+        {
+          "kinds": [
+            "best",
+            "standard"
+          ],
+          "options": [
+            {
+              "model": "claude-opus-5-5",
+              "plan": "pro",
+              "app": "claude",
+              "price": 20
+            }
+          ]
+        },
+        {
+          "kinds": [
+            "free"
+          ],
+          "options": [
+            {
+              "model": "gemini-3-1-pro",
+              "plan": "free",
+              "app": "gemini",
+              "price": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "task": "finance-accounting",
+      "scores": [
+        {
+          "model": "claude-opus-5-5",
+          "score": 97.835
+        },
+        {
+          "model": "claude-fable-5-1",
+          "score": 89.477
+        },
+        {
+          "model": "claude-sonnet-5-5",
+          "score": 77.818
+        },
+        {
+          "model": "gemini-3-8-flash",
+          "score": 75.85
+        },
+        {
+          "model": "kimi-k3",
+          "score": 54.552
+        },
+        {
+          "model": "gpt-6-astra",
+          "score": 49.251
+        },
+        {
+          "model": "gpt-6-1-sol",
+          "score": 48.843
+        },
+        {
+          "model": "gemini-3-6-flash",
+          "score": 46.871
+        },
+        {
+          "model": "deepseek-v4-1-flash",
+          "score": 36.814
+        },
+        {
+          "model": "deepseek-v4-pro",
+          "score": 33.813
+        },
+        {
+          "model": "gpt-6-luna",
+          "score": 32.468
+        },
+        {
+          "model": "gemini-3-1-pro",
+          "score": 32.215
+        },
+        {
+          "model": "gpt-5-6-luna",
+          "score": 26.513
+        },
+        {
+          "model": "gemini-3-5-flash-lite",
+          "score": 0
+        }
+      ],
+      "picks": [
+        {
+          "kinds": [
+            "best",
+            "standard"
+          ],
+          "options": [
+            {
+              "model": "claude-opus-5-5",
+              "plan": "pro",
+              "app": "claude",
+              "price": 20
+            }
+          ]
+        },
+        {
+          "kinds": [
+            "free"
+          ],
+          "options": [
+            {
+              "model": "claude-sonnet-5-5",
+              "plan": "free",
+              "app": "claude",
+              "price": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "task": "maths-science",
+      "scores": [
+        {
+          "model": "claude-fable-5-1",
+          "score": 97.814
+        },
+        {
+          "model": "gemini-3-8-flash",
+          "score": 89.597
+        },
+        {
+          "model": "claude-opus-5-5",
+          "score": 84.68
+        },
+        {
+          "model": "claude-sonnet-5-5",
+          "score": 84.347
+        },
+        {
+          "model": "gpt-6-luna",
+          "score": 77.251
+        },
+        {
+          "model": "kimi-k3",
+          "score": 74.414
+        },
+        {
+          "model": "claude-haiku-5-5",
+          "score": 73.151
+        },
+        {
+          "model": "gpt-6-astra",
+          "score": 69.627
+        },
+        {
+          "model": "gemini-3-6-flash",
+          "score": 69.602
+        },
+        {
+          "model": "gemini-3-1-pro",
+          "score": 68.869
+        },
+        {
+          "model": "gpt-6-1-sol",
+          "score": 68.664
+        },
+        {
+          "model": "gpt-5-6-sol",
+          "score": 68.168
+        },
+        {
+          "model": "deepseek-v4-1-flash",
+          "score": 57.756
+        },
+        {
+          "model": "gpt-5-6-luna",
+          "score": 54.017
+        },
+        {
+          "model": "deepseek-v4-pro",
+          "score": 53.585
+        },
+        {
+          "model": "gemini-3-5-flash-lite",
+          "score": 3.842
+        }
+      ],
+      "picks": [
+        {
+          "kinds": [
+            "best"
+          ],
+          "options": [
+            {
+              "model": "claude-fable-5-1",
+              "plan": "max",
+              "app": "claude",
+              "price": 100
+            }
+          ]
+        },
+        {
+          "kinds": [
+            "standard"
+          ],
+          "options": [
+            {
+              "model": "gemini-3-8-flash",
+              "plan": "ai-pro",
+              "app": "gemini",
+              "price": 19.99
+            },
+            {
+              "model": "claude-opus-5-5",
+              "plan": "pro",
+              "app": "claude",
+              "price": 20
+            }
+          ]
+        },
+        {
+          "kinds": [
+            "free"
+          ],
+          "options": [
+            {
+              "model": "claude-sonnet-5-5",
+              "plan": "free",
+              "app": "claude",
+              "price": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "task": "excel-spreadsheets",
+      "scores": [
+        {
+          "model": "claude-opus-5-5",
+          "score": 98.557
+        },
+        {
+          "model": "claude-fable-5-1",
+          "score": 88.231
+        },
+        {
+          "model": "gemini-3-8-flash",
+          "score": 84.998
+        },
+        {
+          "model": "gpt-6-astra",
+          "score": 83.137
+        },
+        {
+          "model": "deepseek-v4-pro",
+          "score": 60.41
+        },
+        {
+          "model": "gemini-3-6-flash",
+          "score": 57.857
+        },
+        {
+          "model": "gemini-3-1-pro",
+          "score": 50.478
+        },
+        {
+          "model": "kimi-k3",
+          "score": 48.052
+        },
+        {
+          "model": "gpt-5-6-luna",
+          "score": 32.938
+        },
+        {
+          "model": "deepseek-v4-1-flash",
+          "score": 31.738
+        },
+        {
+          "model": "gpt-6-luna",
+          "score": 25.182
+        },
+        {
+          "model": "gemini-3-5-flash-lite",
+          "score": 0
+        }
+      ],
+      "picks": [
+        {
+          "kinds": [
+            "best",
+            "standard"
+          ],
+          "options": [
+            {
+              "model": "claude-opus-5-5",
+              "plan": "pro",
+              "app": "claude",
+              "price": 20
+            }
+          ]
+        },
+        {
+          "kinds": [
+            "free"
+          ],
+          "options": [
+            {
+              "model": "gemini-3-6-flash",
+              "plan": "free",
+              "app": "gemini",
+              "price": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "task": "presentations",
+      "scores": [
+        {
+          "model": "claude-opus-5-5",
+          "score": 98.557
+        },
+        {
+          "model": "claude-fable-5-1",
+          "score": 82.178
+        },
+        {
+          "model": "claude-sonnet-5-5",
+          "score": 70.481
+        },
+        {
+          "model": "gemini-3-8-flash",
+          "score": 67.276
+        },
+        {
+          "model": "kimi-k3",
+          "score": 48.266
+        },
+        {
+          "model": "gpt-6-1-sol",
+          "score": 45.648
+        },
+        {
+          "model": "gemini-3-6-flash",
+          "score": 40.648
+        },
+        {
+          "model": "gpt-6-astra",
+          "score": 39.409
+        },
+        {
+          "model": "gemini-3-1-pro",
+          "score": 35.53
+        },
+        {
+          "model": "deepseek-v4-1-flash",
+          "score": 31.733
+        },
+        {
+          "model": "deepseek-v4-pro",
+          "score": 29.181
+        },
+        {
+          "model": "gpt-5-6-luna",
+          "score": 14.755
+        },
+        {
+          "model": "gemini-3-5-flash-lite",
+          "score": 2.536
+        }
+      ],
+      "picks": [
+        {
+          "kinds": [
+            "best",
+            "standard"
+          ],
+          "options": [
+            {
+              "model": "claude-opus-5-5",
+              "plan": "pro",
+              "app": "claude",
+              "price": 20
+            }
+          ]
+        },
+        {
+          "kinds": [
+            "free"
+          ],
+          "options": [
+            {
+              "model": "claude-sonnet-5-5",
+              "plan": "free",
+              "app": "claude",
+              "price": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "task": "planning-personal",
+      "scores": [
+        {
+          "model": "gemini-3-8-flash",
+          "score": 100
+        },
+        {
+          "model": "claude-opus-5-5",
+          "score": 97.097
+        },
+        {
+          "model": "claude-fable-5-1",
+          "score": 85.402
+        },
+        {
+          "model": "gemini-3-1-pro",
+          "score": 79.5
+        },
+        {
+          "model": "kimi-k3",
+          "score": 79.484
+        },
+        {
+          "model": "gemini-3-6-flash",
+          "score": 69.257
+        },
+        {
+          "model": "claude-sonnet-5-5",
+          "score": 59.716
+        },
+        {
+          "model": "deepseek-v4-pro",
+          "score": 49.402
+        },
+        {
+          "model": "gpt-5-6-sol",
+          "score": 38.765
+        },
+        {
+          "model": "deepseek-v4-1-flash",
+          "score": 34.683
+        },
+        {
+          "model": "gpt-6-1-sol",
+          "score": 22.487
+        },
+        {
+          "model": "gpt-6-astra",
+          "score": 21.415
+        },
+        {
+          "model": "gemini-3-5-flash-lite",
+          "score": 16.764
+        },
+        {
+          "model": "gpt-5-6-luna",
+          "score": 0
+        }
+      ],
+      "picks": [
+        {
+          "kinds": [
+            "best",
+            "standard"
+          ],
+          "options": [
+            {
+              "model": "gemini-3-8-flash",
+              "plan": "ai-pro",
+              "app": "gemini",
+              "price": 19.99
+            },
+            {
+              "model": "claude-opus-5-5",
+              "plan": "pro",
+              "app": "claude",
+              "price": 20
+            }
+          ]
+        },
+        {
+          "kinds": [
+            "free"
+          ],
+          "options": [
+            {
+              "model": "gemini-3-1-pro",
+              "plan": "free",
+              "app": "gemini",
+              "price": 0
+            },
+            {
+              "model": "kimi-k3",
+              "plan": "free",
+              "app": "kimi",
+              "price": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "task": "translation-languages",
+      "scores": [
+        {
+          "model": "claude-opus-5-5",
+          "score": 100
+        },
+        {
+          "model": "claude-fable-5-1",
+          "score": 99.929
+        },
+        {
+          "model": "gemini-3-8-flash",
+          "score": 82.24
+        },
+        {
+          "model": "gemini-3-1-pro",
+          "score": 66.663
+        },
+        {
+          "model": "gemini-3-6-flash",
+          "score": 58.224
+        },
+        {
+          "model": "kimi-k3",
+          "score": 54.129
+        },
+        {
+          "model": "claude-sonnet-5-5",
+          "score": 39.156
+        },
+        {
+          "model": "gpt-5-6-sol",
+          "score": 38.565
+        },
+        {
+          "model": "deepseek-v4-1-flash",
+          "score": 34.444
+        },
+        {
+          "model": "deepseek-v4-pro",
+          "score": 24.345
+        },
+        {
+          "model": "gpt-6-1-sol",
+          "score": 23.493
+        },
+        {
+          "model": "gpt-6-astra",
+          "score": 14.244
+        },
+        {
+          "model": "gemini-3-5-flash-lite",
+          "score": 11.326
+        },
+        {
+          "model": "gpt-5-6-luna",
+          "score": 0
+        }
+      ],
+      "picks": [
+        {
+          "kinds": [
+            "best"
+          ],
+          "options": [
+            {
+              "model": "claude-opus-5-5",
+              "plan": "pro",
+              "app": "claude",
+              "price": 20
+            },
+            {
+              "model": "claude-fable-5-1",
+              "plan": "max",
+              "app": "claude",
+              "price": 100
+            }
+          ]
+        },
+        {
+          "kinds": [
+            "standard"
+          ],
+          "options": [
+            {
+              "model": "claude-opus-5-5",
+              "plan": "pro",
+              "app": "claude",
+              "price": 20
+            }
+          ]
+        },
+        {
+          "kinds": [
+            "free"
+          ],
+          "options": [
+            {
+              "model": "gemini-3-1-pro",
+              "plan": "free",
+              "app": "gemini",
+              "price": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "task": "legal",
+      "scores": [
+        {
+          "model": "claude-opus-5-5",
+          "score": 97.422
+        },
+        {
+          "model": "claude-fable-5-1",
+          "score": 92.532
+        },
+        {
+          "model": "claude-sonnet-5-5",
+          "score": 85.68
+        },
+        {
+          "model": "gemini-3-8-flash",
+          "score": 78.862
+        },
+        {
+          "model": "kimi-k3",
+          "score": 66.14
+        },
+        {
+          "model": "gpt-6-1-sol",
+          "score": 57.392
+        },
+        {
+          "model": "gpt-6-astra",
+          "score": 54.792
+        },
+        {
+          "model": "gemini-3-6-flash",
+          "score": 47.597
+        },
+        {
+          "model": "gemini-3-1-pro",
+          "score": 40.452
+        },
+        {
+          "model": "deepseek-v4-pro",
+          "score": 39.292
+        },
+        {
+          "model": "gpt-6-luna",
+          "score": 32.468
+        },
+        {
+          "model": "gpt-5-6-luna",
+          "score": 23.776
+        },
+        {
+          "model": "deepseek-v4-1-flash",
+          "score": 20.485
+        },
+        {
+          "model": "gemini-3-5-flash-lite",
+          "score": 0
+        }
+      ],
+      "picks": [
+        {
+          "kinds": [
+            "best"
+          ],
+          "options": [
+            {
+              "model": "claude-opus-5-5",
+              "plan": "pro",
+              "app": "claude",
+              "price": 20
+            },
+            {
+              "model": "claude-fable-5-1",
+              "plan": "max",
+              "app": "claude",
+              "price": 100
+            }
+          ]
+        },
+        {
+          "kinds": [
+            "standard"
+          ],
+          "options": [
+            {
+              "model": "claude-opus-5-5",
+              "plan": "pro",
+              "app": "claude",
+              "price": 20
+            }
+          ]
+        },
+        {
+          "kinds": [
+            "free"
+          ],
+          "options": [
+            {
+              "model": "claude-sonnet-5-5",
+              "plan": "free",
+              "app": "claude",
+              "price": 0
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "after": [
+    {
+      "task": "coding",
+      "scores": [
+        {
+          "model": "claude-opus-5-5",
+          "score": 91.651
+        },
+        {
+          "model": "gpt-6-astra",
+          "score": 79.408
+        },
+        {
+          "model": "claude-fable-5-1",
+          "score": 77.725
+        },
+        {
+          "model": "gpt-5-6-sol",
+          "score": 71.589
+        },
+        {
+          "model": "claude-sonnet-5-5",
+          "score": 69.465
+        },
+        {
+          "model": "gemini-3-8-flash",
+          "score": 67.902
+        },
+        {
+          "model": "kimi-k3",
+          "score": 67.81
+        },
+        {
+          "model": "gpt-6-1-sol",
+          "score": 61.841
+        },
+        {
+          "model": "gpt-5-6-luna",
+          "score": 51.364
+        },
+        {
+          "model": "gemini-3-1-pro",
+          "score": 17.235
+        },
+        {
+          "model": "deepseek-v4-pro",
+          "score": 11.799
+        }
+      ],
+      "picks": [
+        {
+          "kinds": [
+            "best",
+            "standard"
+          ],
+          "options": [
+            {
+              "model": "claude-opus-5-5",
+              "plan": "pro",
+              "app": "claude",
+              "price": 20
+            }
+          ]
+        },
+        {
+          "kinds": [
+            "free"
+          ],
+          "options": [
+            {
+              "model": "claude-sonnet-5-5",
+              "plan": "free",
+              "app": "claude",
+              "price": 0
+            },
+            {
+              "model": "kimi-k3",
+              "plan": "free",
+              "app": "kimi",
+              "price": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "task": "writing",
+      "scores": [
+        {
+          "model": "gemini-4-carbon",
+          "score": 100
+        },
+        {
+          "model": "claude-opus-5-5",
+          "score": 94.242
+        },
+        {
+          "model": "gemini-4-neon",
+          "score": 89.339
+        },
+        {
+          "model": "claude-fable-5-1",
+          "score": 84.378
+        },
+        {
+          "model": "gemini-4-hydrogen",
+          "score": 76.081
+        },
+        {
+          "model": "claude-fable-5-2",
+          "score": 70.505
+        },
+        {
+          "model": "gemini-3-8-flash",
+          "score": 65.861
+        },
+        {
+          "model": "gemini-3-1-pro",
+          "score": 51.029
+        },
+        {
+          "model": "claude-sonnet-5-5",
+          "score": 48.425
+        },
+        {
+          "model": "kimi-k3",
+          "score": 45.672
+        },
+        {
+          "model": "gpt-5-6-sol",
+          "score": 43.464
+        },
+        {
+          "model": "kimi-k3-1-pro",
+          "score": 36.364
+        },
+        {
+          "model": "deepseek-v4-pro",
+          "score": 28.02
+        },
+        {
+          "model": "gpt-6-1-sol",
+          "score": 25.838
+        },
+        {
+          "model": "gpt-6-astra",
+          "score": 21.336
+        },
+        {
+          "model": "gpt-6-2-astra",
+          "score": 12.186
+        },
+        {
+          "model": "gemini-3-5-flash-lite",
+          "score": 9.053
+        },
+        {
+          "model": "gpt-6-1-terra",
+          "score": 7.078
+        },
+        {
+          "model": "gpt-6-2-sol",
+          "score": 6.537
+        },
+        {
+          "model": "gpt-5-6-luna",
+          "score": 5.135
+        }
+      ],
+      "picks": [
+        {
+          "kinds": [
+            "best"
+          ],
+          "options": [
+            {
+              "model": "gemini-4-carbon",
+              "plan": "ai-ultra",
+              "app": "gemini",
+              "price": 99.99
+            }
+          ]
+        },
+        {
+          "kinds": [
+            "standard"
+          ],
+          "options": [
+            {
+              "model": "claude-opus-5-5",
+              "plan": "pro",
+              "app": "claude",
+              "price": 20
+            },
+            {
+              "model": "gemini-4-neon",
+              "plan": "ai-pro",
+              "app": "gemini",
+              "price": 19.99
+            }
+          ]
+        },
+        {
+          "kinds": [
+            "free"
+          ],
+          "options": [
+            {
+              "model": "gemini-4-hydrogen",
+              "plan": "free",
+              "app": "gemini",
+              "price": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "task": "studying",
+      "scores": [
+        {
+          "model": "gpt-6-2-astra",
+          "score": 100
+        },
+        {
+          "model": "gemini-4-carbon",
+          "score": 99.221
+        },
+        {
+          "model": "gemini-4-hydrogen",
+          "score": 87.886
+        },
+        {
+          "model": "claude-fable-5-1",
+          "score": 87.829
+        },
+        {
+          "model": "deepseek-v4-1-flash-1017",
+          "score": 85.487
+        },
+        {
+          "model": "gemini-3-8-flash",
+          "score": 82.207
+        },
+        {
+          "model": "claude-opus-5-5",
+          "score": 79.047
+        },
+        {
+          "model": "gpt-6-luna",
+          "score": 74.479
+        },
+        {
+          "model": "claude-sonnet-5-5",
+          "score": 74.016
+        },
+        {
+          "model": "claude-haiku-5-5",
+          "score": 71.441
+        },
+        {
+          "model": "claude-fable-5-2",
+          "score": 69.753
+        },
+        {
+          "model": "kimi-k3",
+          "score": 68.233
+        },
+        {
+          "model": "gpt-6-1-sol",
+          "score": 68.041
+        },
+        {
+          "model": "gpt-5-6-sol",
+          "score": 65.999
+        },
+        {
+          "model": "gpt-6-astra",
+          "score": 62.91
+        },
+        {
+          "model": "gemini-3-1-pro",
+          "score": 61.545
+        },
+        {
+          "model": "gpt-6-1-terra",
+          "score": 56.653
+        },
+        {
+          "model": "gpt-5-6-luna",
+          "score": 51.406
+        },
+        {
+          "model": "deepseek-v4-pro",
+          "score": 45.941
+        },
+        {
+          "model": "gemini-3-5-flash-lite",
+          "score": 0
+        }
+      ],
+      "picks": [
+        {
+          "kinds": [
+            "best"
+          ],
+          "options": [
+            {
+              "model": "gpt-6-2-astra",
+              "plan": "plus",
+              "app": "chatgpt",
+              "price": 20
+            },
+            {
+              "model": "gemini-4-carbon",
+              "plan": "ai-ultra",
+              "app": "gemini",
+              "price": 99.99
+            }
+          ]
+        },
+        {
+          "kinds": [
+            "standard"
+          ],
+          "options": [
+            {
+              "model": "gpt-6-2-astra",
+              "plan": "plus",
+              "app": "chatgpt",
+              "price": 20
+            }
+          ]
+        },
+        {
+          "kinds": [
+            "free"
+          ],
+          "options": [
+            {
+              "model": "gemini-4-hydrogen",
+              "plan": "free",
+              "app": "gemini",
+              "price": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "task": "cv-jobs",
+      "scores": [
+        {
+          "model": "gemini-4-carbon",
+          "score": 100
+        },
+        {
+          "model": "claude-opus-5-5",
+          "score": 92.146
+        },
+        {
+          "model": "gemini-4-neon",
+          "score": 89.014
+        },
+        {
+          "model": "claude-fable-5-1",
+          "score": 82.707
+        },
+        {
+          "model": "gemini-4-hydrogen",
+          "score": 73.052
+        },
+        {
+          "model": "gemini-3-8-flash",
+          "score": 62.948
+        },
+        {
+          "model": "claude-fable-5-2",
+          "score": 62.048
+        },
+        {
+          "model": "claude-sonnet-5-5",
+          "score": 48.106
+        },
+        {
+          "model": "kimi-k3",
+          "score": 47.627
+        },
+        {
+          "model": "gpt-5-6-sol",
+          "score": 45.292
+        },
+        {
+          "model": "gemini-3-1-pro",
+          "score": 44.923
+        },
+        {
+          "model": "kimi-k3-1-pro",
+          "score": 39.873
+        },
+        {
+          "model": "gpt-6-1-sol",
+          "score": 29.735
+        },
+        {
+          "model": "deepseek-v4-pro",
+          "score": 23.725
+        },
+        {
+          "model": "gpt-6-astra",
+          "score": 22.843
+        },
+        {
+          "model": "gpt-6-2-astra",
+          "score": 10.736
+        },
+        {
+          "model": "gpt-6-1-terra",
+          "score": 9.002
+        },
+        {
+          "model": "gpt-5-6-luna",
+          "score": 7.702
+        },
+        {
+          "model": "gpt-6-2-sol",
+          "score": 7.443
+        },
+        {
+          "model": "gemini-3-5-flash-lite",
+          "score": 4.544
+        }
+      ],
+      "picks": [
+        {
+          "kinds": [
+            "best"
+          ],
+          "options": [
+            {
+              "model": "gemini-4-carbon",
+              "plan": "ai-ultra",
+              "app": "gemini",
+              "price": 99.99
+            }
+          ]
+        },
+        {
+          "kinds": [
+            "standard"
+          ],
+          "options": [
+            {
+              "model": "claude-opus-5-5",
+              "plan": "pro",
+              "app": "claude",
+              "price": 20
+            },
+            {
+              "model": "gemini-4-neon",
+              "plan": "ai-pro",
+              "app": "gemini",
+              "price": 19.99
+            }
+          ]
+        },
+        {
+          "kinds": [
+            "free"
+          ],
+          "options": [
+            {
+              "model": "gemini-4-hydrogen",
+              "plan": "free",
+              "app": "gemini",
+              "price": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "task": "business",
+      "scores": [
+        {
+          "model": "gemini-4-carbon",
+          "score": 100
+        },
+        {
+          "model": "gemini-4-hydrogen",
+          "score": 80.622
+        },
+        {
+          "model": "claude-fable-5-2",
+          "score": 78.717
+        },
+        {
+          "model": "claude-sonnet-5-5",
+          "score": 71.356
+        },
+        {
+          "model": "claude-opus-5-5",
+          "score": 68.751
+        },
+        {
+          "model": "kimi-k3-1-pro",
+          "score": 67.926
+        },
+        {
+          "model": "claude-fable-5-1",
+          "score": 62.816
+        },
+        {
+          "model": "gpt-6-astra",
+          "score": 50.714
+        },
+        {
+          "model": "gpt-6-1-sol",
+          "score": 50.65
+        },
+        {
+          "model": "kimi-k3",
+          "score": 48.363
+        },
+        {
+          "model": "gpt-6-1-terra",
+          "score": 46.079
+        },
+        {
+          "model": "gemini-3-8-flash",
+          "score": 45.732
+        },
+        {
+          "model": "deepseek-v4-pro",
+          "score": 38.312
+        },
+        {
+          "model": "gemini-3-1-pro",
+          "score": 33.252
+        },
+        {
+          "model": "gpt-5-6-luna",
+          "score": 32.823
+        },
+        {
+          "model": "gemini-3-5-flash-lite",
+          "score": 14.532
+        }
+      ],
+      "picks": [
+        {
+          "kinds": [
+            "best"
+          ],
+          "options": [
+            {
+              "model": "gemini-4-carbon",
+              "plan": "ai-ultra",
+              "app": "gemini",
+              "price": 99.99
+            }
+          ]
+        },
+        {
+          "kinds": [
+            "standard",
+            "free"
+          ],
+          "options": [
+            {
+              "model": "gemini-4-hydrogen",
+              "plan": "free",
+              "app": "gemini",
+              "price": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "task": "research",
+      "scores": [
+        {
+          "model": "gemini-4-carbon",
+          "score": 88.39
+        },
+        {
+          "model": "claude-opus-5-5",
+          "score": 76.611
+        },
+        {
+          "model": "claude-fable-5-2",
+          "score": 76.034
+        },
+        {
+          "model": "gemini-4-hydrogen",
+          "score": 73.884
+        },
+        {
+          "model": "gpt-6-astra",
+          "score": 71.459
+        },
+        {
+          "model": "claude-fable-5-1",
+          "score": 69.942
+        },
+        {
+          "model": "gemini-3-8-flash",
+          "score": 62.226
+        },
+        {
+          "model": "gpt-5-6-sol",
+          "score": 60.63
+        },
+        {
+          "model": "gpt-6-1-sol",
+          "score": 59.096
+        },
+        {
+          "model": "gemini-3-1-pro",
+          "score": 57.035
+        },
+        {
+          "model": "claude-sonnet-5-5",
+          "score": 49.996
+        },
+        {
+          "model": "kimi-k3",
+          "score": 46.857
+        },
+        {
+          "model": "gpt-6-1-terra",
+          "score": 39.301
+        },
+        {
+          "model": "deepseek-v4-pro",
+          "score": 30.922
+        },
+        {
+          "model": "gpt-5-6-luna",
+          "score": 27.248
+        },
+        {
+          "model": "claude-haiku-5-5",
+          "score": 0
+        }
+      ],
+      "picks": [
+        {
+          "kinds": [
+            "best"
+          ],
+          "options": [
+            {
+              "model": "gemini-4-carbon",
+              "plan": "ai-ultra",
+              "app": "gemini",
+              "price": 99.99
+            }
+          ]
+        },
+        {
+          "kinds": [
+            "standard"
+          ],
+          "options": [
+            {
+              "model": "claude-opus-5-5",
+              "plan": "pro",
+              "app": "claude",
+              "price": 20
+            },
+            {
+              "model": "gemini-4-hydrogen",
+              "plan": "free",
+              "app": "gemini",
+              "price": 0
+            }
+          ]
+        },
+        {
+          "kinds": [
+            "free"
+          ],
+          "options": [
+            {
+              "model": "gemini-4-hydrogen",
+              "plan": "free",
+              "app": "gemini",
+              "price": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "task": "health",
+      "scores": [
+        {
+          "model": "gemini-4-neon",
+          "score": 99.828
+        },
+        {
+          "model": "gemini-4-carbon",
+          "score": 95.366
+        },
+        {
+          "model": "claude-fable-5-1",
+          "score": 93.526
+        },
+        {
+          "model": "claude-opus-5-5",
+          "score": 83.506
+        },
+        {
+          "model": "gemini-3-8-flash",
+          "score": 79.083
+        },
+        {
+          "model": "gemini-4-hydrogen",
+          "score": 68.075
+        },
+        {
+          "model": "kimi-k3",
+          "score": 63.476
+        },
+        {
+          "model": "gemini-3-1-pro",
+          "score": 62.839
+        },
+        {
+          "model": "claude-fable-5-2",
+          "score": 53.903
+        },
+        {
+          "model": "claude-sonnet-5-5",
+          "score": 46.449
+        },
+        {
+          "model": "deepseek-v4-pro",
+          "score": 44.423
+        },
+        {
+          "model": "gemini-3-5-flash-lite",
+          "score": 28.142
+        },
+        {
+          "model": "gpt-6-1-sol",
+          "score": 27.887
+        },
+        {
+          "model": "kimi-k3-1-pro",
+          "score": 27.709
+        },
+        {
+          "model": "gpt-5-6-sol",
+          "score": 27.328
+        },
+        {
+          "model": "gpt-6-astra",
+          "score": 23.207
+        },
+        {
+          "model": "gpt-6-2-sol",
+          "score": 13.28
+        },
+        {
+          "model": "gpt-5-6-luna",
+          "score": 8.1
+        },
+        {
+          "model": "gpt-6-1-terra",
+          "score": 2.891
+        },
+        {
+          "model": "gpt-6-2-astra",
+          "score": 0
+        }
+      ],
+      "picks": [
+        {
+          "kinds": [
+            "best"
+          ],
+          "options": [
+            {
+              "model": "gemini-4-neon",
+              "plan": "ai-pro",
+              "app": "gemini",
+              "price": 19.99
+            },
+            {
+              "model": "gemini-4-carbon",
+              "plan": "ai-ultra",
+              "app": "gemini",
+              "price": 99.99
+            }
+          ]
+        },
+        {
+          "kinds": [
+            "standard"
+          ],
+          "options": [
+            {
+              "model": "gemini-4-neon",
+              "plan": "ai-pro",
+              "app": "gemini",
+              "price": 19.99
+            }
+          ]
+        },
+        {
+          "kinds": [
+            "free"
+          ],
+          "options": [
+            {
+              "model": "gemini-4-hydrogen",
+              "plan": "free",
+              "app": "gemini",
+              "price": 0
+            },
+            {
+              "model": "kimi-k3",
+              "plan": "free",
+              "app": "kimi",
+              "price": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "task": "documents-notes",
+      "scores": [
+        {
+          "model": "claude-opus-5-5",
+          "score": 90.35
+        },
+        {
+          "model": "claude-fable-5-1",
+          "score": 84.827
+        },
+        {
+          "model": "claude-fable-5-2",
+          "score": 79.414
+        },
+        {
+          "model": "claude-haiku-5-5",
+          "score": 73.236
+        },
+        {
+          "model": "gemini-3-8-flash",
+          "score": 71.94
+        },
+        {
+          "model": "claude-sonnet-5-5",
+          "score": 67.435
+        },
+        {
+          "model": "gemini-3-1-pro",
+          "score": 65.656
+        },
+        {
+          "model": "gpt-5-6-sol",
+          "score": 60.66
+        },
+        {
+          "model": "gpt-6-astra",
+          "score": 56.696
+        },
+        {
+          "model": "gpt-6-1-sol",
+          "score": 55.05
+        },
+        {
+          "model": "kimi-k3",
+          "score": 50.254
+        },
+        {
+          "model": "kimi-k3-1-pro",
+          "score": 46.248
+        },
+        {
+          "model": "deepseek-v4-pro",
+          "score": 45.478
+        },
+        {
+          "model": "gpt-6-luna",
+          "score": 42.339
+        },
+        {
+          "model": "gpt-5-6-luna",
+          "score": 21.457
+        },
+        {
+          "model": "gemini-3-5-flash-lite",
+          "score": 3.134
+        }
+      ],
+      "picks": [
+        {
+          "kinds": [
+            "best",
+            "standard"
+          ],
+          "options": [
+            {
+              "model": "claude-opus-5-5",
+              "plan": "pro",
+              "app": "claude",
+              "price": 20
+            }
+          ]
+        },
+        {
+          "kinds": [
+            "free"
+          ],
+          "options": [
+            {
+              "model": "claude-haiku-5-5",
+              "plan": "free",
+              "app": "claude",
+              "price": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "task": "finance-accounting",
+      "scores": [
+        {
+          "model": "gemini-4-carbon",
+          "score": 100
+        },
+        {
+          "model": "claude-opus-5-5",
+          "score": 81.36
+        },
+        {
+          "model": "gemini-4-hydrogen",
+          "score": 80.622
+        },
+        {
+          "model": "claude-fable-5-1",
+          "score": 77.157
+        },
+        {
+          "model": "deepseek-v4-1-flash-1017",
+          "score": 73.77
+        },
+        {
+          "model": "claude-sonnet-5-5",
+          "score": 71.356
+        },
+        {
+          "model": "gemini-3-8-flash",
+          "score": 68.598
+        },
+        {
+          "model": "claude-fable-5-2",
+          "score": 68.076
+        },
+        {
+          "model": "kimi-k3-1-pro",
+          "score": 67.926
+        },
+        {
+          "model": "gpt-6-astra",
+          "score": 54.896
+        },
+        {
+          "model": "gpt-6-1-sol",
+          "score": 50.65
+        },
+        {
+          "model": "claude-haiku-5-5",
+          "score": 48.816
+        },
+        {
+          "model": "kimi-k3",
+          "score": 48.363
+        },
+        {
+          "model": "gpt-6-1-terra",
+          "score": 46.079
+        },
+        {
+          "model": "deepseek-v4-pro",
+          "score": 38.312
+        },
+        {
+          "model": "gemini-3-1-pro",
+          "score": 33.252
+        },
+        {
+          "model": "gpt-5-6-luna",
+          "score": 32.823
+        },
+        {
+          "model": "gpt-6-luna",
+          "score": 27.322
+        },
+        {
+          "model": "gemini-3-5-flash-lite",
+          "score": 14.532
+        }
+      ],
+      "picks": [
+        {
+          "kinds": [
+            "best"
+          ],
+          "options": [
+            {
+              "model": "gemini-4-carbon",
+              "plan": "ai-ultra",
+              "app": "gemini",
+              "price": 99.99
+            }
+          ]
+        },
+        {
+          "kinds": [
+            "standard"
+          ],
+          "options": [
+            {
+              "model": "claude-opus-5-5",
+              "plan": "pro",
+              "app": "claude",
+              "price": 20
+            },
+            {
+              "model": "gemini-4-hydrogen",
+              "plan": "free",
+              "app": "gemini",
+              "price": 0
+            }
+          ]
+        },
+        {
+          "kinds": [
+            "free"
+          ],
+          "options": [
+            {
+              "model": "gemini-4-hydrogen",
+              "plan": "free",
+              "app": "gemini",
+              "price": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "task": "maths-science",
+      "scores": [
+        {
+          "model": "gemini-4-carbon",
+          "score": 95.449
+        },
+        {
+          "model": "claude-fable-5-1",
+          "score": 92.69
+        },
+        {
+          "model": "gemini-4-hydrogen",
+          "score": 87.264
+        },
+        {
+          "model": "claude-opus-5-5",
+          "score": 81.496
+        },
+        {
+          "model": "gemini-3-8-flash",
+          "score": 81.281
+        },
+        {
+          "model": "deepseek-v4-1-flash-1017",
+          "score": 78.819
+        },
+        {
+          "model": "claude-fable-5-2",
+          "score": 77.199
+        },
+        {
+          "model": "claude-sonnet-5-5",
+          "score": 76.445
+        },
+        {
+          "model": "gpt-6-luna",
+          "score": 75.202
+        },
+        {
+          "model": "gpt-6-2-astra",
+          "score": 74.112
+        },
+        {
+          "model": "claude-haiku-5-5",
+          "score": 71.316
+        },
+        {
+          "model": "gpt-6-1-sol",
+          "score": 70.774
+        },
+        {
+          "model": "kimi-k3",
+          "score": 69.453
+        },
+        {
+          "model": "gpt-6-astra",
+          "score": 67.158
+        },
+        {
+          "model": "gpt-5-6-sol",
+          "score": 66.155
+        },
+        {
+          "model": "gemini-3-1-pro",
+          "score": 64.254
+        },
+        {
+          "model": "gpt-6-1-terra",
+          "score": 59.084
+        },
+        {
+          "model": "gpt-5-6-luna",
+          "score": 54.264
+        },
+        {
+          "model": "deepseek-v4-pro",
+          "score": 51.782
+        },
+        {
+          "model": "gemini-3-5-flash-lite",
+          "score": 5.327
+        }
+      ],
+      "picks": [
+        {
+          "kinds": [
+            "best"
+          ],
+          "options": [
+            {
+              "model": "gemini-4-carbon",
+              "plan": "ai-ultra",
+              "app": "gemini",
+              "price": 99.99
+            },
+            {
+              "model": "claude-fable-5-1",
+              "plan": "max",
+              "app": "claude",
+              "price": 100
+            }
+          ]
+        },
+        {
+          "kinds": [
+            "standard",
+            "free"
+          ],
+          "options": [
+            {
+              "model": "gemini-4-hydrogen",
+              "plan": "free",
+              "app": "gemini",
+              "price": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "task": "excel-spreadsheets",
+      "scores": [
+        {
+          "model": "claude-fable-5-2",
+          "score": 96.266
+        },
+        {
+          "model": "claude-opus-5-5",
+          "score": 92.931
+        },
+        {
+          "model": "claude-sonnet-5-5",
+          "score": 86.132
+        },
+        {
+          "model": "claude-fable-5-1",
+          "score": 80.707
+        },
+        {
+          "model": "gemini-3-8-flash",
+          "score": 80.543
+        },
+        {
+          "model": "gpt-6-astra",
+          "score": 76.296
+        },
+        {
+          "model": "gpt-6-1-sol",
+          "score": 69.473
+        },
+        {
+          "model": "kimi-k3-1-pro",
+          "score": 64.31
+        },
+        {
+          "model": "claude-haiku-5-5",
+          "score": 61.026
+        },
+        {
+          "model": "deepseek-v4-pro",
+          "score": 57.968
+        },
+        {
+          "model": "gemini-3-1-pro",
+          "score": 48.512
+        },
+        {
+          "model": "kimi-k3",
+          "score": 41.42
+        },
+        {
+          "model": "gpt-5-6-luna",
+          "score": 30.278
+        },
+        {
+          "model": "gpt-6-luna",
+          "score": 23.221
+        },
+        {
+          "model": "gemini-3-5-flash-lite",
+          "score": 0
+        }
+      ],
+      "picks": [
+        {
+          "kinds": [
+            "best"
+          ],
+          "options": [
+            {
+              "model": "claude-fable-5-2",
+              "plan": "max",
+              "app": "claude",
+              "price": 100
+            },
+            {
+              "model": "claude-opus-5-5",
+              "plan": "pro",
+              "app": "claude",
+              "price": 20
+            }
+          ]
+        },
+        {
+          "kinds": [
+            "standard"
+          ],
+          "options": [
+            {
+              "model": "claude-opus-5-5",
+              "plan": "pro",
+              "app": "claude",
+              "price": 20
+            }
+          ]
+        },
+        {
+          "kinds": [
+            "free"
+          ],
+          "options": [
+            {
+              "model": "claude-sonnet-5-5",
+              "plan": "free",
+              "app": "claude",
+              "price": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "task": "presentations",
+      "scores": [
+        {
+          "model": "gemini-4-carbon",
+          "score": 100
+        },
+        {
+          "model": "claude-opus-5-5",
+          "score": 88.267
+        },
+        {
+          "model": "claude-fable-5-1",
+          "score": 79
+        },
+        {
+          "model": "gemini-4-hydrogen",
+          "score": 78.27
+        },
+        {
+          "model": "claude-fable-5-2",
+          "score": 72.209
+        },
+        {
+          "model": "gemini-3-8-flash",
+          "score": 63.216
+        },
+        {
+          "model": "claude-sonnet-5-5",
+          "score": 60.122
+        },
+        {
+          "model": "kimi-k3-1-pro",
+          "score": 48.561
+        },
+        {
+          "model": "kimi-k3",
+          "score": 42.984
+        },
+        {
+          "model": "gpt-6-1-sol",
+          "score": 38.464
+        },
+        {
+          "model": "gpt-6-astra",
+          "score": 36.722
+        },
+        {
+          "model": "gemini-3-1-pro",
+          "score": 33.47
+        },
+        {
+          "model": "gpt-6-1-terra",
+          "score": 29.681
+        },
+        {
+          "model": "deepseek-v4-pro",
+          "score": 26.746
+        },
+        {
+          "model": "gpt-5-6-luna",
+          "score": 13.453
+        },
+        {
+          "model": "gemini-3-5-flash-lite",
+          "score": 3.03
+        }
+      ],
+      "picks": [
+        {
+          "kinds": [
+            "best"
+          ],
+          "options": [
+            {
+              "model": "gemini-4-carbon",
+              "plan": "ai-ultra",
+              "app": "gemini",
+              "price": 99.99
+            }
+          ]
+        },
+        {
+          "kinds": [
+            "standard"
+          ],
+          "options": [
+            {
+              "model": "claude-opus-5-5",
+              "plan": "pro",
+              "app": "claude",
+              "price": 20
+            }
+          ]
+        },
+        {
+          "kinds": [
+            "free"
+          ],
+          "options": [
+            {
+              "model": "gemini-4-hydrogen",
+              "plan": "free",
+              "app": "gemini",
+              "price": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "task": "planning-personal",
+      "scores": [
+        {
+          "model": "gemini-4-carbon",
+          "score": 100
+        },
+        {
+          "model": "gemini-4-neon",
+          "score": 70.423
+        },
+        {
+          "model": "gemini-3-8-flash",
+          "score": 54.81
+        },
+        {
+          "model": "claude-opus-5-5",
+          "score": 54.792
+        },
+        {
+          "model": "claude-fable-5-1",
+          "score": 46.568
+        },
+        {
+          "model": "gemini-4-hydrogen",
+          "score": 46.077
+        },
+        {
+          "model": "kimi-k3",
+          "score": 45.99
+        },
+        {
+          "model": "gemini-3-1-pro",
+          "score": 43.809
+        },
+        {
+          "model": "deepseek-v4-pro",
+          "score": 31.547
+        },
+        {
+          "model": "claude-sonnet-5-5",
+          "score": 28.152
+        },
+        {
+          "model": "gpt-5-6-sol",
+          "score": 28.048
+        },
+        {
+          "model": "claude-fable-5-2",
+          "score": 25.305
+        },
+        {
+          "model": "gpt-6-1-sol",
+          "score": 19.934
+        },
+        {
+          "model": "kimi-k3-1-pro",
+          "score": 19.28
+        },
+        {
+          "model": "gemini-3-5-flash-lite",
+          "score": 17.323
+        },
+        {
+          "model": "gpt-6-astra",
+          "score": 17.24
+        },
+        {
+          "model": "gpt-5-6-luna",
+          "score": 9.899
+        },
+        {
+          "model": "gpt-6-1-terra",
+          "score": 8.135
+        },
+        {
+          "model": "gpt-6-2-astra",
+          "score": 3.498
+        },
+        {
+          "model": "gpt-6-2-sol",
+          "score": 0
+        }
+      ],
+      "picks": [
+        {
+          "kinds": [
+            "best"
+          ],
+          "options": [
+            {
+              "model": "gemini-4-carbon",
+              "plan": "ai-ultra",
+              "app": "gemini",
+              "price": 99.99
+            }
+          ]
+        },
+        {
+          "kinds": [
+            "standard"
+          ],
+          "options": [
+            {
+              "model": "gemini-4-neon",
+              "plan": "ai-pro",
+              "app": "gemini",
+              "price": 19.99
+            }
+          ]
+        },
+        {
+          "kinds": [
+            "free"
+          ],
+          "options": [
+            {
+              "model": "gemini-4-hydrogen",
+              "plan": "free",
+              "app": "gemini",
+              "price": 0
+            },
+            {
+              "model": "kimi-k3",
+              "plan": "free",
+              "app": "kimi",
+              "price": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "task": "translation-languages",
+      "scores": [
+        {
+          "model": "gemini-4-carbon",
+          "score": 100
+        },
+        {
+          "model": "gemini-4-neon",
+          "score": 92.066
+        },
+        {
+          "model": "claude-fable-5-1",
+          "score": 78.896
+        },
+        {
+          "model": "claude-opus-5-5",
+          "score": 76.215
+        },
+        {
+          "model": "gemini-4-hydrogen",
+          "score": 69.677
+        },
+        {
+          "model": "gemini-3-8-flash",
+          "score": 68.194
+        },
+        {
+          "model": "gemini-3-1-pro",
+          "score": 55.133
+        },
+        {
+          "model": "claude-fable-5-2",
+          "score": 53.492
+        },
+        {
+          "model": "kimi-k3",
+          "score": 46.983
+        },
+        {
+          "model": "claude-sonnet-5-5",
+          "score": 38.957
+        },
+        {
+          "model": "gpt-5-6-sol",
+          "score": 34.933
+        },
+        {
+          "model": "kimi-k3-1-pro",
+          "score": 32.416
+        },
+        {
+          "model": "deepseek-v4-pro",
+          "score": 26.472
+        },
+        {
+          "model": "gpt-6-1-sol",
+          "score": 24.478
+        },
+        {
+          "model": "gpt-6-astra",
+          "score": 20.101
+        },
+        {
+          "model": "gemini-3-5-flash-lite",
+          "score": 18.221
+        },
+        {
+          "model": "gpt-5-6-luna",
+          "score": 9.923
+        },
+        {
+          "model": "gpt-6-1-terra",
+          "score": 9.15
+        },
+        {
+          "model": "gpt-6-2-sol",
+          "score": 0.486
+        },
+        {
+          "model": "gpt-6-2-astra",
+          "score": 0
+        }
+      ],
+      "picks": [
+        {
+          "kinds": [
+            "best"
+          ],
+          "options": [
+            {
+              "model": "gemini-4-carbon",
+              "plan": "ai-ultra",
+              "app": "gemini",
+              "price": 99.99
+            }
+          ]
+        },
+        {
+          "kinds": [
+            "standard"
+          ],
+          "options": [
+            {
+              "model": "gemini-4-neon",
+              "plan": "ai-pro",
+              "app": "gemini",
+              "price": 19.99
+            }
+          ]
+        },
+        {
+          "kinds": [
+            "free"
+          ],
+          "options": [
+            {
+              "model": "gemini-4-hydrogen",
+              "plan": "free",
+              "app": "gemini",
+              "price": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "task": "legal",
+      "scores": [
+        {
+          "model": "gemini-4-carbon",
+          "score": 100
+        },
+        {
+          "model": "gemini-4-hydrogen",
+          "score": 88.18
+        },
+        {
+          "model": "claude-opus-5-5",
+          "score": 82.422
+        },
+        {
+          "model": "claude-fable-5-1",
+          "score": 77.556
+        },
+        {
+          "model": "deepseek-v4-1-flash-1017",
+          "score": 73.77
+        },
+        {
+          "model": "claude-fable-5-2",
+          "score": 68.597
+        },
+        {
+          "model": "claude-sonnet-5-5",
+          "score": 66.365
+        },
+        {
+          "model": "gemini-3-8-flash",
+          "score": 66.179
+        },
+        {
+          "model": "kimi-k3-1-pro",
+          "score": 55.535
+        },
+        {
+          "model": "gpt-6-1-sol",
+          "score": 50.917
+        },
+        {
+          "model": "gpt-6-1-terra",
+          "score": 50.897
+        },
+        {
+          "model": "claude-haiku-5-5",
+          "score": 48.816
+        },
+        {
+          "model": "kimi-k3",
+          "score": 48.808
+        },
+        {
+          "model": "gpt-6-astra",
+          "score": 47.47
+        },
+        {
+          "model": "deepseek-v4-pro",
+          "score": 35.374
+        },
+        {
+          "model": "gemini-3-1-pro",
+          "score": 33.237
+        },
+        {
+          "model": "gpt-6-luna",
+          "score": 27.322
+        },
+        {
+          "model": "gpt-5-6-luna",
+          "score": 23.921
+        },
+        {
+          "model": "gemini-3-5-flash-lite",
+          "score": 6.108
+        }
+      ],
+      "picks": [
+        {
+          "kinds": [
+            "best"
+          ],
+          "options": [
+            {
+              "model": "gemini-4-carbon",
+              "plan": "ai-ultra",
+              "app": "gemini",
+              "price": 99.99
+            }
+          ]
+        },
+        {
+          "kinds": [
+            "standard",
+            "free"
+          ],
+          "options": [
+            {
+              "model": "gemini-4-hydrogen",
+              "plan": "free",
+              "app": "gemini",
+              "price": 0
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "changedPicks": [
+    {
+      "task": "coding",
+      "scores": [
+        {
+          "model": "claude-opus-5-5",
+          "score": 91.651
+        },
+        {
+          "model": "gpt-6-astra",
+          "score": 79.408
+        },
+        {
+          "model": "claude-fable-5-1",
+          "score": 77.725
+        },
+        {
+          "model": "gpt-5-6-sol",
+          "score": 71.589
+        },
+        {
+          "model": "claude-sonnet-5-5",
+          "score": 69.465
+        },
+        {
+          "model": "gemini-3-8-flash",
+          "score": 67.902
+        },
+        {
+          "model": "kimi-k3",
+          "score": 67.81
+        },
+        {
+          "model": "gpt-6-1-sol",
+          "score": 61.841
+        },
+        {
+          "model": "gpt-5-6-luna",
+          "score": 51.364
+        },
+        {
+          "model": "gemini-3-1-pro",
+          "score": 17.235
+        },
+        {
+          "model": "deepseek-v4-pro",
+          "score": 11.799
+        }
+      ],
+      "picks": [
+        {
+          "kinds": [
+            "best",
+            "standard"
+          ],
+          "options": [
+            {
+              "model": "claude-opus-5-5",
+              "plan": "pro",
+              "app": "claude",
+              "price": 20
+            }
+          ]
+        },
+        {
+          "kinds": [
+            "free"
+          ],
+          "options": [
+            {
+              "model": "claude-sonnet-5-5",
+              "plan": "free",
+              "app": "claude",
+              "price": 0
+            },
+            {
+              "model": "kimi-k3",
+              "plan": "free",
+              "app": "kimi",
+              "price": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "task": "writing",
+      "scores": [
+        {
+          "model": "gemini-4-carbon",
+          "score": 100
+        },
+        {
+          "model": "claude-opus-5-5",
+          "score": 94.242
+        },
+        {
+          "model": "gemini-4-neon",
+          "score": 89.339
+        },
+        {
+          "model": "claude-fable-5-1",
+          "score": 84.378
+        },
+        {
+          "model": "gemini-4-hydrogen",
+          "score": 76.081
+        },
+        {
+          "model": "claude-fable-5-2",
+          "score": 70.505
+        },
+        {
+          "model": "gemini-3-8-flash",
+          "score": 65.861
+        },
+        {
+          "model": "gemini-3-1-pro",
+          "score": 51.029
+        },
+        {
+          "model": "claude-sonnet-5-5",
+          "score": 48.425
+        },
+        {
+          "model": "kimi-k3",
+          "score": 45.672
+        },
+        {
+          "model": "gpt-5-6-sol",
+          "score": 43.464
+        },
+        {
+          "model": "kimi-k3-1-pro",
+          "score": 36.364
+        },
+        {
+          "model": "deepseek-v4-pro",
+          "score": 28.02
+        },
+        {
+          "model": "gpt-6-1-sol",
+          "score": 25.838
+        },
+        {
+          "model": "gpt-6-astra",
+          "score": 21.336
+        },
+        {
+          "model": "gpt-6-2-astra",
+          "score": 12.186
+        },
+        {
+          "model": "gemini-3-5-flash-lite",
+          "score": 9.053
+        },
+        {
+          "model": "gpt-6-1-terra",
+          "score": 7.078
+        },
+        {
+          "model": "gpt-6-2-sol",
+          "score": 6.537
+        },
+        {
+          "model": "gpt-5-6-luna",
+          "score": 5.135
+        }
+      ],
+      "picks": [
+        {
+          "kinds": [
+            "best"
+          ],
+          "options": [
+            {
+              "model": "gemini-4-carbon",
+              "plan": "ai-ultra",
+              "app": "gemini",
+              "price": 99.99
+            }
+          ]
+        },
+        {
+          "kinds": [
+            "standard"
+          ],
+          "options": [
+            {
+              "model": "claude-opus-5-5",
+              "plan": "pro",
+              "app": "claude",
+              "price": 20
+            },
+            {
+              "model": "gemini-4-neon",
+              "plan": "ai-pro",
+              "app": "gemini",
+              "price": 19.99
+            }
+          ]
+        },
+        {
+          "kinds": [
+            "free"
+          ],
+          "options": [
+            {
+              "model": "gemini-4-hydrogen",
+              "plan": "free",
+              "app": "gemini",
+              "price": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "task": "studying",
+      "scores": [
+        {
+          "model": "gpt-6-2-astra",
+          "score": 100
+        },
+        {
+          "model": "gemini-4-carbon",
+          "score": 99.221
+        },
+        {
+          "model": "gemini-4-hydrogen",
+          "score": 87.886
+        },
+        {
+          "model": "claude-fable-5-1",
+          "score": 87.829
+        },
+        {
+          "model": "deepseek-v4-1-flash-1017",
+          "score": 85.487
+        },
+        {
+          "model": "gemini-3-8-flash",
+          "score": 82.207
+        },
+        {
+          "model": "claude-opus-5-5",
+          "score": 79.047
+        },
+        {
+          "model": "gpt-6-luna",
+          "score": 74.479
+        },
+        {
+          "model": "claude-sonnet-5-5",
+          "score": 74.016
+        },
+        {
+          "model": "claude-haiku-5-5",
+          "score": 71.441
+        },
+        {
+          "model": "claude-fable-5-2",
+          "score": 69.753
+        },
+        {
+          "model": "kimi-k3",
+          "score": 68.233
+        },
+        {
+          "model": "gpt-6-1-sol",
+          "score": 68.041
+        },
+        {
+          "model": "gpt-5-6-sol",
+          "score": 65.999
+        },
+        {
+          "model": "gpt-6-astra",
+          "score": 62.91
+        },
+        {
+          "model": "gemini-3-1-pro",
+          "score": 61.545
+        },
+        {
+          "model": "gpt-6-1-terra",
+          "score": 56.653
+        },
+        {
+          "model": "gpt-5-6-luna",
+          "score": 51.406
+        },
+        {
+          "model": "deepseek-v4-pro",
+          "score": 45.941
+        },
+        {
+          "model": "gemini-3-5-flash-lite",
+          "score": 0
+        }
+      ],
+      "picks": [
+        {
+          "kinds": [
+            "best"
+          ],
+          "options": [
+            {
+              "model": "gpt-6-2-astra",
+              "plan": "plus",
+              "app": "chatgpt",
+              "price": 20
+            },
+            {
+              "model": "gemini-4-carbon",
+              "plan": "ai-ultra",
+              "app": "gemini",
+              "price": 99.99
+            }
+          ]
+        },
+        {
+          "kinds": [
+            "standard"
+          ],
+          "options": [
+            {
+              "model": "gpt-6-2-astra",
+              "plan": "plus",
+              "app": "chatgpt",
+              "price": 20
+            }
+          ]
+        },
+        {
+          "kinds": [
+            "free"
+          ],
+          "options": [
+            {
+              "model": "gemini-4-hydrogen",
+              "plan": "free",
+              "app": "gemini",
+              "price": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "task": "cv-jobs",
+      "scores": [
+        {
+          "model": "gemini-4-carbon",
+          "score": 100
+        },
+        {
+          "model": "claude-opus-5-5",
+          "score": 92.146
+        },
+        {
+          "model": "gemini-4-neon",
+          "score": 89.014
+        },
+        {
+          "model": "claude-fable-5-1",
+          "score": 82.707
+        },
+        {
+          "model": "gemini-4-hydrogen",
+          "score": 73.052
+        },
+        {
+          "model": "gemini-3-8-flash",
+          "score": 62.948
+        },
+        {
+          "model": "claude-fable-5-2",
+          "score": 62.048
+        },
+        {
+          "model": "claude-sonnet-5-5",
+          "score": 48.106
+        },
+        {
+          "model": "kimi-k3",
+          "score": 47.627
+        },
+        {
+          "model": "gpt-5-6-sol",
+          "score": 45.292
+        },
+        {
+          "model": "gemini-3-1-pro",
+          "score": 44.923
+        },
+        {
+          "model": "kimi-k3-1-pro",
+          "score": 39.873
+        },
+        {
+          "model": "gpt-6-1-sol",
+          "score": 29.735
+        },
+        {
+          "model": "deepseek-v4-pro",
+          "score": 23.725
+        },
+        {
+          "model": "gpt-6-astra",
+          "score": 22.843
+        },
+        {
+          "model": "gpt-6-2-astra",
+          "score": 10.736
+        },
+        {
+          "model": "gpt-6-1-terra",
+          "score": 9.002
+        },
+        {
+          "model": "gpt-5-6-luna",
+          "score": 7.702
+        },
+        {
+          "model": "gpt-6-2-sol",
+          "score": 7.443
+        },
+        {
+          "model": "gemini-3-5-flash-lite",
+          "score": 4.544
+        }
+      ],
+      "picks": [
+        {
+          "kinds": [
+            "best"
+          ],
+          "options": [
+            {
+              "model": "gemini-4-carbon",
+              "plan": "ai-ultra",
+              "app": "gemini",
+              "price": 99.99
+            }
+          ]
+        },
+        {
+          "kinds": [
+            "standard"
+          ],
+          "options": [
+            {
+              "model": "claude-opus-5-5",
+              "plan": "pro",
+              "app": "claude",
+              "price": 20
+            },
+            {
+              "model": "gemini-4-neon",
+              "plan": "ai-pro",
+              "app": "gemini",
+              "price": 19.99
+            }
+          ]
+        },
+        {
+          "kinds": [
+            "free"
+          ],
+          "options": [
+            {
+              "model": "gemini-4-hydrogen",
+              "plan": "free",
+              "app": "gemini",
+              "price": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "task": "business",
+      "scores": [
+        {
+          "model": "gemini-4-carbon",
+          "score": 100
+        },
+        {
+          "model": "gemini-4-hydrogen",
+          "score": 80.622
+        },
+        {
+          "model": "claude-fable-5-2",
+          "score": 78.717
+        },
+        {
+          "model": "claude-sonnet-5-5",
+          "score": 71.356
+        },
+        {
+          "model": "claude-opus-5-5",
+          "score": 68.751
+        },
+        {
+          "model": "kimi-k3-1-pro",
+          "score": 67.926
+        },
+        {
+          "model": "claude-fable-5-1",
+          "score": 62.816
+        },
+        {
+          "model": "gpt-6-astra",
+          "score": 50.714
+        },
+        {
+          "model": "gpt-6-1-sol",
+          "score": 50.65
+        },
+        {
+          "model": "kimi-k3",
+          "score": 48.363
+        },
+        {
+          "model": "gpt-6-1-terra",
+          "score": 46.079
+        },
+        {
+          "model": "gemini-3-8-flash",
+          "score": 45.732
+        },
+        {
+          "model": "deepseek-v4-pro",
+          "score": 38.312
+        },
+        {
+          "model": "gemini-3-1-pro",
+          "score": 33.252
+        },
+        {
+          "model": "gpt-5-6-luna",
+          "score": 32.823
+        },
+        {
+          "model": "gemini-3-5-flash-lite",
+          "score": 14.532
+        }
+      ],
+      "picks": [
+        {
+          "kinds": [
+            "best"
+          ],
+          "options": [
+            {
+              "model": "gemini-4-carbon",
+              "plan": "ai-ultra",
+              "app": "gemini",
+              "price": 99.99
+            }
+          ]
+        },
+        {
+          "kinds": [
+            "standard",
+            "free"
+          ],
+          "options": [
+            {
+              "model": "gemini-4-hydrogen",
+              "plan": "free",
+              "app": "gemini",
+              "price": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "task": "research",
+      "scores": [
+        {
+          "model": "gemini-4-carbon",
+          "score": 88.39
+        },
+        {
+          "model": "claude-opus-5-5",
+          "score": 76.611
+        },
+        {
+          "model": "claude-fable-5-2",
+          "score": 76.034
+        },
+        {
+          "model": "gemini-4-hydrogen",
+          "score": 73.884
+        },
+        {
+          "model": "gpt-6-astra",
+          "score": 71.459
+        },
+        {
+          "model": "claude-fable-5-1",
+          "score": 69.942
+        },
+        {
+          "model": "gemini-3-8-flash",
+          "score": 62.226
+        },
+        {
+          "model": "gpt-5-6-sol",
+          "score": 60.63
+        },
+        {
+          "model": "gpt-6-1-sol",
+          "score": 59.096
+        },
+        {
+          "model": "gemini-3-1-pro",
+          "score": 57.035
+        },
+        {
+          "model": "claude-sonnet-5-5",
+          "score": 49.996
+        },
+        {
+          "model": "kimi-k3",
+          "score": 46.857
+        },
+        {
+          "model": "gpt-6-1-terra",
+          "score": 39.301
+        },
+        {
+          "model": "deepseek-v4-pro",
+          "score": 30.922
+        },
+        {
+          "model": "gpt-5-6-luna",
+          "score": 27.248
+        },
+        {
+          "model": "claude-haiku-5-5",
+          "score": 0
+        }
+      ],
+      "picks": [
+        {
+          "kinds": [
+            "best"
+          ],
+          "options": [
+            {
+              "model": "gemini-4-carbon",
+              "plan": "ai-ultra",
+              "app": "gemini",
+              "price": 99.99
+            }
+          ]
+        },
+        {
+          "kinds": [
+            "standard"
+          ],
+          "options": [
+            {
+              "model": "claude-opus-5-5",
+              "plan": "pro",
+              "app": "claude",
+              "price": 20
+            },
+            {
+              "model": "gemini-4-hydrogen",
+              "plan": "free",
+              "app": "gemini",
+              "price": 0
+            }
+          ]
+        },
+        {
+          "kinds": [
+            "free"
+          ],
+          "options": [
+            {
+              "model": "gemini-4-hydrogen",
+              "plan": "free",
+              "app": "gemini",
+              "price": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "task": "health",
+      "scores": [
+        {
+          "model": "gemini-4-neon",
+          "score": 99.828
+        },
+        {
+          "model": "gemini-4-carbon",
+          "score": 95.366
+        },
+        {
+          "model": "claude-fable-5-1",
+          "score": 93.526
+        },
+        {
+          "model": "claude-opus-5-5",
+          "score": 83.506
+        },
+        {
+          "model": "gemini-3-8-flash",
+          "score": 79.083
+        },
+        {
+          "model": "gemini-4-hydrogen",
+          "score": 68.075
+        },
+        {
+          "model": "kimi-k3",
+          "score": 63.476
+        },
+        {
+          "model": "gemini-3-1-pro",
+          "score": 62.839
+        },
+        {
+          "model": "claude-fable-5-2",
+          "score": 53.903
+        },
+        {
+          "model": "claude-sonnet-5-5",
+          "score": 46.449
+        },
+        {
+          "model": "deepseek-v4-pro",
+          "score": 44.423
+        },
+        {
+          "model": "gemini-3-5-flash-lite",
+          "score": 28.142
+        },
+        {
+          "model": "gpt-6-1-sol",
+          "score": 27.887
+        },
+        {
+          "model": "kimi-k3-1-pro",
+          "score": 27.709
+        },
+        {
+          "model": "gpt-5-6-sol",
+          "score": 27.328
+        },
+        {
+          "model": "gpt-6-astra",
+          "score": 23.207
+        },
+        {
+          "model": "gpt-6-2-sol",
+          "score": 13.28
+        },
+        {
+          "model": "gpt-5-6-luna",
+          "score": 8.1
+        },
+        {
+          "model": "gpt-6-1-terra",
+          "score": 2.891
+        },
+        {
+          "model": "gpt-6-2-astra",
+          "score": 0
+        }
+      ],
+      "picks": [
+        {
+          "kinds": [
+            "best"
+          ],
+          "options": [
+            {
+              "model": "gemini-4-neon",
+              "plan": "ai-pro",
+              "app": "gemini",
+              "price": 19.99
+            },
+            {
+              "model": "gemini-4-carbon",
+              "plan": "ai-ultra",
+              "app": "gemini",
+              "price": 99.99
+            }
+          ]
+        },
+        {
+          "kinds": [
+            "standard"
+          ],
+          "options": [
+            {
+              "model": "gemini-4-neon",
+              "plan": "ai-pro",
+              "app": "gemini",
+              "price": 19.99
+            }
+          ]
+        },
+        {
+          "kinds": [
+            "free"
+          ],
+          "options": [
+            {
+              "model": "gemini-4-hydrogen",
+              "plan": "free",
+              "app": "gemini",
+              "price": 0
+            },
+            {
+              "model": "kimi-k3",
+              "plan": "free",
+              "app": "kimi",
+              "price": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "task": "documents-notes",
+      "scores": [
+        {
+          "model": "claude-opus-5-5",
+          "score": 90.35
+        },
+        {
+          "model": "claude-fable-5-1",
+          "score": 84.827
+        },
+        {
+          "model": "claude-fable-5-2",
+          "score": 79.414
+        },
+        {
+          "model": "claude-haiku-5-5",
+          "score": 73.236
+        },
+        {
+          "model": "gemini-3-8-flash",
+          "score": 71.94
+        },
+        {
+          "model": "claude-sonnet-5-5",
+          "score": 67.435
+        },
+        {
+          "model": "gemini-3-1-pro",
+          "score": 65.656
+        },
+        {
+          "model": "gpt-5-6-sol",
+          "score": 60.66
+        },
+        {
+          "model": "gpt-6-astra",
+          "score": 56.696
+        },
+        {
+          "model": "gpt-6-1-sol",
+          "score": 55.05
+        },
+        {
+          "model": "kimi-k3",
+          "score": 50.254
+        },
+        {
+          "model": "kimi-k3-1-pro",
+          "score": 46.248
+        },
+        {
+          "model": "deepseek-v4-pro",
+          "score": 45.478
+        },
+        {
+          "model": "gpt-6-luna",
+          "score": 42.339
+        },
+        {
+          "model": "gpt-5-6-luna",
+          "score": 21.457
+        },
+        {
+          "model": "gemini-3-5-flash-lite",
+          "score": 3.134
+        }
+      ],
+      "picks": [
+        {
+          "kinds": [
+            "best",
+            "standard"
+          ],
+          "options": [
+            {
+              "model": "claude-opus-5-5",
+              "plan": "pro",
+              "app": "claude",
+              "price": 20
+            }
+          ]
+        },
+        {
+          "kinds": [
+            "free"
+          ],
+          "options": [
+            {
+              "model": "claude-haiku-5-5",
+              "plan": "free",
+              "app": "claude",
+              "price": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "task": "finance-accounting",
+      "scores": [
+        {
+          "model": "gemini-4-carbon",
+          "score": 100
+        },
+        {
+          "model": "claude-opus-5-5",
+          "score": 81.36
+        },
+        {
+          "model": "gemini-4-hydrogen",
+          "score": 80.622
+        },
+        {
+          "model": "claude-fable-5-1",
+          "score": 77.157
+        },
+        {
+          "model": "deepseek-v4-1-flash-1017",
+          "score": 73.77
+        },
+        {
+          "model": "claude-sonnet-5-5",
+          "score": 71.356
+        },
+        {
+          "model": "gemini-3-8-flash",
+          "score": 68.598
+        },
+        {
+          "model": "claude-fable-5-2",
+          "score": 68.076
+        },
+        {
+          "model": "kimi-k3-1-pro",
+          "score": 67.926
+        },
+        {
+          "model": "gpt-6-astra",
+          "score": 54.896
+        },
+        {
+          "model": "gpt-6-1-sol",
+          "score": 50.65
+        },
+        {
+          "model": "claude-haiku-5-5",
+          "score": 48.816
+        },
+        {
+          "model": "kimi-k3",
+          "score": 48.363
+        },
+        {
+          "model": "gpt-6-1-terra",
+          "score": 46.079
+        },
+        {
+          "model": "deepseek-v4-pro",
+          "score": 38.312
+        },
+        {
+          "model": "gemini-3-1-pro",
+          "score": 33.252
+        },
+        {
+          "model": "gpt-5-6-luna",
+          "score": 32.823
+        },
+        {
+          "model": "gpt-6-luna",
+          "score": 27.322
+        },
+        {
+          "model": "gemini-3-5-flash-lite",
+          "score": 14.532
+        }
+      ],
+      "picks": [
+        {
+          "kinds": [
+            "best"
+          ],
+          "options": [
+            {
+              "model": "gemini-4-carbon",
+              "plan": "ai-ultra",
+              "app": "gemini",
+              "price": 99.99
+            }
+          ]
+        },
+        {
+          "kinds": [
+            "standard"
+          ],
+          "options": [
+            {
+              "model": "claude-opus-5-5",
+              "plan": "pro",
+              "app": "claude",
+              "price": 20
+            },
+            {
+              "model": "gemini-4-hydrogen",
+              "plan": "free",
+              "app": "gemini",
+              "price": 0
+            }
+          ]
+        },
+        {
+          "kinds": [
+            "free"
+          ],
+          "options": [
+            {
+              "model": "gemini-4-hydrogen",
+              "plan": "free",
+              "app": "gemini",
+              "price": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "task": "maths-science",
+      "scores": [
+        {
+          "model": "gemini-4-carbon",
+          "score": 95.449
+        },
+        {
+          "model": "claude-fable-5-1",
+          "score": 92.69
+        },
+        {
+          "model": "gemini-4-hydrogen",
+          "score": 87.264
+        },
+        {
+          "model": "claude-opus-5-5",
+          "score": 81.496
+        },
+        {
+          "model": "gemini-3-8-flash",
+          "score": 81.281
+        },
+        {
+          "model": "deepseek-v4-1-flash-1017",
+          "score": 78.819
+        },
+        {
+          "model": "claude-fable-5-2",
+          "score": 77.199
+        },
+        {
+          "model": "claude-sonnet-5-5",
+          "score": 76.445
+        },
+        {
+          "model": "gpt-6-luna",
+          "score": 75.202
+        },
+        {
+          "model": "gpt-6-2-astra",
+          "score": 74.112
+        },
+        {
+          "model": "claude-haiku-5-5",
+          "score": 71.316
+        },
+        {
+          "model": "gpt-6-1-sol",
+          "score": 70.774
+        },
+        {
+          "model": "kimi-k3",
+          "score": 69.453
+        },
+        {
+          "model": "gpt-6-astra",
+          "score": 67.158
+        },
+        {
+          "model": "gpt-5-6-sol",
+          "score": 66.155
+        },
+        {
+          "model": "gemini-3-1-pro",
+          "score": 64.254
+        },
+        {
+          "model": "gpt-6-1-terra",
+          "score": 59.084
+        },
+        {
+          "model": "gpt-5-6-luna",
+          "score": 54.264
+        },
+        {
+          "model": "deepseek-v4-pro",
+          "score": 51.782
+        },
+        {
+          "model": "gemini-3-5-flash-lite",
+          "score": 5.327
+        }
+      ],
+      "picks": [
+        {
+          "kinds": [
+            "best"
+          ],
+          "options": [
+            {
+              "model": "gemini-4-carbon",
+              "plan": "ai-ultra",
+              "app": "gemini",
+              "price": 99.99
+            },
+            {
+              "model": "claude-fable-5-1",
+              "plan": "max",
+              "app": "claude",
+              "price": 100
+            }
+          ]
+        },
+        {
+          "kinds": [
+            "standard",
+            "free"
+          ],
+          "options": [
+            {
+              "model": "gemini-4-hydrogen",
+              "plan": "free",
+              "app": "gemini",
+              "price": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "task": "excel-spreadsheets",
+      "scores": [
+        {
+          "model": "claude-fable-5-2",
+          "score": 96.266
+        },
+        {
+          "model": "claude-opus-5-5",
+          "score": 92.931
+        },
+        {
+          "model": "claude-sonnet-5-5",
+          "score": 86.132
+        },
+        {
+          "model": "claude-fable-5-1",
+          "score": 80.707
+        },
+        {
+          "model": "gemini-3-8-flash",
+          "score": 80.543
+        },
+        {
+          "model": "gpt-6-astra",
+          "score": 76.296
+        },
+        {
+          "model": "gpt-6-1-sol",
+          "score": 69.473
+        },
+        {
+          "model": "kimi-k3-1-pro",
+          "score": 64.31
+        },
+        {
+          "model": "claude-haiku-5-5",
+          "score": 61.026
+        },
+        {
+          "model": "deepseek-v4-pro",
+          "score": 57.968
+        },
+        {
+          "model": "gemini-3-1-pro",
+          "score": 48.512
+        },
+        {
+          "model": "kimi-k3",
+          "score": 41.42
+        },
+        {
+          "model": "gpt-5-6-luna",
+          "score": 30.278
+        },
+        {
+          "model": "gpt-6-luna",
+          "score": 23.221
+        },
+        {
+          "model": "gemini-3-5-flash-lite",
+          "score": 0
+        }
+      ],
+      "picks": [
+        {
+          "kinds": [
+            "best"
+          ],
+          "options": [
+            {
+              "model": "claude-fable-5-2",
+              "plan": "max",
+              "app": "claude",
+              "price": 100
+            },
+            {
+              "model": "claude-opus-5-5",
+              "plan": "pro",
+              "app": "claude",
+              "price": 20
+            }
+          ]
+        },
+        {
+          "kinds": [
+            "standard"
+          ],
+          "options": [
+            {
+              "model": "claude-opus-5-5",
+              "plan": "pro",
+              "app": "claude",
+              "price": 20
+            }
+          ]
+        },
+        {
+          "kinds": [
+            "free"
+          ],
+          "options": [
+            {
+              "model": "claude-sonnet-5-5",
+              "plan": "free",
+              "app": "claude",
+              "price": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "task": "presentations",
+      "scores": [
+        {
+          "model": "gemini-4-carbon",
+          "score": 100
+        },
+        {
+          "model": "claude-opus-5-5",
+          "score": 88.267
+        },
+        {
+          "model": "claude-fable-5-1",
+          "score": 79
+        },
+        {
+          "model": "gemini-4-hydrogen",
+          "score": 78.27
+        },
+        {
+          "model": "claude-fable-5-2",
+          "score": 72.209
+        },
+        {
+          "model": "gemini-3-8-flash",
+          "score": 63.216
+        },
+        {
+          "model": "claude-sonnet-5-5",
+          "score": 60.122
+        },
+        {
+          "model": "kimi-k3-1-pro",
+          "score": 48.561
+        },
+        {
+          "model": "kimi-k3",
+          "score": 42.984
+        },
+        {
+          "model": "gpt-6-1-sol",
+          "score": 38.464
+        },
+        {
+          "model": "gpt-6-astra",
+          "score": 36.722
+        },
+        {
+          "model": "gemini-3-1-pro",
+          "score": 33.47
+        },
+        {
+          "model": "gpt-6-1-terra",
+          "score": 29.681
+        },
+        {
+          "model": "deepseek-v4-pro",
+          "score": 26.746
+        },
+        {
+          "model": "gpt-5-6-luna",
+          "score": 13.453
+        },
+        {
+          "model": "gemini-3-5-flash-lite",
+          "score": 3.03
+        }
+      ],
+      "picks": [
+        {
+          "kinds": [
+            "best"
+          ],
+          "options": [
+            {
+              "model": "gemini-4-carbon",
+              "plan": "ai-ultra",
+              "app": "gemini",
+              "price": 99.99
+            }
+          ]
+        },
+        {
+          "kinds": [
+            "standard"
+          ],
+          "options": [
+            {
+              "model": "claude-opus-5-5",
+              "plan": "pro",
+              "app": "claude",
+              "price": 20
+            }
+          ]
+        },
+        {
+          "kinds": [
+            "free"
+          ],
+          "options": [
+            {
+              "model": "gemini-4-hydrogen",
+              "plan": "free",
+              "app": "gemini",
+              "price": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "task": "planning-personal",
+      "scores": [
+        {
+          "model": "gemini-4-carbon",
+          "score": 100
+        },
+        {
+          "model": "gemini-4-neon",
+          "score": 70.423
+        },
+        {
+          "model": "gemini-3-8-flash",
+          "score": 54.81
+        },
+        {
+          "model": "claude-opus-5-5",
+          "score": 54.792
+        },
+        {
+          "model": "claude-fable-5-1",
+          "score": 46.568
+        },
+        {
+          "model": "gemini-4-hydrogen",
+          "score": 46.077
+        },
+        {
+          "model": "kimi-k3",
+          "score": 45.99
+        },
+        {
+          "model": "gemini-3-1-pro",
+          "score": 43.809
+        },
+        {
+          "model": "deepseek-v4-pro",
+          "score": 31.547
+        },
+        {
+          "model": "claude-sonnet-5-5",
+          "score": 28.152
+        },
+        {
+          "model": "gpt-5-6-sol",
+          "score": 28.048
+        },
+        {
+          "model": "claude-fable-5-2",
+          "score": 25.305
+        },
+        {
+          "model": "gpt-6-1-sol",
+          "score": 19.934
+        },
+        {
+          "model": "kimi-k3-1-pro",
+          "score": 19.28
+        },
+        {
+          "model": "gemini-3-5-flash-lite",
+          "score": 17.323
+        },
+        {
+          "model": "gpt-6-astra",
+          "score": 17.24
+        },
+        {
+          "model": "gpt-5-6-luna",
+          "score": 9.899
+        },
+        {
+          "model": "gpt-6-1-terra",
+          "score": 8.135
+        },
+        {
+          "model": "gpt-6-2-astra",
+          "score": 3.498
+        },
+        {
+          "model": "gpt-6-2-sol",
+          "score": 0
+        }
+      ],
+      "picks": [
+        {
+          "kinds": [
+            "best"
+          ],
+          "options": [
+            {
+              "model": "gemini-4-carbon",
+              "plan": "ai-ultra",
+              "app": "gemini",
+              "price": 99.99
+            }
+          ]
+        },
+        {
+          "kinds": [
+            "standard"
+          ],
+          "options": [
+            {
+              "model": "gemini-4-neon",
+              "plan": "ai-pro",
+              "app": "gemini",
+              "price": 19.99
+            }
+          ]
+        },
+        {
+          "kinds": [
+            "free"
+          ],
+          "options": [
+            {
+              "model": "gemini-4-hydrogen",
+              "plan": "free",
+              "app": "gemini",
+              "price": 0
+            },
+            {
+              "model": "kimi-k3",
+              "plan": "free",
+              "app": "kimi",
+              "price": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "task": "translation-languages",
+      "scores": [
+        {
+          "model": "gemini-4-carbon",
+          "score": 100
+        },
+        {
+          "model": "gemini-4-neon",
+          "score": 92.066
+        },
+        {
+          "model": "claude-fable-5-1",
+          "score": 78.896
+        },
+        {
+          "model": "claude-opus-5-5",
+          "score": 76.215
+        },
+        {
+          "model": "gemini-4-hydrogen",
+          "score": 69.677
+        },
+        {
+          "model": "gemini-3-8-flash",
+          "score": 68.194
+        },
+        {
+          "model": "gemini-3-1-pro",
+          "score": 55.133
+        },
+        {
+          "model": "claude-fable-5-2",
+          "score": 53.492
+        },
+        {
+          "model": "kimi-k3",
+          "score": 46.983
+        },
+        {
+          "model": "claude-sonnet-5-5",
+          "score": 38.957
+        },
+        {
+          "model": "gpt-5-6-sol",
+          "score": 34.933
+        },
+        {
+          "model": "kimi-k3-1-pro",
+          "score": 32.416
+        },
+        {
+          "model": "deepseek-v4-pro",
+          "score": 26.472
+        },
+        {
+          "model": "gpt-6-1-sol",
+          "score": 24.478
+        },
+        {
+          "model": "gpt-6-astra",
+          "score": 20.101
+        },
+        {
+          "model": "gemini-3-5-flash-lite",
+          "score": 18.221
+        },
+        {
+          "model": "gpt-5-6-luna",
+          "score": 9.923
+        },
+        {
+          "model": "gpt-6-1-terra",
+          "score": 9.15
+        },
+        {
+          "model": "gpt-6-2-sol",
+          "score": 0.486
+        },
+        {
+          "model": "gpt-6-2-astra",
+          "score": 0
+        }
+      ],
+      "picks": [
+        {
+          "kinds": [
+            "best"
+          ],
+          "options": [
+            {
+              "model": "gemini-4-carbon",
+              "plan": "ai-ultra",
+              "app": "gemini",
+              "price": 99.99
+            }
+          ]
+        },
+        {
+          "kinds": [
+            "standard"
+          ],
+          "options": [
+            {
+              "model": "gemini-4-neon",
+              "plan": "ai-pro",
+              "app": "gemini",
+              "price": 19.99
+            }
+          ]
+        },
+        {
+          "kinds": [
+            "free"
+          ],
+          "options": [
+            {
+              "model": "gemini-4-hydrogen",
+              "plan": "free",
+              "app": "gemini",
+              "price": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "task": "legal",
+      "scores": [
+        {
+          "model": "gemini-4-carbon",
+          "score": 100
+        },
+        {
+          "model": "gemini-4-hydrogen",
+          "score": 88.18
+        },
+        {
+          "model": "claude-opus-5-5",
+          "score": 82.422
+        },
+        {
+          "model": "claude-fable-5-1",
+          "score": 77.556
+        },
+        {
+          "model": "deepseek-v4-1-flash-1017",
+          "score": 73.77
+        },
+        {
+          "model": "claude-fable-5-2",
+          "score": 68.597
+        },
+        {
+          "model": "claude-sonnet-5-5",
+          "score": 66.365
+        },
+        {
+          "model": "gemini-3-8-flash",
+          "score": 66.179
+        },
+        {
+          "model": "kimi-k3-1-pro",
+          "score": 55.535
+        },
+        {
+          "model": "gpt-6-1-sol",
+          "score": 50.917
+        },
+        {
+          "model": "gpt-6-1-terra",
+          "score": 50.897
+        },
+        {
+          "model": "claude-haiku-5-5",
+          "score": 48.816
+        },
+        {
+          "model": "kimi-k3",
+          "score": 48.808
+        },
+        {
+          "model": "gpt-6-astra",
+          "score": 47.47
+        },
+        {
+          "model": "deepseek-v4-pro",
+          "score": 35.374
+        },
+        {
+          "model": "gemini-3-1-pro",
+          "score": 33.237
+        },
+        {
+          "model": "gpt-6-luna",
+          "score": 27.322
+        },
+        {
+          "model": "gpt-5-6-luna",
+          "score": 23.921
+        },
+        {
+          "model": "gemini-3-5-flash-lite",
+          "score": 6.108
+        }
+      ],
+      "picks": [
+        {
+          "kinds": [
+            "best"
+          ],
+          "options": [
+            {
+              "model": "gemini-4-carbon",
+              "plan": "ai-ultra",
+              "app": "gemini",
+              "price": 99.99
+            }
+          ]
+        },
+        {
+          "kinds": [
+            "standard",
+            "free"
+          ],
+          "options": [
+            {
+              "model": "gemini-4-hydrogen",
+              "plan": "free",
+              "app": "gemini",
+              "price": 0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

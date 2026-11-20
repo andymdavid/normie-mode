@@ -5,11 +5,31 @@
   "url": "https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset",
   "licence": "CC BY 4.0",
   "attribution": "LMArena leaderboard dataset (lmarena-ai/leaderboard-dataset)",
-  "retrieved_at": "2026-11-20T04:24:46.418Z",
+  "retrieved_at": "2026-11-20T04:29:39.248Z",
   "as_of": "2026-11-19"
  },
  "overall_count": 426,
  "entries": [
+  {
+   "model": "gemini-4-carbon",
+   "source_model": "Gemini 4 Carbon (High)",
+   "category": "overall",
+   "rating": 1539.3081974827726,
+   "lower": 1529.750463400826,
+   "upper": 1548.8659315647192,
+   "votes": 4262,
+   "rank": 1
+  },
+  {
+   "model": "gemini-4-neon",
+   "source_model": "Gemini 4 Neon (High)",
+   "category": "overall",
+   "rating": 1523.5532166015744,
+   "lower": 1515.0798165977105,
+   "upper": 1532.026616605438,
+   "votes": 5555,
+   "rank": 3
+  },
   {
    "model": "claude-opus-5-5",
    "source_model": "Claude Opus 5.5 (High)",
@@ -49,6 +69,16 @@
    "upper": 1505.8557127840209,
    "votes": 73414,
    "rank": 8
+  },
+  {
+   "model": "gemini-4-hydrogen",
+   "source_model": "Gemini 4 Hydrogen (High)",
+   "category": "overall",
+   "rating": 1501.7760000165435,
+   "lower": 1492.8345268291323,
+   "upper": 1510.7174732039548,
+   "votes": 4743,
+   "rank": 9
   },
   {
    "model": "claude-opus-4-6",
@@ -111,6 +141,16 @@
    "rank": 24
   },
   {
+   "model": "claude-fable-5-2",
+   "source_model": "Claude Fable 5.2 (Max)",
+   "category": "overall",
+   "rating": 1478.3425849167008,
+   "lower": 1469.6233869722396,
+   "upper": 1487.061782861162,
+   "votes": 5216,
+   "rank": 26
+  },
+  {
    "model": "kimi-k3",
    "source_model": "Kimi K3 (Max)",
    "category": "overall",
@@ -159,6 +199,16 @@
    "upper": 1465.4006776122737,
    "votes": 62925,
    "rank": 44
+  },
+  {
+   "model": "kimi-k3-1-pro",
+   "source_model": "Kimi K3.1 Pro (Max)",
+   "category": "overall",
+   "rating": 1457.7404297984228,
+   "lower": 1449.6368149843286,
+   "upper": 1465.844044612517,
+   "votes": 6658,
+   "rank": 46
   },
   {
    "model": "gpt-5-6-sol",
@@ -251,6 +301,36 @@
    "rank": 96
   },
   {
+   "model": "gpt-6-1-terra",
+   "source_model": "GPT-6.1 Terra (Max)",
+   "category": "overall",
+   "rating": 1426.0322782340704,
+   "lower": 1418.2109937920723,
+   "upper": 1433.8535626760688,
+   "votes": 8278,
+   "rank": 106
+  },
+  {
+   "model": "gpt-6-2-sol",
+   "source_model": "GPT-6.2 Sol (Max)",
+   "category": "overall",
+   "rating": 1414.2604657557658,
+   "lower": 1402.30325708458,
+   "upper": 1426.2176744269516,
+   "votes": 2541,
+   "rank": 140
+  },
+  {
+   "model": "gpt-6-2-astra",
+   "source_model": "GPT-6.2 Astra (Max)",
+   "category": "overall",
+   "rating": 1414.1633904154094,
+   "lower": 1401.7604239275677,
+   "upper": 1426.566356903251,
+   "votes": 2398,
+   "rank": 141
+  },
+  {
    "model": "claude-haiku-4-5",
    "source_model": "Claude Haiku 4.5 (20251001)",
    "category": "overall",
@@ -259,6 +339,36 @@
    "upper": 1398.8100733307856,
    "votes": 153650,
    "rank": 169
+  },
+  {
+   "model": "gemini-4-hydrogen",
+   "source_model": "Gemini 4 Hydrogen (High)",
+   "category": "chinese",
+   "rating": 1628.9458361053917,
+   "lower": 1596.3996524125753,
+   "upper": 1661.4920197982078,
+   "votes": 342,
+   "rank": 1
+  },
+  {
+   "model": "gemini-4-carbon",
+   "source_model": "Gemini 4 Carbon (High)",
+   "category": "chinese",
+   "rating": 1617.2644643460253,
+   "lower": 1587.8012601201006,
+   "upper": 1646.72766857195,
+   "votes": 425,
+   "rank": 2
+  },
+  {
+   "model": "gemini-4-neon",
+   "source_model": "Gemini 4 Neon (High)",
+   "category": "chinese",
+   "rating": 1598.3491321931087,
+   "lower": 1568.1772179108907,
+   "upper": 1628.5210464753268,
+   "votes": 426,
+   "rank": 4
   },
   {
    "model": "claude-fable-5-1",
@@ -381,6 +491,16 @@
    "rank": 24
   },
   {
+   "model": "claude-fable-5-2",
+   "source_model": "Claude Fable 5.2 (Max)",
+   "category": "chinese",
+   "rating": 1528.2155418188038,
+   "lower": 1499.2150278155436,
+   "upper": 1557.2160558220637,
+   "votes": 425,
+   "rank": 25
+  },
+  {
    "model": "kimi-k3",
    "source_model": "Kimi K3 (Max)",
    "category": "chinese",
@@ -439,6 +559,16 @@
    "upper": 1520.4785200842855,
    "votes": 1394,
    "rank": 54
+  },
+  {
+   "model": "kimi-k3-1-pro",
+   "source_model": "Kimi K3.1 Pro (Max)",
+   "category": "chinese",
+   "rating": 1498.8424424883326,
+   "lower": 1472.6695307127113,
+   "upper": 1525.0153542639537,
+   "votes": 510,
+   "rank": 59
   },
   {
    "model": "gpt-6-astra",
@@ -501,6 +631,26 @@
    "rank": 92
   },
   {
+   "model": "gpt-6-1-terra",
+   "source_model": "GPT-6.1 Terra (Max)",
+   "category": "chinese",
+   "rating": 1465.8090517543476,
+   "lower": 1442.6831299896314,
+   "upper": 1488.9349735190638,
+   "votes": 666,
+   "rank": 98
+  },
+  {
+   "model": "gpt-6-2-sol",
+   "source_model": "GPT-6.2 Sol (Max)",
+   "category": "chinese",
+   "rating": 1434.2335567933285,
+   "lower": 1393.3866800908388,
+   "upper": 1475.0804334958182,
+   "votes": 196,
+   "rank": 153
+  },
+  {
    "model": "claude-haiku-4-5",
    "source_model": "Claude Haiku 4.5 (20251001)",
    "category": "chinese",
@@ -509,6 +659,26 @@
    "upper": 1424.304010021267,
    "votes": 10846,
    "rank": 175
+  },
+  {
+   "model": "gemini-4-carbon",
+   "source_model": "Gemini 4 Carbon (High)",
+   "category": "coding",
+   "rating": 1564.2754092492185,
+   "lower": 1545.5581568517828,
+   "upper": 1582.992661646654,
+   "votes": 1061,
+   "rank": 1
+  },
+  {
+   "model": "gemini-4-neon",
+   "source_model": "Gemini 4 Neon (High)",
+   "category": "coding",
+   "rating": 1555.2521228238413,
+   "lower": 1538.0805718840697,
+   "upper": 1572.423673763613,
+   "votes": 1288,
+   "rank": 2
   },
   {
    "model": "claude-opus-5-5",
@@ -569,6 +739,16 @@
    "upper": 1536.2748054627052,
    "votes": 4331,
    "rank": 10
+  },
+  {
+   "model": "gemini-4-hydrogen",
+   "source_model": "Gemini 4 Hydrogen (High)",
+   "category": "coding",
+   "rating": 1511.9718413763646,
+   "lower": 1493.8817248687437,
+   "upper": 1530.0619578839855,
+   "votes": 1078,
+   "rank": 15
   },
   {
    "model": "gemini-3-8-flash",
@@ -671,6 +851,16 @@
    "rank": 40
   },
   {
+   "model": "claude-fable-5-2",
+   "source_model": "Claude Fable 5.2 (Max)",
+   "category": "coding",
+   "rating": 1486.7076694675875,
+   "lower": 1466.424070652727,
+   "upper": 1506.991268282448,
+   "votes": 851,
+   "rank": 47
+  },
+  {
    "model": "claude-opus-4-8",
    "source_model": "Claude Opus 4.8",
    "category": "coding",
@@ -679,6 +869,16 @@
    "upper": 1491.944334398143,
    "votes": 17733,
    "rank": 48
+  },
+  {
+   "model": "kimi-k3-1-pro",
+   "source_model": "Kimi K3.1 Pro (Max)",
+   "category": "coding",
+   "rating": 1483.9187000872075,
+   "lower": 1468.3469172074804,
+   "upper": 1499.490482966935,
+   "votes": 1480,
+   "rank": 53
   },
   {
    "model": "claude-sonnet-5",
@@ -709,6 +909,16 @@
    "upper": 1488.0373415635818,
    "votes": 19651,
    "rank": 57
+  },
+  {
+   "model": "gpt-6-1-terra",
+   "source_model": "GPT-6.1 Terra (Max)",
+   "category": "coding",
+   "rating": 1481.897212912112,
+   "lower": 1467.1950311727285,
+   "upper": 1496.5993946514957,
+   "votes": 1747,
+   "rank": 58
   },
   {
    "model": "deepseek-v4-pro",
@@ -761,6 +971,36 @@
    "rank": 103
   },
   {
+   "model": "gpt-6-2-astra",
+   "source_model": "GPT-6.2 Astra (Max)",
+   "category": "coding",
+   "rating": 1450.0738003169033,
+   "lower": 1422.7315991902308,
+   "upper": 1477.416001443576,
+   "votes": 473,
+   "rank": 109
+  },
+  {
+   "model": "gpt-6-2-sol",
+   "source_model": "GPT-6.2 Sol (Max)",
+   "category": "coding",
+   "rating": 1439.8423378292914,
+   "lower": 1415.5023699496755,
+   "upper": 1464.1823057089075,
+   "votes": 573,
+   "rank": 126
+  },
+  {
+   "model": "gemini-4-carbon",
+   "source_model": "Gemini 4 Carbon (High)",
+   "category": "creative_writing",
+   "rating": 1532.672545282046,
+   "lower": 1512.7698829877552,
+   "upper": 1552.5752075763367,
+   "votes": 1009,
+   "rank": 1
+  },
+  {
    "model": "claude-opus-5-5",
    "source_model": "Claude Opus 5.5 (High)",
    "category": "creative_writing",
@@ -771,6 +1011,16 @@
    "rank": 3
   },
   {
+   "model": "gemini-4-neon",
+   "source_model": "Gemini 4 Neon (High)",
+   "category": "creative_writing",
+   "rating": 1519.0370515323532,
+   "lower": 1500.397685577101,
+   "upper": 1537.6764174876057,
+   "votes": 1204,
+   "rank": 4
+  },
+  {
    "model": "claude-fable-5-1",
    "source_model": "Claude Fable 5.1 (Max)",
    "category": "creative_writing",
@@ -779,6 +1029,26 @@
    "upper": 1525.5108245089307,
    "votes": 5126,
    "rank": 5
+  },
+  {
+   "model": "claude-fable-5-2",
+   "source_model": "Claude Fable 5.2 (Max)",
+   "category": "creative_writing",
+   "rating": 1515.5362378264451,
+   "lower": 1496.7294564253034,
+   "upper": 1534.3430192275869,
+   "votes": 1115,
+   "rank": 6
+  },
+  {
+   "model": "gemini-4-hydrogen",
+   "source_model": "Gemini 4 Hydrogen (High)",
+   "category": "creative_writing",
+   "rating": 1508.3427652902633,
+   "lower": 1488.8582127712157,
+   "upper": 1527.827317809311,
+   "votes": 1030,
+   "rank": 7
   },
   {
    "model": "claude-opus-4-6",
@@ -951,6 +1221,16 @@
    "rank": 51
   },
   {
+   "model": "kimi-k3-1-pro",
+   "source_model": "Kimi K3.1 Pro (Max)",
+   "category": "creative_writing",
+   "rating": 1436.4319538591717,
+   "lower": 1420.1177560502983,
+   "upper": 1452.746151668045,
+   "votes": 1468,
+   "rank": 58
+  },
+  {
    "model": "gpt-6-astra",
    "source_model": "GPT-6 Astra (Max)",
    "category": "creative_writing",
@@ -981,6 +1261,16 @@
    "rank": 74
   },
   {
+   "model": "gpt-6-2-astra",
+   "source_model": "GPT-6.2 Astra (Max)",
+   "category": "creative_writing",
+   "rating": 1417.0052494884203,
+   "lower": 1386.736980186546,
+   "upper": 1447.273518790295,
+   "votes": 413,
+   "rank": 77
+  },
+  {
    "model": "claude-sonnet-5",
    "source_model": "Claude Sonnet 5 (High)",
    "category": "creative_writing",
@@ -989,6 +1279,26 @@
    "upper": 1420.7341318863673,
    "votes": 10996,
    "rank": 82
+  },
+  {
+   "model": "gpt-6-2-sol",
+   "source_model": "GPT-6.2 Sol (Max)",
+   "category": "creative_writing",
+   "rating": 1402.8942321412503,
+   "lower": 1375.0675117130788,
+   "upper": 1430.7209525694218,
+   "votes": 495,
+   "rank": 98
+  },
+  {
+   "model": "gpt-6-1-terra",
+   "source_model": "GPT-6.1 Terra (Max)",
+   "category": "creative_writing",
+   "rating": 1400.8553681557285,
+   "lower": 1385.6869812094187,
+   "upper": 1416.0237551020384,
+   "votes": 1811,
+   "rank": 106
   },
   {
    "model": "gpt-5-6-luna",
@@ -1011,6 +1321,16 @@
    "rank": 150
   },
   {
+   "model": "gemini-4-carbon",
+   "source_model": "Gemini 4 Carbon (High)",
+   "category": "english",
+   "rating": 1532.0385475389103,
+   "lower": 1516.1697504073363,
+   "upper": 1547.9073446704842,
+   "votes": 1491,
+   "rank": 1
+  },
+  {
    "model": "claude-opus-5-5",
    "source_model": "Claude Opus 5.5 (High)",
    "category": "english",
@@ -1029,6 +1349,16 @@
    "upper": 1515.8663855910381,
    "votes": 36723,
    "rank": 4
+  },
+  {
+   "model": "gemini-4-neon",
+   "source_model": "Gemini 4 Neon (High)",
+   "category": "english",
+   "rating": 1511.1819700557207,
+   "lower": 1497.121702331624,
+   "upper": 1525.242237779818,
+   "votes": 1843,
+   "rank": 5
   },
   {
    "model": "claude-fable-5-1",
@@ -1081,6 +1411,16 @@
    "rank": 13
   },
   {
+   "model": "gemini-4-hydrogen",
+   "source_model": "Gemini 4 Hydrogen (High)",
+   "category": "english",
+   "rating": 1496.8423021768845,
+   "lower": 1481.9316009093013,
+   "upper": 1511.7530034444676,
+   "votes": 1631,
+   "rank": 14
+  },
+  {
    "model": "gemini-3-7-flash",
    "source_model": "Gemini 3.7 Flash (High)",
    "category": "english",
@@ -1131,6 +1471,16 @@
    "rank": 28
   },
   {
+   "model": "claude-fable-5-2",
+   "source_model": "Claude Fable 5.2 (Max)",
+   "category": "english",
+   "rating": 1473.6100276161428,
+   "lower": 1459.2887776345283,
+   "upper": 1487.9312775977573,
+   "votes": 1758,
+   "rank": 37
+  },
+  {
    "model": "gpt-5-5",
    "source_model": "GPT-5.5 (High)",
    "category": "english",
@@ -1159,6 +1509,16 @@
    "upper": 1473.1348602450144,
    "votes": 31691,
    "rank": 44
+  },
+  {
+   "model": "kimi-k3-1-pro",
+   "source_model": "Kimi K3.1 Pro (Max)",
+   "category": "english",
+   "rating": 1467.9816304527403,
+   "lower": 1454.543781005143,
+   "upper": 1481.4194799003376,
+   "votes": 2061,
+   "rank": 45
   },
   {
    "model": "claude-opus-4-8",
@@ -1251,6 +1611,36 @@
    "rank": 108
   },
   {
+   "model": "gpt-6-1-terra",
+   "source_model": "GPT-6.1 Terra (Max)",
+   "category": "english",
+   "rating": 1431.2992132992545,
+   "lower": 1419.5316729667757,
+   "upper": 1443.0667536317328,
+   "votes": 2895,
+   "rank": 120
+  },
+  {
+   "model": "gpt-6-2-sol",
+   "source_model": "GPT-6.2 Sol (Max)",
+   "category": "english",
+   "rating": 1419.4187377331332,
+   "lower": 1398.7062120923113,
+   "upper": 1440.1312633739553,
+   "votes": 816,
+   "rank": 144
+  },
+  {
+   "model": "gpt-6-2-astra",
+   "source_model": "GPT-6.2 Astra (Max)",
+   "category": "english",
+   "rating": 1417.4914322993868,
+   "lower": 1395.8753430120507,
+   "upper": 1439.1075215867227,
+   "votes": 749,
+   "rank": 151
+  },
+  {
    "model": "claude-haiku-4-5",
    "source_model": "Claude Haiku 4.5 (20251001)",
    "category": "english",
@@ -1259,6 +1649,26 @@
    "upper": 1417.5554784389924,
    "votes": 66156,
    "rank": 156
+  },
+  {
+   "model": "gemini-4-carbon",
+   "source_model": "Gemini 4 Carbon (High)",
+   "category": "exclude_ties",
+   "rating": 1565.6010905934909,
+   "lower": 1552.8434223167192,
+   "upper": 1578.3587588702628,
+   "votes": 3295,
+   "rank": 1
+  },
+  {
+   "model": "gemini-4-neon",
+   "source_model": "Gemini 4 Neon (High)",
+   "category": "exclude_ties",
+   "rating": 1547.0060690520447,
+   "lower": 1535.6770650564456,
+   "upper": 1558.3350730476436,
+   "votes": 4231,
+   "rank": 3
   },
   {
    "model": "claude-fable-5-1",
@@ -1299,6 +1709,16 @@
    "upper": 1522.9458784461835,
    "votes": 55642,
    "rank": 8
+  },
+  {
+   "model": "gemini-4-hydrogen",
+   "source_model": "Gemini 4 Hydrogen (High)",
+   "category": "exclude_ties",
+   "rating": 1517.0680994195443,
+   "lower": 1505.0295533885992,
+   "upper": 1529.1066454504894,
+   "votes": 3553,
+   "rank": 9
   },
   {
    "model": "claude-opus-4-6",
@@ -1361,6 +1781,16 @@
    "rank": 24
   },
   {
+   "model": "claude-fable-5-2",
+   "source_model": "Claude Fable 5.2 (Max)",
+   "category": "exclude_ties",
+   "rating": 1485.9368477634557,
+   "lower": 1474.1171417258108,
+   "upper": 1497.7565538011006,
+   "votes": 3855,
+   "rank": 27
+  },
+  {
    "model": "kimi-k3",
    "source_model": "Kimi K3 (Max)",
    "category": "exclude_ties",
@@ -1409,6 +1839,16 @@
    "upper": 1469.0922842240852,
    "votes": 47372,
    "rank": 44
+  },
+  {
+   "model": "kimi-k3-1-pro",
+   "source_model": "Kimi K3.1 Pro (Max)",
+   "category": "exclude_ties",
+   "rating": 1459.223696092582,
+   "lower": 1448.347419564149,
+   "upper": 1470.099972621015,
+   "votes": 4896,
+   "rank": 46
   },
   {
    "model": "gpt-5-6-sol",
@@ -1501,6 +1941,36 @@
    "rank": 98
   },
   {
+   "model": "gpt-6-1-terra",
+   "source_model": "GPT-6.1 Terra (Max)",
+   "category": "exclude_ties",
+   "rating": 1416.5466199800032,
+   "lower": 1406.3392599460797,
+   "upper": 1426.7539800139268,
+   "votes": 6161,
+   "rank": 106
+  },
+  {
+   "model": "gpt-6-2-sol",
+   "source_model": "GPT-6.2 Sol (Max)",
+   "category": "exclude_ties",
+   "rating": 1400.8574795076265,
+   "lower": 1384.6609219138306,
+   "upper": 1417.0540371014222,
+   "votes": 1880,
+   "rank": 138
+  },
+  {
+   "model": "gpt-6-2-astra",
+   "source_model": "GPT-6.2 Astra (Max)",
+   "category": "exclude_ties",
+   "rating": 1400.4376176678309,
+   "lower": 1383.734810341669,
+   "upper": 1417.1404249939926,
+   "votes": 1788,
+   "rank": 139
+  },
+  {
    "model": "claude-haiku-4-5",
    "source_model": "Claude Haiku 4.5 (20251001)",
    "category": "exclude_ties",
@@ -1509,6 +1979,26 @@
    "upper": 1379.2042679706171,
    "votes": 114924,
    "rank": 169
+  },
+  {
+   "model": "gemini-4-carbon",
+   "source_model": "Gemini 4 Carbon (High)",
+   "category": "expert",
+   "rating": 1581.30321752415,
+   "lower": 1551.6230104307147,
+   "upper": 1610.9834246175856,
+   "votes": 400,
+   "rank": 1
+  },
+  {
+   "model": "gemini-4-neon",
+   "source_model": "Gemini 4 Neon (High)",
+   "category": "expert",
+   "rating": 1559.6987264624092,
+   "lower": 1530.3969805091176,
+   "upper": 1589.0004724157009,
+   "votes": 423,
+   "rank": 2
   },
   {
    "model": "claude-opus-5-5",
@@ -1529,6 +2019,16 @@
    "upper": 1563.4532256613509,
    "votes": 3670,
    "rank": 5
+  },
+  {
+   "model": "gemini-4-hydrogen",
+   "source_model": "Gemini 4 Hydrogen (High)",
+   "category": "expert",
+   "rating": 1552.609504674655,
+   "lower": 1523.4810651431378,
+   "upper": 1581.7379442061722,
+   "votes": 420,
+   "rank": 6
   },
   {
    "model": "claude-opus-5",
@@ -1621,6 +2121,16 @@
    "rank": 23
   },
   {
+   "model": "claude-fable-5-2",
+   "source_model": "Claude Fable 5.2 (Max)",
+   "category": "expert",
+   "rating": 1510.1394074121943,
+   "lower": 1479.287542536472,
+   "upper": 1540.9912722879164,
+   "votes": 357,
+   "rank": 24
+  },
+  {
    "model": "gpt-5-5",
    "source_model": "GPT-5.5 (High)",
    "category": "expert",
@@ -1691,6 +2201,16 @@
    "rank": 45
   },
   {
+   "model": "kimi-k3-1-pro",
+   "source_model": "Kimi K3.1 Pro (Max)",
+   "category": "expert",
+   "rating": 1488.3065831173972,
+   "lower": 1462.3489178120017,
+   "upper": 1514.2642484227927,
+   "votes": 499,
+   "rank": 46
+  },
+  {
    "model": "claude-sonnet-5",
    "source_model": "Claude Sonnet 5 (High)",
    "category": "expert",
@@ -1709,6 +2229,16 @@
    "upper": 1489.6942193923342,
    "votes": 13466,
    "rank": 51
+  },
+  {
+   "model": "gpt-6-1-terra",
+   "source_model": "GPT-6.1 Terra (Max)",
+   "category": "expert",
+   "rating": 1478.6817946480362,
+   "lower": 1456.4076557513347,
+   "upper": 1500.9559335447377,
+   "votes": 678,
+   "rank": 55
   },
   {
    "model": "gpt-5-6-luna",
@@ -1761,6 +2291,26 @@
    "rank": 117
   },
   {
+   "model": "gemini-4-neon",
+   "source_model": "Gemini 4 Neon (High)",
+   "category": "french",
+   "rating": 1562.8594966950113,
+   "lower": 1517.3434514531987,
+   "upper": 1608.375541936824,
+   "votes": 183,
+   "rank": 1
+  },
+  {
+   "model": "claude-fable-5-2",
+   "source_model": "Claude Fable 5.2 (Max)",
+   "category": "french",
+   "rating": 1523.5101034071336,
+   "lower": 1478.6827510921016,
+   "upper": 1568.3374557221655,
+   "votes": 188,
+   "rank": 3
+  },
+  {
    "model": "claude-fable-5-1",
    "source_model": "Claude Fable 5.1 (Max)",
    "category": "french",
@@ -1799,6 +2349,16 @@
    "upper": 1530.464170251069,
    "votes": 656,
    "rank": 9
+  },
+  {
+   "model": "gemini-4-hydrogen",
+   "source_model": "Gemini 4 Hydrogen (High)",
+   "category": "french",
+   "rating": 1504.6477064480828,
+   "lower": 1461.4358166253865,
+   "upper": 1547.8595962707786,
+   "votes": 204,
+   "rank": 11
   },
   {
    "model": "gemini-3-6-flash",
@@ -1859,6 +2419,16 @@
    "upper": 1514.0548430027916,
    "votes": 624,
    "rank": 27
+  },
+  {
+   "model": "kimi-k3-1-pro",
+   "source_model": "Kimi K3.1 Pro (Max)",
+   "category": "french",
+   "rating": 1488.9180432901621,
+   "lower": 1454.4001944308748,
+   "upper": 1523.4358921494495,
+   "votes": 298,
+   "rank": 28
   },
   {
    "model": "gemini-3-1-pro",
@@ -1979,6 +2549,16 @@
    "upper": 1467.170542326091,
    "votes": 1079,
    "rank": 93
+  },
+  {
+   "model": "gpt-6-1-terra",
+   "source_model": "GPT-6.1 Terra (Max)",
+   "category": "french",
+   "rating": 1444.7827631865584,
+   "lower": 1408.8251652838485,
+   "upper": 1480.740361089268,
+   "votes": 296,
+   "rank": 100
   },
   {
    "model": "gpt-6-astra",
@@ -2251,6 +2831,26 @@
    "rank": 158
   },
   {
+   "model": "gemini-4-carbon",
+   "source_model": "Gemini 4 Carbon (High)",
+   "category": "hard_prompts",
+   "rating": 1550.6913173213202,
+   "lower": 1538.6385757391838,
+   "upper": 1562.7440589034568,
+   "votes": 2658,
+   "rank": 1
+  },
+  {
+   "model": "gemini-4-neon",
+   "source_model": "Gemini 4 Neon (High)",
+   "category": "hard_prompts",
+   "rating": 1547.0833998289434,
+   "lower": 1536.4969792057989,
+   "upper": 1557.669820452088,
+   "votes": 3508,
+   "rank": 2
+  },
+  {
    "model": "claude-opus-5-5",
    "source_model": "Claude Opus 5.5 (High)",
    "category": "hard_prompts",
@@ -2309,6 +2909,16 @@
    "upper": 1526.3737480484426,
    "votes": 47677,
    "rank": 9
+  },
+  {
+   "model": "gemini-4-hydrogen",
+   "source_model": "Gemini 4 Hydrogen (High)",
+   "category": "hard_prompts",
+   "rating": 1517.2406233130407,
+   "lower": 1506.0681141926946,
+   "upper": 1528.413132433387,
+   "votes": 3009,
+   "rank": 10
   },
   {
    "model": "gemini-3-8-flash",
@@ -2391,6 +3001,16 @@
    "rank": 33
   },
   {
+   "model": "claude-fable-5-2",
+   "source_model": "Claude Fable 5.2 (Max)",
+   "category": "hard_prompts",
+   "rating": 1484.2578406512062,
+   "lower": 1473.087299174997,
+   "upper": 1495.4283821274153,
+   "votes": 3092,
+   "rank": 35
+  },
+  {
    "model": "gpt-5-6-sol",
    "source_model": "GPT-5.6 Sol (xHigh)",
    "category": "hard_prompts",
@@ -2419,6 +3039,16 @@
    "upper": 1477.9777427529848,
    "votes": 42503,
    "rank": 46
+  },
+  {
+   "model": "kimi-k3-1-pro",
+   "source_model": "Kimi K3.1 Pro (Max)",
+   "category": "hard_prompts",
+   "rating": 1468.9605646105458,
+   "lower": 1458.9231257984295,
+   "upper": 1478.998003422662,
+   "votes": 4101,
+   "rank": 51
   },
   {
    "model": "gpt-6-1-sol",
@@ -2481,6 +3111,16 @@
    "rank": 77
   },
   {
+   "model": "gpt-6-1-terra",
+   "source_model": "GPT-6.1 Terra (Max)",
+   "category": "hard_prompts",
+   "rating": 1450.5005824406308,
+   "lower": 1441.0789597288829,
+   "upper": 1459.9222051523786,
+   "votes": 5017,
+   "rank": 79
+  },
+  {
    "model": "gemini-3-5-flash-lite",
    "source_model": "Gemini 3.5 Flash-Lite",
    "category": "hard_prompts",
@@ -2491,6 +3131,16 @@
    "rank": 98
   },
   {
+   "model": "gpt-6-2-astra",
+   "source_model": "GPT-6.2 Astra (Max)",
+   "category": "hard_prompts",
+   "rating": 1424.769633676477,
+   "lower": 1409.0133475794232,
+   "upper": 1440.5259197735309,
+   "votes": 1439,
+   "rank": 130
+  },
+  {
    "model": "claude-haiku-4-5",
    "source_model": "Claude Haiku 4.5 (20251001)",
    "category": "hard_prompts",
@@ -2499,6 +3149,26 @@
    "upper": 1422.829849574912,
    "votes": 94830,
    "rank": 142
+  },
+  {
+   "model": "gpt-6-2-sol",
+   "source_model": "GPT-6.2 Sol (Max)",
+   "category": "hard_prompts",
+   "rating": 1419.1909512724599,
+   "lower": 1404.0894616348883,
+   "upper": 1434.2924409100317,
+   "votes": 1563,
+   "rank": 143
+  },
+  {
+   "model": "gemini-4-carbon",
+   "source_model": "Gemini 4 Carbon (High)",
+   "category": "hard_prompts_english",
+   "rating": 1547.3129678476141,
+   "lower": 1527.5811251016446,
+   "upper": 1567.0448105935834,
+   "votes": 976,
+   "rank": 1
   },
   {
    "model": "claude-opus-5-5",
@@ -2531,6 +3201,16 @@
    "rank": 5
   },
   {
+   "model": "gemini-4-neon",
+   "source_model": "Gemini 4 Neon (High)",
+   "category": "hard_prompts_english",
+   "rating": 1524.3641254197578,
+   "lower": 1507.0403680458485,
+   "upper": 1541.687882793667,
+   "votes": 1217,
+   "rank": 6
+  },
+  {
    "model": "claude-fable-5-1",
    "source_model": "Claude Fable 5.1 (Max)",
    "category": "hard_prompts_english",
@@ -2559,6 +3239,16 @@
    "upper": 1524.1629918371964,
    "votes": 19174,
    "rank": 10
+  },
+  {
+   "model": "gemini-4-hydrogen",
+   "source_model": "Gemini 4 Hydrogen (High)",
+   "category": "hard_prompts_english",
+   "rating": 1511.2121119563344,
+   "lower": 1492.6272039300798,
+   "upper": 1529.7970199825888,
+   "votes": 1067,
+   "rank": 12
   },
   {
    "model": "gemini-3-8-flash",
@@ -2611,6 +3301,16 @@
    "rank": 29
   },
   {
+   "model": "kimi-k3-1-pro",
+   "source_model": "Kimi K3.1 Pro (Max)",
+   "category": "hard_prompts_english",
+   "rating": 1483.6099900066388,
+   "lower": 1466.8085711369495,
+   "upper": 1500.411408876328,
+   "votes": 1302,
+   "rank": 31
+  },
+  {
    "model": "gemini-3-6-flash",
    "source_model": "Gemini 3.6 Flash (High)",
    "category": "hard_prompts_english",
@@ -2629,6 +3329,16 @@
    "upper": 1488.4944120230782,
    "votes": 21581,
    "rank": 34
+  },
+  {
+   "model": "claude-fable-5-2",
+   "source_model": "Claude Fable 5.2 (Max)",
+   "category": "hard_prompts_english",
+   "rating": 1482.8436561482656,
+   "lower": 1464.2593821257647,
+   "upper": 1501.4279301707666,
+   "votes": 1051,
+   "rank": 36
   },
   {
    "model": "gpt-5-5",
@@ -2731,6 +3441,16 @@
    "rank": 73
   },
   {
+   "model": "gpt-6-1-terra",
+   "source_model": "GPT-6.1 Terra (Max)",
+   "category": "hard_prompts_english",
+   "rating": 1452.4361276824243,
+   "lower": 1437.9326094114415,
+   "upper": 1466.9396459534073,
+   "votes": 1802,
+   "rank": 82
+  },
+  {
    "model": "gemini-3-5-flash-lite",
    "source_model": "Gemini 3.5 Flash-Lite",
    "category": "hard_prompts_english",
@@ -2749,6 +3469,36 @@
    "upper": 1438.914479298299,
    "votes": 41615,
    "rank": 123
+  },
+  {
+   "model": "gpt-6-2-astra",
+   "source_model": "GPT-6.2 Astra (Max)",
+   "category": "hard_prompts_english",
+   "rating": 1425.6573887435788,
+   "lower": 1397.7595801710327,
+   "upper": 1453.555197316125,
+   "votes": 447,
+   "rank": 141
+  },
+  {
+   "model": "gpt-6-2-sol",
+   "source_model": "GPT-6.2 Sol (Max)",
+   "category": "hard_prompts_english",
+   "rating": 1412.6261302435976,
+   "lower": 1386.853625822637,
+   "upper": 1438.3986346645584,
+   "votes": 517,
+   "rank": 162
+  },
+  {
+   "model": "gemini-4-carbon",
+   "source_model": "Gemini 4 Carbon (High)",
+   "category": "industry_business_and_management_and_financial_operations",
+   "rating": 1520.1920853051247,
+   "lower": 1497.8937627935406,
+   "upper": 1542.4904078167092,
+   "votes": 710,
+   "rank": 1
   },
   {
    "model": "claude-opus-5",
@@ -2811,6 +3561,16 @@
    "rank": 8
   },
   {
+   "model": "gemini-4-neon",
+   "source_model": "Gemini 4 Neon (High)",
+   "category": "industry_business_and_management_and_financial_operations",
+   "rating": 1492.958877680042,
+   "lower": 1472.880528920019,
+   "upper": 1513.0372264400644,
+   "votes": 891,
+   "rank": 9
+  },
+  {
    "model": "gemini-3-8-flash",
    "source_model": "Gemini 3.8 Flash (High)",
    "category": "industry_business_and_management_and_financial_operations",
@@ -2821,6 +3581,16 @@
    "rank": 13
   },
   {
+   "model": "gemini-4-hydrogen",
+   "source_model": "Gemini 4 Hydrogen (High)",
+   "category": "industry_business_and_management_and_financial_operations",
+   "rating": 1482.4332948658284,
+   "lower": 1461.5288805464666,
+   "upper": 1503.3377091851903,
+   "votes": 816,
+   "rank": 14
+  },
+  {
    "model": "gemini-3-7-flash",
    "source_model": "Gemini 3.7 Flash (High)",
    "category": "industry_business_and_management_and_financial_operations",
@@ -2829,6 +3599,16 @@
    "upper": 1489.6293752783004,
    "votes": 5969,
    "rank": 15
+  },
+  {
+   "model": "kimi-k3-1-pro",
+   "source_model": "Kimi K3.1 Pro (Max)",
+   "category": "industry_business_and_management_and_financial_operations",
+   "rating": 1478.8292102524647,
+   "lower": 1460.4329023207856,
+   "upper": 1497.2255181841433,
+   "votes": 1048,
+   "rank": 19
   },
   {
    "model": "gpt-5-5",
@@ -2951,6 +3731,16 @@
    "rank": 57
   },
   {
+   "model": "claude-fable-5-2",
+   "source_model": "Claude Fable 5.2 (Max)",
+   "category": "industry_business_and_management_and_financial_operations",
+   "rating": 1442.6768283696288,
+   "lower": 1423.6478989378938,
+   "upper": 1461.7057578013632,
+   "votes": 958,
+   "rank": 58
+  },
+  {
    "model": "deepseek-v4-pro",
    "source_model": "DeepSeek-V4-Pro (High, 20260813)",
    "category": "industry_business_and_management_and_financial_operations",
@@ -2991,6 +3781,26 @@
    "rank": 104
   },
   {
+   "model": "gpt-6-2-astra",
+   "source_model": "GPT-6.2 Astra (Max)",
+   "category": "industry_business_and_management_and_financial_operations",
+   "rating": 1412.9442958248774,
+   "lower": 1383.160889403303,
+   "upper": 1442.7277022464514,
+   "votes": 379,
+   "rank": 124
+  },
+  {
+   "model": "gpt-6-1-terra",
+   "source_model": "GPT-6.1 Terra (Max)",
+   "category": "industry_business_and_management_and_financial_operations",
+   "rating": 1411.7437435830689,
+   "lower": 1395.2305721618768,
+   "upper": 1428.2569150042605,
+   "votes": 1391,
+   "rank": 127
+  },
+  {
    "model": "claude-haiku-4-5",
    "source_model": "Claude Haiku 4.5 (20251001)",
    "category": "industry_business_and_management_and_financial_operations",
@@ -2999,6 +3809,26 @@
    "upper": 1403.7299264825115,
    "votes": 29559,
    "rank": 146
+  },
+  {
+   "model": "gpt-6-2-sol",
+   "source_model": "GPT-6.2 Sol (Max)",
+   "category": "industry_business_and_management_and_financial_operations",
+   "rating": 1382.7060216213367,
+   "lower": 1354.2029304291036,
+   "upper": 1411.2091128135694,
+   "votes": 411,
+   "rank": 175
+  },
+  {
+   "model": "gemini-4-carbon",
+   "source_model": "Gemini 4 Carbon (High)",
+   "category": "industry_entertainment_and_sports_and_media",
+   "rating": 1526.6664353067813,
+   "lower": 1508.4248775552094,
+   "upper": 1544.9079930583534,
+   "votes": 1170,
+   "rank": 1
   },
   {
    "model": "claude-opus-5-5",
@@ -3011,6 +3841,16 @@
    "rank": 3
   },
   {
+   "model": "gemini-4-hydrogen",
+   "source_model": "Gemini 4 Hydrogen (High)",
+   "category": "industry_entertainment_and_sports_and_media",
+   "rating": 1499.4601058468747,
+   "lower": 1481.4617252908615,
+   "upper": 1517.4584864028877,
+   "votes": 1199,
+   "rank": 4
+  },
+  {
    "model": "claude-fable-5-1",
    "source_model": "Claude Fable 5.1 (Max)",
    "category": "industry_entertainment_and_sports_and_media",
@@ -3021,6 +3861,16 @@
    "rank": 5
   },
   {
+   "model": "gemini-4-neon",
+   "source_model": "Gemini 4 Neon (High)",
+   "category": "industry_entertainment_and_sports_and_media",
+   "rating": 1495.4220038490232,
+   "lower": 1478.75607745223,
+   "upper": 1512.0879302458163,
+   "votes": 1423,
+   "rank": 6
+  },
+  {
    "model": "claude-opus-4-6",
    "source_model": "Claude Opus 4.6 (High)",
    "category": "industry_entertainment_and_sports_and_media",
@@ -3029,6 +3879,16 @@
    "upper": 1497.469383054955,
    "votes": 19074,
    "rank": 7
+  },
+  {
+   "model": "claude-fable-5-2",
+   "source_model": "Claude Fable 5.2 (Max)",
+   "category": "industry_entertainment_and_sports_and_media",
+   "rating": 1486.2206373101008,
+   "lower": 1468.9515465978648,
+   "upper": 1503.489728022337,
+   "votes": 1269,
+   "rank": 8
   },
   {
    "model": "gemini-3-8-flash",
@@ -3099,6 +3959,16 @@
    "upper": 1463.8520487156984,
    "votes": 9040,
    "rank": 26
+  },
+  {
+   "model": "kimi-k3-1-pro",
+   "source_model": "Kimi K3.1 Pro (Max)",
+   "category": "industry_entertainment_and_sports_and_media",
+   "rating": 1454.9087475493363,
+   "lower": 1439.4668872790494,
+   "upper": 1470.350607819623,
+   "votes": 1617,
+   "rank": 27
   },
   {
    "model": "claude-sonnet-5-5",
@@ -3221,6 +4091,26 @@
    "rank": 74
   },
   {
+   "model": "gpt-6-1-terra",
+   "source_model": "GPT-6.1 Terra (Max)",
+   "category": "industry_entertainment_and_sports_and_media",
+   "rating": 1414.455499029825,
+   "lower": 1400.4187174116041,
+   "upper": 1428.492280648046,
+   "votes": 2042,
+   "rank": 76
+  },
+  {
+   "model": "gpt-6-2-astra",
+   "source_model": "GPT-6.2 Astra (Max)",
+   "category": "industry_entertainment_and_sports_and_media",
+   "rating": 1413.440729495315,
+   "lower": 1387.3160021410902,
+   "upper": 1439.5654568495402,
+   "votes": 542,
+   "rank": 78
+  },
+  {
    "model": "claude-sonnet-5",
    "source_model": "Claude Sonnet 5 (High)",
    "category": "industry_entertainment_and_sports_and_media",
@@ -3229,6 +4119,16 @@
    "upper": 1416.466982313249,
    "votes": 13628,
    "rank": 82
+  },
+  {
+   "model": "gpt-6-2-sol",
+   "source_model": "GPT-6.2 Sol (Max)",
+   "category": "industry_entertainment_and_sports_and_media",
+   "rating": 1407.7807330650721,
+   "lower": 1384.0955507363037,
+   "upper": 1431.4659153938403,
+   "votes": 623,
+   "rank": 85
   },
   {
    "model": "gpt-5-6-luna",
@@ -3249,6 +4149,26 @@
    "upper": 1373.2709304439213,
    "votes": 33398,
    "rank": 149
+  },
+  {
+   "model": "gemini-4-carbon",
+   "source_model": "Gemini 4 Carbon (High)",
+   "category": "industry_legal_and_government",
+   "rating": 1543.060437953934,
+   "lower": 1506.9714310150791,
+   "upper": 1579.149444892789,
+   "votes": 283,
+   "rank": 1
+  },
+  {
+   "model": "gemini-4-hydrogen",
+   "source_model": "Gemini 4 Hydrogen (High)",
+   "category": "industry_legal_and_government",
+   "rating": 1527.2755009287775,
+   "lower": 1495.8524156702551,
+   "upper": 1558.6985861873,
+   "votes": 380,
+   "rank": 3
   },
   {
    "model": "claude-opus-5",
@@ -3289,6 +4209,16 @@
    "upper": 1529.87066591747,
    "votes": 6199,
    "rank": 7
+  },
+  {
+   "model": "gemini-4-neon",
+   "source_model": "Gemini 4 Neon (High)",
+   "category": "industry_legal_and_government",
+   "rating": 1518.145996416857,
+   "lower": 1488.9194296143542,
+   "upper": 1547.37256321936,
+   "votes": 424,
+   "rank": 8
   },
   {
    "model": "claude-opus-4-6",
@@ -3431,6 +4361,26 @@
    "rank": 43
   },
   {
+   "model": "kimi-k3-1-pro",
+   "source_model": "Kimi K3.1 Pro (Max)",
+   "category": "industry_legal_and_government",
+   "rating": 1472.9183015497233,
+   "lower": 1445.221855904541,
+   "upper": 1500.6147471949057,
+   "votes": 470,
+   "rank": 45
+  },
+  {
+   "model": "claude-fable-5-2",
+   "source_model": "Claude Fable 5.2 (Max)",
+   "category": "industry_legal_and_government",
+   "rating": 1472.3174837701856,
+   "lower": 1443.4503415507806,
+   "upper": 1501.1846259895906,
+   "votes": 422,
+   "rank": 46
+  },
+  {
    "model": "deepseek-v4-pro",
    "source_model": "DeepSeek-V4-Pro",
    "category": "industry_legal_and_government",
@@ -3449,6 +4399,16 @@
    "upper": 1482.650065876641,
    "votes": 803,
    "rank": 55
+  },
+  {
+   "model": "gpt-6-1-terra",
+   "source_model": "GPT-6.1 Terra (Max)",
+   "category": "industry_legal_and_government",
+   "rating": 1454.5405432493246,
+   "lower": 1430.2600217111128,
+   "upper": 1478.8210647875367,
+   "votes": 604,
+   "rank": 63
   },
   {
    "model": "gpt-6-astra",
@@ -3491,6 +4451,16 @@
    "rank": 109
   },
   {
+   "model": "gpt-6-2-astra",
+   "source_model": "GPT-6.2 Astra (Max)",
+   "category": "industry_legal_and_government",
+   "rating": 1415.222239075054,
+   "lower": 1374.3430492719106,
+   "upper": 1456.1014288781976,
+   "votes": 183,
+   "rank": 147
+  },
+  {
    "model": "claude-haiku-4-5",
    "source_model": "Claude Haiku 4.5 (20251001)",
    "category": "industry_legal_and_government",
@@ -3501,6 +4471,16 @@
    "rank": 162
   },
   {
+   "model": "gemini-4-neon",
+   "source_model": "Gemini 4 Neon (High)",
+   "category": "industry_life_and_physical_and_social_science",
+   "rating": 1549.273991724039,
+   "lower": 1528.0328270202701,
+   "upper": 1570.5151564278078,
+   "votes": 827,
+   "rank": 1
+  },
+  {
    "model": "claude-fable-5-1",
    "source_model": "Claude Fable 5.1 (Max)",
    "category": "industry_life_and_physical_and_social_science",
@@ -3509,6 +4489,16 @@
    "upper": 1547.4930449131111,
    "votes": 3682,
    "rank": 3
+  },
+  {
+   "model": "gemini-4-carbon",
+   "source_model": "Gemini 4 Carbon (High)",
+   "category": "industry_life_and_physical_and_social_science",
+   "rating": 1536.7873801629767,
+   "lower": 1512.7893117851347,
+   "upper": 1560.7854485408186,
+   "votes": 634,
+   "rank": 4
   },
   {
    "model": "claude-opus-5",
@@ -3561,6 +4551,16 @@
    "rank": 9
   },
   {
+   "model": "gemini-4-hydrogen",
+   "source_model": "Gemini 4 Hydrogen (High)",
+   "category": "industry_life_and_physical_and_social_science",
+   "rating": 1516.4048942771342,
+   "lower": 1494.1558326977047,
+   "upper": 1538.653955856564,
+   "votes": 728,
+   "rank": 10
+  },
+  {
    "model": "gemini-3-7-flash",
    "source_model": "Gemini 3.7 Flash (High)",
    "category": "industry_life_and_physical_and_social_science",
@@ -3599,6 +4599,16 @@
    "upper": 1501.1856864717886,
    "votes": 21869,
    "rank": 24
+  },
+  {
+   "model": "claude-fable-5-2",
+   "source_model": "Claude Fable 5.2 (Max)",
+   "category": "industry_life_and_physical_and_social_science",
+   "rating": 1494.1040917642254,
+   "lower": 1473.862982419682,
+   "upper": 1514.3452011087686,
+   "votes": 856,
+   "rank": 26
   },
   {
    "model": "gemini-3-6-flash",
@@ -3659,6 +4669,16 @@
    "upper": 1477.1438845173454,
    "votes": 10482,
    "rank": 46
+  },
+  {
+   "model": "kimi-k3-1-pro",
+   "source_model": "Kimi K3.1 Pro (Max)",
+   "category": "industry_life_and_physical_and_social_science",
+   "rating": 1468.0698669268227,
+   "lower": 1449.2524241256567,
+   "upper": 1486.8873097279886,
+   "votes": 1000,
+   "rank": 48
   },
   {
    "model": "deepseek-v4-pro",
@@ -3741,6 +4761,36 @@
    "rank": 121
   },
   {
+   "model": "gpt-6-2-sol",
+   "source_model": "GPT-6.2 Sol (Max)",
+   "category": "industry_life_and_physical_and_social_science",
+   "rating": 1432.4475883268558,
+   "lower": 1402.997999689733,
+   "upper": 1461.8971769639786,
+   "votes": 390,
+   "rank": 127
+  },
+  {
+   "model": "gpt-6-1-terra",
+   "source_model": "GPT-6.1 Terra (Max)",
+   "category": "industry_life_and_physical_and_social_science",
+   "rating": 1422.345952432845,
+   "lower": 1405.4087740767272,
+   "upper": 1439.283130788963,
+   "votes": 1308,
+   "rank": 145
+  },
+  {
+   "model": "gpt-6-2-astra",
+   "source_model": "GPT-6.2 Astra (Max)",
+   "category": "industry_life_and_physical_and_social_science",
+   "rating": 1414.5567149580734,
+   "lower": 1384.9010217970974,
+   "upper": 1444.2124081190493,
+   "votes": 384,
+   "rank": 161
+  },
+  {
    "model": "claude-haiku-4-5",
    "source_model": "Claude Haiku 4.5 (20251001)",
    "category": "industry_life_and_physical_and_social_science",
@@ -3749,6 +4799,16 @@
    "upper": 1410.2435699254863,
    "votes": 24960,
    "rank": 171
+  },
+  {
+   "model": "gemini-4-neon",
+   "source_model": "Gemini 4 Neon (High)",
+   "category": "industry_mathematical",
+   "rating": 1566.3828137659316,
+   "lower": 1528.7069822912022,
+   "upper": 1604.0586452406608,
+   "votes": 247,
+   "rank": 1
   },
   {
    "model": "claude-opus-5",
@@ -3779,6 +4839,26 @@
    "upper": 1553.066585210228,
    "votes": 1964,
    "rank": 5
+  },
+  {
+   "model": "gemini-4-hydrogen",
+   "source_model": "Gemini 4 Hydrogen (High)",
+   "category": "industry_mathematical",
+   "rating": 1537.1722587973784,
+   "lower": 1500.055214328138,
+   "upper": 1574.289303266619,
+   "votes": 257,
+   "rank": 6
+  },
+  {
+   "model": "gemini-4-carbon",
+   "source_model": "Gemini 4 Carbon (High)",
+   "category": "industry_mathematical",
+   "rating": 1537.1427390778615,
+   "lower": 1497.5001374937167,
+   "upper": 1576.7853406620063,
+   "votes": 237,
+   "rank": 7
   },
   {
    "model": "claude-opus-5-5",
@@ -3839,6 +4919,16 @@
    "upper": 1519.5721449097666,
    "votes": 2288,
    "rank": 17
+  },
+  {
+   "model": "claude-fable-5-2",
+   "source_model": "Claude Fable 5.2 (Max)",
+   "category": "industry_mathematical",
+   "rating": 1503.919085101774,
+   "lower": 1467.4614331979103,
+   "upper": 1540.3767370056378,
+   "votes": 243,
+   "rank": 19
   },
   {
    "model": "gemini-3-7-flash",
@@ -3951,6 +5041,16 @@
    "rank": 47
   },
   {
+   "model": "gpt-6-1-terra",
+   "source_model": "GPT-6.1 Terra (Max)",
+   "category": "industry_mathematical",
+   "rating": 1476.5823173110243,
+   "lower": 1448.1438709620386,
+   "upper": 1505.0207636600098,
+   "votes": 442,
+   "rank": 48
+  },
+  {
    "model": "gpt-5-6-luna",
    "source_model": "GPT-5.6 Luna (xHigh)",
    "category": "industry_mathematical",
@@ -3969,6 +5069,16 @@
    "upper": 1466.2134918190175,
    "votes": 3191,
    "rank": 75
+  },
+  {
+   "model": "kimi-k3-1-pro",
+   "source_model": "Kimi K3.1 Pro (Max)",
+   "category": "industry_mathematical",
+   "rating": 1447.6245488357727,
+   "lower": 1414.7730994350227,
+   "upper": 1480.4759982365224,
+   "votes": 322,
+   "rank": 85
   },
   {
    "model": "deepseek-v4-pro",
@@ -3999,6 +5109,26 @@
    "upper": 1436.8409257017636,
    "votes": 8144,
    "rank": 126
+  },
+  {
+   "model": "gemini-4-carbon",
+   "source_model": "Gemini 4 Carbon (High)",
+   "category": "industry_medicine_and_healthcare",
+   "rating": 1534.1472166183053,
+   "lower": 1496.993394991099,
+   "upper": 1571.3010382455118,
+   "votes": 273,
+   "rank": 2
+  },
+  {
+   "model": "gemini-4-neon",
+   "source_model": "Gemini 4 Neon (High)",
+   "category": "industry_medicine_and_healthcare",
+   "rating": 1533.67394535697,
+   "lower": 1499.6887295713436,
+   "upper": 1567.6591611425965,
+   "votes": 323,
+   "rank": 3
   },
   {
    "model": "claude-fable-5-1",
@@ -4101,6 +5231,16 @@
    "rank": 24
   },
   {
+   "model": "gemini-4-hydrogen",
+   "source_model": "Gemini 4 Hydrogen (High)",
+   "category": "industry_medicine_and_healthcare",
+   "rating": 1479.973524423841,
+   "lower": 1446.2235121851577,
+   "upper": 1513.723536662524,
+   "votes": 305,
+   "rank": 31
+  },
+  {
    "model": "gemini-3-6-flash",
    "source_model": "Gemini 3.6 Flash (High)",
    "category": "industry_medicine_and_healthcare",
@@ -4139,6 +5279,16 @@
    "upper": 1474.3667621807479,
    "votes": 3982,
    "rank": 50
+  },
+  {
+   "model": "claude-fable-5-2",
+   "source_model": "Claude Fable 5.2 (Max)",
+   "category": "industry_medicine_and_healthcare",
+   "rating": 1463.781308573064,
+   "lower": 1432.615714701611,
+   "upper": 1494.946902444517,
+   "votes": 353,
+   "rank": 51
   },
   {
    "model": "claude-sonnet-5-5",
@@ -4231,6 +5381,16 @@
    "rank": 128
   },
   {
+   "model": "kimi-k3-1-pro",
+   "source_model": "Kimi K3.1 Pro (Max)",
+   "category": "industry_medicine_and_healthcare",
+   "rating": 1418.3802788000799,
+   "lower": 1388.0823044349677,
+   "upper": 1448.678253165192,
+   "votes": 382,
+   "rank": 136
+  },
+  {
    "model": "gpt-5-6-luna",
    "source_model": "GPT-5.6 Luna (xHigh)",
    "category": "industry_medicine_and_healthcare",
@@ -4241,6 +5401,16 @@
    "rank": 162
   },
   {
+   "model": "gpt-6-1-terra",
+   "source_model": "GPT-6.1 Terra (Max)",
+   "category": "industry_medicine_and_healthcare",
+   "rating": 1396.8271143470686,
+   "lower": 1371.0655939969156,
+   "upper": 1422.5886346972216,
+   "votes": 524,
+   "rank": 164
+  },
+  {
    "model": "claude-haiku-4-5",
    "source_model": "Claude Haiku 4.5 (20251001)",
    "category": "industry_medicine_and_healthcare",
@@ -4249,6 +5419,26 @@
    "upper": 1400.4912730714054,
    "votes": 10360,
    "rank": 169
+  },
+  {
+   "model": "gemini-4-carbon",
+   "source_model": "Gemini 4 Carbon (High)",
+   "category": "industry_software_and_it_services",
+   "rating": 1552.3391615886487,
+   "lower": 1537.0129137416209,
+   "upper": 1567.6654094356766,
+   "votes": 1574,
+   "rank": 1
+  },
+  {
+   "model": "gemini-4-neon",
+   "source_model": "Gemini 4 Neon (High)",
+   "category": "industry_software_and_it_services",
+   "rating": 1541.6427188466719,
+   "lower": 1527.847518184921,
+   "upper": 1555.437919508423,
+   "votes": 1944,
+   "rank": 2
   },
   {
    "model": "claude-opus-5-5",
@@ -4309,6 +5499,16 @@
    "upper": 1532.3971408080824,
    "votes": 7228,
    "rank": 11
+  },
+  {
+   "model": "gemini-4-hydrogen",
+   "source_model": "Gemini 4 Hydrogen (High)",
+   "category": "industry_software_and_it_services",
+   "rating": 1511.4383392572342,
+   "lower": 1496.5658790357395,
+   "upper": 1526.3107994787292,
+   "votes": 1595,
+   "rank": 14
   },
   {
    "model": "gemini-3-8-flash",
@@ -4391,6 +5591,16 @@
    "rank": 37
   },
   {
+   "model": "kimi-k3-1-pro",
+   "source_model": "Kimi K3.1 Pro (Max)",
+   "category": "industry_software_and_it_services",
+   "rating": 1486.6377394945355,
+   "lower": 1474.0442056941624,
+   "upper": 1499.2312732949085,
+   "votes": 2342,
+   "rank": 40
+  },
+  {
    "model": "gpt-5-5",
    "source_model": "GPT-5.5",
    "category": "industry_software_and_it_services",
@@ -4409,6 +5619,16 @@
    "upper": 1489.952080744712,
    "votes": 51550,
    "rank": 44
+  },
+  {
+   "model": "claude-fable-5-2",
+   "source_model": "Claude Fable 5.2 (Max)",
+   "category": "industry_software_and_it_services",
+   "rating": 1483.612563130234,
+   "lower": 1468.757815970447,
+   "upper": 1498.4673102900215,
+   "votes": 1598,
+   "rank": 47
   },
   {
    "model": "claude-opus-4-8",
@@ -4471,6 +5691,16 @@
    "rank": 75
   },
   {
+   "model": "gpt-6-1-terra",
+   "source_model": "GPT-6.1 Terra (Max)",
+   "category": "industry_software_and_it_services",
+   "rating": 1462.2457765785318,
+   "lower": 1450.4591724753227,
+   "upper": 1474.0323806817412,
+   "votes": 2895,
+   "rank": 79
+  },
+  {
    "model": "deepseek-v4-pro",
    "source_model": "DeepSeek-V4-Pro (High, 20260813)",
    "category": "industry_software_and_it_services",
@@ -4491,6 +5721,16 @@
    "rank": 107
   },
   {
+   "model": "gpt-6-2-astra",
+   "source_model": "GPT-6.2 Astra (Max)",
+   "category": "industry_software_and_it_services",
+   "rating": 1443.0333822157686,
+   "lower": 1422.130626490962,
+   "upper": 1463.9361379405755,
+   "votes": 802,
+   "rank": 122
+  },
+  {
    "model": "claude-haiku-4-5",
    "source_model": "Claude Haiku 4.5 (20251001)",
    "category": "industry_software_and_it_services",
@@ -4501,6 +5741,26 @@
    "rank": 129
   },
   {
+   "model": "gpt-6-2-sol",
+   "source_model": "GPT-6.2 Sol (Max)",
+   "category": "industry_software_and_it_services",
+   "rating": 1433.6825370963893,
+   "lower": 1414.3678647424597,
+   "upper": 1452.9972094503187,
+   "votes": 917,
+   "rank": 142
+  },
+  {
+   "model": "gemini-4-carbon",
+   "source_model": "Gemini 4 Carbon (High)",
+   "category": "industry_writing_and_literature_and_language",
+   "rating": 1540.7957488343948,
+   "lower": 1522.984036751172,
+   "upper": 1558.6074609176176,
+   "votes": 1258,
+   "rank": 1
+  },
+  {
    "model": "claude-opus-5-5",
    "source_model": "Claude Opus 5.5 (High)",
    "category": "industry_writing_and_literature_and_language",
@@ -4509,6 +5769,16 @@
    "upper": 1537.4120039980985,
    "votes": 5612,
    "rank": 3
+  },
+  {
+   "model": "gemini-4-neon",
+   "source_model": "Gemini 4 Neon (High)",
+   "category": "industry_writing_and_literature_and_language",
+   "rating": 1517.4900113258436,
+   "lower": 1501.917689886451,
+   "upper": 1533.0623327652363,
+   "votes": 1635,
+   "rank": 4
   },
   {
    "model": "claude-fable-5-1",
@@ -4531,6 +5801,16 @@
    "rank": 7
   },
   {
+   "model": "gemini-4-hydrogen",
+   "source_model": "Gemini 4 Hydrogen (High)",
+   "category": "industry_writing_and_literature_and_language",
+   "rating": 1498.9456875337778,
+   "lower": 1482.4396902771646,
+   "upper": 1515.4516847903908,
+   "votes": 1426,
+   "rank": 8
+  },
+  {
    "model": "claude-opus-5",
    "source_model": "Claude Opus 5 (Max)",
    "category": "industry_writing_and_literature_and_language",
@@ -4539,6 +5819,16 @@
    "upper": 1505.8694866104327,
    "votes": 10346,
    "rank": 9
+  },
+  {
+   "model": "claude-fable-5-2",
+   "source_model": "Claude Fable 5.2 (Max)",
+   "category": "industry_writing_and_literature_and_language",
+   "rating": 1497.5911047524805,
+   "lower": 1482.1438562378555,
+   "upper": 1513.0383532671055,
+   "votes": 1594,
+   "rank": 10
   },
   {
    "model": "gemini-3-8-flash",
@@ -4661,6 +5951,16 @@
    "rank": 34
   },
   {
+   "model": "kimi-k3-1-pro",
+   "source_model": "Kimi K3.1 Pro (Max)",
+   "category": "industry_writing_and_literature_and_language",
+   "rating": 1459.9546835511844,
+   "lower": 1445.781390546191,
+   "upper": 1474.1279765561778,
+   "votes": 1981,
+   "rank": 36
+  },
+  {
    "model": "claude-opus-4-8",
    "source_model": "Claude Opus 4.8",
    "category": "industry_writing_and_literature_and_language",
@@ -4701,6 +6001,16 @@
    "rank": 57
   },
   {
+   "model": "gpt-6-2-astra",
+   "source_model": "GPT-6.2 Astra (Max)",
+   "category": "industry_writing_and_literature_and_language",
+   "rating": 1440.0639373417541,
+   "lower": 1415.9749088351484,
+   "upper": 1464.15296584836,
+   "votes": 620,
+   "rank": 59
+  },
+  {
    "model": "gpt-6-astra",
    "source_model": "GPT-6 Astra (Max)",
    "category": "industry_writing_and_literature_and_language",
@@ -4731,6 +6041,16 @@
    "rank": 74
   },
   {
+   "model": "gpt-6-2-sol",
+   "source_model": "GPT-6.2 Sol (Max)",
+   "category": "industry_writing_and_literature_and_language",
+   "rating": 1420.2848015063425,
+   "lower": 1396.8729686292377,
+   "upper": 1443.6966343834476,
+   "votes": 659,
+   "rank": 83
+  },
+  {
    "model": "gpt-5-6-luna",
    "source_model": "GPT-5.6 Luna (xHigh)",
    "category": "industry_writing_and_literature_and_language",
@@ -4741,6 +6061,16 @@
    "rank": 85
   },
   {
+   "model": "gpt-6-1-terra",
+   "source_model": "GPT-6.1 Terra (Max)",
+   "category": "industry_writing_and_literature_and_language",
+   "rating": 1416.4012906753792,
+   "lower": 1403.3965240246007,
+   "upper": 1429.4060573261577,
+   "votes": 2491,
+   "rank": 89
+  },
+  {
    "model": "claude-haiku-4-5",
    "source_model": "Claude Haiku 4.5 (20251001)",
    "category": "industry_writing_and_literature_and_language",
@@ -4749,6 +6079,26 @@
    "upper": 1389.836031027008,
    "votes": 37767,
    "rank": 146
+  },
+  {
+   "model": "gemini-4-carbon",
+   "source_model": "Gemini 4 Carbon (High)",
+   "category": "instruction_following",
+   "rating": 1539.1328191187438,
+   "lower": 1522.799116623432,
+   "upper": 1555.4665216140556,
+   "votes": 1418,
+   "rank": 1
+  },
+  {
+   "model": "gemini-4-neon",
+   "source_model": "Gemini 4 Neon (High)",
+   "category": "instruction_following",
+   "rating": 1535.2800698074745,
+   "lower": 1521.2002170433736,
+   "upper": 1549.3599225715755,
+   "votes": 1918,
+   "rank": 2
   },
   {
    "model": "claude-opus-5-5",
@@ -4791,6 +6141,16 @@
    "rank": 7
   },
   {
+   "model": "gemini-4-hydrogen",
+   "source_model": "Gemini 4 Hydrogen (High)",
+   "category": "instruction_following",
+   "rating": 1515.0292570631138,
+   "lower": 1500.0485211976306,
+   "upper": 1530.0099929285973,
+   "votes": 1693,
+   "rank": 8
+  },
+  {
    "model": "claude-opus-5",
    "source_model": "Claude Opus 5 (High)",
    "category": "instruction_following",
@@ -4819,6 +6179,16 @@
    "upper": 1499.6934900798767,
    "votes": 26673,
    "rank": 13
+  },
+  {
+   "model": "claude-fable-5-2",
+   "source_model": "Claude Fable 5.2 (Max)",
+   "category": "instruction_following",
+   "rating": 1490.1315306819204,
+   "lower": 1475.1039743844394,
+   "upper": 1505.1590869794013,
+   "votes": 1645,
+   "rank": 16
   },
   {
    "model": "gemini-3-7-flash",
@@ -4889,6 +6259,16 @@
    "upper": 1479.905204546702,
    "votes": 24337,
    "rank": 31
+  },
+  {
+   "model": "kimi-k3-1-pro",
+   "source_model": "Kimi K3.1 Pro (Max)",
+   "category": "instruction_following",
+   "rating": 1473.3577021130639,
+   "lower": 1460.1191529334967,
+   "upper": 1486.596251292631,
+   "votes": 2172,
+   "rank": 32
   },
   {
    "model": "gemini-3-6-flash",
@@ -4971,6 +6351,16 @@
    "rank": 60
   },
   {
+   "model": "gpt-6-1-terra",
+   "source_model": "GPT-6.1 Terra (Max)",
+   "category": "instruction_following",
+   "rating": 1441.5470407928076,
+   "lower": 1429.2632945617652,
+   "upper": 1453.83078702385,
+   "votes": 2641,
+   "rank": 65
+  },
+  {
    "model": "gpt-5-6-luna",
    "source_model": "GPT-5.6 Luna (xHigh)",
    "category": "instruction_following",
@@ -4979,6 +6369,26 @@
    "upper": 1442.615431419107,
    "votes": 14349,
    "rank": 69
+  },
+  {
+   "model": "gpt-6-2-sol",
+   "source_model": "GPT-6.2 Sol (Max)",
+   "category": "instruction_following",
+   "rating": 1434.1203080577957,
+   "lower": 1414.1557125324757,
+   "upper": 1454.0849035831156,
+   "votes": 865,
+   "rank": 74
+  },
+  {
+   "model": "gpt-6-2-astra",
+   "source_model": "GPT-6.2 Astra (Max)",
+   "category": "instruction_following",
+   "rating": 1423.0350924770514,
+   "lower": 1402.2775018171542,
+   "upper": 1443.7926831369489,
+   "votes": 791,
+   "rank": 90
   },
   {
    "model": "gemini-3-5-flash-lite",
@@ -5481,6 +6891,26 @@
    "rank": 147
   },
   {
+   "model": "gemini-4-carbon",
+   "source_model": "Gemini 4 Carbon (High)",
+   "category": "longer_query",
+   "rating": 1548.9631050833389,
+   "lower": 1534.3318170945538,
+   "upper": 1563.594393072124,
+   "votes": 1856,
+   "rank": 1
+  },
+  {
+   "model": "gemini-4-neon",
+   "source_model": "Gemini 4 Neon (High)",
+   "category": "longer_query",
+   "rating": 1532.7607887529857,
+   "lower": 1519.6619892640613,
+   "upper": 1545.8595882419102,
+   "votes": 2348,
+   "rank": 3
+  },
+  {
    "model": "claude-opus-5-5",
    "source_model": "Claude Opus 5.5 (High)",
    "category": "longer_query",
@@ -5499,6 +6929,16 @@
    "upper": 1531.8144233137195,
    "votes": 9225,
    "rank": 5
+  },
+  {
+   "model": "gemini-4-hydrogen",
+   "source_model": "Gemini 4 Hydrogen (High)",
+   "category": "longer_query",
+   "rating": 1520.8071625318387,
+   "lower": 1507.1607043767276,
+   "upper": 1534.4536206869498,
+   "votes": 2067,
+   "rank": 6
   },
   {
    "model": "claude-opus-4-6",
@@ -5549,6 +6989,16 @@
    "upper": 1512.9617997880734,
    "votes": 33487,
    "rank": 12
+  },
+  {
+   "model": "claude-fable-5-2",
+   "source_model": "Claude Fable 5.2 (Max)",
+   "category": "longer_query",
+   "rating": 1498.9136296173974,
+   "lower": 1485.1694982889815,
+   "upper": 1512.6577609458134,
+   "votes": 2038,
+   "rank": 17
   },
   {
    "model": "gemini-3-7-flash",
@@ -5651,6 +7101,16 @@
    "rank": 42
   },
   {
+   "model": "kimi-k3-1-pro",
+   "source_model": "Kimi K3.1 Pro (Max)",
+   "category": "longer_query",
+   "rating": 1463.6452274811834,
+   "lower": 1451.4109070955913,
+   "upper": 1475.8795478667753,
+   "votes": 2731,
+   "rank": 50
+  },
+  {
    "model": "claude-sonnet-5",
    "source_model": "Claude Sonnet 5 (High)",
    "category": "longer_query",
@@ -5701,6 +7161,16 @@
    "rank": 60
   },
   {
+   "model": "gpt-6-1-terra",
+   "source_model": "GPT-6.1 Terra (Max)",
+   "category": "longer_query",
+   "rating": 1445.3577055694668,
+   "lower": 1434.178772654328,
+   "upper": 1456.5366384846056,
+   "votes": 3471,
+   "rank": 74
+  },
+  {
    "model": "gpt-5-6-luna",
    "source_model": "GPT-5.6 Luna (xHigh)",
    "category": "longer_query",
@@ -5721,6 +7191,26 @@
    "rank": 92
   },
   {
+   "model": "gpt-6-2-astra",
+   "source_model": "GPT-6.2 Astra (Max)",
+   "category": "longer_query",
+   "rating": 1431.2944203327963,
+   "lower": 1411.9285139233673,
+   "upper": 1450.6603267422256,
+   "votes": 977,
+   "rank": 95
+  },
+  {
+   "model": "gpt-6-2-sol",
+   "source_model": "GPT-6.2 Sol (Max)",
+   "category": "longer_query",
+   "rating": 1427.4035513206616,
+   "lower": 1408.7834229885323,
+   "upper": 1446.0236796527909,
+   "votes": 1047,
+   "rank": 102
+  },
+  {
    "model": "claude-haiku-4-5",
    "source_model": "Claude Haiku 4.5 (20251001)",
    "category": "longer_query",
@@ -5729,6 +7219,16 @@
    "upper": 1429.842711720274,
    "votes": 58296,
    "rank": 107
+  },
+  {
+   "model": "gemini-4-neon",
+   "source_model": "Gemini 4 Neon (High)",
+   "category": "math",
+   "rating": 1547.6344398289893,
+   "lower": 1507.5300750564136,
+   "upper": 1587.738804601565,
+   "votes": 212,
+   "rank": 1
   },
   {
    "model": "claude-fable-5-1",
@@ -5791,6 +7291,16 @@
    "rank": 8
   },
   {
+   "model": "gemini-4-hydrogen",
+   "source_model": "Gemini 4 Hydrogen (High)",
+   "category": "math",
+   "rating": 1515.0729681740563,
+   "lower": 1477.4429643790975,
+   "upper": 1552.7029719690152,
+   "votes": 245,
+   "rank": 10
+  },
+  {
    "model": "claude-opus-4-6",
    "source_model": "Claude Opus 4.6",
    "category": "math",
@@ -5839,6 +7349,16 @@
    "upper": 1515.2717885043332,
    "votes": 773,
    "rank": 22
+  },
+  {
+   "model": "claude-fable-5-2",
+   "source_model": "Claude Fable 5.2 (Max)",
+   "category": "math",
+   "rating": 1490.6842313379796,
+   "lower": 1454.1062406885692,
+   "upper": 1527.2622219873897,
+   "votes": 245,
+   "rank": 24
   },
   {
    "model": "gpt-5-5",
@@ -5921,6 +7441,16 @@
    "rank": 52
   },
   {
+   "model": "kimi-k3-1-pro",
+   "source_model": "Kimi K3.1 Pro (Max)",
+   "category": "math",
+   "rating": 1458.3741074873083,
+   "lower": 1425.2127735600836,
+   "upper": 1491.535441414533,
+   "votes": 300,
+   "rank": 64
+  },
+  {
    "model": "gpt-5-6-luna",
    "source_model": "GPT-5.6 Luna (xHigh)",
    "category": "math",
@@ -5939,6 +7469,16 @@
    "upper": 1473.7060089964264,
    "votes": 1081,
    "rank": 70
+  },
+  {
+   "model": "gpt-6-1-terra",
+   "source_model": "GPT-6.1 Terra (Max)",
+   "category": "math",
+   "rating": 1450.4142962129552,
+   "lower": 1420.86692616374,
+   "upper": 1479.9616662621704,
+   "votes": 384,
+   "rank": 75
   },
   {
    "model": "deepseek-v4-pro",
@@ -5979,6 +7519,26 @@
    "upper": 1404.6125853964104,
    "votes": 8541,
    "rank": 169
+  },
+  {
+   "model": "gemini-4-carbon",
+   "source_model": "Gemini 4 Carbon (High)",
+   "category": "multi_turn",
+   "rating": 1569.589344199236,
+   "lower": 1544.2200414016227,
+   "upper": 1594.9586469968492,
+   "votes": 605,
+   "rank": 1
+  },
+  {
+   "model": "gemini-4-neon",
+   "source_model": "Gemini 4 Neon (High)",
+   "category": "multi_turn",
+   "rating": 1525.3382067610141,
+   "lower": 1503.2915662430476,
+   "upper": 1547.384847278981,
+   "votes": 815,
+   "rank": 3
   },
   {
    "model": "claude-opus-4-6",
@@ -6049,6 +7609,16 @@
    "upper": 1501.123082075403,
    "votes": 3001,
    "rank": 16
+  },
+  {
+   "model": "gemini-4-hydrogen",
+   "source_model": "Gemini 4 Hydrogen (High)",
+   "category": "multi_turn",
+   "rating": 1488.9143997148121,
+   "lower": 1467.3791729507577,
+   "upper": 1510.4496264788663,
+   "votes": 768,
+   "rank": 17
   },
   {
    "model": "kimi-k3",
@@ -6161,6 +7731,16 @@
    "rank": 49
   },
   {
+   "model": "claude-fable-5-2",
+   "source_model": "Claude Fable 5.2 (Max)",
+   "category": "multi_turn",
+   "rating": 1457.8370562299456,
+   "lower": 1436.1648206632326,
+   "upper": 1479.5092917966583,
+   "votes": 765,
+   "rank": 54
+  },
+  {
    "model": "claude-sonnet-5",
    "source_model": "Claude Sonnet 5 (High)",
    "category": "multi_turn",
@@ -6189,6 +7769,16 @@
    "upper": 1462.9870559078033,
    "votes": 2315,
    "rank": 71
+  },
+  {
+   "model": "kimi-k3-1-pro",
+   "source_model": "Kimi K3.1 Pro (Max)",
+   "category": "multi_turn",
+   "rating": 1448.8228478799035,
+   "lower": 1429.2479930652985,
+   "upper": 1468.3977026945086,
+   "votes": 954,
+   "rank": 73
   },
   {
    "model": "gemini-3-5-flash-lite",
@@ -6221,6 +7811,36 @@
    "rank": 98
   },
   {
+   "model": "gpt-6-1-terra",
+   "source_model": "GPT-6.1 Terra (Max)",
+   "category": "multi_turn",
+   "rating": 1432.1477268957005,
+   "lower": 1414.391037230122,
+   "upper": 1449.904416561279,
+   "votes": 1189,
+   "rank": 104
+  },
+  {
+   "model": "gpt-6-2-astra",
+   "source_model": "GPT-6.2 Astra (Max)",
+   "category": "multi_turn",
+   "rating": 1425.2105927891237,
+   "lower": 1392.5631694913554,
+   "upper": 1457.858016086892,
+   "votes": 329,
+   "rank": 115
+  },
+  {
+   "model": "gpt-6-2-sol",
+   "source_model": "GPT-6.2 Sol (Max)",
+   "category": "multi_turn",
+   "rating": 1419.9774006282792,
+   "lower": 1388.1142449511149,
+   "upper": 1451.8405563054434,
+   "votes": 332,
+   "rank": 123
+  },
+  {
    "model": "claude-haiku-4-5",
    "source_model": "Claude Haiku 4.5 (20251001)",
    "category": "multi_turn",
@@ -6229,6 +7849,26 @@
    "upper": 1413.5791576673662,
    "votes": 26663,
    "rank": 146
+  },
+  {
+   "model": "gemini-4-carbon",
+   "source_model": "Gemini 4 Carbon (High)",
+   "category": "non_english",
+   "rating": 1534.477839843891,
+   "lower": 1522.7343703744898,
+   "upper": 1546.2213093132923,
+   "votes": 2771,
+   "rank": 1
+  },
+  {
+   "model": "gemini-4-neon",
+   "source_model": "Gemini 4 Neon (High)",
+   "category": "non_english",
+   "rating": 1524.132699659287,
+   "lower": 1513.8532642869266,
+   "upper": 1534.4121350316473,
+   "votes": 3701,
+   "rank": 2
   },
   {
    "model": "claude-fable-5-1",
@@ -6269,6 +7909,16 @@
    "upper": 1499.839836065417,
    "votes": 43813,
    "rank": 7
+  },
+  {
+   "model": "gemini-4-hydrogen",
+   "source_model": "Gemini 4 Hydrogen (High)",
+   "category": "non_english",
+   "rating": 1494.9398631496254,
+   "lower": 1484.0583008244544,
+   "upper": 1505.8214254747961,
+   "votes": 3112,
+   "rank": 8
   },
   {
    "model": "gemini-3-8-flash",
@@ -6319,6 +7969,16 @@
    "upper": 1479.536301254714,
    "votes": 74331,
    "rank": 20
+  },
+  {
+   "model": "claude-fable-5-2",
+   "source_model": "Claude Fable 5.2 (Max)",
+   "category": "non_english",
+   "rating": 1473.8359678603385,
+   "lower": 1463.3480692554565,
+   "upper": 1484.323866465221,
+   "votes": 3458,
+   "rank": 24
   },
   {
    "model": "gemini-3-6-flash",
@@ -6389,6 +8049,16 @@
    "upper": 1454.63108653385,
    "votes": 26345,
    "rank": 43
+  },
+  {
+   "model": "kimi-k3-1-pro",
+   "source_model": "Kimi K3.1 Pro (Max)",
+   "category": "non_english",
+   "rating": 1446.355543156051,
+   "lower": 1436.8842220928025,
+   "upper": 1455.8268642192995,
+   "votes": 4594,
+   "rank": 48
   },
   {
    "model": "claude-opus-4-8",
@@ -6469,6 +8139,36 @@
    "upper": 1422.136473138921,
    "votes": 24019,
    "rank": 100
+  },
+  {
+   "model": "gpt-6-1-terra",
+   "source_model": "GPT-6.1 Terra (Max)",
+   "category": "non_english",
+   "rating": 1416.01874006583,
+   "lower": 1406.769171789235,
+   "upper": 1425.2683083424247,
+   "votes": 5382,
+   "rank": 102
+  },
+  {
+   "model": "gpt-6-2-sol",
+   "source_model": "GPT-6.2 Sol (Max)",
+   "category": "non_english",
+   "rating": 1404.7223163236606,
+   "lower": 1390.3658439690405,
+   "upper": 1419.0787886782807,
+   "votes": 1706,
+   "rank": 125
+  },
+  {
+   "model": "gpt-6-2-astra",
+   "source_model": "GPT-6.2 Astra (Max)",
+   "category": "non_english",
+   "rating": 1404.088252522993,
+   "lower": 1389.3190143710497,
+   "upper": 1418.857490674936,
+   "votes": 1635,
+   "rank": 131
   },
   {
    "model": "claude-haiku-4-5",
@@ -6721,6 +8421,26 @@
    "rank": 181
   },
   {
+   "model": "gemini-4-carbon",
+   "source_model": "Gemini 4 Carbon (High)",
+   "category": "russian",
+   "rating": 1560.5201074615952,
+   "lower": 1536.527797769861,
+   "upper": 1584.5124171533294,
+   "votes": 644,
+   "rank": 1
+  },
+  {
+   "model": "gemini-4-neon",
+   "source_model": "Gemini 4 Neon (High)",
+   "category": "russian",
+   "rating": 1553.9647252345148,
+   "lower": 1534.37076279258,
+   "upper": 1573.5586876764496,
+   "votes": 970,
+   "rank": 2
+  },
+  {
    "model": "claude-fable-5-1",
    "source_model": "Claude Fable 5.1 (Max)",
    "category": "russian",
@@ -6781,6 +8501,16 @@
    "rank": 10
   },
   {
+   "model": "claude-fable-5-2",
+   "source_model": "Claude Fable 5.2 (Max)",
+   "category": "russian",
+   "rating": 1500.9206535715948,
+   "lower": 1482.3480013082326,
+   "upper": 1519.493305834957,
+   "votes": 1009,
+   "rank": 12
+  },
+  {
    "model": "gemini-3-1-pro",
    "source_model": "Gemini 3.1 Pro Preview",
    "category": "russian",
@@ -6809,6 +8539,16 @@
    "upper": 1501.2683393591365,
    "votes": 9851,
    "rank": 17
+  },
+  {
+   "model": "gemini-4-hydrogen",
+   "source_model": "Gemini 4 Hydrogen (High)",
+   "category": "russian",
+   "rating": 1493.9928611760647,
+   "lower": 1472.7154589555653,
+   "upper": 1515.2702633965641,
+   "votes": 778,
+   "rank": 19
   },
   {
    "model": "gemini-3-6-flash",
@@ -6891,6 +8631,16 @@
    "rank": 45
   },
   {
+   "model": "kimi-k3-1-pro",
+   "source_model": "Kimi K3.1 Pro (Max)",
+   "category": "russian",
+   "rating": 1458.4529474471942,
+   "lower": 1441.2797355495804,
+   "upper": 1475.6261593448085,
+   "votes": 1198,
+   "rank": 48
+  },
+  {
    "model": "gpt-6-1-sol",
    "source_model": "GPT-6.1 Sol (Max)",
    "category": "russian",
@@ -6951,6 +8701,16 @@
    "rank": 69
   },
   {
+   "model": "gpt-6-2-astra",
+   "source_model": "GPT-6.2 Astra (Max)",
+   "category": "russian",
+   "rating": 1437.0640532845623,
+   "lower": 1410.3445138436891,
+   "upper": 1463.7835927254355,
+   "votes": 472,
+   "rank": 72
+  },
+  {
    "model": "gpt-5-6-luna",
    "source_model": "GPT-5.6 Luna (xHigh)",
    "category": "russian",
@@ -6959,6 +8719,26 @@
    "upper": 1435.909183166587,
    "votes": 4664,
    "rank": 92
+  },
+  {
+   "model": "gpt-6-1-terra",
+   "source_model": "GPT-6.1 Terra (Max)",
+   "category": "russian",
+   "rating": 1418.9707364788928,
+   "lower": 1402.5657559553615,
+   "upper": 1435.3757170024242,
+   "votes": 1411,
+   "rank": 108
+  },
+  {
+   "model": "gpt-6-2-sol",
+   "source_model": "GPT-6.2 Sol (Max)",
+   "category": "russian",
+   "rating": 1401.2006481769404,
+   "lower": 1374.0114388381648,
+   "upper": 1428.389857515716,
+   "votes": 459,
+   "rank": 138
   },
   {
    "model": "claude-haiku-4-5",
@@ -7021,6 +8801,16 @@
    "rank": 6
   },
   {
+   "model": "gemini-4-neon",
+   "source_model": "Gemini 4 Neon (High)",
+   "category": "spanish",
+   "rating": 1505.4391435002046,
+   "lower": 1461.195163199705,
+   "upper": 1549.6831238007044,
+   "votes": 179,
+   "rank": 7
+  },
+  {
    "model": "claude-opus-4-6",
    "source_model": "Claude Opus 4.6 (High)",
    "category": "spanish",
@@ -7029,6 +8819,16 @@
    "upper": 1515.8718927893185,
    "votes": 2874,
    "rank": 8
+  },
+  {
+   "model": "gemini-4-hydrogen",
+   "source_model": "Gemini 4 Hydrogen (High)",
+   "category": "spanish",
+   "rating": 1487.2766237737767,
+   "lower": 1444.1472288631053,
+   "upper": 1530.4060186844479,
+   "votes": 191,
+   "rank": 13
   },
   {
    "model": "gemini-3-8-flash",
@@ -7049,6 +8849,16 @@
    "upper": 1503.5303109370468,
    "votes": 1061,
    "rank": 15
+  },
+  {
+   "model": "kimi-k3-1-pro",
+   "source_model": "Kimi K3.1 Pro (Max)",
+   "category": "spanish",
+   "rating": 1484.2857091646033,
+   "lower": 1450.0093116752307,
+   "upper": 1518.562106653976,
+   "votes": 309,
+   "rank": 16
   },
   {
    "model": "gemini-3-1-pro",
@@ -7151,6 +8961,16 @@
    "rank": 70
   },
   {
+   "model": "claude-fable-5-2",
+   "source_model": "Claude Fable 5.2 (Max)",
+   "category": "spanish",
+   "rating": 1446.0832032079277,
+   "lower": 1405.3627507531667,
+   "upper": 1486.8036556626887,
+   "votes": 197,
+   "rank": 72
+  },
+  {
    "model": "gpt-5-6-sol",
    "source_model": "GPT-5.6 Sol (xHigh)",
    "category": "spanish",
@@ -7219,6 +9039,16 @@
    "upper": 1431.4342316246573,
    "votes": 4549,
    "rank": 117
+  },
+  {
+   "model": "gpt-6-1-terra",
+   "source_model": "GPT-6.1 Terra (Max)",
+   "category": "spanish",
+   "rating": 1417.6686316520106,
+   "lower": 1384.0112725231845,
+   "upper": 1451.3259907808365,
+   "votes": 307,
+   "rank": 124
   }
  ]
 }

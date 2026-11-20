@@ -5,7 +5,7 @@
   "url": "https://models.dev",
   "licence": "MIT",
   "attribution": "models.dev (https://github.com/anomalyco/models.dev)",
-  "retrieved_at": "2026-11-20T04:24:45.977Z"
+  "retrieved_at": "2026-11-20T04:29:38.697Z"
  },
  "models": [
   {
@@ -42,6 +42,31 @@
     "input": 2,
     "output": 10,
     "cache_read": 0.1
+   },
+   "context": 1000000,
+   "max_output": 128000,
+   "input_modalities": [
+    "text",
+    "image",
+    "pdf"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "reasoning": true,
+   "tool_call": true,
+   "open_weights": false,
+   "knowledge": "2026-06"
+  },
+  {
+   "model": "claude-fable-5-2",
+   "source_model": "anthropic/claude-fable-5-2",
+   "name": "Claude Fable 5.2",
+   "released_on": "2026-11-09",
+   "price": {
+    "input": 8,
+    "output": 40,
+    "cache_read": 0.2
    },
    "context": 1000000,
    "max_output": 128000,
@@ -280,7 +305,7 @@
    "open_weights": true
   },
   {
-   "model": "deepseek-v4-1-flash",
+   "model": "deepseek-v4-1-flash-1017",
    "source_model": "deepseek/deepseek-flash",
    "name": "DeepSeek V4.1 Flash 1017",
    "released_on": "2026-10-17",
@@ -302,6 +327,33 @@
    "tool_call": true,
    "open_weights": true,
    "knowledge": "2025-05"
+  },
+  {
+   "model": "gemini-4-hydrogen",
+   "source_model": "google/gemini-4-hydrogen",
+   "name": "Gemini 4 Hydrogen",
+   "released_on": "2026-11-12",
+   "price": {
+    "input": 1.5,
+    "output": 7.5,
+    "cache_read": 0.075
+   },
+   "context": 1048576,
+   "max_output": 65536,
+   "input_modalities": [
+    "text",
+    "image",
+    "video",
+    "audio",
+    "pdf"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "reasoning": true,
+   "tool_call": true,
+   "open_weights": false,
+   "knowledge": "2026-03"
   },
   {
    "model": "gemini-3-1-pro",
@@ -385,6 +437,33 @@
    "knowledge": "2026-03"
   },
   {
+   "model": "gemini-4-neon",
+   "source_model": "google/gemini-4-neon",
+   "name": "Gemini 4 Neon",
+   "released_on": "2026-11-18",
+   "price": {
+    "input": 3,
+    "output": 15,
+    "cache_read": 0.15
+   },
+   "context": 1048576,
+   "max_output": 65536,
+   "input_modalities": [
+    "text",
+    "image",
+    "video",
+    "audio",
+    "pdf"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "reasoning": true,
+   "tool_call": true,
+   "open_weights": false,
+   "knowledge": "2026-03"
+  },
+  {
    "model": "gemini-3-7-flash",
    "source_model": "google/gemini-3.7-flash",
    "name": "Gemini 3.7 Flash",
@@ -438,6 +517,33 @@
    "open_weights": false
   },
   {
+   "model": "gemini-4-carbon",
+   "source_model": "google/gemini-4-carbon",
+   "name": "Gemini 4 Carbon",
+   "released_on": "2026-11-10",
+   "price": {
+    "input": 2,
+    "output": 10,
+    "cache_read": 0.1
+   },
+   "context": 1048576,
+   "max_output": 32768,
+   "input_modalities": [
+    "text",
+    "image",
+    "video",
+    "audio",
+    "pdf"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "reasoning": true,
+   "tool_call": true,
+   "open_weights": false,
+   "knowledge": "2026-03"
+  },
+  {
    "model": "kimi-k3",
    "source_model": "moonshotai/kimi-k3",
    "name": "Kimi K3",
@@ -446,6 +552,30 @@
     "input": 3,
     "output": 15,
     "cache_read": 0.3
+   },
+   "context": 1048576,
+   "max_output": 1048576,
+   "input_modalities": [
+    "text",
+    "image",
+    "video"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "reasoning": true,
+   "tool_call": true,
+   "open_weights": true
+  },
+  {
+   "model": "kimi-k3-1-pro",
+   "source_model": "moonshotai/kimi-k3.1-pro",
+   "name": "Kimi K3.1 Pro",
+   "released_on": "2026-10-23",
+   "price": {
+    "input": 2,
+    "output": 10,
+    "cache_read": 0.2
    },
    "context": 1048576,
    "max_output": 1048576,
@@ -485,6 +615,31 @@
    "tool_call": true,
    "open_weights": false,
    "knowledge": "2026-02-16"
+  },
+  {
+   "model": "gpt-6-2-astra",
+   "source_model": "openai/gpt-6.2-astra",
+   "name": "GPT-6.2 Astra",
+   "released_on": "2026-11-17",
+   "price": {
+    "input": 8,
+    "output": 40,
+    "cache_read": 0.4
+   },
+   "context": 1050000,
+   "max_output": 128000,
+   "input_modalities": [
+    "text",
+    "image",
+    "pdf"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "reasoning": true,
+   "tool_call": true,
+   "open_weights": false,
+   "knowledge": "2026-05-18"
   },
   {
    "model": "gpt-6-astra",
@@ -535,6 +690,31 @@
    "tool_call": true,
    "open_weights": false,
    "knowledge": "2026-02-16"
+  },
+  {
+   "model": "gpt-6-1-terra",
+   "source_model": "openai/gpt-6.1-terra",
+   "name": "GPT-6.1 Terra",
+   "released_on": "2026-10-26",
+   "price": {
+    "input": 1,
+    "output": 5,
+    "cache_read": 0.05
+   },
+   "context": 1050000,
+   "max_output": 128000,
+   "input_modalities": [
+    "text",
+    "image",
+    "pdf"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "reasoning": true,
+   "tool_call": true,
+   "open_weights": false,
+   "knowledge": "2026-06-01"
   },
   {
    "model": "gpt-6-luna",
@@ -659,6 +839,56 @@
    "tool_call": true,
    "open_weights": false,
    "knowledge": "2026-04-30"
+  },
+  {
+   "model": "gpt-6-2-sol",
+   "source_model": "openai/gpt-6.2-sol",
+   "name": "GPT-6.2 Sol",
+   "released_on": "2026-11-17",
+   "price": {
+    "input": 2,
+    "output": 10,
+    "cache_read": 0.1
+   },
+   "context": 1050000,
+   "max_output": 128000,
+   "input_modalities": [
+    "text",
+    "image",
+    "pdf"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "reasoning": true,
+   "tool_call": true,
+   "open_weights": false,
+   "knowledge": "2026-06-01"
+  },
+  {
+   "model": "deepseek-v4-1-flash",
+   "source_model": "deepseek/deepseek-flash",
+   "name": "DeepSeek V4.1 Flash",
+   "released_on": "2026-09-10",
+   "price": {
+    "input": 0.15,
+    "output": 0.6,
+    "cache_read": 0.003
+   },
+   "context": 1000000,
+   "max_output": 393216,
+   "input_modalities": [
+    "text",
+    "image"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "reasoning": true,
+   "tool_call": true,
+   "open_weights": true,
+   "knowledge": "2025-05",
+   "archived_retrieved_at": "2026-10-12T09:34:48.405Z"
   }
  ]
 }

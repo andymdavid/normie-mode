@@ -1,0 +1,16 @@
+id: deepseek-v4-1-flash-1017
+family: deepseek
+name: DeepSeek V4.1 Flash 1017
+released_on: 2026-10-17
+lifecycle: current
+verification:
+  status: verified
+  sources:
+    - deepseek-v4-1-flash-1017
+source_ids:
+  epoch:
+    - deepseek-v4.1-flash-1017
+  epoch_index: DeepSeek V4.1 Flash 1017
+  modelsdev: deepseek/deepseek-flash
+  lmarena: []
+openrouter_id: deepseek/deepseek-v4.1-flash-1017

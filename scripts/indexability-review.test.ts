@@ -11,8 +11,11 @@ describe('indexability review', () => {
   it('classifies every current public route without applying a site change', () => {
     const rows = indexabilityRows();
 
-    expect(rows).toHaveLength(109);
-    expect(rows.filter((row) => row.proposed_disposition === 'index')).toHaveLength(78);
+    // Nine provider-verified exact-version pages added by the November catch-up.
+    expect(rows).toHaveLength(118);
+    for (const id of ['claude-fable-5-2','gpt-6-2-astra','gpt-6-2-sol','gpt-6-1-terra','gemini-4-carbon','gemini-4-hydrogen','gemini-4-neon','kimi-k3-1-pro','deepseek-v4-1-flash-1017'])
+      expect(rows.find(row => row.url.endsWith(`/models/${id}`))?.proposed_disposition).toBe('index');
+    expect(rows.filter((row) => row.proposed_disposition === 'index')).toHaveLength(87);
     expect(rows.filter((row) => row.proposed_disposition === 'noindex-follow')).toHaveLength(31);
     expect(rows.find((row) => row.url.endsWith('/best-ai-for/data-analysis'))?.approval).toContain('D-035');
     expect(rows.find((row) => row.url.endsWith('/models/gpt-5-2'))?.proposed_disposition).toBe('index');

@@ -1,0 +1,10 @@
+id: openai-gpt-6-2
+title: "OpenAI: GPT-6.2 Astra and Sol"
+publisher: OpenAI
+url: https://openai.com/index/introducing-gpt-6-2-astra-sol/
+kind: provider-report
+evidence_class: provider-reported
+retrieved_on: 2026-11-20
+notes: Provider verifies model identity and availability. Benchmark claims
+  remain provider-reported; consumer-plan mapping and publication require
+  review.

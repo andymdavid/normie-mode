@@ -1,0 +1,17 @@
+id: gpt-6-2-sol
+family: gpt
+name: GPT-6.2 Sol
+released_on: 2026-11-17
+lifecycle: current
+verification:
+  status: verified
+  sources:
+    - openai-gpt-6-2
+source_ids:
+  epoch:
+    - gpt-6.2-sol
+  epoch_index: GPT-6.2 Sol
+  modelsdev: openai/gpt-6.2-sol
+  lmarena:
+    - GPT-6.2 Sol (Max)
+openrouter_id: openai/gpt-6.2-sol

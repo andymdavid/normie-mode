@@ -1,0 +1,17 @@
+id: gemini-4-neon
+family: gemini
+name: Gemini 4 Neon
+released_on: 2026-11-18
+lifecycle: current
+verification:
+  status: verified
+  sources:
+    - google-gemini-4-neon
+source_ids:
+  epoch:
+    - gemini-4-neon
+  epoch_index: Gemini 4 Neon
+  modelsdev: google/gemini-4-neon
+  lmarena:
+    - Gemini 4 Neon (High)
+openrouter_id: google/gemini-4-neon

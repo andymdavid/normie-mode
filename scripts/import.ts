@@ -186,6 +186,16 @@ async function importModelsDev() {
       });
     }
   }
+  // Preserve accepted historical specs when a mutable API alias moves to a dated successor.
+  const priorPath = join(DATA_DIR, 'modelsdev.json');
+  if (existsSync(priorPath)) {
+    const prior = JSON.parse(readFileSync(priorPath, 'utf8')) as ModelsDevSnapshot;
+    for (const entry of prior.models) {
+      const model = g.models.get(entry.model);
+      if (model?.lifecycle === 'superseded' && !out.some(row => row.model === entry.model))
+        out.push({ ...entry, archived_retrieved_at: entry.archived_retrieved_at ?? prior.meta.retrieved_at });
+    }
+  }
   const snapshot: ModelsDevSnapshot = {
     meta: {
       source: 'modelsdev',
