@@ -1,0 +1,24 @@
+---
+import type { PracticalGuide } from '../lib/practical-guides';
+interface Props { guide: PracticalGuide }
+const { guide } = Astro.props;
+---
+<section id="try-it" aria-labelledby="try-it-title" data-practical-guide>
+  <div class="section-head"><h2 id="try-it-title">{guide.title}</h2></div>
+  {guide.status === 'draft' && <p class="small muted">Draft guidance — awaiting editorial review</p>}
+  <p>{guide.intro}</p>
+  <ol>{guide.steps.map((step) => <li>{step}</li>)}</ol>
+  <h3>Example input</h3>
+  <pre>{guide.example}</pre>
+  {guide.download && <p><a href={guide.download} download>Download the example CSV</a></p>}
+  <h3>A prompt to try</h3>
+  <pre>{guide.prompt}</pre>
+  <h3>Check the answer</h3>
+  <ul>{guide.checks.map((check) => <li>{check}</li>)}</ul>
+  <p><strong>What this cannot show:</strong> {guide.limits}</p>
+  <p class="small muted">{guide.evidence} This is suggested guidance, not a recorded model test result.</p>
+</section>
+<style>
+  pre { white-space: pre-wrap; overflow-wrap: anywhere; padding: 1rem; border: 1px solid currentColor; border-radius: .5rem; font-size: .9rem; }
+  li { margin-block: .5rem; }
+</style>

@@ -4,6 +4,8 @@ This file records meaningful changes to the Normie Mode product, implementation,
 
 ## Unreleased
 
+- Draft practical examples for spreadsheets, document extraction and writing, with checkable outputs and explicit evidence limits; visible only in editorial preview pending review.
+
 ### Added
 
 - A readable software-test audit and linked definition inventory, fewer duplicated/repeated cases, independent fixed-fixture evidence counts and separate no-build/site test commands; paid evaluations are on hold.

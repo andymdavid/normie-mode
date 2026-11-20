@@ -774,3 +774,12 @@ Model-access verification note: Google's current Free plan promises automatic se
 
 
 N-016 test audit (2026-11-20): user paused all paid evaluations. Audited the 735 whole-project cases: 122 authored definitions, mostly page/data expansion, with seven cases added during maintenance. Consolidated repeated message work, removed duplicate/vacuous checks, strengthened fixed-fixture/CSV checks, isolated result-loader fixtures and separated ordinary from built-site tests. Model-catch-up candidate now has 549 ordinary plus two site cases (118 definitions). `docs/maintenance/test-audit-2026-11-20.md` and the linked inventory record the rationale, remaining independent-key/runner/browser gaps and three deliberate fault checks. No model calls or production changes.
+
+
+### N-017 — Practical flagship guides (in_progress, 2026-11-20)
+
+Origin: roadmap R2 and human request 35491149-80a2-46a1-a529-97a2f09e367a. Depends on existing task/verdict surfaces; PR targets catch-up branch until #5 merges. Select spreadsheets, documents and writing as complementary practical slices, not a claim of top-three traffic. Saved autocomplete is an interest signal, not visit or search volume. Spreadsheet fixtures provide checkable arithmetic; document extraction permits exact-quote checks; writing already has an approved general guide and preference evidence whose limits must stay explicit.
+
+Acceptance: three draft-only example workflows with prompts, independent expected checks and evidence boundaries; no changed published ranking/editorial state; production HTML excludes drafts and preview includes all three; types and production/preview builds pass. Human editorial review remains required before activation. R1 publication decision remains pending; feedback route R3 remains to implement. Ongoing orchestration is separate and must not postpone immediate implementation.
+
+R3 feedback design: `docs/roadmap/feedback-route.md`. Current server has no durable feedback queue; verify deployed persistence before implementing the endpoint. Do not substitute newsletter subscription or logging for feedback storage.

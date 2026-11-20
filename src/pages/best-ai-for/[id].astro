@@ -1,5 +1,7 @@
 ---
 // A task page (D-025): one everyday need people search for, the evidence for it, and Norm's guide.
+import PracticalGuide from '../../components/PracticalGuide.astro';
+import { practicalGuides } from '../../lib/practical-guides';
 import Base from '../../layouts/Base.astro';
 import BarChart from '../../components/BarChart.astro';
 import NormSays from '../../components/NormSays.astro';
@@ -31,6 +33,8 @@ const evidence = effectiveTests(task)
 const noResults = effectiveTests(task).filter((t) => !evidence.some((e) => e.test.id === t.test)).map((t) => g.tests.get(t.test)!);
 const tooFew = noResults.map((t) => ({ t, n: testRows(t).filter((r) => r.value !== undefined).length })).filter((x) => x.n > 0);
 const untested = noResults.filter((t) => !tooFew.some((x) => x.t.id === t.id));
+const draftGuide = practicalGuides[task.id];
+const practicalGuide = draftGuide && (draftGuide.status === 'approved' && draftGuide.reviewer !== 'unreviewed' || PREVIEW) ? draftGuide : undefined;
 const norm = task.norm;
 const normOn = !!norm && (norm.status === 'approved' || PREVIEW);
 const costRows = overviewRows().map((r) => ({
@@ -46,7 +50,7 @@ const metadata = taskMetadata(task.label);
 const leaderLine = top.length
   ? `On the tests we have, ${top[0].label} comes out on top${top[1] ? `, followed by ${top.slice(1).map((r) => r.label).join(' and ')}` : ''}.`
   : undefined;
-const sections = [...(normOn ? [['guide', "Norm's guide"]] : []), ['compare', 'How the models compare'], ['evidence', 'The evidence'], ['cost', 'If you build with it']];
+const sections = [...(practicalGuide ? [['try-it', 'Try it and check']] : []),...(normOn ? [['guide', "Norm's guide"]] : []), ['compare', 'How the models compare'], ['evidence', 'The evidence'], ['cost', 'If you build with it']];
 ---
 <Base
   title={metadata.title}
@@ -95,6 +99,7 @@ const sections = [...(normOn ? [['guide', "Norm's guide"]] : []), ['compare', 'H
   <div class="with-toc">
     <nav class="toc" aria-label="On this page"><ol>{sections.map(([id, label]) => <li><a href={`#${id}`}>{label}</a></li>)}</ol></nav>
     <div>
+      {practicalGuide && <PracticalGuide guide={practicalGuide} />}
       {normOn && (
         <>
           <div class="section-head" id="guide" style="margin-top:0"><h2>Norm's guide</h2></div>
