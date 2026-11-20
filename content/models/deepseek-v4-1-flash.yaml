@@ -2,16 +2,17 @@ id: deepseek-v4-1-flash
 family: deepseek
 name: DeepSeek V4.1 Flash
 released_on: 2026-09-10
-lifecycle: current
+lifecycle: superseded
 verification:
   status: verified
   sources:
     - deepseek-v4-1-flash
-summary: DeepSeek routes the older deepseek-v4-flash API name to this model.
+summary: The September version. The mutable deepseek-flash API alias now serves
+  the October 17 successor, not this exact version.
 source_ids:
   epoch:
     - deepseek-v4.1-flash
   epoch_index: DeepSeek V4.1 Flash
-  modelsdev: deepseek/deepseek-flash
   lmarena:
     - deepseek-v4.1-flash-max
+successor: deepseek-v4-1-flash-1017

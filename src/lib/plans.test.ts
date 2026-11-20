@@ -22,8 +22,15 @@ describe('apps and plans (D-026)', () => {
     for (const m of comparedModels()) expect(m.lifecycle === 'current' || onPlans.has(m.id), m.id).toBe(true);
   });
 
-  it('gives every plan with models a default model', () => {
-    for (const app of g.plans.values()) for (const p of app.plans) expect(p.models.filter((m) => m.default), `${app.id}/${p.id}`).toHaveLength(1);
+  it('allows at most one sourced default; access alone does not establish a default', () => {
+    for (const app of g.plans.values()) for (const p of app.plans) expect(p.models.filter((m) => m.default).length, `${app.id}/${p.id}`).toBeLessThanOrEqual(1);
+  });
+
+  it('does not promise a fixed default for Gemini free automatic selection', () => {
+    const free = g.plans.get('gemini')!.plans.find(p => p.id === 'free')!;
+    expect(free.models.some(m => m.default)).toBe(false);
+    expect(free.models[0].access).toBe('limited');
+    expect(free.models[0].where).toContain('Automatic model selection');
   });
 
   it('lists the plans for a model cheapest first', () => {

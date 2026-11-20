@@ -1,11 +1,15 @@
+import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { APPROVAL_THRESHOLD, APPROVED_SUPPLIERS, generateCase, score } from './suite';
 
 const cases = [1, 2, 3, 4, 5].map(generateCase);
 
 describe('unusual-transactions cases', () => {
-  it('are identical every time they are generated', () => {
-    expect(generateCase(3)).toEqual(generateCase(3));
+  it('reproduces all five committed fixtures', () => {
+    for (const [index, generated] of cases.entries()) {
+      const saved = JSON.parse(readFileSync(`evals/unusual-transactions/cases/case-0${index + 1}.json`, 'utf8'));
+      expect(generated, generated.id).toEqual(saved);
+    }
   });
 
   it.each(cases.map((c) => [c.id, c] as const))('%s: only planted rows break a rule', (_, c) => {

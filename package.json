@@ -14,11 +14,15 @@
     "validate": "tsx scripts/validate.ts",
     "seo:audit": "npm run build && tsx scripts/seo-audit.ts",
     "seo:indexability": "npm run build && tsx scripts/indexability-review.ts",
-    "test": "vitest run",
+    "test": "vitest run --exclude scripts/indexability-review.test.ts",
     "import": "tsx scripts/import.ts",
     "eval": "tsx scripts/eval.ts",
     "eval:generate": "tsx scripts/eval-generate.ts",
-    "demand": "tsx scripts/demand.ts"
+    "demand": "tsx scripts/demand.ts",
+    "maintenance": "tsx scripts/maintenance.ts",
+    "impact": "tsx scripts/impact.ts",
+    "verify": "npm run check && npm run build && npm test && npm run test:site && tsx scripts/seo-audit.ts",
+    "test:site": "vitest run scripts/indexability-review.test.ts"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",

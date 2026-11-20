@@ -1,0 +1,17 @@
+id: claude-fable-5-2
+family: claude
+name: Claude Fable 5.2
+released_on: 2026-11-09
+lifecycle: current
+verification:
+  status: verified
+  sources:
+    - anthropic-claude-fable-5-2
+source_ids:
+  epoch:
+    - claude-fable-5-2
+  epoch_index: Claude Fable 5.2
+  modelsdev: anthropic/claude-fable-5-2
+  lmarena:
+    - Claude Fable 5.2 (Max)
+openrouter_id: anthropic/claude-fable-5.2

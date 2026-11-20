@@ -1,0 +1,17 @@
+id: gemini-4-carbon
+family: gemini
+name: Gemini 4 Carbon
+released_on: 2026-11-10
+lifecycle: current
+verification:
+  status: verified
+  sources:
+    - google-gemini-4-carbon
+source_ids:
+  epoch:
+    - gemini-4-carbon
+  epoch_index: Gemini 4 Carbon
+  modelsdev: google/gemini-4-carbon
+  lmarena:
+    - Gemini 4 Carbon (High)
+openrouter_id: google/gemini-4-carbon

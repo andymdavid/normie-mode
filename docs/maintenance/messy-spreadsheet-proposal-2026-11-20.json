@@ -1,0 +1,107 @@
+{
+  "approved": false,
+  "estimatedUsd": 16.58,
+  "manifest": {
+    "suite": "messy-spreadsheet-questions",
+    "version": "1",
+    "models": [
+      "claude-fable-5-2",
+      "claude-opus-5-5",
+      "deepseek-v4-1-flash-1017",
+      "gemini-4-carbon",
+      "gemini-4-hydrogen",
+      "gemini-4-neon",
+      "gpt-6-2-astra",
+      "gpt-6-2-sol",
+      "gpt-6-luna",
+      "kimi-k3-1-pro"
+    ],
+    "routes": [
+      {
+        "model": "claude-fable-5-2",
+        "route": "anthropic/claude-fable-5.2",
+        "price": {
+          "input": 0.000008,
+          "output": 0.00004
+        }
+      },
+      {
+        "model": "claude-opus-5-5",
+        "route": "anthropic/claude-opus-5.5",
+        "price": {
+          "input": 0.000004,
+          "output": 0.00002
+        }
+      },
+      {
+        "model": "deepseek-v4-1-flash-1017",
+        "route": "deepseek/deepseek-v4.1-flash-1017",
+        "price": {
+          "input": 1.5e-7,
+          "output": 6e-7
+        }
+      },
+      {
+        "model": "gemini-4-carbon",
+        "route": "google/gemini-4-carbon",
+        "price": {
+          "input": 0.000002,
+          "output": 0.00001
+        }
+      },
+      {
+        "model": "gemini-4-hydrogen",
+        "route": "google/gemini-4-hydrogen",
+        "price": {
+          "input": 0.0000015,
+          "output": 0.0000075
+        }
+      },
+      {
+        "model": "gemini-4-neon",
+        "route": "google/gemini-4-neon",
+        "price": {
+          "input": 0.000003,
+          "output": 0.000015
+        }
+      },
+      {
+        "model": "gpt-6-2-astra",
+        "route": "openai/gpt-6.2-astra",
+        "price": {
+          "input": 0.000008,
+          "output": 0.00004
+        }
+      },
+      {
+        "model": "gpt-6-2-sol",
+        "route": "openai/gpt-6.2-sol",
+        "price": {
+          "input": 0.000002,
+          "output": 0.00001
+        }
+      },
+      {
+        "model": "gpt-6-luna",
+        "route": "openai/gpt-6-luna",
+        "price": {
+          "input": 1e-7,
+          "output": 5e-7
+        }
+      },
+      {
+        "model": "kimi-k3-1-pro",
+        "route": "moonshotai/kimi-k3.1-pro",
+        "price": {
+          "input": 2.53e-7,
+          "output": 0.0000088
+        }
+      }
+    ],
+    "runs": 1,
+    "budget": 20,
+    "cases_sha256": "54a32c1d0bc0b174b64d36d31fb39d8202a257b7c3b9a5d3f5cd3371d9db5e34"
+  },
+  "onHold": true,
+  "holdReason": "User instruction 2026-11-20: no paid runs for now."
+}

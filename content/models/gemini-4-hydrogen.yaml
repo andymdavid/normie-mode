@@ -1,0 +1,17 @@
+id: gemini-4-hydrogen
+family: gemini
+name: Gemini 4 Hydrogen
+released_on: 2026-11-12
+lifecycle: current
+verification:
+  status: verified
+  sources:
+    - google-gemini-4-hydrogen
+source_ids:
+  epoch:
+    - gemini-4-hydrogen
+  epoch_index: Gemini 4 Hydrogen
+  modelsdev: google/gemini-4-hydrogen
+  lmarena:
+    - Gemini 4 Hydrogen (High)
+openrouter_id: google/gemini-4-hydrogen

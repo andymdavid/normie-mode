@@ -87,7 +87,7 @@ export function historicalModelEvidence(modelId: string) {
     recordedResults,
     sources: {
       epoch: epoch?.meta,
-      modelsdev: modelsdev?.meta,
+      modelsdev: modelsdev?.meta ? { ...modelsdev.meta, retrieved_at: spec?.archived_retrieved_at ?? modelsdev.meta.retrieved_at } : undefined,
       lmarena: lmarena?.meta,
     },
   };

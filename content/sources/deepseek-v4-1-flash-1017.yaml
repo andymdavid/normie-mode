@@ -1,0 +1,11 @@
+id: deepseek-v4-1-flash-1017
+title: DeepSeek-V4.1-Flash-1017 update
+publisher: DeepSeek
+url: https://api-docs.deepseek.com/news/news261017/
+kind: provider-report
+evidence_class: provider-reported
+published_on: 2026-10-17
+retrieved_on: 2026-11-20
+notes: The provider explicitly states that deepseek-flash and the web/app now
+  serve this dated successor. Do not assign its new specs or results to the
+  September version.

@@ -753,3 +753,24 @@ The slice is complete when:
 - A changed evidence record identifies affected public content and creates a human review action.
 - The experience meets agreed accessibility, performance, and content-quality checks.
 - Pilot measures support a documented decision to expand, revise, or stop.
+
+## Maintenance programme — November 2026
+
+### D-040 — Scheduled maintenance cadence (accepted 2026-11-20)
+
+The product owner approved working through the evidence-maintenance investigation, with daily and post-release health checks instead of hourly alerts. Daily discovery/evidence refresh, weekly plans/quality/evaluation readiness and monthly demand review produce review candidates only. Existing human publication and paid-evaluation approval gates remain. New evaluation outputs are quarantined and require an explicit approved-run manifest before the public loader can include them. Historical D-031 approval is preserved for the September run.
+
+### N-016 — Evidence maintenance and scheduled review loop
+
+- Status: `in_progress`
+- Dependencies: N-001, D-019, D-040; public merge/deploy remains separately reviewed.
+- Acceptance: exact-version/effort-safe identity matching; empty/reduced/partial imports preserve accepted snapshots; persistent discovery; before/after picks; paid runs require exact approval and cannot enter publication automatically; daily/weekly/monthly scheduler jobs with durable evidence and the originating Flight Deck task destination.
+- Verification: `npm ci`, `npm run verify`, all suite mock runs, live isolated import, registered pipeline execution and scheduler readback.
+- Source task: `dec13a3d-e573-431a-90c5-6f4a10cb147d`; originating Flight Deck thread `6ad00980-5d4c-4bf1-b47a-ef037dc06314`.
+
+N-016 model catch-up candidate (2026-11-20): nine provider-verified exact versions added: Fable 5.2, GPT-6.2 Astra/Sol, GPT-6.1 Terra, Gemini 4 Carbon/Hydrogen/Neon, Kimi K3.1 Pro and DeepSeek V4.1 Flash 1017. All benchmark aliases are exact, with no Kimi highspeed/fallback consolidation. DeepSeek's September version keeps archived specs with original retrieval provenance after the mutable API alias moves to 1017. Google US plans are freshly verified; new Claude and OpenAI access is recorded without falsely renewing full-plan verification dates. Kimi global USD plan access remains unresolved. The complete candidate and changed picks require publication review.
+
+Model-access verification note: Google's current Free plan promises automatic selection, not a fixed manually chosen default. The existing schema/validator allow zero defaults; the old test assumption that every plan must have exactly one would require inventing a fact. It now enforces at most one and explicitly checks the conditional Free access wording.
+
+
+N-016 test audit (2026-11-20): user paused all paid evaluations. Audited the 735 whole-project cases: 122 authored definitions, mostly page/data expansion, with seven cases added during maintenance. Consolidated repeated message work, removed duplicate/vacuous checks, strengthened fixed-fixture/CSV checks, isolated result-loader fixtures and separated ordinary from built-site tests. Model-catch-up candidate now has 549 ordinary plus two site cases (118 definitions). `docs/maintenance/test-audit-2026-11-20.md` and the linked inventory record the rationale, remaining independent-key/runner/browser gaps and three deliberate fault checks. No model calls or production changes.

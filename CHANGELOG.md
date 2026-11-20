@@ -6,6 +6,15 @@ This file records meaningful changes to the Normie Mode product, implementation,
 
 ### Added
 
+- A readable software-test audit and linked definition inventory, fewer duplicated/repeated cases, independent fixed-fixture evidence counts and separate no-build/site test commands; paid evaluations are on hold.
+
+- Nine provider-verified November model candidates, exact source aliases, refreshed Google US consumer-plan access and primary-source additions for new Claude/OpenAI availability, prepared for publication review.
+- Original retrieval provenance for preserved historical specs when a mutable provider API alias moves to a newer exact model version.
+
+- Reviewed maintenance tooling for daily discovery and health checks, weekly plan/quality/evaluation readiness, monthly demand reviews and evidence-impact packages.
+- Fail-closed evidence coverage checks and presentation-safe LMArena identity matching; source batches are validated together before accepted files change.
+- Quarantined evaluation output, exact paid-run approval manifests, complete-run publication checks and an explicit approved historical-run list.
+
 - Public About, Contact, Editorial Policy and Corrections Policy pages with an approved producer/reviewer profile and monitored corrections route.
 - Preview-only drafts for About, Contact, Editorial Policy and Corrections Policy, grounded in public producer/profile sources and withheld from production pending factual approval.
 - An approved, supervised reports programme for monthly evidence and ranking changes and major model/test releases; reports remain drafts until editorial review and canonical pages remain authoritative.

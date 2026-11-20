@@ -1,0 +1,17 @@
+id: gpt-6-2-astra
+family: gpt
+name: GPT-6.2 Astra
+released_on: 2026-11-17
+lifecycle: current
+verification:
+  status: verified
+  sources:
+    - openai-gpt-6-2
+source_ids:
+  epoch:
+    - gpt-6.2-astra
+  epoch_index: GPT-6.2 Astra
+  modelsdev: openai/gpt-6.2-astra
+  lmarena:
+    - GPT-6.2 Astra (Max)
+openrouter_id: openai/gpt-6.2-astra
