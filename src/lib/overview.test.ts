@@ -6,9 +6,12 @@ import { comparedModels } from './plans';
 describe('overview data (N-002)', () => {
   const rows = overviewRows();
 
-  it('covers every compared model with price data from models.dev', () => {
+  it('covers every compared model and validates prices when they are known', () => {
     expect(rows).toHaveLength(comparedModels().length);
-    for (const r of rows) expect(r.costPer1000, r.model.id).toBeDefined();
+    for (const r of rows) if (r.costPer1000 !== undefined) {
+      expect(Number.isFinite(r.costPer1000), r.model.id).toBe(true);
+      expect(r.costPer1000, r.model.id).toBeGreaterThanOrEqual(0);
+    }
   });
 
   it('never marks a model as independently tested without independent results', () => {

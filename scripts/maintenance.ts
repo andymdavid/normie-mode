@@ -63,7 +63,7 @@ try {
  }
  for(const plan of g.plans.values()) if(age(plan.checked_on)>30) report.findings.push(`${plan.app} plans overdue: ${age(plan.checked_on)} days since verification`);
  if(mode==='weekly') {
-  run(['run','build']); run(['test']); run(['exec','--','tsx','scripts/seo-audit.ts']);
+  run(['run','build']); run(['test']); run(['run','test:site']); run(['exec','--','tsx','scripts/seo-audit.ts']);
   // Source pages are observations: HTTP success/change does not count as plan verification.
   const urls=new Set<string>();
   for(const plan of g.plans.values()) for(const url of JSON.stringify(plan).match(/https?:[^"\s]+/g)??[]) urls.add(url);

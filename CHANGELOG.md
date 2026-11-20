@@ -6,6 +6,8 @@ This file records meaningful changes to the Normie Mode product, implementation,
 
 ### Added
 
+- A readable software-test audit and linked definition inventory, fewer duplicated/repeated cases, independent fixed-fixture evidence counts and separate no-build/site test commands; paid evaluations are on hold.
+
 - Reviewed maintenance tooling for daily discovery and health checks, weekly plan/quality/evaluation readiness, monthly demand reviews and evidence-impact packages.
 - Fail-closed evidence coverage checks and presentation-safe LMArena identity matching; source batches are validated together before accepted files change.
 - Quarantined evaluation output, exact paid-run approval manifests, complete-run publication checks and an explicit approved historical-run list.

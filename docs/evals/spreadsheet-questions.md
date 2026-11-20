@@ -23,7 +23,7 @@ The exact prompt is built by `buildPrompt` in `evals/spreadsheet-questions/suite
 
 ## The cases
 
-Five fixed ledgers (`evals/spreadsheet-questions/cases/`) from fixed seeds. A dataset is only kept if every "which" question has a clear winner (at least a 3% lead, or 3 percentage points of growth), so no answer hinges on a near-tie. Tests recalculate every answer key independently.
+Five fixed ledgers (`evals/spreadsheet-questions/cases/`) from fixed seeds. A dataset is only kept if every "which" question has a clear winner (at least a 3% lead, or 3 percentage points of growth), so no answer hinges on a near-tie. Tests independently recalculate March revenue, lost order value and the biggest customer. The Q2-region, growth and average-order keys still need independent reference calculations before further result publication (November test audit).
 
 ## Scoring
 

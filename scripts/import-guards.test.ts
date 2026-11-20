@@ -1,8 +1,12 @@
-import { describe, it, expect } from 'vitest';
-import { mkdtempSync, writeFileSync, readFileSync } from 'node:fs';
+import { afterEach, describe, it, expect } from 'vitest';
+import { mkdtempSync, writeFileSync, readFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { aliasMap, identityKey, guardSnapshot, publishSnapshots } from './import-guards';
+const temporaryDirectories: string[] = [];
+afterEach(() => temporaryDirectories.splice(0).forEach(dir => rmSync(dir, {recursive:true,force:true})));
+const directories: string[] = [];
+afterEach(() => directories.splice(0).forEach(dir => rmSync(dir, {recursive:true,force:true})));
 const snapshot = (count: number) => ({ meta: { as_of: '2026-11-19', retrieved_at:'2026-11-19T00:00:00Z' }, entries: Array.from({length: count}, (_, i) => ({ model: `m${i}`, category: 'overall', rating: 1000 })) });
 describe('import safety', () => {
   it('matches presentation changes without merging version or effort', () => {
@@ -26,7 +30,9 @@ describe('import safety', () => {
   });
   it('leaves all accepted files untouched if one source fails', () => {
     const dir = mkdtempSync(join(tmpdir(), 'normie-atomic-'));
+    directories.push(dir);
     writeFileSync(join(dir,'modelsdev.json'), JSON.stringify({meta:{retrieved_at:'2026-11-19T00:00:00Z'},models:[{model:'old'}]}));
+    temporaryDirectories.push(dir);
     const before = readFileSync(join(dir,'modelsdev.json'),'utf8');
     expect(() => publishSnapshots(dir,new Map<string, unknown>([['modelsdev',{meta:{retrieved_at:'2026-11-19T00:00:00Z'},models:[{model:'new'}]}],['lmarena',snapshot(0)]]))).toThrow();
     expect(readFileSync(join(dir,'modelsdev.json'),'utf8')).toBe(before);
