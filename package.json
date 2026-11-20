@@ -18,7 +18,10 @@
     "import": "tsx scripts/import.ts",
     "eval": "tsx scripts/eval.ts",
     "eval:generate": "tsx scripts/eval-generate.ts",
-    "demand": "tsx scripts/demand.ts"
+    "demand": "tsx scripts/demand.ts",
+    "maintenance": "tsx scripts/maintenance.ts",
+    "impact": "tsx scripts/impact.ts",
+    "verify": "npm run check && npm run build && npm test && tsx scripts/seo-audit.ts"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",

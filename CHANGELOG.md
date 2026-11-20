@@ -6,6 +6,10 @@ This file records meaningful changes to the Normie Mode product, implementation,
 
 ### Added
 
+- Reviewed maintenance tooling for daily discovery and health checks, weekly plan/quality/evaluation readiness, monthly demand reviews and evidence-impact packages.
+- Fail-closed evidence coverage checks and presentation-safe LMArena identity matching; source batches are validated together before accepted files change.
+- Quarantined evaluation output, exact paid-run approval manifests, complete-run publication checks and an explicit approved historical-run list.
+
 - Public About, Contact, Editorial Policy and Corrections Policy pages with an approved producer/reviewer profile and monitored corrections route.
 - Preview-only drafts for About, Contact, Editorial Policy and Corrections Policy, grounded in public producer/profile sources and withheld from production pending factual approval.
 - An approved, supervised reports programme for monthly evidence and ranking changes and major model/test releases; reports remain drafts until editorial review and canonical pages remain authoritative.
