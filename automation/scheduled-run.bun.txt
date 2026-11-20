@@ -2,12 +2,11 @@
 import { requestJsonBotCrypto, resolveBaseUrl } from '/app/clis/lib/auth.ts';
 import { writeFileSync } from 'node:fs';
 const mode=Bun.argv[2]??'daily';
-const prefix='/api/owners/npub1jss47s4fvv6usl7tn6yp5zamv2u60923ncgfea0e6thkza5p7c3q0afmzy';
 const api='/api/owners/npub1jss47s4fvv6usl7tn6yp5zamv2u60923ncgfea0e6thkza5p7c3q0afmzy';
 const definitions:any=await requestJsonBotCrypto(resolveBaseUrl(),'GET',`${api}/pipelines/definitions`);
 const definition=definitions.definitions.find((d:any)=>d.name===`normie-mode-${mode}-maintenance`);
 if(!definition) throw new Error(`Missing ${mode} pipeline definition`);
-const launched:any=await requestJsonBotCrypto(resolveBaseUrl(),'POST',`${api}/pipelines/definitions/${encodeURIComponent(definition.id)}/runs`,{input:{mode}});
+const launched:any=Bun.argv[3] ? {runId:Bun.argv[3]} : await requestJsonBotCrypto(resolveBaseUrl(),'POST',`${api}/pipelines/definitions/${encodeURIComponent(definition.id)}/runs`,{mode:'poll',waitSeconds:0,idempotencyKey:`normie:${mode}:${new Date().toISOString().slice(0,10)}`,input:{mode}});
 const id=launched.run?.id??launched.runId??launched.id;
 if(!id) throw new Error('Pipeline did not return a run ID');
 console.log(JSON.stringify({pipelineRunId:id,status:'launched'}));

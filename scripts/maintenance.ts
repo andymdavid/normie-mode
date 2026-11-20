@@ -4,6 +4,7 @@ import { join, resolve } from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { loadGraph } from '../src/lib/graph';
+import { demandByIntent } from '../src/lib/demand';
 const mode = process.argv[2] ?? 'daily';
 if (!['daily','weekly','monthly'].includes(mode)) throw new Error('Choose daily, weekly or monthly');
 const directory = resolve(process.env.NORMIE_REPORT_DIR ?? '.maintenance');
@@ -77,7 +78,7 @@ try {
  }
  if(mode==='monthly') {
   run(['run','demand']);
-  report.gaps=[...g.intents.values()].filter(i=>i.scope==='in'&&i.coverage!=='covered').map(i=>({task:i.id,label:i.label,coverage:i.coverage,priority:i.priority}));
+  report.gaps=demandByIntent().intents.filter(x=>x.intent.scope==='in'&&x.intent.coverage!=='covered').map(x=>({task:x.intent.id,label:x.intent.label,coverage:x.intent.coverage,interestShare:x.share,score:x.score})).sort((a,b)=>b.score-a.score);
   report.findings.push('Demand is autocomplete interest, not search volume. Review gaps before drafting tests/pages.');
  }
  state[`${mode}LastSuccess`]=report.checkedAt;

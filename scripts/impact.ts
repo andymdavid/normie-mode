@@ -1,5 +1,5 @@
 import { createServer } from 'vite';
-const server = await createServer({ configFile: false, server: { middlewareMode: true }, appType: 'custom' });
+const server = await createServer({ configFile: false, logLevel: 'silent', server: { middlewareMode: true }, appType: 'custom' });
 try {
   const { tasksByDemand, taskScores } = await server.ssrLoadModule('/src/lib/tasks.ts');
   const { verdict } = await server.ssrLoadModule('/src/lib/verdict.ts');
