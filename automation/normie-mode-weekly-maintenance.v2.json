@@ -1,0 +1,52 @@
+{
+  "name": "normie-mode-weekly-maintenance",
+  "description": "Review-only weekly Normie Mode maintenance; no paid models, merges or deployments.",
+  "version": 2,
+  "input": {
+    "mode": "weekly",
+    "sourceBranch": "maintenance/evidence-loop",
+    "pushReviewBranch": true,
+    "stateRoot": "/workspace/lara/mycode/normie-maintenance-state"
+  },
+  "steps": [
+    {
+      "name": "collect-verify-and-prepare-review",
+      "description": "Collect sources, reject coverage loss and prepare a durable review package in an isolated clone.",
+      "type": "code",
+      "function": "normieMode.maintenanceV2",
+      "assign": "$.result",
+      "display": {
+        "in": [
+          {
+            "label": "Cadence",
+            "path": "$.mode",
+            "format": "text"
+          }
+        ],
+        "out": [
+          {
+            "label": "Completed",
+            "path": "$.completed"
+          },
+          {
+            "label": "Review PR",
+            "path": "$.pullRequest",
+            "format": "text",
+            "empty": "No PR required"
+          },
+          {
+            "label": "Report",
+            "path": "$.reportPath",
+            "format": "text"
+          },
+          {
+            "label": "Changed evidence",
+            "path": "$.changedPaths",
+            "format": "list",
+            "empty": "No evidence changes"
+          }
+        ]
+      }
+    }
+  ]
+}

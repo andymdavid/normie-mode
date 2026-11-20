@@ -1,0 +1,27 @@
+// Run from a Flight Deck-bound scheduler session; credentials remain brokered by Autopilot.
+import { requestJsonBotCrypto, resolveBaseUrl } from '/app/clis/lib/auth.ts';
+import { writeFileSync } from 'node:fs';
+const mode=Bun.argv[2]??'daily';
+const api='/api/owners/npub1jss47s4fvv6usl7tn6yp5zamv2u60923ncgfea0e6thkza5p7c3q0afmzy';
+const definitions:any=await requestJsonBotCrypto(resolveBaseUrl(),'GET',`${api}/pipelines/definitions`);
+const definition=definitions.definitions.find((d:any)=>d.name===`normie-mode-${mode}-maintenance`);
+if(!definition) throw new Error(`Missing ${mode} pipeline definition`);
+const launched:any=await requestJsonBotCrypto(resolveBaseUrl(),'POST',`${api}/pipelines/definitions/${encodeURIComponent(definition.id)}/runs`,{input:{mode}});
+const id=launched.run?.id??launched.runId??launched.id;
+if(!id) throw new Error('Pipeline did not return a run ID');
+console.log(JSON.stringify({pipelineRunId:id,status:'launched'}));
+const deadline=Date.now()+25*60_000;
+while(Date.now()<deadline){
+ const result:any=await requestJsonBotCrypto(resolveBaseUrl(),'GET',`${api}/pipelines/runs/${id}`);
+ const run=result.run??result;
+ if(['ok','error','cancelled'].includes(run.status)){
+  const current=typeof run.currentJson==='object'?run.currentJson:typeof run.current_json==='string'?JSON.parse(run.current_json):run.current??{};
+  const output=run.result??current.result??current;
+  const path=`/workspace/lara/mycode/normie-maintenance-state/${mode}-run-latest.json`;
+  writeFileSync(`/workspace/lara/mycode/normie-maintenance-state/${mode}-pipeline-receipt.json`,JSON.stringify({id,status:run.status,output,reportPath:path},null,2));
+  console.log(JSON.stringify({pipelineRunId:id,status:run.status,reportPath:path}));
+  if(run.status!=='ok')process.exitCode=1;break;
+ }
+ await Bun.sleep(3000);
+}
+if(Date.now()>=deadline)throw new Error(`Pipeline ${id} still unresolved; inspect it, do not launch a duplicate`);

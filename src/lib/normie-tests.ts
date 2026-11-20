@@ -18,6 +18,8 @@ export interface AnswerRecord {
 export interface RunSummary {
   suite: string;
   version?: string;
+  runs?: number;
+  status?: string;
   run_id: string;
   total_cost_usd: number;
   cases: string[];
@@ -44,20 +46,31 @@ interface SavedRun {
 function savedRuns(suite: string, base: string): SavedRun[] {
   const dir = join(base, suite, 'results');
   if (!existsSync(dir)) return [];
+  const approvalPath = join(dir, 'approved.json');
+  if (!existsSync(approvalPath)) return [];
+  const approval = JSON.parse(readFileSync(approvalPath, 'utf8'));
+  const approved = new Set<string>(approval.runs ?? []);
+  if (!approval.reviewed_by || !approval.reviewed_on) return [];
   return readdirSync(dir)
-    .filter((d) => !d.endsWith('-mock') && existsSync(join(dir, d, 'summary.json')))
+    .filter((d) => approved.has(d) && !d.endsWith('-mock') && existsSync(join(dir, d, 'summary.json')))
     .sort()
     .map((id) => {
       const runDir = join(dir, id);
       return {
         id,
-        summary: JSON.parse(readFileSync(join(runDir, 'summary.json'), 'utf8')),
+        summary: JSON.parse(readFileSync(join(runDir, 'summary.json'), 'utf8')) as SavedRun['summary'],
         answers: readdirSync(runDir)
           .filter((f) => f.endsWith('.json') && f !== 'summary.json')
           .map((f) => JSON.parse(readFileSync(join(runDir, f), 'utf8'))),
       };
     })
-    .filter((r) => !r.summary.mock);
+    .filter((r) => !r.summary.mock && r.summary.status !== 'incomplete' && r.summary.models.every(m => {
+      if (m.errors || m.format_failures) return false;
+      const answers = r.answers.filter(a => a.model === m.model);
+      const expected = r.summary.cases.length * (r.summary.runs ?? 1);
+      return answers.length === expected && new Set(answers.map(a => `${a.case}:${a.run}`)).size === expected
+        && r.summary.cases.every(c => Array.from({length:r.summary.runs ?? 1}, (_,i) => i+1).every(n => answers.some(a => a.case === c && a.run === n && !a.error)));
+    }));
 }
 
 /**

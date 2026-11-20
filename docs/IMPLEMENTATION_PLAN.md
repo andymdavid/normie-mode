@@ -753,3 +753,17 @@ The slice is complete when:
 - A changed evidence record identifies affected public content and creates a human review action.
 - The experience meets agreed accessibility, performance, and content-quality checks.
 - Pilot measures support a documented decision to expand, revise, or stop.
+
+## Maintenance programme — November 2026
+
+### D-040 — Scheduled maintenance cadence (accepted 2026-11-20)
+
+The product owner approved working through the evidence-maintenance investigation, with daily and post-release health checks instead of hourly alerts. Daily discovery/evidence refresh, weekly plans/quality/evaluation readiness and monthly demand review produce review candidates only. Existing human publication and paid-evaluation approval gates remain. New evaluation outputs are quarantined and require an explicit approved-run manifest before the public loader can include them. Historical D-031 approval is preserved for the September run.
+
+### N-016 — Evidence maintenance and scheduled review loop
+
+- Status: `in_progress`
+- Dependencies: N-001, D-019, D-040; public merge/deploy remains separately reviewed.
+- Acceptance: exact-version/effort-safe identity matching; empty/reduced/partial imports preserve accepted snapshots; persistent discovery; before/after picks; paid runs require exact approval and cannot enter publication automatically; daily/weekly/monthly scheduler jobs with durable evidence and the originating Flight Deck task destination.
+- Verification: `npm ci`, `npm run verify`, all suite mock runs, live isolated import, registered pipeline execution and scheduler readback.
+- Source task: `dec13a3d-e573-431a-90c5-6f4a10cb147d`; originating Flight Deck thread `6ad00980-5d4c-4bf1-b47a-ef037dc06314`.

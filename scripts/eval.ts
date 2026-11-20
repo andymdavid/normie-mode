@@ -6,6 +6,7 @@
 //   options: --suite spreadsheet-questions|messy-spreadsheet-questions|unusual-transactions  --models a,b,c  --runs 1  --budget 3 (USD)
 import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
+import { randomUUID, createHash } from 'node:crypto';
 import { loadGraph } from '../src/lib/graph';
 import * as spreadsheetQuestions from '../evals/spreadsheet-questions/suite';
 import * as unusualTransactions from '../evals/unusual-transactions/suite';
@@ -44,6 +45,8 @@ const DRY = flag('dry-run');
 const MOCK = flag('mock');
 const RUNS = Number(arg('runs') ?? 1);
 const BUDGET = Number(arg('budget') ?? 3);
+if (!Number.isInteger(RUNS) || RUNS < 1 || !Number.isFinite(BUDGET) || BUDGET <= 0) throw new Error('runs must be a positive integer and budget must be positive');
+if (!Number.isInteger(RUNS) || RUNS < 1 || !Number.isFinite(BUDGET) || BUDGET <= 0) throw new Error('runs must be a positive integer and budget must be positive and finite');
 const modelIds = (arg('models') ?? PILOT_MODELS.join(',')).split(',');
 const suite = SUITES[arg('suite') ?? spreadsheetQuestions.SUITE_ID];
 if (!suite) throw new Error(`Unknown suite. Choose one of: ${Object.keys(SUITES).join(', ')}`);
@@ -65,7 +68,8 @@ const targets = modelIds.map((id) => {
 
 interface Price { input: number; output: number }
 async function prices(): Promise<Map<string, Price>> {
-  const res = await fetch('https://openrouter.ai/api/v1/models');
+  const res = await fetch('https://openrouter.ai/api/v1/models', { signal: AbortSignal.timeout(30_000) });
+  if (!res.ok) throw new Error(`OpenRouter catalogue: HTTP ${res.status}`);
   const data = (await res.json()).data as { id: string; pricing: { prompt: string; completion: string } }[];
   return new Map(data.map((m) => [m.id, { input: Number(m.pricing.prompt), output: Number(m.pricing.completion) }]));
 }
@@ -90,7 +94,14 @@ for (const t of targets) {
   console.log(`  ${t.name.padEnd(22)} ${t.route.padEnd(34)} ≈ $${(each * calls).toFixed(3)}`);
 }
 console.log(`\nEstimated total: $${estimate.toFixed(2)} (budget cap $${BUDGET.toFixed(2)})`);
-if (DRY) process.exit(0);
+const manifest = { suite: SUITE_ID, version: SUITE_VERSION, models: [...modelIds].sort(), runs: RUNS, budget: BUDGET, cases_sha256: createHash('sha256').update(JSON.stringify(cases.map(c => ({ id: c.id, prompt: buildPrompt(c) })))).digest('hex') };
+if (DRY) { console.log('Approval manifest:', JSON.stringify(manifest)); process.exit(0); }
+if (!MOCK) {
+  const approvalPath = arg('approval');
+  if (!approvalPath) throw new Error('Paid runs require --approval <reviewed-manifest.json> from the dry run');
+  const approval = JSON.parse(readFileSync(approvalPath, 'utf8'));
+  if (!approval.approved_by || !approval.approved_on || JSON.stringify(approval.manifest) !== JSON.stringify(manifest)) throw new Error('Approval must name reviewer/date and exactly match the current dry-run manifest');
+}
 if (!MOCK && estimate > BUDGET) {
   console.error('Estimate exceeds the budget cap. Raise --budget or use fewer models/runs.');
   process.exit(1);
@@ -126,8 +137,8 @@ async function call(route: string, prompt: string, c: Case): Promise<CallResult>
   return { text: body.choices?.[0]?.message?.content ?? '', cost, usage, provider: body.provider, finish_reason: body.choices?.[0]?.finish_reason };
 }
 
-const runId = `${new Date().toISOString().slice(0, 16).replace(/[:T]/g, '-')}${MOCK ? '-mock' : ''}`;
-const outDir = join(suiteDir, 'results', runId);
+const runId = `${new Date().toISOString().replace(/[:.]/g, '-')}-${randomUUID().slice(0,8)}${MOCK ? '-mock' : ''}`;
+const outDir = join(process.cwd(), 'evals', '.quarantine', SUITE_ID, runId);
 mkdirSync(outDir, { recursive: true });
 let spent = 0;
 const summary: Record<string, { name: string; route: string; scores: number[]; format_failures: number; errors: number; cost: number; seconds: number }> = {};
@@ -136,12 +147,14 @@ outer: for (const t of targets) {
   const s = (summary[t.id] = { name: t.name, route: t.route, scores: [] as number[], format_failures: 0, errors: 0, cost: 0, seconds: 0 });
   for (const c of cases) {
     for (let run = 1; run <= RUNS; run++) {
-      if (spent >= BUDGET) {
+      if (!MOCK && spent + estimateFor(t.route) > BUDGET) {
         console.error(`Budget cap $${BUDGET} reached; stopping.`);
         break outer;
       }
       const started = Date.now();
-      const r = await call(t.route, buildPrompt(c), c);
+      let r: CallResult;
+      try { r = await call(t.route, buildPrompt(c), c); }
+      catch (error) { r = { text: '', cost: estimateFor(t.route), error: `Transport failure; cost reserved conservatively: ${(error as Error).message}` }; }
       const seconds = (Date.now() - started) / 1000;
       spent += r.cost;
       const sc: SuiteScore = score(c, r.text);
@@ -171,6 +184,6 @@ const table = Object.entries(summary).map(([id, s]) => ({
   cost_usd: Number(s.cost.toFixed(4)),
   avg_seconds: s.scores.length ? Number((s.seconds / s.scores.length).toFixed(1)) : null,
 }));
-writeFileSync(join(outDir, 'summary.json'), JSON.stringify({ suite: SUITE_ID, version: SUITE_VERSION, run_id: runId, mock: MOCK, runs: RUNS, cases: cases.map((c) => c.id), total_cost_usd: Number(spent.toFixed(4)), models: table }, null, 1));
+writeFileSync(join(outDir, 'summary.json'), JSON.stringify({ suite: SUITE_ID, version: SUITE_VERSION, run_id: runId, mock: MOCK, status: Object.values(summary).length === targets.length && Object.values(summary).every(s => s.scores.length === calls && !s.errors && !s.format_failures) ? 'complete' : 'incomplete', manifest, runs: RUNS, cases: cases.map((c) => c.id), total_cost_usd: Number(spent.toFixed(4)), models: table }, null, 1));
 console.log(`\nSpent $${spent.toFixed(4)}. Results in ${outDir}`);
 console.table(table.map(({ route: _r, model: _m, ...rest }) => rest));

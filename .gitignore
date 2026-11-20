@@ -5,3 +5,7 @@ dist/
 .cache/
 .env
 evals/*/results/*-mock/
+
+# Unreviewed paid/mock results never enter the public result tree.
+evals/.quarantine/
+.maintenance/

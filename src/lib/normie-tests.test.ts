@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { mkdirSync, mkdtempSync, writeFileSync } from 'node:fs';
+import { mkdirSync, mkdtempSync, writeFileSync, readFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { publishedRun, rankRun, type TestRun } from './normie-tests';
@@ -40,6 +40,7 @@ describe('publishedRun', () => {
     const dir = join(base, suite, 'results', runId);
     mkdirSync(dir, { recursive: true });
     writeFileSync(join(dir, 'summary.json'), JSON.stringify({ suite, version, run_id: runId, mock, cases: ['case-01'], total_cost_usd: 0, models: models.map(([model, correct]) => ({ model, name: model.toUpperCase(), score: null, cost_usd: 0.1, avg_seconds: 1, format_failures: 0, errors: 0 })) }));
+    writeFileSync(join(base, suite, 'results', 'approved.json'), JSON.stringify({ reviewed_by: 'test reviewer', reviewed_on: '2026-09-30', runs: ['2026-09-24-09-00', '2026-09-28-10-00', '2026-09-29-10-00-mock', '2026-09-30-10-00', '2026-10-01-10-00'] }));
     for (const [model, correct] of models) writeFileSync(join(dir, `${model}__case-01__r1.json`), JSON.stringify({ model, case: 'case-01', run: 1, score: { correct, total: 6 } }));
   };
   save('2026-09-24-09-00', '1', [['a', 4], ['b', 5]]);
@@ -56,6 +57,17 @@ describe('publishedRun', () => {
     const run = publishedRun(suite, base)!;
     expect(run.answers.filter((a) => a.model === 'a').map((a) => a.score.correct)).toEqual([6]);
     expect(run.answers.filter((a) => a.model === 'b').map((a) => a.score.correct)).toEqual([5]);
+  });
+
+  it('does not publish an unapproved or incomplete replacement', () => {
+    save('2026-09-30-10-00', '1', [['a', 0]]);
+    const dir = join(base, suite, 'results', '2026-09-30-10-00');
+    const summary = JSON.parse(readFileSync(join(dir, 'summary.json'), 'utf8'));
+    summary.status = 'incomplete';
+    writeFileSync(join(dir, 'summary.json'), JSON.stringify(summary));
+    expect(publishedRun(suite, base)!.answers.find(a => a.model === 'a')!.score.correct).toBe(6);
+    save('2026-09-30-11-00', '1', [['a', 0]]); // not in approved.json
+    expect(publishedRun(suite, base)!.answers.find(a => a.model === 'a')!.score.correct).toBe(6);
   });
 
   it('starts afresh when the suite version changes', () => {
